@@ -344,12 +344,6 @@ if ($tail) {
 	<script src="/assets/js/moment.min.js?<?php echo ASSET_VERSION; ?>"></script>
 	<script src="/assets/js/jquery.cookie.js?<?php echo ASSET_VERSION; ?>"></script>
 	<script src="/assets/js/log.min.js?<?php echo ASSET_VERSION; ?>"></script>
-	<script>$.fn.extend({
-		scrollToMe: function() {
-			var x = $(this).offset().top - 100;
-			$('html,body').animate({scrollTop: x}, 400);
-		}
-	});</script>
 	<?php
 	if ($tail) {
 		echo '<script>$(document).ready(function(){setTimeout(function(){location.reload()},6000);});$(function() {$(document).scrollTop($("#bottom").offset().top);});</script>';
