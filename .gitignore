@@ -1,1 +1,4 @@
 *.bak
+/vendor
+.env
+node_modules
