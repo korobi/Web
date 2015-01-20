@@ -10,10 +10,8 @@ class AddKeysTable extends Migration {
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('keys', function(Blueprint $table)
-        {
+    public function up() {
+        Schema::create('keys', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->string("channel_name");
@@ -26,8 +24,7 @@ class AddKeysTable extends Migration {
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::drop('keys');
     }
 

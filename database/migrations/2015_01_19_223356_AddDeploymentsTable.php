@@ -10,10 +10,8 @@ class AddDeploymentsTable extends Migration {
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('deployments', function(Blueprint $table)
-        {
+    public function up() {
+        Schema::create('deployments', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamp("start_date");
             $table->timestamp("end_date");
@@ -27,8 +25,7 @@ class AddDeploymentsTable extends Migration {
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::drop('deployments');
     }
 
