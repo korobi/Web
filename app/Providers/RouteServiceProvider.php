@@ -1,4 +1,4 @@
-<?php namespace Yukai\Providers;
+<?php namespace Korobi\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider {
      *
      * @var string
      */
-    protected $namespace = 'Yukai\Http\Controllers';
+    protected $namespace = 'Korobi\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

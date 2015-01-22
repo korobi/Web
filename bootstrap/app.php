@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
 	'Illuminate\Contracts\Http\Kernel',
-	'Yukai\Http\Kernel'
+	'Korobi\Http\Kernel'
 );
 
 $app->singleton(
 	'Illuminate\Contracts\Console\Kernel',
-	'Yukai\Console\Kernel'
+	'Korobi\Console\Kernel'
 );
 
 $app->singleton(
 	'Illuminate\Contracts\Debug\ExceptionHandler',
-	'Yukai\Exceptions\Handler'
+	'Korobi\Exceptions\Handler'
 );
 
 /*

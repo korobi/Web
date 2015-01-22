@@ -1,4 +1,4 @@
-<?php namespace Yukai\Commands;
+<?php namespace Korobi\Commands;
 
 abstract class Command {
 

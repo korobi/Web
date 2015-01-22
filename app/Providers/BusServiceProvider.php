@@ -1,4 +1,4 @@
-<?php namespace Yukai\Providers;
+<?php namespace Korobi\Providers;
 
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Support\ServiceProvider;
@@ -14,7 +14,7 @@ class BusServiceProvider extends ServiceProvider {
     public function boot(Dispatcher $dispatcher) {
         $dispatcher->mapUsing(function ($command) {
             return Dispatcher::simpleMapping(
-                $command, 'Yukai\Commands', 'Yukai\Handlers\Commands'
+                $command, 'Korobi\Commands', 'Korobi\Handlers\Commands'
             );
         });
     }

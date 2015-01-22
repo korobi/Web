@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: Yukai
-        psr4_prefix: Yukai
+        namespace: Korobi
+        psr4_prefix: Korobi
         src_path: app

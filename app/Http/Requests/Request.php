@@ -1,4 +1,4 @@
-<?php namespace Yukai\Http\Requests;
+<?php namespace Korobi\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

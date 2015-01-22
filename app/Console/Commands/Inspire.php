@@ -1,4 +1,4 @@
-<?php namespace Yukai\Console\Commands;
+<?php namespace Korobi\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

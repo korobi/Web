@@ -1,4 +1,4 @@
-<?php namespace Yukai\Providers;
+<?php namespace Korobi\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

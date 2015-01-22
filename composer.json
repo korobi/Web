@@ -17,12 +17,12 @@
 			"database"
 		],
 		"psr-4": {
-			"Yukai\\": "app/"
+			"Korobi\\": "app/"
 		}
 	},
 	"autoload-dev": {
 		"classmap": [
-			"tests/TestCase.php"
+			"app/Tests/TestCase.php"
 		]
 	},
 	"scripts": {

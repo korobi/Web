@@ -1,4 +1,4 @@
-<?php namespace Yukai\Exceptions;
+<?php namespace Korobi\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

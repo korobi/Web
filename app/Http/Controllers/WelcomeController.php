@@ -1,4 +1,4 @@
-<?php namespace Yukai\Http\Controllers;
+<?php namespace Korobi\Http\Controllers;
 
 use Illuminate\Http\Response;
 

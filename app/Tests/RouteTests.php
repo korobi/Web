@@ -1,6 +1,6 @@
 <?php
 
-namespace Yukai\Tests;
+namespace Korobi\Tests;
 
 class RouteTests extends TestCase {
 

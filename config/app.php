@@ -139,11 +139,11 @@ return [
         /*
          * Application Service Providers...
          */
-        'Yukai\Providers\AppServiceProvider',
-        'Yukai\Providers\BusServiceProvider',
-        'Yukai\Providers\ConfigServiceProvider',
-        'Yukai\Providers\EventServiceProvider',
-        'Yukai\Providers\RouteServiceProvider',
+        'Korobi\Providers\AppServiceProvider',
+        'Korobi\Providers\BusServiceProvider',
+        'Korobi\Providers\ConfigServiceProvider',
+        'Korobi\Providers\EventServiceProvider',
+        'Korobi\Providers\RouteServiceProvider',
 
     ],
 

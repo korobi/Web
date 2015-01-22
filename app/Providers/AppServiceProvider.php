@@ -1,4 +1,4 @@
-<?php namespace Yukai\Providers;
+<?php namespace Korobi\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider {
     public function register() {
         $this->app->bind(
             'Illuminate\Contracts\Auth\Registrar',
-            'Yukai\Services\Registrar'
+            'Korobi\Services\Registrar'
         );
     }
 

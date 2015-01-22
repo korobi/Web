@@ -1,14 +1,15 @@
 <?php
 
-namespace Yukai\Tests;
+namespace Korobi\Tests;
 
-use Yukai\Utilities\GitInfoUtility;
+use Illuminate\Filesystem\Filesystem;
+use Korobi\Utilities\GitInfoUtility;
 
 class GitInfoTest extends TestCase {
 
     public function testGetHash() {
-        $sut = new GitInfoUtility();
-
+        //$sut = new GitInfoUtility();
+        //echo $sut->getShortHash(new Filesystem(), "laravel");
     }
 
 }

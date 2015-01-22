@@ -1,4 +1,4 @@
-<?php namespace Yukai\Http;
+<?php namespace Korobi\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -24,9 +24,9 @@ class Kernel extends HttpKernel {
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => 'Yukai\Http\Middleware\Authenticate',
+        'auth' => 'Korobi\Http\Middleware\Authenticate',
         'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-        'guest' => 'Yukai\Http\Middleware\RedirectIfAuthenticated',
+        'guest' => 'Korobi\Http\Middleware\RedirectIfAuthenticated',
     ];
 
 }
