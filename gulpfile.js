@@ -10,9 +10,10 @@ var compass = require('gulp-compass'),
     gutil = require('gulp-util');
 
 
-gulp.task('deploy', function () {
+gulp.task('deploy', function (cb) {
     git.pull('origin', 'laravel', {args: '--rebase'}, function (err) {
         if (err) throw err;
+        cb(err);
     });
 
 });
