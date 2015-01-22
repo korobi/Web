@@ -6,11 +6,13 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "~5.0",
-                "laravel/socialite": "*"
+                "laravel/socialite": "*",
+		"barryvdh/laravel-ide-helper": "~1.11@dev"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
-		"phpspec/phpspec": "~2.1"
+		"phpspec/phpspec": "~2.1",
+        "mockery/mockery": "dev-master@dev"
 	},
 	"autoload": {
 		"classmap": [
