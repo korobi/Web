@@ -1,10 +1,10 @@
 <html>
 	<head>
-		<link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 
 		<style>
 			body {
-                                background-color: #34495e;
+                background-color: #34495e;
 				margin: 0;
 				padding: 0;
 				width: 100%;
@@ -12,7 +12,7 @@
 				color: #eee;
 				display: table;
 				font-weight: 100;
-				font-family: 'Lato';
+				font-family: 'Lato',sans-serif;
 			}
 
 			.container {
@@ -39,8 +39,8 @@
 	<body>
 		<div class="container">
 			<div class="content">
-				<div class="title">Laravel 5</div>
-				<div class="quote">{{ Inspiring::quote() }}</div>
+				<div class="title">Welcome</div>
+				<div class="quote">{{ trans("branding.project-name") }} staging</div>
 			</div>
 		</div>
 	</body>
