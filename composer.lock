@@ -516,12 +516,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d51fb166aa48feaf1cd6eaaddd265f11f3f7d092"
+                "reference": "3f5863966d90b5f76b3adb3582bc0b33569a3ccc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d51fb166aa48feaf1cd6eaaddd265f11f3f7d092",
-                "reference": "d51fb166aa48feaf1cd6eaaddd265f11f3f7d092",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/3f5863966d90b5f76b3adb3582bc0b33569a3ccc",
+                "reference": "3f5863966d90b5f76b3adb3582bc0b33569a3ccc",
                 "shasum": ""
             },
             "require": {
@@ -629,7 +629,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-01-20 17:09:48"
+            "time": "2015-01-22 19:01:44"
         },
         {
             "name": "laravel/socialite",
@@ -1829,12 +1829,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "4b5ce2f2d8023cd4c145cbc349adac1069e6a185"
+                "reference": "b3bedb7547aa9930c0b06404042bcdc0327a34b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/4b5ce2f2d8023cd4c145cbc349adac1069e6a185",
-                "reference": "4b5ce2f2d8023cd4c145cbc349adac1069e6a185",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/b3bedb7547aa9930c0b06404042bcdc0327a34b9",
+                "reference": "b3bedb7547aa9930c0b06404042bcdc0327a34b9",
                 "shasum": ""
             },
             "require": {
@@ -1877,7 +1877,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2015-01-13 14:49:42"
+            "time": "2015-01-21 17:40:20"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2152,17 +2152,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "1828bb298d75727d0dd10b348d1afae204d38634"
+                "reference": "4f04a3b1c7192b39b2c04bb747f3a218b04c86d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/1828bb298d75727d0dd10b348d1afae204d38634",
-                "reference": "1828bb298d75727d0dd10b348d1afae204d38634",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/4f04a3b1c7192b39b2c04bb747f3a218b04c86d4",
+                "reference": "4f04a3b1c7192b39b2c04bb747f3a218b04c86d4",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
-                "phpdocumentor/reflection-docblock": "~2.0"
+                "phpdocumentor/reflection-docblock": "~2.0",
+                "sebastian/comparator": "~1.1"
             },
             "require-dev": {
                 "phpspec/phpspec": "~2.0"
@@ -2203,7 +2204,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2015-01-18 16:48:09"
+            "time": "2015-01-21 10:08:09"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2455,12 +2456,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2d8c819677473bf0859c2baa31998c4c672032a5"
+                "reference": "b92539368bdda39ecc77a4f6c0ba2c7dae1d24e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2d8c819677473bf0859c2baa31998c4c672032a5",
-                "reference": "2d8c819677473bf0859c2baa31998c4c672032a5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b92539368bdda39ecc77a4f6c0ba2c7dae1d24e0",
+                "reference": "b92539368bdda39ecc77a4f6c0ba2c7dae1d24e0",
                 "shasum": ""
             },
             "require": {
@@ -2519,7 +2520,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-01-19 08:18:11"
+            "time": "2015-01-21 07:53:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
