@@ -1,4 +1,4 @@
-<?php namespace App\Events;
+<?php namespace Yukai\Events;
 
 abstract class Event {
 

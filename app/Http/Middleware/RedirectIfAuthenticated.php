@@ -1,4 +1,4 @@
-<?php namespace App\Http\Middleware;
+<?php namespace Yukai\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
@@ -17,7 +17,7 @@ class RedirectIfAuthenticated {
      * Create a new filter instance.
      *
      * @param  Guard $auth
-     * @return \App\Http\Middleware\RedirectIfAuthenticated
+     * @return \Yukai\Http\Middleware\RedirectIfAuthenticated
      */
     public function __construct(Guard $auth) {
         $this->auth = $auth;

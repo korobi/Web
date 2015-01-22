@@ -1,5 +1,7 @@
 <?php
 
+namespace Yukai\Tests;
+
 class RouteTests extends TestCase {
 
     /**

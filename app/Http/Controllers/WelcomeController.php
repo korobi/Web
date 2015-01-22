@@ -1,8 +1,8 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Yukai\Http\Controllers;
 
 use Illuminate\Http\Response;
 
-class WelcomeController extends Controller {
+class WelcomeBaseController extends BaseController {
 
     /*
     |--------------------------------------------------------------------------

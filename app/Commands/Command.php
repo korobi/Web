@@ -1,4 +1,4 @@
-<?php namespace App\Commands;
+<?php namespace Yukai\Commands;
 
 abstract class Command {
 
