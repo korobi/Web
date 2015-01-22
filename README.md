@@ -3,7 +3,7 @@ Laravel refactor
 
 Staging: https://dev.vq.lc/
 
-PR: https://github.com/kashike/qtpi-web/pull/1
+PR: https://github.com/kashike/yukai-web/pull/1
 
 Copyright 2014 - 2015 Kashike
 
