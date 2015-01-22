@@ -45,11 +45,13 @@ gulp.task('scripts', ['deploy'],  function () {
 gulp.task('live', function () {
     livereload.listen();
 
-//watch .scss files
+    //watch .scss files
     gulp.watch('resources/assets/sass/**/*.scss', ['styles']);
 
-//watch .js files
+    //watch .js files
     gulp.watch('resources/assets/js/**/*.js', ['scripts']);
+
+    gutil.log(gutil.colors.green('You may now change SASS and JS files.'));
 
 });
 
