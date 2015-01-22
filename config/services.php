@@ -35,8 +35,8 @@ return [
     ],
 
     'github' => [
-        'client_id' => getenv("GITHUB_OAUTH_ID"),
-        'client_secret' => getenv("GITHUB_OAUTH_SECRET"),
-        'redirect' => getenv("GITHUB_REDIRECT_URL"),
+        'client_id' => env("GITHUB_OAUTH_ID"),
+        'client_secret' => env("GITHUB_OAUTH_SECRET"),
+        'redirect' => env("GITHUB_REDIRECT_URL"),
     ],
 ];
