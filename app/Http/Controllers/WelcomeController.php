@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Response;
 
-class WelcomeBaseController extends BaseController {
+class WelcomeController extends BaseController {
 
     /*
     |--------------------------------------------------------------------------
