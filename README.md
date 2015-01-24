@@ -2,7 +2,7 @@
 
 **Staging:** https://dev.vq.lc/
 
-**PR:** https://github.com/korobi/Webpull/1
+**PR:** https://github.com/korobi/Web/pull/1
 
 Copyright (c) 2014 - 2015 Kashike
 
