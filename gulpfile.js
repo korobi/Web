@@ -9,6 +9,7 @@ var runSequence = require('run-sequence'),
     gulp = require('gulp'),
     git = require('gulp-git'),
     gutil = require('gulp-util'),
+    phpunit = require('gulp-phpunit'),
     shell = require('gulp-shell');
 
 
@@ -44,6 +45,11 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('serve', shell.task('php artisan serve'));
+
+//tests
+gulp.task('tests', function() {
+    gulp.src('phpunit.xml').pipe(phpunit());
+});
 
 //watch
 gulp.task('watcher', function () {
