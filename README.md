@@ -48,3 +48,7 @@ APP_URL=
 ## Branding
 
 Edit [resources/lang/en/branding.php](https://github.com/korobi/Web/blob/laravel/resources/lang/en/branding.php) to change the proejct name across the site.
+
+## Admin access
+
+Admins have access to edit channel keys and display names. To change who has access to these tools, edit [config/admins.php](https://github.com/korobi/Web/blob/laravel/config/admins.php). The IDs are GitHub user IDs. They can be looked up using [this tool](https://caius.github.io/github_id/).
