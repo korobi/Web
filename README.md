@@ -44,3 +44,7 @@ APP_URL=
 `APP_DEBUG` should be set to a boolean specifying whether debug mode is enabled or not. Do not enable this in production.
 
 `APP_KEY` should be set to a 32 character key used for encrypting data.
+
+## Branding
+
+Edit [resources/lang/en/branding.php](https://github.com/korobi/Web/blob/laravel/resources/lang/en/branding.php) to change the proejct name across the site.
