@@ -1,6 +1,7 @@
 <?php namespace Korobi\Http\Controllers;
 
 use Illuminate\Http\Response;
+use Korobi\Utilities\GitInfoUtility;
 
 class WelcomeController extends BaseController {
 
@@ -18,10 +19,11 @@ class WelcomeController extends BaseController {
     /**
      * Show the application welcome screen to the user.
      *
+     * @param GitInfoUtility $git Git tool.
      * @return Response
      */
-    public function index() {
-        return view('welcome');
+    public function index(GitInfoUtility $git) {
+        return view('welcome', ["hash" => $git->getShortHash(), "branch" => $git->getBranch()]);
     }
 
 }

@@ -39,8 +39,8 @@
 	<body>
 		<div class="container">
 			<div class="content">
-				<div class="title">Welcome to {{ trans("branding.project-name") }}</div>
-				<div class="quote">Git hash here</div>
+				<div class="title">Welcome to {{{ trans("branding.project-name") }}}</div>
+				<div class="quote">Running {{{ $hash }}} on {{{ $branch }}}</div>
 			</div>
 		</div>
 	</body>
