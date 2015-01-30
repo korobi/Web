@@ -6,7 +6,7 @@ namespace Korobi\Authentication;
 
 use Illuminate\Session\Store;
 
-class GithubAuthentication implements UserAuthenticationInterface {
+class GitHubAuthentication implements UserAuthenticationInterface {
 
     /**
      * @var Store The session store instance.

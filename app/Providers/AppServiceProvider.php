@@ -27,6 +27,14 @@ class AppServiceProvider extends ServiceProvider {
             'Illuminate\Contracts\Auth\Registrar',
             'Korobi\Services\Registrar'
         );
+        $this->app->bind(
+            'Korobi\Authentication\UserPermissionsInterface',
+            'Korobi\Authentication\UserConfigPermissions'
+        );
+        $this->app->bind(
+            'Korobi\Authentication\UserAuthenticationInterface',
+            'Korobi\Authentication\GitHubAuthentication'
+        );
     }
 
 }
