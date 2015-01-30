@@ -9,13 +9,13 @@
     "type": "project",
     "require": {
         "laravel/framework": "~5.0dev",
-        "laravel/socialite": "*",
-        "barryvdh/laravel-ide-helper": "2.0.*@dev"
+        "laravel/socialite": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1",
-        "mockery/mockery": "dev-master@dev"
+        "mockery/mockery": "dev-master@dev",
+        "barryvdh/laravel-ide-helper": "2.0.*@dev"
     },
     "autoload": {
         "classmap": [
