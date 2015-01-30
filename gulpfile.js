@@ -23,9 +23,7 @@ gulp.task('deploy', function (cb) {
 
 //styles
 gulp.task('styles', ['scripts'], function () {
-    elixir(function(mix) {
-        mix.sass("resources/assets/sass/styles.scss", "public/css/");
-    });
+
 });
 
 //scripts
