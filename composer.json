@@ -1,11 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
-    "license": "MIT",
+    "name": "Korobi/Web",
+    "description": "The web part of Korobi.",
+    "license": "All rights reserved",
     "type": "project",
     "require": {
         "laravel/framework": "~5.0dev",
@@ -15,7 +11,8 @@
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1",
         "mockery/mockery": "dev-master@dev",
-        "barryvdh/laravel-ide-helper": "2.0.*@dev"
+        "barryvdh/laravel-ide-helper": "2.0.*@dev",
+        "doctrine/dbal": "~2.3"
     },
     "autoload": {
         "classmap": [
