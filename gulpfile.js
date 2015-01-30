@@ -1,5 +1,5 @@
-var runSequence = require('run-sequence'),
-    compass = require('gulp-compass'),
+var elixir = require('laravel-elixir'),
+    runSequence = require('run-sequence'),
     minifycss = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
@@ -23,15 +23,9 @@ gulp.task('deploy', function (cb) {
 
 //styles
 gulp.task('styles', ['scripts'], function () {
-    return gulp.src(['resources/assets/sass/**/*.scss'])
-        .pipe(compass({
-            css: 'public/css',
-            sass: 'resources/assets/sass/'
-        }))
-        .pipe(gulp.dest('public/css'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(minifycss())
-        .pipe(gulp.dest('public/css'));
+    elixir(function(mix) {
+        mix.sass("resources/assets/sass/styles.scss", "public/css/");
+    });
 });
 
 //scripts

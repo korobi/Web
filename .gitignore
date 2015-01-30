@@ -1,7 +1,10 @@
 # laravel
 .env
-public/css/
-public/js/
+public/css/*
+public/js/*
+!public/css/.gitkeep
+!public/js/.gitkeep
+
 storage/
 vendor/
 
