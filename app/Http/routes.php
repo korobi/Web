@@ -1,5 +1,5 @@
 <?php
 
 Route::get('/', 'WelcomeController@index');
-Route::get('/login', 'AuthController@redirectToGitHub');
-Route::get('/auth/github', 'AuthController@getUserDetails');
+Route::get('/login', 'GitHubAuthController@redirectToGitHub');
+Route::get('/auth/github', 'GitHubAuthController@getUserDetails');
