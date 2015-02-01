@@ -1,16 +1,21 @@
 # laravel
-.env
-public/css/*
-public/js/*
-!public/css/.gitkeep
-!public/js/.gitkeep
-
+public/assets/css/
+public/assets/js/
 storage/
 vendor/
+.env
+!public/assets/css/.gitkeep
+!public/assets/js/.gitkeep
 
 # node
-npm-debug.log
 node_modules/
+npm-debug.log
+
+# ide junk
+.idea/
+*.iml
+*.ipr
+*.iws
 
 # misc
 *.bak

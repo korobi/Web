@@ -30,10 +30,10 @@ gulp.task('styles', ['scripts'], function () {
 gulp.task('scripts', function () {
     return gulp.src('resources/assets/js/**/*.js')
         .pipe(concat('app.js'))
-        .pipe(gulp.dest('public/js'))
+        .pipe(gulp.dest('public/assets/js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
-        .pipe(gulp.dest('public/js'));
+        .pipe(gulp.dest('public/assets/js'));
 });
 
 gulp.task('serve', shell.task('php artisan serve'));
