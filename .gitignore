@@ -1,6 +1,6 @@
 # laravel
-public/assets/css/
-public/assets/js/
+public/assets/css/*
+public/assets/js/*
 storage/
 vendor/
 .env
