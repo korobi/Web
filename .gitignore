@@ -11,6 +11,9 @@ vendor/
 node_modules/
 npm-debug.log
 
+# I'm too sassy for you
+.sass-cache/
+
 # ide junk
 .idea/
 *.iml
