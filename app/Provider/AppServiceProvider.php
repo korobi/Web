@@ -40,5 +40,4 @@ class AppServiceProvider extends ServiceProvider {
             'Korobi\Auth\GitHubAuth'
         );
     }
-
 }

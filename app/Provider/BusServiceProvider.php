@@ -16,7 +16,7 @@ class BusServiceProvider extends ServiceProvider {
     public function boot(Dispatcher $dispatcher) {
         $dispatcher->mapUsing(function ($command) {
             return Dispatcher::simpleMapping(
-                $command, 'Korobi\Commands', 'Korobi\Handlers\Commands'
+                $command, 'Korobi\Command', 'Korobi\Handler\Command'
             );
         });
     }
