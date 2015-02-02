@@ -1,4 +1,6 @@
-<?php namespace Korobi\Http\Middleware;
+<?php
+
+namespace Korobi\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
@@ -37,5 +39,4 @@ class RedirectIfAuthenticated {
 
         return $next($request);
     }
-
 }

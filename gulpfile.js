@@ -21,12 +21,12 @@ gulp.task('deploy', function (cb) {
 
 });
 
-//styles
+// styles
 gulp.task('styles', ['scripts'], function () {
 
 });
 
-//scripts
+// scripts
 gulp.task('scripts', function () {
     return gulp.src('resources/assets/js/**/*.js')
         .pipe(concat('app.js'))
@@ -38,19 +38,19 @@ gulp.task('scripts', function () {
 
 gulp.task('serve', shell.task('php artisan serve'));
 
-//tests
+// tests
 gulp.task('tests', function() {
     gulp.src('phpunit.xml').pipe(phpunit());
 });
 
-//watch
+// watch
 gulp.task('watcher', function () {
     livereload.listen();
 
-    //watch .scss files
+    // watch .scss files
     gulp.watch('resources/assets/sass/**/*.scss', ['styles']);
 
-    //watch .js files
+    // watch .js files
     gulp.watch('resources/assets/js/**/*.js', ['scripts']);
     gutil.log(gutil.colors.green('You may now change SASS and JS files!'));
 

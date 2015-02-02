@@ -140,11 +140,11 @@ return [
         /*
          * Application Service Providers...
          */
-        'Korobi\Providers\AppServiceProvider',
-        'Korobi\Providers\BusServiceProvider',
-        'Korobi\Providers\ConfigServiceProvider',
-        'Korobi\Providers\EventServiceProvider',
-        'Korobi\Providers\RouteServiceProvider',
+        'Korobi\Provider\AppServiceProvider',
+        'Korobi\Provider\BusServiceProvider',
+        'Korobi\Provider\ConfigServiceProvider',
+        'Korobi\Provider\EventServiceProvider',
+        'Korobi\Provider\RouteServiceProvider',
 
     ],
 

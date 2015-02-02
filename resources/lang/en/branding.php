@@ -1,4 +1,5 @@
 <?php
+
 return [
-    "project-name" => "Korobi",
+    'project-name' => 'Korobi',
 ];

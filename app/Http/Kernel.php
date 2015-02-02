@@ -1,4 +1,6 @@
-<?php namespace Korobi\Http;
+<?php
+
+namespace Korobi\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -28,5 +30,4 @@ class Kernel extends HttpKernel {
         'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
         'guest' => 'Korobi\Http\Middleware\RedirectIfAuthenticated',
     ];
-
 }

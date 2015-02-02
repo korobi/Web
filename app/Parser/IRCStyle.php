@@ -11,48 +11,48 @@ class IRCStyle {
      * @return string
      */
     public static function parseLine($line) {
-        $character_map = self::getCharacterMap();
-        $enabled_map = array();
+        $characterMap = self::getCharacterMap();
+        $activeMap = array();
 
-        foreach ($character_map as $key => $value) {
-            $enabled_map[$key] = 0;
+        foreach ($characterMap as $key => $value) {
+            $activeMap[$key] = 0;
         }
 
-        $line_escape = htmlentities($line, ENT_QUOTES);
-        $line_parsed = '';
-        $length = strlen($line_escape);
+        $line = htmlentities($line, ENT_QUOTES);
+        $result = '';
+        $length = strlen($line);
 
         for ($i = 0; $i < $length; $i++) {
-            $character = $line_escape[$i];
+            $character = $line[$i];
 
-            if (in_array($character, $character_map)) {
+            if (in_array($character, $characterMap)) {
                 if (self::isBold($character)) {
-                    $line_parsed .= self::wrapInElement($character_map['bold'], $enabled_map['bold'] == 1);
-                    $enabled_map['bold'] = $enabled_map['bold'] == 0 ? 1 : 0;
+                    $result .= self::wrapInElement($characterMap['bold'], $activeMap['bold'] == 1);
+                    $activeMap['bold'] = $activeMap['bold'] == 0 ? 1 : 0;
                     continue;
                 }
 
                 if (self::isColor($character)) {
-                    if ($length > $i + 1 && is_numeric($line_escape[$i + 1])) {
-                        if ($length > $i + 2 && is_numeric($line_escape[$i + 2])) {
-                            $line_parsed .= self::wrapInElement($line_escape[$i + 1] . $line_escape[$i + 2]);
-                            $enabled_map['color']++;
+                    if ($length > $i + 1 && is_numeric($line[$i + 1])) {
+                        if ($length > $i + 2 && is_numeric($line[$i + 2])) {
+                            $result .= self::wrapInElement($line[$i + 1] . $line[$i + 2]);
+                            $activeMap['color']++;
                             $i += 2;
                             continue;
                         }
 
-                        $line_parsed .= self::wrapInElement($line_escape[$i + 1]);
-                        $enabled_map['color']++;
+                        $result .= self::wrapInElement($line[$i + 1]);
+                        $activeMap['color']++;
                         $i++;
                         continue;
                     }
 
-                    if ($enabled_map['color'] > 0) {
-                        for ($j = 0; $j < $enabled_map['color']; $j++) {
-                            $line_parsed .= self::wrapInelement($character_map['color'], true);
+                    if ($activeMap['color'] > 0) {
+                        for ($j = 0; $j < $activeMap['color']; $j++) {
+                            $result .= self::wrapInelement($characterMap['color'], true);
                         }
 
-                        $enabled_map['color'] = 0;
+                        $activeMap['color'] = 0;
                         continue;
                     }
 
@@ -60,9 +60,9 @@ class IRCStyle {
                 }
 
                 if (self::isClear($character)) {
-                    foreach ($enabled_map as $key => $value) {
-                        while ($enabled_map[$key] > 0) {
-                            $line_parsed .= self::wrapInElement($character_map[$key], $enabled_map[$key]-- > 0);
+                    foreach ($activeMap as $key => $value) {
+                        while ($activeMap[$key] > 0) {
+                            $result .= self::wrapInElement($characterMap[$key], $activeMap[$key]-- > 0);
                         }
                     }
 
@@ -70,34 +70,34 @@ class IRCStyle {
                 }
 
                 if (self::isReverseTv($character)) {
-                    $line_parsed .= self::wrapInElement($character_map['reversetv'], $enabled_map['reversetv'] == 1);
-                    $enabled_map['reversetv'] = $enabled_map['reversetv'] == 0 ? 1 : 0;
+                    $result .= self::wrapInElement($characterMap['reversetv'], $activeMap['reversetv'] == 1);
+                    $activeMap['reversetv'] = $activeMap['reversetv'] == 0 ? 1 : 0;
                     continue;
                 }
 
                 if (self::isItalic($character)) {
-                    $line_parsed .= self::wrapInElement($character_map['italic'], $enabled_map['italic'] == 1);
-                    $enabled_map['italic'] = $enabled_map['italic'] == 0 ? 1 : 0;
+                    $result .= self::wrapInElement($characterMap['italic'], $activeMap['italic'] == 1);
+                    $activeMap['italic'] = $activeMap['italic'] == 0 ? 1 : 0;
                     continue;
                 }
 
                 if (self::isUnderline($character)) {
-                    $line_parsed .= self::wrapInElement($character_map['underline'], $enabled_map['underline'] == 1);
-                    $enabled_map['underline'] = $enabled_map['underline'] == 0 ? 1 : 0;
+                    $result .= self::wrapInElement($characterMap['underline'], $activeMap['underline'] == 1);
+                    $activeMap['underline'] = $activeMap['underline'] == 0 ? 1 : 0;
                     continue;
                 }
             }
 
-            $line_parsed .= $character;
+            $result .= $character;
         }
 
-        foreach ($enabled_map as $key => $value) {
-            while ($enabled_map[$key] > 0) {
-                $line_parsed .= self::wrapInElement($character_map[$key], $enabled_map[$key]-- > 0);
+        foreach ($activeMap as $key => $value) {
+            while ($activeMap[$key] > 0) {
+                $result .= self::wrapInElement($characterMap[$key], $activeMap[$key]-- > 0);
             }
         }
 
-        return self::transform($line_parsed);
+        return self::transform($result);
     }
 
     /**
@@ -148,7 +148,7 @@ class IRCStyle {
             return $raw;
         }
 
-        $inside_anchor = false;
+        $insideAnchor = false;
         $position = 0;
         $result = '';
 
@@ -156,11 +156,11 @@ class IRCStyle {
             $match = array();
             preg_match('{</?([a-z]+)([^"\'>]|"[^"]*"|\'[^\']*\')*>|&#?[a-zA-Z0-9]+;|$}', $raw, $match, PREG_OFFSET_CAPTURE, $position);
 
-            list($markup, $markup_position) = $match[0];
+            list($markup, $markupIndex) = $match[0];
 
-            $text = substr($raw, $position, $markup_position - $position);
+            $text = substr($raw, $position, $markupIndex - $position);
 
-            if (!$inside_anchor) {
+            if (!$insideAnchor) {
                 $text = self::transformUnsafe($text);
             }
 
@@ -171,12 +171,12 @@ class IRCStyle {
             }
 
             if ($markup[0] !== '&' && $match[1][0] === 'a') {
-                $inside_anchor = ($markup[1] !== '/');
+                $insideAnchor = ($markup[1] !== '/');
             }
 
             $result .= $markup;
 
-            $position = $markup_position + strlen($markup);
+            $position = $markupIndex + strlen($markup);
         }
 
         return $result;
@@ -192,9 +192,9 @@ class IRCStyle {
         $match = [];
 
         while (preg_match(self::$pattern, $text, $match, PREG_OFFSET_CAPTURE, $index)) {
-            list($url, $url_index) = $match[0];
+            list($url, $urlIndex) = $match[0];
 
-            $result .= htmlspecialchars(substr($text, $index, $url_index - $index));
+            $result .= htmlspecialchars(substr($text, $index, $urlIndex - $index));
 
             $scheme = $match[1][0];
             $username = $match[2][0];
@@ -209,25 +209,25 @@ class IRCStyle {
             if (preg_match('{^\.[0-9]{1,3}$}', $tld) || in_array($tld, self::$extensions)) {
                 if (!$scheme && $password) {
                     $result .= htmlspecialchars($username);
-                    $index = $url_index + strlen($username);
+                    $index = $urlIndex + strlen($username);
 
                     continue;
                 }
 
                 if (!$scheme && $username && !$password && !$after) {
-                    $complete_url = "mailto:$url";
+                    $linkRef = "mailto:$url";
                     $linkText = $url;
                 } else {
-                    $complete_url = $scheme ? $url : "http://$url";
-                    $linkText = $complete_url;
+                    $linkRef = $scheme ? $url : "http://$url";
+                    $linkText = $linkRef;
                 }
 
-                $result .= self::createLinkTag($complete_url, $linkText);
+                $result .= self::createLinkTag($linkRef, $linkText);
             } else {
                 $result .= htmlspecialchars($url);
             }
 
-            $index = $url_index + strlen($url);
+            $index = $urlIndex + strlen($url);
         }
 
         $result .= htmlspecialchars(substr($text, $index));
@@ -245,10 +245,10 @@ class IRCStyle {
     }
 
     /**
-     * @param null $array_item
+     * @param null $item
      * @return array|int|null|string
      */
-    private static function getCharacterMap($array_item = null) {
+    private static function getCharacterMap($item = null) {
         $map = [
             'bold' => chr(2),
             'color' => chr(3),
@@ -258,11 +258,11 @@ class IRCStyle {
             'underline' => chr(31),
         ];
 
-        if ($array_item !== null) {
+        if ($item !== null) {
             foreach ($map as $key => $value) {
-                if ($key == $array_item) {
+                if ($key == $item) {
                     return $value;
-                } else if ($value == $array_item) {
+                } else if ($value == $item) {
                     return $key;
                 }
             }

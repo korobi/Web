@@ -1,9 +1,9 @@
 {{-- You make me cry with your lack of autocompletion, PHPStorm :( --}}
-{{-- See \Korobi\Authentication\UserAuthenticationInterface --}}
+{{-- See \Korobi\Auth\UserAuthInterface --}}
 @if ($user->isAuthenticated())
     <h2>Hi {{{ $user->getUsername() }}}!</h2>
 
-    <p>Your unique id is {{{ $user->getUniqueIdentifier() }}}.</p>
+    <p>Your unique id is {{{ $user->getUniqueId() }}}.</p>
     @if ($user->isAdmin())
         <p>I think you're an administrator.</p>
     @else

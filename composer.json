@@ -1,7 +1,8 @@
 {
     "name": "Korobi/Web",
     "description": "The web part of Korobi.",
-    "license": "All rights reserved",
+    "homepage": "https://korobi.io/",
+    "license": "proprietary",
     "type": "project",
     "require": {
         "laravel/framework": "~5.0dev",
@@ -24,7 +25,7 @@
     },
     "autoload-dev": {
         "classmap": [
-            "app/Tests/TestCase.php"
+            "app/Test/TestCase.php"
         ]
     },
     "scripts": {
