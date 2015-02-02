@@ -1,1 +1,25 @@
+# laravel
+public/assets/css/*
+public/assets/js/*
+storage/
+vendor/
+.env
+!public/assets/css/.gitkeep
+!public/assets/js/.gitkeep
+
+# node
+node_modules/
+npm-debug.log
+
+# I'm too sassy for you
+.sass-cache/
+
+# ide junk
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# misc
 *.bak
+_ide_helper.php

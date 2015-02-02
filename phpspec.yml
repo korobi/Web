@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Korobi
+        psr4_prefix: Korobi
+        src_path: app
