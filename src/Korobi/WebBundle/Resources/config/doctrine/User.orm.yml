@@ -1,0 +1,15 @@
+Korobi\WebBundle\Entity\User:
+    type: entity
+    table: auth_users
+    repositoryClass: Korobi\WebBundle\Entity\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        githubUserId:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

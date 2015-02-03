@@ -21,7 +21,8 @@ framework:
     trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
+        handler_id:  session.handler.native_file
+        save_path: "%kernel.cache_dir%/sessions"
     fragments:       ~
     http_method_override: true
 
@@ -76,3 +77,22 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_user:
+    db_driver: orm
+    firewall_name: app
+    user_class: Korobi\WebBundle\Entity\User
+    registration:
+        confirmation:
+            enabled: false
+
+hwi_oauth:
+    firewall_name: app
+    resource_owners:
+        github:
+            type: github
+            client_id: "%github_client_id%"
+            client_secret: "%github_client_secret%"
+    fosub:
+        properties:
+            github: githubUserId
