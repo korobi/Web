@@ -1,10 +1,10 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "license": "MIT",
+    "name": "korobi/web",
+    "license": "proprietary",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "The Korobi web component",
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-0": { "": "src/" }
     },
     "require": {
         "php": ">=5.3.3",

@@ -1,28 +1,17 @@
-Symfony Standard Edition
+Web
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
-
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Copyright (c) 2014 - 2015
 
 What's inside?
 --------------
-
-The Symfony Standard Edition is configured with the following defaults:
-
-  * An AppBundle you can use to start coding;
-
-  * Twig as the only configured template engine;
+  * Twig template engine;
 
   * Doctrine ORM/DBAL;
 
   * Swiftmailer;
 
   * Annotations enabled for everything.
-
-It comes pre-configured with the following bundles:
 
   * **FrameworkBundle** - The core Symfony framework bundle
 
@@ -52,11 +41,6 @@ It comes pre-configured with the following bundles:
 
   * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
     capabilities
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
 
 [1]:  http://symfony.com/doc/2.6/book/installation.html
 [6]:  http://symfony.com/doc/2.6/bundles/SensioFrameworkExtraBundle/index.html
