@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{{ app_name }}{% endblock %}</title>
+    {% stylesheets filter='scss' '@KorobiWebBundle/Resources/assets/sass/application.scss' %}
+    <link rel='stylesheet' href='{{ asset_url }}' />
+    {% endstylesheets %}
+</head>
+<body>
+{% block body %}{% endblock %}
+{% javascripts '@KorobiWebBundle/Resources/assets/js/*' output='assets/js/application.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{# <script src='{{ asset('assets/js/application.js') }}'></script> #}
+</body>
+</html>

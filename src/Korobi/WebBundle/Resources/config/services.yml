@@ -1,0 +1,6 @@
+services:
+    korobi.extension.twig.globals:
+        class: Korobi\WebBundle\Extension\ExtensionTwigGlobals
+        tags:
+            - { name: twig.extension }
+        arguments: [%kernel.root_dir%]

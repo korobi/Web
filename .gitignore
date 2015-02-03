@@ -14,8 +14,15 @@
 /build/
 /web/bundles/
 
-# ide
+# intellij
 /.idea/
 *.iml
 *.ipr
 *.iws
+
+# node.js
+/node_modules/
+/npm-debug.log
+
+# sass
+/.sass-cache/
