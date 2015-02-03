@@ -12,6 +12,10 @@
 /app/phpunit.xml
 /bin/
 /build/
+/web/assets/css/
+!/web/assets/css/.gitkeep
+/web/assets/js/
+!/web/assets/js/.gitkeep
 /web/bundles/
 
 # intellij
