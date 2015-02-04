@@ -3,6 +3,18 @@ Web
 
 Copyright (c) 2014 - 2015
 
+Useful commands
+---------------
+
+**Run local testing server**
+`php app/console server:start [0.0.0.0:8000] # Host:port optional`
+
+**Create database**
+`php app/console doctrine:database:create`
+
+**Run migrations**
+`php app/console doctrine:schema:update --force`
+
 What's inside?
 --------------
   * Twig template engine;
