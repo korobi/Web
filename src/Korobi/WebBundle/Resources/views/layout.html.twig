@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}{{ app_name }}{% endblock %}</title>
+    <title>{% if page_title is defined %} {{ page_title }} - {% endif %}{{ app_name }}</title>
+    <meta name="viewport" content="initial-scale=1">
     {% stylesheets filter='scss' '@KorobiWebBundle/Resources/assets/sass/application.scss' %}
     <link rel='stylesheet' href='{{ asset_url }}' />
     {% endstylesheets %}
 </head>
 <body>
-{% block body %}{% endblock %}
+{{ include('KorobiWebBundle::partials/nav.html.twig') }}
+<main>
+    {% block body %}{% endblock %}
+</main>
+
 {% javascripts '@KorobiWebBundle/Resources/assets/js/*' output='assets/js/application.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
