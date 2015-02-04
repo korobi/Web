@@ -23,6 +23,12 @@ The items below are mostly based on guess-work:
 **Watch assets and auto-compile**
 `php app/console assetic:watch`
 
+**Run tests**
+
+NB: Tests are in the src directory but the PHPUnit config is in the app directory.
+
+`cd app/; phpunit`
+
 What's inside?
 --------------
   * Twig template engine;
