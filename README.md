@@ -9,11 +9,19 @@ Useful commands
 **Run local testing server**
 `php app/console server:start [0.0.0.0:8000] # Host:port optional`
 
-**Create database**
+**Create database (skip if already made)**
 `php app/console doctrine:database:create`
 
 **Run migrations**
 `php app/console doctrine:schema:update --force`
+
+The items below are mostly based on guess-work:
+
+**Compile assets**
+`php app/console assetic:dump`
+
+**Watch assets and auto-compile**
+`php app/console assetic:watch`
 
 What's inside?
 --------------
