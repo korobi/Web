@@ -28,7 +28,7 @@ security:
                 resource_owners:
                     github: '/auth/connect/check-github'
                 oauth_user_provider:
-                    service: hwi_oauth.user.provider.fosub_bridge
+                    service: app_user_provider
             logout:
                 path: /auth/logout
                 target: /

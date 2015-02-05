@@ -4,6 +4,9 @@ parameters:
 #    parameter_name: value
 
 services:
+    app_user_provider:
+        class: "Korobi\WebBundle\Security\UserProvider"
+        arguments: [@fos_user.user_manager,{github: githubUserId}]
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
