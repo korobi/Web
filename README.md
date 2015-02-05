@@ -3,6 +3,11 @@ Web
 
 Copyright (c) 2014 - 2015
 
+Staging
+-------
+
+A development instance is available at https://dev.korobi.io/. Authentication is required.
+
 Useful commands
 ---------------
 
