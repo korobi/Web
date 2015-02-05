@@ -1,37 +1,37 @@
 <?php
 
-namespace Korobi\WebBundle\Entity;
+namespace Korobi\WebBundle\Document;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * ChannelViewKey
+ * @MongoDB\Document(collection="view_keys")
  */
 class ChannelViewKey {
     /**
-     * @var integer
+     * @MongoDB\Id(strategy="auto")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
+     * @MongoDB\String
      */
     private $network;
 
     /**
-     * @var string
+     * @MongoDB\String
      */
     private $channel;
 
     /**
-     * @var string
+     * @MongoDB\String
      */
-    private $viewKey;
+    private $key;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return id $id
      */
     public function getId() {
         return $this->id;
@@ -40,7 +40,7 @@ class ChannelViewKey {
     /**
      * Get network
      *
-     * @return string
+     * @return string $network
      */
     public function getNetwork() {
         return $this->network;
@@ -50,18 +50,17 @@ class ChannelViewKey {
      * Set network
      *
      * @param string $network
-     * @return ChannelViewKey
+     * @return self
      */
     public function setNetwork($network) {
         $this->network = $network;
-
         return $this;
     }
 
     /**
      * Get channel
      *
-     * @return string
+     * @return string $channel
      */
     public function getChannel() {
         return $this->channel;
@@ -71,32 +70,30 @@ class ChannelViewKey {
      * Set channel
      *
      * @param string $channel
-     * @return ChannelViewKey
+     * @return self
      */
     public function setChannel($channel) {
         $this->channel = $channel;
-
         return $this;
     }
 
     /**
-     * Get viewKey
+     * Get key
      *
-     * @return string
+     * @return string $key
      */
-    public function getViewKey() {
-        return $this->viewKey;
+    public function getKey() {
+        return $this->key;
     }
 
     /**
-     * Set viewKey
+     * Set key
      *
-     * @param string $viewKey
-     * @return ChannelViewKey
+     * @param string $key
+     * @return self
      */
-    public function setViewKey($viewKey) {
-        $this->viewKey = $viewKey;
-
+    public function setKey($key) {
+        $this->key = $key;
         return $this;
     }
 }
