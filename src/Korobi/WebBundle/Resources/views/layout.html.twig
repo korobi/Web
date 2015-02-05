@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% if page_title is defined %} {{ page_title }} - {% endif %}{{ app_name }}</title>
-    <meta name="viewport" content="initial-scale=1">
+    <title>{% if page_title is defined %}{{ page_title }} - {% endif %}{{ app_name }}</title>
+    <meta name='viewport' content='initial-scale=1'>
     {% stylesheets filter='scss' '@KorobiWebBundle/Resources/assets/sass/application.scss' %}
     <link rel='stylesheet' href='{{ asset_url }}' />
     {% endstylesheets %}
