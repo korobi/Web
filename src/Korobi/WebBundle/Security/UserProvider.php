@@ -12,24 +12,23 @@ class UserProvider extends FOSUBUserProvider {
 
         $user = $this->userManager->findUserBy([$this->getProperty($response) => $username]);
 
+        // no existing user, create one from response data
         if ($user == null) {
             /** @var $user \Korobi\WebBundle\Entity\User */
             $user = $this->userManager->createUser();
             $user->setGithubUserId($username);
             $user->setUsername($response->getNickname());
-            $user->setEmail($response->getEmail());
-            $user->setPlainPassword($username . '__meow');
+            $user->setEmail($response->getEmail() ?: $response->getNickname() . '@users.noreply.github.com');
+            $user->setPlainPassword(hash('sha512', $username . '__meow'));
             $user->setEnabled(true);
 
             $this->userManager->updateUser($user);
 
             return $user;
-
         }
 
         /** @var $user \Korobi\WebBundle\Entity\User */
         $user = parent::loadUserByOAuthUserResponse($response);
-        $user->setGithubUserId($username);
 
         return $user;
     }
