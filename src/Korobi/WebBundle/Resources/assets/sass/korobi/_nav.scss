@@ -110,7 +110,7 @@ header.navigation {
 
   // The nav items
 
-  ul li.nav-link {
+  ul li {
     background: $navigation-background;
     display: block;
     line-height: $navigation-height;
@@ -151,7 +151,7 @@ header.navigation {
 
   // Sub menus
 
-  li.more.nav-link {
+  li.more {
     padding-right: 0;
 
     @include media($large-screen) {
