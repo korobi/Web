@@ -1,36 +1,21 @@
-<header class="navigation" role="banner">
-    <div class="navigation-wrapper">
-        <a href="/" class="logo">
-            <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo Image">
-        </a>
-        <button class="navigation-menu-button" id="js-mobile-menu"><i class="fa fa-bars"></i></button>
-        <nav role="navigation">
-            <ul id="navigation-menu-js">
-                <li><a href="#">Products</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-                <li class="more"><a href="#">More</a>
-                    <ul class="submenu">
-                        <li><a href="#">Submenu Item</a></li>
-                        <li><a href="#">Another Item</a></li>
-                        <li class="more"><a href="#">Item with submenu</a>
-                            <ul class="submenu">
-                                <li><a href="#">Sub-submenu Item</a></li>
-                                <li><a href="#">Another Item</a></li>
-                            </ul>
-                        </li>
-                        <li class="more"><a href="#">Another submenu</a>
-                            <ul class="submenu">
-                                <li><a href="#">Sub-submenu</a></li>
-                                <li><a href="#">An Item</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <div class="navigation-auth">
-            <a href="#" class="sign-up">Sign Up</a>
+<nav class="navigation" role="navigation">
+    <div class="navigation--inner">
+        <div class="navigation--brand-mobile">
+            <a href="/" class="navigation--brandlink navigation--brandlink-mobile">{{ app_name }}</a>
         </div>
+        <div class="navigation--brand">
+            <a href="/" class="navigation--brandlink" role="menuitem">{{ app_name }}</a>
+            <i class="navigation--menutoggle fa fa-navicon"></i>
+        </div>
+        <ul class="navigation--links">
+            <li class="active">
+                <a href="#" role="menuitem">Active item</a>
+            </li>
+        </ul>
+        <ul class="navigation--links navigation--links-secondary">
+            <li class="active">
+                <a href="#" role="menuitem">Secondary active item</a>
+            </li>
+        </ul>
     </div>
-</header>
+</nav>
