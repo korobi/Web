@@ -1,21 +1,22 @@
 <?php
 
-namespace Korobi\WebBundle\Entity;
+namespace Korobi\WebBundle\Document;
 
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use FOS\UserBundle\Model\User as BaseUser;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
+ * @MongoDB\Document(collection="users")
  */
 class User extends BaseUser {
+
     /**
-     * @var integer
+     * @MongoDB\Id(strategy="auto")
      */
     protected $id;
 
     /**
-     * @var string
+     * @MongoDB\Int
      */
     protected $githubUserId;
 
@@ -26,7 +27,7 @@ class User extends BaseUser {
     /**
      * Get id
      *
-     * @return integer
+     * @return id $id
      */
     public function getId() {
         return $this->id;
@@ -35,7 +36,7 @@ class User extends BaseUser {
     /**
      * Get githubUserId
      *
-     * @return string
+     * @return int $githubUserId
      */
     public function getGithubUserId() {
         return $this->githubUserId;
@@ -44,12 +45,11 @@ class User extends BaseUser {
     /**
      * Set githubUserId
      *
-     * @param string $githubUserId
-     * @return User
+     * @param int $githubUserId
+     * @return self
      */
     public function setGithubUserId($githubUserId) {
         $this->githubUserId = $githubUserId;
-
         return $this;
     }
 }
