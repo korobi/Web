@@ -18,7 +18,13 @@ Useful commands
 `php app/console doctrine:database:create`
 
 **Run migrations**
-`php app/console doctrine:schema:update --force`
+`php app/console doctrine:mongodb:schema:create`
+
+**Create document getters/setters**
+`php app/console doctrine:mongodb:generate:documents KorobiWebBundle`
+
+**More information**
+`php app/console doctrine:mongodb help`
 
 The items below are mostly based on guess-work:
 
