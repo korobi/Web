@@ -5,9 +5,9 @@ namespace Korobi\WebBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document(collection="view_keys")
+ * @MongoDB\Document(collection="channel_config",repositoryClass="Korobi\WebBundle\Repository\ChannelConfigRepository")
  */
-class ChannelViewKey {
+class ChannelConfig {
     /**
      * @MongoDB\Id(strategy="auto")
      */
@@ -27,6 +27,16 @@ class ChannelViewKey {
      * @MongoDB\String
      */
     private $key;
+
+    /**
+     * @MongoDB\Boolean
+     */
+    private $logs_enabled;
+
+    /**
+     * @MongoDB\Boolean
+     */
+    private $commands_enabled;
 
     /**
      * Get id
@@ -94,6 +104,46 @@ class ChannelViewKey {
      */
     public function setKey($key) {
         $this->key = $key;
+        return $this;
+    }
+
+    /**
+     * Get logsEnabled
+     *
+     * @return boolean $logsEnabled
+     */
+    public function getLogsEnabled() {
+        return $this->logs_enabled;
+    }
+
+    /**
+     * Set logsEnabled
+     *
+     * @param boolean $logsEnabled
+     * @return self
+     */
+    public function setLogsEnabled($logsEnabled) {
+        $this->logs_enabled = $logsEnabled;
+        return $this;
+    }
+
+    /**
+     * Get commandsEnabled
+     *
+     * @return boolean $commandsEnabled
+     */
+    public function getCommandsEnabled() {
+        return $this->commands_enabled;
+    }
+
+    /**
+     * Set commandsEnabled
+     *
+     * @param boolean $commandsEnabled
+     * @return self
+     */
+    public function setCommandsEnabled($commandsEnabled) {
+        $this->commands_enabled = $commandsEnabled;
         return $this;
     }
 }

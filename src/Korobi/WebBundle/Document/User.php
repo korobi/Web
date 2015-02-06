@@ -6,7 +6,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * @MongoDB\Document(collection="users")
+ * @MongoDB\Document(collection="users",repositoryClass="Korobi\WebBundle\Repository\UserRepository")
  */
 class User extends BaseUser {
 
