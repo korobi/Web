@@ -5,9 +5,9 @@ namespace Korobi\WebBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document(collection="channel_config",repositoryClass="Korobi\WebBundle\Repository\ChannelConfigRepository")
+ * @MongoDB\Document(collection="channels",repositoryClass="Korobi\WebBundle\Repository\ChannelRepository")
  */
-class ChannelConfig {
+class Channel {
     /**
      * @MongoDB\Id(strategy="auto")
      */
