@@ -1,0 +1,3 @@
+.irc-inverted {
+  @include filter(invert(100%));
+}
