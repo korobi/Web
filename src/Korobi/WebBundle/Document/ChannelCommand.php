@@ -34,6 +34,11 @@ class ChannelCommand {
     private $value;
 
     /**
+     * @MongoDB\Boolean
+     */
+    private $is_alias;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -120,5 +125,25 @@ class ChannelCommand {
     public function setValue($value) {
         $this->value = $value;
         return $this;
+    }
+
+    /**
+     * Set isAlias
+     *
+     * @param boolean $isAlias
+     * @return self
+     */
+    public function setIsAlias($isAlias) {
+        $this->is_alias = $isAlias;
+        return $this;
+    }
+
+    /**
+     * Get isAlias
+     *
+     * @return boolean $isAlias
+     */
+    public function getIsAlias() {
+        return $this->is_alias;
     }
 }
