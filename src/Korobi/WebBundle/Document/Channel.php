@@ -8,6 +8,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  * @MongoDB\Document(collection="channels",repositoryClass="Korobi\WebBundle\Repository\ChannelRepository")
  */
 class Channel {
+
     /**
      * @MongoDB\Id(strategy="auto")
      */
