@@ -4,3 +4,17 @@ services:
         tags:
             - { name: twig.extension }
         arguments: [%kernel.root_dir%]
+
+    korobi.home_controller:
+        class: Korobi\WebBundle\Controller\HomeController
+        arguments:
+          - @templating
+          - @korobi.channel_repository
+
+    korobi.channel_repository:
+        class: Korobi\WebBundle\Repository\ChannelRepository
+        factory_service: doctrine_mongodb
+        factory_method: getRepository
+        public: false
+        arguments:
+            - "KorobiWebBundle:Channel"
