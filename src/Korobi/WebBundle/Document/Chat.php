@@ -9,6 +9,8 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  */
 class Chat {
 
+    const ACTOR_SERVER = '$Server';
+
     /**
      * @MongoDB\Id(strategy="auto")
      */
@@ -28,6 +30,16 @@ class Chat {
      * @MongoDB\Date
      */
     private $date;
+
+    /**
+     * @MongoDB\String
+     */
+    private $actor;
+
+    /**
+     * @MongoDB\String
+     */
+    private $actor_hostname;
 
     /**
      * @MongoDB\String
@@ -101,6 +113,46 @@ class Chat {
     public function setDate($date) {
         $this->date = $date;
         return $this;
+    }
+
+    /**
+     * Set actor
+     *
+     * @param string $actor
+     * @return self
+     */
+    public function setActor($actor) {
+        $this->actor = $actor;
+        return $this;
+    }
+
+    /**
+     * Get actor
+     *
+     * @return string $actor
+     */
+    public function getActor() {
+        return $this->actor;
+    }
+
+    /**
+     * Set actorHostname
+     *
+     * @param string $actorHostname
+     * @return self
+     */
+    public function setActorHostname($actorHostname) {
+        $this->actor_hostname = $actorHostname;
+        return $this;
+    }
+
+    /**
+     * Get actorHostname
+     *
+     * @return string $actorHostname
+     */
+    public function getActorHostname() {
+        return $this->actor_hostname;
     }
 
     /**
