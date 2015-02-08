@@ -116,6 +116,15 @@ class Chat {
     }
 
     /**
+     * Get actor
+     *
+     * @return string $actor
+     */
+    public function getActor() {
+        return $this->actor;
+    }
+
+    /**
      * Set actor
      *
      * @param string $actor
@@ -127,12 +136,12 @@ class Chat {
     }
 
     /**
-     * Get actor
+     * Get actorHostname
      *
-     * @return string $actor
+     * @return string $actorHostname
      */
-    public function getActor() {
-        return $this->actor;
+    public function getActorHostname() {
+        return $this->actor_hostname;
     }
 
     /**
@@ -144,15 +153,6 @@ class Chat {
     public function setActorHostname($actorHostname) {
         $this->actor_hostname = $actorHostname;
         return $this;
-    }
-
-    /**
-     * Get actorHostname
-     *
-     * @return string $actorHostname
-     */
-    public function getActorHostname() {
-        return $this->actor_hostname;
     }
 
     /**
