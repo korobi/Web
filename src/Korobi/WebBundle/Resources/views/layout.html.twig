@@ -13,7 +13,7 @@
 <main>
     {% block body %}{% endblock %}
 </main>
-
+{{ include('KorobiWebBundle::partials/footer.html.twig') }}
 {% javascripts '@KorobiWebBundle/Resources/assets/js/*' output='assets/js/application.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}

@@ -1,0 +1,52 @@
+// Thanks mystrdat
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin: 0 0 $footerHeight;
+}
+
+footer.footer {
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: $footerHeight;
+  width: 100%;
+  background-color: $footerBackgroundColour;
+  padding-left: 1em;
+  padding-right: 1em;
+  div.footer--inner {
+    @include outer-container;
+    line-height: 3;
+  }
+}
+
+p.footer--copyright {
+  display: inline-block;
+  float: left;
+  color: $footerColor;
+  margin-bottom: 0;
+}
+
+ul.footer--links {
+  display: inline-block;
+  float: right;
+  li + li {
+    margin-left: 0.8em;
+  }
+  li {
+    display: inline-block;
+    a {
+      color: $footerColor;
+      text-decoration: none;
+      @include transition(all 0.3s);
+    }
+    a:hover, a:focus {
+      color: #fff;
+    }
+  }
+}
