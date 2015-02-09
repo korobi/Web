@@ -1,12 +1,27 @@
 $(function() {
     var $debugToolbar = $(".sf-toolbar");
-    if ($debugToolbar.length != 0) {
-        console.log($debugToolbar.css("display"));
-        $(".footer").addClass("footer--debug");
+    function getSymfonyPreference(name) {
+        if (!window.localStorage) {
+            return null;
+        }
+        return localStorage.getItem('sf2/profiler/' + name);
     }
 
+    if ($debugToolbar.length != 0) {
+        var dispPref = getSymfonyPreference("toolbar/displayState");
+        if (dispPref == "block") {
+            $(".footer").addClass("footer--debug");
+        }
+    }
+
+
     function toggleFooterDebugMode() {
-        $(".footer").toggleClass("footer--debug");
+        var $debugToolbar = $(".sf-minitoolbar");
+        if ($debugToolbar.css("display") != "none") {
+            $(".footer").removeClass("footer--debug");
+        } else {
+            $(".footer").addClass("footer--debug");
+        }
     }
 
     $("body").on("click", ".hide-button, a[title='Show Symfony toolbar']", function() {
