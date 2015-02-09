@@ -10,7 +10,6 @@ body {
 }
 
 footer.footer {
-
   position: absolute;
   left: 0;
   bottom: 0;
@@ -23,6 +22,10 @@ footer.footer {
     @include outer-container;
     line-height: 3;
   }
+}
+
+footer.footer.footer--debug {
+  bottom: 38px;
 }
 
 p.footer--copyright {

@@ -25,6 +25,6 @@ class HomeController {
 
     public function homeAction() {
         dump($this->channels->findAllByNetwork('solas')->toArray());
-        return $this->templating->renderResponse('KorobiWebBundle::home.html.twig');
+        return $this->templating->renderResponse('KorobiWebBundle::home.html.twig', ["debug"]);
     }
 }
