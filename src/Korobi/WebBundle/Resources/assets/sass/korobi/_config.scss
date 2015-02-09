@@ -4,19 +4,5 @@ $footerHeight: 3em;
 $footerBackgroundColour: #333333;
 $footerColor: #aaa;
 
-$irc-0: rgb(255, 255, 255);
-$irc-1: rgb(0, 0, 0);
-$irc-2: rgb(0, 0, 127);
-$irc-3: rgb(0, 147, 0);
-$irc-4: rgb(255, 0, 0);
-$irc-5: rgb(127, 0, 0);
-$irc-6: rgb(156, 0, 156);
-$irc-7: rgb(252, 127, 0);
-$irc-8: rgb(255, 255, 0);
-$irc-9: rgb(0, 252, 0);
-$irc-10: rgb(0, 147, 147);
-$irc-11: rgb(0, 255, 255);
-$irc-12: rgb(0, 0, 252);
-$irc-13: rgb(255, 0, 255);
-$irc-14: rgb(127, 127, 127);
-$irc-15: rgb(210, 210, 210);
+$irc-colors: rgb(255, 255, 255) rgb(0, 0, 0) rgb(0, 0, 127) rgb(0, 147, 0) rgb(255, 0, 0) rgb(127, 0, 0) rgb(156, 0, 156) rgb(252, 127, 0) rgb(255, 255, 0) rgb(0, 252, 0) rgb(0, 147, 147) rgb(0, 255, 255) rgb(0, 0, 252) rgb(255, 0, 255) rgb(127, 127, 127) rgb(210, 210, 210);
+

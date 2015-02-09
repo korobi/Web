@@ -1,3 +1,15 @@
-.irc-inverted {
-  @include filter(invert(100%));
+// Generates all the classes for the IRC colours
+@for $i from 0 through 15 {
+  @for $x from 0 through 15 {
+    .irc--#{$i}-#{$x} {
+      color: nth($irc-colors, $i+1);
+      background-color: nth($irc-colors, $x+1);
+    }
+
+    .irc--#{$i}-#{$x}-inverted {
+      background-color: nth($irc-colors, $i+1);
+      color: nth($irc-colors, $x+1);
+    }
+  }
+
 }
