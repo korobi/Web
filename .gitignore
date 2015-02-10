@@ -12,6 +12,7 @@
 /app/phpunit.xml
 /bin/
 /build/
+/src/Korobi/WebBundle/Document/*.php~
 /web/assets/css/
 !/web/assets/css/.gitkeep
 /web/assets/js/

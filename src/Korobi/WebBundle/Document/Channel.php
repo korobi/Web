@@ -40,6 +40,11 @@ class Channel {
     private $commands_enabled;
 
     /**
+     * @MongoDB\Boolean
+     */
+    private $punishments_enabled;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -145,6 +150,26 @@ class Channel {
      */
     public function setCommandsEnabled($commandsEnabled) {
         $this->commands_enabled = $commandsEnabled;
+        return $this;
+    }
+
+    /**
+     * Get punishmentsEnabled
+     *
+     * @return boolean $punishmentsEnabled
+     */
+    public function getPunishmentsEnabled() {
+        return $this->punishments_enabled;
+    }
+
+    /**
+     * Set punishmentsEnabled
+     *
+     * @param boolean $punishmentsEnabled
+     * @return self
+     */
+    public function setPunishmentsEnabled($punishmentsEnabled) {
+        $this->punishments_enabled = $punishmentsEnabled;
         return $this;
     }
 }

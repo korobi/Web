@@ -9,7 +9,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  */
 class Chat {
 
-    const ACTOR_SERVER = '$Server';
+    const ACTOR_INTERNAL = '$Internal';
 
     /**
      * @MongoDB\Id(strategy="auto")
@@ -27,6 +27,11 @@ class Chat {
     private $channel;
 
     /**
+     * @MongoDB\String
+     */
+    private $type;
+
+    /**
      * @MongoDB\Date
      */
     private $date;
@@ -34,12 +39,42 @@ class Chat {
     /**
      * @MongoDB\String
      */
-    private $actor;
+    private $actor_name;
 
     /**
      * @MongoDB\String
      */
     private $actor_hostname;
+
+    /**
+     * @MongoDB\String
+     */
+    private $actor_prefix;
+
+    /**
+     * @MongoDB\String
+     */
+    private $recipient_name;
+
+    /**
+     * @MongoDB\String
+     */
+    private $recipient_hostname;
+
+    /**
+     * @MongoDB\String
+     */
+    private $recipient_prefix;
+
+    /**
+     * @MongoDB\String
+     */
+    private $channel_mode;
+
+    /**
+     * @MongoDB\Boolean
+     */
+    private $imported;
 
     /**
      * @MongoDB\String
@@ -96,6 +131,26 @@ class Chat {
     }
 
     /**
+     * Get type
+     *
+     * @return string $type
+     */
+    public function getType() {
+        return $this->type;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return self
+     */
+    public function setType($type) {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
      * Get date
      *
      * @return date $date
@@ -116,22 +171,22 @@ class Chat {
     }
 
     /**
-     * Get actor
+     * Get actorName
      *
-     * @return string $actor
+     * @return string $actorName
      */
-    public function getActor() {
-        return $this->actor;
+    public function getActorName() {
+        return $this->actor_name;
     }
 
     /**
-     * Set actor
+     * Set actorName
      *
-     * @param string $actor
+     * @param string $actorName
      * @return self
      */
-    public function setActor($actor) {
-        $this->actor = $actor;
+    public function setActorName($actorName) {
+        $this->actor_name = $actorName;
         return $this;
     }
 
@@ -152,6 +207,126 @@ class Chat {
      */
     public function setActorHostname($actorHostname) {
         $this->actor_hostname = $actorHostname;
+        return $this;
+    }
+
+    /**
+     * Get actorPrefix
+     *
+     * @return string $actorPrefix
+     */
+    public function getActorPrefix() {
+        return $this->actor_prefix;
+    }
+
+    /**
+     * Set actorPrefix
+     *
+     * @param string $actorPrefix
+     * @return self
+     */
+    public function setActorPrefix($actorPrefix) {
+        $this->actor_prefix = $actorPrefix;
+        return $this;
+    }
+
+    /**
+     * Get recipientName
+     *
+     * @return string $recipientName
+     */
+    public function getRecipientName() {
+        return $this->recipient_name;
+    }
+
+    /**
+     * Set recipientName
+     *
+     * @param string $recipientName
+     * @return self
+     */
+    public function setRecipientName($recipientName) {
+        $this->recipient_name = $recipientName;
+        return $this;
+    }
+
+    /**
+     * Get recipientHostname
+     *
+     * @return string $recipientHostname
+     */
+    public function getRecipientHostname() {
+        return $this->recipient_hostname;
+    }
+
+    /**
+     * Set recipientHostname
+     *
+     * @param string $recipientHostname
+     * @return self
+     */
+    public function setRecipientHostname($recipientHostname) {
+        $this->recipient_hostname = $recipientHostname;
+        return $this;
+    }
+
+    /**
+     * Get recipientPrefix
+     *
+     * @return string $recipientPrefix
+     */
+    public function getRecipientPrefix() {
+        return $this->recipient_prefix;
+    }
+
+    /**
+     * Set recipientPrefix
+     *
+     * @param string $recipientPrefix
+     * @return self
+     */
+    public function setRecipientPrefix($recipientPrefix) {
+        $this->recipient_prefix = $recipientPrefix;
+        return $this;
+    }
+
+    /**
+     * Get channelMode
+     *
+     * @return string $channelMode
+     */
+    public function getChannelMode() {
+        return $this->channel_mode;
+    }
+
+    /**
+     * Set channelMode
+     *
+     * @param string $channelMode
+     * @return self
+     */
+    public function setChannelMode($channelMode) {
+        $this->channel_mode = $channelMode;
+        return $this;
+    }
+
+    /**
+     * Get imported
+     *
+     * @return boolean $imported
+     */
+    public function getImported() {
+        return $this->imported;
+    }
+
+    /**
+     * Set imported
+     *
+     * @param boolean $imported
+     * @return self
+     */
+    public function setImported($imported) {
+        $this->imported = $imported;
         return $this;
     }
 
