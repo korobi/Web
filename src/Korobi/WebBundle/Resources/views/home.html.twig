@@ -5,5 +5,10 @@
 {% block body %}
     Welcome home, darling.
 
-    <p class="irc-inverted" style="background-color: inherit; color: red;">I'm inverted!</p>
+    {% for i in 0..15 %}
+        {% for x in 0..15 %}
+            <p class="irc--{{ i }}-{{ x }}">Hi there. I'm an IRC colour. I have foreground {{ i }} and background {{ x }}. I'm <b>not</b> inverted.</p>
+            <p class="irc--{{ i }}-{{ x }}-inverted">Hi there. I'm an IRC colour. I have foreground {{ i }} and background {{ x }}. I <b>am</b> inverted.</p>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}

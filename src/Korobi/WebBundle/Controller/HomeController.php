@@ -6,7 +6,7 @@ use Korobi\WebBundle\Repository\ChannelRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
-class HomeController {
+class HomeController extends BaseController {
 
     /**
      * @var ChannelRepository The channel repository.

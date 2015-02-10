@@ -1,3 +1,6 @@
 home:
     path: /
     defaults: { _controller: korobi.home_controller:homeAction }
+deploy:
+    path: /deploy
+    defaults: { _controller: korobi.deploy_controller:deployAction }

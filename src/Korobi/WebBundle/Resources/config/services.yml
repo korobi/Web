@@ -11,6 +11,13 @@ services:
           - @templating
           - @korobi.channel_repository
 
+    korobi.deploy_controller:
+        class: Korobi\WebBundle\Controller\DeploymentController
+        arguments:
+          - @templating
+          - @logger
+          - %github_hook_hmac_secret%
+
     korobi.channel_repository:
         class: Korobi\WebBundle\Repository\ChannelRepository
         factory_service: doctrine_mongodb

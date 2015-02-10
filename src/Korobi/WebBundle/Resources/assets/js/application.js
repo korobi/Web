@@ -22,6 +22,7 @@ $(function() {
         } else {
             $(".footer").addClass("footer--debug");
         }
+
     }
 
     $("body").on("click", ".hide-button, a[title='Show Symfony toolbar']", function() {
