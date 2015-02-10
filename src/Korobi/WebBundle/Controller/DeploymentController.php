@@ -26,14 +26,17 @@ class DeploymentController extends BaseController {
      */
     private $hmacKey;
 
-    public function __construct(EngineInterface $templating, LoggerInterface $logger, $hmacKey) {
+    public function __construct(EngineInterface $templating, LoggerInterface $logger) {
         $this->templating = $templating;
         $this->logger = $logger;
-        $this->hmacKey = $hmacKey;
     }
 
     private function verifyHookHmac($signature, $secret, $data) {
         // TODO: Implement
+    }
+
+    public function setHmacKey($hmacKey) {
+        $this->hmacKey = $hmacKey;
     }
 
     public function deployAction(Request $request) {
