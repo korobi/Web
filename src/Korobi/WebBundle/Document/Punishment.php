@@ -37,6 +37,16 @@ class Punishment {
     /**
      * @MongoDB\String
      */
+    private $expire_date;
+
+    /**
+     * @MongoDB\Boolean
+     */
+    private $expired;
+
+    /**
+     * @MongoDB\String
+     */
     private $reason;
 
     /**
@@ -145,6 +155,46 @@ class Punishment {
      */
     public function setDate($date) {
         $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * Get expireDate
+     *
+     * @return string $expireDate
+     */
+    public function getExpireDate() {
+        return $this->expire_date;
+    }
+
+    /**
+     * Set expireDate
+     *
+     * @param string $expireDate
+     * @return self
+     */
+    public function setExpireDate($expireDate) {
+        $this->expire_date = $expireDate;
+        return $this;
+    }
+
+    /**
+     * Get expired
+     *
+     * @return boolean $expired
+     */
+    public function getExpired() {
+        return $this->expired;
+    }
+
+    /**
+     * Set expired
+     *
+     * @param boolean $expired
+     * @return self
+     */
+    public function setExpired($expired) {
+        $this->expired = $expired;
         return $this;
     }
 
