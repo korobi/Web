@@ -1,7 +1,7 @@
 Web
 ========================
 
-Copyright (c) 2014 - 2015
+Copyright &copy; 2014 - 2015
 
 Staging
 -------
