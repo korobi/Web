@@ -17,7 +17,7 @@ services:
           - @templating
           - @logger
         calls:
-          - [setHmacKey, [" %github_hook_hmac_secret%"]]
+          - [setHmacKey, ["%github_hook_hmac_secret%"]]
 
     korobi.channel_repository:
         class: Korobi\WebBundle\Repository\ChannelRepository
