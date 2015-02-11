@@ -32,7 +32,7 @@ class DeploymentController extends BaseController {
     }
 
     private function verifyHookHmac($signature, $secret, $data) {
-        // TODO: Implement
+        return hash_equals(hash_hmac("sha1", $data, $secret), $signature);
     }
 
     public function setHmacKey($hmacKey) {
@@ -40,8 +40,21 @@ class DeploymentController extends BaseController {
     }
 
     public function deployAction(Request $request) {
-        $this->logger->info("Got deploy request.");
+        $signature = $this->getHmacSignatureFromRequest($request);
 
-        return new JsonResponse(["data" => $this->hmacKey, "attributes" => $this->getJsonRequestData($request)]);
+        $theData = ["verified" => $this->verifyHookHmac($signature, $this->hmacKey, $request->getContent()), "data" => $this->hmacKey, "attributes" => $this->getJsonRequestData($request)];
+        $this->logger->info("Got deploy request.", $theData);
+
+        return new JsonResponse($theData);
+    }
+
+    private function getHmacSignatureFromRequest(Request $request) {
+        $sig = $request->headers->get("X-Hub-Signature");
+        if ($sig === null) {
+            return null;
+        }
+        parse_str($sig, $output);
+        $sig = (array_key_exists("sha1", $output)) ? $output['sha1'] : null;
+        return $sig;
     }
 }
