@@ -67,7 +67,7 @@ class DeploymentController extends BaseController {
      * @param mixed $rootPath
      */
     public function setRootPath($rootPath) {
-        $this->rootPath = $rootPath . ".." . DIRECTORY_SEPARATOR;
+        $this->rootPath = $rootPath . "..";
     }
 
 
