@@ -18,6 +18,7 @@ services:
           - @logger
         calls:
           - [setHmacKey, ["%github_hook_hmac_secret%"]]
+          - [setRootPath, ["%kernel.root_dir%"]]
 
     korobi.channel_repository:
         class: Korobi\WebBundle\Repository\ChannelRepository

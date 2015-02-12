@@ -26,6 +26,8 @@ class DeploymentController extends BaseController {
      */
     private $hmacKey;
 
+    private $rootPath;
+
     public function __construct(EngineInterface $templating, LoggerInterface $logger) {
         $this->templating = $templating;
         $this->logger = $logger;
@@ -47,11 +49,19 @@ class DeploymentController extends BaseController {
         $this->logger->info("Got deploy request.", $theData);
 
         if ($verified) {
-            exec("deploy.sh");
+            exec($this->rootPath . DIRECTORY_SEPARATOR . "deploy.sh");
         }
 
         return new JsonResponse($theData);
     }
+
+    /**
+     * @param mixed $rootPath
+     */
+    public function setRootPath($rootPath) {
+        $this->rootPath = $rootPath;
+    }
+
 
     private function getHmacSignatureFromRequest(Request $request) {
         $sig = $request->headers->get("X-Hub-Signature");
