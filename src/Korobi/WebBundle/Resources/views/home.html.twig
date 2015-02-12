@@ -5,8 +5,8 @@
 {% block body %}
     Welcome home, darling.
 
-    {% for i in 0..15 %}
-        {% for x in 0..15 %}
+    {% for i in 0..2 %}
+        {% for x in 0..2 %}
             <p class="irc--{{ i }}-{{ x }}">Hi there. I'm an IRC colour. I have foreground {{ i }} and background {{ x }}. I'm <b>not</b> inverted.</p>
             <p class="irc--{{ i }}-{{ x }}-inverted">Hi there. I'm an IRC colour. I have foreground {{ i }} and background {{ x }}. I <b>am</b> inverted.</p>
         {% endfor %}
