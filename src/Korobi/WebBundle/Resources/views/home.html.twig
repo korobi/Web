@@ -3,10 +3,10 @@
 {% set page_title = "Home" %}
 
 {% block body %}
-    Welcome home, darling. I won't believe it until I see it! Yes, in theory it should work ;P xD
+    Welcome home, darling. Test.
 
-    {% for i in 0..2 %}
-        {% for x in 0..2 %}
+    {% for i in 0..1 %}
+        {% for x in 0..1 %}
             <p class="irc--{{ i }}-{{ x }}">Hi there. I'm an IRC colour. I have foreground {{ i }} and background {{ x }}. I'm <b>not</b> inverted.</p>
             <p class="irc--{{ i }}-{{ x }}-inverted">Hi there. I'm an IRC colour. I have foreground {{ i }} and background {{ x }}. I <b>am</b> inverted.</p>
         {% endfor %}
