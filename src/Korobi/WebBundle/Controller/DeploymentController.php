@@ -50,7 +50,7 @@ class DeploymentController extends BaseController {
 
         if ($verified) {
             $out = [];
-            $this->logger->info("About to execute " . $this->rootPath . DIRECTORY_SEPARATOR . "deploy.sh");
+            $this->logger->info("About to execute " . $this->rootPath . DIRECTORY_SEPARATOR . "deploy_init.sh");
             $retVal = exec($this->rootPath . DIRECTORY_SEPARATOR . "deploy_init.sh", $out);
             if ($retVal === false) {
                 $this->logger->error("Failed to run deploy script.");
