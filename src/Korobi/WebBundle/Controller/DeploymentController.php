@@ -49,7 +49,15 @@ class DeploymentController extends BaseController {
         $this->logger->info("Got deploy request.", $theData);
 
         if ($verified) {
-            exec($this->rootPath . DIRECTORY_SEPARATOR . "deploy.sh");
+            $out = [];
+            $this->logger->info("About to execute " . $this->rootPath . DIRECTORY_SEPARATOR . "deploy.sh");
+            $retVal = exec($this->rootPath . DIRECTORY_SEPARATOR . "deploy.sh", $out);
+            if ($retVal === false) {
+                $this->logger->error("Failed to run deploy script.");
+            } else {
+                $this->logger->info("Cmd output: ", $out);
+            }
+
         }
 
         return new JsonResponse($theData);
