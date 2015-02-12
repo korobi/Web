@@ -42,8 +42,13 @@ class DeploymentController extends BaseController {
     public function deployAction(Request $request) {
         $signature = $this->getHmacSignatureFromRequest($request);
 
-        $theData = ["verified" => $this->verifyHookHmac($signature, $this->hmacKey, $request->getContent()), "data" => $this->hmacKey, "attributes" => $this->getJsonRequestData($request)];
+        $verified = $this->verifyHookHmac($signature, $this->hmacKey, $request->getContent());
+        $theData = ["verified" => $verified, "data" => $this->hmacKey, "attributes" => $this->getJsonRequestData($request)];
         $this->logger->info("Got deploy request.", $theData);
+
+        if ($verified) {
+            exec("deploy.sh");
+        }
 
         return new JsonResponse($theData);
     }
