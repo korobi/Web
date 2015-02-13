@@ -45,7 +45,7 @@ ul.footer--links {
     display: inline-block;
     a {
       color: $footerColor;
-      text-decoration: none;
+      text-decoration: underline;
       @include transition(all 0.3s);
     }
     a:hover, a:focus {
