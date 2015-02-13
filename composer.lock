@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "284b5d70e139e2c6e220d99194e25828",
+    "hash": "2e9f27722a25f89438e33bdcdafb8424",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -888,12 +888,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "1343375a4edf3e2157138e442441654e25fabbec"
+                "reference": "b37c4c3dd913d707c743e78e15c39e5dbba2f193"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/1343375a4edf3e2157138e442441654e25fabbec",
-                "reference": "1343375a4edf3e2157138e442441654e25fabbec",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/b37c4c3dd913d707c743e78e15c39e5dbba2f193",
+                "reference": "b37c4c3dd913d707c743e78e15c39e5dbba2f193",
                 "shasum": ""
             },
             "require": {
@@ -954,7 +954,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2015-01-23 10:29:57"
+            "time": "2015-02-13 18:49:47"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -1479,6 +1479,68 @@
                 "markdown"
             ],
             "time": "2014-05-05 02:43:50"
+        },
+        {
+            "name": "mmoreram/gearman-bundle",
+            "version": "dev-master",
+            "target-dir": "Mmoreram/GearmanBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mmoreram/GearmanBundle.git",
+                "reference": "8c33412152cf5e3262fe2817e5b1427e34970c45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mmoreram/GearmanBundle/zipball/8c33412152cf5e3262fe2817e5b1427e34970c45",
+                "reference": "8c33412152cf5e3262fe2817e5b1427e34970c45",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "~2.2",
+                "doctrine/doctrine-cache-bundle": "~1.0",
+                "ext-gearman": "*",
+                "php": ">=5.3.3",
+                "symfony/config": "~2.1",
+                "symfony/console": "~2.1",
+                "symfony/dependency-injection": "~2.1",
+                "symfony/finder": "~2.1",
+                "symfony/framework-bundle": "~2.4",
+                "symfony/http-kernel": "~2.1"
+            },
+            "replace": {
+                "mmoreramerino/gearman-bundle": "dev-master"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mmoreram\\GearmanBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Morera",
+                    "email": "yuhu@mmoreram.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/mmoreram/GearmanBundle/contributors"
+                }
+            ],
+            "description": "Adds gearman support to your Symfony2 project",
+            "homepage": "https://github.com/mmoreram/GearmanBundle",
+            "keywords": [
+                "gearman"
+            ],
+            "time": "2014-11-24 11:18:15"
         },
         {
             "name": "monolog/monolog",
@@ -2259,7 +2321,8 @@
         "doctrine/mongodb-odm": 20,
         "doctrine/mongodb-odm-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
-        "hwi/oauth-bundle": 20
+        "hwi/oauth-bundle": 20,
+        "mmoreram/gearman-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
