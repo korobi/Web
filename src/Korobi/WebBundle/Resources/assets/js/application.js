@@ -11,6 +11,7 @@ $(function() {
         var dispPref = getSymfonyPreference("toolbar/displayState");
         if (dispPref == "block") {
             $(".footer").addClass("footer--debug");
+            $("body").addClass("open-debug");
         }
     }
 
@@ -19,8 +20,10 @@ $(function() {
         var $debugToolbar = $(".sf-minitoolbar");
         if ($debugToolbar.css("display") != "none") {
             $(".footer").removeClass("footer--debug");
+            $("body").removeClass("open-debug");
         } else {
             $(".footer").addClass("footer--debug");
+            $("body").addClass("open-debug");
         }
 
     }
