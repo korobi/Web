@@ -39,17 +39,21 @@ ul.footer--links {
   display: inline-block;
   float: right;
   li + li {
-    margin-left: 0.8em;
+    //margin-left: 0.8em;
   }
   li {
     display: inline-block;
     a {
       color: $footerColor;
-      text-decoration: underline;
       @include transition(all 0.3s);
+      line-height: $footerHeight;
+      display: block;
+      padding: 0 1em 0 1em;
     }
     a:hover, a:focus {
       color: #fff;
+      background-color: darken($footerBackgroundColour, 10%);
+
     }
   }
 }
