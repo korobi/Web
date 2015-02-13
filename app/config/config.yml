@@ -30,6 +30,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        gitInfo: "@korobi.git_info"
+
 
 # Assetic Configuration
 assetic:

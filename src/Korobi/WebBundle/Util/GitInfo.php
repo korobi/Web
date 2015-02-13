@@ -7,7 +7,7 @@ namespace Korobi\WebBundle\Util;
  * Class to handle getting info about git branches, commits etc.
  * @package Korobi\WebBundle\Util
  */
-class GitInfoUtility {
+class GitInfo {
 
     protected $filesystem;
     protected $branch;
@@ -26,22 +26,22 @@ class GitInfoUtility {
     }
 
     /**
-     * @return string
+     * @return string The name of the current git branch.
      */
     public function getBranch() {
         return $this->branch;
     }
 
     /**
-     * @return string
+     * @return string The current hash.
      */
     public function getHash() {
         return $this->hash;
     }
 
     /**
-     * @param int $length Length
-     * @return string
+     * @param int $length Length of short hash
+     * @return string The shorter hash
      */
     public function getShortHash($length = 8) {
         return substr($this->hash, 0, $length);

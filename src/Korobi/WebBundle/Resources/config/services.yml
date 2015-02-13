@@ -11,6 +11,9 @@ services:
           - @templating
           - @korobi.channel_repository
 
+    korobi.git_info:
+        class: Korobi\WebBundle\Util\GitInfo
+
     korobi.deploy_controller:
         class: Korobi\WebBundle\Controller\DeploymentController
         arguments:

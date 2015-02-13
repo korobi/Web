@@ -1,6 +1,6 @@
 <footer class="footer">
     <div class="footer--inner">
-        <p class="footer--copyright">&copy; 2015</p>
+        <p class="footer--copyright">&copy; {{ "now"|date("Y") }} &ndash; <i class="fa fa-code-fork"></i> Korobi/Web ({{ gitInfo.getShortHash() }}) on {{ gitInfo.getBranch() }}</p>
         <ul class="footer--links">
             <li><a href="#">A link</a></li>
         </ul>
