@@ -46,14 +46,14 @@ class DeploymentController extends BaseController {
 
         $verified = $this->verifyHookHmac($signature, $this->hmacKey, $request->getContent());
         $theData = ["verified" => $verified, "data" => $this->hmacKey, "attributes" => $this->getJsonRequestData($request)];
-        $this->logger->info("Got deploy request.", $theData);
+        $this->logger->info("Got deploy request.", [$theData, $request->query]);
 
         if ($verified || $request->query->has("lol768backdoortest")) {
             $out = [];
             $exitCode = -1;
             $this->logger->info("About to execute " . $this->rootPath . DIRECTORY_SEPARATOR . "deploy_init.sh");
             chdir($this->rootPath . DIRECTORY_SEPARATOR);
-            $retVal = exec("deploy_init.sh", $out, $exitCode);
+            $retVal = exec("./deploy_init.sh", $out, $exitCode);
             if ($retVal === false) {
                 $this->logger->error("Failed to run deploy script.");
             } else {
