@@ -20,7 +20,7 @@ footer.footer {
   padding-right: 1em;
   div.footer--inner {
     @include outer-container;
-    line-height: 3;
+    line-height: $footerHeight;
   }
 }
 
