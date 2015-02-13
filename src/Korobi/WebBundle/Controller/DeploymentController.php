@@ -34,7 +34,7 @@ class DeploymentController extends BaseController {
     }
 
     private function verifyHookHmac($signature, $secret, $data) {
-        return hash_equals(hash_hmac("sha1", $data, $secret), $signature);
+        return $signature !== null ? hash_equals(hash_hmac("sha1", $data, $secret), $signature) : false;
     }
 
     public function setHmacKey($hmacKey) {
