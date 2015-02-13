@@ -22,8 +22,7 @@ class GitInfoUtility {
         $ref = trim(explode(' ', $ref)[1]);
 
         $this->branch = trim(array_reverse(explode('/', $ref))[0]);
-        $root = $root . '.git/' . $ref;
-        $this->hash = $this->filesystem->get($root);
+        $this->hash = (new \SplFileObject($root . '.git/' . $ref))->getCurrentLine();
     }
 
     /**
