@@ -30,3 +30,8 @@ services:
         public: false
         arguments:
             - "KorobiWebBundle:Channel"
+
+    korobi.navigation_collection:
+        class: Korobi\WebBundle\Util\NavigationCollection
+        arguments:
+            - %korobi.config%

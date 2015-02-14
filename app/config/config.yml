@@ -32,6 +32,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         gitInfo: "@korobi.git_info"
+        navigation: "@korobi.navigation_collection"
 
 
 # Assetic Configuration
