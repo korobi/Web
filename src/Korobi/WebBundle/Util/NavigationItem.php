@@ -52,10 +52,11 @@ class NavigationItem {
     }
 
     public function getClass($route) {
+        $ext = $this->externalUrl ? "external" : "";
         if ($route === $this->route) {
-            return "active";
+            return $ext . " active";
         } else {
-            return "";
+            return $ext . "";
         }
     }
 
