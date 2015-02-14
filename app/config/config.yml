@@ -83,9 +83,6 @@ korobi_web:
                 title: Commands
                 route: "dummy"
             -
-                title: Revisions
-                route: "dummy"
-            -
                 title: Admin
                 requires_admin: true
                 route: "dummy"
@@ -94,6 +91,10 @@ korobi_web:
                 route: "https://github.com/korobi/Korobi/issues"
                 type: "footer"
                 external: true
+            -
+                title: Revisions
+                route: "dummy"
+                type: "footer"
 
 # Swiftmailer Configuration
 swiftmailer:
