@@ -5,6 +5,7 @@ namespace Korobi\WebBundle\Controller;
 use Korobi\WebBundle\Repository\ChannelRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HomeController extends BaseController {
 

@@ -71,13 +71,24 @@ korobi_web:
                 title: Home
                 route: "home"
             -
-                title: Auth only link
-                requires_auth: true
-                route: "deploy"
+                title: Logs
+                route: "dummy"
             -
-                title: Admin only link
+                title: Search
+                route: "dummy"
+            -
+                title: Stats
+                route: "dummy"
+            -
+                title: Commands
+                route: "dummy"
+            -
+                title: Revisions
+                route: "dummy"
+            -
+                title: Admin
                 requires_admin: true
-                route: "deploy"
+                route: "dummy"
             -
                 title: Issues
                 route: "https://github.com/korobi/Korobi/issues"
