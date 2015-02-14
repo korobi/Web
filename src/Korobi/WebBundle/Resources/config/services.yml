@@ -8,8 +8,13 @@ services:
     korobi.home_controller:
         class: Korobi\WebBundle\Controller\HomeController
         arguments:
-          - @templating
-          - @korobi.channel_repository
+            - @templating
+            - @korobi.channel_repository
+
+    korobi.base_controller:
+        class: Korobi\WebBundle\Controller\BaseController
+        calls:
+            - [setAuthorisationChecker, ["@security.authorization_checker"]]
 
     korobi.git_info:
         class: Korobi\WebBundle\Util\GitInfo
@@ -17,11 +22,11 @@ services:
     korobi.deploy_controller:
         class: Korobi\WebBundle\Controller\DeploymentController
         arguments:
-          - @templating
-          - @logger
+            - @templating
+            - @logger
         calls:
-          - [setHmacKey, ["%github_hook_hmac_secret%"]]
-          - [setRootPath, ["%kernel.root_dir%"]]
+            - [setHmacKey, ["%github_hook_hmac_secret%"]]
+            - [setRootPath, ["%kernel.root_dir%"]]
 
     korobi.channel_repository:
         class: Korobi\WebBundle\Repository\ChannelRepository
@@ -29,7 +34,7 @@ services:
         factory_method: getRepository
         public: false
         arguments:
-            - "KorobiWebBundle:Channel"
+           - "KorobiWebBundle:Channel"
 
     korobi.navigation_collection:
         class: Korobi\WebBundle\Util\NavigationCollection

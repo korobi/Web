@@ -5,8 +5,14 @@ namespace Korobi\WebBundle\Controller;
 
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 abstract class BaseController {
+
+    /**
+     * @var AuthorizationChecker
+     */
+    protected $authorisationChecker;
 
     protected function getJsonRequestData(Request $request) {
         $params = [];
@@ -16,5 +22,10 @@ abstract class BaseController {
         }
         return $params;
     }
+
+    public function setAuthorisationChecker(AuthorizationChecker $checker) {
+        $this->authorisationChecker = $checker;
+    }
+
 
 }
