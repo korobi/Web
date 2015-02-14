@@ -15,7 +15,19 @@ class NavigationCollection {
     public function __construct(array $korobiConfig) {
         $items = $korobiConfig['navigation']['items'];
         array_walk($items, function($value, $key) {
-            die(json_encode($value));
+            $this->items[$value['type']] = $value;
         });
+    }
+
+    public function getPrimary() {
+        return $this->items['primary'];
+    }
+
+    public function getSecondary() {
+        return $this->items['secondary'];
+    }
+
+    public function getFooter() {
+        return $this->items['footer'];
     }
 }
