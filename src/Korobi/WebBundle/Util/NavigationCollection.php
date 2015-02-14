@@ -10,12 +10,12 @@ namespace Korobi\WebBundle\Util;
  */
 class NavigationCollection {
 
-    private $items = [];
+    private $items = ["secondary" => [], "primary" => []];
 
     public function __construct(array $korobiConfig) {
         $items = $korobiConfig['navigation']['items'];
         array_walk($items, function($value, $key) {
-            $this->items[$value['type']] = $value;
+            $this->items[$value['type']][] = $value;
         });
     }
 

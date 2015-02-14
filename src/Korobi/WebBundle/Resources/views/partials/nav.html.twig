@@ -9,8 +9,8 @@
         </div>
         <ul class="navigation--links">
             {% for item in navigation.getPrimary() %}
+                {{ dump(item) }}
                 <li>
-                    <a href="{{ item.url }}" role="menuitem">{{ item.title }}</a>
                 </li>
             {% endfor %}
         </ul>
