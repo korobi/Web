@@ -33,7 +33,7 @@ class NavigationItem {
      * @return boolean
      */
     public function getRequiresAuth() {
-        return $this->requiresAuth;
+        return $this->requiresAuth || $this->requiresAdmin;
     }
 
     /**
@@ -49,4 +49,13 @@ class NavigationItem {
     public function getRoute() {
         return $this->route;
     }
+
+    public function getClass($route) {
+        if ($route === $this->route) {
+            return "active";
+        } else {
+            return "";
+        }
+    }
+
 }

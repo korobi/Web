@@ -1,5 +1,23 @@
-{% macro nav_link(item) %}
-    <li>
+{% macro nav_link_html(item) %}
+    <li class="{{ item.getClass(app.request.attributes.get('_route')) }}">
         <a href="{{ item.getRoute }}" role="menuitem">{{ item.title }}</a>
     </li>
+{% endmacro %}
+
+{% macro nav_link(item) %}
+    {# Bit ugly #}
+    {% import _self as nav %}
+    {% if item.getRequiresAuth() %}
+        {% if item.getRequiresAdmin() %}
+            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                {{ nav.nav_link_html(item) }}
+            {% endif %}
+        {% else %}
+            {% if app.user %}
+                {{ nav.nav_link_html(item) }}
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {{ nav.nav_link_html(item) }}
+    {% endif %}
 {% endmacro %}
