@@ -71,6 +71,14 @@ korobi_web:
                 title: Home
                 route: "home"
             -
+                title: Auth only link
+                requires_auth: true
+                route: "deploy"
+            -
+                title: Admin only link
+                requires_admin: true
+                route: "deploy"
+            -
                 title: Issues
                 route: "https://github.com/korobi/Korobi/issues"
                 type: "footer"
