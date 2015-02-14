@@ -1,7 +1,7 @@
 {% macro nav_link_html(item) %}
     <li class="{{ item.getClass(app.request.attributes.get('_route')) }}">
         {% if item.isExternalUrl() %}
-            <a href="{{ item.getRoute|raw }}" role="menuitem">{{ item.title }}</a>
+            <a href="{{ item.getRoute|raw }}" role="menuitem">{{ item.title }} <i class="fa fa-font "</a>
         {% else %}
             <a href="{{ path(item.getRoute) }}" role="menuitem">{{ item.title }}</a>
         {% endif %}
