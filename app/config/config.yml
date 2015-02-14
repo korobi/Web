@@ -70,6 +70,11 @@ korobi_web:
             -
                 title: Home
                 route: "home"
+            -
+                title: Issues
+                route: "https://github.com/korobi/Korobi/issues"
+                type: "footer"
+                external: true
 
 # Swiftmailer Configuration
 swiftmailer:

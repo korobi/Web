@@ -14,6 +14,7 @@ class NavigationItem {
     private $route;
     private $requiresAuth;
     private $requiresAdmin;
+    private $externalUrl;
 
     public function __construct($requiresAdmin, $requiresAuth, $title, $route) {
         $this->requiresAdmin = $requiresAdmin;
@@ -58,4 +59,17 @@ class NavigationItem {
         }
     }
 
+    /**
+     * @return boolean
+     */
+    public function isExternalUrl() {
+        return $this->externalUrl;
+    }
+
+    /**
+     * @param boolean $externalUrl
+     */
+    public function setIsExternalUrl($externalUrl) {
+        $this->externalUrl = $externalUrl;
+    }
 }
