@@ -1,0 +1,5 @@
+{% macro nav_link(item) %}
+    <li>
+        <a href="{{ item.getRoute }}" role="menuitem">{{ item.title }}</a>
+    </li>
+{% endmacro %}

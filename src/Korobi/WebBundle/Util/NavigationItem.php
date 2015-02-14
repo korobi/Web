@@ -11,15 +11,15 @@ namespace Korobi\WebBundle\Util;
 class NavigationItem {
 
     private $title;
-    private $url;
+    private $route;
     private $requiresAuth;
     private $requiresAdmin;
 
-    public function __construct($requiresAdmin, $requiresAuth, $title, $url) {
+    public function __construct($requiresAdmin, $requiresAuth, $title, $route) {
         $this->requiresAdmin = $requiresAdmin;
         $this->requiresAuth = $requiresAuth;
         $this->title = $title;
-        $this->url = $url;
+        $this->route = $route;
     }
 
     /**
@@ -46,7 +46,7 @@ class NavigationItem {
     /**
      * @return mixed
      */
-    public function getUrl() {
-        return $this->url;
+    public function getRoute() {
+        return $this->route;
     }
 }

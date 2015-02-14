@@ -11,7 +11,7 @@ class Configuration implements ConfigurationInterface {
         $treeBuilder = new TreeBuilder();
         $root = $treeBuilder->root('korobi_web');
         $root->children()->arrayNode("navigation")->children()->arrayNode("items")->prototype("array")
-        ->children()->scalarNode("title")->end()->scalarNode("url")->end()->scalarNode("type")->defaultValue("primary")->end()->end()->end();
+        ->children()->scalarNode("title")->end()->scalarNode("route")->end()->scalarNode("type")->defaultValue("primary")->end()->end()->end();
         return $treeBuilder;
     }
 }

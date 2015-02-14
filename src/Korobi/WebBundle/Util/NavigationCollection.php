@@ -15,7 +15,7 @@ class NavigationCollection {
     public function __construct(array $korobiConfig) {
         $items = $korobiConfig['navigation']['items'];
         array_walk($items, function($value, $key) {
-            $this->items[$value['type']][] = $value;
+            $this->items[$value['type']][] = new NavigationItem(false, false, $value['title'], $value['route']);
         });
     }
 

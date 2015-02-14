@@ -9,16 +9,12 @@
         </div>
         <ul class="navigation--links">
             {% for item in navigation.getPrimary() %}
-                <li>
-                    <a href="{{ item.url }}" role="menuitem">{{ item.title }}</a>
-                </li>
+                {{ nav.nav_link(item) }}
             {% endfor %}
         </ul>
         <ul class="navigation--links navigation--links-secondary">
             {% for item in navigation.getSecondary() %}
-                <li>
-                    <a href="{{ item.url }}" role="menuitem">{{ item.title }}</a>
-                </li>
+                {{ nav.nav_link(item) }}
             {% endfor %}
         </ul>
     </div>

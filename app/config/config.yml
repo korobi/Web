@@ -69,7 +69,7 @@ korobi_web:
         items:
             -
                 title: Home
-                url: "/"
+                route: "home"
 
 # Swiftmailer Configuration
 swiftmailer:
