@@ -63,6 +63,13 @@ doctrine_mongodb:
         default:
             auto_mapping: true
 
+korobi_web:
+    navigation:
+        items:
+            -
+                title: Home
+                url: "/"
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

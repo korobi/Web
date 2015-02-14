@@ -9,8 +9,8 @@ class Configuration implements ConfigurationInterface {
 
     public function getConfigTreeBuilder() {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('korobi_webbundle');
-
+        $root = $treeBuilder->root('korobi_web');
+        $root->children()->arrayNode("navigation")->children()->arrayNode("items")->prototype("array")->end()->end();
         return $treeBuilder;
     }
 }
