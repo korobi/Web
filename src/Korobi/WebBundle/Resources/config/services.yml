@@ -5,12 +5,6 @@ services:
             - { name: twig.extension }
         arguments: [%kernel.root_dir%]
 
-    korobi.home_controller:
-        class: Korobi\WebBundle\Controller\HomeController
-        arguments:
-            - @templating
-            - @korobi.channel_repository
-
     korobi.base_controller:
         class: Korobi\WebBundle\Controller\BaseController
         calls:
@@ -19,8 +13,16 @@ services:
     korobi.git_info:
         class: Korobi\WebBundle\Util\GitInfo
 
+    korobi.home_controller:
+        class: Korobi\WebBundle\Controller\HomeController
+        parent: korobi.base_controller
+        arguments:
+            - @templating
+            - @korobi.channel_repository
+
     korobi.deploy_controller:
         class: Korobi\WebBundle\Controller\DeploymentController
+        parent: korobi.base_controller
         arguments:
             - @templating
             - @logger
