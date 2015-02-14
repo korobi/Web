@@ -35,6 +35,11 @@ p.footer--copyright {
   margin-bottom: 0;
 }
 
+@mixin active-footer-link {
+  color: #fff;
+  background-color: darken($footerBackgroundColour, 10%);
+}
+
 ul.footer--links {
   display: inline-block;
   float: right;
@@ -51,9 +56,10 @@ ul.footer--links {
       padding: 0 1em 0 1em;
     }
     a:hover, a:focus {
-      color: #fff;
-      background-color: darken($footerBackgroundColour, 10%);
-
+      @include active-footer-link
     }
+  }
+  li.active a {
+    @include active-footer-link
   }
 }
