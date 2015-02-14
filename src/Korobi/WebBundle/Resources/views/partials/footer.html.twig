@@ -2,7 +2,9 @@
     <div class="footer--inner">
         <p class="footer--copyright">&copy; {{ "now"|date("Y") }} &ndash; <i class="fa fa-code-fork"></i> Korobi/Web ({{ gitInfo.getShortHash() }}) on {{ gitInfo.getBranch() }}</p>
         <ul class="footer--links">
-            <li><a href="#">A link</a></li><li><a href="#">Another link</a></li>
+            {% for item in navigation.getFooter() %}
+            <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+            {% endfor %}
         </ul>
     </div>
 </footer>
