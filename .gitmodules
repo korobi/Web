@@ -1,3 +1,6 @@
 [submodule "docs"]
 	path = docs
 	url = git@github.com:korobi/Korobi.git
+[submodule "private_docs"]
+	path = private_docs
+	url = git@github.com:korobi/Web.wiki

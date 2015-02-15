@@ -6,7 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HomeControllerTest extends WebTestCase {
 
-    public function testIndexAndThemes() {
+    public function testIndexLoadsSuccessfully() {
+        $client = static::createClient();
+        $client->request('GET', '/');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testIndexWithLightTheme() {
         $client = static::createClient();
 
         $theme = $this->getMockBuilder('Korobi\WebBundle\Util\ThemeService')
@@ -18,12 +25,11 @@ class HomeControllerTest extends WebTestCase {
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertTrue($crawler->filter('body.light')->count() > 0);
         // everything resets..
         $crawler = $client->request('GET', '/');
         $this->assertTrue($crawler->filter('body.light')->count() === 0);
-
-
     }
+
+
 }
