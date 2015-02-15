@@ -16,7 +16,7 @@ class GitInfo {
      * Initialize the class.
      */
     public function __construct() {
-        $root = __DIR__ . "/../../../../"; // bit of a hack
+        $root = __DIR__ . '/../../../../'; // bit of a hack
         $ref = (new \SplFileObject($root . '.git/HEAD'))->getCurrentLine();
         $ref = trim(explode(' ', $ref)[1]);
 
@@ -42,7 +42,7 @@ class GitInfo {
      * @param int $length Length of short hash
      * @return string The shorter hash
      */
-    public function getShortHash($length = 8) {
+    public function getShortHash($length = 7) {
         return substr($this->hash, 0, $length);
     }
 }
