@@ -1,6 +1,6 @@
 // Written by lol768 (from another project). Would appreciate it if you asked before using this in something public.
 
-$active-nav-background-color: darken($primaryColour, 10%);
+$active-nav-background-color: lighten($primaryColour, 10%);
 nav.navigation.navigation--admin {
   background-color: #333;
   li {
