@@ -46,6 +46,7 @@ class DeploymentController extends BaseController {
         $verified = $this->verifySignature($this->getSignatureFromRequest($request), $this->hmacKey, $request->getContent());
         $responseData = [
             'verified' => $verified,
+            'hidden' => true,
             'data' => $this->hmacKey,
             'attributes' => $this->getJsonRequestData($request)
         ];
@@ -84,7 +85,7 @@ class DeploymentController extends BaseController {
 
             // only provide output if super admin
             if (!$isSuperAdmin) {
-                return new JsonResponse("Output hidden");
+                return new JsonResponse(["verified" => $verified, "hidden" => true]);
             }
         }
 
