@@ -6,19 +6,27 @@
     <meta name='viewport' content='initial-scale=1'>
     {% stylesheets filter='scss' '@KorobiWebBundle/Resources/assets/sass/application.scss' output='assets/css/application.css' %}
     <link rel='stylesheet' href='{{ asset_url }}?cb={{ "now"|date("U") }}' />
-    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css'>
     {% endstylesheets %}
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css'>
 </head>
-<body class="{{ (theme.isLight()) ? 'light' : '' }}">
+<body{{ (theme.isLight()) ? ' class="light"' : '' }}>
 {{ include('KorobiWebBundle::partials/nav.html.twig') }}
+
 <main>
     {% block body %}{% endblock %}
 </main>
+
 {{ include('KorobiWebBundle::partials/footer.html.twig') }}
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-{% javascripts '@KorobiWebBundle/Resources/assets/js/*' output='assets/js/application.js' %}
+{% javascripts '@KorobiWebBundle/Resources/assets/js/prod/*' output='assets/js/application.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
-{# <script src='{{ asset('assets/js/application.js') }}'></script> #}
+{# only include development js in dev environment #}
+{% if app.environment == 'dev' %}
+{% javascripts '@KorobiWebBundle/Resources/assets/js/dev/*' output='assets/js/dev.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endif %}
 </body>
 </html>

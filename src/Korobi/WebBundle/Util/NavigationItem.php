@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Korobi\WebBundle\Util;
-
 
 /**
  * POPO for NavigationItems
@@ -52,11 +50,11 @@ class NavigationItem {
     }
 
     public function getClass($route) {
-        $ext = $this->externalUrl ? "external" : "";
+        $ext = $this->externalUrl ? 'external' : '';
         if ($route === $this->route) {
-            return $ext . " active";
+            return $ext . ' active';
         } else {
-            return $ext . "";
+            return $ext . '';
         }
     }
 

@@ -65,41 +65,6 @@ doctrine_mongodb:
         default:
             auto_mapping: true
 
-korobi_web:
-    navigation:
-        items:
-            -
-                title: Home
-                route: "home"
-            -
-                title: Logs
-                route: "dummy"
-            -
-                title: Search
-                route: "dummy"
-            -
-                title: Stats
-                route: "dummy"
-            -
-                title: Commands
-                route: "dummy"
-            -
-                title: Docs
-                route: "dummy"
-            -
-                title: Admin
-                requires_admin: true
-                route: "dummy"
-            -
-                title: Issues
-                route: "https://github.com/korobi/Korobi/issues"
-                type: "footer"
-                external: true
-            -
-                title: Revisions
-                route: "dummy"
-                type: "footer"
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

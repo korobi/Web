@@ -1,9 +1,9 @@
 home:
     path: /
-    defaults: { _controller: korobi.home_controller:homeAction }
+    defaults: { _controller: KorobiWebBundle:Home:home }
 dummy:
     path: /dummy
-    defaults: { _controller: korobi.home_controller:homeAction }
+    defaults: { _controller: KorobiWebBundle:Home:home }
 deploy:
     path: /deploy
     defaults: { _controller: korobi.deploy_controller:deployAction }

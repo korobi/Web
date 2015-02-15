@@ -1,31 +1,30 @@
 <?php
 
-
 namespace Korobi\WebBundle\Controller;
 
-
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
-abstract class BaseController {
+abstract class BaseController extends Controller {
 
     /**
      * @var AuthorizationChecker
      */
-    protected $authorisationChecker;
+    protected $authChecker;
 
     protected function getJsonRequestData(Request $request) {
-        $params = [];
+        $data = [];
+
         $content = $request->getContent();
         if (!empty($content)) {
-            $params = json_decode($content, true);
+            $data = json_decode($content, true);
         }
-        return $params;
+
+        return $data;
     }
 
-    public function setAuthorisationChecker(AuthorizationChecker $checker) {
-        $this->authorisationChecker = $checker;
+    public function setAuthChecker(AuthorizationChecker $checker) {
+        $this->authChecker = $checker;
     }
-
-
 }

@@ -1,0 +1,34 @@
+# root node - everything should be nested
+korobi_web:
+    navigation:
+        items:
+            - title: Home
+              route: 'home'
+
+            - title: Logs
+              route: 'dummy'
+
+            - title: Search
+              route: 'dummy'
+
+            - title: Stats
+              route: 'dummy'
+
+            - title: Commands
+              route: 'dummy'
+
+            - title: Docs
+              route: 'dummy'
+
+            - title: Admin
+              route: 'dummy'
+              requires_admin: true
+
+            - title: Issues
+              route: 'https://github.com/korobi/Korobi/issues'
+              type: 'footer'
+              external: true
+
+            - title: Revisions
+              route: 'dummy'
+              type: 'footer'

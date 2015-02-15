@@ -2,11 +2,8 @@
 
 namespace Korobi\WebBundle\Controller;
 
-use Korobi\WebBundle\Repository\ChannelRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class ThemeController extends BaseController {
@@ -23,12 +20,23 @@ class ThemeController extends BaseController {
         $this->session = $session;
     }
 
-    public function toggleAction() {
-        if ($this->session->has("light-theme")) {
-            $this->session->remove("light-theme");
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function toggleAction(Request $request) {
+        if ($this->session->has('theme-light')) {
+            $this->session->remove('theme-light');
         } else {
-            $this->session->set("light-theme", true);
+            $this->session->set('theme-light', true);
         }
-        return RedirectResponse::create("/");
+
+        return $this->redirectToRoute($this->getLastRoute($request));
+    }
+
+    protected function getLastRoute(Request $request) {
+        $referer = $request->headers->get('referer');
+        $baseUrl = $request->getBaseUrl();
+        return $this->get('router')->getMatcher()->match(substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl)))['_route'];
     }
 }

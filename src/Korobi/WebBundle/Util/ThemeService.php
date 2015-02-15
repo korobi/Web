@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Korobi\WebBundle\Util;
 
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -20,6 +19,6 @@ class ThemeService {
     }
 
     public function isLight() {
-        return $this->session->has("light-theme");
+        return $this->session->has('theme-light');
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Korobi\WebBundle\Util;
-
 
 /**
  * Holds many navigation items.
@@ -10,7 +8,11 @@ namespace Korobi\WebBundle\Util;
  */
 class NavigationCollection {
 
-    private $items = ["secondary" => [], "primary" => [], "footer" => []];
+    private $items = [
+        'primary' => [],
+        'secondary' => [],
+        'footer' => []
+    ];
 
     public function __construct(array $korobiConfig) {
         $items = $korobiConfig['navigation']['items'];

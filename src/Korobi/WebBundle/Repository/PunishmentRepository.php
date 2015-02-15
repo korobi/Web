@@ -19,5 +19,4 @@ class PunishmentRepository extends DocumentRepository {
             ->getQuery()
             ->execute();
     }
-
 }

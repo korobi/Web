@@ -9,6 +9,8 @@
 /app/config/parameters.yml
 /app/logs/*
 !app/logs/.gitkeep
+/app/sessions/*
+!/app/sessions/.gitkeep
 /app/phpunit.xml
 /bin/
 /build/

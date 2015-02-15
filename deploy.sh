@@ -1,12 +1,17 @@
 #!/bin/bash
-echo "Pulling..."
+
+echo "Pulling changes..."
 git pull
-echo "chmoding..."
+
+echo "Assigning directory permissions..."
 chmod -R 777 app/cache/dev
-echo "Making asset files..."
+
+echo "Dumping asset files..."
 php app/console assetic:dump
+
 echo "Clearing cache..."
 php app/console cache:clear
+
 echo "Running tests..."
 cd app/
 phpunit
