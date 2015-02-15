@@ -31,18 +31,6 @@ class ThemeController extends BaseController {
             $this->session->set('theme-light', true);
         }
 
-        return $this->redirectToRoute($this->getLastRoute($request));
-    }
-
-    protected function getLastRoute(Request $request) {
-        $referer = $request->headers->get('referer');
-
-        // *grumbles about getBaseUrl() returning empty*
-        $baseUrl = $request->getBaseUrl();
-        if ($baseUrl == '') {
-            $baseUrl = '/';
-        }
-
-        return $this->get('router')->getMatcher()->match(substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl)))['_route'];
+        return $this->redirect($request->headers->get('referer'));
     }
 }
