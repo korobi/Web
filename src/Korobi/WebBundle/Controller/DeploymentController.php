@@ -69,9 +69,9 @@ class DeploymentController extends BaseController {
             chdir($this->rootPath . DIRECTORY_SEPARATOR . 'app');
             $testOutput = exec('phpunit', $execOutput);
             if (substr($testOutput, 0, 2) !== "OK") {
-                $this->debug("Tests failed!", implode("\n", $execOutput), true);
+                $this->debug("Tests failed!", [implode("\n", $execOutput)], true);
             } else {
-                $this->debug("Tests passed.", $testOutput);
+                $this->debug("Tests passed.", [$testOutput]);
             }
 
 
