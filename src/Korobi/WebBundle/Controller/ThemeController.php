@@ -31,6 +31,6 @@ class ThemeController extends BaseController {
             $this->session->set('theme-light', true);
         }
 
-        return $this->redirect($request->headers->get('referer'));
+        return $this->redirect($request->headers->get('referer', '/'));
     }
 }
