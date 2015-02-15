@@ -36,7 +36,13 @@ class ThemeController extends BaseController {
 
     protected function getLastRoute(Request $request) {
         $referer = $request->headers->get('referer');
+
+        // *grumbles about getBaseUrl() returning empty*
         $baseUrl = $request->getBaseUrl();
+        if ($baseUrl == '') {
+            $baseUrl = '/';
+        }
+
         return $this->get('router')->getMatcher()->match(substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl)))['_route'];
     }
 }
