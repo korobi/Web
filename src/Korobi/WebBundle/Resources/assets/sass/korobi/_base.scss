@@ -2,3 +2,8 @@ main {
   @include outer-container;
   margin-top: 1em;
 }
+
+body {
+  background-image: $bodyBackgroundImage;
+  background-repeat: repeat;
+}
