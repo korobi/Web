@@ -5,6 +5,7 @@ namespace Korobi\WebBundle\Controller;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DeploymentController extends BaseController {
 
@@ -65,8 +66,12 @@ class DeploymentController extends BaseController {
                 $this->debug('Deploy output: ', $execOutput);
             }
 
+            $responseData['exec_output'] = $execOutput;
+            $responseData['status_code'] = $statusCode;
+
             // we'll do tests here instead of in the bash script to make output processing easier
             chdir($this->rootPath . DIRECTORY_SEPARATOR . 'app');
+            $execOutput = [];
             $testOutput = exec('phpunit', $execOutput);
             if (substr($testOutput, 0, 2) !== "OK") {
                 $this->debug("Tests failed!", [implode("\n", $execOutput)], true);
@@ -78,9 +83,8 @@ class DeploymentController extends BaseController {
 
 
             // only provide output if super admin
-            if ($isSuperAdmin) {
-                $responseData['exec_output'] = $execOutput;
-                $responseData['status_code'] = $statusCode;
+            if (!$isSuperAdmin) {
+                return new JsonResponse("Output hidden");
             }
         }
 
