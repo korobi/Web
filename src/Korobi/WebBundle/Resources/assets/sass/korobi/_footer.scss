@@ -37,7 +37,7 @@ p.footer--copyright {
 
 @mixin active-footer-link {
   color: #fff;
-  background-color: lighten($footerBackgroundColour, 10%);
+  background-color: darken($footerBackgroundColour, 10%);
 }
 
 ul.footer--links {
