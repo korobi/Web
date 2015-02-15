@@ -84,6 +84,9 @@ korobi_web:
                 title: Commands
                 route: "dummy"
             -
+                title: Docs
+                route: "dummy"
+            -
                 title: Admin
                 requires_admin: true
                 route: "dummy"
