@@ -45,6 +45,16 @@ class Channel {
     private $punishments_enabled;
 
     /**
+     * @MongoDB\Collection
+     */
+    private $permissions;
+
+    /**
+     * @MongoDB\Raw
+     */
+    private $settings;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -170,6 +180,46 @@ class Channel {
      */
     public function setPunishmentsEnabled($punishmentsEnabled) {
         $this->punishments_enabled = $punishmentsEnabled;
+        return $this;
+    }
+
+    /**
+     * Get permissions
+     *
+     * @return collection $permissions
+     */
+    public function getPermissions() {
+        return $this->permissions;
+    }
+
+    /**
+     * Set permissions
+     *
+     * @param collection $permissions
+     * @return self
+     */
+    public function setPermissions($permissions) {
+        $this->permissions = $permissions;
+        return $this;
+    }
+
+    /**
+     * Get settings
+     *
+     * @return raw $settings
+     */
+    public function getSettings() {
+        return $this->settings;
+    }
+
+    /**
+     * Set settings
+     *
+     * @param raw $settings
+     * @return self
+     */
+    public function setSettings($settings) {
+        $this->settings = $settings;
         return $this;
     }
 }

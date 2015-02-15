@@ -5,9 +5,9 @@ namespace Korobi\WebBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document(collection="channel_commands",repositoryClass="Korobi\WebBundle\Repository\ChannelCommandRepository")
+ * @MongoDB\Document(collection="channel_ai",repositoryClass="Korobi\WebBundle\Repository\ChannelAIRepository")
  */
-class ChannelCommand {
+class ChannelAI {
 
     /**
      * @MongoDB\Id(strategy="auto")
@@ -27,22 +27,22 @@ class ChannelCommand {
     /**
      * @MongoDB\String
      */
-    private $name;
-
-    /**
-     * @MongoDB\String
-     */
-    private $value;
+    private $join_message;
 
     /**
      * @MongoDB\Boolean
      */
-    private $is_action;
+    private $join_message_enabled;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Raw
      */
-    private $is_alias;
+    private $patterns_map;
+
+    /**
+     * @MongoDB\Int
+     */
+    private $pattern_index;
 
     /**
      * Get id
@@ -94,82 +94,82 @@ class ChannelCommand {
     }
 
     /**
-     * Get name
+     * Get joinMessage
      *
-     * @return string $name
+     * @return string $joinMessage
      */
-    public function getName() {
-        return $this->name;
+    public function getJoinMessage() {
+        return $this->join_message;
     }
 
     /**
-     * Set name
+     * Set joinMessage
      *
-     * @param string $name
+     * @param string $joinMessage
      * @return self
      */
-    public function setName($name) {
-        $this->name = $name;
+    public function setJoinMessage($joinMessage) {
+        $this->join_message = $joinMessage;
         return $this;
     }
 
     /**
-     * Get value
+     * Get joinMessageEnabled
      *
-     * @return string $value
+     * @return boolean $joinMessageEnabled
      */
-    public function getValue() {
-        return $this->value;
+    public function getJoinMessageEnabled() {
+        return $this->join_message_enabled;
     }
 
     /**
-     * Set value
+     * Set joinMessageEnabled
      *
-     * @param string $value
+     * @param boolean $joinMessageEnabled
      * @return self
      */
-    public function setValue($value) {
-        $this->value = $value;
+    public function setJoinMessageEnabled($joinMessageEnabled) {
+        $this->join_message_enabled = $joinMessageEnabled;
         return $this;
     }
 
     /**
-     * Get isAction
+     * Get patternsMap
      *
-     * @return boolean $isAction
+     * @return raw $patternsMap
      */
-    public function getIsAction() {
-        return $this->is_action;
+    public function getPatternsMap() {
+        return $this->patterns_map;
     }
 
     /**
-     * Set isAction
+     * Set patternsMap
      *
-     * @param boolean $isAction
+     * @param raw $patternsMap
      * @return self
      */
-    public function setIsAction($isAction) {
-        $this->is_action = $isAction;
+    public function setPatternsMap($patternsMap) {
+        $this->patterns_map = $patternsMap;
         return $this;
     }
 
     /**
-     * Get isAlias
+     * Get patternIndex
      *
-     * @return boolean $isAlias
+     * @return int $patternIndex
      */
-    public function getIsAlias() {
-        return $this->is_alias;
+    public function getPatternIndex() {
+        return $this->pattern_index;
     }
 
     /**
-     * Set isAlias
+     * Set patternIndex
      *
-     * @param boolean $isAlias
+     * @param int $patternIndex
      * @return self
      */
-    public function setIsAlias($isAlias) {
-        $this->is_alias = $isAlias;
+    public function setPatternIndex($patternIndex) {
+        $this->pattern_index = $patternIndex;
         return $this;
     }
 }

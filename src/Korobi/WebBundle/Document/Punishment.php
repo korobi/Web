@@ -70,6 +70,11 @@ class Punishment {
     private $actor_hostname;
 
     /**
+     * @MongoDB\Boolean
+     */
+    private $actor_anonymous;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -295,6 +300,26 @@ class Punishment {
      */
     public function setActorHostname($actorHostname) {
         $this->actor_hostname = $actorHostname;
+        return $this;
+    }
+
+    /**
+     * Get actorAnonymous
+     *
+     * @return boolean $actorAnonymous
+     */
+    public function getActorAnonymous() {
+        return $this->actor_anonymous;
+    }
+
+    /**
+     * Set actorAnonymous
+     *
+     * @param boolean $actorAnonymous
+     * @return self
+     */
+    public function setActorAnonymous($actorAnonymous) {
+        $this->actor_anonymous = $actorAnonymous;
         return $this;
     }
 }

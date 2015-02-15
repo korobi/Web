@@ -23,6 +23,9 @@ Useful commands
 **Create document getters/setters**
 `php app/console doctrine:mongodb:generate:documents KorobiWebBundle`
 
+**Generate database hydrators
+`php app/console doctrine:mongodb:generate:hydrators`
+
 **More information**
 `php app/console doctrine:mongodb help`
 
