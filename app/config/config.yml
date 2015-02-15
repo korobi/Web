@@ -33,6 +33,7 @@ twig:
     globals:
         gitInfo: "@korobi.git_info"
         navigation: "@korobi.navigation_collection"
+        theme: "@korobi.theme_service"
 
 
 # Assetic Configuration

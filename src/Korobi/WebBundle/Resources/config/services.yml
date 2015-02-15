@@ -48,3 +48,8 @@ services:
         parent: korobi.base_controller
         arguments:
             - @session
+
+    korobi.theme_service:
+        class: Korobi\WebBundle\Util\ThemeService
+        arguments:
+            - @session
