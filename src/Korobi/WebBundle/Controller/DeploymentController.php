@@ -70,8 +70,10 @@ class DeploymentController extends BaseController {
             $testOutput = exec('phpunit', $execOutput);
             if (substr($testOutput, 0, 2) !== "OK") {
                 $this->debug("Tests failed!", [implode("\n", $execOutput)], true);
+                $responseData['tests'] = ["status" => "fail", "output" => $execOutput];
             } else {
                 $this->debug("Tests passed.", [$testOutput]);
+                $responseData['tests'] = ["status" => "pass", "output" => $execOutput];
             }
 
 
