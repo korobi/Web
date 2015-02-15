@@ -42,3 +42,9 @@ services:
         class: Korobi\WebBundle\Util\NavigationCollection
         arguments:
             - %korobi.config%
+
+    korobi.theme_controller:
+        class: Korobi\WebBundle\Controller\ThemeController
+        parent: korobi.base_controller
+        arguments:
+            - @session

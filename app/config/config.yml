@@ -95,6 +95,10 @@ korobi_web:
                 title: Revisions
                 route: "dummy"
                 type: "footer"
+            -
+                title: Switch theme
+                route: "theme_toggle"
+                type: "footer"
 
 # Swiftmailer Configuration
 swiftmailer:

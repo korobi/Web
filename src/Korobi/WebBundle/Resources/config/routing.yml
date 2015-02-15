@@ -7,3 +7,6 @@ dummy:
 deploy:
     path: /deploy
     defaults: { _controller: korobi.deploy_controller:deployAction }
+theme_toggle:
+    path: /theme
+    defaults: { _controller: korobi.theme_controller:toggleAction }
