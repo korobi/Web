@@ -1,6 +1,6 @@
 <footer class="footer">
     <div class="footer--inner">
-        <p class="footer--copyright">&copy; {{ "now"|date("Y") }} &ndash; <i class="fa fa-code-fork"></i> Korobi/Web ({{ gitInfo.getShortHash() }}) on {{ gitInfo.getBranch() }}</p>
+        <p class="footer--copyright">&copy; {{ "now"|date("Y") }} &ndash; <i class="fa fa-code-fork"></i> Korobi/Web ({{ gitInfo.getShortHash() }}) on {{ gitInfo.getBranch() }} &ndash; <a href="/theme"><i class="fa fa-adjust"></i></a></p>
         <ul class="footer--links">
             {% for item in navigation.getFooter() %}
                 {{ nav.nav_link(item) }}
