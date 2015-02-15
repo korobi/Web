@@ -11,7 +11,3 @@ php app/console assetic:dump
 
 echo "Clearing cache..."
 php app/console cache:clear
-
-echo "Running tests..."
-cd app/
-phpunit

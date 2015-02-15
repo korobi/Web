@@ -65,6 +65,16 @@ class DeploymentController extends BaseController {
                 $this->debug('Deploy output: ', $execOutput);
             }
 
+            // we'll do tests here instead of in the bash script to make output processing easier
+            chdir($this->rootPath . DIRECTORY_SEPARATOR . 'app');
+            $testOutput = exec('phpunit', $execOutput);
+            if (substr($testOutput, 0, 2) !== "OK") {
+                $this->debug("Tests failed!", implode("\n", $execOutput), true);
+            } else {
+                $this->debug("Tests passed.", $testOutput);
+            }
+
+
             // only provide output if super admin
             if ($isSuperAdmin) {
                 $responseData['exec_output'] = $execOutput;
