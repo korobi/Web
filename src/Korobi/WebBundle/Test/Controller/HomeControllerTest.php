@@ -31,5 +31,22 @@ class HomeControllerTest extends WebTestCase {
         $this->assertTrue($crawler->filter('body.light')->count() === 0);
     }
 
+    public function testBranchAndCommitDisplayedInFooter() {
+        $client = static::createClient();
+
+        $gitInfo = $this->getMockBuilder('Korobi\WebBundle\Util\GitInfo')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $gitInfo->expects($this->any())->method("getBranch")->will($this->returnValue("dummy_branch"));
+        $gitInfo->expects($this->any())->method("getShortHash")->will($this->returnValue("1234567"));
+        $client->getContainer()->set('korobi.git_info', $gitInfo);
+
+        $crawler = $client->request('GET', '/');
+
+        $this->assertTrue($crawler->filter('footer.footer .footer--copyright:contains("dummy_branch")')->count() > 0);
+        $this->assertTrue($crawler->filter('footer.footer .footer--copyright:contains("1234567")')->count() > 0);
+    }
+
 
 }
