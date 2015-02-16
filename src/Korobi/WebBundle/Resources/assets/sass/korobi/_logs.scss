@@ -11,4 +11,8 @@ body.light .logs {
 .logs--line {
   display: block;
   font-family: monospace;
+  .highlighted {
+    font-weight: bold;
+    background-color: rgba(100,255,0,0.3);
+  }
 }
