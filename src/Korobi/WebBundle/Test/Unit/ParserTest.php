@@ -1,6 +1,6 @@
 <?php
 
-namespace Korobi\WebBundle\Test\Controller;
+namespace Korobi\WebBundle\Test\Unit;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
