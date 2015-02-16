@@ -52,7 +52,9 @@ $(function() {
             }
         }
     }
-    $(window).hashchange(hashChange);
+    $(window).on('hashchange', function() {
+        hashChange();
+    });
     hashChange();
 
 });
