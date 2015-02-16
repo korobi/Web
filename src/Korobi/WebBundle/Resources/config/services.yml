@@ -17,6 +17,7 @@ services:
         parent: korobi.base_controller
         arguments:
             - @logger
+            - @korobi.git_info
         calls:
             - [setHmacKey, ["%github_hook_hmac_secret%"]]
             - [setRootPath, ["%kernel.root_dir%"]]

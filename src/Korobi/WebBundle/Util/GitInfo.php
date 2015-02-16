@@ -16,12 +16,7 @@ class GitInfo {
      * Initialize the class.
      */
     public function __construct() {
-        $root = __DIR__ . '/../../../../'; // bit of a hack
-        $ref = (new \SplFileObject($root . '.git/HEAD'))->getCurrentLine();
-        $ref = trim(explode(' ', $ref)[1]);
-
-        $this->branch = trim(array_reverse(explode('/', $ref))[0]);
-        $this->hash = (new \SplFileObject($root . '.git/' . $ref))->getCurrentLine();
+        $this->updateData();
     }
 
     /**
@@ -44,5 +39,17 @@ class GitInfo {
      */
     public function getShortHash($length = 7) {
         return substr($this->hash, 0, $length);
+    }
+
+    /**
+     * Force update data.
+     */
+    public function updateData() {
+        $root = __DIR__ . '/../../../../'; // bit of a hack
+        $ref = (new \SplFileObject($root . '.git/HEAD'))->getCurrentLine();
+        $ref = trim(explode(' ', $ref)[1]);
+
+        $this->branch = trim(array_reverse(explode('/', $ref))[0]);
+        $this->hash = (new \SplFileObject($root . '.git/' . $ref))->getCurrentLine();
     }
 }

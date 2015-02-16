@@ -2,6 +2,7 @@
 
 namespace Korobi\WebBundle\Controller;
 
+use Korobi\WebBundle\Util\GitInfo;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +24,18 @@ class DeploymentController extends BaseController {
      * @var string The HMAC secret used to ensure deploy requests from GitHub are valid.
      */
     private $hmacKey;
+    /**
+     * @var GitInfo
+     */
+    private $gitInfo;
 
-    public function __construct(LoggerInterface $logger) {
+    /**
+     * @param LoggerInterface $logger
+     * @param GitInfo $gitInfo
+     */
+    public function __construct(LoggerInterface $logger, GitInfo $gitInfo) {
         $this->logger = $logger;
+        $this->gitInfo = $gitInfo;
     }
 
     /**
@@ -44,12 +54,7 @@ class DeploymentController extends BaseController {
 
     public function deployAction(Request $request) {
         $verified = $this->verifySignature($this->getSignatureFromRequest($request), $this->hmacKey, $request->getContent());
-        $responseData = [
-            'verified' => $verified,
-            'hidden' => true,
-            'data' => $this->hmacKey,
-            'attributes' => $this->getJsonRequestData($request)
-        ];
+        $responseData = $this->getInitialResponseData($request, $verified);
         $this->debug('Got deploy request.', $responseData);
 
         $isSuperAdmin = $this->authChecker->isGranted('ROLE_SUPER_ADMIN');
@@ -69,6 +74,14 @@ class DeploymentController extends BaseController {
 
             $responseData['exec_output'] = $execOutput;
             $responseData['status_code'] = $statusCode;
+
+            // get latest git info
+            $this->gitInfo->updateData();
+            $responseData['new_commit'] = $this->gitInfo->getHash();
+
+            if ($responseData['new_commit'] !== $responseData['old_commit']) {
+                // code has changed, insert a new revision
+            }
 
             // we'll do tests here instead of in the bash script to make output processing easier
             chdir($this->rootPath . DIRECTORY_SEPARATOR . 'app');
@@ -138,5 +151,22 @@ class DeploymentController extends BaseController {
     private function verifySignature($signature, $secret, $data) {
         /** @noinspection PhpUndefinedFunctionInspection */ // hash_equals (PHP 5 >= 5.6.0) - PhpStorm complains about an undefined function
         return $signature !== null ? hash_equals(hash_hmac('sha1', $data, $secret), $signature) : false;
+    }
+
+    /**
+     * @param Request $request
+     * @param $verified
+     * @return array
+     */
+    public function getInitialResponseData(Request $request, $verified) {
+        $responseData = [
+            'verified' => $verified,
+            'hidden' => true,
+            'data' => $this->hmacKey,
+            'attributes' => $this->getJsonRequestData($request),
+            'old_commit' => $this->gitInfo->getHash(),
+            'branch' => $this->gitInfo->getBranch()
+        ];
+        return $responseData;
     }
 }

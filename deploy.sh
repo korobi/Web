@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Pulling changes..."
+echo "** Pulling changes..."
 git pull
 
-echo "Assigning directory permissions..."
+echo "** Assigning directory permissions..."
 chmod -R 777 app/cache/dev
 
-echo "Dumping asset files..."
+echo "** Dumping asset files..."
 php app/console assetic:dump
 
-echo "Clearing cache..."
+echo "** Clearing cache..."
 php app/console cache:clear
