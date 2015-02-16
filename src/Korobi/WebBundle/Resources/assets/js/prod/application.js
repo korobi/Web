@@ -15,8 +15,8 @@ $(function() {
         if ($("div.logs").length == 0) {
             console.log("Not on a logs page!");
         } else {
-            var remainingParts = remainingPart.substr(2).split(",");
-            console.log("Split item: " + remainingPart.substr(2));
+            var remainingParts = remainingPart.substr(1).split(",");
+            console.log("Split item: " + remainingPart.substr(1));
             console.log(remainingParts);
             for (var i = 0; i < remainingParts.length; i++) {
                 console.log("Inspecting part with index " + i);
