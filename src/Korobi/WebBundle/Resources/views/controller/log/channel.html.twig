@@ -5,7 +5,7 @@
 {% block body %}
     <div class="logs">
         {% for message in logs %}
-            <span class="logs--line">{{ message|raw }}</span>
+            <span class="logs--line" data-line-num="{{ loop.index }}">{{ message|raw }}</span>
         {% endfor %}
     </div>
 {% endblock %}
