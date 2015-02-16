@@ -37,7 +37,7 @@ body.light {
       }
 
       .irc--#{leading($i)}-#{leading($x)}-inverted {
-        background-color: darken(nth($irc-colors, $i+1), 20%););
+        background-color: darken(nth($irc-colors, $i+1), 20%);
         color: darken(nth($irc-colors, $x+1), 20%);
       }
     }

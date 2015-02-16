@@ -73,6 +73,7 @@ class DeploymentController extends BaseController {
             $execOutput = [];
             $statusCode = -1;
             if (exec('./deploy_init.sh', $execOutput, $statusCode) === false) {
+                $this->akio->sendMessage($this->akio->startMessage()->insertRed()->insertText("lol768: Deploy failed."));
                 $this->debug('Failed to run deploy script.', array(), true);
             } else {
                 $this->debug('Deploy output: ', $execOutput);
