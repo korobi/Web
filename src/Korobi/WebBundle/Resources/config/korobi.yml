@@ -6,11 +6,7 @@ korobi_web:
               route: 'home'
 
             - title: Logs
-              route: 'logs'
-              routes:
-              - logs
-              - logs_network
-              - logs_channel
+              route: 'dummy'
 
             - title: Search
               route: 'dummy'
