@@ -2,7 +2,10 @@ $(function() {
 
     function highlightLine(lineNum) {
         lineNum -= 1;
-        $(".logs--line[data-line-num='" + lineNum + "']").addClass("highlighted");
+        console.log("New number is " + lineNum);
+        var selector = ".logs--line[data-line-num='" + lineNum + "']";
+        console.log("Final selector is" + selector);
+        $(selector).addClass("highlighted");
     }
 
     var hash = window.location.hash;
@@ -12,10 +15,16 @@ $(function() {
         if ($("div.logs").length == 0) {
             console.log("Not on a logs page!");
         } else {
-            var remainingParts = remainingPart.substr(1).split(",");
+            var remainingParts = remainingPart.substr(2).split(",");
+            console.log("Split item: " + remainingPart.substr(2));
+            console.log(remainingParts);
             for (var i = 0; i < remainingParts.length; i++) {
+                console.log("Inspecting part with index " + i);
                 var part = remainingParts[i];
+                console.log("Part contents: " + part);
+
                 if (part.indexOf("-") !== -1) {
+                    console.log("Found a hyphen in this part");
                     var re = /([0-9]+)-([0-9]+)/;
                     var match = re.exec(part);
                     if (match.length !== 3) {
@@ -29,10 +38,12 @@ $(function() {
                         }
                     }
                 } else {
+                    console.log("No hyphen, treating as number");
                     var ival = Number(part);
                     if (isNaN(ival)) {
                         console.log("Invalid fragment! " + part)
                     } else {
+                        console.log("Valid number, requesting highlight");
                         highlightLine(ival);
                     }
                 }
