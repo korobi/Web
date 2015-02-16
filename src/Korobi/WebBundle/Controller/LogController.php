@@ -6,6 +6,7 @@ use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Parser\IRCTextParser;
+use Korobi\WebBundle\Parser\NickColours;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -210,7 +211,7 @@ class LogController extends BaseController {
 
         $result .= '&lt;';
         $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
+        $result .= $this->getSpanForColour(NickColours::getColourForNick(self::transformActor($chat->getActorName())), self::transformActor($chat->getActorName()));
         $result .= '&gt; ';
 
         // message
@@ -234,6 +235,10 @@ class LogController extends BaseController {
         $result .= '</span>';
 
         return $result;
+    }
+
+    private function getSpanForColour($colour, $text) {
+        return '<span class="irc--' . $colour . '-99">' . $text . '</span>';
     }
 
     private function parseNick(Chat $chat) {
