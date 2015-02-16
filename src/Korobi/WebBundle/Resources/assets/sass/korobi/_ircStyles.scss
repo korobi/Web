@@ -12,4 +12,9 @@
     }
   }
 
+  .irc--#{$i}-99 {
+    background-color: transparent;
+    color: nth($irc-colors, $x+1);
+  }
+
 }
