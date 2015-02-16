@@ -27,3 +27,25 @@
   }
 
 }
+
+body.light {
+  @for $i from 0 through 15 {
+    @for $x from 0 through 15 {
+      .irc--#{leading($i)}-#{leading($x)} {
+        color: darken(nth($irc-colors, $i+1), 20%);
+        background-color: darken(nth($irc-colors, $x+1), 20%);
+      }
+
+      .irc--#{leading($i)}-#{leading($x)}-inverted {
+        background-color: darken(nth($irc-colors, $i+1), 20%););
+        color: darken(nth($irc-colors, $x+1), 20%);
+      }
+    }
+
+    .irc--#{leading($i)}-99 {
+      background-color: transparent;
+      color: darken(nth($irc-colors, $i+1), 20%);
+    }
+  }
+}
+
