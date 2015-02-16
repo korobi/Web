@@ -1,8 +1,7 @@
 $(function() {
 
     function highlightLine(lineNum) {
-        lineNum -= 1;
-        console.log("New number is " + lineNum);
+        console.log("Number is " + lineNum);
         var selector = ".logs--line[data-line-num='" + lineNum + "']";
         console.log("Final selector is" + selector);
         $(selector).addClass("highlighted");
