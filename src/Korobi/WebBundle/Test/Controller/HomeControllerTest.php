@@ -28,7 +28,7 @@ class HomeControllerTest extends WebTestCase {
         $this->assertTrue($crawler->filter('body.light')->count() > 0);
         // everything resets..
         $crawler = $client->request('GET', '/');
-        $this->assertTrue($crawler->filter('body.light')->count() !== 0);
+        $this->assertTrue($crawler->filter('body.light')->count() === 0);
     }
 
 
