@@ -10,15 +10,17 @@ class NavigationItem {
 
     private $title;
     private $route;
+    private $routes;
     private $requiresAuth;
     private $requiresAdmin;
     private $externalUrl;
 
-    public function __construct($requiresAdmin, $requiresAuth, $title, $route) {
+    public function __construct($requiresAdmin, $requiresAuth, $title, $route, $routes) {
         $this->requiresAdmin = $requiresAdmin;
         $this->requiresAuth = $requiresAuth;
         $this->title = $title;
         $this->route = $route;
+        $this->routes = $routes;
     }
 
     /**
@@ -49,9 +51,17 @@ class NavigationItem {
         return $this->route;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRoutes() {
+        return$this->routes;
+    }
+
     public function getClass($route) {
         $ext = $this->externalUrl ? 'external' : '';
-        if ($route === $this->route) {
+
+        if ($route === $this->route || in_array($route, $this->routes)) {
             return $ext . ' active';
         } else {
             return $ext . '';
