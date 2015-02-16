@@ -34,7 +34,7 @@ $(function() {
                             console.log("Min: " + match[1] + ", Max: " + match[2]);
                             var imin = Number(match[1]);
                             var imax = Number(match[2]);
-                            for (var j = imin; j < imax; j++) {
+                            for (var j = imin; j <= imax; j++) {
                                 console.log("Highlighting " + j);
                                 highlightLine(j);
                             }
