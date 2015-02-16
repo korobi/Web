@@ -21,10 +21,10 @@ parameters:
     github_client_secret: ~
     github_hook_hmac_secret: ~
 
-    # Flare IRC notifications data
-    flare_host: ~
-    flare_port: ~
-    flare_key: ~
+    # Akio IRC notifications data
+    akio_host: ~
+    akio_port: ~
+    akio_key: ~
 
     # SASS file parh
     sass_path: ~
