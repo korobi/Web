@@ -3,8 +3,9 @@
 {% set page_title = "Log" %}
 
 {% block body %}
-
-    {% for message in logs %}
-        <p>{{ message|raw }}</p>
-    {% endfor %}
+    <div class="logs">
+        {% for message in logs %}
+            <span class="logs--line">{{ message|raw }}</span>
+        {% endfor %}
+    </div>
 {% endblock %}
