@@ -1,18 +1,27 @@
 // Generates all the classes for the IRC colours
+@function leading($n) {
+  @if $n < 10 {
+    @return "0" + $n
+  } @else {
+    @return $n
+  }
+}
+
+
 @for $i from 0 through 15 {
   @for $x from 0 through 15 {
-    .irc--#{$i}-#{$x} {
+    .irc--#{leading($i)}-#{leading($x)} {
       color: nth($irc-colors, $i+1);
       background-color: nth($irc-colors, $x+1);
     }
 
-    .irc--#{$i}-#{$x}-inverted {
+    .irc--#{leading($i)}-#{leading($x)}-inverted {
       background-color: nth($irc-colors, $i+1);
       color: nth($irc-colors, $x+1);
     }
   }
 
-  .irc--#{$i}-99 {
+  .irc--#{leading($i)}-99 {
     background-color: transparent;
     color: nth($irc-colors, $i+1);
   }
