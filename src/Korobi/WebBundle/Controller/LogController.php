@@ -318,16 +318,16 @@ class LogController extends BaseController {
     private static function createUserMode($prefix) {
         switch ($prefix) {
             case 'OWNER':
-                return '<span class="irc--4-99">~</span>';
+                return '<span class="irc--04-99">~</span>';
             case 'ADMIN':
                 return '<span class="irc--11-99">&</span>';
             case 'OPERATOR':
-                return '<span class="irc--9-99">@</span>';
+                return '<span class="irc--09-99">@</span>';
             case 'HALF_OP':
                 return '<span class="irc--13-99">%</span>';
                 break;
             case 'VOICE':
-                return '<span class="irc--8-99">+</span>';
+                return '<span class="irc--08-99">+</span>';
                 break;
             case 'NORMAL':
                 return '';

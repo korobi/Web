@@ -4,7 +4,10 @@ services:
         class: Korobi\WebBundle\Extension\ExtensionTwigGlobals
         tags:
             - { name: twig.extension }
-        arguments: [%kernel.root_dir%]
+    korobi.extension.twig.filters:
+        class: Korobi\WebBundle\Extension\ExtensionTwigFilters
+        tags:
+            - { name: twig.extension }
 
     # controllers
     korobi.base_controller:
@@ -12,6 +15,12 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
             - [setAuthChecker, ["@security.authorization_checker"]]
+    korobi.controller.log:
+        class: Korobi\WebBundle\Controller\LogController
+        parent: korobi.base_controller
+    korobi.controller.command:
+        class: Korobi\WebBundle\Controller\CommandController
+        parent: korobi.base_controller
     korobi.deploy_controller:
         class: Korobi\WebBundle\Controller\DeploymentController
         parent: korobi.base_controller

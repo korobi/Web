@@ -22,7 +22,11 @@ korobi_web:
               route: 'dummy'
 
             - title: Commands
-              route: 'dummy'
+              route: 'commands'
+              routes:
+              - commands
+              - commands_network
+              - commands_channel
 
             - title: Docs
               route: 'dummy'

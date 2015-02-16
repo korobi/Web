@@ -8,27 +8,43 @@ home:
 # network list
 logs:
     path: /logs
-    defaults: { _controller: KorobiWebBundle:Log:home }
+    defaults: { _controller: korobi.controller.log:homeAction }
 # channel list
 logs_network:
     path: /logs/{network}
-    defaults: { _controller: KorobiWebBundle:Log:network }
+    defaults: { _controller: korobi.controller.log:networkAction }
 # channel
 logs_channel:
     path: /logs/{network}/{channel}
-    defaults: { _controller: KorobiWebBundle:Log:channel }
+    defaults: { _controller: korobi.controller.log:channelAction }
 # channel by date
 logs_channel_date:
     path: /logs/{network}/{channel}/{year}/{month}/{day}
-    defaults: { _controller: KorobiWebBundle:Log:channel }
+    defaults: { _controller: korobi.controller.log:channel }
 # channel by date with tail
 logs_channel_date_tail:
     path: /logs/{network}/{channel}/{year}/{month}/{day}/tail/{tail}
-    defaults: { _controller: KorobiWebBundle:Log:channel, tail: 30 }
+    defaults: { _controller: korobi.controller.log:channel, tail: 30 }
 # channel with tail
 logs_channel_tail:
     path: /logs/{network}/{channel}/tail/{tail}
-    defaults: { _controller: KorobiWebBundle:Log:channel, tail: 30 }
+    defaults: { _controller: korobi.controller.log:channel, tail: 30 }
+
+# --------------------------
+# ---- Channel Commands ----
+# --------------------------
+# network list
+commands:
+    path: /commands
+    defaults: { _controller: korobi.controller.command:homeAction }
+# channel list
+commands_network:
+    path: /commands/{network}
+    defaults: { _controller: korobi.controller.command:networkAction }
+# channel
+commands_channel:
+    path: /commands/{network}/{channel}
+    defaults: { _controller: korobi.controller.command:channelAction }
 
 dummy:
     path: /dummy

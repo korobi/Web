@@ -19,4 +19,15 @@ class ChannelCommandRepository extends DocumentRepository {
             ->getQuery()
             ->execute();
     }
+
+    public function findAliasesFor($network, $channel, $command) {
+        return $this->createQueryBuilder()
+            ->sort('name', 'ASC')
+            ->field('network')->equals($network)
+            ->field('channel')->equals($channel)
+            ->field('value')->equals($command)
+            ->field('is_alias')->equals(true)
+            ->getQuery()
+            ->execute();
+    }
 }
