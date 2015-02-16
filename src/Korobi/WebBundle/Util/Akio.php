@@ -34,7 +34,7 @@ class Akio {
 
     public function sendMessage(AkioMessageBuilder $message) {
         $text = $message->getRawText();
-        $this->guzzle->get("http://" . $this->host . ":" . $this->port, [
+        $this->guzzle->post("http://" . $this->host . ":" . $this->port, [
             'query' => ['message' => $text],
             'headers' => ['X-Akio-Korobi' => $this->key]
         ]);
