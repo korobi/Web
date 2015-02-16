@@ -11,20 +11,17 @@ use GuzzleHttp\Client as GuzzleClient;
 class Akio {
 
     protected $guzzle;
-    private $host;
-    private $port;
+    private $url;
     private $key;
 
     /**
      * Initialize the class.
-     * @param string $host The instance host
-     * @param int $port The instance port
+     * @param string $url The instance url
      * @param string $key The auth key
      */
-    public function __construct($host, $port, $key) {
+    public function __construct($url, $key) {
         $this->guzzle = new GuzzleClient();
-        $this->host = $host;
-        $this->port = $port;
+        $this->url = $url;
         $this->key = $key;
     }
 
@@ -34,7 +31,7 @@ class Akio {
 
     public function sendMessage(AkioMessageBuilder $message) {
         $text = $message->getRawText();
-        $this->guzzle->post($this->host . ":" . $this->port, [
+        $this->guzzle->post($this->url, [
             'body' => ['message' => $text],
             'headers' => ['X-Akio-Korobi' => $this->key]
         ]);

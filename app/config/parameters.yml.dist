@@ -22,8 +22,7 @@ parameters:
     github_hook_hmac_secret: ~
 
     # Akio IRC notifications data
-    akio_host: ~
-    akio_port: ~
+    akio_path: ~
     akio_key: ~
 
     # SASS file parh
