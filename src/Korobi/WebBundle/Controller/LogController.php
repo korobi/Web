@@ -70,7 +70,8 @@ class LogController extends BaseController {
         }
 
         return $this->render('KorobiWebBundle:controller/log:network.html.twig', [
-            'channels' => $channels
+            'channels' => $channels,
+            'network' => $network
         ]);
     }
 
