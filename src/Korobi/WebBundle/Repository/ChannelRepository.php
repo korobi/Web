@@ -17,4 +17,18 @@ class ChannelRepository extends DocumentRepository {
             ->getQuery()
             ->execute();
     }
+
+    /**
+     * @param $network
+     * @param $channel
+     * @return mixed
+     */
+    public function findByChannel($network, $channel) {
+        return $this->createQueryBuilder()
+            ->sort('name', 'ASC')
+            ->field('network')->equals($network)
+            ->field('channel')->equals($channel)
+            ->getQuery()
+            ->execute();
+    }
 }

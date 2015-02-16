@@ -1,15 +1,34 @@
 home:
     path: /
     defaults: { _controller: KorobiWebBundle:Home:home }
+
+# ----------------------
+# ---- Channel Logs ----
+# ----------------------
+# network list
 logs:
     path: /logs
     defaults: { _controller: KorobiWebBundle:Log:home }
+# channel list
 logs_network:
     path: /logs/{network}
     defaults: { _controller: KorobiWebBundle:Log:network }
+# channel
 logs_channel:
     path: /logs/{network}/{channel}
     defaults: { _controller: KorobiWebBundle:Log:channel }
+# channel by date
+logs_channel_date:
+    path: /logs/{network}/{channel}/{year}/{month}/{day}
+    defaults: { _controller: KorobiWebBundle:Log:channel }
+# channel by date with tail
+logs_channel_date_tail:
+    path: /logs/{network}/{channel}/{year}/{month}/{day}/tail/{tail}
+    defaults: { _controller: KorobiWebBundle:Log:channel, tail: 30 }
+# channel with tail
+logs_channel_tail:
+    path: /logs/{network}/{channel}/tail/{tail}
+    defaults: { _controller: KorobiWebBundle:Log:channel, tail: 30 }
 
 dummy:
     path: /dummy

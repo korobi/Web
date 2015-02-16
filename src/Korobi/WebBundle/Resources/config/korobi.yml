@@ -11,6 +11,9 @@ korobi_web:
               - logs
               - logs_network
               - logs_channel
+              - logs_channel_date
+              - logs_channel_date_tail
+              - logs_channel_tail
 
             - title: Search
               route: 'dummy'
