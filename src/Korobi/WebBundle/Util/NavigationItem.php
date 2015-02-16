@@ -55,7 +55,7 @@ class NavigationItem {
      * @return mixed
      */
     public function getRoutes() {
-        return$this->routes;
+        return $this->routes;
     }
 
     public function getClass($route) {
