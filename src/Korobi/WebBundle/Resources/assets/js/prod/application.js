@@ -9,7 +9,7 @@ $(function() {
     var remainingPart = hash.substr(0, 2);
     if (remainingPart == "#L") {
         console.log("Got request to highlight lines!");
-        if ($("div.logs").length() == 0) {
+        if ($("div.logs").length == 0) {
             console.log("Not on a logs page!");
         } else {
             var remainingParts = remainingPart.substr(2).split(",");
