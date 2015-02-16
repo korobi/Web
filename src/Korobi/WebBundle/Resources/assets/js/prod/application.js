@@ -8,6 +8,7 @@ $(function() {
     }
 
     function hashChange() {
+        $(".logs--line").removeClass("highlighted");
         var hash = window.location.hash;
         var remainingPart = hash.substr(0, 2);
         if (remainingPart == "#L") {
