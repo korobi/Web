@@ -2,6 +2,7 @@
 
 namespace Korobi\WebBundle\Controller;
 
+use Korobi\WebBundle\Util\Akio;
 use Korobi\WebBundle\Util\GitInfo;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,14 +29,19 @@ class DeploymentController extends BaseController {
      * @var GitInfo
      */
     private $gitInfo;
+    /**
+     * @var Akio
+     */
+    private $akio;
 
     /**
      * @param LoggerInterface $logger
      * @param GitInfo $gitInfo
      */
-    public function __construct(LoggerInterface $logger, GitInfo $gitInfo) {
+    public function __construct(LoggerInterface $logger, GitInfo $gitInfo, Akio $akio) {
         $this->logger = $logger;
         $this->gitInfo = $gitInfo;
+        $this->akio = $akio;
     }
 
     /**
@@ -70,6 +76,7 @@ class DeploymentController extends BaseController {
                 $this->debug('Failed to run deploy script.', array(), true);
             } else {
                 $this->debug('Deploy output: ', $execOutput);
+
             }
 
             $responseData['exec_output'] = $execOutput;
@@ -94,7 +101,7 @@ class DeploymentController extends BaseController {
                 $this->debug("Tests passed.", [$testOutput]);
                 $responseData['tests'] = ["status" => "pass", "output" => $execOutput];
             }
-
+            $this->akio->sendMessage($this->akio->startMessage()->insertGreen()->insertText("A deploy!"));
 
             // only provide output if super admin
             if (!$isSuperAdmin) {
