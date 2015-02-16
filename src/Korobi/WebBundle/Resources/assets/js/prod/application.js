@@ -12,7 +12,7 @@ $(function() {
         if ($("div.logs").length == 0) {
             console.log("Not on a logs page!");
         } else {
-            var remainingParts = remainingPart.substr(2).split(",");
+            var remainingParts = remainingPart.substr(1).split(",");
             for (var i = 0; i < remainingParts.length; i++) {
                 var part = remainingParts[i];
                 if (part.indexOf("-") !== -1) {
