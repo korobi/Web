@@ -16,7 +16,7 @@ class Akio {
      * Initialize the class.
      * @param GuzzleClient $guzzle
      */
-    public function __construct(GuzzleClient $guzzle) {
+    public function __construct(GuzzleClient $guzzle, $akio) {
         $this->guzzle = $guzzle;
     }
 

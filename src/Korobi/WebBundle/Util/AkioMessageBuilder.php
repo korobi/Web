@@ -26,7 +26,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertWhite() {
-        $this->text .= self::COLOUR . "0";
+        $this->text .= self::COLOUR . "00";
         return $this;
     }
 
@@ -34,7 +34,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertBlack() {
-        $this->text .= self::COLOUR . "1";
+        $this->text .= self::COLOUR . "01";
         return $this;
     }
 
@@ -42,7 +42,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertNavyBlue() {
-        $this->text .= self::COLOUR . "2";
+        $this->text .= self::COLOUR . "02";
         return $this;
     }
 
@@ -50,7 +50,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertGreen() {
-        $this->text .= self::COLOUR . "3";
+        $this->text .= self::COLOUR . "03";
         return $this;
     }
 
@@ -58,7 +58,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertRed() {
-        $this->text .= self::COLOUR . "4";
+        $this->text .= self::COLOUR . "04";
         return $this;
     }
 
@@ -66,7 +66,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertBrown() {
-        $this->text .= self::COLOUR . "5";
+        $this->text .= self::COLOUR . "05";
         return $this;
     }
 
@@ -74,7 +74,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertPurple() {
-        $this->text .= self::COLOUR . "6";
+        $this->text .= self::COLOUR . "06";
         return $this;
     }
 
@@ -82,7 +82,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertOlive() {
-        $this->text .= self::COLOUR . "7";
+        $this->text .= self::COLOUR . "07";
         return $this;
     }
 
@@ -90,7 +90,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertYellow() {
-        $this->text .= self::COLOUR . "8";
+        $this->text .= self::COLOUR . "08";
         return $this;
     }
 
@@ -98,7 +98,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertLimeGreen() {
-        $this->text .= self::COLOUR . "9";
+        $this->text .= self::COLOUR . "09";
         return $this;
     }
 
