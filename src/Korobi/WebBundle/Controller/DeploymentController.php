@@ -86,10 +86,6 @@ class DeploymentController extends BaseController {
             $this->gitInfo->updateData();
             $responseData['new_commit'] = $this->gitInfo->getHash();
 
-            if ($responseData['new_commit'] !== $responseData['old_commit']) {
-                // code has changed, insert a new revision
-            }
-
             // we'll do tests here instead of in the bash script to make output processing easier
             chdir($this->rootPath . DIRECTORY_SEPARATOR . 'app');
             $execOutput = [];
@@ -101,7 +97,17 @@ class DeploymentController extends BaseController {
                 $this->debug("Tests passed.", [$testOutput]);
                 $responseData['tests'] = ["status" => "pass", "output" => $execOutput];
             }
-            $this->akio->sendMessage($this->akio->startMessage()->insertGreen()->insertText("A deploy!"));
+            
+            
+            if ($responseData['new_commit'] !== $responseData['old_commit']) {
+                // code has changed, insert a new revision
+                
+                if ($responseData['tests']['status'] === 'pass') {
+                    $this->akio->sendMessage($this->akio->startMessage()->insertGreen()->insertText("All tests passed! Output: " . $testOutput));
+                } else {
+                    $this->akio->sendMessage($this->akio->startMessage()->insertRed()->insertText("lol768: At least one test failed. Output: " . $testOutput));
+                }
+            }
 
             // only provide output if super admin
             if (!$isSuperAdmin) {
