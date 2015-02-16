@@ -222,7 +222,11 @@ class IRCTextParser {
                     $linkText = $url;
                 } else {
                     $linkRef = $scheme ? $url : "http://$url";
-                    $linkText = $linkRef;
+                    if (!$scheme) {
+                        $linkText = $url;
+                    } else {
+                        $linkText = $linkRef;
+                    }
                 }
 
                 $result .= self::createLinkTag($linkRef, $linkText);

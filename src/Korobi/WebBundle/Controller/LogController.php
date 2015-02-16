@@ -12,6 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class LogController extends BaseController {
 
+    const ACTION_USER_PREFIX = '*';
+    const ACTION_SERVER_PREFIX = '**';
+    const ACTION_SERVER_CLASS = 'irc--14-99';
+
     public function homeAction() {
 
         $rawNetworks = $this->get('doctrine_mongodb')
@@ -160,7 +164,8 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
-        $result .= '* ';
+        $result .= self::ACTION_USER_PREFIX;
+        $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' ';
@@ -177,8 +182,9 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
-        $result .= '<span class="irc--14-99">';
-        $result .= '** ';
+        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
+        $result .= self::ACTION_SERVER_PREFIX;
+        $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' joined the channel';
@@ -194,7 +200,8 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
-        $result .= '** ';
+        $result .= self::ACTION_SERVER_PREFIX;
+        $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' was kicked by ';
@@ -228,11 +235,24 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
-        $result .= '<span class="irc--14-99">';
-        $result .= '** ';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
-        $result .= ' sets mode ' . $chat->getMessage();
+        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
+        $result .= self::ACTION_SERVER_PREFIX;
+        $result .= ' ';
+        if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
+            $result .= self::createUserMode($chat->getActorPrefix());
+            $result .= self::transformActor($chat->getActorName());
+            $result .= ' sets mode ' . $chat->getMessage();
+        } else {
+            $result .= self::createUserMode($chat->getActorPrefix());
+            $result .= self::transformActor($chat->getActorName());
+            $result .= ' sets mode ' . $chat->getMessage();
+
+            if ($chat->getRecipientPrefix() !== null) {
+                $result .= self::transformMode($chat->getRecipientPrefix());
+                $result .= ' ';
+                $result .= self::transformActor($chat->getRecipientName());
+            }
+        }
         $result .= '</span>';
 
         return $result;
@@ -250,7 +270,8 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
-        $result .= '** ';
+        $result .= self::ACTION_SERVER_PREFIX;
+        $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= $prefix;
         $result .= self::transformActor($chat->getActorName());
@@ -268,8 +289,9 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
-        $result .= '<span class="irc--14-99">';
-        $result .= '** ';
+        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
+        $result .= self::ACTION_SERVER_PREFIX;
+        $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' left the channel';
@@ -285,8 +307,9 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
-        $result .= '<span class="irc--14-99">';
-        $result .= '** ';
+        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
+        $result .= self::ACTION_SERVER_PREFIX;
+        $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' ';
@@ -304,13 +327,18 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
-        $result .= '<span class="irc--14-99">';
-        $result .= '** ';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
+        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
+        $result .= self::ACTION_SERVER_PREFIX;
         $result .= ' ';
 
-        $result .= 'has changed the topic to: ' . $chat->getMessage();
+        if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
+            $result .= 'Topic is: ' . $chat->getMessage();
+        } else {
+            $result .= self::createUserMode($chat->getActorPrefix());
+            $result .= self::transformActor($chat->getActorName());
+            $result .= ' has changed the topic to: ' . $chat->getMessage();
+        }
+
         $result .= '</span>';
 
         return $result;
@@ -330,6 +358,24 @@ class LogController extends BaseController {
             case 'VOICE':
                 return '<span class="irc--08-99">+</span>';
                 break;
+            case 'NORMAL':
+                return '';
+                break;
+        }
+    }
+
+    private static function transformMode($mode) {
+        switch ($mode) {
+            case 'OWNER':
+                return 'q';
+            case 'ADMIN':
+                return 'a';
+            case 'OPERATOR':
+                return 'o';
+            case 'HALF_OP':
+                return 'h';
+            case 'VOICE':
+                return 'v';
             case 'NORMAL':
                 return '';
                 break;
