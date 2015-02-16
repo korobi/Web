@@ -147,6 +147,10 @@ class LogController extends BaseController {
         ]);
     }
 
+    // -----------------
+    // ---- Parsing ----
+    // -----------------
+
     private function parseAction(Chat $chat) {
         $result = '';
 
@@ -189,6 +193,7 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
+        $result .= '<span class="irc--14-99">';
         $result .= '** ';
         switch ($chat->getActorPrefix()) {
             case 'OWNER':
@@ -211,6 +216,7 @@ class LogController extends BaseController {
         }
         $result .= self::transformActor($chat->getActorName());
         $result .= ' joined the channel';
+        $result .= '</span>';
 
         return $result;
     }
