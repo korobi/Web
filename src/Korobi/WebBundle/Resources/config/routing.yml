@@ -4,6 +4,9 @@ home:
 dummy:
     path: /dummy
     defaults: { _controller: KorobiWebBundle:Home:home }
+revisions:
+    path: /revisions
+    defaults: { _controller: KorobiWebBundle:Home:home }
 deploy:
     path: /deploy
     defaults: { _controller: korobi.deploy_controller:deployAction }

@@ -30,5 +30,5 @@ korobi_web:
               external: true
 
             - title: Revisions
-              route: 'dummy'
+              route: 'revisions'
               type: 'footer'
