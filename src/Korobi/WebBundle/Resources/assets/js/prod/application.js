@@ -56,6 +56,6 @@ $(function() {
     $(window).on('hashchange', function() {
         hashChange();
     });
-    hashChange();
+    setTimeout(hashChange, 500);
 
 });
