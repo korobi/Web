@@ -10,6 +10,7 @@
   display: block;
   font-weight: 400;
   font-family: 'Ubuntu Mono', monospace;
+  @include transition(0.5s all);
 }
 
 .logs--line.highlighted {
