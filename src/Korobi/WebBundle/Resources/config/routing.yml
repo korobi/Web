@@ -1,6 +1,16 @@
 home:
     path: /
     defaults: { _controller: KorobiWebBundle:Home:home }
+logs:
+    path: /logs
+    defaults: { _controller: KorobiWebBundle:Log:home }
+logs_network:
+    path: /logs/{network}
+    defaults: { _controller: KorobiWebBundle:Log:network }
+logs_channel:
+    path: /logs/{network}/{channel}
+    defaults: { _controller: KorobiWebBundle:Log:channel }
+
 dummy:
     path: /dummy
     defaults: { _controller: KorobiWebBundle:Home:home }

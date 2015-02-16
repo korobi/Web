@@ -1,0 +1,9 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = "Log" %}
+
+{% block body %}
+    {% for channel in channels %}
+    <a href="{{ channel.href }}">{{ channel.name }}</a>
+    {% endfor %}
+{% endblock %}
