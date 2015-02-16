@@ -6,10 +6,15 @@ use Korobi\WebBundle\Document\Revision;
 use Symfony\Component\BrowserKit\Request;
 
 /**
- * Runs the tests.
+ * Does base processing.
  * @package Korobi\WebBundle\Deployment\Processor
  */
-class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
+abstract class BaseProcessor implements DeploymentProcessorInterface {
+
+
+    public function __construct() {
+
+    }
 
     public function handle(Revision $document, Request $request) {
         // TODO: Implement handle() method.
