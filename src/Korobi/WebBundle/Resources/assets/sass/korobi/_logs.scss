@@ -4,15 +4,19 @@
   border-radius: 3px;
 }
 
-body.light .logs {
-  background-color: #ddd;
-}
-
 .logs--line {
   display: block;
   font-family: monospace;
-  .highlighted {
-    font-weight: bold;
-    background-color: rgba(100,255,0,0.3);
+}
+
+.logs--line.highlighted {
+  font-weight: bold;
+  background-color: rgba(255, 239, 0, 0.30);
+}
+
+body.light .logs {
+  background-color: #ddd;
+  .logs--line.highlighted {
+    background-color: rgba(255, 239, 0, 0.75);
   }
 }
