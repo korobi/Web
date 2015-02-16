@@ -311,9 +311,9 @@ class IRCTextParser {
             }
         }
 
-        $suffix = $suffix ?: '';
+        $suffix = $suffix ?: '-99';
 
-        $prefix = 'irc-color-';
+        $prefix = 'irc--';
         switch ($input) {
             case '00':
             case '01':
@@ -325,6 +325,7 @@ class IRCTextParser {
             case '07':
             case '08':
             case '09':
+                return $prefix . substr($input, 1, 1) . $suffix;
             case '10':
             case '11':
             case '12':

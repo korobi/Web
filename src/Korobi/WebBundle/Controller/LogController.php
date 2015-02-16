@@ -159,25 +159,7 @@ class LogController extends BaseController {
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
         $result .= '* ';
-        switch ($chat->getActorPrefix()) {
-            case 'OWNER':
-                $result .= '~';
-                break;
-            case 'ADMIN':
-                $result .= '&';
-                break;
-            case 'OPERATOR':
-                $result .= '@';
-                break;
-            case 'HALF_OP':
-                $result .= '%';
-                break;
-            case 'VOICE':
-                $result .= '+';
-                break;
-            case 'NORMAL':
-                break;
-        }
+        $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' ';
 
@@ -195,25 +177,7 @@ class LogController extends BaseController {
 
         $result .= '<span class="irc--14-99">';
         $result .= '** ';
-        switch ($chat->getActorPrefix()) {
-            case 'OWNER':
-                $result .= '~';
-                break;
-            case 'ADMIN':
-                $result .= '&';
-                break;
-            case 'OPERATOR':
-                $result .= '@';
-                break;
-            case 'HALF_OP':
-                $result .= '%';
-                break;
-            case 'VOICE':
-                $result .= '+';
-                break;
-            case 'NORMAL':
-                break;
-        }
+        $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' joined the channel';
         $result .= '</span>';
@@ -229,25 +193,7 @@ class LogController extends BaseController {
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
         $result .= '** ';
-        switch ($chat->getActorPrefix()) {
-            case 'OWNER':
-                $result .= '~';
-                break;
-            case 'ADMIN':
-                $result .= '&';
-                break;
-            case 'OPERATOR':
-                $result .= '@';
-                break;
-            case 'HALF_OP':
-                $result .= '%';
-                break;
-            case 'VOICE':
-                $result .= '+';
-                break;
-            case 'NORMAL':
-                break;
-        }
+        $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' was kicked by ';
         $result .= $chat->getActorName();
@@ -263,25 +209,7 @@ class LogController extends BaseController {
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
         $result .= '&lt;';
-        switch ($chat->getActorPrefix()) {
-            case 'OWNER':
-                $result .= '~';
-                break;
-            case 'ADMIN':
-                $result .= '&';
-                break;
-            case 'OPERATOR':
-                $result .= '@';
-                break;
-            case 'HALF_OP':
-                $result .= '%';
-                break;
-            case 'VOICE':
-                $result .= '+';
-                break;
-            case 'NORMAL':
-                break;
-        }
+        $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= '&gt; ';
 
@@ -298,28 +226,12 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
+        $result .= '<span class="irc--14-99">';
         $result .= '** ';
-        switch ($chat->getActorPrefix()) {
-            case 'OWNER':
-                $result .= '~';
-                break;
-            case 'ADMIN':
-                $result .= '&';
-                break;
-            case 'OPERATOR':
-                $result .= '@';
-                break;
-            case 'HALF_OP':
-                $result .= '%';
-                break;
-            case 'VOICE':
-                $result .= '+';
-                break;
-            case 'NORMAL':
-                break;
-        }
+        $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' sets mode ' . $chat->getMessage();
+        $result .= '</span>';
 
         return $result;
     }
@@ -333,25 +245,7 @@ class LogController extends BaseController {
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
         $result .= '** ';
-        switch ($chat->getActorPrefix()) {
-            case 'OWNER':
-                $prefix .= '~';
-                break;
-            case 'ADMIN':
-                $prefix .= '&';
-                break;
-            case 'OPERATOR':
-                $prefix .= '@';
-                break;
-            case 'HALF_OP':
-                $prefix .= '%';
-                break;
-            case 'VOICE':
-                $prefix .= '+';
-                break;
-            case 'NORMAL':
-                break;
-        }
+        $result .= self::createUserMode($chat->getActorPrefix());
         $result .= $prefix;
         $result .= self::transformActor($chat->getActorName());
         $result .= ' is now known as ';
@@ -368,28 +262,12 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
+        $result .= '<span class="irc--14-99">';
         $result .= '** ';
-        switch ($chat->getActorPrefix()) {
-            case 'OWNER':
-                $result .= '~';
-                break;
-            case 'ADMIN':
-                $result .= '&';
-                break;
-            case 'OPERATOR':
-                $result .= '@';
-                break;
-            case 'HALF_OP':
-                $result .= '%';
-                break;
-            case 'VOICE':
-                $result .= '+';
-                break;
-            case 'NORMAL':
-                break;
-        }
+        $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' left the channel';
+        $result .= '</span>';
 
         return $result;
     }
@@ -401,28 +279,12 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
+        $result .= '<span class="irc--14-99">';
         $result .= '** ';
-        switch ($chat->getActorPrefix()) {
-            case 'OWNER':
-                $result .= '~';
-                break;
-            case 'ADMIN':
-                $result .= '&';
-                break;
-            case 'OPERATOR':
-                $result .= '@';
-                break;
-            case 'HALF_OP':
-                $result .= '%';
-                break;
-            case 'VOICE':
-                $result .= '+';
-                break;
-            case 'NORMAL':
-                break;
-        }
+        $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' ';
+        $result .= '</span>';
 
         $result .= 'has quit (' . $chat->getMessage() . ')';
 
@@ -436,32 +298,36 @@ class LogController extends BaseController {
         $date = $chat->getDate();
         $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
 
+        $result .= '<span class="irc--14-99">';
         $result .= '** ';
-        switch ($chat->getActorPrefix()) {
-            case 'OWNER':
-                $result .= '~';
-                break;
-            case 'ADMIN':
-                $result .= '&';
-                break;
-            case 'OPERATOR':
-                $result .= '@';
-                break;
-            case 'HALF_OP':
-                $result .= '%';
-                break;
-            case 'VOICE':
-                $result .= '+';
-                break;
-            case 'NORMAL':
-                break;
-        }
+        $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' ';
 
         $result .= 'has changed the topic to: ' . $chat->getMessage();
+        $result .= '</span>';
 
         return $result;
+    }
+
+    private static function createUserMode($prefix) {
+        switch ($prefix) {
+            case 'OWNER':
+                return '<span class="irc--4-99">~</span>';
+            case 'ADMIN':
+                return '<span class="irc--11-99">&</span>';
+            case 'OPERATOR':
+                return '<span class="irc--9-99">@</span>';
+            case 'HALF_OP':
+                return '<span class="irc--13-99">%</span>';
+                break;
+            case 'VOICE':
+                return '<span class="irc--8-99">+</span>';
+                break;
+            case 'NORMAL':
+                return '';
+                break;
+        }
     }
 
     private static function populateRequest($year, $month, $day, $tail) {
