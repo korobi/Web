@@ -8,10 +8,22 @@ body {
   background-repeat: repeat;
 }
 
+i.fa {
+  color: #eee;
+}
+
 body.light {
   background-image: none;
   color: #333;
+  
+  i.fa {
+    color: #333;
+  }
 }
+
+
+
+
 
 h1 {
   font-size: 0.75 * 2.5714285714285716em;
