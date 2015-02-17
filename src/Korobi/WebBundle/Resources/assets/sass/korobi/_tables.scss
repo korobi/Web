@@ -3,7 +3,6 @@ td {
 }
 
 tr {
-  padding: 1em;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -13,5 +12,13 @@ tr:nth-child(2n+1) {
 
 thead > tr {
   font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+td {
+  padding: 1em;
+}
+
+table {
+  layout: auto;
 }
