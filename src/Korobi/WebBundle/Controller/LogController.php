@@ -16,8 +16,11 @@ class LogController extends BaseController {
     const ACTION_SERVER_PREFIX = '**';
     const ACTION_SERVER_CLASS = 'irc--14-99';
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function homeAction() {
-
+        // fetch all networks from the database
         $rawNetworks = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Network')
@@ -25,17 +28,17 @@ class LogController extends BaseController {
             ->toArray();
 
         $networks = [];
+
+        // create an entry for each network
         foreach ($rawNetworks as $network) {
             /** @var $network Network  */
-            $name = $network->getSlug();
-            if (!in_array($name, $networks)) {
-                $networks[$name] = [
-                    'name' => $network->getName(),
-                    'href' => $this->generateUrl('logs_network', [
-                        'network' => $name
-                    ])
-                ];
-            }
+
+            $networks[] = [
+                'name' => $network->getName(),
+                'href' => $this->generateUrl('logs_network', [
+                    'network' => $network->getSlug()
+                ])
+            ];
         }
 
         return $this->render('KorobiWebBundle:controller/log:home.html.twig', [
@@ -46,21 +49,40 @@ class LogController extends BaseController {
     // TODO:
     // - invalid network name
     // - empty network
+    /**
+     * @param $network
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function networkAction($network) {
-        $isAdmin = $this->authChecker->isGranted('ROLE_ADMIN');
+        // validate network
+        /** @var $dbNetwork Network */
+        $dbNetwork = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Network')
+            ->findNetwork($network)
+            ->toArray(false);
+        if (empty($dbNetwork)) {
+            throw new Exception('Could not find network'); // TODO
+        }
 
-        $rawChannels = $this->get('doctrine_mongodb')
+        // grab first slice
+        $dbNetwork = $dbNetwork[0];
+
+        // fetch all channels
+        $dbChannels = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
             ->findAllByNetwork($network)
             ->toArray();
+
         $channels = [];
 
-        foreach ($rawChannels as $channel) {
+        // create an entry for each channel
+        foreach ($dbChannels as $channel) {
             /** @var $channel Channel  */
 
             // only add channels with keys if we're an admin
-            if ($channel->getKey() !== null && !$isAdmin) {
+            if ($channel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {
                 continue;
             }
 
@@ -75,30 +97,60 @@ class LogController extends BaseController {
 
         return $this->render('KorobiWebBundle:controller/log:network.html.twig', [
             'channels' => $channels,
-            'network' => $network
+            'network' => $dbNetwork->getName()
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $network
+     * @param $channel
+     * @param bool $year
+     * @param bool $month
+     * @param bool $day
+     * @param bool $tail
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function channelAction(Request $request, $network, $channel, $year = false, $month = false, $day = false, $tail = false) {
-        $logs = [];
+        // validate network
+        /** @var $dbNetwork Network */
+        $dbNetwork = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Network')
+            ->findNetwork($network)
+            ->toArray(false);
+        if (empty($dbNetwork)) {
+            throw new Exception('Could not find network'); // TODO
+        }
 
+        // validate channel
         /** @var $dbChannel Channel */
-        $dbChannel = $this->get('doctrine_mongodb')->getManager()->getRepository('KorobiWebBundle:Channel')->findByChannel($network, '#' . $channel)->toArray(false);
+        $dbChannel = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Channel')
+            ->findByChannel($network, '#' . $channel) // TODO
+            ->toArray(false);
         if (empty($dbChannel)) {
             throw new Exception('Could not find channel');
         }
 
-        // we exist, trim to first entry
+        // grab first slice
         $dbChannel = $dbChannel[0];
+
+        // check if this channel requires a key
         if ($dbChannel->getKey() !== null) {
-            if ($request->query->get('key') !== $dbChannel->getKey()) {
-                throw new Exception('Unauthorized');
+            $key = $request->query->get('key');
+            if ($key === null || $key !== $dbChannel->getKey()) {
+                throw new Exception('Unauthorized'); // TODO
             }
         }
 
+        // populate variables with request information if available, or defaults
+        // note: validation is done here
         list($year, $month, $day, $tail) = self::populateRequest($year, $month, $day, $tail);
 
-        $rawLogs = $this->get('doctrine_mongodb')
+        // fetch all commands
+        $dbChats = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Chat')
             ->findAllByChannelAndDate(
@@ -109,47 +161,52 @@ class LogController extends BaseController {
             )
             ->toArray();
 
+        // if a tail is requested...
         if ($tail !== false) {
-            $rawLogs = array_slice($rawLogs, -$tail);
+            // ... grab the last X chats
+            $dbChats = array_slice($dbChats, -$tail);
         }
 
-        foreach ($rawLogs as $chat) {
+        $chats = [];
+
+        // process all found chat entries
+        foreach ($dbChats as $chat) {
             /** @var $chat Chat  */
 
             switch ($chat->getType()) {
                 case 'ACTION':
-                    $logs[] = $this->parseAction($chat);
+                    $chats[] = $this->parseAction($chat);
                     break;
                 case 'JOIN':
-                    $logs[] = $this->parseJoin($chat);
+                    $chats[] = $this->parseJoin($chat);
                     break;
                 case 'KICK':
-                    $logs[] = $this->parseKick($chat);
+                    $chats[] = $this->parseKick($chat);
                     break;
                 case 'MESSAGE':
-                    $logs[] = $this->parseMessage($chat);
+                    $chats[] = $this->parseMessage($chat);
                     break;
                 case 'MODE':
-                    $logs[] = $this->parseMode($chat);
+                    $chats[] = $this->parseMode($chat);
                     break;
                 case 'NICK':
-                    $logs[] = $this->parseNick($chat);
+                    $chats[] = $this->parseNick($chat);
                     break;
                 case 'PART':
-                    $logs[] = $this->parsePart($chat);
+                    $chats[] = $this->parsePart($chat);
                     break;
                 case 'QUIT':
-                    $logs[] = $this->parseQuit($chat);
+                    $chats[] = $this->parseQuit($chat);
                     break;
                 case 'TOPIC':
-                    $logs[] = $this->parseTopic($chat);
+                    $chats[] = $this->parseTopic($chat);
                     break;
             }
 
         }
 
         return $this->render('KorobiWebBundle:controller/log:channel.html.twig', [
-            'logs' => $logs
+            'logs' => $chats
         ]);
     }
 
@@ -157,6 +214,10 @@ class LogController extends BaseController {
     // ---- Parsing ----
     // -----------------
 
+    /**
+     * @param Chat $chat
+     * @return string
+     */
     private function parseAction(Chat $chat) {
         $result = '';
 
@@ -175,6 +236,10 @@ class LogController extends BaseController {
         return $result;
     }
 
+    /**
+     * @param Chat $chat
+     * @return string
+     */
     private function parseJoin(Chat $chat) {
         $result = '';
 
@@ -193,6 +258,10 @@ class LogController extends BaseController {
         return $result;
     }
 
+    /**
+     * @param Chat $chat
+     * @return string
+     */
     private function parseKick(Chat $chat) {
         $result = '';
 
@@ -210,6 +279,10 @@ class LogController extends BaseController {
         return $result;
     }
 
+    /**
+     * @param Chat $chat
+     * @return string
+     */
     private function parseMessage(Chat $chat) {
         $result = '';
 
@@ -219,7 +292,7 @@ class LogController extends BaseController {
 
         $result .= '&lt;';
         $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= $this->getSpanForColour(NickColours::getColourForNick(self::transformActor($chat->getActorName())), self::transformActor($chat->getActorName()));
+        $result .= self::getSpanForColour(NickColours::getColourForNick(self::transformActor($chat->getActorName())), self::transformActor($chat->getActorName()));
         $result .= '&gt; ';
 
         // message
@@ -228,6 +301,10 @@ class LogController extends BaseController {
         return $result;
     }
 
+    /**
+     * @param Chat $chat
+     * @return string
+     */
     private function parseMode(Chat $chat) {
         $result = '';
 
@@ -248,7 +325,7 @@ class LogController extends BaseController {
             $result .= ' sets mode ' . $chat->getMessage();
 
             if ($chat->getRecipientPrefix() !== null) {
-                $result .= self::transformMode($chat->getRecipientPrefix());
+                $result .= self::transformModeToLetter($chat->getRecipientPrefix());
                 $result .= ' ';
                 $result .= self::transformActor($chat->getRecipientName());
             }
@@ -258,10 +335,10 @@ class LogController extends BaseController {
         return $result;
     }
 
-    private function getSpanForColour($colour, $text) {
-        return '<span class="irc--' . $colour . '-99">' . $text . '</span>';
-    }
-
+    /**
+     * @param Chat $chat
+     * @return string
+     */
     private function parseNick(Chat $chat) {
         $result = '';
         $prefix = '';
@@ -282,6 +359,10 @@ class LogController extends BaseController {
         return $result;
     }
 
+    /**
+     * @param Chat $chat
+     * @return string
+     */
     private function parsePart(Chat $chat) {
         $result = '';
 
@@ -300,6 +381,10 @@ class LogController extends BaseController {
         return $result;
     }
 
+    /**
+     * @param Chat $chat
+     * @return string
+     */
     private function parseQuit(Chat $chat) {
         $result = '';
 
@@ -320,6 +405,10 @@ class LogController extends BaseController {
         return $result;
     }
 
+    /**
+     * @param Chat $chat
+     * @return string
+     */
     private function parseTopic(Chat $chat) {
         $result = '';
 
@@ -344,6 +433,23 @@ class LogController extends BaseController {
         return $result;
     }
 
+    // -----------------
+    // ---- Helpers ----
+    // -----------------
+
+    /**
+     * @param $colour
+     * @param $text
+     * @return string
+     */
+    private static function getSpanForColour($colour, $text) {
+        return '<span class="irc--' . $colour . '-99">' . $text . '</span>';
+    }
+
+    /**
+     * @param $prefix
+     * @return string
+     */
     private static function createUserMode($prefix) {
         switch ($prefix) {
             case 'OWNER':
@@ -354,17 +460,19 @@ class LogController extends BaseController {
                 return '<span class="irc--09-99">@</span>';
             case 'HALF_OP':
                 return '<span class="irc--13-99">%</span>';
-                break;
             case 'VOICE':
                 return '<span class="irc--08-99">+</span>';
-                break;
             case 'NORMAL':
+            default:
                 return '';
-                break;
         }
     }
 
-    private static function transformMode($mode) {
+    /**
+     * @param $mode
+     * @return string
+     */
+    private static function transformModeToLetter($mode) {
         switch ($mode) {
             case 'OWNER':
                 return 'q';
@@ -377,11 +485,18 @@ class LogController extends BaseController {
             case 'VOICE':
                 return 'v';
             case 'NORMAL':
+            default:
                 return '';
-                break;
         }
     }
 
+    /**
+     * @param $year
+     * @param $month
+     * @param $day
+     * @param $tail
+     * @return array
+     */
     private static function populateRequest($year, $month, $day, $tail) {
         if (!$year) {
             $year = date('Y');
@@ -393,6 +508,15 @@ class LogController extends BaseController {
 
         if (!$day) {
             $day = date('d');
+        }
+
+        if ($tail !== false) {
+            // minimum: 5
+            // maximum: 90
+            if ($tail > 90 || $tail < 5) {
+                // fallback to 30
+                $tail = 30;
+            }
         }
 
         return [$year, $month, $day, $tail];

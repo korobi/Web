@@ -3,7 +3,19 @@
 {% set page_title = "Commands" %}
 
 {% block body %}
-    {% for channel in channels %}
-        <a href="{{ channel.href }}">{{ channel.name }}</a>
-    {% endfor %}
+    <h1>Logged channels on {{ network }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Channel</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for channel in channels %}
+            <tr>
+                <td><a href="{{ channel.href }}">{{ channel.name }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

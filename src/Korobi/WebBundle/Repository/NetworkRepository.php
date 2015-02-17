@@ -12,4 +12,12 @@ class NetworkRepository extends DocumentRepository {
             ->getQuery()
             ->execute();
     }
+
+    public function findNetwork($slug) {
+        return $this->createQueryBuilder()
+            ->sort('name', 'ASC')
+            ->field('slug')->equals($slug)
+            ->getQuery()
+            ->execute();
+    }
 }
