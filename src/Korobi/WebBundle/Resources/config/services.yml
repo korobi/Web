@@ -46,7 +46,7 @@ services:
         arguments:
            - "KorobiWebBundle:Channel"
 
-    # helpers
+    # helpers/utilities
     korobi.git_info:
         class: Korobi\WebBundle\Util\GitInfo
     korobi.navigation_collection:
