@@ -1,0 +1,17 @@
+td {
+  border-bottom: 1px solid #000;
+}
+
+tr {
+  padding: 1em;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+tr:nth-child(2n+1) {
+  background-color: rgba(25, 25, 25, 0.8);
+}
+
+thead > tr {
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.5);
+}
