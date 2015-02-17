@@ -20,6 +20,7 @@ parameters:
     github_client_id: ~
     github_client_secret: ~
     github_hook_hmac_secret: ~
+    github_oauth_token: ~
 
     # Akio IRC notifications data
     akio_path: ~

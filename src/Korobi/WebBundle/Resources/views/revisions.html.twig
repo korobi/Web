@@ -3,10 +3,29 @@
 {% set page_title = "Revisions" %}
 
 {% block body %}
-    <h1>Korobi/Web</h1>
-    <center>
-        <img src="https://i.imgur.com/GGnKRen.gif">
-        <p>Excuse the mess while we try to get things working.</p>
-        <img src="https://31.media.tumblr.com/d44c35ab3361fb91652c3b65fca504fb/tumblr_n6cdy1Q2k51tcxb8so1_250.gif" width="500" height="500" />
-    </center>
+    <h1>Korobi/{{ repository }}</h1>
+    <table>
+        <thead>
+        <tr>
+            <td>Revision</td>
+            <td>Author</td>
+            <td>Description</td>
+            <td>When</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for revision in revisions %}
+            <tr>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <td><a href="{{ revision.html_url }}">{{ revision.sha|slice(0, 7) }}</a></td>
+                {% else %}
+                    <td>{{ revision.sha|slice(0, 7) }}</td>
+                {% endif %}
+                <td>{{ revision.commit.author.name|commitauthorname }}</td>
+                <td>{{ revision.commit.message }}</td>
+                <td>{{ revision.commit.author.date|date('H:m:s') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -21,6 +21,9 @@ services:
     korobi.controller.command:
         class: Korobi\WebBundle\Controller\CommandController
         parent: korobi.base_controller
+    korobi.controller.revisions:
+        class: Korobi\WebBundle\Controller\RevisionsController
+        parent: korobi.base_controller
     korobi.deploy_controller:
         class: Korobi\WebBundle\Controller\DeploymentController
         parent: korobi.base_controller
