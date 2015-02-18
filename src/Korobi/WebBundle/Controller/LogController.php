@@ -325,9 +325,13 @@ class LogController extends BaseController {
             $result .= ' sets mode ' . $chat->getMessage();
 
             if ($chat->getRecipientPrefix() !== null) {
-                $result .= self::transformModeToLetter($chat->getRecipientPrefix());
+                $result .= self::transformUserModeToLetter($chat->getRecipientPrefix());
                 $result .= ' ';
                 $result .= self::transformActor($chat->getRecipientName());
+            } else if ($chat->getChannelMode() !== null) {
+                $result .= self::transformChannelModeToLetter($chat->getChannelMode());
+                $result .= ' ';
+                $result .= self::transformActor($chat->getRecipientHostname());
             }
         }
         $result .= '</span>';
@@ -472,7 +476,23 @@ class LogController extends BaseController {
      * @param $mode
      * @return string
      */
-    private static function transformModeToLetter($mode) {
+    private static function transformChannelModeToLetter($mode) {
+        switch ($mode) {
+            case 'BAN':
+                return 'b';
+            case 'QUIET':
+                return 'q';
+            case 'NORMAL':
+            default:
+                return '';
+        }
+    }
+
+    /**
+     * @param $mode
+     * @return string
+     */
+    private static function transformUserModeToLetter($mode) {
         switch ($mode) {
             case 'OWNER':
                 return 'q';
