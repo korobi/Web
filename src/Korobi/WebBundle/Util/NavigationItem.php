@@ -15,12 +15,21 @@ class NavigationItem {
     private $requiresAdmin;
     private $externalUrl;
 
-    public function __construct($requiresAdmin, $requiresAuth, $title, $route, $routes) {
-        $this->requiresAdmin = $requiresAdmin;
-        $this->requiresAuth = $requiresAuth;
+    /**
+     * @param $title
+     * @param $route
+     * @param $routes
+     * @param $requiresAuth
+     * @param $requiresAdmin
+     * @param $externalUrl
+     */
+    public function __construct($title, $route, $routes, $requiresAuth, $requiresAdmin, $externalUrl) {
         $this->title = $title;
         $this->route = $route;
         $this->routes = $routes;
+        $this->requiresAuth = $requiresAuth;
+        $this->requiresAdmin = $requiresAdmin;
+        $this->externalUrl = $externalUrl;
     }
 
     /**
@@ -73,12 +82,5 @@ class NavigationItem {
      */
     public function isExternalUrl() {
         return $this->externalUrl;
-    }
-
-    /**
-     * @param boolean $externalUrl
-     */
-    public function setIsExternalUrl($externalUrl) {
-        $this->externalUrl = $externalUrl;
     }
 }

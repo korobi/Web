@@ -1,14 +1,12 @@
 <?php
 
-
 namespace Korobi\WebBundle\Util;
-
 
 class AkioMessageBuilder {
 
-    const COLOUR = "{C}";
-    const BOLD = "{B}";
-    const RESET = "{R}";
+    const COLOUR = '{C}';
+    const BOLD = '{B}';
+    const RESET = '{R}';
 
     /**
      * @var string Current text
@@ -26,7 +24,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertWhite() {
-        $this->text .= self::COLOUR . "00";
+        $this->text .= self::COLOUR . '00';
         return $this;
     }
 
@@ -34,7 +32,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertBlack() {
-        $this->text .= self::COLOUR . "01";
+        $this->text .= self::COLOUR . '01';
         return $this;
     }
 
@@ -42,7 +40,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertNavyBlue() {
-        $this->text .= self::COLOUR . "02";
+        $this->text .= self::COLOUR . '02';
         return $this;
     }
 
@@ -50,7 +48,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertGreen() {
-        $this->text .= self::COLOUR . "03";
+        $this->text .= self::COLOUR . '03';
         return $this;
     }
 
@@ -58,7 +56,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertRed() {
-        $this->text .= self::COLOUR . "04";
+        $this->text .= self::COLOUR . '04';
         return $this;
     }
 
@@ -66,7 +64,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertBrown() {
-        $this->text .= self::COLOUR . "05";
+        $this->text .= self::COLOUR . '05';
         return $this;
     }
 
@@ -74,7 +72,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertPurple() {
-        $this->text .= self::COLOUR . "06";
+        $this->text .= self::COLOUR . '06';
         return $this;
     }
 
@@ -82,7 +80,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertOlive() {
-        $this->text .= self::COLOUR . "07";
+        $this->text .= self::COLOUR . '07';
         return $this;
     }
 
@@ -90,7 +88,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertYellow() {
-        $this->text .= self::COLOUR . "08";
+        $this->text .= self::COLOUR . '08';
         return $this;
     }
 
@@ -98,7 +96,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertLimeGreen() {
-        $this->text .= self::COLOUR . "09";
+        $this->text .= self::COLOUR . '09';
         return $this;
     }
 
@@ -106,7 +104,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertTeal() {
-        $this->text .= self::COLOUR . "10";
+        $this->text .= self::COLOUR . '10';
         return $this;
     }
 
@@ -114,7 +112,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertAquaLight() {
-        $this->text .= self::COLOUR . "11";
+        $this->text .= self::COLOUR . '11';
         return $this;
     }
 
@@ -122,7 +120,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertRoyalBlue() {
-        $this->text .= self::COLOUR . "12";
+        $this->text .= self::COLOUR . '12';
         return $this;
     }
 
@@ -130,7 +128,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertHotPink() {
-        $this->text .= self::COLOUR . "13";
+        $this->text .= self::COLOUR . '13';
         return $this;
     }
 
@@ -138,7 +136,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertDarkGray() {
-        $this->text .= self::COLOUR . "14";
+        $this->text .= self::COLOUR . '14';
         return $this;
     }
 
@@ -146,7 +144,7 @@ class AkioMessageBuilder {
      * @return $this
      */
     public function insertLightGray() {
-        $this->text .= self::COLOUR . "15";
+        $this->text .= self::COLOUR . '15';
         return $this;
     }
 
@@ -174,5 +172,4 @@ class AkioMessageBuilder {
         $this->text .= self::RESET;
         return $this;
     }
-
 }

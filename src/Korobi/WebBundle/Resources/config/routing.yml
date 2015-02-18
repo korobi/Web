@@ -1,6 +1,6 @@
 home:
     path: /
-    defaults: { _controller: KorobiWebBundle:Home:home }
+    defaults: { _controller: korobi.controller.home:homeAction }
 
 # ----------------------
 # ---- Channel Logs ----
@@ -46,15 +46,17 @@ commands_channel:
     path: /commands/{network}/{channel}
     defaults: { _controller: korobi.controller.command:channelAction }
 
-dummy:
-    path: /dummy
-    defaults: { _controller: KorobiWebBundle:Home:home }
-revisions:
-    path: /revisions/{repository}
-    defaults: { _controller: korobi.controller.revisions:listAction, repository: Web }
 deploy:
     path: /deploy
     defaults: { _controller: korobi.deploy_controller:deployAction }
+revisions:
+    path: /revisions/{repository}
+    defaults: { _controller: korobi.controller.revisions:listAction, repository: Web }
 theme_toggle:
     path: /theme
     defaults: { _controller: korobi.theme_controller:toggleAction }
+
+# temporary
+dummy:
+    path: /dummy
+    defaults: { _controller: KorobiWebBundle:Home:home }

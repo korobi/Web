@@ -6,6 +6,7 @@ use GuzzleHttp\Client as GuzzleClient;
 
 /**
  * Class to talk to Akio.
+ *
  * @package Korobi\WebBundle\Util
  */
 class Akio {
@@ -36,5 +37,4 @@ class Akio {
             'headers' => ['X-Akio-Korobi' => $this->key]
         ]);
     }
-
 }

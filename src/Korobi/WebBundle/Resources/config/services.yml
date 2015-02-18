@@ -15,6 +15,9 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
             - [setAuthChecker, ["@security.authorization_checker"]]
+    korobi.controller.home:
+        class: Korobi\WebBundle\Controller\HomeController
+        parent: korobi.base_controller
     korobi.controller.log:
         class: Korobi\WebBundle\Controller\LogController
         parent: korobi.base_controller
@@ -39,15 +42,6 @@ services:
         parent: korobi.base_controller
         arguments:
             - @session
-
-    # database
-    korobi.channel_repository:
-        class: Korobi\WebBundle\Repository\ChannelRepository
-        factory_service: doctrine_mongodb
-        factory_method: getRepository
-        public: false
-        arguments:
-           - "KorobiWebBundle:Channel"
 
     # helpers/utilities
     korobi.git_info:

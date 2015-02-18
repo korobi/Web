@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Korobi\WebBundle\Deployment;
 
 use Korobi\WebBundle\Document\Revision;
@@ -13,6 +12,5 @@ use Symfony\Component\HttpFoundation\Request;
 class DeploymentProcessor {
 
     public function __construct(Request $request, Revision $revision) {
-
     }
 }

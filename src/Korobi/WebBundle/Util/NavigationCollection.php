@@ -14,12 +14,17 @@ class NavigationCollection {
         'footer' => []
     ];
 
-    public function __construct(array $korobiConfig) {
-        $items = $korobiConfig['navigation']['items'];
+    public function __construct(array $config) {
+        $items = $config['navigation']['items'];
         array_walk($items, function($value, $key) {
-            $item = new NavigationItem($value['requires_admin'], $value['requires_auth'], $value['title'], $value['route'], $value['routes']);
-            $item->setIsExternalUrl($value['external']);
-            $this->items[$value['type']][] = $item;
+            $this->items[$value['type']][] = new NavigationItem(
+                $value['title'],
+                $value['route'],
+                $value['routes'],
+                $value['requires_auth'],
+                $value['requires_admin'],
+                $value['external']
+            );
         });
     }
 

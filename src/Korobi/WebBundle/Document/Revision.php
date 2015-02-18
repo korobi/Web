@@ -54,7 +54,6 @@ class Revision {
      */
     private $manual;
 
-
     /**
      * Get id
      *
@@ -62,6 +61,15 @@ class Revision {
      */
     public function getId() {
         return $this->id;
+    }
+
+    /**
+     * Get oldCommit
+     *
+     * @return string $oldCommit
+     */
+    public function getOldCommit() {
+        return $this->old_commit;
     }
 
     /**
@@ -76,12 +84,12 @@ class Revision {
     }
 
     /**
-     * Get oldCommit
+     * Get newCommit
      *
-     * @return string $oldCommit
+     * @return string $newCommit
      */
-    public function getOldCommit() {
-        return $this->old_commit;
+    public function getNewCommit() {
+        return $this->new_commit;
     }
 
     /**
@@ -96,12 +104,12 @@ class Revision {
     }
 
     /**
-     * Get newCommit
+     * Get date
      *
-     * @return string $newCommit
+     * @return date $date
      */
-    public function getNewCommit() {
-        return $this->new_commit;
+    public function getDate() {
+        return $this->date;
     }
 
     /**
@@ -116,12 +124,12 @@ class Revision {
     }
 
     /**
-     * Get date
+     * Get deploySuccessful
      *
-     * @return date $date
+     * @return boolean $deploySuccessful
      */
-    public function getDate() {
-        return $this->date;
+    public function getDeploySuccessful() {
+        return $this->deploy_successful;
     }
 
     /**
@@ -136,12 +144,12 @@ class Revision {
     }
 
     /**
-     * Get deploySuccessful
+     * Get deployOutput
      *
-     * @return boolean $deploySuccessful
+     * @return string $deployOutput
      */
-    public function getDeploySuccessful() {
-        return $this->deploy_successful;
+    public function getDeployOutput() {
+        return $this->deploy_output;
     }
 
     /**
@@ -156,12 +164,12 @@ class Revision {
     }
 
     /**
-     * Get deployOutput
+     * Get testsPassed
      *
-     * @return string $deployOutput
+     * @return boolean $testsPassed
      */
-    public function getDeployOutput() {
-        return $this->deploy_output;
+    public function getTestsPassed() {
+        return $this->tests_passed;
     }
 
     /**
@@ -176,12 +184,12 @@ class Revision {
     }
 
     /**
-     * Get testsPassed
+     * Get testsOutput
      *
-     * @return boolean $testsPassed
+     * @return string $testsOutput
      */
-    public function getTestsPassed() {
-        return $this->tests_passed;
+    public function getTestsOutput() {
+        return $this->tests_output;
     }
 
     /**
@@ -196,12 +204,12 @@ class Revision {
     }
 
     /**
-     * Get testsOutput
+     * Get whether deploy was done manually
      *
-     * @return string $testsOutput
+     * @return boolean $manual
      */
-    public function getTestsOutput() {
-        return $this->tests_output;
+    public function getManual() {
+        return $this->manual;
     }
 
     /**
@@ -213,14 +221,5 @@ class Revision {
     public function setManual($manual) {
         $this->manual = $manual;
         return $this;
-    }
-
-    /**
-     * Get whether deploy was done manually
-     *
-     * @return boolean $manual
-     */
-    public function getManual() {
-        return $this->manual;
     }
 }

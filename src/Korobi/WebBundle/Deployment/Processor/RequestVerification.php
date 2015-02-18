@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Korobi\WebBundle\Deployment\Processor;
 
 use Korobi\WebBundle\Document\Revision;
