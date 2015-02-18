@@ -3,8 +3,9 @@
 namespace Korobi\WebBundle\Util;
 
 /**
- * POPO for NavigationItems
- * @package Korobi\Util
+ * A 'Plain Old PHP Object' for navigation items.
+ *
+ * @package Korobi\WebBundle\Util
  */
 class NavigationItem {
 
@@ -33,20 +34,6 @@ class NavigationItem {
     }
 
     /**
-     * @return boolean Whether or not the visibility of this item requires authentication.
-     */
-    public function getRequiresAdmin() {
-        return $this->requiresAdmin;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getRequiresAuth() {
-        return $this->requiresAuth || $this->requiresAdmin;
-    }
-
-    /**
      * @return mixed
      */
     public function getTitle() {
@@ -67,6 +54,31 @@ class NavigationItem {
         return $this->routes;
     }
 
+    /**
+     * @return boolean
+     */
+    public function getRequiresAuth() {
+        return $this->requiresAuth || $this->requiresAdmin;
+    }
+
+    /**
+     * @return boolean Whether or not the visibility of this item requires authentication.
+     */
+    public function getRequiresAdmin() {
+        return $this->requiresAdmin;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isExternalUrl() {
+        return $this->externalUrl;
+    }
+
+    /**
+     * @param $route
+     * @return string
+     */
     public function getClass($route) {
         $ext = $this->externalUrl ? 'external' : '';
 
@@ -75,12 +87,5 @@ class NavigationItem {
         } else {
             return $ext . '';
         }
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isExternalUrl() {
-        return $this->externalUrl;
     }
 }

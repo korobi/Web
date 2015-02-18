@@ -14,6 +14,10 @@ abstract class BaseController extends Controller {
      */
     protected $authChecker;
 
+    /**
+     * @param Request $request
+     * @return array|mixed
+     */
     protected function getJsonRequestData(Request $request) {
         $data = [];
 
@@ -25,6 +29,9 @@ abstract class BaseController extends Controller {
         return $data;
     }
 
+    /**
+     * @param AuthorizationChecker $checker
+     */
     public function setAuthChecker(AuthorizationChecker $checker) {
         $this->authChecker = $checker;
     }

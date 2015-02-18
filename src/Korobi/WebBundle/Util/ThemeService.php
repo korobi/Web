@@ -4,6 +4,9 @@ namespace Korobi\WebBundle\Util;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
+/**
+ * @package Korobi\WebBundle\Util
+ */
 class ThemeService {
 
     /**

@@ -5,7 +5,7 @@ namespace Korobi\WebBundle\Util;
 use GuzzleHttp\Client as GuzzleClient;
 
 /**
- * Class to talk to Akio.
+ * Used to communicate with the notification component of Akio.
  *
  * @package Korobi\WebBundle\Util
  */
@@ -26,10 +26,16 @@ class Akio {
         $this->key = $key;
     }
 
+    /**
+     * @return AkioMessageBuilder
+     */
     public function startMessage() {
         return new AkioMessageBuilder();
     }
 
+    /**
+     * @param AkioMessageBuilder $message
+     */
     public function sendMessage(AkioMessageBuilder $message) {
         $text = $message->getRawText();
         $this->guzzle->get($this->url, [

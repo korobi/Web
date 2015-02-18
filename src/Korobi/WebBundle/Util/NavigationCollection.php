@@ -3,8 +3,9 @@
 namespace Korobi\WebBundle\Util;
 
 /**
- * Holds many navigation items.
- * @package Korobi\Util
+ * Holds many NavigationItems.
+ *
+ * @package Korobi\WebBundle\Util
  */
 class NavigationCollection {
 

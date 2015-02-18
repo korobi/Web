@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Handles deployments. Chain of responsibility.
+ *
  * @package Korobi\WebBundle\Deployment
  */
 class DeploymentProcessor {

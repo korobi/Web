@@ -6,7 +6,8 @@ use Korobi\WebBundle\Document\Revision;
 use Symfony\Component\BrowserKit\Request;
 
 /**
- * Saves results in database.
+ * Saves deployment results to the database.
+ *
  * @package Korobi\WebBundle\Deployment\Processor
  */
 class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInterface {

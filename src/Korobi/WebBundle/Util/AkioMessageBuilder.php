@@ -2,6 +2,9 @@
 
 namespace Korobi\WebBundle\Util;
 
+/**
+ * @package Korobi\WebBundle\Util
+ */
 class AkioMessageBuilder {
 
     const COLOUR = '{C}';

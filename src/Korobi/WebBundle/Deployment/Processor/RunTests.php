@@ -7,6 +7,7 @@ use Symfony\Component\BrowserKit\Request;
 
 /**
  * Runs the tests.
+ *
  * @package Korobi\WebBundle\Deployment\Processor
  */
 class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
