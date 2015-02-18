@@ -100,7 +100,7 @@ class DeploymentController extends BaseController {
             }
             
             
-            if ($responseData['new_commit'] !== $responseData['old_commit']) {
+            if (true) {
                 // code has changed, insert a new revision
                 
                 if ($responseData['tests']['status'] === 'pass') {
