@@ -25,7 +25,7 @@ class Channel {
     private $channel;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\String(nullable=true)
      */
     private $key;
 
