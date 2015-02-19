@@ -14,4 +14,8 @@ $form-text-color: $form-gray-dark !default;
   margin-bottom: 10px;
   color: lighten($form-text-color, 25%); // lighten the text some for contrast
 }
+
+.has-error {
+  color: #a94442;
+}
 // ---- thank you, bootstrap ----

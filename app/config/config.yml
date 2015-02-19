@@ -46,9 +46,13 @@ assetic:
     sass: "%sass_path%"
     filters:
         cssrewrite: ~
-        sass: ~
+        sass:
+            style: compressed
         compass: ~
-        scss: ~
+        scss:
+            style: compressed
+        uglifyjs2:
+            bin: "%uglifyjs_path%"
         #closure:
         #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
         #yui_css:

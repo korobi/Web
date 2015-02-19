@@ -43,6 +43,13 @@ NB: Tests are in the src directory but the PHPUnit config is in the app director
 
 `cd app/; phpunit`
 
+Requirements
+------------
+  * PHP 5.6+
+  * SASS
+  * node.js
+  * uglify-js (npm)
+
 What's inside?
 --------------
   * Twig template engine;

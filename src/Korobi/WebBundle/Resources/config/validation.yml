@@ -1,0 +1,21 @@
+# form validation
+Korobi\WebBundle\Document\Channel:
+    properties:
+        command_prefix:
+            # must be set
+            - NotBlank: ~
+            - NotNull: ~
+            - Length:
+                # only allow a prefix 1 character in length
+                min: 1
+                max: 1
+            - NotEqualTo:
+                # we shouldn't reach this case because of the max length
+                # but it's here just in case that ever changes - this
+                # prefix is reserved for internal commands
+                value: ".$"
+            - Regex:
+                # only allow special characters
+                pattern: '/[^a-zA-Z\d\s:]/'
+                match: true
+                message: 'The command prefix must not be alphanumeric.'

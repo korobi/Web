@@ -26,5 +26,6 @@ parameters:
     akio_path: ~
     akio_key: ~
 
-    # SASS file parh
+    # bin paths
     sass_path: ~
+    uglifyjs_path: ~

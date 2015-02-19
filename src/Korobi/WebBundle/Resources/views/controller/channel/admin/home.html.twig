@@ -1,0 +1,14 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = channel_name ~ " on " ~ network_name ~ " - Admin" %}
+
+{% block body %}
+    <h1>{{ channel_name }} on {{ network_name }}</h1>
+
+    <div class="form">
+        {{ form_errors(form) }}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

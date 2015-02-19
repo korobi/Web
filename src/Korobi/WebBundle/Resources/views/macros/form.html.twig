@@ -24,3 +24,15 @@
     </div>
     {% endspaceless %}
 {% endblock form_row %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+        <ul>
+            {% for error in errors %}
+                <li class="has-error">{{ error.message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
