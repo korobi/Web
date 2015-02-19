@@ -52,18 +52,4 @@ abstract class BaseController extends Controller {
         // remove for single #
         return str_replace('#', '', $channel);
     }
-
-    /**
-     * Transform an actor name.
-     *
-     * @param $actor
-     * @return string
-     */
-    protected static function transformActor($actor) {
-        if ($actor == Chat::ACTOR_INTERNAL) {
-            return 'Server';
-        }
-
-        return $actor;
-    }
 }

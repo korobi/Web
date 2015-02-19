@@ -6,16 +6,17 @@ use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChannelCommand;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
-use Korobi\WebBundle\Parser\IRCTextParser;
-use Korobi\WebBundle\Parser\NickColours;
+use Korobi\WebBundle\Parser\LogParser;
 use Symfony\Component\HttpFoundation\Request;
 
 class ChannelController extends BaseController {
 
-    const ACTION_USER_PREFIX = '*';
-    const ACTION_SERVER_PREFIX = '**';
-    const ACTION_SERVER_CLASS = 'irc--14-99';
-
+    /**
+     * @param $network
+     * @param $channel
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function homeAction($network, $channel) {
         // validate network
         /** @var $dbNetwork Network */
@@ -31,6 +32,7 @@ class ChannelController extends BaseController {
         // grab first slice
         $dbNetwork = $dbNetwork[0];
 
+        // fetch channel
         /** @var $dbChannel Channel */
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
@@ -38,6 +40,7 @@ class ChannelController extends BaseController {
             ->findByChannel($network, '#' . $channel)
             ->toArray(false);
 
+        // make sure we actually have a channel
         if (empty($dbChannel)) {
             throw new \Exception('Could not find channel'); // TODO
         }
@@ -45,13 +48,9 @@ class ChannelController extends BaseController {
         // grab first slice
         $dbChannel = $dbChannel[0];
 
-        $slug = $dbChannel->getChannel();
-
+        // create appropriate links
         $links = [];
-        $linkBase = [
-            'network' => $network,
-            'channel' => $channel
-        ];
+        $linkBase = ['network' => $network, 'channel' => $channel];
 
         if ($dbChannel->getLogsEnabled()) {
             $links[] = [
@@ -67,16 +66,23 @@ class ChannelController extends BaseController {
             ];
         }
 
-
+        // time to render!
         return $this->render('KorobiWebBundle:controller/channel:home.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
-            'slug' => $slug,
+            'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
             'links' => $links
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $network
+     * @param $channel
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function commandsAction(Request $request, $network, $channel) {
         // validate network
         /** @var $dbNetwork Network */
@@ -92,6 +98,7 @@ class ChannelController extends BaseController {
         // grab first slice
         $dbNetwork = $dbNetwork[0];
 
+        // fetch channel
         /** @var $dbChannel Channel */
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
@@ -99,6 +106,7 @@ class ChannelController extends BaseController {
             ->findByChannel($network, '#' . $channel)
             ->toArray(false);
 
+        // make sure we actually have a channel
         if (empty($dbChannel)) {
             throw new \Exception('Could not find channel'); // TODO
         }
@@ -153,6 +161,7 @@ class ChannelController extends BaseController {
             ];
         }
 
+        // time to render!
         return $this->render('KorobiWebBundle:controller/channel:commands.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
@@ -160,6 +169,17 @@ class ChannelController extends BaseController {
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $network
+     * @param $channel
+     * @param bool $year
+     * @param bool $month
+     * @param bool $day
+     * @param bool $tail
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function logsAction(Request $request, $network, $channel, $year = false, $month = false, $day = false, $tail = false) {
         // validate network
         /** @var $dbNetwork Network */
@@ -175,13 +195,15 @@ class ChannelController extends BaseController {
         // grab first slice
         $dbNetwork = $dbNetwork[0];
 
-        // validate channel
+        // fetch channel
         /** @var $dbChannel Channel */
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
             ->findByChannel($network, '#' . $channel) // TODO
             ->toArray(false);
+
+        // make sure we actually have a channel
         if (empty($dbChannel)) {
             throw new \Exception('Could not find channel');
         }
@@ -227,341 +249,41 @@ class ChannelController extends BaseController {
 
             switch ($chat->getType()) {
                 case 'ACTION':
-                    $chats[] = $this->parseAction($chat);
+                    $chats[] = LogParser::parseAction($chat);
                     break;
                 case 'JOIN':
-                    $chats[] = $this->parseJoin($chat);
+                    $chats[] = LogParser::parseJoin($chat);
                     break;
                 case 'KICK':
-                    $chats[] = $this->parseKick($chat);
+                    $chats[] = LogParser::parseKick($chat);
                     break;
                 case 'MESSAGE':
-                    $chats[] = $this->parseMessage($chat);
+                    $chats[] = LogParser::parseMessage($chat);
                     break;
                 case 'MODE':
-                    $chats[] = $this->parseMode($chat);
+                    $chats[] = LogParser::parseMode($chat);
                     break;
                 case 'NICK':
-                    $chats[] = $this->parseNick($chat);
+                    $chats[] = LogParser::parseNick($chat);
                     break;
                 case 'PART':
-                    $chats[] = $this->parsePart($chat);
+                    $chats[] = LogParser::parsePart($chat);
                     break;
                 case 'QUIT':
-                    $chats[] = $this->parseQuit($chat);
+                    $chats[] = LogParser::parseQuit($chat);
                     break;
                 case 'TOPIC':
-                    $chats[] = $this->parseTopic($chat);
+                    $chats[] = LogParser::parseTopic($chat);
                     break;
             }
-
         }
 
+        // time to render!
         return $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'logs' => $chats
         ]);
-    }
-
-    // -----------------
-    // ---- Parsing ----
-    // -----------------
-
-    /**
-     * @param Chat $chat
-     * @return string
-     */
-    private function parseAction(Chat $chat) {
-        $result = '';
-
-        /** @var $date \DateTime */
-        $date = $chat->getDate();
-        $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
-
-        $result .= self::ACTION_USER_PREFIX;
-        $result .= ' ';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
-        $result .= ' ';
-
-        $result .= IRCTextParser::parse($chat->getMessage());
-
-        return $result;
-    }
-
-    /**
-     * @param Chat $chat
-     * @return string
-     */
-    private function parseJoin(Chat $chat) {
-        $result = '';
-
-        /** @var $date \DateTime */
-        $date = $chat->getDate();
-        $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
-
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
-        $result .= ' joined the channel';
-        $result .= '</span>';
-
-        return $result;
-    }
-
-    /**
-     * @param Chat $chat
-     * @return string
-     */
-    private function parseKick(Chat $chat) {
-        $result = '';
-
-        /** @var $date \DateTime */
-        $date = $chat->getDate();
-        $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
-
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
-        $result .= ' was kicked by ';
-        $result .= $chat->getActorName();
-
-        return $result;
-    }
-
-    /**
-     * @param Chat $chat
-     * @return string
-     */
-    private function parseMessage(Chat $chat) {
-        $result = '';
-
-        /** @var $date \DateTime */
-        $date = $chat->getDate();
-        $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
-
-        $result .= '&lt;';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::getSpanForColour(NickColours::getColourForNick(self::transformActor($chat->getActorName())), self::transformActor($chat->getActorName()));
-        $result .= '&gt; ';
-
-        // message
-        $result .= IRCTextParser::parse($chat->getMessage());
-
-        return $result;
-    }
-
-    /**
-     * @param Chat $chat
-     * @return string
-     */
-    private function parseMode(Chat $chat) {
-        $result = '';
-
-        /** @var $date \DateTime */
-        $date = $chat->getDate();
-        $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
-
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
-        if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
-            $result .= self::createUserMode($chat->getActorPrefix());
-            $result .= self::transformActor($chat->getActorName());
-            $result .= ' sets mode ' . $chat->getMessage();
-        } else {
-            $result .= self::createUserMode($chat->getActorPrefix());
-            $result .= self::transformActor($chat->getActorName());
-            $result .= ' sets mode ' . $chat->getMessage();
-
-            if ($chat->getRecipientPrefix() !== null) {
-                $result .= self::transformUserModeToLetter($chat->getRecipientPrefix());
-                $result .= ' ';
-                $result .= self::transformActor($chat->getRecipientName());
-            } else if ($chat->getChannelMode() !== null) {
-                $result .= self::transformChannelModeToLetter($chat->getChannelMode());
-                $result .= ' ';
-                $result .= self::transformActor($chat->getRecipientHostname());
-            }
-        }
-        $result .= '</span>';
-
-        return $result;
-    }
-
-    /**
-     * @param Chat $chat
-     * @return string
-     */
-    private function parseNick(Chat $chat) {
-        $result = '';
-        $prefix = '';
-
-        /** @var $date \DateTime */
-        $date = $chat->getDate();
-        $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
-
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= $prefix;
-        $result .= self::transformActor($chat->getActorName());
-        $result .= ' is now known as ';
-        $result .= $prefix;
-        $result .= $chat->getRecipientName();
-
-        return $result;
-    }
-
-    /**
-     * @param Chat $chat
-     * @return string
-     */
-    private function parsePart(Chat $chat) {
-        $result = '';
-
-        /** @var $date \DateTime */
-        $date = $chat->getDate();
-        $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
-
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
-        $result .= ' left the channel';
-        $result .= '</span>';
-
-        return $result;
-    }
-
-    /**
-     * @param Chat $chat
-     * @return string
-     */
-    private function parseQuit(Chat $chat) {
-        $result = '';
-
-        /** @var $date \DateTime */
-        $date = $chat->getDate();
-        $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
-
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
-        $result .= ' ';
-        $result .= '</span>';
-
-        $result .= 'has quit (' . $chat->getMessage() . ')';
-
-        return $result;
-    }
-
-    /**
-     * @param Chat $chat
-     * @return string
-     */
-    private function parseTopic(Chat $chat) {
-        $result = '';
-
-        /** @var $date \DateTime */
-        $date = $chat->getDate();
-        $result .= '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
-
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
-
-        if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
-            $result .= 'Topic is: ' . $chat->getMessage();
-        } else {
-            $result .= self::createUserMode($chat->getActorPrefix());
-            $result .= self::transformActor($chat->getActorName());
-            $result .= ' has changed the topic to: ' . $chat->getMessage();
-        }
-
-        $result .= '</span>';
-
-        return $result;
-    }
-
-    // -----------------
-    // ---- Helpers ----
-    // -----------------
-
-    /**
-     * @param $colour
-     * @param $text
-     * @return string
-     */
-    private static function getSpanForColour($colour, $text) {
-        return '<span class="irc--' . $colour . '-99">' . $text . '</span>';
-    }
-
-    /**
-     * @param $prefix
-     * @return string
-     */
-    private static function createUserMode($prefix) {
-        switch ($prefix) {
-            case 'OWNER':
-                return '<span class="irc--04-99">~</span>';
-            case 'ADMIN':
-                return '<span class="irc--11-99">&</span>';
-            case 'OPERATOR':
-                return '<span class="irc--09-99">@</span>';
-            case 'HALF_OP':
-                return '<span class="irc--13-99">%</span>';
-            case 'VOICE':
-                return '<span class="irc--08-99">+</span>';
-            case 'NORMAL':
-            default:
-                return '';
-        }
-    }
-
-    /**
-     * @param $mode
-     * @return string
-     */
-    private static function transformChannelModeToLetter($mode) {
-        switch ($mode) {
-            case 'BAN':
-                return 'b';
-            case 'QUIET':
-                return 'q';
-            case 'NORMAL':
-            default:
-                return '';
-        }
-    }
-
-    /**
-     * @param $mode
-     * @return string
-     */
-    private static function transformUserModeToLetter($mode) {
-        switch ($mode) {
-            case 'OWNER':
-                return 'q';
-            case 'ADMIN':
-                return 'a';
-            case 'OPERATOR':
-                return 'o';
-            case 'HALF_OP':
-                return 'h';
-            case 'VOICE':
-                return 'v';
-            case 'NORMAL':
-            default:
-                return '';
-        }
     }
 
     /**
@@ -595,4 +317,5 @@ class ChannelController extends BaseController {
 
         return [$year, $month, $day, $tail];
     }
+
 }
