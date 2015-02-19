@@ -22,7 +22,7 @@ class NetworkController extends BaseController {
 
         // make sure we actually have a network
         if (empty($dbNetwork)) {
-            throw new \Exception('Could not find network'); // TODO
+            return $this->createNotFoundException();
         }
 
         // grab first slice
