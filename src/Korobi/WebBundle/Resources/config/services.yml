@@ -1,5 +1,7 @@
 services:
-    # twig services
+    # -------------------------
+    # ---- Twig Extensions ----
+    # -------------------------
     korobi.extension.twig.globals:
         class: Korobi\WebBundle\Extension\ExtensionTwigGlobals
         tags:
@@ -9,7 +11,9 @@ services:
         tags:
             - { name: twig.extension }
 
-    # controllers
+    # ---------------------
+    # ---- Controllers ----
+    # ---------------------
     korobi.base_controller:
         class: Korobi\WebBundle\Controller\BaseController
         calls:
@@ -18,11 +22,11 @@ services:
     korobi.controller.home:
         class: Korobi\WebBundle\Controller\HomeController
         parent: korobi.base_controller
-    korobi.controller.log:
-        class: Korobi\WebBundle\Controller\LogController
+    korobi.controller.network:
+        class: Korobi\WebBundle\Controller\NetworkController
         parent: korobi.base_controller
-    korobi.controller.command:
-        class: Korobi\WebBundle\Controller\CommandController
+    korobi.controller.channel:
+        class: Korobi\WebBundle\Controller\ChannelController
         parent: korobi.base_controller
     korobi.controller.revisions:
         class: Korobi\WebBundle\Controller\RevisionsController
@@ -43,7 +47,9 @@ services:
         arguments:
             - @session
 
-    # helpers/utilities
+    # ---------------------------
+    # ---- Helpers/Utilities ----
+    # ---------------------------
     korobi.git_info:
         class: Korobi\WebBundle\Util\GitInfo
     korobi.navigation_collection:

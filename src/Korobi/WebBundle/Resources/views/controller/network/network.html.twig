@@ -1,9 +1,12 @@
 {% extends 'KorobiWebBundle::layout.html.twig' %}
 
-{% set page_title = "Commands" %}
+{% set page_title = network_name %}
 
 {% block body %}
-    <h1>Logged channels on {{ network }}</h1>
+    <h1>{{ network_name }}</h1>
+    {% if all_channels_private %}
+    <p>Sorry, but it appears as if all channels on this network are private.</p>
+    {% else %}
     <table>
         <thead>
             <tr>
@@ -11,11 +14,12 @@
             </tr>
         </thead>
         <tbody>
-            {% for channel in channels %}
+        {% for channel in channels %}
             <tr>
                 <td><a href="{{ channel.href }}">{{ channel.name }}</a></td>
             </tr>
-            {% endfor %}
+        {% endfor %}
         </tbody>
     </table>
+    {% endif %}
 {% endblock %}

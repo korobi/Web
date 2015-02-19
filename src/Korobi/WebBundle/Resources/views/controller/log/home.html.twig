@@ -1,9 +1,0 @@
-{% extends 'KorobiWebBundle::layout.html.twig' %}
-
-{% set page_title = "Log" %}
-
-{% block body %}
-    {% for network in networks %}
-    <a href="{{ network.href }}">{{ network.name }}</a>
-    {% endfor %}
-{% endblock %}

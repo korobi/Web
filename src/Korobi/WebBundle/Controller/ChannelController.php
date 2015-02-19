@@ -3,57 +3,20 @@
 namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Document\Channel;
+use Korobi\WebBundle\Document\ChannelCommand;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Parser\IRCTextParser;
 use Korobi\WebBundle\Parser\NickColours;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 
-class LogController extends BaseController {
+class ChannelController extends BaseController {
 
     const ACTION_USER_PREFIX = '*';
     const ACTION_SERVER_PREFIX = '**';
     const ACTION_SERVER_CLASS = 'irc--14-99';
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function homeAction() {
-        // fetch all networks from the database
-        $rawNetworks = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Network')
-            ->findNetworks()
-            ->toArray();
-
-        $networks = [];
-
-        // create an entry for each network
-        foreach ($rawNetworks as $network) {
-            /** @var $network Network  */
-
-            $networks[] = [
-                'name' => $network->getName(),
-                'href' => $this->generateUrl('logs_network', [
-                    'network' => $network->getSlug()
-                ])
-            ];
-        }
-
-        return $this->render('KorobiWebBundle:controller/log:home.html.twig', [
-            'networks' => $networks
-        ]);
-    }
-
-    // TODO:
-    // - invalid network name
-    // - empty network
-    /**
-     * @param $network
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function networkAction($network) {
+    public function homeAction($network, $channel) {
         // validate network
         /** @var $dbNetwork Network */
         $dbNetwork = $this->get('doctrine_mongodb')
@@ -62,56 +25,59 @@ class LogController extends BaseController {
             ->findNetwork($network)
             ->toArray(false);
         if (empty($dbNetwork)) {
-            throw new Exception('Could not find network'); // TODO
+            throw new \Exception('Could not find network'); // TODO
         }
 
         // grab first slice
         $dbNetwork = $dbNetwork[0];
 
-        // fetch all channels
-        $dbChannels = $this->get('doctrine_mongodb')
+        /** @var $dbChannel Channel */
+        $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
-            ->findAllByNetwork($network)
-            ->toArray();
+            ->findByChannel($network, '#' . $channel)
+            ->toArray(false);
 
-        $channels = [];
+        if (empty($dbChannel)) {
+            throw new \Exception('Could not find channel'); // TODO
+        }
 
-        // create an entry for each channel
-        foreach ($dbChannels as $channel) {
-            /** @var $channel Channel  */
+        // grab first slice
+        $dbChannel = $dbChannel[0];
 
-            // only add channels with keys if we're an admin
-            if ($channel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {
-                continue;
-            }
+        $slug = $dbChannel->getChannel();
 
-            $channels[] = [
-                'name' => $channel->getChannel(),
-                'href' => $this->generateUrl('logs_channel', [
-                    'network' => $network,
-                    'channel' => self::transformChannelName($channel->getChannel())
-                ])
+        $links = [];
+        $linkBase = [
+            'network' => $network,
+            'channel' => $channel
+        ];
+
+        if ($dbChannel->getLogsEnabled()) {
+            $links[] = [
+                'name' => 'Logs',
+                'href' => $this->generateUrl('channel_logs', $linkBase)
             ];
         }
 
-        return $this->render('KorobiWebBundle:controller/log:network.html.twig', [
-            'channels' => $channels,
-            'network' => $dbNetwork->getName()
+        if ($dbChannel->getCommandsEnabled()) {
+            $links[] = [
+                'name' => 'Commands',
+                'href' => $this->generateUrl('channel_commands', $linkBase)
+            ];
+        }
+
+
+        return $this->render('KorobiWebBundle:controller/channel:home.html.twig', [
+            'network_name' => $dbNetwork->getName(),
+            'channel_name' => $dbChannel->getChannel(),
+            'slug' => $slug,
+            'command_prefix' => $dbChannel->getCommandPrefix(),
+            'links' => $links
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param $network
-     * @param $channel
-     * @param bool $year
-     * @param bool $month
-     * @param bool $day
-     * @param bool $tail
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function channelAction(Request $request, $network, $channel, $year = false, $month = false, $day = false, $tail = false) {
+    public function commandsAction(Request $request, $network, $channel) {
         // validate network
         /** @var $dbNetwork Network */
         $dbNetwork = $this->get('doctrine_mongodb')
@@ -120,8 +86,94 @@ class LogController extends BaseController {
             ->findNetwork($network)
             ->toArray(false);
         if (empty($dbNetwork)) {
-            throw new Exception('Could not find network'); // TODO
+            throw new \Exception('Could not find network'); // TODO
         }
+
+        // grab first slice
+        $dbNetwork = $dbNetwork[0];
+
+        /** @var $dbChannel Channel */
+        $dbChannel = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Channel')
+            ->findByChannel($network, '#' . $channel)
+            ->toArray(false);
+
+        if (empty($dbChannel)) {
+            throw new \Exception('Could not find channel'); // TODO
+        }
+
+        // we exist, trim to first entry
+        $dbChannel = $dbChannel[0];
+
+        // check if this channel requires a key
+        if ($dbChannel->getKey() !== null) {
+            $key = $request->query->get('key');
+            if ($key === null || $key !== $dbChannel->getKey()) {
+                throw new \Exception('Unauthorized'); // TODO
+            }
+        }
+
+        // fetch all commands
+        $dbCommands = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:ChannelCommand')
+            ->findAllByChannel($network, '#' . $channel) // TODO
+            ->toArray();
+
+        $commands = [];
+
+        // process all found commands
+        foreach ($dbCommands as $dbCommand) {
+            /** @var $dbCommand ChannelCommand  */
+
+            // skip if this command is an alias
+            if ($dbCommand->getIsAlias()) {
+                continue;
+            }
+
+            // fetch aliases for this command
+            $rawAliases = $this->get('doctrine_mongodb')
+                ->getManager()
+                ->getRepository('KorobiWebBundle:ChannelCommand')
+                ->findAliasesFor($network, '#' . $channel, $dbCommand->getName()) // TODO
+                ->toArray();
+
+            $aliases = [];
+            foreach ($rawAliases as $alias) {
+                /** @var $alias ChannelCommand  */
+                $aliases[] = $alias->getName();
+            }
+
+            $commands[] = [
+                'name' => $dbCommand->getName(),
+                'value' => $dbCommand->getValue(),
+                'aliases' => implode(', ', $aliases),
+                'is_action' => $dbCommand->getIsAction()
+            ];
+        }
+
+        return $this->render('KorobiWebBundle:controller/channel:commands.html.twig', [
+            'network_name' => $dbNetwork->getName(),
+            'channel_name' => $dbChannel->getChannel(),
+            'commands' => $commands
+        ]);
+    }
+
+    public function logsAction(Request $request, $network, $channel, $year = false, $month = false, $day = false, $tail = false) {
+        // validate network
+        /** @var $dbNetwork Network */
+        $dbNetwork = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Network')
+            ->findNetwork($network)
+            ->toArray(false);
+        if (empty($dbNetwork)) {
+            throw new \Exception('Could not find network'); // TODO
+        }
+
+        // grab first slice
+        $dbNetwork = $dbNetwork[0];
 
         // validate channel
         /** @var $dbChannel Channel */
@@ -131,7 +183,7 @@ class LogController extends BaseController {
             ->findByChannel($network, '#' . $channel) // TODO
             ->toArray(false);
         if (empty($dbChannel)) {
-            throw new Exception('Could not find channel');
+            throw new \Exception('Could not find channel');
         }
 
         // grab first slice
@@ -141,7 +193,7 @@ class LogController extends BaseController {
         if ($dbChannel->getKey() !== null) {
             $key = $request->query->get('key');
             if ($key === null || $key !== $dbChannel->getKey()) {
-                throw new Exception('Unauthorized'); // TODO
+                throw new \Exception('Unauthorized'); // TODO
             }
         }
 
@@ -205,7 +257,9 @@ class LogController extends BaseController {
 
         }
 
-        return $this->render('KorobiWebBundle:controller/log:channel.html.twig', [
+        return $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
+            'network_name' => $dbNetwork->getName(),
+            'channel_name' => $dbChannel->getChannel(),
             'logs' => $chats
         ]);
     }

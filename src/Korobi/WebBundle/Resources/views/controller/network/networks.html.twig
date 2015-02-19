@@ -1,0 +1,25 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = "Networks" %}
+
+{% block body %}
+    <h1>Networks</h1>
+    {% if all_networks_private %}
+    <p>Sorry, but it appears as if all networks found have no public channels.</p>
+    {% else %}
+    <table>
+        <thead>
+        <tr>
+            <th>Network</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for network in networks %}
+            <tr>
+                <td><a href="{{ network.href }}">{{ network.name }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

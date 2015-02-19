@@ -1,0 +1,11 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = channel_name ~ " on " ~ network_name %}
+
+{% block body %}
+    <h1>{{ channel_name }} on {{ network_name }}</h1>
+    <strong>Command Prefix: </strong> {{ command_prefix }}
+    {% for link in links %}
+        <a href="{{ link.href }}">{{ link.name }}</a>
+    {% endfor %}
+{% endblock %}

@@ -30,6 +30,11 @@ class Channel {
     private $key;
 
     /**
+     * @MongoDB\String
+     */
+    private $command_prefix;
+
+    /**
      * @MongoDB\Boolean
      */
     private $logs_enabled;
@@ -120,6 +125,26 @@ class Channel {
      */
     public function setKey($key) {
         $this->key = $key;
+        return $this;
+    }
+
+    /**
+     * Get command_prefix
+     *
+     * @return string $command_prefix
+     */
+    public function getCommandPrefix() {
+        return $this->command_prefix;
+    }
+
+    /**
+     * Set command_prefix
+     *
+     * @param string $command_prefix
+     * @return self
+     */
+    public function setCommandPrefix($command_prefix) {
+        $this->command_prefix = $command_prefix;
         return $this;
     }
 

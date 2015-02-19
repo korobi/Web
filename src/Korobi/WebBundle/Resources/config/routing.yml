@@ -1,51 +1,13 @@
+################################################################
+##                           NOTICE                           ##
+################################################################
+#                                                              #
+#    ALL BASE ROUTES MUST COME BEFORE THE 'networks' ROUTE!    #
+#                                                              #
+################################################################
 home:
     path: /
     defaults: { _controller: korobi.controller.home:homeAction }
-
-# ----------------------
-# ---- Channel Logs ----
-# ----------------------
-# network list
-logs:
-    path: /logs
-    defaults: { _controller: korobi.controller.log:homeAction }
-# channel list
-logs_network:
-    path: /logs/{network}
-    defaults: { _controller: korobi.controller.log:networkAction }
-# channel
-logs_channel:
-    path: /logs/{network}/{channel}
-    defaults: { _controller: korobi.controller.log:channelAction }
-# channel by date
-logs_channel_date:
-    path: /logs/{network}/{channel}/{year}/{month}/{day}
-    defaults: { _controller: korobi.controller.log:channel }
-# channel by date with tail
-logs_channel_date_tail:
-    path: /logs/{network}/{channel}/{year}/{month}/{day}/tail/{tail}
-    defaults: { _controller: korobi.controller.log:channel, tail: 30 }
-# channel with tail
-logs_channel_tail:
-    path: /logs/{network}/{channel}/tail/{tail}
-    defaults: { _controller: korobi.controller.log:channel, tail: 30 }
-
-# --------------------------
-# ---- Channel Commands ----
-# --------------------------
-# network list
-commands:
-    path: /commands
-    defaults: { _controller: korobi.controller.command:homeAction }
-# channel list
-commands_network:
-    path: /commands/{network}
-    defaults: { _controller: korobi.controller.command:networkAction }
-# channel
-commands_channel:
-    path: /commands/{network}/{channel}
-    defaults: { _controller: korobi.controller.command:channelAction }
-
 deploy:
     path: /deploy
     defaults: { _controller: korobi.deploy_controller:deployAction }
@@ -55,8 +17,49 @@ revisions:
 theme_toggle:
     path: /theme
     defaults: { _controller: korobi.theme_controller:toggleAction }
-
 # temporary
 dummy:
     path: /dummy
-    defaults: { _controller: KorobiWebBundle:Home:home }
+    defaults: { _controller: korobi.controller.home:homeAction }
+################################################################
+##                           NOTICE                           ##
+################################################################
+#                                                              #
+#    ALL BASE ROUTES MUST COME BEFORE THE 'networks' ROUTE!    #
+#                                                              #
+################################################################
+
+# ------------------
+# ---- Networks ----
+# ------------------
+networks:
+    path: /networks
+    defaults: { _controller: korobi.controller.network:networksAction }
+network:
+    path: /{network}
+    defaults: { _controller: korobi.controller.network:networkAction }
+
+# ------------------
+# ---- Channels ----
+# ------------------
+channel:
+    path: /{network}/{channel}
+    defaults: { _controller: korobi.controller.channel:homeAction }
+channel_admin:
+    path: /{network}/{channel}/admin
+    defaults: { _controller: korobi.controller.channel:homeAction }
+channel_commands:
+    path: /{network}/{channel}/commands
+    defaults: { _controller: korobi.controller.channel:commandsAction }
+channel_logs:
+    path: /{network}/{channel}/log
+    defaults: { _controller: korobi.controller.channel:logsAction }
+channel_logs_date:
+    path: /{network}/{channel}/log/{year}/{month}/{day}
+    defaults: { _controller: korobi.controller.channel:logsAction }
+channel_logs_date_tail:
+    path: /{network}/{channel}/log/{year}/{month}/{day}/tail/{tail}
+    defaults: { _controller: korobi.controller.channel:logsAction, tail: 30 }
+channel_logs_tail:
+    path: /{network}/{channel}/log/tail/{tail}
+    defaults: { _controller: korobi.controller.channel:logsAction, tail: 30 }

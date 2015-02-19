@@ -5,28 +5,18 @@ korobi_web:
             - title: Home
               route: 'home'
 
-            - title: Logs
-              route: 'logs'
+            - title: Networks
+              route: 'networks'
               routes:
-              - logs
-              - logs_network
-              - logs_channel
-              - logs_channel_date
-              - logs_channel_date_tail
-              - logs_channel_tail
-
-            - title: Search
-              route: 'dummy'
-
-            - title: Stats
-              route: 'dummy'
-
-            - title: Commands
-              route: 'commands'
-              routes:
-              - commands
-              - commands_network
-              - commands_channel
+              - network
+              - networks
+              - channel
+              - channel_admin
+              - channel_commands
+              - channel_logs
+              - channel_logs_date
+              - channel_logs_date_tail
+              - channel_logs_tail
 
             - title: Docs
               route: 'dummy'
