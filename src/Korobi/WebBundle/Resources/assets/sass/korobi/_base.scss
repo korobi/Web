@@ -25,9 +25,15 @@ body.light {
   }
 }
 
+a:active, a:focus {
+  outline: dotted 1px #eee;
+}
 
-
-
+body.light {
+  a:active, a:focus {
+    outline: dotted 1px #333;
+  }
+}
 
 h1 {
   font-size: 0.75 * 2.5714285714285716em;
