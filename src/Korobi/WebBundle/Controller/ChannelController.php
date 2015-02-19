@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ChannelController extends BaseController {
 
+    // --------------
+    // ---- Home ----
+    // --------------
+
     /**
      * @param $network
      * @param $channel
@@ -25,6 +29,8 @@ class ChannelController extends BaseController {
             ->getRepository('KorobiWebBundle:Network')
             ->findNetwork($network)
             ->toArray(false);
+
+        // make sure we actually have a network
         if (empty($dbNetwork)) {
             throw new \Exception('Could not find network'); // TODO
         }
@@ -37,7 +43,7 @@ class ChannelController extends BaseController {
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
-            ->findByChannel($network, '#' . $channel)
+            ->findByChannel($network, self::transformChannelName($channel, true))
             ->toArray(false);
 
         // make sure we actually have a channel
@@ -76,6 +82,10 @@ class ChannelController extends BaseController {
         ]);
     }
 
+    // ------------------
+    // ---- Commands ----
+    // ------------------
+
     /**
      * @param Request $request
      * @param $network
@@ -91,6 +101,8 @@ class ChannelController extends BaseController {
             ->getRepository('KorobiWebBundle:Network')
             ->findNetwork($network)
             ->toArray(false);
+
+        // make sure we actually have a network
         if (empty($dbNetwork)) {
             throw new \Exception('Could not find network'); // TODO
         }
@@ -103,7 +115,7 @@ class ChannelController extends BaseController {
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
-            ->findByChannel($network, '#' . $channel)
+            ->findByChannel($network, self::transformChannelName($channel, true))
             ->toArray(false);
 
         // make sure we actually have a channel
@@ -126,7 +138,7 @@ class ChannelController extends BaseController {
         $dbCommands = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:ChannelCommand')
-            ->findAllByChannel($network, '#' . $channel) // TODO
+            ->findAllByChannel($network, self::transformChannelName($channel, true))
             ->toArray();
 
         $commands = [];
@@ -144,7 +156,7 @@ class ChannelController extends BaseController {
             $rawAliases = $this->get('doctrine_mongodb')
                 ->getManager()
                 ->getRepository('KorobiWebBundle:ChannelCommand')
-                ->findAliasesFor($network, '#' . $channel, $dbCommand->getName()) // TODO
+                ->findAliasesFor($network, self::transformChannelName($channel, true), $dbCommand->getName()) // TODO
                 ->toArray();
 
             $aliases = [];
@@ -169,6 +181,10 @@ class ChannelController extends BaseController {
         ]);
     }
 
+    // --------------
+    // ---- Logs ----
+    // --------------
+
     /**
      * @param Request $request
      * @param $network
@@ -188,6 +204,8 @@ class ChannelController extends BaseController {
             ->getRepository('KorobiWebBundle:Network')
             ->findNetwork($network)
             ->toArray(false);
+
+        // make sure we actually have a network
         if (empty($dbNetwork)) {
             throw new \Exception('Could not find network'); // TODO
         }
@@ -200,7 +218,7 @@ class ChannelController extends BaseController {
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
-            ->findByChannel($network, '#' . $channel) // TODO
+            ->findByChannel($network, self::transformChannelName($channel, true)) // TODO
             ->toArray(false);
 
         // make sure we actually have a channel
@@ -229,7 +247,7 @@ class ChannelController extends BaseController {
             ->getRepository('KorobiWebBundle:Chat')
             ->findAllByChannelAndDate(
                 $network,
-                '#' . $channel, // TODO
+                self::transformChannelName($channel, true),
                 new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day, $year)))),
                 new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
             )
@@ -307,8 +325,7 @@ class ChannelController extends BaseController {
         }
 
         if ($tail !== false) {
-            // minimum: 5
-            // maximum: 90
+            // maximum: 90  |  minimum: 5
             if ($tail > 90 || $tail < 5) {
                 // fallback to 30
                 $tail = 30;
@@ -317,5 +334,4 @@ class ChannelController extends BaseController {
 
         return [$year, $month, $day, $tail];
     }
-
 }

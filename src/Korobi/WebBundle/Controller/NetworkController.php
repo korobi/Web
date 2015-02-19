@@ -7,6 +7,11 @@ use Korobi\WebBundle\Document\Network;
 
 class NetworkController extends BaseController {
 
+    /**
+     * @param $network
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function networkAction($network) {
         /** @var $dbNetwork Network */
         $dbNetwork = $this->get('doctrine_mongodb')
@@ -14,6 +19,8 @@ class NetworkController extends BaseController {
             ->getRepository('KorobiWebBundle:Network')
             ->findNetwork($network)
             ->toArray(false);
+
+        // make sure we actually have a network
         if (empty($dbNetwork)) {
             throw new \Exception('Could not find network'); // TODO
         }

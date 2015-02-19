@@ -6,13 +6,14 @@ use Github\Client;
 
 class RevisionsController extends BaseController {
 
-    private static $repositories = ['Web', 'Freya', 'Akio'];
+    private static $repositories = ['Web', 'Freya', 'Akio', 'Korobi'];
 
     /**
      * @param $repository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function listAction($repository) {
+        // only allow viewing of certain repositories
         if (!in_array($repository, self::$repositories)) {
             return $this->redirectToRoute('revisions');
         }

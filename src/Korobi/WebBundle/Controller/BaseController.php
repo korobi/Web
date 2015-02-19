@@ -2,7 +2,6 @@
 
 namespace Korobi\WebBundle\Controller;
 
-use Korobi\WebBundle\Document\Chat;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
@@ -40,16 +39,28 @@ abstract class BaseController extends Controller {
      * Transform a channel name.
      *
      * @param $channel
+     * @param bool $reverse
      * @return mixed
      */
-    protected static function transformChannelName($channel) {
-        // change for double (and above) #
-        $length = strlen('##');
-        if (substr($channel, 0, $length) === '##') {
-            return str_replace('#', '', $channel);
-        }
+    protected static function transformChannelName($channel, $reverse = false) {
+        if (!$reverse) {
+            // change for double (and above) #
+            $length = strlen('##');
+            if (substr($channel, 0, $length) === '##') {
+                return str_replace('#', '%23', $channel);
+            }
 
-        // remove for single #
-        return str_replace('#', '', $channel);
+            // remove for single #
+            return str_replace('#', '', $channel);
+        } else {
+            // change for double (and above) %23
+            $length = strlen('%23%23');
+            if (substr($channel, 0, $length) === '%23%23') {
+                return str_replace('%23', '#', $channel);
+            }
+
+            // add single #
+            return '#' . $channel;
+        }
     }
 }
