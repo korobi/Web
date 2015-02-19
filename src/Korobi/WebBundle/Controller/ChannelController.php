@@ -32,7 +32,7 @@ class ChannelController extends BaseController {
 
         // make sure we actually have a network
         if (empty($dbNetwork)) {
-            return $this->createNotFoundException('Could not find network');
+            throw $this->createNotFoundException('Could not find network');
         }
 
         // grab first slice
@@ -48,7 +48,7 @@ class ChannelController extends BaseController {
 
         // make sure we actually have a channel
         if (empty($dbChannel)) {
-            return $this->createNotFoundException('Could not find channel');
+            throw $this->createNotFoundException('Could not find channel');
         }
 
         // grab first slice
@@ -104,7 +104,7 @@ class ChannelController extends BaseController {
 
         // make sure we actually have a network
         if (empty($dbNetwork)) {
-            return $this->createNotFoundException('Could not find network');
+            throw $this->createNotFoundException('Could not find network');
         }
 
         // grab first slice
@@ -120,7 +120,7 @@ class ChannelController extends BaseController {
 
         // make sure we actually have a channel
         if (empty($dbChannel)) {
-            return $this->createNotFoundException('Could not find channel');
+            throw $this->createNotFoundException('Could not find channel');
         }
 
         // we exist, trim to first entry
@@ -207,7 +207,7 @@ class ChannelController extends BaseController {
 
         // make sure we actually have a network
         if (empty($dbNetwork)) {
-            return $this->createNotFoundException('Could not find network');
+            throw $this->createNotFoundException('Could not find network');
         }
 
         // grab first slice
@@ -223,7 +223,7 @@ class ChannelController extends BaseController {
 
         // make sure we actually have a channel
         if (empty($dbChannel)) {
-            return $this->createNotFoundException('Could not find channel');
+            throw $this->createNotFoundException('Could not find channel');
         }
 
         // grab first slice

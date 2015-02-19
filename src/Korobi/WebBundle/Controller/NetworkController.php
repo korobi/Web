@@ -22,7 +22,7 @@ class NetworkController extends BaseController {
 
         // make sure we actually have a network
         if (empty($dbNetwork)) {
-            return $this->createNotFoundException();
+            throw $this->createNotFoundException();
         }
 
         // grab first slice
