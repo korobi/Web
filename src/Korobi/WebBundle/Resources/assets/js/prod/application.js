@@ -113,6 +113,7 @@ $(function() {
             activeLines.forEach(function(entry) {
                 removeLine(entry);
             });
+            activeLines = [];
 
             addLine(line);
         }
