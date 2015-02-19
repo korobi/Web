@@ -18,6 +18,10 @@
   background-color: rgba(255, 0, 0, 0.30);
 }
 
+.js-hl .fa {
+  cursor: pointer;
+}
+
 body.light .logs {
   background-color: #ddd;
   .logs--line.highlighted {
