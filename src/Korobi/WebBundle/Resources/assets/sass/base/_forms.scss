@@ -18,7 +18,8 @@ label {
   margin-bottom: $small-spacing / 2;
 
   &.required::after {
-    content: "*";
+    color: #AA3333;
+    content: " *";
   }
 
   abbr {

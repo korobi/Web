@@ -1,0 +1,26 @@
+{% use 'form_div_layout.html.twig' %}
+
+{% block form_help %}
+    {% spaceless %}
+        {% if attr.help_text is defined and attr.help_text is not empty %}
+            {% set help_text = attr.help_text %}
+        {% endif %}
+        {% set help_text = help_text|default('') %}
+        {% if help_text is not empty %}
+            <span class="help-block">{{ help_text|trans({}, translation_domain) }}</span>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_help %}
+
+{% block form_row %}
+    {% spaceless %}
+    <div class="form-group{% if form.vars.errors|length > 0 %} has-error{% endif %}">
+        {{ form_label(form) }}
+        <div class="form-row">
+            {{ form_widget(form) }}
+            {{ block('form_help') }}
+            {{ form_errors(form) }}
+        </div>
+    </div>
+    {% endspaceless %}
+{% endblock form_row %}
