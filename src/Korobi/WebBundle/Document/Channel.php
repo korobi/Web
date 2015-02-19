@@ -25,6 +25,11 @@ class Channel {
     private $channel;
 
     /**
+     * @MongoDB\Collection
+     */
+    private $managers;
+
+    /**
      * @MongoDB\String(nullable=true)
      */
     private $key;
@@ -105,6 +110,26 @@ class Channel {
      */
     public function setChannel($channel) {
         $this->channel = $channel;
+        return $this;
+    }
+
+    /**
+     * Get managers
+     *
+     * @return collection $managers
+     */
+    public function getManagers() {
+        return $this->managers;
+    }
+
+    /**
+     * Set managers
+     *
+     * @param collection $managers
+     * @return self
+     */
+    public function setManagers($managers) {
+        $this->managers = $managers;
         return $this;
     }
 

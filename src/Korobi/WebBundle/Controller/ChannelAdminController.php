@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\Document\User;
 use Symfony\Component\HttpFoundation\Request;
 
 class ChannelAdminController extends BaseController {
@@ -47,6 +48,13 @@ class ChannelAdminController extends BaseController {
 
         // grab first slice
         $dbChannel = $dbChannel[0];
+
+        // check if authorized
+        /** @var $user User */
+        $user = $this->getUser();
+        if ($user === null || (!in_array($user->getGitHubUserId(), $dbChannel->getManagers()) && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw new \Exception('No.');
+        }
 
         // --------------
         // ---- Form ----
