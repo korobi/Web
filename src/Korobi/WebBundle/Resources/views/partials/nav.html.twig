@@ -8,14 +8,18 @@
             <i class="navigation--menutoggle fa fa-navicon"></i>
         </div>
         <ul class="navigation--links">
-            {% for item in navigation.getPrimary() %}
-                {{ nav.nav_link(item) }}
-            {% endfor %}
+            {% spaceless %}
+                {% for item in navigation.getPrimary() %}
+                    {{ nav.nav_link(item) }}
+                {% endfor %}
+            {% endspaceless %}
         </ul>
         <ul class="navigation--links navigation--links-secondary">
-            {% for item in navigation.getSecondary() %}
-                {{ nav.nav_link(item) }}
-            {% endfor %}
+            {% spaceless %}
+                {% for item in navigation.getSecondary() %}
+                    {{ nav.nav_link(item) }}
+                {% endfor %}
+            {% endspaceless %}
         </ul>
     </div>
 </nav>
