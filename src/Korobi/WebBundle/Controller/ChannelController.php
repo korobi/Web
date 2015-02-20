@@ -6,11 +6,18 @@ use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChannelCommand;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\Exception\UnsupportedOperationException;
 use Korobi\WebBundle\Parser\LogParser;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Intl\Exception\NotImplementedException;
 
 class ChannelController extends BaseController {
+
+    /**
+     * @var \ReflectionClass The log parser reflection class.
+     */
+    private $logParser;
 
     // --------------
     // ---- Home ----
@@ -260,6 +267,9 @@ class ChannelController extends BaseController {
             $dbChats = array_slice($dbChats, -$tail);
         }
 
+        // grab reflection class for log parser
+        $this->logParser = new \ReflectionClass("Korobi\\WebBundle\\Parser\\LogParser");
+
         $chats = [];
 
         // process all found chat entries
@@ -269,35 +279,7 @@ class ChannelController extends BaseController {
 
             $result = '<span class="logs--line js-hl" data-line-num="' . $index++ . '"><i class="fa fa-paint-brush"></i> ';
 
-            switch ($chat->getType()) {
-                case 'ACTION':
-                    $result .= LogParser::parseAction($chat);
-                    break;
-                case 'JOIN':
-                    $result .= LogParser::parseJoin($chat);
-                    break;
-                case 'KICK':
-                    $result .= LogParser::parseKick($chat);
-                    break;
-                case 'MESSAGE':
-                    $result .= LogParser::parseMessage($chat);
-                    break;
-                case 'MODE':
-                    $result .= LogParser::parseMode($chat);
-                    break;
-                case 'NICK':
-                    $result .= LogParser::parseNick($chat);
-                    break;
-                case 'PART':
-                    $result .= LogParser::parsePart($chat);
-                    break;
-                case 'QUIT':
-                    $result .= LogParser::parseQuit($chat);
-                    break;
-                case 'TOPIC':
-                    $result .= LogParser::parseTopic($chat);
-                    break;
-            }
+            $result .= $this->parseChatEntry($chat);
 
             $result .= '</span>';
 
@@ -348,5 +330,22 @@ class ChannelController extends BaseController {
         }
 
         return [$year, $month, $day, $tail];
+    }
+
+    /**
+     * @param Chat $chat The chat entry to pass off to the parser.
+     * @return string
+     * @throws UnsupportedOperationException If you try and parse an unsupported message type.
+     */
+    private function parseChatEntry(Chat $chat) {
+        $method = ucfirst(strtolower($chat->getType()));
+        try {
+            $method = $this->logParser->getMethod($method);
+            $method->invokeArgs(null, [$chat]);
+        } catch (\ReflectionException $ex) {
+            throw new UnsupportedOperationException();
+        }
+
+
     }
 }
