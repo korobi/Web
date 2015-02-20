@@ -4,11 +4,40 @@
 
 {% block body %}
     <h1>{{ channel_name }} on {{ network_name }}</h1>
+    <p>Please refer to the documentation for information about the settings on this page.</p>
 
-    <div class="form">
+    <div class="form form-inline">
         {{ form_errors(form) }}
         {{ form_start(form) }}
-        {{ form_widget(form) }}
+
+        {{ form_row(form.key) }}
+        {{ form_row(form.command_prefix) }}
+        {{ form_row(form.settings) }}
+
+        {{ form_label(form.permissions) }}
+        {{ block('form_help') }}
+        <table>
+            <thead>
+                <tr>
+                    <th>Permission</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="permissions" data-prototype="{{ form_widget(form.permissions.vars.prototype)|e }}">
+            {% for permission in form.permissions %}
+                <tr data-content="{{ permission.vars.id }}">
+                    <td>{{ form_widget(permission) }}</td>
+                    <td><a href="#" id="permission-del" data-related="{{ permission.vars.id }}">Remove</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="#" id="permission-add">Add</a>
+
         {{ form_end(form) }}
     </div>
+
+    <script>var permissionCount = '{{ form.permissions|length }}';</script><br>
 {% endblock %}
+

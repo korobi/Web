@@ -75,6 +75,22 @@ class ChannelAdminController extends BaseController {
                     'help_text' => 'The command prefix for dynamic commands.'
                 ]
             ])
+            ->add('permissions', 'collection', [
+                'required' => false,
+                'type' => 'text',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'delete_empty' => true,
+                'prototype' => true,
+                'by_reference' => false,
+                'attr' => [
+                    'help_text' => ''
+                ],
+                'options' => [
+                    'label' => false
+                ],
+            ])
+            ->add('settings', 'collection')
             ->add('save', 'submit', ['label' => 'Save'])
             ->getForm();
 
