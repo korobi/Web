@@ -37,18 +37,11 @@ class IRCTextParser {
 
                 if (self::isColor($character)) {
                     $sixSubsequentCharacters = substr($line, $i, 6);
-                    $result = IRCColourParser::parseColour($sixSubsequentCharacters);
-                    if ($length > $i + 1 && is_numeric($line[$i + 1])) {
-                        if ($length > $i + 2 && is_numeric($line[$i + 2])) {
-                            $result .= self::wrapInElement($line[$i + 1] . $line[$i + 2]);
-                            $activeMap['color']++;
-                            $i += 2;
-                            continue;
-                        }
-
-                        $result .= self::wrapInElement($line[$i + 1]);
-                        $activeMap['color']++;
-                        $i++;
+                    $colours = IRCColourParser::parseColour($sixSubsequentCharacters);
+                    if ($colours !== null) {
+                        $result .= '<span class="irc--' . $colours['foreground'] . '-' . $colours['background'] . '">"';
+                        $activeMap['color'] = $activeMap['color'] + 1;
+                        $i += $colours['skip'];
                         continue;
                     }
 
