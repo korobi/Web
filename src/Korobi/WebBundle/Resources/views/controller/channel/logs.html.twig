@@ -3,6 +3,7 @@
 {% set page_title = channel_name ~ " on " ~ network_name ~ " - Logs" %}
 
 {% block body %}
+    <h2>Log for {{ channel_name }} on {{ network_name }} - {{ date.d }}/{{ date.m }}/{{ date.y }}</h2>
     <div class="logs">
         {% for message in logs %}
             <span class="logs--line js-hl" data-line-num="{{ loop.index }}"><i class="fa fa-paint-brush"></i> {{ message|raw }}</span>

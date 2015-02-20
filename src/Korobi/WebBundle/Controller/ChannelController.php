@@ -300,7 +300,12 @@ class ChannelController extends BaseController {
         return $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
-            'logs' => $chats
+            'logs' => $chats,
+            'date' => [
+                'y' => $year,
+                'm' => ($month < 10 ? '0' . $month : $month),
+                'd' => $day
+            ]
         ]);
     }
 
