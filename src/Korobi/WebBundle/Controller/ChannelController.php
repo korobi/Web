@@ -341,7 +341,7 @@ class ChannelController extends BaseController {
         $method = "parse" . ucfirst(strtolower($chat->getType()));
         try {
             $method = $this->logParser->getMethod($method);
-            $method->invokeArgs(null, [$chat]);
+            return $method->invokeArgs(null, [$chat]);
         } catch (\ReflectionException $ex) {
             throw new UnsupportedOperationException("The method $method caused a reflection exception: " . $ex->getMessage());
         }
