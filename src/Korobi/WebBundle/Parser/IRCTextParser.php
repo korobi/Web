@@ -39,7 +39,7 @@ class IRCTextParser {
                     $sixSubsequentCharacters = substr($line, $i, 6);
                     $colours = IRCColourParser::parseColour($sixSubsequentCharacters);
                     if ($colours !== null) {
-                        $result .= '<span class="irc--' . $colours['foreground'] . '-' . $colours['background'] . '">"';
+                        $result .= '<span class="irc--' . $colours['foreground'] . '-' . $colours['background'] . '">';
                         $activeMap['color'] = $activeMap['color'] + 1;
                         $i += $colours['skip'];
                         continue;

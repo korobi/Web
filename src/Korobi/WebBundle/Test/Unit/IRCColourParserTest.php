@@ -9,12 +9,12 @@ class IRCColourParserTest extends WebTestCase {
 
     public function testSimpleColour() {
         $message = "\x0305Hello world!";
-        $this->assertEquals(["foreground" => "05", "background" => "99"], IRCColourParser::parseColour($message));
+        $this->assertEquals(["foreground" => "05", "background" => "99", "skip" => 2], IRCColourParser::parseColour($message));
     }
 
     public function testSimpleColourWithBackground() {
         $message = "\x0305,04Hello world!";
-        $this->assertEquals(["foreground" => "05", "background" => "04"], IRCColourParser::parseColour($message));
+        $this->assertEquals(["foreground" => "05", "background" => "04", "skip" => 5], IRCColourParser::parseColour($message));
     }
 
     public function testInvalidColourFragment() {

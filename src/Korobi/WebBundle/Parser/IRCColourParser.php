@@ -14,11 +14,13 @@ class IRCColourParser {
             return null;
         } else {
             $result = ['foreground' => sprintf('%02d', (int) $matches[1][0]), 'background' => 99];
+            $result['skip'] = $matches[1][1] + 1;
 
             if (count($matches) > 2) {
                 $result['background'] = sprintf("%02d", (int) $matches[2][0]);
+                $result['skip'] = $matches[2][1] + 1;
             }
-            $result['skip'] = $matches[2][1] + 1;
+
             return $result;
         }
     }
