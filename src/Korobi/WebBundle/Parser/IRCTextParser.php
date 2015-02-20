@@ -36,9 +36,8 @@ class IRCTextParser {
                 }
 
                 if (self::isColor($character)) {
-                    $fiveSubsequentCharacters = substr($line, $i, $i+5);
-                    $regex = "([0-9][0-9]?)(?:,([0-9][0-9]?))?"; // mIRC accepts 0 => 99 and ignores invalid colours
-
+                    $sixSubsequentCharacters = substr($line, $i, 6);
+                    $result = IRCColourParser::parseColour($sixSubsequentCharacters);
                     if ($length > $i + 1 && is_numeric($line[$i + 1])) {
                         if ($length > $i + 2 && is_numeric($line[$i + 2])) {
                             $result .= self::wrapInElement($line[$i + 1] . $line[$i + 2]);
