@@ -1,15 +1,21 @@
-@import "korobi/config";
-@import "korobi/reset";
-@import "bourbon/bourbon";
-@import "base/base";
-@import "neat/neat";
-@import "korobi/base";
-@import "korobi/nav";
-@import "korobi/ircStyles";
-@import "korobi/footer";
-@import "korobi/logs";
-@import "korobi/tables";
-@import "korobi/symfony_debug";
-@import "korobi/tooltip";
-@import "korobi/forms";
-@import "korobi/flashes";
+// The import order here is very important.
+
+// first, drag bootstrap in kicking and screaming
+@import "bootstrap/bootstrap";
+
+// borrow a few things from neat
+@import "app/neat";
+
+// base syles
+@import "app/config";
+@import "app/base";
+@import "app/header";
+@import "app/footer";
+@import "app/symfony";
+@import "app/forms";
+@import "app/tables";
+
+// irc styles
+@import "app/irc_styles";
+@import "app/irc_logs";
+

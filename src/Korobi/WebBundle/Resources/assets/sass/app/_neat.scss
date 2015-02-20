@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+@mixin neat_clearfix {
+  &::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}
+
+/// Strips the unit from a number.
+///
+/// @param {Number (With Unit)} $value
+///
+/// @example scss - Usage
+///   $dimension: strip-units(10em);
+///
+/// @example css - CSS Output
+///   $dimension: 10;
+///
+/// @return {Number (Unitless)}
+
+@function strip-units($value) {
+  @return ($value / ($value * 0 + 1));
+}
+
+// Convert pixels to ems
+// eg. for a relational value of 12px write em(12) when the parent is 16px
+// if the parent is another value say 24px write em(12, 24)
+
+$em-base: 16px !default;
+
+@function em($pxval, $base: $em-base) {
+  @if not unitless($pxval) {
+    $pxval: strip-units($pxval);
+  }
+  @if not unitless($base) {
+    $base: strip-units($base);
+  }
+  @return ($pxval / $base) * 1em;
+}
+
+/// Makes an element a outer container by centring it in the viewport, clearing its floats, and setting its `max-width`.
+/// Although optional, using `outer-container` is recommended. The mixin can be called on more than one element per page, as long as they are not nested.
+///
+/// @param {Number (unit)} $local-max-width ($max-width)
+///   Max width to be applied to the element. Can be a percentage or a measure.
+///
+/// @example scss - Usage
+///   .element {
+///     @include outer-container(100%);
+///   }
+///
+/// @example css - CSS Output
+///   .element {
+///     *zoom: 1;
+///     max-width: 100%;
+///     margin-left: auto;
+///     margin-right: auto;
+///   }
+///
+///   .element:before, .element:after {
+///     content: " ";
+///     display: table;
+///   }
+///
+///   .element:after {
+///     clear: both;
+///   }
+
+$max-width: em(1088) !default;
+
+@mixin outer-container($local-max-width: $max-width) {
+  @include neat_clearfix;
+  max-width: $local-max-width;
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}

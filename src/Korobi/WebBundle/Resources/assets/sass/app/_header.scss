@@ -1,0 +1,123 @@
+$nav-colour-bg-default: #2c3e50;
+$nav-colour-bg-highlight: #1a242f;
+$nav-colour-default: #eeeeee;
+$nav-colour-highlight: #eeeeee;
+$nav-dropdown-enabled: false;
+
+// override default navbar styling with our own
+.navbar-default {
+  background-color: $nav-colour-bg-default;
+  border-color: $nav-colour-bg-highlight;
+
+  .navbar-brand {
+    color: $nav-colour-default;
+    font-weight: bold;
+
+    &:hover,
+    &:focus {
+      color: $nav-colour-highlight;
+    }
+  }
+
+  .navbar-text {
+    color: $nav-colour-default;
+  }
+
+  .navbar-nav {
+    > li {
+      > a {
+        color: $nav-colour-default;
+
+        &:hover,
+        &:focus {
+          background-color: $nav-colour-bg-highlight;
+          color: $nav-colour-highlight;
+        }
+      }
+
+      @if $nav-dropdown-enabled {
+        > .dropdown-menu {
+          background-color: $nav-colour-bg-default;
+
+          > li > a {
+            color: $nav-colour-default;
+
+            &:hover,
+            &:focus {
+              color: $nav-colour-highlight;
+              background-color: $nav-colour-bg-highlight;
+            }
+          }
+
+          .divider {
+            background-color: $nav-colour-bg-highlight;
+          }
+        }
+      }
+    }
+
+    > .active {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $nav-colour-highlight;
+        background-color: $nav-colour-bg-highlight; }
+    }
+
+    > .open {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $nav-colour-highlight;
+        background-color: $nav-colour-bg-highlight;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border-color: $nav-colour-bg-highlight;
+
+    &:hover,
+    &:focus {
+      background-color: $nav-colour-bg-highlight;
+    }
+
+    .icon-bar {
+      background-color: $nav-colour-default;
+    }
+  }
+
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $nav-colour-default;
+  }
+
+  .navbar-link {
+    color: $nav-colour-default;
+    &:hover {
+      color: $nav-colour-highlight;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu {
+    > li > a {
+      color: $nav-colour-default;
+
+      &:hover,
+      &:focus {
+        color: $nav-colour-highlight;
+      }
+    }
+
+    > .active {
+      > a,
+      > a:hover,
+      > a:focus, {
+        color: $nav-colour-highlight;
+        background-color: $nav-colour-bg-highlight;
+      }
+    }
+  }
+}

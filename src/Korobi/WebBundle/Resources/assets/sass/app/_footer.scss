@@ -1,0 +1,65 @@
+// thanks mystrdat
+
+footer.footer {
+  vertical-align: bottom;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: $footerHeight;
+  width: 100%;
+  background-color: $footerBackgroundColour;
+  padding-left: 1em;
+  padding-right: 1em;
+
+  div.footer--inner {
+    @include outer-container;
+    line-height: $footerHeight;
+  }
+}
+
+footer.footer.footer--debug {
+  bottom: $footerHeight;
+}
+
+p.footer--copyright {
+  display: inline-block;
+  float: left;
+  color: $footerColor;
+  margin-bottom: 0;
+}
+
+@mixin active-footer-link {
+  color: #fff;
+  background-color: darken($footerBackgroundColour, 10%);
+}
+
+ul.footer--links {
+  margin-bottom: 0;
+  display: inline-block;
+  float: right;
+
+  li + li {
+    //margin-left: 0.8em;
+  }
+
+  li {
+    display: inline-block;
+
+    a {
+      color: $footerColor;
+      @include transition(all 0.3s);
+      line-height: $footerHeight;
+      display: block;
+      padding: 0 1em 0 1em;
+    }
+
+    a:hover,
+    a:focus {
+      @include active-footer-link
+    }
+  }
+
+  li.active a {
+    @include active-footer-link
+  }
+}

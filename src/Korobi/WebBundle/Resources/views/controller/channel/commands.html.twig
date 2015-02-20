@@ -3,7 +3,7 @@
 {% set page_title = channel_name ~ " on " ~ network_name ~ " - Commands" %}
 
 {% block body %}
-    <h1>Commands for {{ channel_name }} on {{ network_name }}</h1>
+    <h2>Commands for {{ channel_name }} on {{ network_name }}</h2>
     <div class="commands">
         <table>
             <tr>
@@ -13,7 +13,7 @@
             {% for command in commands %}
                 <tr>
                     {% if command.aliases or command.is_action %}
-                        <td><abbr title="{% if command.aliases %}<strong>Aliases:</strong> {{ command.aliases }}{% endif %}{% if command.is_action %}{% if command.aliases %}<br>{% endif %}<strong>Action:</strong> {% if command.is_action %}yes{% else %}no{% endif %}{% endif %}" rel="tooltip">{{ command.name }}</abbr></td>
+                        <td><abbr data-toggle="tooltip" data-placement="top" title="{% if command.aliases %}<strong>Aliases:</strong> {{ command.aliases }}{% endif %}{% if command.is_action %}{% if command.aliases %}<br>{% endif %}<strong>Action:</strong> {% if command.is_action %}yes{% else %}no{% endif %}{% endif %}" rel="tooltip">{{ command.name }}</abbr></td>
                         <td>{{ command.value|ircformat|raw }}</td>
                     {% else %}
                         <td>{{ command.name }}</td>

@@ -6,12 +6,12 @@
                 {% for item in navigation.getFooter() %}
                     {{ nav.nav_link(item) }}
                 {% endfor %}
-            {% endspaceless %}
             {% if not app.user %}
                 <li><a href="/auth/connect/github">Login</a></li>
             {% else %}
                 <li><a href="/auth/logout">Logout</a></li>
             {% endif %}
+            {% endspaceless %}
         </ul>
     </div>
 </footer>

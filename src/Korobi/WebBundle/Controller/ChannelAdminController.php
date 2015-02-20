@@ -66,6 +66,9 @@ class ChannelAdminController extends BaseController {
                 'attr' => [
                     'placeholder' => 'Leave empty for no key.',
                     'help_text' => 'If a key is specified, channel components (commands, logs, etc) cannot be viewed without providing the key in the request URL.'
+                ],
+                'label_attr' => [
+                    'class' => 'control-label'
                 ]
             ])
             ->add('command_prefix', 'text', [
@@ -73,6 +76,9 @@ class ChannelAdminController extends BaseController {
                 'attr' => [
                     'placeholder' => 'Maximum of one character. Default is \'.\'',
                     'help_text' => 'The command prefix for dynamic commands.'
+                ],
+                'label_attr' => [
+                    'class' => 'control-label'
                 ]
             ])
             ->add('permissions', 'collection', [
@@ -89,8 +95,15 @@ class ChannelAdminController extends BaseController {
                 'options' => [
                     'label' => false
                 ],
+                'label_attr' => [
+                    'class' => 'control-label'
+                ]
             ])
-            ->add('settings', 'collection')
+            ->add('settings', 'collection', [
+                'label_attr' => [
+                    'class' => 'control-label'
+                ]
+            ])
             ->add('save', 'submit', ['label' => 'Save'])
             ->getForm();
 

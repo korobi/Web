@@ -14,13 +14,12 @@
 
 {% block form_row %}
     {% spaceless %}
-    <div class="form-group{% if form.vars.errors|length > 0 %} has-error{% endif %}">
+    <div class="form-group{% if form.vars.required %} required{% endif %}{% if form.vars.errors|length > 0 %} has-error{% endif %}">
         {{ form_label(form) }}
-        <div class="form-row">
-            {{ form_widget(form) }}
-            {{ block('form_help') }}
-            {{ form_errors(form) }}
-        </div>
+        {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+        {{ block('form_help') }}
+        {{ form_errors(form) }}
+
     </div>
     {% endspaceless %}
 {% endblock form_row %}

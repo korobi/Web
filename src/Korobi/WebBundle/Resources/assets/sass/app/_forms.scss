@@ -1,0 +1,12 @@
+.form-group.required .control-label:after {
+  content: " *";
+  color: red;
+}
+
+.form-settings-meow {
+  margin-left: 15px;
+}
+
+input.permission {
+  color: #000;
+}
