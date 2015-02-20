@@ -16,7 +16,7 @@
         <tbody>
         {% for revision in revisions %}
             <tr>
-                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                {% if app.user and is_granted('ROLE_SUPER_ADMIN') %}
                     <td><a href="{{ revision.html_url }}">{{ revision.sha|slice(0, 7) }}</a></td>
                 {% else %}
                     <td>{{ revision.sha|slice(0, 7) }}</td>
