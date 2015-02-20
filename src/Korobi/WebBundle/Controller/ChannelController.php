@@ -338,7 +338,7 @@ class ChannelController extends BaseController {
      * @throws UnsupportedOperationException If you try and parse an unsupported message type.
      */
     private function parseChatEntry(Chat $chat) {
-        $method = ucfirst(strtolower($chat->getType()));
+        $method = "parse" . ucfirst(strtolower($chat->getType()));
         try {
             $method = $this->logParser->getMethod($method);
             $method->invokeArgs(null, [$chat]);
