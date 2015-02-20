@@ -2,10 +2,26 @@
 
 {% set page_title = channel_name ~ " on " ~ network_name ~ " - Logs" %}
 
+{% block javascripts %}
+{{ parent() }}
+{% if is_tail %}
+<script>
+$(document).scrollTop($("#bottom").offset().top);
+setInterval(function() {
+    $.get('{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}', function(data) {
+        $('div.logs').html(JSON.parse(data));
+        $(document).scrollTop($("#bottom").offset().top);
+    })
+}, 5000);
+</script>
+{% endif %}
+{% endblock %}
+
 {% block body %}
+    <h1>Log for {{ channel_name }} on {{ network_name }} - {{ log_date }}</h1>
     <div class="logs">
         {% for message in logs %}
-            <span class="logs--line js-hl" data-line-num="{{ loop.index }}"><i class="fa fa-paint-brush"></i> {{ message|raw }}</span>
+            {{ message|raw }}
         {% endfor %}
     </div>
 {% endblock %}

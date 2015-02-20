@@ -7,6 +7,7 @@ use Korobi\WebBundle\Document\ChannelCommand;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Parser\LogParser;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ChannelController extends BaseController {
@@ -262,45 +263,59 @@ class ChannelController extends BaseController {
         $chats = [];
 
         // process all found chat entries
+        $index = 1;
         foreach ($dbChats as $chat) {
             /** @var $chat Chat  */
 
+            $result = '<span class="logs--line js-hl" data-line-num="' . $index++ . '"><i class="fa fa-paint-brush"></i> ';
+
             switch ($chat->getType()) {
                 case 'ACTION':
-                    $chats[] = LogParser::parseAction($chat);
+                    $result .= LogParser::parseAction($chat);
                     break;
                 case 'JOIN':
-                    $chats[] = LogParser::parseJoin($chat);
+                    $result .= LogParser::parseJoin($chat);
                     break;
                 case 'KICK':
-                    $chats[] = LogParser::parseKick($chat);
+                    $result .= LogParser::parseKick($chat);
                     break;
                 case 'MESSAGE':
-                    $chats[] = LogParser::parseMessage($chat);
+                    $result .= LogParser::parseMessage($chat);
                     break;
                 case 'MODE':
-                    $chats[] = LogParser::parseMode($chat);
+                    $result .= LogParser::parseMode($chat);
                     break;
                 case 'NICK':
-                    $chats[] = LogParser::parseNick($chat);
+                    $result .= LogParser::parseNick($chat);
                     break;
                 case 'PART':
-                    $chats[] = LogParser::parsePart($chat);
+                    $result .= LogParser::parsePart($chat);
                     break;
                 case 'QUIT':
-                    $chats[] = LogParser::parseQuit($chat);
+                    $result .= LogParser::parseQuit($chat);
                     break;
                 case 'TOPIC':
-                    $chats[] = LogParser::parseTopic($chat);
+                    $result .= LogParser::parseTopic($chat);
                     break;
             }
+
+            $result .= '</span>';
+
+            $chats[] = $result;
+        }
+
+        if ($request->isXmlHttpRequest()) {
+            // <span class="logs--line js-hl" data-line-num="{{ loop.index }}"><i class="fa fa-paint-brush"></i> {{ message|raw }}</span>
+            return new JsonResponse(json_encode($chats));
         }
 
         // time to render!
         return $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
-            'logs' => $chats
+            'logs' => $chats,
+            'log_date' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
+            'is_tail' => $tail !== false
         ]);
     }
 
