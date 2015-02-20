@@ -6,6 +6,10 @@ namespace Korobi\WebBundle\Parser;
 
 class IRCColourParser {
 
+    /**
+     * @param string $messageFragment The fragment of message to extract the colours from.
+     * @return array|null The array of data or null if no colour is present.
+     */
     public static function parseColour($messageFragment) {
         $regex = '/([0-9][0-9]?)(?:,([0-9][0-9]?))?/'; // mIRC accepts 0 => 99 and ignores invalid colours
         $matches = [];
@@ -24,5 +28,4 @@ class IRCColourParser {
             return $result;
         }
     }
-
 }
