@@ -14,6 +14,13 @@ abstract class BaseController extends Controller {
     protected $authChecker;
 
     /**
+     * @param AuthorizationChecker $checker
+     */
+    public function setAuthChecker(AuthorizationChecker $checker) {
+        $this->authChecker = $checker;
+    }
+
+    /**
      * @param Request $request
      * @return array|mixed
      */
@@ -26,13 +33,6 @@ abstract class BaseController extends Controller {
         }
 
         return $data;
-    }
-
-    /**
-     * @param AuthorizationChecker $checker
-     */
-    public function setAuthChecker(AuthorizationChecker $checker) {
-        $this->authChecker = $checker;
     }
 
     /**
