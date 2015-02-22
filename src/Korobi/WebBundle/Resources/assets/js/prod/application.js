@@ -119,7 +119,12 @@ $(function() {
         }
 
         // set the new hash
-        window.location.hash = createHash();
+        var hash = createHash();
+        if (hash !== 'L') {
+            window.location.hash = createHash();
+        } else {
+            window.location.hash = '';
+        }
     });
 
     // delay load
