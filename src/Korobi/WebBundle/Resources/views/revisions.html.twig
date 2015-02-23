@@ -23,7 +23,7 @@
                 {% endif %}
                 <td>{{ revision.commit.author.name|commitauthorname }}</td>
                 <td>{{ revision.commit.message }}</td>
-                <td>{{ revision.commit.author.date|date('H:m:s') }}</td>
+                <td>{{ revision.commit.author.date|date('d/m/Y H:m:s') }}</td>
             </tr>
         {% endfor %}
         </tbody>
