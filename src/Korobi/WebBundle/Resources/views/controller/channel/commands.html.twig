@@ -17,7 +17,11 @@
                         <td>{{ command.value|ircformat|raw }}</td>
                     {% else %}
                         <td>{{ command.name }}</td>
-                        <td>{{ command.value|ircformat|raw }}</td>
+                        <td>
+                            {% for value in command.value %}
+                                {{ value|ircformat|raw }}{% if not loop.last %}<br>{% endif %}
+                            {% endfor %}
+                        </td>
                     {% endif %}
 
                 </tr>

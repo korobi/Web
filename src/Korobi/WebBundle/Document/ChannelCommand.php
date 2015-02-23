@@ -30,7 +30,7 @@ class ChannelCommand {
     private $name;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Collection
      */
     private $value;
 
@@ -116,7 +116,7 @@ class ChannelCommand {
     /**
      * Get value
      *
-     * @return string $value
+     * @return collection $value
      */
     public function getValue() {
         return $this->value;
@@ -125,7 +125,7 @@ class ChannelCommand {
     /**
      * Set value
      *
-     * @param string $value
+     * @param collection $value
      * @return self
      */
     public function setValue($value) {
