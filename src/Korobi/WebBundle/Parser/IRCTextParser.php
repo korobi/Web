@@ -14,6 +14,15 @@ class IRCTextParser {
      * @return string
      */
     public static function parse($line) {
+        return self::parseLine($line, false);
+    }
+
+    /**
+     * @param $line
+     * @param $pretty_only
+     * @return string
+     */
+    public static function parseLine($line, $pretty_only) {
         $characterMap = self::getCharacterMap();
         $activeMap = [];
 
@@ -21,7 +30,10 @@ class IRCTextParser {
             $activeMap[$key] = 0;
         }
 
-        $line = htmlentities($line, ENT_QUOTES);
+        if (!$pretty_only) {
+            $line = htmlentities($line, ENT_QUOTES);
+        }
+
         $result = '';
         $length = strlen($line);
 
@@ -95,7 +107,11 @@ class IRCTextParser {
             }
         }
 
-        return self::transform($result);
+        if ($pretty_only) {
+            return $result;
+        } else {
+            return self::transform($result);
+        }
     }
 
     /**

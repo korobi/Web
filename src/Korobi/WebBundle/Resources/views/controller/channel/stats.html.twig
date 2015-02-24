@@ -1,0 +1,10 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = channel_name ~ " on " ~ network_name ~ " - Stats" %}
+
+{% block body %}
+    <h1>Stats for {{ channel_name }} on {{ network_name }}</h1>
+    <div class="logs">
+        {{ data|raw }}
+    </div>
+{% endblock %}

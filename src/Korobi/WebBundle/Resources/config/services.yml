@@ -31,6 +31,9 @@ services:
     korobi.controller.channel_admin:
         class: Korobi\WebBundle\Controller\ChannelAdminController
         parent: korobi.base_controller
+    korobi.controller.channel_stats:
+        class: Korobi\WebBundle\Controller\ChannelStatsController
+        parent: korobi.base_controller
     korobi.controller.revisions:
         class: Korobi\WebBundle\Controller\RevisionsController
         parent: korobi.base_controller

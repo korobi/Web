@@ -249,7 +249,7 @@ class ChannelController extends BaseController {
         // note: validation is done here
         list($year, $month, $day, $tail) = self::populateRequest($year, $month, $day, $tail);
 
-        // fetch all commands
+        // fetch all chats
         $dbChats = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Chat')

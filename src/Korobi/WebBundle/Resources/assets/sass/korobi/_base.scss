@@ -53,3 +53,8 @@ h5 {
 h6 {
   font-size: 0.75 * 0.8571428571428571em;
 }
+
+small,
+.small {
+  font-size: floor((100% * $font-size-small / $font-size-base));
+}

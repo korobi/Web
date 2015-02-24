@@ -29,3 +29,6 @@ parameters:
     # bin paths
     sass_path: ~
     uglifyjs_path: ~
+
+    # channel stats base path
+    channel_stats_root: ~

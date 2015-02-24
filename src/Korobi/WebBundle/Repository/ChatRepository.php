@@ -35,4 +35,19 @@ class ChatRepository extends DocumentRepository {
             ->getQuery()
             ->execute();
     }
+
+    /**
+     * @param $network
+     * @param $channel
+     * @return mixed
+     */
+    public function findAllByChannelAndType($network, $channel, $type) {
+        return $this->createQueryBuilder()
+            ->sort('date', 'ASC')
+            ->field('network')->equals($network)
+            ->field('channel')->equals($channel)
+            ->field('type')->equals($type)
+            ->getQuery()
+            ->execute();
+    }
 }

@@ -63,3 +63,6 @@ channel_logs_date_tail:
 channel_logs_tail:
     path: /{network}/{channel}/log/tail/{tail}
     defaults: { _controller: korobi.controller.channel:logsAction, tail: 30 }
+channel_stats:
+    path: /{network}/{channel}/stats
+    defaults: { _controller: korobi.controller.channel_stats:statsAction }
