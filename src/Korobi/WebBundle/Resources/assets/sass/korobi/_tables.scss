@@ -22,3 +22,19 @@ td, th {
 table {
   table-layout: auto;
 }
+
+body.light {
+
+  thead > tr {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+
+  tr:nth-child(2n+1) {
+      background-color: rgba(25, 25, 25, 0.1);
+  }
+
+  tr {
+      background-color: rgba(0, 0, 0, 0.2);
+  }
+
+}
