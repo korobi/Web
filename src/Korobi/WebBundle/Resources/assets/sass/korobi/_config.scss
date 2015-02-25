@@ -1,13 +1,12 @@
 // Midnight blue: #2c3e50, Amethyst: #9b59b6, Wisteria: #8e44ad
 $primaryColour: #2c3e50;
+
+//noinspection CssUnknownTarget
+$bodyBackgroundImage: url("/assets/images/bg.png?a");
+
 $footerHeight: 39px;
 $footerBackgroundColour: $primaryColour;
 $footerColor: #eee;
-//noinspection CssUnknownTarget
-$bodyBackgroundImage: url("/assets/images/bg.png?a");
-//           White   Black   Blue   Green   LRed    Brown   Purple  Orange  Yellow  LGreen  Cyan    LCyan   LBlue   Pink    Grey    LightGrey
-$irc-colors: #ffffff #555753 #3465a4 #4e9a06 #ef2929 #cc0000 #75507b #c4a000 #fce94f #8ae234 #06989a #34e2e2 #729fcf #ad7fa8 #555753 #d3d7cf;
 
-$font-size-base:          14px !default;
-$font-size-large:         ceil(($font-size-base * 1.25)) !default; // ~18px
-$font-size-small:         ceil(($font-size-base * 0.85)) !default; // ~12px
+$font-size-base: 14px !default;
+$font-size-small: ceil(($font-size-base * 0.85)) !default; // ~12px

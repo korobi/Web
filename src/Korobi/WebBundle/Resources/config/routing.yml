@@ -52,7 +52,7 @@ channel_commands:
     path: /{network}/{channel}/commands
     defaults: { _controller: korobi.controller.channel:commandsAction }
 channel_logs:
-    path: /{network}/{channel}/log
+    path: /{network}/{channel}/logs
     defaults: { _controller: korobi.controller.channel:logsAction }
 channel_logs_date:
     path: /{network}/{channel}/logs/{year}/{month}/{day}

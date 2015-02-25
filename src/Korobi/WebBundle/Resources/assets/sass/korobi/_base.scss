@@ -1,11 +1,11 @@
-main {
-  @include outer-container;
-  margin-top: 1em;
-}
-
 body {
   background-image: $bodyBackgroundImage;
   background-repeat: repeat;
+}
+
+main {
+  @include outer-container;
+  margin-top: 1em;
 }
 
 i.fa {
@@ -30,7 +30,8 @@ a:active, a:focus {
 }
 
 body.light {
-  a:active, a:focus {
+  a:active,
+  a:focus {
     outline: dotted 1px #333;
   }
 }
@@ -38,18 +39,23 @@ body.light {
 h1 {
   font-size: 0.75 * 2.5714285714285716em;
 }
+
 h2 {
   font-size: 0.75 * 2.142857142857143em;
 }
+
 h3 {
   font-size: 0.75 * 1.7142857142857142em;
 }
+
 h4 {
   font-size: 0.75 * 1.2857142857142858em;
 }
+
 h5 {
   font-size: 0.75 * 1em;
 }
+
 h6 {
   font-size: 0.75 * 0.8571428571428571em;
 }

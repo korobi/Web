@@ -1,14 +1,18 @@
 // Written by lol768 (from another project). Would appreciate it if you asked before using this in something public.
 
 $active-nav-background-color: darken($primaryColour, 10%);
+
 nav.navigation.navigation--admin {
   background-color: #333;
+
   li {
-    a:hover, a:focus {
+    a:hover,
+    a:focus {
       background-color: #555 !important;
     }
   }
 }
+
 nav.navigation {
   width: 100%;
   min-height: 3em;
@@ -42,6 +46,7 @@ nav.navigation {
     //font-size: 2.5em;
     max-height: 3em;
     margin-right: 0.8em;
+
     a {
       font-size: 1em;
     }
@@ -57,8 +62,10 @@ nav.navigation {
 
   ul.navigation--links {
     float: left;
+
     li {
       display: inline-block;
+
       a {
         display: inline-block;
         padding: 1em;
@@ -66,15 +73,19 @@ nav.navigation {
         text-decoration: none;
         @include transition(all 0.3s);
       }
-      a:hover, a:focus {
+
+      a:hover,
+      a:focus {
         background-color: $active-nav-background-color;
       }
     }
+
     li.active {
       a {
         background-color: $active-nav-background-color;
       }
     }
+
     li + li {
       margin-left: -4px;
     }
@@ -122,7 +133,9 @@ nav.navigation:after {
     margin-right: 1em;
   }
 
-  nav.navigation .navigation--inner > ul, nav.navigation .navigation--inner > ul > li, nav.navigation .navigation--inner > ul > li > a {
+  nav.navigation .navigation--inner > ul,
+  nav.navigation .navigation--inner > ul > li,
+  nav.navigation .navigation--inner > ul > li > a {
     width: 100% !important;
   }
 
@@ -144,5 +157,4 @@ nav.navigation:after {
       float: left;
     }
   }
-
 }

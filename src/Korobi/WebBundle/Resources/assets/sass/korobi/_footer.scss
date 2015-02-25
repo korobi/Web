@@ -18,6 +18,7 @@ footer.footer {
   background-color: $footerBackgroundColour;
   padding-left: 1em;
   padding-right: 1em;
+
   div.footer--inner {
     @include outer-container;
     line-height: $footerHeight;
@@ -43,11 +44,14 @@ p.footer--copyright {
 ul.footer--links {
   display: inline-block;
   float: right;
+
   li + li {
     //margin-left: 0.8em;
   }
+
   li {
     display: inline-block;
+
     a {
       color: $footerColor;
       @include transition(all 0.3s);
@@ -55,10 +59,13 @@ ul.footer--links {
       display: block;
       padding: 0 1em 0 1em;
     }
-    a:hover, a:focus {
+
+    a:hover,
+    a:focus {
       @include active-footer-link
     }
   }
+
   li.active a {
     @include active-footer-link
   }

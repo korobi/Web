@@ -10,12 +10,14 @@ tr:nth-child(2n+1) {
   background-color: rgba(25, 25, 25, 0.8);
 }
 
-thead > tr, thead > tr * {
+thead > tr,
+thead > tr * {
   font-weight: bold;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-td, th {
+td,
+th {
   padding: 1em;
 }
 
@@ -24,7 +26,6 @@ table {
 }
 
 body.light {
-
   thead > tr {
     background-color: rgba(0, 0, 0, 0.2) !important;
   }
@@ -36,5 +37,4 @@ body.light {
   tr {
       background-color: rgba(0, 0, 0, 0.2);
   }
-
 }

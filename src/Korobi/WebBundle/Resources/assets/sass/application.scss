@@ -1,16 +1,23 @@
-@import "korobi/config";
 @import "korobi/reset";
+
 @import "bourbon/bourbon";
 @import "base/base";
 @import "neat/neat";
+
+// base syles
+@import "korobi/config";
 @import "korobi/base";
-@import "korobi/nav";
-@import "korobi/ircStyles";
+@import "korobi/header";
 @import "korobi/footer";
-@import "korobi/logs";
-@import "korobi/tables";
 @import "korobi/symfony_debug";
+
+// components
+@import "korobi/tables";
 @import "korobi/tooltip";
 @import "korobi/forms";
 @import "korobi/flashes";
-@import "korobi/stats"
+
+// irc styles
+@import "korobi/irc/base";
+@import "korobi/irc/logs";
+@import "korobi/irc/stats";

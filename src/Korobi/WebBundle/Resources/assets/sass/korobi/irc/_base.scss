@@ -1,5 +1,8 @@
+//            White   Black   Blue   Green    LRed    Brown   Purple  Orange  Yellow  LGreen   Cyan   LCyan   LBlue   Pink    Grey   LightGrey
+$irc-colors: #ffffff #555753 #3465a4 #4e9a06 #ef2929 #cc0000 #75507b #c4a000 #fce94f #8ae234 #06989a #34e2e2 #729fcf #ad7fa8 #555753 #d3d7cf;
+
 // Generates all the classes for the IRC colours
-@function leading($n) {
+@function leading_zero($n) {
   @if $n < 10 {
     @return "0" + $n
   } @else {
@@ -7,45 +10,42 @@
   }
 }
 
-
 @for $i from 0 through 15 {
   @for $x from 0 through 15 {
-    .irc--#{leading($i)}-#{leading($x)} {
+    .irc--#{leading_zero($i)}-#{leading_zero($x)} {
       color: nth($irc-colors, $i+1);
       background-color: nth($irc-colors, $x+1);
     }
 
-    .irc--#{leading($i)}-#{leading($x)}-inverted {
+    .irc--#{leading_zero($i)}-#{leading_zero($x)}-inverted {
       background-color: nth($irc-colors, $i+1);
       color: nth($irc-colors, $x+1);
     }
   }
 
-  .irc--#{leading($i)}-99 {
+  .irc--#{leading_zero($i)}-99 {
     background-color: transparent;
     color: nth($irc-colors, $i+1);
   }
-
 }
 
 body.light {
   @for $i from 0 through 15 {
     @for $x from 0 through 15 {
-      .irc--#{leading($i)}-#{leading($x)} {
+      .irc--#{leading_zero($i)}-#{leading_zero($x)} {
         color: darken(nth($irc-colors, $i+1), 20%);
         background-color: darken(nth($irc-colors, $x+1), 20%);
       }
 
-      .irc--#{leading($i)}-#{leading($x)}-inverted {
+      .irc--#{leading_zero($i)}-#{leading_zero($x)}-inverted {
         background-color: darken(nth($irc-colors, $i+1), 20%);
         color: darken(nth($irc-colors, $x+1), 20%);
       }
     }
 
-    .irc--#{leading($i)}-99 {
+    .irc--#{leading_zero($i)}-99 {
       background-color: transparent;
       color: darken(nth($irc-colors, $i+1), 20%);
     }
   }
 }
-
