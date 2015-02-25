@@ -12,7 +12,6 @@
 <body{{ (theme.isLight()) ? ' class="light"' : '' }}>
 {{ include('KorobiWebBundle::partials/nav.html.twig') }}
 
-
 <main>
     {# flash notices #}
     {% for flashMessage in app.session.flashbag.get('alert') %}<div class="alert-error">{{ flashMessage }}</div>{% endfor %}

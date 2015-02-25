@@ -45,8 +45,8 @@ abstract class BaseController extends Controller {
     protected static function transformChannelName($channel, $reverse = false) {
         if (!$reverse) {
             // change for double (and above) #
-            $length = strlen('##');
-            if (substr($channel, 0, $length) === '##') {
+            $length = strlen('#');
+            if (substr($channel, 0, $length) === '#') {
                 return str_replace('#', '%23', $channel);
             }
 
@@ -54,9 +54,9 @@ abstract class BaseController extends Controller {
             return str_replace('#', '', $channel);
         } else {
             // change for double (and above) %23
-            $length = strlen('%23%23');
-            if (substr($channel, 0, $length) === '%23%23') {
-                return str_replace('%23', '#', $channel);
+            $length = strlen('#');
+            if (substr($channel, 0, $length) === '#') {
+                return $channel;
             }
 
             // add single #
