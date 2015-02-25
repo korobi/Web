@@ -7,10 +7,8 @@ use Korobi\WebBundle\Document\ChannelCommand;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Exception\UnsupportedOperationException;
-use Korobi\WebBundle\Parser\LogParser;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Intl\Exception\NotImplementedException;
 
 class ChannelController extends BaseController {
 
@@ -30,37 +28,9 @@ class ChannelController extends BaseController {
      * @throws \Exception
      */
     public function homeAction($network, $channel) {
-        // validate network
         /** @var $dbNetwork Network */
-        $dbNetwork = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Network')
-            ->findNetwork($network)
-            ->toArray(false);
-
-        // make sure we actually have a network
-        if (empty($dbNetwork)) {
-            throw $this->createNotFoundException('Could not find network');
-        }
-
-        // grab first slice
-        $dbNetwork = $dbNetwork[0];
-
-        // fetch channel
         /** @var $dbChannel Channel */
-        $dbChannel = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Channel')
-            ->findByChannel($network, self::transformChannelName($channel, true))
-            ->toArray(false);
-
-        // make sure we actually have a channel
-        if (empty($dbChannel)) {
-            throw $this->createNotFoundException('Could not find channel');
-        }
-
-        // grab first slice
-        $dbChannel = $dbChannel[0];
+        list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // create appropriate links
         $links = [];
@@ -102,37 +72,9 @@ class ChannelController extends BaseController {
      * @throws \Exception
      */
     public function commandsAction(Request $request, $network, $channel) {
-        // validate network
         /** @var $dbNetwork Network */
-        $dbNetwork = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Network')
-            ->findNetwork($network)
-            ->toArray(false);
-
-        // make sure we actually have a network
-        if (empty($dbNetwork)) {
-            throw $this->createNotFoundException('Could not find network');
-        }
-
-        // grab first slice
-        $dbNetwork = $dbNetwork[0];
-
-        // fetch channel
         /** @var $dbChannel Channel */
-        $dbChannel = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Channel')
-            ->findByChannel($network, self::transformChannelName($channel, true))
-            ->toArray(false);
-
-        // make sure we actually have a channel
-        if (empty($dbChannel)) {
-            throw $this->createNotFoundException('Could not find channel');
-        }
-
-        // we exist, trim to first entry
-        $dbChannel = $dbChannel[0];
+        list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if this channel requires a key
         if ($dbChannel->getKey() !== null) {
@@ -205,37 +147,9 @@ class ChannelController extends BaseController {
      * @throws \Exception
      */
     public function logsAction(Request $request, $network, $channel, $year = false, $month = false, $day = false, $tail = false) {
-        // validate network
         /** @var $dbNetwork Network */
-        $dbNetwork = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Network')
-            ->findNetwork($network)
-            ->toArray(false);
-
-        // make sure we actually have a network
-        if (empty($dbNetwork)) {
-            throw $this->createNotFoundException('Could not find network');
-        }
-
-        // grab first slice
-        $dbNetwork = $dbNetwork[0];
-
-        // fetch channel
         /** @var $dbChannel Channel */
-        $dbChannel = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Channel')
-            ->findByChannel($network, self::transformChannelName($channel, true)) // TODO
-            ->toArray(false);
-
-        // make sure we actually have a channel
-        if (empty($dbChannel)) {
-            throw $this->createNotFoundException('Could not find channel');
-        }
-
-        // grab first slice
-        $dbChannel = $dbChannel[0];
+        list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if this channel requires a key
         if ($dbChannel->getKey() !== null) {
@@ -338,14 +252,12 @@ class ChannelController extends BaseController {
      * @throws UnsupportedOperationException If you try and parse an unsupported message type.
      */
     private function parseChatEntry(Chat $chat) {
-        $method = "parse" . ucfirst(strtolower($chat->getType()));
+        $method = 'parse' . ucfirst(strtolower($chat->getType()));
         try {
             $method = $this->logParser->getMethod($method);
             return $method->invokeArgs(null, [$chat]);
         } catch (\ReflectionException $ex) {
             throw new UnsupportedOperationException("The method $method caused a reflection exception: " . $ex->getMessage());
         }
-
-
     }
 }

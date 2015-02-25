@@ -2,6 +2,8 @@
 
 namespace Korobi\WebBundle\Controller;
 
+use Korobi\WebBundle\Document\Channel;
+use Korobi\WebBundle\Document\Network;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
@@ -62,5 +64,46 @@ abstract class BaseController extends Controller {
             // add single #
             return '#' . $channel;
         }
+    }
+
+    /**
+     * @param $network
+     * @param $channel
+     * @return array
+     */
+    protected function createNetworkChannelPair($network, $channel) {
+        // validate network
+        /** @var $dbNetwork Network */
+        $dbNetwork = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Network')
+            ->findNetwork($network)
+            ->toArray(false);
+
+        // make sure we actually have a network
+        if (empty($dbNetwork)) {
+            throw $this->createNotFoundException('Could not find network');
+        }
+
+        // grab first slice
+        $dbNetwork = $dbNetwork[0];
+
+        // fetch channel
+        /** @var $dbChannel Channel */
+        $dbChannel = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Channel')
+            ->findByChannel($network, self::transformChannelName($channel, true)) // TODO
+            ->toArray(false);
+
+        // make sure we actually have a channel
+        if (empty($dbChannel)) {
+            throw $this->createNotFoundException('Could not find channel');
+        }
+
+        // grab first slice
+        $dbChannel = $dbChannel[0];
+
+        return [$dbNetwork, $dbChannel];
     }
 }

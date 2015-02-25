@@ -17,37 +17,9 @@ class ChannelAdminController extends BaseController {
      * @throws \Exception
      */
     public function homeAction(Request $request, $network, $channel) {
-        // validate network
         /** @var $dbNetwork Network */
-        $dbNetwork = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Network')
-            ->findNetwork($network)
-            ->toArray(false);
-
-        // make sure we actually have a network
-        if (empty($dbNetwork)) {
-            throw new \Exception('Could not find network'); // TODO
-        }
-
-        // grab first slice
-        $dbNetwork = $dbNetwork[0];
-
-        // fetch channel
         /** @var $dbChannel Channel */
-        $dbChannel = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Channel')
-            ->findByChannel($network, self::transformChannelName($channel, true))
-            ->toArray(false);
-
-        // make sure we actually have a channel
-        if (empty($dbChannel)) {
-            throw new \Exception('Could not find channel'); // TODO
-        }
-
-        // grab first slice
-        $dbChannel = $dbChannel[0];
+        list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if authorized
         /** @var $user User */

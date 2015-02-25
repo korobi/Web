@@ -17,37 +17,9 @@ class ChannelStatsController extends BaseController {
      * @throws \Exception
      */
     public function statsAction(Request $request, $network, $channel) {
-        // validate network
         /** @var $dbNetwork Network */
-        $dbNetwork = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Network')
-            ->findNetwork($network)
-            ->toArray(false);
-
-        // make sure we actually have a network
-        if (empty($dbNetwork)) {
-            throw $this->createNotFoundException('Could not find network');
-        }
-
-        // grab first slice
-        $dbNetwork = $dbNetwork[0];
-
-        // fetch channel
         /** @var $dbChannel Channel */
-        $dbChannel = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Channel')
-            ->findByChannel($network, self::transformChannelName($channel, true)) // TODO
-            ->toArray(false);
-
-        // make sure we actually have a channel
-        if (empty($dbChannel)) {
-            throw $this->createNotFoundException('Could not find channel');
-        }
-
-        // grab first slice
-        $dbChannel = $dbChannel[0];
+        list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if this channel requires a key
         if ($dbChannel->getKey() !== null) {
