@@ -17,6 +17,11 @@ class Punishment {
     /**
      * @MongoDB\String
      */
+    private $bot_id;
+
+    /**
+     * @MongoDB\String
+     */
     private $network;
 
     /**
@@ -81,6 +86,26 @@ class Punishment {
      */
     public function getId() {
         return $this->id;
+    }
+
+    /**
+     * Get botId
+     *
+     * @return string $botId
+     */
+    public function getBotId() {
+        return $this->bot_id;
+    }
+
+    /**
+     * Set botId
+     *
+     * @param string $botId
+     * @return self
+     */
+    public function setBotId($botId) {
+        $this->bot_id = $botId;
+        return $this;
     }
 
     /**
