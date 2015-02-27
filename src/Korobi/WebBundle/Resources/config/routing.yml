@@ -17,6 +17,9 @@ revisions:
 theme_toggle:
     path: /theme
     defaults: { _controller: korobi.theme_controller:toggleAction }
+style_guide:
+    path: /style-guide
+    defaults: { _controller: korobi.controller.style_guide:displayAction }
 # temporary
 dummy:
     path: /dummy

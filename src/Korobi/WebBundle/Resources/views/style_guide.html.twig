@@ -1,0 +1,93 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = "Style guide" %}
+
+{#
+                     __          __              _             _
+                     \ \        / /             (_)           | |
+                      \ \  /\  / /_ _ _ __ _ __  _ _ __   __ _| |
+                       \ \/  \/ / _` | '__| '_ \| | '_ \ / _` | |
+                        \  /\  / (_| | |  | | | | | | | | (_| |_|
+                         \/  \/ \__,_|_|  |_| |_|_|_| |_|\__, (_)
+                                                          __/ |
+                                                         |___/
+#}
+{# **Many many bad things will happen if you try to run a formatter on this file** #}
+
+{% block body %}
+    <h1>Frontend style guide</h1>
+    <p>This page aims to showcase the UI components available and provide some guidance on a consistent approach to
+        styling. This page is inspired by <a href="https://github.com/styleguide/css/">GitHub's style guide</a>.</p>
+
+    <h2>Available components</h2>
+    <p>The styles are all written using SASS and a number of reusable components are available in order to make
+        developing new pages easier.</p>
+
+    <h3>Tables</h3>
+    <p>These are relatively simple and look good on both the light and dark themes. There are no special classes required,
+    just write valid table markup and they'll automatically be styled.</p>
+    <pre><code class="language-markup">&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Fruit&lt;/th&gt;
+            &lt;th&gt;Rating&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Banana&lt;/td&gt;
+            &lt;td&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Apple&lt;/td&gt;
+            &lt;td&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+    <p>The above code results in the following table:</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Fruit</th>
+            <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Banana</td>
+            <td><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></td>
+        </tr>
+        <tr>
+            <td>Apple</td>
+            <td><i class="fa fa-star"></i> <i class="fa fa-star"></i></td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>Code blocks</h3>
+    <p>Powered by <a href="http://prismjs.com">Prism</a>, these blocks are great for showcasing code.
+        Their main purpose is on this page, but they're super easy to include in any page. To get started, you'll want a
+        <code class="language-markup">&lt;pre&gt;</code> element which acts as a wrapper for code blocks. If you'd
+        prefer an inline block, you can leave this out. Next, the actual code should go inside a <code
+                class="language-markup">&lt;code&gt;</code> element. The class should be set to "language-{language}"
+        where language is one of markup, twig, css, clike, javascript or scss.
+    </p>
+    <p><strong>Note:</strong> The code should be entity encoded, especially if it's HTML. See the example below:</p>
+    <pre><code class="language-markup">&lt;pre&gt;&lt;code class=&quot;language-markup&quot;&gt;&amp;lt;strong&amp;gt;My markup here!&amp;lt;/strong&amp;gt;&lt;/code&gt;&lt;/pre&gt;</code></pre>
+    <p>The above yields the following result:</p>
+    <pre><code class="language-markup">&lt;strong&gt;My markup here!&lt;/strong&gt;</code></pre>
+
+    <h3>Flash messages</h3>
+    <p>Mainly useful for displaying to users just after they've completed an action or submitted a form, these come in a
+        variety of different colours and are easy to customise.</p>
+
+    <pre><code class="language-markup">&lt;div class=&quot;flash-success&quot;&gt;&lt;p&gt;This is a success message&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;flash-notice&quot;&gt;&lt;p&gt;This is a notice message&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;flash-alert&quot;&gt;&lt;p&gt;This is an alert message&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;flash-error&quot;&gt;&lt;p&gt;This is an error message&lt;/p&gt;&lt;/div</code></pre>
+
+    <p>The above code results in the following:</p>
+    <div class="flash-success"><p>This is a success message</p></div>
+    <div class="flash-notice"><p>This is a notice message</p></div>
+    <div class="flash-alert"><p>This is an alert message</p></div>
+    <div class="flash-error"><p>This is an error message</p></div>
+{% endblock %}

@@ -37,6 +37,9 @@ services:
     korobi.controller.revisions:
         class: Korobi\WebBundle\Controller\RevisionsController
         parent: korobi.base_controller
+    korobi.controller.style_guide:
+        class: Korobi\WebBundle\Controller\StyleGuideController
+        parent: korobi.base_controller
     korobi.deploy_controller:
         class: Korobi\WebBundle\Controller\DeploymentController
         parent: korobi.base_controller

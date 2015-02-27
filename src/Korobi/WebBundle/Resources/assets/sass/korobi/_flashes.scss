@@ -1,12 +1,24 @@
 $base-spacing: 1.5em !default;
 $alert-color: #fff6bf !default;
-$error-color: #fbe3e4 !default;
-$notice-color: #e5edf8 !default;
-$success-color: #e6efc2 !default;
+$alert-color-dark: #F39C12 !default;
 
-@mixin flash($color) {
+$error-color: #fbe3e4 !default;
+$error-color-dark: #E74C3C !default;
+
+$notice-color: #e5edf8 !default;
+$notice-color-dark: #3498DB !default;
+
+$success-color: #e6efc2 !default;
+$success-color-dark: #00BC8C !default;
+
+@mixin flash($color, $dark: false) {
   background-color: $color;
-  color: darken($color, 60%);
+  @if ($dark) {
+    color: #fff;
+  } @else {
+    color: darken($color, 60%);
+  }
+
   display: block;
   font-weight: 600;
   margin-bottom: $base-spacing / 2;
@@ -38,4 +50,22 @@ $success-color: #e6efc2 !default;
 
 .flash-success {
   @include flash($success-color);
+}
+
+body:not(.light) {
+  .flash-alert {
+    @include flash($alert-color-dark, true);
+  }
+
+  .flash-error {
+    @include flash($error-color-dark, true);
+  }
+
+  .flash-notice {
+    @include flash($notice-color-dark, true);
+  }
+
+  .flash-success {
+    @include flash($success-color-dark, true);
+  }
 }
