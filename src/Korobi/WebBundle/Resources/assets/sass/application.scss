@@ -16,6 +16,7 @@
 @import "korobi/tooltip";
 @import "korobi/forms";
 @import "korobi/flashes";
+@import "korobi/content_blocks";
 
 // irc styles
 @import "korobi/irc/base";
@@ -24,3 +25,6 @@
 
 // code highlighting
 @import "prism/prism";
+
+// style guide
+@import "korobi/style_guide";

@@ -19,6 +19,18 @@
     <p>This page aims to showcase the UI components available and provide some guidance on a consistent approach to
         styling. This page is inspired by <a href="https://github.com/styleguide/css/">GitHub's style guide</a>.</p>
 
+    <h2>Colours and fonts</h2>
+    <p>The primary colour for the system is &ldquo;Midnight Blue&rdquo;:</p>
+    <div class="colour-block primary">
+        Midnight Blue (#2c3e50)
+    </div>
+    <!-- "Helvetica Neue","Helvetica","Roboto","Arial",sans-serif -->
+    <p>
+        At present, the font-family is set to try <span style="font-family: 'Helvetica Neue'">Helvetica Neue</span>,
+        <span style="font-family: 'Helvetica'">Helvetica</span>, <span style="font-family: 'Roboto'">Roboto</span>,
+        <span style="font-family: 'Arial'">Arial</span> and <span style="font-family: 'sans-serif'">the fallback sans-serif</span>.
+    </p>
+
     <h2>Available components</h2>
     <p>The styles are all written using SASS and a number of reusable components are available in order to make
         developing new pages easier.</p>
@@ -90,4 +102,57 @@
     <div class="flash-notice"><p>This is a notice message</p></div>
     <div class="flash-alert"><p>This is an alert message</p></div>
     <div class="flash-error"><p>This is an error message</p></div>
+
+    <h3>Content blocks</h3>
+    <p>Useful for sidebar items and simply separating parts of a page into distinct groups, content blocks have a block header.
+        Combined with Neat, these can take up only part of the page.</p>
+    <p>The following code creates a relatively simple content block with an icon in the title.</p>
+<pre><code class="language-markup">&lt;div class=&quot;example-container&quot;&gt;
+    &lt;div class=&quot;content-block&quot;&gt;
+        &lt;h1&gt;&lt;i class=&quot;fa fa-pencil&quot;&gt;&lt;/i&gt; My title&lt;/h1&gt;
+        &lt;div class=&quot;content&quot;&gt;
+            &lt;p&gt;
+                The kraken fears with urchin, break the pacific ocean before it screams.
+                The rum hails with power, drink the pacific ocean before it travels.
+                Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
+                The skull hoists with strength, hail the seychelles before it sings.
+                clouds travel with hunger.
+            &lt;/p&gt;
+            &lt;p&gt;
+                The kraken fears with urchin, break the pacific ocean before it screams.
+                The rum hails with power, drink the pacific ocean before it travels.
+                Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
+                The skull hoists with strength, hail the seychelles before it sings.
+                clouds travel with hunger.
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <p>Some small SASS is used to tell Neat to make the content block sit in a container which occupies 6 columns:</p>
+    <pre><code class="language-scss">.example-container {
+    @include span-columns(8);
+}</code></pre>
+    <p>This results in the following:</p>
+    <div class="example-container">
+        <div class="content-block">
+            <h1><i class="fa fa-pencil"></i> My title</h1>
+            <div class="content">
+                <p>
+                    The kraken fears with urchin, break the pacific ocean before it screams.
+                    The rum hails with power, drink the pacific ocean before it travels.
+                    Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
+                    The skull hoists with strength, hail the seychelles before it sings.
+                    clouds travel with hunger.
+                </p>
+                <p>
+                    The kraken fears with urchin, break the pacific ocean before it screams.
+                    The rum hails with power, drink the pacific ocean before it travels.
+                    Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
+                    The skull hoists with strength, hail the seychelles before it sings.
+                    clouds travel with hunger.
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

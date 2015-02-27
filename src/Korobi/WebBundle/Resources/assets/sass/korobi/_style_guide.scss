@@ -1,0 +1,21 @@
+.colour-block {
+  padding: 2em 2em 2em;
+  text-align: center;
+  color: #eee;
+  font-weight: bold;
+  border-radius: 0.3em;
+  @include span-columns(4);
+  float: none;
+  @include transition(0.2s all);
+  margin-bottom: 0.75em;
+}
+
+.colour-block.primary {
+  background-color: $primaryColour;
+  border: 1px solid lighten($primaryColour, 10%);
+}
+
+.colour-block.primary:hover {
+  color: #fff;
+  text-shadow: 1px 1px #333;
+}
