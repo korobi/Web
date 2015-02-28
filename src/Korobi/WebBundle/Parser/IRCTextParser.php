@@ -31,7 +31,7 @@ class IRCTextParser {
         }
 
         if (!$pretty_only) {
-            $line = htmlentities($line, ENT_QUOTES);
+            $line = self::makeSafe($line, true);
         }
 
         $result = '';
@@ -208,7 +208,7 @@ class IRCTextParser {
         while (preg_match(self::$pattern, $text, $match, PREG_OFFSET_CAPTURE, $index)) {
             list($url, $urlIndex) = $match[0];
 
-            $result .= htmlspecialchars(substr($text, $index, $urlIndex - $index));
+            $result .= self::makeSafe(substr($text, $index, $urlIndex - $index));
 
             $scheme = $match[1][0];
             $username = $match[2][0];
@@ -222,7 +222,7 @@ class IRCTextParser {
 
             if (preg_match('{^\.[0-9]{1,3}$}', $tld) || in_array($tld, self::$extensions)) {
                 if (!$scheme && $password) {
-                    $result .= htmlspecialchars($username);
+                    $result .= self::makeSafe($username);
                     $index = $urlIndex + strlen($username);
 
                     continue;
@@ -242,15 +242,33 @@ class IRCTextParser {
 
                 $result .= self::createLinkTag($linkRef, $linkText);
             } else {
-                $result .= htmlspecialchars($url);
+                $result .= self::makeSafe($url);
             }
 
             $index = $urlIndex + strlen($url);
         }
 
-        $result .= htmlspecialchars(substr($text, $index));
+        $result .= self::makeSafe(substr($text, $index));
 
         return $result;
+    }
+
+    /**
+     * @param $string
+     * @param bool $entities
+     * @return mixed|string
+     */
+    private static function makeSafe($string, $entities = false) {
+        if ($entities) {
+            $string = htmlentities($string, ENT_QUOTES);
+        } else {
+            $string = htmlspecialchars($string);
+        }
+
+        // Replace &amp; with & to fix link parsing
+        $string = str_replace('&amp;', '&', $string);
+
+        return $string;
     }
 
     /**
@@ -259,7 +277,7 @@ class IRCTextParser {
      * @return string
      */
     private static function createLinkTag($url, $content) {
-        return sprintf('<a href="%s" target="_blank">%s</a>', htmlspecialchars($url), htmlspecialchars($content));
+        return sprintf('<a href="%s" target="_blank">%s</a>', self::makeSafe($url), self::makeSafe($content));
     }
 
     /**

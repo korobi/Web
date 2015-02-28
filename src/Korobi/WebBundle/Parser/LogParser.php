@@ -213,11 +213,11 @@ class LogParser {
         $result .= ' ';
 
         if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
-            $result .= 'Topic is: ' . $chat->getMessage();
+            $result .= 'Topic is: ' . IRCTextParser::parse($chat->getMessage());
         } else {
             $result .= self::createUserMode($chat->getActorPrefix());
             $result .= self::transformActor($chat->getActorName());
-            $result .= ' has changed the topic to: ' . $chat->getMessage();
+            $result .= ' has changed the topic to: ' . IRCTextParser::parse($chat->getMessage());
         }
 
         $result .= '</span>';
