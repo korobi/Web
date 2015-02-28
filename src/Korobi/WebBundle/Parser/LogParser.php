@@ -26,7 +26,7 @@ class LogParser {
         $result .= self::ACTION_USER_PREFIX;
         $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
+        $result .= self::getSpanForColour(NickColours::getColourForNick(self::transformActor($chat->getActorName())), self::transformActor($chat->getActorName()));
         $result .= ' ';
 
         $result .= IRCTextParser::parse($chat->getMessage());
