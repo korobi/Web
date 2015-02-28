@@ -34,4 +34,5 @@
 
 .example-container {
   @include span-columns(8);
+  float: none;
 }
