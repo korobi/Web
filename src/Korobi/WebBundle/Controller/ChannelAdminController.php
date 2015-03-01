@@ -48,13 +48,13 @@ class ChannelAdminController extends BaseController {
                 ]
             ])
             ->add('commands_enabled', 'checkbox', [
-                'required' => true,
+                'required' => false,
                 'attr' => [
                     'help_text' => 'Should dynamic commands be enabled for this channel?'
                 ]
             ])
             ->add('punishments_enabled', 'checkbox', [
-                'required' => true,
+                'required' => false,
                 'attr' => [
                     'help_text' => 'Should punishments be enabled for this channel?'
                 ]

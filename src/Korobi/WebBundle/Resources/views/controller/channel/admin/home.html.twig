@@ -12,7 +12,9 @@
 
         {{ form_row(form.key) }}
         {{ form_row(form.command_prefix) }}
-        {{ form_row(form.settings) }}
+        {{ form_row(form.commands_enabled) }}
+        {{ form_row(form.punishments_enabled) }}
+        {# {{ form_row(form.settings) }} #}
 
         {{ form_label(form.permissions) }}
         {{ block('form_help') }}
