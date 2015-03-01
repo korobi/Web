@@ -17,12 +17,17 @@ class IRCColourParser {
         if ($retVal === 0) {
             return null;
         } else {
-            $result = ['foreground' => sprintf('%02d', (int) $matches[1][0]), 'background' => 99];
+            $result = ['foreground' => sprintf('%02d', $matches[1][0]), 'background' => 99];
             $result['skip'] = $matches[1][1] + 1;
-
+            if (strlen($matches[1][0]) === 1) {
+                $result['skip'] = $result['skip'] - 1;
+            }
             if (count($matches) > 2) {
                 $result['background'] = sprintf("%02d", (int) $matches[2][0]);
                 $result['skip'] = $matches[2][1] + 1;
+                if (strlen($matches[2][0]) === 1) {
+                    $result['skip'] = $result['skip'] - 1;
+                }
             }
 
             return $result;
