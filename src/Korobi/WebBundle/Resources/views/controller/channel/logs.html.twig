@@ -2,6 +2,10 @@
 
 {% set page_title = channel_name ~ " on " ~ network_name ~ " - Logs" %}
 
+{% block head %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+{% endblock %}
+
 {% block javascripts %}
 {{ parent() }}
 {% if is_tail %}
