@@ -47,6 +47,18 @@ class ChannelAdminController extends BaseController {
                     'help_text' => 'The command prefix for dynamic commands.'
                 ]
             ])
+            ->add('commands_enabled', 'checkbox', [
+                'required' => true,
+                'attr' => [
+                    'help_text' => 'Should dynamic commands be enabled for this channel?'
+                ]
+            ])
+            ->add('punishments_enabled', 'checkbox', [
+                'required' => true,
+                'attr' => [
+                    'help_text' => 'Should punishments be enabled for this channel?'
+                ]
+            ])
             ->add('permissions', 'collection', [
                 'required' => false,
                 'type' => 'text',
@@ -62,7 +74,6 @@ class ChannelAdminController extends BaseController {
                     'label' => false
                 ],
             ])
-            ->add('settings', 'collection')
             ->add('save', 'submit', ['label' => 'Save'])
             ->getForm();
 
