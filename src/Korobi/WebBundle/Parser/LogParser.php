@@ -200,10 +200,10 @@ class LogParser {
         $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
-        //$result .= ' (';
-        //$result .= $chat->getActorHostname();
-        //$result .= ') ';
-        $result .= ' has quit (' . $chat->getMessage() . ')';
+        $result .= ' (';
+        $result .= $chat->getActorHostname();
+        $result .= ') ';
+        $result .= 'has quit (' . $chat->getMessage() . ')';
         $result .= '</span>';
 
         return $result;
