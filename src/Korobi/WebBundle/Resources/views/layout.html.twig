@@ -8,6 +8,8 @@
     <link rel='stylesheet' href='{{ asset_url }}?cb={{ "now"|date("U") }}' />
     {% endstylesheets %}
     <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css'>
+    {% block head %}
+    {% endblock %}
 </head>
 <body{{ (theme.isLight()) ? ' class="light"' : '' }}>
 {{ include('KorobiWebBundle::partials/nav.html.twig') }}
