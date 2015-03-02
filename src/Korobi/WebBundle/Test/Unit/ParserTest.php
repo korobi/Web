@@ -26,8 +26,9 @@ class ParserTest extends WebTestCase {
         $chat->expects($this->any())->method("getDate")->will($this->returnValue(new \DateTime("@0")));
         $chat->expects($this->any())->method("getActorName")->will($this->returnValue("TestUser"));
         $chat->expects($this->any())->method("getActorPrefix")->will($this->returnValue("OPERATOR"));
+        $chat->expects($this->any())->method("getActorHostname")->will($this->returnValue("user@host"));
 
-        $this->assertEquals('[00:00:00] <span class="irc--14-99">** <span class="irc--09-99">@</span>TestUser joined the channel</span>', LogParser::parseJoin($chat));
+        $this->assertEquals('[00:00:00] <span class="irc--14-99">** <span class="irc--09-99">@</span>TestUser (user@host) joined the channel</span>', LogParser::parseJoin($chat));
     }
 
     public function testParseMessage() {
