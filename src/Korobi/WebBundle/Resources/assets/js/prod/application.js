@@ -66,6 +66,11 @@ $(function() {
                             if (match.length === 3) {
                                 var imin = Number(match[1]);
                                 var imax = Number(match[2]);
+                                if (imin > imax) {
+                                    var tempMax = imax;
+                                    imax = imin;
+                                    imin = tempMax;
+                                }
                                 for (var j = imin; j <= imax; j++) {
                                     addLine(j);
                                 }
@@ -100,16 +105,40 @@ $(function() {
         // grab parent (.fa is a child)
         var line = $(this).parent().data('line-num');
 
-        // if shift is being held, add another line
-        if (event.shiftKey) {
-            // if we're shifting and the line exists, remove it
+        // if ctrl is being held, add another line
+        if (event.ctrlKey) {
+            // if we're holding ctrl and the line exists, remove it
             if (activeLines.indexOf(line) != -1) {
                 removeLine(line);
             } else {
                 addLine(line);
             }
+        } else if (event.shiftKey) {
+            // We'll assume the user wants to select a range here
+
+            // I'm arbitrarily deciding that a range will be made up of the last line they added to the list
+            // and the line they're clicking now.
+
+            var lastLine = activeLines[activeLines.length - 1];
+            if (lastLine < line) {
+                // The just-selected line is in front of the last selected line. Great, we'll
+                // highlight all of the lines in between.
+
+                window.location.hash = window.location.hash + "," + lastLine + "-" + line;
+                hashChange();
+                return;
+            } else {
+                // The last line is after the one the user just selected. We'll start at the selected line
+                // and step to the next.
+
+                window.location.hash = window.location.hash + "," + line + "-" + lastLine;
+                hashChange();
+                return;
+            }
+
+
         } else {
-            // shift is not being held, remove all and add new
+            // ctrl is not being held, remove all and add new
             activeLines.forEach(function(entry) {
                 removeLine(entry);
             });
