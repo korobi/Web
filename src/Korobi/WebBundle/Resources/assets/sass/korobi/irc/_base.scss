@@ -27,6 +27,11 @@ $irc-colors: #ffffff #555753 #3465a4 #4e9a06 #ef2929 #cc0000 #75507b #c4a000 #fc
     background-color: transparent;
     color: nth($irc-colors, $i+1);
   }
+
+  .irc--99-#{leading_zero($i)} {
+    background-color: nth($irc-colors, $i+1);
+    color: #eee;
+  }
 }
 
 body.light {
@@ -46,6 +51,11 @@ body.light {
     .irc--#{leading_zero($i)}-99 {
       background-color: transparent;
       color: darken(nth($irc-colors, $i+1), 20%);
+    }
+
+    .irc--99-#{leading_zero($i)} {
+      background-color: darken(nth($irc-colors, $i+1), 20%);
+      color: #eee;
     }
   }
 }

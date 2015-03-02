@@ -25,6 +25,9 @@ class IRCTextParser {
     public static function parseLine($line, $pretty_only) {
         $characterMap = self::getCharacterMap();
         $activeMap = [];
+        $isReversed = false;
+        $currentFg = 99;
+        $currentBg = 99;
 
         foreach ($characterMap as $key => $value) {
             $activeMap[$key] = 0;
@@ -49,10 +52,12 @@ class IRCTextParser {
 
                 if (self::isColor($character)) {
                     $sixSubsequentCharacters = substr($line, $i, 6);
-                    $colours = IRCColourParser::parseColour($sixSubsequentCharacters);
+                    $colours = IRCColourParser::parseColour($sixSubsequentCharacters, $isReversed, $currentFg, $currentBg);
                     if ($colours !== null) {
                         $result .= '<span class="irc--' . $colours['foreground'] . '-' . $colours['background'] . '">';
                         $activeMap['color'] = $activeMap['color'] + 1;
+                        $currentFg = $colours['foreground'];
+                        $currentBg = $colours['background'];
                         $i += $colours['skip'];
                         continue;
                     }
@@ -80,8 +85,13 @@ class IRCTextParser {
                 }
 
                 if (self::isReverseTv($character)) {
-                    $result .= self::wrapInElement($characterMap['reversetv'], $activeMap['reversetv'] == 1);
-                    $activeMap['reversetv'] = $activeMap['reversetv'] == 0 ? 1 : 0;
+                    $isReversed = !$isReversed;
+                    $activeMap['color'] = $activeMap['color'] + 1;
+                    $tempFg = $currentFg;
+                    $currentFg = $currentBg;
+                    $currentBg = $tempFg;
+                    $result .= '<span class="irc--' . $currentFg . '-' . $currentBg . '">';
+
                     continue;
                 }
 
