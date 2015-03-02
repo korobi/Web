@@ -138,7 +138,7 @@ $(function() {
 
 
         } else {
-            var alreadyExisted = (activeLines.indexOf(line) != -1);
+            var alreadyExisted = (activeLines.indexOf(line) != -1 && activeLines.length === 1);
             // ctrl is not being held, remove all and add new
             activeLines.forEach(function(entry) {
                 removeLine(entry);
