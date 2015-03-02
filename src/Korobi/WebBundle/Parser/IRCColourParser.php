@@ -11,7 +11,7 @@ class IRCColourParser {
      * @param bool $swap Swaps the foreground and background
      * @return array|null The array of data or null if no colour is present.
      */
-    public static function parseColour($messageFragment, $swap=false, $defaultFg, $defaultBg) {
+    public static function parseColour($messageFragment, $swap=false, $defaultFg=99, $defaultBg=99) {
         $regex = '/([0-9][0-9]?)(?:,([0-9][0-9]?))?/'; // mIRC accepts 0 => 99 and ignores invalid colours
         $matches = [];
         $retVal = preg_match($regex, $messageFragment, $matches, PREG_OFFSET_CAPTURE);
