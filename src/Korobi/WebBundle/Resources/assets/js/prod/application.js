@@ -138,13 +138,16 @@ $(function() {
 
 
         } else {
+            var alreadyExisted = (activeLines.indexOf(line) != -1);
             // ctrl is not being held, remove all and add new
             activeLines.forEach(function(entry) {
                 removeLine(entry);
             });
             activeLines = [];
 
-            addLine(line);
+            if (!alreadyExisted) {
+                addLine(line);
+            }
         }
 
         // set the new hash
