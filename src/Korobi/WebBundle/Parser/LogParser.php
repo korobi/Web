@@ -73,7 +73,7 @@ class LogParser {
         $result .= ' was kicked by ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
-        $result .= '(' . $chat->getMessage() . ')';
+        $result .= ' (' . $chat->getMessage() . ')';
 
         return $result;
     }
