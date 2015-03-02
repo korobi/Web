@@ -31,8 +31,9 @@ class IRCColourParser {
                 }
             }
             if ($swap) {
+                $tempForeground =$result['foreground'];
                 $result['foreground'] = $result['background'];
-                $result['background'] = $result['foreground'];
+                $result['background'] = $tempForeground;
                 if (!count($matches) > 2) {
                     $result['background'] = $defaultFg;
                 }
