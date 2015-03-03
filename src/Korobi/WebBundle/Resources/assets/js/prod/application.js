@@ -279,7 +279,7 @@ $(function() {
  */
 $(function() {
     $(".navigation--menutoggle").click(function() {
-        $(".navigation--links li").toggle();
+        $("nav.navigation").toggleClass("on-mobile");
     });
 });
 

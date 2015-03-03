@@ -2,17 +2,6 @@
 
 $active-nav-background-color: darken($primaryColour, 10%);
 
-nav.navigation.navigation--admin {
-  background-color: #333;
-
-  li {
-    a:hover,
-    a:focus {
-      background-color: #555 !important;
-    }
-  }
-}
-
 nav.navigation {
   width: 100%;
   min-height: 3em;
