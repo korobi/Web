@@ -22,8 +22,6 @@ abstract class BaseProcessor implements DeploymentProcessorInterface {
     /**
      * @param DeploymentInfo $deploymentInfo
      * @return string Status of deployment
-     * @internal param Revision $document The revision document describing the deployment.
-     * @internal param Request $request The HTTP request triggering it.
      */
     public function handle(DeploymentInfo $deploymentInfo) {
         if ($this->next !== null) {
