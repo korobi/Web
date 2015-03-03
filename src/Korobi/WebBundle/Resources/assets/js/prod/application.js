@@ -1,3 +1,6 @@
+/**
+ * Line highlighting
+ */
 $(function() {
     var activeLines = [],
         /**
@@ -164,6 +167,9 @@ $(function() {
     setTimeout(jumpToFirstLine, 600);
 });
 
+/**
+ * Tooltips
+ */
 $(function() {
     var targets = $('[rel~=tooltip]'),
         target = false,
@@ -239,7 +245,10 @@ $(function() {
     });
 });
 
-$(document).ready(function() {
+/**
+ * Permissions
+ */
+$(function() {
     $('#permission-add').click(function(event) {
         event.preventDefault();
 
@@ -264,3 +273,13 @@ $(document).ready(function() {
         }
     });
 });
+
+/**
+ * Responsive nav
+ */
+$(function() {
+    $(".navigation--menutoggle").click(function() {
+        $(".navigation--links li").toggle();
+    });
+});
+
