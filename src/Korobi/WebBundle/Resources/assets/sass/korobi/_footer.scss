@@ -43,7 +43,7 @@ p.footer--copyright {
 
   .sf-minitoolbar {
     // it overlaps with the footer links, sadly
-    display: none;
+    display: none !important;
   }
 }
 
