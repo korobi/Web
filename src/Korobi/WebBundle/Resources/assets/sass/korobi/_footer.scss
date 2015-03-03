@@ -29,15 +29,11 @@ footer.footer.footer--debug {
   bottom: $footerHeight;
 }
 
-p.footer--copyright {
+.footer--copyright {
   display: inline-block;
   float: left;
   color: $footerColor;
   margin-bottom: 0;
-}
-
-.footer--revision {
-  display: inline;
 }
 
 @media (max-width: $medium-screen) {
