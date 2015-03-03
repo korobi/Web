@@ -36,6 +36,10 @@ p.footer--copyright {
   margin-bottom: 0;
 }
 
+.footer--revision {
+  display: inline;
+}
+
 @media (max-width: $medium-screen) {
   .footer--revision {
     display: none;
