@@ -2,8 +2,9 @@
 
 namespace Korobi\WebBundle\Deployment\Processor;
 
+use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Document\Revision;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Verifies the request is authentic (i.e. from GitHub, or a super admin).
@@ -12,7 +13,7 @@ use Symfony\Component\BrowserKit\Request;
  */
 class RequestVerification extends BaseProcessor implements DeploymentProcessorInterface {
 
-    public function handle(Revision $document, Request $request) {
-        // TODO: Implement handle() method.
+    public function handle(DeploymentInfo $deploymentInfo) {
+        $req = $deploymentInfo->getRequest();
     }
 }

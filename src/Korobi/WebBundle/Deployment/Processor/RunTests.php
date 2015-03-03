@@ -2,8 +2,7 @@
 
 namespace Korobi\WebBundle\Deployment\Processor;
 
-use Korobi\WebBundle\Document\Revision;
-use Symfony\Component\BrowserKit\Request;
+use Korobi\WebBundle\Deployment\DeploymentInfo;
 
 /**
  * Runs the tests.
@@ -12,7 +11,7 @@ use Symfony\Component\BrowserKit\Request;
  */
 class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
 
-    public function handle(Revision $document, Request $request) {
+    public function handle(DeploymentInfo $deploymentInfo) {
         // TODO: Implement handle() method.
     }
 }

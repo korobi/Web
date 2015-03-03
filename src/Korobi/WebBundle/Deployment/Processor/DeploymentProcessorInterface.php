@@ -2,10 +2,13 @@
 
 namespace Korobi\WebBundle\Deployment\Processor;
 
-use Korobi\WebBundle\Document\Revision;
-use Symfony\Component\BrowserKit\Request;
+use Korobi\WebBundle\Deployment\DeploymentInfo;
 
 interface DeploymentProcessorInterface {
 
-    public function handle(Revision $document, Request $request);
+    /**
+     * @param DeploymentInfo $deploymentInfo
+     * @return string Status of deployment
+     */
+    public function handle(DeploymentInfo $deploymentInfo);
 }

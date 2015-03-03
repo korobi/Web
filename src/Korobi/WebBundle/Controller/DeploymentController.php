@@ -2,6 +2,7 @@
 
 namespace Korobi\WebBundle\Controller;
 
+use Documents\User;
 use Korobi\WebBundle\Util\Akio;
 use Korobi\WebBundle\Util\GitInfo;
 use Psr\Log\LoggerInterface;
@@ -25,10 +26,12 @@ class DeploymentController extends BaseController {
      * @var string The HMAC secret used to ensure deploy requests from GitHub are valid.
      */
     private $hmacKey;
+
     /**
      * @var GitInfo
      */
     private $gitInfo;
+
     /**
      * @var Akio
      */
@@ -59,6 +62,9 @@ class DeploymentController extends BaseController {
     }
 
     public function deployAction(Request $request) {
+        /** @var \Korobi\WebBundle\Document\User $user */
+        $user = $this->getUser();
+
         $verified = $this->verifySignature($this->getSignatureFromRequest($request), $this->hmacKey, $request->getContent());
         $responseData = $this->getInitialResponseData($request, $verified);
         $this->debug('Got deploy request.', $responseData);

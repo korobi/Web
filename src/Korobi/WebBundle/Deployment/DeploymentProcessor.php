@@ -2,6 +2,11 @@
 
 namespace Korobi\WebBundle\Deployment;
 
+use Korobi\WebBundle\Deployment\Processor\DeploymentProcessorInterface;
+use Korobi\WebBundle\Deployment\Processor\FinalizeDeployment;
+use Korobi\WebBundle\Deployment\Processor\PerformDeployment;
+use Korobi\WebBundle\Deployment\Processor\RequestVerification;
+use Korobi\WebBundle\Deployment\Processor\RunTests;
 use Korobi\WebBundle\Document\Revision;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,6 +17,34 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class DeploymentProcessor {
 
-    public function __construct(Request $request, Revision $revision) {
+    /**
+     * @var DeploymentProcessorInterface
+     */
+    private $firstStep;
+
+    /**
+     * @var DeploymentInfo
+     */
+    private $info;
+
+    public function __construct(DeploymentInfo $info) {
+        $firstStep = new RequestVerification();
+        $secondStep = new PerformDeployment();
+        $thirdStep = new RunTests();
+        $fourthStep = new FinalizeDeployment();
+        $firstStep->setNext($secondStep);
+        $secondStep->setNext($thirdStep);
+        $thirdStep->setNext($fourthStep);
+
+        $this->firstStep = $firstStep;
+        $this->info = $info;
+    }
+
+    /**
+     * @return string Status of deployment
+     * @see DeploymentStatus
+     */
+    public function performDeployment() {
+        return $this->firstStep->handle($this->info);
     }
 }

@@ -2,8 +2,9 @@
 
 namespace Korobi\WebBundle\Deployment\Processor;
 
+use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Document\Revision;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Saves deployment results to the database.
@@ -12,7 +13,7 @@ use Symfony\Component\BrowserKit\Request;
  */
 class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInterface {
 
-    public function handle(Revision $document, Request $request) {
+    public function handle(DeploymentInfo $deploymentInfo) {
         // TODO: Implement handle() method.
     }
 }
