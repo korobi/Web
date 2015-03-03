@@ -18,7 +18,7 @@ class IRCColourParser {
         if ($retVal === 0) {
             return null;
         } else {
-            $result = ['foreground' => sprintf('%02d', $matches[1][0]), 'background' => $defaultBg];
+            $result = ['foreground' => sprintf('%02d', $matches[1][0]), 'background' => sprintf("%02d", $defaultBg)];
             $result['skip'] = $matches[1][1] + 1;
             if (strlen($matches[1][0]) === 1) {
                 $result['skip'] = $result['skip'] - 1;
@@ -31,11 +31,11 @@ class IRCColourParser {
                 }
             }
             if ($swap) {
-                $tempForeground =$result['foreground'];
+                $tempForeground = $result['foreground'];
                 $result['foreground'] = $result['background'];
                 $result['background'] = $tempForeground;
                 if (!count($matches) > 2) {
-                    $result['background'] = $defaultFg;
+                    $result['background'] = sprintf("%02d", $defaultFg);
                 }
 
 
