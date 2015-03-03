@@ -68,3 +68,7 @@ small,
 .small {
   font-size: floor((100% * $font-size-small / $font-size-base));
 }
+
+main {
+  padding: 0 1em;
+}

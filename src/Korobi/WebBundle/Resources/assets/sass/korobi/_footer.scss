@@ -36,6 +36,17 @@ p.footer--copyright {
   margin-bottom: 0;
 }
 
+@media (max-width: $medium-screen) {
+  .footer--revision {
+    display: none;
+  }
+
+  .sf-minitoolbar {
+    // it overlaps with the footer links, sadly
+    display: none;
+  }
+}
+
 @mixin active-footer-link {
   color: #fff;
   background-color: darken($footerBackgroundColour, 10%);
