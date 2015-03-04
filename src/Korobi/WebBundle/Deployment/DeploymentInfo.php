@@ -25,7 +25,7 @@ class DeploymentInfo {
     private $revision;
 
     /**
-     * @var User
+     * @var User|null
      */
     private $user;
 
@@ -52,7 +52,7 @@ class DeploymentInfo {
      * @param $hmacKey string The HMAC key
      * @param $rootPath
      */
-    public function __construct(Request $request, Revision $revision, User $user, AuthorizationChecker $authorisationChecker, $hmacKey, $rootPath) {
+    public function __construct(Request $request, Revision $revision, $user, AuthorizationChecker $authorisationChecker, $hmacKey, $rootPath) {
         $this->request = $request;
         $this->revision = $revision;
         $this->user = $user;
