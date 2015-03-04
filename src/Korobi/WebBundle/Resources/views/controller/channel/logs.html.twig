@@ -25,8 +25,8 @@ setInterval(function() {
     <h1>Log for {{ channel_name }} on {{ network_name }} - {{ log_date }}</h1>
     <div class="logs">
         {% for line_num, line in logs %}
-            <div class="line {% if is_tail %}js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
-                {% if is_tail %}
+            <div class="line {% if not is_tail %}js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
+                {% if not is_tail %}
                     <i class="fa fa-paint-brush"></i>
                 {% endif %}
                 <span class="timestamp">
