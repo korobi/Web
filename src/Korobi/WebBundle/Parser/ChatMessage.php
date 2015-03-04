@@ -2,8 +2,6 @@
 
 namespace Korobi\WebBundle\Parser;
 
-use Korobi\WebBundle\Document\Chat;
-
 class ChatMessage {
 
     /**
@@ -35,7 +33,7 @@ class ChatMessage {
         $this->timestamp = date('H:i:s', $date->getTimestamp());
         $this->role = strtolower($role);
         $this->nickColour = $colour;
-        $this->nick = $actor == Chat::ACTOR_INTERNAL ? 'Server' : $actor;
+        $this->nick = $actor;
         $this->message = $message;
     }
 

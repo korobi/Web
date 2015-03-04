@@ -28,6 +28,10 @@
       &.half_op:before  { content: '%'; color: nth($irc-colors, 13); }
       &.voice:before    { content: '+'; color: nth($irc-colors,  8); }
     }
+
+    .message {
+      word-break: break-all;
+    }
   }
 
   .js-hl .fa {
