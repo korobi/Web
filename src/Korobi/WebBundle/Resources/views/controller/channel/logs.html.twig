@@ -14,7 +14,7 @@ $(document).scrollTop($("#bottom").offset().top);
 setInterval(function() {
     $.get('{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}', function(data) {
         var logs = $('div.logs').empty();
-        $.each(JSON.parse(data), function(line) {
+        $.each(JSON.parse(data), function(index, line) {
             var timestamp = $('<span/>')
                 .addClass('timestamp')
                 .html(line.timestamp);
