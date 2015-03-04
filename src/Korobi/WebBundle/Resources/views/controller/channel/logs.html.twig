@@ -32,8 +32,8 @@ setInterval(function() {
                 <span class="timestamp">
                     {{ line.timestamp }}
                 </span>
-                <span class="nick irc--{{ line.nickColour }}-99 {% if line.role is not empty %}{{ line.role }}{% endif %}">
-                    {{ line.nick }}
+                <span class="nick irc--{{ line.nickColour }}-99 {% if line.role is not empty %}{{ line.role }}{% endif %}"><!--
+                    -->{{ line.nick }}
                 </span>
                 <span class="message">
                     {{ line.message|raw }}

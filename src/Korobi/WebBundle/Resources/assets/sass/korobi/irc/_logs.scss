@@ -19,11 +19,11 @@
 
     & > span {
       display: table-cell;
+      padding-right: 15px;
     }
 
     .nick {
       text-align: right;
-      padding: 0 10px;
       border-right: 1px solid #333; // TODO Don't hardcode colors?
 
       &.owner:before    { content: '~'; color: nth($irc-colors,  4); }
@@ -34,8 +34,9 @@
     }
 
     .message {
-      padding-left: 7px;
       word-break: break-all;
+      padding-right: 0;
+      padding-left: 10px;
     }
   }
 
