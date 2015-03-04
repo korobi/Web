@@ -50,7 +50,7 @@ class Revision {
     private $tests_output;
 
     /**
-     * @MongoDB\Collection
+     * @MongoDB\Hash
      */
     private $tests_info;
 
