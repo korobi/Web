@@ -201,7 +201,7 @@ class ChannelController extends BaseController {
         }
 
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(json_encode($chats)); // TODO Check that this is right after the changes
+            return new JsonResponse(json_encode($chats));
         }
 
         // time to render!

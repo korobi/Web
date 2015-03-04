@@ -20,7 +20,7 @@
     & > span {
       display: table-cell;
       padding-right: 15px;
-      border-bottom: 1px solid #222;
+      border-bottom: 1px solid #1b1b1b;
     }
 
     &:last-child > span {
@@ -29,7 +29,7 @@
 
     .nick {
       text-align: right;
-      border-right: 1px solid #333; // TODO Don't hardcode colors?
+      border-right: 1px solid #444;
 
       &.owner:before    { content: '~'; color: nth($irc-colors,  4); }
       &.admin:before    { content: '&'; color: nth($irc-colors, 11); }
@@ -53,8 +53,18 @@
   body.light & {
     background-color: #ddd;
 
-    .line.highlighted {
-      background-color: rgba(255, 239, 0, 0.75);
+    .line {
+      &.highlighted {
+        background-color: rgba(255, 239, 0, 0.75);
+      }
+
+      & > span {
+        border-color: #ccc;
+      }
+
+      .nick {
+        border-color: #888;
+      }
     }
   }
 }
