@@ -13,7 +13,25 @@
 $(document).scrollTop($("#bottom").offset().top);
 setInterval(function() {
     $.get('{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}', function(data) {
-        $('div.logs').html(JSON.parse(data));
+        var logs = $('div.logs').empty());
+        $.each(JSON.parse(data), function(line) {
+            var timestamp = $('<span/>')
+                .addClass('timestamp')
+                .html(line.timestamp);
+            var nick = $('<span/>')
+                .addClass('nick irc--' + line.nickColour + '-99 ' + line.role)
+                .html(line.nick);
+            var message = $('<span/>')
+                .addClass('message')
+                .html(line.message);
+            logs.append(
+                $('<div/>')
+                    .addClass('line')
+                    .append(timestamp)
+                    .append(nick)
+                    .append(message)
+            );
+        });
         $(document).scrollTop($("#bottom").offset().top);
     })
 }, 5000);
