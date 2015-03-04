@@ -93,17 +93,16 @@ class LogParser {
             $result .= self::createUserMode($chat->getActorPrefix());
             $result .= self::transformActor($chat->getActorName());
             $result .= ' sets mode ' . $chat->getMessage();
+        }
 
-            if ($chat->getRecipientPrefix() !== null) {
-                $result .= self::transformUserModeToLetter($chat->getRecipientPrefix());
-                $result .= ' ';
-                $result .= self::transformActor($chat->getRecipientName());
-            } else if ($chat->getChannelMode() !== null) {
-                $result .= self::transformChannelModeToLetter($chat->getChannelMode());
-                $result .= ' ';
-                $result .= self::transformActor($chat->getRecipientHostname());
-            }
-
+        if ($chat->getRecipientPrefix() !== null) {
+            $result .= self::transformUserModeToLetter($chat->getRecipientPrefix());
+            $result .= ' ';
+            $result .= self::transformActor($chat->getRecipientName());
+        } else if ($chat->getChannelMode() !== null) {
+            $result .= self::transformChannelModeToLetter($chat->getChannelMode());
+            $result .= ' ';
+            $result .= self::transformActor($chat->getRecipientHostname());
         }
 
         return $result;
