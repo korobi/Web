@@ -17,6 +17,10 @@
       background-color: rgba(255, 10, 10, 0.2);
     }
 
+    & > span {
+      display: table-cell;
+    }
+
     .nick {
       text-align: right;
       padding: 0 10px;
@@ -30,6 +34,7 @@
     }
 
     .message {
+      padding-left: 7px;
       word-break: break-all;
     }
   }
