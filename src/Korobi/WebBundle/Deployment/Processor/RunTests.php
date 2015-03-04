@@ -18,14 +18,13 @@ class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
         $execOutput = [];
         $testOutput = exec('phpunit', $execOutput);
         $parsed = (new TestOutputParser())->parseLine($testOutput);
-        if (substr($testOutput, 0, 2) !== "OK") {
+        if ($parsed['failures'] > 0) {
             $this->logger->debug("Tests failed!", [implode("\n", $execOutput)], true);
-            $this->akio->sendMessage($this->akio->startMessage()->insertText(json_encode($parsed)));
+            $this->akio->sendMessage($this->akio->startMessage()->insertText("Tests: " . $parsed['status']));
             return DeploymentStatus::$TESTS_FAILED;
         } else {
             $this->logger->debug("Tests passed.", [$testOutput]);
-            $this->akio->sendMessage($this->akio->startMessage()->insertText(json_encode($parsed)));
-            $responseData['tests'] = ["status" => "pass", "output" => $execOutput];
+            $this->akio->sendMessage($this->akio->startMessage()->insertText("Tests: " . $parsed['status']));
         }
         return parent::handle($deploymentInfo);
     }

@@ -18,6 +18,9 @@ class TestOutputParser {
             if (is_int($key)) {
                 unset($data[$key]);
             }
+            if ($arr === "") {
+                $data[$key] = 0;
+            }
         }
         if ($data['incomplete'] > 0) {
             $data['status'] = "Tentative pass";
