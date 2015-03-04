@@ -7,6 +7,7 @@ use Korobi\WebBundle\Document\ChannelCommand;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Exception\UnsupportedOperationException;
+use Korobi\WebBundle\Parser\ChatMessage;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -187,22 +188,19 @@ class ChannelController extends BaseController {
         $chats = [];
 
         // process all found chat entries
-        $index = 1;
         foreach ($dbChats as $chat) {
             /** @var $chat Chat  */
-
-            $result = '<span class="logs--line js-hl" data-line-num="' . $index++ . '"><i class="fa fa-paint-brush"></i> ';
-
-            $result .= $this->parseChatEntry($chat);
-
-            $result .= '</span>';
-
-            $chats[] = $result;
+            $chats[] = new ChatMessage(
+                $chat->getDate(),
+                $chat->getActorPrefix(),
+                LogParser::getColourForActor($chat),
+                LogParser::getActorName($chat),
+                $this->parseChatMessage($chat)
+            );
         }
 
         if ($request->isXmlHttpRequest()) {
-            // <span class="logs--line js-hl" data-line-num="{{ loop.index }}"><i class="fa fa-paint-brush"></i> {{ message|raw }}</span>
-            return new JsonResponse(json_encode($chats));
+            return new JsonResponse(json_encode($chats)); // TODO Check that this is right after the changes
         }
 
         // time to render!
@@ -251,7 +249,7 @@ class ChannelController extends BaseController {
      * @return string
      * @throws UnsupportedOperationException If you try and parse an unsupported message type.
      */
-    private function parseChatEntry(Chat $chat) {
+    private function parseChatMessage(Chat $chat) {
         $method = 'parse' . ucfirst(strtolower($chat->getType()));
         try {
             $method = $this->logParser->getMethod($method);

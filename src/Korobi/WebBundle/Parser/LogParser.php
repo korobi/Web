@@ -8,7 +8,7 @@ class LogParser {
 
     const ACTION_USER_PREFIX = '*';
     const ACTION_SERVER_PREFIX = '**';
-    const ACTION_SERVER_CLASS = 'irc--14-99';
+    const ACTION_SERVER_COLOUR = '14';
 
     // -----------------
     // ---- Parsing ----
@@ -18,17 +18,13 @@ class LogParser {
      * @param Chat $chat
      * @return string
      */
-    // [00:00:00] * @Kashike flails
+    // @Kashike flails
     public static function parseAction(Chat $chat) {
         $result = '';
-        $result .= self::provideTime($chat);
 
-        $result .= self::ACTION_USER_PREFIX;
-        $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::getSpanForColour(NickColours::getColourForNick(self::transformActor($chat->getActorName())), self::transformActor($chat->getActorName()));
+        $result .= self::getSpanForColour(getColourForActor($chat->getActorName()), $chat->getActorName());
         $result .= ' ';
-
         $result .= IRCTextParser::parse($chat->getMessage());
 
         return $result;
@@ -38,21 +34,16 @@ class LogParser {
      * @param Chat $chat
      * @return string
      */
-    // [00:00:00] ** @Kashike joined the channel
+    // @Kashike joined the channel
     public static function parseJoin(Chat $chat) {
         $result = '';
-        $result .= self::provideTime($chat);
 
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' (';
         $result .= $chat->getActorHostname();
         $result .= ') ';
         $result .= 'joined the channel';
-        $result .= '</span>';
 
         return $result;
     }
@@ -61,13 +52,10 @@ class LogParser {
      * @param Chat $chat
      * @return string
      */
-    // [00:00:00] ** @lol768 was kicked by @Kashike (hello)
+    // @lol768 was kicked by @Kashike (hello)
     public static function parseKick(Chat $chat) {
         $result = '';
-        $result .= self::provideTime($chat);
 
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
         $result .= self::createUserMode($chat->getRecipientPrefix());
         $result .= self::transformActor($chat->getRecipientName());
         $result .= ' was kicked by ';
@@ -82,35 +70,19 @@ class LogParser {
      * @param Chat $chat
      * @return string
      */
-    // [00:00:00] <@lol768> meow!
+    // meow!
     public static function parseMessage(Chat $chat) {
-        $result = '';
-        $result .= self::provideTime($chat);
-
-        $result .= '&lt;';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::getSpanForColour(NickColours::getColourForNick(self::transformActor($chat->getActorName())), self::transformActor($chat->getActorName()));
-        $result .= '&gt; ';
-
-        // message
-        $result .= IRCTextParser::parse($chat->getMessage());
-
-        return $result;
+        return IRCTextParser::parse($chat->getMessage());
     }
 
     /**
      * @param Chat $chat
      * @return string
      */
-    // [00:00:00] ** Server sets mode +CQnst
-    // [00:00:00] ** @Kashike sets mode +b *!*@test.com
+    // Server sets mode +CQnst
+    // @Kashike sets mode +b *!*@test.com
     public static function parseMode(Chat $chat) {
         $result = '';
-        $result .= self::provideTime($chat);
-
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
 
         // mode set by internal actor
         if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
@@ -134,8 +106,6 @@ class LogParser {
 
         }
 
-        $result .= '</span>';
-
         return $result;
     }
 
@@ -146,20 +116,14 @@ class LogParser {
     // [00:00:00] ** @drtshock is now known as @Trent
     public static function parseNick(Chat $chat) {
         $result = '';
-        $result .= self::provideTime($chat);
 
         $prefix = self::createUserMode($chat->getActorPrefix());
 
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
         $result .= $prefix;
         $result .= $chat->getActorName();
         $result .= ' is now known as ';
         $result .= $prefix;
         $result .= $chat->getRecipientName();
-        $result .= '</span>';
 
         return $result;
     }
@@ -170,11 +134,7 @@ class LogParser {
      */
     public static function parsePart(Chat $chat) {
         $result = '';
-        $result .= self::provideTime($chat);
 
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
 
@@ -182,7 +142,6 @@ class LogParser {
         $result .= $chat->getActorHostname();
         $result .= ') ';
         $result .= 'left the channel';
-        $result .= '</span>';
 
         return $result;
     }
@@ -193,18 +152,13 @@ class LogParser {
      */
     public static function parseQuit(Chat $chat) {
         $result = '';
-        $result .= self::provideTime($chat);
 
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
         $result .= self::createUserMode($chat->getActorPrefix());
         $result .= self::transformActor($chat->getActorName());
         $result .= ' (';
         $result .= $chat->getActorHostname();
         $result .= ') ';
         $result .= 'has quit (' . $chat->getMessage() . ')';
-        $result .= '</span>';
 
         return $result;
     }
@@ -215,11 +169,6 @@ class LogParser {
      */
     public static function parseTopic(Chat $chat) {
         $result = '';
-        $result .= self::provideTime($chat);
-
-        $result .= '<span class="' . self::ACTION_SERVER_CLASS . '">';
-        $result .= self::ACTION_SERVER_PREFIX;
-        $result .= ' ';
 
         if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
             $result .= 'Topic is: ' . IRCTextParser::parse($chat->getMessage());
@@ -229,9 +178,36 @@ class LogParser {
             $result .= ' has changed the topic to: ' . IRCTextParser::parse($chat->getMessage());
         }
 
-        $result .= '</span>';
-
         return $result;
+    }
+
+    /**
+     * @param Chat $chat
+     * @return string
+     */
+    public static function getColourForActor(Chat $chat) {
+        switch ($chat->getType()) {
+            case 'ACTION':
+            case 'MESSAGE':
+                return NickColours::getColourForNick(self::transformActor($chat->getActorName()));
+            default:
+                return self::ACTION_SERVER_COLOUR;
+        }
+    }
+
+    /**
+     * @param Chat $chat
+     * @return string
+     */
+    public static function getActorName(Chat $chat) {
+        switch ($chat->getType()) {
+            case 'MESSAGE':
+                return $chat->getActorName();
+            case 'ACTION':
+                return self::ACTION_USER_PREFIX;
+            default:
+                return self::ACTION_SERVER_PREFIX;
+        }
     }
 
     // -----------------
@@ -239,24 +215,12 @@ class LogParser {
     // -----------------
 
     /**
-     * Provide the timestamp.
-     *
-     * @param Chat $chat
-     * @return string
-     */
-    private static function provideTime(Chat $chat) {
-        /** @var $date \DateTime */
-        $date = $chat->getDate();
-        return '[' . date('H:i:s', $date->getTimestamp()) . '] '; // time
-    }
-
-    /**
      * @param $colour
      * @param $text
      * @return string
      */
     private static function getSpanForColour($colour, $text) {
-        return '<span class="irc--' . $colour . '-99">' . $text . '</span>';
+        return '<span class="irc--' . $colour . '-99">' . self::transformActor($text) . '</span>';
     }
 
     /**

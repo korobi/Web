@@ -14,15 +14,19 @@
 
     &.highlighted {
       font-weight: bold;
-      background-color: rgba(255, 0, 0, 0.30);
-    }
-
-    & > span {
-      display: table-cell;
+      background-color: rgba(255, 10, 10, 0.2);
     }
 
     .nick {
       text-align: right;
+      padding: 0 10px;
+      border-right: 1px solid #333; // TODO Don't hardcode colors?
+
+      &.owner:before    { content: '~'; color: nth($irc-colors,  4); }
+      &.admin:before    { content: '&'; color: nth($irc-colors, 11); }
+      &.operator:before { content: '@'; color: nth($irc-colors,  9); }
+      &.half_op:before  { content: '%'; color: nth($irc-colors, 13); }
+      &.voice:before    { content: '+'; color: nth($irc-colors,  8); }
     }
   }
 
@@ -39,6 +43,3 @@
     }
   }
 }
-
-
-

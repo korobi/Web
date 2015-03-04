@@ -30,9 +30,9 @@ setInterval(function() {
                     <i class="fa fa-paint-brush"></i>
                 {% endif %}
                 <span class="timestamp">
-                    {{ line.time }}
+                    {{ line.timestamp }}
                 </span>
-                <span class="nick {% if line.role is not empty %}line.role{% endif %}">
+                <span class="nick irc--{{ line.nickColour }}-99 {% if line.role is not empty %}line.role{% endif %}">
                     {{ line.nick }}
                 </span>
                 <span class="message">
