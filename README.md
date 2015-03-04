@@ -6,7 +6,7 @@ Copyright &copy; 2014 - 2015
 Staging
 -------
 
-A development instance is available at https://dev.korobi.io/. Authentication is required.
+A development instance is available at https://dev.korobi.io/. Authentication is required via a header.
 
 Useful commands
 ---------------
