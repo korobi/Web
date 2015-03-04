@@ -24,8 +24,21 @@ setInterval(function() {
 {% block body %}
     <h1>Log for {{ channel_name }} on {{ network_name }} - {{ log_date }}</h1>
     <div class="logs">
-        {% for message in logs %}
-            {{ message|raw }}
+        {% for line_num, line in logs %}
+            <div class="line {% if is_tail %}js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
+                {% if is_tail %}
+                    <i class="fa fa-paint-brush"></i>
+                {% endif %}
+                <span class="timestamp">
+                    {{ line.time }}
+                </span>
+                <span class="nick {% if line.role is not empty %}line.role{% endif %}">
+                    {{ line.nick }}
+                </span>
+                <span class="message">
+                    {{ line.message|raw }}
+                </span>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}

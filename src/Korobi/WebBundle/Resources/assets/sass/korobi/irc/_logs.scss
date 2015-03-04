@@ -4,28 +4,41 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding: 1em;
   border-radius: 3px;
-}
+  display: table;
 
-.logs--line {
-  display: block;
-  font-weight: 400;
-  font-family: 'Source Code Pro', monospace;
-  @include transition(0.25s all);
-}
+  .line {
+    display: table-row;
+    font-weight: 400;
+    font-family: 'Source Code Pro', monospace;
+    @include transition(0.25s all);
 
-.logs--line.highlighted {
-  font-weight: bold;
-  background-color: rgba(255, 0, 0, 0.30);
-}
+    &.highlighted {
+      font-weight: bold;
+      background-color: rgba(255, 0, 0, 0.30);
+    }
 
-.js-hl .fa {
-  cursor: pointer;
-}
+    & > span {
+      display: table-cell;
+    }
 
-body.light .logs {
-  background-color: #ddd;
+    .nick {
+      text-align: right;
+    }
+  }
 
-  .logs--line.highlighted {
-    background-color: rgba(255, 239, 0, 0.75);
+  .js-hl .fa {
+    cursor: pointer;
+  }
+
+  // Light theme
+  body.light & {
+    background-color: #ddd;
+
+    .line.highlighted {
+      background-color: rgba(255, 239, 0, 0.75);
+    }
   }
 }
+
+
+
