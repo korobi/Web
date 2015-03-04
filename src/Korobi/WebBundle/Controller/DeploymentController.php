@@ -79,6 +79,7 @@ class DeploymentController extends BaseController {
         $deployment = $this->get('doctrine_mongodb')
             ->getRepository('KorobiWebBundle:Revision')
             ->find($id);
-        return new JsonResponse($deployment);
+        dump($deployment);
+        return $this->render('KorobiWebBundle::home.html.twig');
     }
 }
