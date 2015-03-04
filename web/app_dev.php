@@ -21,6 +21,9 @@ if (!isset($_SERVER['HTTP_X_GITHUB_DELIVERY']) && !isset($_SERVER['HTTP_X_HUB_SI
         header('HTTP/1.0 403 Forbidden');
         exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
     }
+} else if (parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) !== "/deploy") {
+    header('HTTP/1.0 403 Forbidden');
+    exit("Oops, you look like a GitHub but you're not requesting a deploy?");
 }
 
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
