@@ -193,7 +193,7 @@ class ChannelController extends BaseController {
             /** @var $chat Chat  */
             $chats[] = new ChatMessage(
                 $chat->getDate(),
-                $chat->getType() == 'ACTION' ? '' : $chat->getActorPrefix(),
+                $chat->getType() == 'MESSAGE' ? $chat->getActorPrefix() : '',
                 LogParser::getColourForActor($chat),
                 LogParser::getActorName($chat),
                 $this->parseChatMessage($chat)
