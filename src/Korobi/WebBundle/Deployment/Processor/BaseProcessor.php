@@ -2,6 +2,7 @@
 
 namespace Korobi\WebBundle\Deployment\Processor;
 
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Deployment\DeploymentLogger;
 use Korobi\WebBundle\Deployment\DeploymentStatus;
@@ -29,9 +30,15 @@ abstract class BaseProcessor implements DeploymentProcessorInterface {
      */
     protected $akio;
 
-    public function __construct(DeploymentLogger $logger, Akio $akio) {
+    /**
+     * @var DocumentManager
+     */
+    protected $dm;
+
+    public function __construct(DeploymentLogger $logger, Akio $akio, DocumentManager $dm) {
         $this->logger = $logger;
         $this->akio = $akio;
+        $this->dm = $dm;
     }
 
 

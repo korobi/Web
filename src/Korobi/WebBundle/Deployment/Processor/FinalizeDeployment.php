@@ -15,6 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInterface {
 
     public function handle(DeploymentInfo $deploymentInfo) {
+        $this->dm->persist($deploymentInfo->getRevision());
+
+        $this->akio->sendMessage($this->akio->startMessage()->insertGreen()->insertText("https://dev.korobi.io/deploy/view/" . $deploymentInfo->getRevision()->getId()));
         return DeploymentStatus::$OK;
     }
 }
