@@ -50,6 +50,11 @@ class Revision {
     private $tests_output;
 
     /**
+     * @MongoDB\Collection
+     */
+    private $tests_info;
+
+    /**
      * @MongoDB\Boolean
      */
     private $manual;
@@ -248,5 +253,27 @@ class Revision {
     public function getBranch()
     {
         return $this->branch;
+    }
+
+    /**
+     * Set testsInfo
+     *
+     * @param collection $testsInfo
+     * @return self
+     */
+    public function setTestsInfo($testsInfo)
+    {
+        $this->tests_info = $testsInfo;
+        return $this;
+    }
+
+    /**
+     * Get testsInfo
+     *
+     * @return collection $testsInfo
+     */
+    public function getTestsInfo()
+    {
+        return $this->tests_info;
     }
 }

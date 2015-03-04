@@ -28,6 +28,7 @@ class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
         }
         $deploymentInfo->getRevision()->setTestsOutput(implode("\n", $execOutput));
         $deploymentInfo->getRevision()->setTestsPassed($parsed['failures'] === 0);
+        $deploymentInfo->getRevision()->setTestsInfo($parsed);
         return parent::handle($deploymentInfo);
     }
 }
