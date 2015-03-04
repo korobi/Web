@@ -28,7 +28,7 @@ class ParserTest extends WebTestCase {
         $chat->expects($this->any())->method("getActorPrefix")->will($this->returnValue("OPERATOR"));
         $chat->expects($this->any())->method("getActorHostname")->will($this->returnValue("user@host"));
 
-        $this->assertEquals('[00:00:00] <span class="irc--14-99">** <span class="irc--09-99">@</span>TestUser (user@host) joined the channel</span>', LogParser::parseJoin($chat));
+        $this->assertEquals('<span class="irc--09-99">@</span>TestUser (user@host) joined the channel', LogParser::parseJoin($chat));
     }
 
     public function testParseMessage() {
@@ -41,7 +41,7 @@ class ParserTest extends WebTestCase {
         $chat->expects($this->any())->method("getActorName")->will($this->returnValue("TestUser"));
         $chat->expects($this->any())->method("getActorPrefix")->will($this->returnValue("OPERATOR"));
         $chat->expects($this->any())->method("getMessage")->will($this->returnValue("\x0307,04Hello!"));
-        $this->assertEquals('[00:00:00] &lt;<span class="irc--09-99">@</span><span class="irc--06-99">TestUser</span>&gt; <span class="irc--07-04">Hello!</span>', LogParser::parseMessage($chat));
+        $this->assertEquals('<span class="irc--07-04">Hello!</span>', LogParser::parseMessage($chat));
     }
 
 
@@ -55,7 +55,7 @@ class ParserTest extends WebTestCase {
         $chat->expects($this->any())->method("getActorName")->will($this->returnValue("TestUser"));
         $chat->expects($this->any())->method("getActorPrefix")->will($this->returnValue("OPERATOR"));
         $chat->expects($this->any())->method("getMessage")->will($this->returnValue("\x0307,04\x16Hello!"));
-        $this->assertEquals('[00:00:00] &lt;<span class="irc--09-99">@</span><span class="irc--06-99">TestUser</span>&gt; <span class="irc--07-04"><span class="irc--04-07">Hello!</span></span>', LogParser::parseMessage($chat));
+        $this->assertEquals('<span class="irc--07-04"><span class="irc--04-07">Hello!</span></span>', LogParser::parseMessage($chat));
     }
 
 

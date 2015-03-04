@@ -8,6 +8,7 @@ use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Exception\UnsupportedOperationException;
 use Korobi\WebBundle\Parser\ChatMessage;
+use Korobi\WebBundle\Parser\LogParser;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
