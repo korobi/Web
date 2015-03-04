@@ -33,6 +33,7 @@ class PerformDeployment extends BaseProcessor implements DeploymentProcessorInte
             return DeploymentStatus::$DEPLOY_FAILED;
         } else {
             $this->logger->debug('Deploy output: ', $execOutput);
+            $deploymentInfo->getRevision()->setDeploySuccessful(true);
         }
         $deploymentInfo->getRevision()->setDeployOutput(implode("\n", $execOutput));
 

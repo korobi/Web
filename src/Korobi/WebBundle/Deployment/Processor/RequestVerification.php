@@ -16,6 +16,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 class RequestVerification extends BaseProcessor implements DeploymentProcessorInterface {
 
     public function handle(DeploymentInfo $deploymentInfo) {
+        $deploymentInfo->getRevision()->setDate(new \DateTime());
+
         $req = $deploymentInfo->getRequest();
         $signature = $this->getSignatureFromRequest($req);
         $isSuperUser = $this->isSuperUser($deploymentInfo->getAuthorisationChecker());

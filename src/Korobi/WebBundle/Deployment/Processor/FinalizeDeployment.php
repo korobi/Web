@@ -18,6 +18,7 @@ class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInt
         $this->dm->persist($deploymentInfo->getRevision());
         $this->dm->flush();
         $this->akio->sendMessage($this->akio->startMessage()->insertGreen()->insertText("https://dev.korobi.io/deploy/view/" . $deploymentInfo->getRevision()->getId()));
+
         return DeploymentStatus::$OK;
     }
 }
