@@ -40,35 +40,35 @@ class ChatMessage {
     /**
      * @return string
      */
-    public getTimestamp() {
+    public function getTimestamp() {
         return $this->timestamp;
     }
 
     /**
      * @return string
      */
-    public getRole() {
+    public function getRole() {
         return $this->role;
     }
 
     /**
      * @return string
      */
-    public getNick() {
+    public function getNick() {
         return $this->nick;
     }
 
     /**
      * @return string
      */
-    public getNickColour() {
+    public function getNickColour() {
         return $this->nickColour;
     }
 
     /**
      * @return string
      */
-    public getMessage() {
+    public function getMessage() {
         return $this->message;
     }
 
