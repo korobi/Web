@@ -3,6 +3,7 @@
 namespace Korobi\WebBundle\Deployment\Processor;
 
 use Korobi\WebBundle\Deployment\DeploymentInfo;
+use Korobi\WebBundle\Deployment\DeploymentStatus;
 use Korobi\WebBundle\Document\Revision;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -14,6 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInterface {
 
     public function handle(DeploymentInfo $deploymentInfo) {
-        // TODO: Implement handle() method.
+        return DeploymentStatus::$OK;
     }
 }

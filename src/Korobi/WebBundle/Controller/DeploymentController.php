@@ -3,6 +3,7 @@
 namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Deployment\DeploymentInfo;
+use Korobi\WebBundle\Deployment\DeploymentProcessor;
 use Korobi\WebBundle\Document\Revision;
 use Korobi\WebBundle\Util\Akio;
 use Korobi\WebBundle\Util\GitInfo;
@@ -67,65 +68,11 @@ class DeploymentController extends BaseController {
         $user = $this->getUser();
 
         $info = new DeploymentInfo($request, new Revision(), $user, $this->authChecker, $this->hmacKey, $this->rootPath);
+        $processor = new DeploymentProcessor($info, $this->logger, $this->container->get('kernel'), $this->akio);
+        $status = $processor->performDeployment();
+        $this->akio->sendMessage($this->akio->startMessage()->insertGreen()->insertText("lol768: Status was " . $status));
 
-        $verified = $this->verifySignature($this->getSignatureFromRequest($request), $this->hmacKey, $request->getContent());
-        $responseData = $this->getInitialResponseData($request, $verified);
-        $this->debug('Got deploy request.', $responseData);
-
-        $isSuperAdmin = $this->authChecker->isGranted('ROLE_SUPER_ADMIN');
-        if ($verified || $isSuperAdmin) {
-            $this->debug("About to execute " . $this->rootPath . 'deploy_init.sh');
-
-            // move to the root path, or you'll get screamed at because 'app/console' could not be found
-            chdir($this->rootPath);
-
-            $execOutput = [];
-            $statusCode = -1;
-            if (exec('./deploy_init.sh', $execOutput, $statusCode) === false) {
-                $this->akio->sendMessage($this->akio->startMessage()->insertRed()->insertText("lol768: Deploy failed."));
-                $this->debug('Failed to run deploy script.', array(), true);
-            } else {
-                $this->debug('Deploy output: ', $execOutput);
-
-            }
-
-            $responseData['exec_output'] = $execOutput;
-            $responseData['status_code'] = $statusCode;
-
-            // get latest git info
-            $this->gitInfo->updateData();
-            $responseData['new_commit'] = $this->gitInfo->getHash();
-
-            // we'll do tests here instead of in the bash script to make output processing easier
-            chdir($this->rootPath . DIRECTORY_SEPARATOR . 'app');
-            $execOutput = [];
-            $testOutput = exec('phpunit', $execOutput);
-            if (substr($testOutput, 0, 2) !== "OK") {
-                $this->debug("Tests failed!", [implode("\n", $execOutput)], true);
-                $responseData['tests'] = ["status" => "fail", "output" => $execOutput];
-            } else {
-                $this->debug("Tests passed.", [$testOutput]);
-                $responseData['tests'] = ["status" => "pass", "output" => $execOutput];
-            }
-            
-            
-            if ($responseData['new_commit'] !== $responseData['old_commit']) {
-                // code has changed, insert a new revision
-                
-                if ($responseData['tests']['status'] === 'pass') {
-                    $this->akio->sendMessage($this->akio->startMessage()->insertGreen()->insertText("All tests passed! Output: " . $testOutput));
-                } else {
-                    $this->akio->sendMessage($this->akio->startMessage()->insertRed()->insertText("lol768: At least one test failed. Output: " . $testOutput));
-                }
-            }
-
-            // only provide output if super admin
-            if (!$isSuperAdmin) {
-                return new JsonResponse(["verified" => $verified, "hidden" => true]);
-            }
-        }
-
-        return new JsonResponse($responseData);
+        return new JsonResponse(["status" => $status]);
     }
 
     /**
