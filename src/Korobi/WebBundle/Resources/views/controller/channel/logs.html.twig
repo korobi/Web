@@ -27,7 +27,9 @@ setInterval(function() {
         {% for line_num, line in logs %}
             <div class="line {% if not is_tail %}js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
                 {% if not is_tail %}
-                    <i class="fa fa-paint-brush"></i>
+                    <span class="icon">
+                        <i class="fa fa-paint-brush"></i>
+                    </span>
                 {% endif %}
                 <span class="timestamp">
                     {{ line.timestamp }}

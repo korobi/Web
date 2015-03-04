@@ -23,6 +23,10 @@
       border-bottom: 1px solid #222;
     }
 
+    &:last-child > span {
+      border-bottom: none;
+    }
+
     .nick {
       text-align: right;
       border-right: 1px solid #333; // TODO Don't hardcode colors?

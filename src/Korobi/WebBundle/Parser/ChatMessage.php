@@ -2,7 +2,7 @@
 
 namespace Korobi\WebBundle\Parser;
 
-class ChatMessage {
+class ChatMessage implements \JsonSerializable {
 
     /**
      * @var string
@@ -35,6 +35,16 @@ class ChatMessage {
         $this->nickColour = $colour;
         $this->nick = $actor;
         $this->message = $message;
+    }
+
+    public function jsonSerialize() {
+        return [
+            'timestamp'  => $this->timestamp,
+            'role'       => $this->role,
+            'nickColour' => $this->nickColour,
+            'nick'       => $this->nick,
+            'message'    => $this->message
+        ];
     }
 
     /**
