@@ -29,7 +29,7 @@ class ChatMessage {
      */
     private $message;
 
-    public __construct(\DateTime $date, $role, $colour, $actor, $message) {
+    public function __construct(\DateTime $date, $role, $colour, $actor, $message) {
         $this->timestamp = date('H:i:s', $date->getTimestamp());
         $this->role = strtolower($role);
         $this->nickColour = $colour;
