@@ -3,8 +3,10 @@
 namespace Korobi\WebBundle\Deployment\Processor;
 
 use Korobi\WebBundle\Deployment\DeploymentInfo;
+use Korobi\WebBundle\Deployment\DeploymentLogger;
 use Korobi\WebBundle\Deployment\DeploymentStatus;
 use Korobi\WebBundle\Document\Revision;
+use Korobi\WebBundle\Util\Akio;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,6 +20,20 @@ abstract class BaseProcessor implements DeploymentProcessorInterface {
      * @var DeploymentProcessorInterface
      */
     private $next;
+    /**
+     * @var DeploymentLogger
+     */
+    protected $logger;
+    /**
+     * @var Akio
+     */
+    protected $akio;
+
+    public function __construct(DeploymentLogger $logger, Akio $akio) {
+        $this->logger = $logger;
+        $this->akio = $akio;
+    }
+
 
     /**
      * @param DeploymentInfo $deploymentInfo

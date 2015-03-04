@@ -55,6 +55,11 @@ class Revision {
     private $manual;
 
     /**
+     * @MongoDB\String
+     */
+    private $branch;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -221,5 +226,27 @@ class Revision {
     public function setManual($manual) {
         $this->manual = $manual;
         return $this;
+    }
+
+    /**
+     * Set branch
+     *
+     * @param string $branch
+     * @return self
+     */
+    public function setBranch($branch)
+    {
+        $this->branch = $branch;
+        return $this;
+    }
+
+    /**
+     * Get branch
+     *
+     * @return string $branch
+     */
+    public function getBranch()
+    {
+        return $this->branch;
     }
 }

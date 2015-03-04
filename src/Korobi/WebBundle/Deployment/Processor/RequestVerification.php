@@ -22,9 +22,13 @@ class RequestVerification extends BaseProcessor implements DeploymentProcessorIn
         $signatureVerified = $this->verifySignature($signature, $deploymentInfo->getHmacKey(), $req->getContent());
         $okayToProceed = $signatureVerified || $isSuperUser;
 
+        $deploymentInfo->getRevision()->setManual($isSuperUser);
+
         if ($okayToProceed) {
+            $this->logger->debug("Verified deployment request");
             return parent::handle($deploymentInfo);
         }
+        $this->logger->debug("Rejecting unauthorised deployment request", ["signature" => $signatureVerified, "superuser" => $isSuperUser]);
         return DeploymentStatus::$UNAUTHORISED;
     }
 

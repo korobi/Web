@@ -2,7 +2,8 @@
 
 namespace Korobi\WebBundle\Controller;
 
-use Documents\User;
+use Korobi\WebBundle\Deployment\DeploymentInfo;
+use Korobi\WebBundle\Document\Revision;
 use Korobi\WebBundle\Util\Akio;
 use Korobi\WebBundle\Util\GitInfo;
 use Psr\Log\LoggerInterface;
@@ -64,6 +65,8 @@ class DeploymentController extends BaseController {
     public function deployAction(Request $request) {
         /** @var \Korobi\WebBundle\Document\User $user */
         $user = $this->getUser();
+
+        $info = new DeploymentInfo($request, new Revision(), $user, $this->authChecker, $this->hmacKey, $this->rootPath);
 
         $verified = $this->verifySignature($this->getSignatureFromRequest($request), $this->hmacKey, $request->getContent());
         $responseData = $this->getInitialResponseData($request, $verified);

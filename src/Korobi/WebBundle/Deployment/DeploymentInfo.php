@@ -40,18 +40,25 @@ class DeploymentInfo {
     private $hmacKey;
 
     /**
+     * @var string
+     */
+    private $rootPath;
+
+    /**
      * @param $request Request
      * @param $revision Revision
      * @param $user User
      * @param $authorisationChecker AuthorizationChecker
      * @param $hmacKey string The HMAC key
+     * @param $rootPath
      */
-    public function __construct(Request $request, Revision $revision, User $user, AuthorizationChecker $authorisationChecker, $hmacKey) {
+    public function __construct(Request $request, Revision $revision, User $user, AuthorizationChecker $authorisationChecker, $hmacKey, $rootPath) {
         $this->request = $request;
         $this->revision = $revision;
         $this->user = $user;
         $this->authorisationChecker = $authorisationChecker;
         $this->hmacKey = $hmacKey;
+        $this->rootPath = $rootPath;
     }
 
     /**
@@ -87,5 +94,12 @@ class DeploymentInfo {
      */
     public function getHmacKey() {
         return $this->hmacKey;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRootPath() {
+        return $this->rootPath;
     }
 }

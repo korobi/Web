@@ -12,6 +12,16 @@ use Korobi\WebBundle\Deployment\DeploymentInfo;
 class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
 
     public function handle(DeploymentInfo $deploymentInfo) {
-        // TODO: Implement handle() method.
+        chdir($deploymentInfo->getRootPath() . DIRECTORY_SEPARATOR . 'app');
+        $execOutput = [];
+        $testOutput = exec('phpunit', $execOutput);
+        if (substr($testOutput, 0, 2) !== "OK") {
+            $this->logger->debug("Tests failed!", [implode("\n", $execOutput)], true);
+
+            $responseData['tests'] = ["status" => "fail", "output" => $execOutput];
+        } else {
+            $this->logger->debug("Tests passed.", [$testOutput]);
+            $responseData['tests'] = ["status" => "pass", "output" => $execOutput];
+        }
     }
 }
