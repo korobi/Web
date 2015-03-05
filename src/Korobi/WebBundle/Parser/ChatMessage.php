@@ -57,6 +57,13 @@ class ChatMessage implements \JsonSerializable {
     /**
      * @return string
      */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
     public function getTimestamp() {
         return $this->timestamp;
     }
