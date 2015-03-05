@@ -18,7 +18,7 @@ $(function() {
             }
 
             // add class
-            $(".logs--line[data-line-num='" + line + "']").addClass('highlighted');
+            $(".logs .line[data-line-num='" + line + "']").addClass('highlighted');
         },
         /**
          * @param line
@@ -31,7 +31,7 @@ $(function() {
             }
 
             // remove class
-            $(".logs--line[data-line-num='" + line + "']").removeClass('highlighted');
+            $(".logs .line[data-line-num='" + line + "']").removeClass('highlighted');
         },
         /**
          * @returns {string}
@@ -52,7 +52,7 @@ $(function() {
             return result;
         },
         hashChange = function() {
-            $('.logs--line').removeClass('highlighted');
+            $('.logs .line').removeClass('highlighted');
 
             var hash = window.location.hash;
 
@@ -91,7 +91,7 @@ $(function() {
         jumpToFirstLine = function() {
             if (activeLines.length > 0) {
                 var shift = Math.min.apply(Math, activeLines);
-                var elem = $(".logs--line[data-line-num='" + shift + "']");
+                var elem = $(".logs .line[data-line-num='" + shift + "']");
                 $(window).scrollTop(elem.offset().top - 0.33 * $(window).height());
             }
         };
