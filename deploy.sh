@@ -10,7 +10,7 @@ echo "** Checking for dependency changes"
 git --no-pager log -1 HEAD --name-only | grep "composer.lock"
 if [ $? -ne 1 ]; then
     echo "** Found composer lock change, performing install"
-    composer install
+    composer install --no-scripts
 fi
 
 echo "** Dumping asset files..."
