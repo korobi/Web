@@ -109,7 +109,7 @@ $(function() {
         var line = $(this).closest('.line').data('line-num');
 
         // if ctrl is being held, add another line
-        if (event.ctrlKey) {
+        if (event.ctrlKey || event.metaKey) {
             // if we're holding ctrl and the line exists, remove it
             if (activeLines.indexOf(line) != -1) {
                 removeLine(line);
