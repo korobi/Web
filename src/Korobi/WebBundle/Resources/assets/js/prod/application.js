@@ -105,8 +105,8 @@ $(function() {
     $(document).on('mousedown', '.js-hl .fa', function(event) {
         event.preventDefault();
 
-        // grab parent (.fa is a child)
-        var line = $(this).parent().data('line-num');
+        // climb the dom to .line
+        var line = $(this).closest('.line').data('line-num');
 
         // if ctrl is being held, add another line
         if (event.ctrlKey) {
