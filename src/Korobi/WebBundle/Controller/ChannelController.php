@@ -222,7 +222,7 @@ class ChannelController extends BaseController {
             'channel_name' => $dbChannel->getChannel(),
             'logs' => $chats,
             'log_date' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
-            'last_id' => end($chats)->getId();
+            'last_id' => end($chats)->getId(),
             'is_tail' => $tail !== false
         ]);
     }
