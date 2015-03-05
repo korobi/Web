@@ -1,0 +1,22 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = "Deploment details" %}
+
+{% block body %}
+    <h1>View deployment</h1>
+    <p>
+        This deployment was triggered at {{ doc.date }}
+        {% if doc.manual %}
+            by a super-user
+        {% endif %}
+        and pulled in changes made in revision <a href="https://github.com/Korobi/Web/commit/{{ doc.newCommit }}">{{ doc.newCommit[:10] }}</a>
+    </p>
+    {% if doc.deploySuccessful %}
+        <h2>Deploy output (successful)</h2>
+    {% else %}
+        <h2>Deploy output (failed)</h2>
+    {% endif %}
+    <pre>{{ doc.deployOutput }}</pre>
+    <h2>Tests output ({{ doc.testsInfo.status }})</h2>
+    <pre>{{ doc.testsOutput }}</pre>
+{% endblock %}

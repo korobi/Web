@@ -76,10 +76,19 @@ class DeploymentController extends BaseController {
     }
 
     public function viewAction($id) {
+        if (!$this->authChecker->isGranted("ROLE_SUPER_ADMIN")) {
+            throw $this->createAccessDeniedException();
+        }
+
+        /** @var Revision $deployment */
         $deployment = $this->get('doctrine_mongodb')
             ->getRepository('KorobiWebBundle:Revision')
             ->find($id);
-        dump($deployment);
-        return $this->render('KorobiWebBundle::home.html.twig');
+
+        if ($deployment === null) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('KorobiWebBundle::deployment.html.twig', ["doc" => $deployment]);
     }
 }
