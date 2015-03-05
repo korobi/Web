@@ -6,6 +6,8 @@ body {
 main {
   @include outer-container;
   margin-top: 1em;
+  margin-bottom: $footerHeight + 20;
+  padding: 0 1em;
 }
 
 i.fa {
@@ -15,7 +17,7 @@ i.fa {
 body.light {
   background-image: none;
   color: #333;
-  
+
   i.fa {
     color: #333;
   }
@@ -67,8 +69,4 @@ h1, h2, h3, h4, h5, h5 {
 small,
 .small {
   font-size: floor((100% * $font-size-small / $font-size-base));
-}
-
-main {
-  padding: 0 1em;
 }
