@@ -31,11 +31,11 @@
       text-align: right;
       border-right: 1px solid #444;
 
-      &.owner:before    { content: '~'; color: nth($irc-colors,  4); }
-      &.admin:before    { content: '&'; color: nth($irc-colors, 11); }
-      &.operator:before { content: '@'; color: nth($irc-colors,  9); }
-      &.half_op:before  { content: '%'; color: nth($irc-colors, 13); }
-      &.voice:before    { content: '+'; color: nth($irc-colors,  8); }
+      &.owner:before    { content: '~'; color: nth($irc-colors,  5); }
+      &.admin:before    { content: '&'; color: nth($irc-colors, 12); }
+      &.operator:before { content: '@'; color: nth($irc-colors, 10); }
+      &.half_op:before  { content: '%'; color: nth($irc-colors, 14); }
+      &.voice:before    { content: '+'; color: nth($irc-colors,  9); }
     }
 
     .message {
