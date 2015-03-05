@@ -166,19 +166,30 @@ class ChannelController extends BaseController {
         list($year, $month, $day, $tail) = self::populateRequest($year, $month, $day, $tail);
 
         // fetch all chats
-        $dbChats = $this->get('doctrine_mongodb')
+        $repo = $this->get('doctrine_mongodb')
             ->getManager()
-            ->getRepository('KorobiWebBundle:Chat')
-            ->findAllByChannelAndDate(
-                $network,
-                self::transformChannelName($channel, true),
-                new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day, $year)))),
-                new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
-            )
-            ->toArray();
+            ->getRepository('KorobiWebBundle:Chat');
+        $last_id = $request->query->get('last_id', false);
+        if($last_id !== false && \MongoId::isValid($last_id)) {
+            $dbChats = $repo->findAllByChannelAndId(
+                    $network,
+                    self::transformChannelName($channel, true),
+                    new \MongoId($last_id),
+                    new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
+                )
+                ->toArray();
+        } else {
+            $dbChats = $repo->findAllByChannelAndDate(
+                    $network,
+                    self::transformChannelName($channel, true),
+                    new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day, $year)))),
+                    new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
+                )
+                ->toArray();
+        }
 
-        // if a tail is requested...
-        if ($tail !== false) {
+        // if a tail is requested and no last id was provided...
+        if ($tail !== false && $last_id === false) {
             // ... grab the last X chats
             $dbChats = array_slice($dbChats, -$tail);
         }
@@ -192,6 +203,7 @@ class ChannelController extends BaseController {
         foreach ($dbChats as $chat) {
             /** @var $chat Chat  */
             $chats[] = new ChatMessage(
+                $chat->getId(),
                 $chat->getDate(),
                 $chat->getType() == 'MESSAGE' ? $chat->getActorPrefix() : '',
                 LogParser::getColourForActor($chat),
@@ -210,6 +222,7 @@ class ChannelController extends BaseController {
             'channel_name' => $dbChannel->getChannel(),
             'logs' => $chats,
             'log_date' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
+            'last_id' => end($chats)->getId();
             'is_tail' => $tail !== false
         ]);
     }

@@ -5,6 +5,11 @@ namespace Korobi\WebBundle\Parser;
 class ChatMessage implements \JsonSerializable {
 
     /**
+     * @var MongoId
+     */
+    private $id;
+
+    /**
      * @var string
      */
     private $timestamp;
@@ -29,7 +34,8 @@ class ChatMessage implements \JsonSerializable {
      */
     private $message;
 
-    public function __construct(\DateTime $date, $role, $colour, $actor, $message) {
+    public function __construct(\MongoId $id, \DateTime $date, $role, $colour, $actor, $message) {
+        $this->id = $id;
         $this->timestamp = date('H:i:s', $date->getTimestamp());
         $this->role = strtolower($role);
         $this->nickColour = $colour;
@@ -39,6 +45,7 @@ class ChatMessage implements \JsonSerializable {
 
     public function jsonSerialize() {
         return [
+            'id'         => $this->id,
             'timestamp'  => $this->timestamp,
             'role'       => $this->role,
             'nickColour' => $this->nickColour,

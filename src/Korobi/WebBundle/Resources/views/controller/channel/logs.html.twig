@@ -10,30 +10,42 @@
 {{ parent() }}
 {% if is_tail %}
 <script>
+var last_id = {{ last_id }};
 $(document).scrollTop($("#bottom").offset().top);
 setInterval(function() {
-    $.get('{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}', function(data) {
-        var logs = $('div.logs').empty();
-        $.each(JSON.parse(data), function(index, line) {
-            var timestamp = $('<span/>')
-                .addClass('timestamp')
-                .html(line.timestamp);
-            var nick = $('<span/>')
-                .addClass('nick irc--' + line.nickColour + '-99 ' + line.role)
-                .html(line.nick);
-            var message = $('<span/>')
-                .addClass('message')
-                .html(line.message);
-            logs.append(
-                $('<div/>')
-                    .addClass('line')
-                    .append(timestamp)
-                    .append(nick)
-                    .append(message)
-            );
-        });
-        $(document).scrollTop($("#bottom").offset().top);
-    })
+    $.ajax({
+        url: '{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}',
+        data: { last_id: last_id },
+        type: 'GET',
+        success: function(data) {
+            var json = JSON.parse(data);
+            if(json.length == 0) {
+                return;
+            }
+
+            var logs = $('.logs');
+            $.each(json, function(index, line) {
+                var timestamp = $('<span/>')
+                    .addClass('timestamp')
+                    .html(line.timestamp);
+                var nick = $('<span/>')
+                    .addClass('nick irc--' + line.nickColour + '-99 ' + line.role)
+                    .html(line.nick);
+                var message = $('<span/>')
+                    .addClass('message')
+                    .html(line.message);
+                logs.append(
+                    $('<div/>')
+                        .addClass('line')
+                        .append(timestamp)
+                        .append(nick)
+                        .append(message)
+                );
+            });
+            last_id = json.slice(-1)[0].id;
+            $(document).scrollTop($("#bottom").offset().top);
+        }
+    });
 }, 5000);
 </script>
 {% endif %}
