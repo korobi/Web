@@ -46,7 +46,7 @@ class ChatRepository extends DocumentRepository {
             ->sort('date', 'ASC')
             ->field('network')->equals($network)
             ->field('channel')->equals($channel)
-            ->field('_id')->gte($from)
+            ->field('_id')->gt($from)
             ->field('date')->lt($to)
             ->getQuery()
             ->execute();
