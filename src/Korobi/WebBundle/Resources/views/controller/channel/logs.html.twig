@@ -10,7 +10,7 @@
 {{ parent() }}
 {% if is_tail %}
 <script>
-var last_id = {{ last_id }};
+var last_id = '{{ last_id }}';
 $(document).scrollTop($("#bottom").offset().top);
 setInterval(function() {
     $.ajax({
