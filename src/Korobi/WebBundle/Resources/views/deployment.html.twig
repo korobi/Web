@@ -5,7 +5,7 @@
 {% block body %}
     <h1>View deployment</h1>
     <p>
-        This deployment was triggered at {{ doc.date }}
+        This deployment was triggered at {{ doc.date|date('Y-m-d H:i:s') }}
         {% if doc.manual %}
             by a super-user
         {% endif %}
