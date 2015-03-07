@@ -18,23 +18,23 @@
   position: absolute;
   left: 50%;
   bottom: -10px;
-  margin-left: -10px
+  margin-left: -10px;
 }
 
 #tooltip.top:after {
   border-top-color: transparent;
   border-bottom: 10px solid #34495E;
   top: -20px;
-  bottom: auto
+  bottom: auto;
 }
 
 #tooltip.left:after {
   left: 10px;
-  margin: 0
+  margin: 0;
 }
 
 #tooltip.right:after {
   right: 10px;
   left: auto;
-  margin: 0
+  margin: 0;
 }
