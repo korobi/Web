@@ -11,6 +11,12 @@
         {% endif %}
         and pulled in changes made in revision <a href="https://github.com/Korobi/Web/commit/{{ doc.newCommit }}">{{ doc.newCommit[:10] }}</a>
     </p>
+    <p>Statuses attached to this include:</p>
+    <ul>
+        {% for status in doc.statuses %}
+            <li>{{ status }}</li>
+        {% endfor %}
+    </ul>
     {% if doc.deploySuccessful %}
         <h2>Deploy output (successful)</h2>
     {% else %}
