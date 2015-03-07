@@ -27,7 +27,8 @@
       border-bottom: none;
     }
 
-    .timestamp {
+    /* Only enable when not tailing */
+    .logs:not(.tailing) & .timestamp {
       cursor: pointer;
 
       &:hover {
