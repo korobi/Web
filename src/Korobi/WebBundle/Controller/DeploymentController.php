@@ -70,7 +70,6 @@ class DeploymentController extends BaseController {
         $info = new DeploymentInfo($request, new Revision(), $user, $this->authChecker, $this->hmacKey, $this->rootPath);
         $processor = new DeploymentProcessor($info, $this->logger, $this->container->get('kernel'), $this->akio, $this->get('doctrine_mongodb')->getManager());
         $status = $processor->performDeployment();
-        $this->akio->sendMessage($this->akio->startMessage()->insertGreen()->insertText("Status was " . $status));
 
         return new JsonResponse(["status" => $status]);
     }
