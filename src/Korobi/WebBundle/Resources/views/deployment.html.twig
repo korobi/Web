@@ -22,7 +22,7 @@
     {% else %}
         <h2>Deploy output (failed)</h2>
     {% endif %}
-    <pre>{{ doc.deployOutput }}</pre>
+    <pre class="code">{{ doc.deployOutput }}</pre>
     <h2>Tests output ({{ doc.testsInfo.status }})</h2>
-    <pre>{{ doc.testsOutput }}</pre>
+    <pre class="code">{{ doc.testsOutput }}</pre>
 {% endblock %}

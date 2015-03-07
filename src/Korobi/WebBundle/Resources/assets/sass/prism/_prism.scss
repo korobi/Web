@@ -6,7 +6,7 @@
  */
 
 code[class*="language-"],
-pre[class*="language-"] {
+pre[class*="language-"], .code {
   color: #f8f8f2;
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
   font-family: Consolas, Monaco, 'Andale Mono', monospace;
@@ -36,7 +36,7 @@ pre[class*="language-"] {
 }
 
 :not(pre) > code[class*="language-"],
-pre[class*="language-"] {
+pre[class*="language-"], .code {
   background: rgba(0, 0, 0, 0.5);
 }
 
