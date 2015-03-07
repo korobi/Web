@@ -53,23 +53,11 @@ class IRCTextParser {
                 if (self::isColor($character)) {
                     $sixSubsequentCharacters = substr($line, $i, 6);
                     $colours = IRCColourParser::parseColour($sixSubsequentCharacters, $isReversed, $currentFg, $currentBg);
-                    if ($colours !== null) {
-                        $result .= '<span class="irc--' . $colours['foreground'] . '-' . $colours['background'] . '">';
-                        $activeMap['color'] = $activeMap['color'] + 1;
-                        $currentFg = $colours['foreground'];
-                        $currentBg = $colours['background'];
-                        $i += $colours['skip'];
-                        continue;
-                    }
-
-                    if ($activeMap['color'] > 0) {
-                        for ($j = 0; $j < $activeMap['color']; $j++) {
-                            $result .= self::wrapInelement($characterMap['color'], true);
-                        }
-
-                        $activeMap['color'] = 0;
-                        continue;
-                    }
+                    $result .= '<span class="irc--' . $colours['foreground'] . '-' . $colours['background'] . '">';
+                    $activeMap['color'] = $activeMap['color'] + 1;
+                    $currentFg = $colours['foreground'];
+                    $currentBg = $colours['background'];
+                    $i += $colours['skip'];
 
                     continue;
                 }

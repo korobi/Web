@@ -16,7 +16,10 @@ class IRCColourParser {
         $matches = [];
         $retVal = preg_match($regex, $messageFragment, $matches, PREG_OFFSET_CAPTURE);
         if ($retVal === 0) {
-            return null;
+            echo "No match!";
+            $result = ['foreground' => sprintf('%02d', 99), 'background' => sprintf("%02d", 99)];
+            $result['skip'] = 0;
+            return $result;
         } else {
             $result = ['foreground' => sprintf('%02d', $matches[1][0]), 'background' => sprintf("%02d", $defaultBg)];
             $result['skip'] = $matches[1][1] + 1;
