@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "41ae5aa8478d5c9d9b6836595620ff73",
+    "hash": "72dfc6a2615253874a74a21c10dc4e74",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1866,6 +1866,55 @@
                 "psr-3"
             ],
             "time": "2015-03-05 01:12:12"
+        },
+        {
+            "name": "nelmio/security-bundle",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nelmio/NelmioSecurityBundle.git",
+                "reference": "a3ee5be287b8586e46f082504044b62343a6a3c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nelmio/NelmioSecurityBundle/zipball/a3ee5be287b8586e46f082504044b62343a6a3c0",
+                "reference": "a3ee5be287b8586e46f082504044b62343a6a3c0",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": "~2.3",
+                "symfony/security": "~2.3"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nelmio\\SecurityBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nelmio",
+                    "homepage": "http://nelm.io"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/nelmio/NelmioSecurityBundle/contributors"
+                }
+            ],
+            "description": "Extra security-related features for Symfony2: signed/encrypted cookies, HTTPS/SSL/HSTS handling, cookie session storage, ...",
+            "keywords": [
+                "security"
+            ],
+            "time": "2015-02-01 11:00:05"
         },
         {
             "name": "phpunit/php-code-coverage",
