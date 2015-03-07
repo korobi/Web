@@ -6,27 +6,27 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
   outline: 0;
   font-size: 100%;
   vertical-align: baseline;
-  background: transparent
+  background: transparent;
 }
 
 body {
-  line-height: 1
+  line-height: 1;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-  display: block
+  display: block;
 }
 
 nav ul {
-  list-style: none
+  list-style: none;
 }
 
 blockquote, q {
-  quotes: none
+  quotes: none;
 }
 
 blockquote:before, blockquote:after, q:before, q:after {
-  content: none
+  content: none;
 }
 
 a {
@@ -34,34 +34,34 @@ a {
   padding: 0;
   font-size: 100%;
   vertical-align: baseline;
-  background: transparent
+  background: transparent;
 }
 
 ins {
   background-color: #ff9;
   color: #000;
-  text-decoration: none
+  text-decoration: none;
 }
 
 mark {
   background-color: #ff9;
   color: #000;
   font-style: italic;
-  font-weight: bold
+  font-weight: bold;
 }
 
 del {
-  text-decoration: line-through
+  text-decoration: line-through;
 }
 
 abbr[title], dfn[title] {
   border-bottom: 1px dotted;
-  cursor: help
+  cursor: help;
 }
 
 table {
   border-collapse: collapse;
-  border-spacing: 0
+  border-spacing: 0;
 }
 
 hr {
@@ -70,9 +70,9 @@ hr {
   border: 0;
   border-top: 1px solid #ccc;
   margin: 1em 0;
-  padding: 0
+  padding: 0;
 }
 
 input, select {
-  vertical-align: middle
+  vertical-align: middle;
 }
