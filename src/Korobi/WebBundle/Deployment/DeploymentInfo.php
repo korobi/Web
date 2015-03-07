@@ -45,6 +45,11 @@ class DeploymentInfo {
     private $rootPath;
 
     /**
+     * @var array Array of statuses
+     */
+    private $status;
+
+    /**
      * @param $request Request
      * @param $revision Revision
      * @param $user User
@@ -59,6 +64,7 @@ class DeploymentInfo {
         $this->authorisationChecker = $authorisationChecker;
         $this->hmacKey = $hmacKey;
         $this->rootPath = $rootPath;
+        $this->status = [];
     }
 
     /**
@@ -101,5 +107,14 @@ class DeploymentInfo {
      */
     public function getRootPath() {
         return $this->rootPath;
+    }
+
+    /**
+     * @param string $status
+     * @see  DeploymentStatus
+     */
+    public function addStatus($status) {
+        $this->status[] = $status;
+        $this->revision->setStatuses($this->status);
     }
 }

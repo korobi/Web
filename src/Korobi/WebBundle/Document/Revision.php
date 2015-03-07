@@ -65,6 +65,11 @@ class Revision {
     private $branch;
 
     /**
+     * @MongoDB\Collection
+     */
+    private $statuses;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -275,5 +280,27 @@ class Revision {
     public function getTestsInfo()
     {
         return $this->tests_info;
+    }
+
+    /**
+     * Set statuses
+     *
+     * @param collection $statuses
+     * @return self
+     */
+    public function setStatuses($statuses)
+    {
+        $this->statuses = $statuses;
+        return $this;
+    }
+
+    /**
+     * Get statuses
+     *
+     * @return collection $statuses
+     */
+    public function getStatuses()
+    {
+        return $this->statuses;
     }
 }

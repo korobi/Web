@@ -31,6 +31,7 @@ class RequestVerification extends BaseProcessor implements DeploymentProcessorIn
             return parent::handle($deploymentInfo);
         }
         $this->logger->debug("Rejecting unauthorised deployment request", ["signature" => $signatureVerified, "superuser" => $isSuperUser]);
+        $deploymentInfo->addStatus(DeploymentStatus::$UNAUTHORISED);
         return DeploymentStatus::$UNAUTHORISED;
     }
 
