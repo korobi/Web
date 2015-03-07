@@ -27,15 +27,6 @@
       border-bottom: none;
     }
 
-    /* Only enable when not tailing */
-    .logs:not(.tailing) & .timestamp {
-      cursor: pointer;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-
     .nick {
       text-align: right;
       border-right: 1px solid #444;
@@ -75,5 +66,14 @@
         border-right-color: #888;
       }
     }
+  }
+}
+
+/* Only enable when not tailing */
+.logs:not(.tailing) .timestamp {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
