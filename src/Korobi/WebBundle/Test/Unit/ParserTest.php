@@ -70,7 +70,7 @@ class ParserTest extends WebTestCase {
         $chat->expects($this->any())->method("getActorName")->will($this->returnValue("TestUser"));
         $chat->expects($this->any())->method("getActorPrefix")->will($this->returnValue("OPERATOR"));
         $chat->expects($this->any())->method("getMessage")->will($this->returnValue("\x0313Red_Sky\x03 plays \x030,04 Red 7 \x03 \x03 to \x0306Kashike"));
-        $this->assertEquals('<span class="irc--13-99">Red_Sky</span> plays <span class="irc--00-04"> Red 7 </span>  to <span class="irc--06-04">Kashike</span>', LogParser::parseMessage($chat));
+        $this->assertEquals('<span class="irc--13-99">Red_Sky</span> plays <span class="irc--00-04"> Red 7 </span>  to <span class="irc--06-99">Kashike</span>', LogParser::parseMessage($chat));
     }
 
 
