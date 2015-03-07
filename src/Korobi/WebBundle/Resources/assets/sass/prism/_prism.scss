@@ -28,11 +28,16 @@ pre[class*="language-"], .code {
 }
 
 /* Code blocks */
-pre[class*="language-"] {
+pre[class*="language-"], .code {
   padding: 1em;
   margin: .5em 0;
   overflow: auto;
   border-radius: 0.3em;
+}
+
+.code {
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 :not(pre) > code[class*="language-"],
