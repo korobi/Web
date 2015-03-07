@@ -27,6 +27,14 @@
       border-bottom: none;
     }
 
+    .timestamp {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
     .nick {
       text-align: right;
       border-right: 1px solid #444;

@@ -2,6 +2,11 @@
  * Line highlighting
  */
 $(function() {
+    // Check if line hilighting is needed
+    if(!$('.logs:not(.tailing)').length) {
+        return;
+    }
+
     var activeLines = [],
         /**
          * @param line
@@ -58,7 +63,7 @@ $(function() {
 
             var remainingPart = hash.substr(0, 2);
             if (remainingPart == "#L") {
-                if ($('div.logs').length !== 0) {
+                if ($('.logs').length !== 0) {
                     var remainingParts = hash.substr(2).split(',');
                     for (var i = 0; i < remainingParts.length; i++) {
                         var part = remainingParts[i];
@@ -102,7 +107,7 @@ $(function() {
     });
 
     // allow adding and removing lines using the icon beside the log line
-    $(document).on('mousedown', '.js-hl .fa', function(event) {
+    $(document).on('mousedown', '.logs .timestamp', function(event) {
         event.preventDefault();
 
         // climb the dom to .line
