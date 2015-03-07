@@ -97,3 +97,25 @@ hwi_oauth:
     fosub:
         properties:
             github: githubUserId
+
+#Nelmio sec bundle config
+nelmio_security:
+    csp:
+        enforce:
+            report-uri: [/nelmio/csp/report]
+            default-src: ['self']
+            script-src:
+                - 'self'
+                - 'https://cdnjs.cloudflare.com'
+            font-src:
+                - 'self'
+                - 'https://cdnjs.cloudflare.com'
+                - 'https://fonts.googleapis.com'
+            style-src:
+                - 'self'
+                - 'https://cdnjs.cloudflare.com'
+                - 'https://fonts.googleapis.com'
+            img-src:
+                - 'https:'
+            object-src:
+                - 'none'
