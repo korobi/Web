@@ -46,15 +46,26 @@ class IRCTextParser {
             if (in_array($character, $characterMap)) {
                 if (self::isBold($character)) {
                     $result .= self::wrapInElement($characterMap['bold'], $activeMap['bold'] == 1);
-                    $activeMap['bold'] = $activeMap['bold'] == 0 ? 1 : 0;
+                    $activeMap['bold'] ^= 1;
                     continue;
                 }
 
                 if (self::isColor($character)) {
+                    // close previous color tags if any
+                    if ($activeMap['color']) {
+                        $result .= self::wrapInelement($characterMap['color'], true);
+                        $activeMap['color'] = 0;
+                    }
+
                     $sixSubsequentCharacters = substr($line, $i, 6);
-                    $colours = IRCColourParser::parseColour($sixSubsequentCharacters, $isReversed, $currentFg, $currentBg);
+                    $colours = IRCColourParser::parseColour(
+                        $sixSubsequentCharacters,
+                        $isReversed,
+                        $currentFg,
+                        $currentBg
+                    );
                     $result .= '<span class="irc--' . $colours['foreground'] . '-' . $colours['background'] . '">';
-                    $activeMap['color'] = $activeMap['color'] + 1;
+                    $activeMap['color'] = 1;
                     $currentFg = $colours['foreground'];
                     $currentBg = $colours['background'];
                     $i += $colours['skip'];
@@ -85,13 +96,13 @@ class IRCTextParser {
 
                 if (self::isItalic($character)) {
                     $result .= self::wrapInElement($characterMap['italic'], $activeMap['italic'] == 1);
-                    $activeMap['italic'] = $activeMap['italic'] == 0 ? 1 : 0;
+                    $activeMap['italic'] ^= 1;
                     continue;
                 }
 
                 if (self::isUnderline($character)) {
                     $result .= self::wrapInElement($characterMap['underline'], $activeMap['underline'] == 1);
-                    $activeMap['underline'] = $activeMap['underline'] == 0 ? 1 : 0;
+                    $activeMap['underline'] ^= 1;
                     continue;
                 }
             }
