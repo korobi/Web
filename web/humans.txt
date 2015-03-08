@@ -1,8 +1,8 @@
 /* WEB */
 
-    Kashike - ???
+    Kashike - backend developer, javascript hitter, kitten cuddler
         Twitter: @_kashike
-        GitHub: https://github.com/Kashike/
+        GitHub: https://github.com/kashike/
 
     lol768 - backend developer
         Twitter: @lol768
@@ -14,14 +14,13 @@
 
 /* IRC */
 
-    Kashike - ???
+    Kashike - developer, kitten cuddler
         Twitter: @_kashike
-        GitHub: https://github.com/Kashike/
+        GitHub: https://github.com/kashike/
 
 /* THANKS */
 
     Zarthus - work on colour parser and advice
-        Twitter: @Zarthus_
         GitHub: https://github.com/Zarthus/
 
     drtshock - feedback on the site and bot
