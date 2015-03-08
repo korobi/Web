@@ -9,7 +9,7 @@
 </head>
 <body>
     {{ content|raw }}
-    {% javascripts '@child_frame' %}
+    {% javascripts '@child_frame' output='assets/js/frame.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 </body>
