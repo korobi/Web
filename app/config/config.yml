@@ -122,5 +122,7 @@ nelmio_security:
             object-src:
                 - 'none'
     external_redirects:
-        override: unexpected_redirect
+        override: /unexpected-redirect
         forward_as: redirUrl
+        whitelist:
+          - github.com
