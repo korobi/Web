@@ -1,0 +1,29 @@
+/* WEB */
+
+    Kashike - ???
+        Twitter: @_kashike
+        GitHub: https://github.com/Kashike/
+
+    lol768 - backend developer
+        Twitter: @lol768
+        GitHub: https://github.com/lol768/
+
+    bendem - ???
+        Twitter: @bendembd
+        GitHub: https://github.com/bendem/
+
+/* IRC */
+
+    Kashike - ???
+        Twitter: @_kashike
+        GitHub: https://github.com/Kashike/
+
+/* THANKS */
+
+    Zarthus - work on colour parser and advice
+        Twitter: @Zarthus_
+        GitHub: https://github.com/Zarthus/
+
+    drtshock - feedback on the site and bot
+        Twitter: @drtshock
+        GitHub: https://github.com/drtshock/
