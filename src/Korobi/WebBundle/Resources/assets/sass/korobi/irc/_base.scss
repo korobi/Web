@@ -35,8 +35,8 @@ $irc-colors: #ffffff #555753 #3465a4 #4e9a06 #ef2929 #cc0000 #75507b #c4a000 #fc
 }
 
 body.light {
-  @for $i from 0 through df {
-    @for $x from 0 through df {
+  @for $i from 0 through 15 {
+    @for $x from 0 through 15 {
       .irc--#{leading_zero($i)}-#{leading_zero($x)} {
         color: darken(nth($irc-colors, $i+1), 20%);
         background-color: darken(nth($irc-colors, $x+1), 20%);
