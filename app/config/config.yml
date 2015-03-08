@@ -121,3 +121,6 @@ nelmio_security:
                 - 'data:'
             object-src:
                 - 'none'
+    external_redirects:
+        override: unexpected_redirect
+        forward_as: redirUrl

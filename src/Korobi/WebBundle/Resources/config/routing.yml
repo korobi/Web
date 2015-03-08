@@ -27,6 +27,9 @@ csp_report:
     path: /csp/report
     defaults: { _controller: korobi.controller.security:reportCspAction }
     methods:  [POST]
+unexpected_redirect:
+    path: /unexpected-redirect
+    defaults: { _controller: korobi.controller.security:showRedirectAction }
 # temporary
 dummy:
     path: /dummy
