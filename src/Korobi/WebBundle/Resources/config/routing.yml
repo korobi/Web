@@ -14,6 +14,9 @@ deploy:
 deploy_view:
     path: /deploy/view/{id}
     defaults: { _controller: korobi.deploy_controller:viewAction }
+docs_render:
+    path: /docs/{file}
+    defaults: { _controller: korobi.docs_controller:renderAction }
 revisions:
     path: /revisions/{repository}
     defaults: { _controller: korobi.controller.revisions:listAction, repository: Web }
