@@ -9,3 +9,11 @@
         iframes are used in this section to sandbox the markdown-rendered content that is the documentation.
     </iframe>
 {% endblock %}
+
+{% block javascripts %}
+    <script type="application/javascript">
+        $(function() {
+            $('iframe').iFrameResize();
+        });
+    </script>
+{% endblock %}
