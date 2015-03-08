@@ -17,7 +17,7 @@ use Symfony\Component\Debug\Debug;
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }*/
 if (!isset($_SERVER['HTTP_X_GITHUB_DELIVERY']) && !isset($_SERVER['HTTP_X_HUB_SIGNATURE']) && strpos($_SERVER['HTTP_USER_AGENT'], 'GitHub-Hookshot/') === false) {
-    if ($_SERVER['HTTP_X_KOROBI_AUTH'] != 'RfI4RnTKtzZx9M1drjUtsGewf' && $_SERVER['HTTP_X_KOROBI_AUTH'] != 'ZYPfWQnSryJmV6J9HC6TAfj') {
+    if ($_SERVER['HTTP_X_KOROBI_AUTH'] != 'nkYPUztAKf3gv82FnuMd9BB') {
         header('HTTP/1.0 403 Forbidden');
         exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
     }
