@@ -15,7 +15,9 @@
     <script type="application/javascript">
         $(function() {
             console.log("The doc is ready");
-            $('iframe').iFrameResize({log: true});
+            $('iframe').iFrameResize({log: true, resizedCallback: function(data) {
+                alert("It has been done.");
+            }});
         });
     </script>
 {% endblock %}
