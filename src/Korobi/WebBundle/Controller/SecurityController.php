@@ -25,7 +25,7 @@ class SecurityController extends BaseController {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function reportCspAction(Request $req) {
-        $payload = json_decode($req->getContent());
+        $payload = json_decode($req->getContent(), true);
         $uri = $payload['csp-report']['document-uri'];
         $resource = $payload['csp-report']['blocked-uri'];
         $message = $this->akio->startMessage()->insertRed()->insertText("[!! CSP !!]")->insertAquaLight()->insertText(" Request to $resource on page $uri blocked.");
