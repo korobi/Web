@@ -44,5 +44,20 @@ monolog:
 assetic:
     use_controller: true
 
+nelmio_security:
+    csp:
+        enforce:
+            script-src:
+                - 'self'
+                - 'unsafe-inline'
+                - 'unsafe-eval'
+                - 'https://cdnjs.cloudflare.com'
+            style-src:
+                - 'self'
+                - 'https://cdnjs.cloudflare.com'
+                - 'https://fonts.googleapis.com'
+                - 'unsafe-inline'
+
+
 #swiftmailer:
 #    delivery_address: me@example.com
