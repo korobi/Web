@@ -13,10 +13,10 @@ deploy:
     defaults: { _controller: korobi.deploy_controller:deployAction }
 deploy_view:
     path: /deploy/view/{id}
-    defaults: { _controller: korobi.deploy_controller:viewAction }
+    defaults: { _controller: korobi.controller.deploy:viewAction }
 docs_render:
     path: /docs/{file}
-    defaults: { _controller: korobi.docs_controller:renderAction }
+    defaults: { _controller: korobi.controller.docs:renderAction }
 revisions:
     path: /revisions/{repository}
     defaults: { _controller: korobi.controller.revisions:listAction, repository: Web }
