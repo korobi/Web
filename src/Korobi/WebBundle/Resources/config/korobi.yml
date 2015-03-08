@@ -20,7 +20,7 @@ korobi_web:
               - channel_stats
 
             - title: Docs
-              route: 'dummy'
+              route: 'docs_index'
 
             - title: Admin
               route: 'dummy'
