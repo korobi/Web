@@ -118,6 +118,6 @@ nelmio_security:
                 - 'https://fonts.googleapis.com'
             img-src:
                 - 'https:'
-                - 'data'
+                - 'data:'
             object-src:
                 - 'none'
