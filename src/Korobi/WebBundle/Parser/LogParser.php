@@ -9,7 +9,7 @@ class LogParser {
     const JOIN_USER_PREFIX = '-->';
     const PART_USER_PREFIX = '<--';
     const ACTION_USER_PREFIX = '*';
-    const ACTION_SERVER_PREFIX = '**';
+    const ACTION_SERVER_PREFIX = '--';
     const ACTION_SERVER_COLOUR = '14';
 
     // -----------------
@@ -191,6 +191,11 @@ class LogParser {
             case 'ACTION':
             case 'MESSAGE':
                 return NickColours::getColourForNick(self::transformActor($chat->getActorName()));
+            case 'PART':
+            case 'QUIT':
+                return '02';
+            case 'JOIN':
+                return '04';
             default:
                 return self::ACTION_SERVER_COLOUR;
         }
