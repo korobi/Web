@@ -5,6 +5,7 @@ namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Exception\NotImplementedException;
 use Michelf\Markdown;
+use Symfony\Component\HttpFoundation\Response;
 
 class DocsController extends BaseController {
 
@@ -22,6 +23,6 @@ class DocsController extends BaseController {
         $parser->no_entities = true;
         $parser->no_markup = true;
 
-        return $parser->transform(file_get_contents($fn));
+        return new Response($parser->transform(file_get_contents($fn)));
     }
 }
