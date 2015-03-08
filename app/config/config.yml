@@ -102,7 +102,7 @@ hwi_oauth:
 nelmio_security:
     csp:
         enforce:
-            report-uri: [/nelmio/csp/report]
+            report-uri: [/csp/report]
             default-src: ['self']
             script-src:
                 - 'self'

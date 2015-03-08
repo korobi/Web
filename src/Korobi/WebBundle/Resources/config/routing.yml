@@ -23,6 +23,10 @@ theme_toggle:
 style_guide:
     path: /style-guide
     defaults: { _controller: korobi.controller.style_guide:displayAction }
+csp_report:
+    path: /csp/report
+    defaults: { _controller: korobi.controller.security:cspReportAction }
+    methods:  [POST]
 # temporary
 dummy:
     path: /dummy
