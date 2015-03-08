@@ -22,7 +22,8 @@ class DocsController extends BaseController {
         $parser = new Markdown;
         $parser->no_entities = true;
         $parser->no_markup = true;
-        return $this->render('KorobiWebBundle::doc_item.html.twig', ["content" => $parser->transform(file_get_contents($fn))]);
+        $content = $this->render('KorobiWebBundle::doc_item.html.twig', ["content" => $parser->transform(file_get_contents($fn))]);
+        return new Response($content, 200, ["Content-Security-Policy" => "default-src 'self'"]);
     }
 
     public function indexAction() {
