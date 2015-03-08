@@ -33,7 +33,7 @@ class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
         }
 
         $this->akio->sendMessage($message);
-
+        $this->akio->sendMessage(json_encode($parsed));
         $deploymentInfo->getRevision()->setTestsOutput(implode("\n", $execOutput));
         $deploymentInfo->getRevision()->setTestsPassed($parsed['failures'] === 0);
         $deploymentInfo->getRevision()->setTestsInfo($parsed);
