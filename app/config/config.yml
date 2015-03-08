@@ -130,4 +130,6 @@ nelmio_security:
         nosniff: true
     clickjacking:
         paths:
+            '^/docs/.+': SAMEORIGIN
             '^/.*': DENY
+

@@ -1,0 +1,11 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = "Docs" %}
+
+{% block body %}
+    <h1>Documentation Index</h1>
+    <iframe seamless sandbox src="/docs/index" class="docs" width="100%" scrolling="no">
+        Your browser does not support iframes.
+        iframes are used in this section to sandbox the markdown-rendered content that is the documentation.
+    </iframe>
+{% endblock %}

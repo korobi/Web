@@ -25,4 +25,8 @@ class DocsController extends BaseController {
 
         return new Response($parser->transform(file_get_contents($fn)));
     }
+
+    public function indexAction() {
+        return $this->render('KorobiWebBundle::docs.html.twig');
+    }
 }
