@@ -9,11 +9,12 @@ $(function() {
         return localStorage.getItem('sf2/profiler/' + name);
     }
 
+    var $body = $('body');
     if ($debugToolbar.length != 0) {
         var dispPref = getSymfonyPreference('toolbar/displayState');
-        if (dispPref == 'block') {
+        if (dispPref == 'block' || dispPref === null) {
             $('.footer').addClass('footer--debug');
-            $('body').addClass('open-debug');
+            $body.addClass('open-debug');
         }
     }
 
@@ -29,7 +30,7 @@ $(function() {
 
     }
 
-    $('body').on("click", ".hide-button, a[title='Show Symfony toolbar']", function() {
+    $body.on("click", ".hide-button, a[title='Show Symfony toolbar']", function() {
         toggleFooterDebugMode();
     });
 });
