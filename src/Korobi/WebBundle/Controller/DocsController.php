@@ -21,15 +21,13 @@ class DocsController extends BaseController {
 
         $parser = new Markdown;
         $parser->no_entities = true;
-        $parser->no_markup = true;
-        if ($this->container->has('profiler')) {
-            $this->container->get('profiler')->disable();
-        }
-        $content = $this->render('KorobiWebBundle::doc_item.html.twig', ["content" => $parser->transform(file_get_contents($fn))]);
+        $parser->no_markup = true; // not bulletproof but CSP will fix whatever else we get
+
+        $content = $this->render('KorobiWebBundle::docs.html.twig', ["content" => $parser->transform(file_get_contents($fn))]);
         return $content;
     }
 
     public function indexAction() {
-        return $this->render('KorobiWebBundle::docs.html.twig');
+        return $this->renderAction("index");
     }
 }
