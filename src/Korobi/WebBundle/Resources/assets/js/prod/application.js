@@ -163,7 +163,7 @@ $(function() {
         if (hash !== 'L') {
             window.location.hash = createHash();
         } else {
-            window.location.hash = '';
+            history.pushState('', document.title, window.location.pathname + window.location.search);
         }
     });
 
