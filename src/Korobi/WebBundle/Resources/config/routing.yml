@@ -25,7 +25,7 @@ style_guide:
     defaults: { _controller: korobi.controller.style_guide:displayAction }
 csp_report:
     path: /csp/report
-    defaults: { _controller: korobi.controller.security:cspReportAction }
+    defaults: { _controller: korobi.controller.security:reportCspAction }
     methods:  [POST]
 # temporary
 dummy:
