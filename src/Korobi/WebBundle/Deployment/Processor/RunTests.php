@@ -13,6 +13,11 @@ use Korobi\WebBundle\Deployment\TestOutputParser;
  */
 class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
 
+    /**
+     * Does the actual test work.
+     * @param DeploymentInfo $deploymentInfo
+     * @return string
+     */
     public function handle(DeploymentInfo $deploymentInfo) {
         chdir($deploymentInfo->getRootPath() . DIRECTORY_SEPARATOR . 'app');
         $execOutput = [];
