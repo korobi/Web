@@ -10,7 +10,7 @@ home:
     defaults: { _controller: korobi.controller.home:homeAction }
 deploy:
     path: /deploy
-    defaults: { _controller: korobi.deploy_controller:deployAction }
+    defaults: { _controller: korobi.controller.deploy:deployAction }
 deploy_view:
     path: /deploy/view/{id}
     defaults: { _controller: korobi.controller.deploy:viewAction }
