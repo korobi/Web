@@ -11,12 +11,12 @@ class DocsController extends BaseController {
 
     public function renderAction($file) {
         if (!preg_match("/^[A-Za-z0-9_]+$/", $file)) {
-            throw $this->createAccessDeniedException("Invalid doc");
+            throw $this->createNotFoundException("Invalid doc");
         }
 
         $fn = $this->get('kernel')->getRootDir() . "/docs/" . $file . ".md";
         if (!file_exists($fn)) {
-            throw $this->createAccessDeniedException("Doc does not exist");
+            throw $this->createNotFoundException("Doc does not exist, " . $fn);
         }
 
         $parser = new Markdown;
