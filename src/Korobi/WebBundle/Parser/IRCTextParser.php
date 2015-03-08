@@ -97,8 +97,10 @@ class IRCTextParser {
                         $styles['bg'] = self::DEFAULT_BACKGROUND;
                     }
                     $colour_info = self::parseColour(substr($next, $index + 1, 7));
-                    $tag = self::createColorTag($colour_info['fg'], $colour_info['bg']);
-                    $skip += $colour_info['skip'];
+                    if($colour_info['skip']) { // A color code without simply resets the color
+                        $tag = self::createColorTag($colour_info['fg'], $colour_info['bg']);
+                        $skip += $colour_info['skip'];
+                    }
                     $styles['fg'] = $colour_info['fg'];
                     $styles['bg'] = $colour_info['bg'];
                     break;
