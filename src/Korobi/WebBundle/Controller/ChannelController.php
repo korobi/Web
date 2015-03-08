@@ -202,14 +202,7 @@ class ChannelController extends BaseController {
         // process all found chat entries
         foreach ($dbChats as $chat) {
             /** @var $chat Chat  */
-            $chats[] = new ChatMessage(
-                $chat->getId(),
-                $chat->getDate(),
-                $chat->getType() == 'MESSAGE' ? $chat->getActorPrefix() : '',
-                LogParser::getColourForActor($chat),
-                LogParser::getActorName($chat),
-                $this->parseChatMessage($chat)
-            );
+            $chats[] = $this->transformToChatMessage($chat);
         }
 
         if ($request->isXmlHttpRequest()) {
@@ -256,6 +249,17 @@ class ChannelController extends BaseController {
         }
 
         return [$year, $month, $day, $tail];
+    }
+
+    private function transformToChatMessage(Chat $chat) {
+        return new ChatMessage(
+            $chat->getId(),
+            $chat->getDate(),
+            $chat->getType() == 'MESSAGE' ? $chat->getActorPrefix() : '',
+            LogParser::getColourForActor($chat),
+            LogParser::getActorName($chat),
+            $this->parseChatMessage($chat)
+        );
     }
 
     /**

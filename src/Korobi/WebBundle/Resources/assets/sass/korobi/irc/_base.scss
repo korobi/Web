@@ -1,4 +1,4 @@
-//            White   Black   Blue   Green    LRed    Brown   Purple  Orange  Yellow  LGreen   Cyan   LCyan   LBlue   Pink    Grey   LightGrey
+//            White   Black   Blue    Green   LRed    Brown   Purple  Orange  Yellow  LGreen  Cyan    LCyan   LBlue   Pink    Grey    LightGrey
 $irc-colors: #ffffff #555753 #3465a4 #4e9a06 #ef2929 #cc0000 #75507b #c4a000 #fce94f #8ae234 #06989a #34e2e2 #729fcf #ad7fa8 #555753 #d3d7cf;
 
 // Generates all the classes for the IRC colours
@@ -23,20 +23,20 @@ $irc-colors: #ffffff #555753 #3465a4 #4e9a06 #ef2929 #cc0000 #75507b #c4a000 #fc
     }
   }
 
-  .irc--#{leading_zero($i)}-99 {
+  .irc--#{leading_zero($i)}-df {
     background-color: transparent;
     color: nth($irc-colors, $i+1);
   }
 
-  .irc--99-#{leading_zero($i)} {
+  .irc--df-#{leading_zero($i)} {
     background-color: nth($irc-colors, $i+1);
     color: #eee;
   }
 }
 
 body.light {
-  @for $i from 0 through 15 {
-    @for $x from 0 through 15 {
+  @for $i from 0 through df {
+    @for $x from 0 through df {
       .irc--#{leading_zero($i)}-#{leading_zero($x)} {
         color: darken(nth($irc-colors, $i+1), 20%);
         background-color: darken(nth($irc-colors, $x+1), 20%);
@@ -48,12 +48,12 @@ body.light {
       }
     }
 
-    .irc--#{leading_zero($i)}-99 {
+    .irc--#{leading_zero($i)}-df {
       background-color: transparent;
       color: darken(nth($irc-colors, $i+1), 20%);
     }
 
-    .irc--99-#{leading_zero($i)} {
+    .irc--df-#{leading_zero($i)} {
       background-color: darken(nth($irc-colors, $i+1), 20%);
       color: #eee;
     }

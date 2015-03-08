@@ -42,6 +42,10 @@
       word-break: break-all;
       padding-right: 0;
       padding-left: 10px;
+
+      .underline { text-decoration: underline; }
+      .italic    { font-style: italic; }
+      .bold      { font-weight: bold; }
     }
   }
 
