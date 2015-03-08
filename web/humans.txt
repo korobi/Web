@@ -26,3 +26,7 @@
     drtshock - feedback on the site and bot
         Twitter: @drtshock
         GitHub: https://github.com/drtshock/
+
+    jkcclemens - ???
+        Twitter: @jkcclemens
+        GitHub: https://github.com/jkcclemens/
