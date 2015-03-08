@@ -195,7 +195,7 @@ class LogParser {
             case 'QUIT':
                 return '02';
             case 'JOIN':
-                return '04';
+                return '03';
             default:
                 return self::ACTION_SERVER_COLOUR;
         }
