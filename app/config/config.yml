@@ -63,6 +63,10 @@ assetic:
         child_frame:
             inputs:
                 - '@KorobiWebBundle/Resources/assets/js/prod/iframeResizer.contentWindow.js'
+        production:
+            inputs:
+                - '@KorobiWebBundle/Resources/assets/js/prod/application.js'
+                - '@KorobiWebBundle/Resources/assets/js/prod/prism.js'
 # Doctrine Configuration
 doctrine_mongodb:
     connections:
