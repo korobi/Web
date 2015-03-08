@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Embedded document</title>
+    {% stylesheets filter='scss' '@KorobiWebBundle/Resources/assets/sass/application.scss' output='assets/css/application.css' %}
+    <link rel='stylesheet' href='{{ asset_url }}?cb={{ "now"|date("U") }}' />
+    {% endstylesheets %}
+</head>
+<body>
+    {{ content|raw }}
+    {% javascripts '@child_frame' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+</body>
+</html>
