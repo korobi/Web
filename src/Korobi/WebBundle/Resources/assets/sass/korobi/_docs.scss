@@ -1,5 +1,6 @@
 .docs {
   width: 100%;
+  iframe {}
 }
 
 .doc-item ul, .doc-item ol {
@@ -9,4 +10,5 @@
 
 .doc-item {
   background: transparent;
+  padding-bottom: 20px;
 }
