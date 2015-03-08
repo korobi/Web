@@ -21,4 +21,5 @@ php app/console cache:clear
 
 echo "** Updating docs submodule"
 git submodule init docs
-git submodule update docs
+cd docs/
+git pull
