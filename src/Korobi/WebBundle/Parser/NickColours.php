@@ -8,7 +8,7 @@ namespace Korobi\WebBundle\Parser;
 class NickColours {
     // http://www.weechat.org/files/doc/stable/weechat_user.en.html
     // cyan,magenta,green,brown,lightblue,default,lightcyan,lightmagenta,lightgreen,blue
-    public static $COLOUR_MAP = ['10', '06', '03', '07', '12', '99', '11', '13', '09', '02'];
+    public static $COLOUR_MAP = [10, 6, 3, 7, 12, IRCTextParser::DEFAULT_FOREGROUND, 11, 13, 9, 2];
 
     /**
      * @param string $nick The nick.

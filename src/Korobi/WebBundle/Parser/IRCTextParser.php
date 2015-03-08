@@ -92,13 +92,11 @@ class IRCTextParser {
                     break;
                 case 'colour':
                     if ($styles['fg'] != self::DEFAULT_FOREGROUND || $styles['bg'] != self::DEFAULT_BACKGROUND) {
-                        // reset colors first
+                        // a color is in use, closing
                         $closeTag = self::closeTag();
-                        $styles['fg'] = self::DEFAULT_FOREGROUND;
-                        $styles['bg'] = self::DEFAULT_BACKGROUND;
                     }
                     $colour_info = self::parseColour(substr($next, $index + 1, 7));
-                    if($colour_info['skip']) { // A color code without simply resets the color
+                    if($colour_info['skip']) { // A color code without information simply resets the color
                         $tag = self::createColorTag($colour_info['fg'], $colour_info['bg']);
                         $skip += $colour_info['skip'];
                     }

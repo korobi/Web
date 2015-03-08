@@ -25,11 +25,15 @@ setInterval(function() {
 
             var logs = $('.logs');
             $.each(json, function(index, line) {
+                // Pad the colour with 0
+                var colourStr = line.nickColour + '';
+                var colour = '00'.substr(0, colour.length) + colourStr;
+
                 var timestamp = $('<span/>')
                     .addClass('timestamp')
                     .html(line.timestamp);
                 var nick = $('<span/>')
-                    .addClass('nick irc--' + line.nickColour + '-99 ' + line.role)
+                    .addClass('nick irc--' + colour + '-df ' + line.role)
                     .html(line.nick);
                 var message = $('<span/>')
                     .addClass('message')
@@ -60,7 +64,7 @@ setInterval(function() {
                     {{ line.timestamp }}
                 </span>
                 {% spaceless %}
-                    <span class="nick irc--{{ line.nickColour }}-99 {% if line.role is not empty %}{{ line.role }}{% endif %}">
+                    <span class="nick irc--{{ "%02d"|format(line.nickColour) }}-df {% if line.role is not empty %}{{ line.role }}{% endif %}">
                         {{- line.nick }}
                     </span>
                 {% endspaceless %}

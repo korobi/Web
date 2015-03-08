@@ -20,7 +20,7 @@ class ChatMessage implements \JsonSerializable {
     private $role;
 
     /**
-     * @var string
+     * @var int
      */
     private $nickColour;
 
@@ -83,7 +83,7 @@ class ChatMessage implements \JsonSerializable {
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getNickColour() {
         return $this->nickColour;
