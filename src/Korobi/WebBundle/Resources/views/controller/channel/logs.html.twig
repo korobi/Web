@@ -27,7 +27,7 @@ setInterval(function() {
             $.each(json, function(index, line) {
                 // Pad the colour with 0
                 var colourStr = line.nickColour + '';
-                var colour = '00'.substr(0, colour.length) + colourStr;
+                var colour = '00'.substr(0, colourStr.length) + colourStr;
 
                 var timestamp = $('<span/>')
                     .addClass('timestamp')
