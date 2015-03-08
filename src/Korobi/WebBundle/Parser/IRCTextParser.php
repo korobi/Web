@@ -75,8 +75,9 @@ class IRCTextParser {
                 case 'underline':
                     if ($styles[$style]) {
                         $closeTag = self::closeTag();
+                    } else {
+                        $tag = self::createFormatTag($style);
                     }
-                    $tag = self::createFormatTag($style);
                     $styles[$style] ^= 1;
                     break;
                 case 'reverse':
