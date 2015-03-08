@@ -23,7 +23,6 @@ class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
         $execOutput = [];
         $testOutput = exec('phpunit', $execOutput);
         $parsed = (new TestOutputParser())->parseLine($testOutput);
-        $this->akio->sendMessage($this->akio->startMessage()->insertText("Parsing line \"$testOutput\" => " . json_encode($parsed)));
 
         $message = $this->akio->startMessage()->insertGreen()->insertText($parsed['passed'] . " tests passed.");
 
