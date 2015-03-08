@@ -1,3 +1,12 @@
 .docs {
   width: 100%;
 }
+
+.doc-item ul, .doc-item ol {
+  margin: 1em 0;
+  padding: 0 0 0 40px;
+}
+
+.doc-item {
+  background: transparent;
+}
