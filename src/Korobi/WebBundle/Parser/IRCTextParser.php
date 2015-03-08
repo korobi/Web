@@ -360,19 +360,4 @@ class IRCTextParser {
     private static function createLinkTag($url, $content) {
         return sprintf('<a href="%s" target="_blank">%s</a>', self::makeSafe($url), self::makeSafe($content));
     }
-
-    /**
-     * @param null $item
-     * @return array|int|null|string
-     */
-    private static function getCharacterMap() {
-        $map = [
-            'bold' => chr(2),
-            'color' => chr(3),
-            'clear' => chr(15),
-            'reversetv' => chr(22),
-            'italic' => chr(29),
-            'underline' => chr(31),
-        ];
-    }
 }
