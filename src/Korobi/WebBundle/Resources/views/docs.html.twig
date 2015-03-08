@@ -14,7 +14,8 @@
     {{ parent() }}
     <script type="application/javascript">
         $(function() {
-            $('iframe').iFrameResize();
+            console.log("The doc is ready");
+            $('iframe').iFrameResize({log: true});
         });
     </script>
 {% endblock %}
