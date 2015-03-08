@@ -21,9 +21,9 @@ security:
         app:
             pattern: ^/
             oauth:
-                failure_path: /auth/connect
-                login_path: /auth/connect
-                check_path: /auth/connect
+                failure_path: /auth/connect/github
+                login_path: /auth/connect/github
+                check_path: /auth/connect/github
                 provider: fos_userbundle
                 resource_owners:
                     github: '/auth/connect/check-github'
