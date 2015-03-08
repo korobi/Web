@@ -80,12 +80,24 @@ class IRCTextParser {
                     $styles[$style] ^= 1;
                     break;
                 case 'reverse':
-                case 'colour':
+                    // ignore if no color is set
                     if ($styles['fg'] != self::DEFAULT_FOREGROUND || $styles['bg'] != self::DEFAULT_BACKGROUND) {
                         $closeTag = self::closeTag();
+                        $tmp = $styles['fg'];
+                        $styles['fg'] = $styles['bg'];
+                        $styles['bg'] = $tmp;
+                        $tag = self::createColorTag($styles['fg'], $styles['bg']);
                     }
-                    $colour_info = self::parseColour(substr($next, $index + 1, 7), $style == 'reverse');
-                    $tag = self::createColorTag($colour_info);
+                    break;
+                case 'colour':
+                    if ($styles['fg'] != self::DEFAULT_FOREGROUND || $styles['bg'] != self::DEFAULT_BACKGROUND) {
+                        // reset colors first
+                        $closeTag = self::closeTag();
+                        $styles['fg'] = self::DEFAULT_FOREGROUND;
+                        $styles['bg'] = self::DEFAULT_BACKGROUND;
+                    }
+                    $colour_info = self::parseColour(substr($next, $index + 1, 7));
+                    $tag = self::createColorTag($colour_info['fg'], $colour_info['bg']);
                     $skip += $colour_info['skip'];
                     $styles['fg'] = $colour_info['fg'];
                     $styles['bg'] = $colour_info['bg'];
@@ -110,10 +122,9 @@ class IRCTextParser {
 
     /**
      * @param string $messageFragment The fragment of message to extract the colours from.
-     * @param bool $swap Swaps the foreground and background
      * @return array An array of data containing fg, bg and char count to skip.
      */
-    public static function parseColour($messageFragment, $swap = false, $fg = self::DEFAULT_FOREGROUND, $bg = self::DEFAULT_BACKGROUND) {
+    public static function parseColour($messageFragment, $fg = self::DEFAULT_FOREGROUND, $bg = self::DEFAULT_BACKGROUND) {
         $result = [
             'fg' => $fg,
             'bg' => $bg,
@@ -137,12 +148,6 @@ class IRCTextParser {
                 $result['bg'] = intval($matches['bg'][0]);
                 $result['skip'] += strlen($matches['bg'][0]) + 1; // + 1 for the comma
             }
-        }
-
-        if ($swap) {
-            $tmp = $result['fg'];
-            $result['fg'] = $result['bg'];
-            $result['bg'] = $tmp;
         }
 
         return $result;
@@ -194,18 +199,12 @@ class IRCTextParser {
     /**
      * Creates a span element with a class corresponding to the provided colour information.
      *
-     * @param array $colour_info
-     * @param bool $close
+     * @param int $fg
+     * @param int $bg
      * @return string
      * @internal param string $style
      */
-    private static function createColorTag(array $colour_info, $close = false) {
-        if ($close) {
-            return '</span>';
-        }
-
-        $fg = $colour_info['fg'];
-        $bg = $colour_info['bg'];
+    private static function createColorTag($fg, $bg) {
 
         return '<span class="' . self::getColorClass($fg, $bg) . '">';
     }

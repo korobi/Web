@@ -146,28 +146,6 @@ class IRCTextParserTest extends WebTestCase {
         );
     }
 
-    public function testSimpleColourWithSwap() {
-        $message = "05Hello world!";
-        $this->assertEquals([
-                "fg" => IRCTextParser::DEFAULT_BACKGROUND,
-                "bg" => 5,
-                "skip" => 2
-            ],
-            IRCTextParser::parseColour($message, true)
-        );
-    }
-
-    public function testSimpleColourWithSwapAndDefaults() {
-        $message = "05Hello world!";
-        $this->assertEquals([
-                "fg" => 42,
-                "bg" => 5,
-                "skip" => 2
-            ],
-            IRCTextParser::parseColour($message, true, 99, 42)
-        );
-    }
-
     public function testSimpleColourWithBackground() {
         $message = "05,04Hello world!";
         $this->assertEquals([
@@ -190,17 +168,6 @@ class IRCTextParserTest extends WebTestCase {
         );
     }
 
-    public function testColoursWithSwap() {
-        $message = "5,4Hello world!";
-        $this->assertEquals([
-                "fg" => 4,
-                "bg" => 5,
-                "skip" => 3
-            ],
-            IRCTextParser::parseColour($message, true)
-        );
-    }
-
     public function testColoursWithDefaults() {
         $message = "5Hello world!";
         $this->assertEquals([
@@ -208,21 +175,7 @@ class IRCTextParserTest extends WebTestCase {
                 "bg" => 2,
                 "skip" => 1
             ],
-            IRCTextParser::parseColour($message, false, 99, 2)
-        );
-    }
-
-    public function testColoursWithDefaultsAndSwap() {
-        // Normally this would be 05 colour text on a default (i.e. 99) BG
-        // But we're swapping it and providing some defaults
-        // So the background should be 05 and the foreground should be our default background colour
-        $message = "5Hello world!";
-        $this->assertEquals([
-                "fg" => 2,
-                "bg" => 5,
-                "skip" => 1
-            ],
-            IRCTextParser::parseColour($message, true, 99, 2)
+            IRCTextParser::parseColour($message, 99, 2)
         );
     }
 
