@@ -8,7 +8,7 @@
                 {% endfor %}
             {% endspaceless %}
             {% if not app.user %}
-                <li><a href="/auth/connect/github">Login</a></li>
+                <li><a href="/auth/connect/github" rel="nofollow">Login</a></li>
             {% else %}
                 <li><a href="/auth/logout">Logout</a></li>
             {% endif %}
