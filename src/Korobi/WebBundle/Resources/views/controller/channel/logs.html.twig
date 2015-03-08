@@ -10,6 +10,10 @@
 {{ parent() }}
 {% if is_tail %}
 <script>
+function pad(n) {
+    n = n + '';
+    return n.length >= 2 ? n : new Array(2 - n.length + 1).join('0') + n;
+}
 var last_id = '{{ last_id }}';
 $(document).scrollTop($("#bottom").offset().top);
 setInterval(function() {
@@ -25,15 +29,11 @@ setInterval(function() {
 
             var logs = $('.logs');
             $.each(json, function(index, line) {
-                // Pad the colour with 0
-                var colourStr = line.nickColour + '';
-                var colour = '00'.substr(0, colourStr.length) + colourStr;
-
                 var timestamp = $('<span/>')
                     .addClass('timestamp')
                     .html(line.timestamp);
                 var nick = $('<span/>')
-                    .addClass('nick irc--' + colour + '-df ' + line.role)
+                    .addClass('nick irc--' + pad(line.nickColour) + '-df ' + line.role)
                     .html(line.nick);
                 var message = $('<span/>')
                     .addClass('message')
