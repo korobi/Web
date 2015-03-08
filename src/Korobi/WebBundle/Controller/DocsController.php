@@ -22,6 +22,9 @@ class DocsController extends BaseController {
         $parser = new Markdown;
         $parser->no_entities = true;
         $parser->no_markup = true;
+        if ($this->container->has('profiler')) {
+            $this->container->get('profiler')->disable();
+        }
         $content = $this->render('KorobiWebBundle::doc_item.html.twig', ["content" => $parser->transform(file_get_contents($fn))]);
         return new Response($content, 200, ["Content-Security-Policy" => "script-src 'self'"]);
     }
