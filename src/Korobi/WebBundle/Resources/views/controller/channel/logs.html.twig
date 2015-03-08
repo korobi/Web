@@ -61,7 +61,7 @@ setInterval(function() {
                 </span>
                 {% spaceless %}
                     <span class="nick irc--{{ line.nickColour }}-99 {% if line.role is not empty %}{{ line.role }}{% endif %}">
-                        {{ line.nick }}
+                        {{- line.nick }}
                     </span>
                 {% endspaceless %}
                 <span class="message">
