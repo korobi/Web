@@ -22,7 +22,7 @@ class DocsController extends BaseController {
         $parser = new Markdown;
         $parser->no_entities = true;
         $parser->no_markup = true;
-        return $this->render('KorobiWebBundle::doc_item.html.twig', ["contents" => $parser->transform(file_get_contents($fn))]);
+        return $this->render('KorobiWebBundle::doc_item.html.twig', ["content" => $parser->transform(file_get_contents($fn))]);
     }
 
     public function indexAction() {
