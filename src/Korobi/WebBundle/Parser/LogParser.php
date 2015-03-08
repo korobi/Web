@@ -6,6 +6,8 @@ use Korobi\WebBundle\Document\Chat;
 
 class LogParser {
 
+    const JOIN_USER_PREFIX = '-->';
+    const PART_USER_PREFIX = '<--';
     const ACTION_USER_PREFIX = '*';
     const ACTION_SERVER_PREFIX = '**';
     const ACTION_SERVER_COLOUR = '14';
@@ -204,6 +206,11 @@ class LogParser {
                 return $chat->getActorName();
             case 'ACTION':
                 return self::ACTION_USER_PREFIX;
+            case 'JOIN':
+                return self::JOIN_USER_PREFIX;
+            case 'PART':
+            case 'QUIT':
+                return self::PART_USER_PREFIX;
             default:
                 return self::ACTION_SERVER_PREFIX;
         }
