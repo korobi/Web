@@ -23,7 +23,7 @@ class DocsController extends BaseController {
         $parser->no_entities = true;
         $parser->no_markup = true;
 
-        return new Response($parser->transform(file_get_contents($fn)));
+        return new Response($parser->transform(file_get_contents($fn)), 200, ["Content-Type" => "text/html-sandboxed"]);
     }
 
     public function indexAction() {
