@@ -24,6 +24,7 @@ class TestOutputParser {
         }
         if ($data['incomplete'] > 0) {
             $data['status'] = "Tentative pass";
+            $data['passed'] = $data['tests'] - $data['incomplete'];
         }
 
         if ($data['failures'] > 0) {

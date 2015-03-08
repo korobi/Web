@@ -18,14 +18,22 @@ class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
         $execOutput = [];
         $testOutput = exec('phpunit', $execOutput);
         $parsed = (new TestOutputParser())->parseLine($testOutput);
+        $message = $this->akio->startMessage()->insertGreen()->insertText($parsed['passed'] . " tests passed.");
+
+
+
+        if ($parsed['incomplete'] > 0) {
+            $message = $message->insertYellow(" " . $parsed['incomplete'] . " skipped/risky tests.");
+        }
+
         if ($parsed['failures'] > 0) {
             $this->logger->debug("Tests failed!", [implode("\n", $execOutput)], true);
-            $this->akio->sendMessage($this->akio->startMessage()->insertRed()->insertText($parsed['failures'] . " tests failed in this deploy."));
+            $message = $message->insertRed(" " . $parsed['failed'] . " failed.");
             $deploymentInfo->addStatus(DeploymentStatus::$TESTS_FAILED);
-        } else {
-            $this->logger->debug("Tests passed.", [$testOutput]);
-            $this->akio->sendMessage($this->akio->startMessage()->insertGreen()->insertText($parsed['passed'] . " tests passed."));
         }
+
+        $this->akio->sendMessage($message);
+
         $deploymentInfo->getRevision()->setTestsOutput(implode("\n", $execOutput));
         $deploymentInfo->getRevision()->setTestsPassed($parsed['failures'] === 0);
         $deploymentInfo->getRevision()->setTestsInfo($parsed);

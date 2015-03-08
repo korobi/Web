@@ -24,6 +24,7 @@ class TestOutputParserTest extends WebTestCase {
         $sut = new TestOutputParser();
         $data = $sut->parseLine("Tests: 23, Assertions: 28, Incomplete: 1.");
         $this->assertEquals(23, $data['tests']);
+        $this->assertEquals(22, $data['passed']);
         $this->assertEquals(28, $data['assertions']);
         $this->assertEquals(1, $data['incomplete']);
         $this->assertEquals("Tentative pass", $data['status']);
