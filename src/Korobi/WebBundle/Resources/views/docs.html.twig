@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script type="application/javascript">
         $(function() {
             $('iframe').iFrameResize();
