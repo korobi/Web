@@ -26,7 +26,7 @@ class DocsController extends BaseController {
             $this->container->get('profiler')->disable();
         }
         $content = $this->render('KorobiWebBundle::doc_item.html.twig', ["content" => $parser->transform(file_get_contents($fn))]);
-        return new Response($content, 200, ["Content-Security-Policy" => "script-src 'self'"]);
+        return $content;
     }
 
     public function indexAction() {
