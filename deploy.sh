@@ -19,7 +19,5 @@ php app/console assetic:dump
 echo "** Clearing cache..."
 php app/console cache:clear
 
-echo "** Updating docs submodule"
-git submodule init docs
-cd docs/
-git pull
+echo "** Updating docs submodule with git pull"
+git submodule foreach git pull origin master
