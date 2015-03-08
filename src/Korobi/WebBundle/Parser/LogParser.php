@@ -193,7 +193,7 @@ class LogParser {
                 return NickColours::getColourForNick(self::transformActor($chat->getActorName()));
             case 'PART':
             case 'QUIT':
-                return '02';
+                return '04';
             case 'JOIN':
                 return '03';
             default:
