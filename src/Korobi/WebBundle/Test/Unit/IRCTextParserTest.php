@@ -104,6 +104,26 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertFalse($im_a_style['italic']);
     }
 
+    public function testMessageWithFgAndBgUsingReverse() {
+        $hf = new HtmlFacility(IRCTextParser::parse("\x16I'm a \x031,2test"));
+
+        $this->assertTrue($hf->isValid());
+
+        $test_style = $hf->getStyle('test');
+        $this->assertEquals('002', $test_style['fg']);
+        $this->assertEquals('001', $test_style['bg']);
+        $this->assertFalse($test_style['bold']);
+        $this->assertFalse($test_style['underline']);
+        $this->assertFalse($test_style['italic']);
+
+        $im_a_style = $hf->getStyle("I'm a ");
+        $this->assertEquals(IRCTextParser::DEFAULT_BACKGROUND, $im_a_style['fg']);
+        $this->assertFalse(IRCTextParser::DEFAULT_FOREGROUND, $im_a_style['bg']);
+        $this->assertFalse($im_a_style['bold']);
+        $this->assertFalse($im_a_style['underline']);
+        $this->assertFalse($im_a_style['italic']);
+    }
+
     public function testMessageNestedFormats() {
         $hf = new HtmlFacility(IRCTextParser::parse("abc\x02d\x031,2e\x0ffg"));
 
@@ -135,6 +155,8 @@ class IRCTextParserTest extends WebTestCase {
         $hf = new HtmlFacility(IRCTextParser::parse(
             "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopqrstuvwxyz"
         ));
+
+        // \x02 => bold, \x03 => colour
 
         $this->assertTrue($hf->isValid());
 
