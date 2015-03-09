@@ -131,6 +131,27 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertFalse($e_style['italic']);
     }
 
+    public function testNestedFormats() {
+        var_dump(IRCTextParser::parse(
+            "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopqrstuvwxyz"
+        ));
+        $hf = new HtmlFacility(IRCTextParser::parse(
+            "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopqrstuvwxyz"
+        ));
+
+        $this->assertTrue($hf->isValid());
+
+        $h_style = $hf->getStyle('h');
+        $this->assertEquals('001', $h_style['fg']);
+        $this->assertEquals('002', $h_style['bg']);
+        $this->assertFalse($h_style['bold']);
+
+        $n_style = $hf->getStyle('n');
+        $this->assertEquals(IRCTextParser::DEFAULT_FOREGROUND, $n_style['fg']);
+        $this->assertEquals(IRCTextParser::DEFAULT_BACKGROUND, $n_style['bg']);
+        $this->assertTrue($n_style['bold']);
+    }
+
     /************************************
      * Color tests
      */
