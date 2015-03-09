@@ -132,9 +132,6 @@ class IRCTextParserTest extends WebTestCase {
     }
 
     public function testNestedFormats() {
-        var_dump(IRCTextParser::parse(
-            "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopqrstuvwxyz"
-        ));
         $hf = new HtmlFacility(IRCTextParser::parse(
             "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopqrstuvwxyz"
         ));
