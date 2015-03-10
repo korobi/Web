@@ -103,6 +103,14 @@ class IRCTextParserTest extends WebTestCase {
         );
     }
 
+    public function testMessageWithTags() {
+        $message = "<script>alert('woo');</script>";
+        $this->assertEquals(
+            htmlentities($message),
+            IRCTextParser::parse($message)
+        );
+    }
+
     public function testMessageWithFgAndBg() {
         $hf = new HtmlFacility(IRCTextParser::parse("I'm a \x031,2test"));
 
