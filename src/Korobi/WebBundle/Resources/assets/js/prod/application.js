@@ -2,7 +2,7 @@
  * Line highlighting
  */
 $(function() {
-    // Check if line hilighting is needed
+    // Check if line highlighting is needed
     if(!$('.logs:not(.tailing)').length) {
         return;
     }
@@ -106,16 +106,24 @@ $(function() {
         hashChange();
     });
 
-    // allow adding and removing lines using the icon beside the log line
+    // Allow lines to be highlighted by clicking the timestamp next to the log line.
+    // The behaviour for clicks is as follows:
+    // - Click:
+    // ---- highlight single line, un-highlighting any existing highlighted lines
+    // - Ctrl + Click:
+    // ---- add or remove (if line is already highlighted) a line
+    // - Shift + Click:
+    // ---- add/remove highlighting to a group of lines
     $(document).on('mousedown', '.logs .timestamp', function(event) {
         event.preventDefault();
 
         // climb the dom to .line
         var line = $(this).closest('.line').data('line-num');
 
-        // if ctrl is being held, add another line
+        // If ctrl/command is being held while clicking, either highlight the line or remove
+        // existing highlighting from the line.
         if (event.ctrlKey || event.metaKey) {
-            // if we're holding ctrl and the line exists, remove it
+            // If the line is already highlighted, remove highlighting
             if (activeLines.indexOf(line) != -1) {
                 removeLine(line);
             } else {
@@ -143,8 +151,6 @@ $(function() {
                 hashChange();
                 return;
             }
-
-
         } else {
             var alreadyExisted = (activeLines.indexOf(line) != -1 && activeLines.length === 1);
             // ctrl is not being held, remove all and add new
@@ -179,62 +185,64 @@ $(function() {
     var targets = $('[rel~=tooltip]'),
         target = false,
         tooltip = false,
-        title = false;
+        title = false,
+        tip;
 
     targets.bind('mouseenter', function() {
         target = $(this);
         tip = target.attr('title');
         tooltip = $('<div id="tooltip"></div>');
 
-        if (!tip || tip == '')
+        if (!tip || tip == '') {
             return false;
+        }
 
         target.removeAttr('title');
         tooltip.css('opacity', 0)
             .html(tip)
             .appendTo('body');
 
-        var init_tooltip = function() {
-            if ($(window).width() < tooltip.outerWidth() * 1.5)
+        var initTooltip = function() {
+            if ($(window).width() < tooltip.outerWidth() * 1.5) {
                 tooltip.css('max-width', $(window).width() / 2);
-            else
+            } else {
                 tooltip.css('max-width', 340);
+            }
 
-            var pos_left = target.offset().left + (target.outerWidth() / 2) - (tooltip.outerWidth() / 2),
-                pos_top = target.offset().top - tooltip.outerHeight() - 20;
+            var posLeft = target.offset().left + (target.outerWidth() / 2) - (tooltip.outerWidth() / 2),
+                posTop = target.offset().top - tooltip.outerHeight() - 20;
 
-            if (pos_left < 0) {
-                pos_left = target.offset().left + target.outerWidth() / 2 - 20;
+            if (posLeft < 0) {
+                posLeft = target.offset().left + target.outerWidth() / 2 - 20;
                 tooltip.addClass('left');
             } else
                 tooltip.removeClass('left');
 
-            if (pos_left + tooltip.outerWidth() > $(window).width()) {
-                pos_left = target.offset().left - tooltip.outerWidth() + target.outerWidth() / 2 + 20;
+            if (posLeft + tooltip.outerWidth() > $(window).width()) {
+                posLeft = target.offset().left - tooltip.outerWidth() + target.outerWidth() / 2 + 20;
                 tooltip.addClass('right');
             } else
                 tooltip.removeClass('right');
 
-            if (pos_top < 0) {
-                var pos_top = target.offset().top + target.outerHeight();
+            if (posTop < 0) {
+                posTop = target.offset().top + target.outerHeight();
                 tooltip.addClass('top');
             } else
                 tooltip.removeClass('top');
 
             tooltip.css({
-                left: pos_left,
-                top: pos_top
-            })
-                .animate({
-                    top: '+=10',
-                    opacity: 1
-                }, 50);
+                left: posLeft,
+                top: posTop
+            }).animate({
+                top: '+=10',
+                opacity: 1
+            }, 50);
         };
 
-        init_tooltip();
-        $(window).resize(init_tooltip);
+        initTooltip();
+        $(window).resize(initTooltip);
 
-        var remove_tooltip = function() {
+        var removeTooltip = function() {
             tooltip.animate({
                 top: '-=10',
                 opacity: 0
@@ -245,8 +253,8 @@ $(function() {
             target.attr('title', tip);
         };
 
-        target.bind('mouseleave', remove_tooltip);
-        tooltip.bind('click', remove_tooltip);
+        target.bind('mouseleave', removeTooltip);
+        tooltip.bind('click', removeTooltip);
     });
 });
 
@@ -287,4 +295,3 @@ $(function() {
         $("nav.navigation").toggleClass("on-mobile");
     });
 });
-
