@@ -30,7 +30,7 @@ class DocsController extends BaseController {
         $parser->no_entities = true;
         $parser->no_markup = true; // not bulletproof but CSP and PRs will fix whatever else we get
 
-        $viewData = ["fileName" => $file, "content" => $parser->transform(file_get_contents($fn))];
+        $viewData = ["pageName" => $file, "content" => $parser->transform(file_get_contents($fn))];
         $content = $this->render('KorobiWebBundle::docs.html.twig', $viewData);
         return $content;
     }
