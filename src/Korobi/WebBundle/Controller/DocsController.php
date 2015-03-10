@@ -2,10 +2,7 @@
 
 namespace Korobi\WebBundle\Controller;
 
-
-use Korobi\WebBundle\Exception\NotImplementedException;
 use Michelf\Markdown;
-use Symfony\Component\HttpFoundation\Response;
 
 class DocsController extends BaseController {
 
