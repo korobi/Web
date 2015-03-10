@@ -27,7 +27,7 @@ class ChannelRepository extends DocumentRepository {
         return $this->createQueryBuilder()
             ->sort('channel', 'ASC')
             ->field('network')->equals($network)
-            ->field('channel')->equals($channel)
+            ->field('channel')->equals(new \MongoRegex('/^' . $channel . '/'))
             ->getQuery()
             ->execute();
     }
