@@ -8,7 +8,7 @@ use Michelf\Markdown;
 class DocsController extends BaseController {
 
     public function renderAction($file) {
-        if (StringUtil::endsWith($file, "md", true)) {
+        if (StringUtil::endsWith($file, ".md", true)) {
             $file = substr($file, 0, -3);
         }
 
