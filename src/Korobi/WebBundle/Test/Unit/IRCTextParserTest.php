@@ -90,8 +90,8 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertTrue($hf->isValid());
 
         $test_style = $hf->getStyle('test');
-        $this->assertEquals('001', $test_style['fg']);
-        $this->assertEquals('002', $test_style['bg']);
+        $this->assertEquals(1, $test_style['fg']);
+        $this->assertEquals(2, $test_style['bg']);
         $this->assertFalse($test_style['bold']);
         $this->assertFalse($test_style['underline']);
         $this->assertFalse($test_style['italic']);
@@ -110,8 +110,8 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertTrue($hf->isValid());
 
         $test_style = $hf->getStyle('test');
-        $this->assertEquals('002', $test_style['fg']);
-        $this->assertEquals('001', $test_style['bg']);
+        $this->assertEquals(2, $test_style['fg']);
+        $this->assertEquals(1, $test_style['bg']);
         $this->assertFalse($test_style['bold']);
         $this->assertFalse($test_style['underline']);
         $this->assertFalse($test_style['italic']);
@@ -144,8 +144,8 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertFalse($d_style['italic']);
 
         $e_style = $hf->getStyle('e');
-        $this->assertEquals('001', $e_style['fg']);
-        $this->assertEquals('002', $e_style['bg']);
+        $this->assertEquals(1, $e_style['fg']);
+        $this->assertEquals(2, $e_style['bg']);
         $this->assertTrue($e_style['bold']);
         $this->assertFalse($e_style['underline']);
         $this->assertFalse($e_style['italic']);
@@ -161,8 +161,8 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertTrue($hf->isValid());
 
         $h_style = $hf->getStyle('h');
-        $this->assertEquals('001', $h_style['fg']);
-        $this->assertEquals('002', $h_style['bg']);
+        $this->assertEquals(1, $h_style['fg']);
+        $this->assertEquals(2, $h_style['bg']);
         $this->assertFalse($h_style['bold']);
 
         $n_style = $hf->getStyle('n');
