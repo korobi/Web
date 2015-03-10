@@ -27,45 +27,53 @@ class HtmlFacility {
      * @return mixed
      */
     public function getStyle($textFragment) {
-        //$this->_debug($this->dom); echo "\n";
-        return $this->_getStyle($textFragment, $this->dom, [
-            'fg' => false,
-            'bg' => false,
+        $structure = $this->parse($this->dom);
+        return $this->_getStyle($textFragment, $structure, [
+            'fg' => IRCTextParser::DEFAULT_FOREGROUND,
+            'bg' => IRCTextParser::DEFAULT_BACKGROUND,
             'bold' => false,
             'italic' => false,
             'underline' => false
         ]);
     }
 
-    private function _debug(\SimpleXMLElement $e, $indent = 0) {
-        foreach ($e as $k => $v) {
-            echo "\n" . str_pad($k, $indent, ' ', STR_PAD_LEFT) . '[' . $v->attributes() . '] ' . $v[0];
-            $this->_debug($v, $indent + 4);
+    private function parse(\SimpleXMLElement $e) {
+        $c = [];
+        foreach ($e as $tag => $content) {
+            $c[] = [
+                'content' => $content[0]->__toString(),
+                'class' => $content->attributes()->__toString(),
+                'tag' => $tag,
+                'child' => $this->parse($content)
+            ];
         }
+        return $c;
     }
 
 
-    private function _getStyle($textFragment, $sxe, $styles) {
-        foreach ($sxe as $k => $v) {
-            if($k == 'span') {
+    private function _getStyle($textFragment, $structure, $styles) {
+        foreach ($structure as $value) {
+            if($value['tag'] == 'span') {
                 // Check for styles
-                $class = $v->attributes()->__toString();
-                switch ($class) {
+                switch ($value['class']) {
                     case 'bold':
                     case 'italic':
                     case 'underline':
-                        $styles[$class] = true;
+                        $styles[$value['class']] = true;
                         break;
                     default:
-                        $colour_info = explode('-', $class);
+                        $colour_info = explode('-', $value['class']);
                         $styles['fg'] = $colour_info[2];
                         $styles['bg'] = $colour_info[3];
                 }
             }
-            if (strpos($v[0], $textFragment) !== false) {
+            if (strpos($value['content'], $textFragment) !== false) {
                 return $styles;
             }
-            return $this->_getStyle($textFragment, $v, $styles);
+            // Go look in children if there is some
+            if(!empty($value['child'])) {
+                return $this->_getStyle($textFragment, $value['child'], $styles);
+            }
         }
     }
 }
@@ -97,8 +105,8 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertFalse($test_style['italic']);
 
         $im_a_style = $hf->getStyle("I'm a ");
-        $this->assertFalse($im_a_style['fg']);
-        $this->assertFalse($im_a_style['bg']);
+        $this->assertEquals(IRCTextParser::DEFAULT_FOREGROUND, $im_a_style['fg']);
+        $this->assertEquals(IRCTextParser::DEFAULT_BACKGROUND, $im_a_style['bg']);
         $this->assertFalse($im_a_style['bold']);
         $this->assertFalse($im_a_style['underline']);
         $this->assertFalse($im_a_style['italic']);
@@ -118,7 +126,7 @@ class IRCTextParserTest extends WebTestCase {
 
         $im_a_style = $hf->getStyle("I'm a ");
         $this->assertEquals(IRCTextParser::DEFAULT_BACKGROUND, $im_a_style['fg']);
-        $this->assertFalse(IRCTextParser::DEFAULT_FOREGROUND, $im_a_style['bg']);
+        $this->assertEquals(IRCTextParser::DEFAULT_FOREGROUND, $im_a_style['bg']);
         $this->assertFalse($im_a_style['bold']);
         $this->assertFalse($im_a_style['underline']);
         $this->assertFalse($im_a_style['italic']);
@@ -130,16 +138,16 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertTrue($hf->isValid());
 
         $b_style = $hf->getStyle("b");
-        $this->assertFalse($b_style['fg']);
-        $this->assertFalse($b_style['bg']);
+        $this->assertEquals(IRCTextParser::DEFAULT_FOREGROUND, $b_style['fg']);
+        $this->assertEquals(IRCTextParser::DEFAULT_BACKGROUND, $b_style['bg']);
         $this->assertFalse($b_style['bold']);
         $this->assertFalse($b_style['underline']);
         $this->assertFalse($b_style['italic']);
 
         $d_style = $hf->getStyle("d");
         $this->assertTrue($d_style['bold']);
-        $this->assertFalse($d_style['fg']);
-        $this->assertFalse($d_style['bg']);
+        $this->assertEquals(IRCTextParser::DEFAULT_FOREGROUND, $d_style['fg']);
+        $this->assertEquals(IRCTextParser::DEFAULT_BACKGROUND, $d_style['bg']);
         $this->assertFalse($d_style['underline']);
         $this->assertFalse($d_style['italic']);
 
@@ -151,8 +159,11 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertFalse($e_style['italic']);
     }
 
-    public function testNestedFormats() {
+    public function testMessageComplexNestedFormats() {
         $hf = new HtmlFacility(IRCTextParser::parse(
+            "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopqrstuvwxyz"
+        ));
+        var_dump(IRCTextParser::parse(
             "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopqrstuvwxyz"
         ));
 
