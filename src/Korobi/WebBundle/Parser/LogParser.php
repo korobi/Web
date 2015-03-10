@@ -253,19 +253,20 @@ class LogParser {
     /**
      * @param $prefix
      * @return string
+     * @todo Use the css nick classes
      */
     private static function createUserMode($prefix) {
         switch ($prefix) {
             case 'OWNER':
-                return '<span class="irc--04-99">~</span>';
+                return '<span class="irc--04-' . IRCTextParser::DEFAULT_BACKGROUND . '">~</span>';
             case 'ADMIN':
-                return '<span class="irc--11-99">&</span>';
+                return '<span class="irc--11-' . IRCTextParser::DEFAULT_BACKGROUND . '">&</span>';
             case 'OPERATOR':
-                return '<span class="irc--09-99">@</span>';
+                return '<span class="irc--09-' . IRCTextParser::DEFAULT_BACKGROUND . '">@</span>';
             case 'HALF_OP':
-                return '<span class="irc--13-99">%</span>';
+                return '<span class="irc--13-' . IRCTextParser::DEFAULT_BACKGROUND . '">%</span>';
             case 'VOICE':
-                return '<span class="irc--08-99">+</span>';
+                return '<span class="irc--08-' . IRCTextParser::DEFAULT_BACKGROUND . '">+</span>';
             case 'NORMAL':
             default:
                 return '';
