@@ -7,8 +7,6 @@ use Korobi\WebBundle\Deployment\Processor\FinalizeDeployment;
 use Korobi\WebBundle\Deployment\Processor\PerformDeployment;
 use Korobi\WebBundle\Deployment\Processor\RequestVerification;
 use Korobi\WebBundle\Deployment\Processor\RunTests;
-use Korobi\WebBundle\Document\Revision;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Handles deployments. Chain of responsibility.

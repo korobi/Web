@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Korobi\WebBundle\Deployment;
-
 
 class TestOutputParser {
 
@@ -22,6 +20,7 @@ class TestOutputParser {
                 $data[$key] = 0;
             }
         }
+
         if ($data['incomplete'] > 0) {
             $data['status'] = "Tentative pass";
             $data['passed'] = $data['tests'] - $data['incomplete'];
@@ -33,5 +32,4 @@ class TestOutputParser {
 
         return $data;
     }
-
 }

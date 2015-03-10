@@ -6,9 +6,7 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Deployment\DeploymentLogger;
 use Korobi\WebBundle\Deployment\DeploymentStatus;
-use Korobi\WebBundle\Document\Revision;
 use Korobi\WebBundle\Util\Akio;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * All processors extend this.
@@ -50,7 +48,7 @@ abstract class BaseProcessor implements DeploymentProcessorInterface {
         if ($this->next !== null) {
             return $this->next->handle($deploymentInfo);
         }
-        return DeploymentStatus::$OK;
+        return DeploymentStatus::OK;
     }
 
     /**
@@ -66,6 +64,4 @@ abstract class BaseProcessor implements DeploymentProcessorInterface {
     public function setNext($next) {
         $this->next = $next;
     }
-
-
 }

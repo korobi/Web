@@ -73,7 +73,7 @@ abstract class BaseController extends Controller {
      */
     protected function createNetworkChannelPair($network, $channel) {
         // validate network
-        /** @var $dbNetwork Network */
+        /** @var Network $dbNetwork */
         $dbNetwork = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Network')
@@ -89,7 +89,7 @@ abstract class BaseController extends Controller {
         $dbNetwork = $dbNetwork[0];
 
         // fetch channel
-        /** @var $dbChannel Channel */
+        /** @var Channel $dbChannel */
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')

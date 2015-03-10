@@ -9,6 +9,7 @@ use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Exception\UnsupportedOperationException;
 use Korobi\WebBundle\Parser\ChatMessage;
 use Korobi\WebBundle\Parser\LogParser;
+use Korobi\WebBundle\Repository\ChatRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,8 +31,8 @@ class ChannelController extends BaseController {
      * @throws \Exception
      */
     public function homeAction($network, $channel) {
-        /** @var $dbNetwork Network */
-        /** @var $dbChannel Channel */
+        /** @var Network $dbNetwork */
+        /** @var Channel $dbChannel */
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // create appropriate links
@@ -74,8 +75,8 @@ class ChannelController extends BaseController {
      * @throws \Exception
      */
     public function commandsAction(Request $request, $network, $channel) {
-        /** @var $dbNetwork Network */
-        /** @var $dbChannel Channel */
+        /** @var Network $dbNetwork */
+        /** @var Channel $dbChannel */
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if this channel requires a key
@@ -97,7 +98,7 @@ class ChannelController extends BaseController {
 
         // process all found commands
         foreach ($dbCommands as $dbCommand) {
-            /** @var $dbCommand ChannelCommand  */
+            /** @var ChannelCommand $dbCommand */
 
             // skip if this command is an alias
             if ($dbCommand->getIsAlias()) {
@@ -113,7 +114,7 @@ class ChannelController extends BaseController {
 
             $aliases = [];
             foreach ($rawAliases as $alias) {
-                /** @var $alias ChannelCommand  */
+                /** @var ChannelCommand $alias */
                 $aliases[] = $alias->getName();
             }
 
@@ -149,8 +150,8 @@ class ChannelController extends BaseController {
      * @throws \Exception
      */
     public function logsAction(Request $request, $network, $channel, $year = false, $month = false, $day = false, $tail = false) {
-        /** @var $dbNetwork Network */
-        /** @var $dbChannel Channel */
+        /** @var Network $dbNetwork */
+        /** @var Channel $dbChannel */
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if this channel requires a key
@@ -166,6 +167,7 @@ class ChannelController extends BaseController {
         list($year, $month, $day, $tail) = self::populateRequest($year, $month, $day, $tail);
 
         // fetch all chats
+        /** @var ChatRepository $repo */
         $repo = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Chat');
@@ -201,7 +203,7 @@ class ChannelController extends BaseController {
 
         // process all found chat entries
         foreach ($dbChats as $chat) {
-            /** @var $chat Chat  */
+            /** @var Chat $chat */
             $chats[] = $this->transformToChatMessage($chat);
         }
 

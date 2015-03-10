@@ -17,12 +17,12 @@ class ChannelAdminController extends BaseController {
      * @throws \Exception
      */
     public function homeAction(Request $request, $network, $channel) {
-        /** @var $dbNetwork Network */
-        /** @var $dbChannel Channel */
+        /** @var Network $dbNetwork */
+        /** @var Channel $dbChannel */
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if authorized
-        /** @var $user User */
+        /** @var User $user */
         $user = $this->getUser();
         if ($user === null || (!in_array($user->getGitHubUserId(), $dbChannel->getManagers()) && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN'))) {
             throw $this->createAccessDeniedException("You must be a channel manager to access this page");
@@ -83,7 +83,7 @@ class ChannelAdminController extends BaseController {
             $data = $form->getData();
 
             // update document
-            /** @var $manager \Doctrine\ODM\MongoDB\DocumentManager */
+            /** @var \Doctrine\ODM\MongoDB\DocumentManager $manager */
             $manager = $this->get('doctrine_mongodb')->getManager();
             $manager->persist($data);
             $manager->flush();

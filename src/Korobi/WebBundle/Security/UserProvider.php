@@ -14,7 +14,7 @@ class UserProvider extends FOSUBUserProvider {
 
         // no existing user, create one from response data
         if ($user == null) {
-            /** @var $user \Korobi\WebBundle\Document\User */
+            /** @var \Korobi\WebBundle\Document\User $user */
             $user = $this->userManager->createUser();
             $user->setGithubUserId($username);
             $user->setUsername($response->getNickname());
@@ -27,7 +27,7 @@ class UserProvider extends FOSUBUserProvider {
             return $user;
         }
 
-        /** @var $user \Korobi\WebBundle\Document\User */
+        /** @var \Korobi\WebBundle\Document\User $user */
         $user = parent::loadUserByOAuthUserResponse($response);
 
         return $user;

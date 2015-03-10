@@ -17,8 +17,8 @@ class ChannelStatsController extends BaseController {
      * @throws \Exception
      */
     public function statsAction(Request $request, $network, $channel) {
-        /** @var $dbNetwork Network */
-        /** @var $dbChannel Channel */
+        /** @var Network $dbNetwork */
+        /** @var Channel $dbChannel */
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if this channel requires a key

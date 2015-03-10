@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Korobi\WebBundle\Deployment;
 
 use Korobi\WebBundle\Document\User;

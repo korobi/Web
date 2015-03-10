@@ -13,7 +13,7 @@ class NetworkController extends BaseController {
      * @throws \Exception
      */
     public function networkAction($network) {
-        /** @var $dbNetwork Network */
+        /** @var Network $dbNetwork */
         $dbNetwork = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Network')
@@ -39,7 +39,7 @@ class NetworkController extends BaseController {
 
         // create an entry for each channel
         foreach ($dbChannels as $channel) {
-            /** @var $channel Channel  */
+            /** @var Channel $channel */
 
             // only add channels with keys if we're an admin
             if ($channel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {
@@ -66,7 +66,7 @@ class NetworkController extends BaseController {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function networksAction() {
-        /** @var $dbNetwork Network */
+        /** @var Network $dbNetwork */
         $dbNetworks = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Network')
@@ -77,7 +77,7 @@ class NetworkController extends BaseController {
 
         // create an entry for each channel
         foreach ($dbNetworks as $network) {
-            /** @var $network Network  */
+            /** @var Network $network */
 
             // fetch all channels
             $dbChannels = $this->get('doctrine_mongodb')
@@ -90,7 +90,7 @@ class NetworkController extends BaseController {
 
             // create an entry for each channel
             foreach ($dbChannels as $channel) {
-                /** @var $channel Channel  */
+                /** @var Channel $channel */
 
                 // only add channels with keys if we're an admin
                 if ($channel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {

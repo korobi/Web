@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Korobi\WebBundle\Deployment;
-
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Kernel;
@@ -45,5 +43,4 @@ class DeploymentLogger {
             }
         }
     }
-
 }

@@ -23,6 +23,8 @@ class ChatRepository extends DocumentRepository {
     /**
      * @param $network
      * @param $channel
+     * @param \MongoDate $from
+     * @param \MongoDate $to
      * @return mixed
      */
     public function findAllByChannelAndDate($network, $channel, \MongoDate $from, \MongoDate $to) {
@@ -39,6 +41,8 @@ class ChatRepository extends DocumentRepository {
     /**
      * @param $network
      * @param $channel
+     * @param \MongoId $from
+     * @param \MongoDate $to
      * @return mixed
      */
     public function findAllByChannelAndId($network, $channel, \MongoId $from, \MongoDate $to) {
@@ -55,6 +59,7 @@ class ChatRepository extends DocumentRepository {
     /**
      * @param $network
      * @param $channel
+     * @param $type
      * @return mixed
      */
     public function findAllByChannelAndType($network, $channel, $type) {

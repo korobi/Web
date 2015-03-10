@@ -4,7 +4,6 @@ namespace Korobi\WebBundle\Deployment\Processor;
 
 use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Deployment\DeploymentStatus;
-use Korobi\WebBundle\Document\Revision;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
@@ -31,8 +30,8 @@ class RequestVerification extends BaseProcessor implements DeploymentProcessorIn
             return parent::handle($deploymentInfo);
         }
         $this->logger->debug("Rejecting unauthorised deployment request", ["signature" => $signatureVerified, "superuser" => $isSuperUser]);
-        $deploymentInfo->addStatus(DeploymentStatus::$UNAUTHORISED);
-        return DeploymentStatus::$UNAUTHORISED;
+        $deploymentInfo->addStatus(DeploymentStatus::UNAUTHORISED);
+        return DeploymentStatus::UNAUTHORISED;
     }
 
     private function isSuperUser(AuthorizationChecker $authChecker) {

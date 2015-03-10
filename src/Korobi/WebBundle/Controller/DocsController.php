@@ -7,6 +7,10 @@ use Michelf\Markdown;
 
 class DocsController extends BaseController {
 
+    /**
+     * @param $file
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function renderAction($file) {
         if (StringUtil::endsWith($file, ".md", true)) {
             $file = substr($file, 0, -3);
@@ -31,6 +35,9 @@ class DocsController extends BaseController {
         return $content;
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction() {
         return $this->renderAction("index");
     }

@@ -4,8 +4,6 @@ namespace Korobi\WebBundle\Deployment\Processor;
 
 use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Deployment\DeploymentStatus;
-use Korobi\WebBundle\Document\Revision;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Saves deployment results to the database.
@@ -19,6 +17,6 @@ class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInt
         $this->dm->flush();
         $this->akio->sendMessage($this->akio->startMessage()->insertText("Full details at https://dev.korobi.io/deploy/view/" . $deploymentInfo->getRevision()->getId()));
 
-        return DeploymentStatus::$OK;
+        return DeploymentStatus::OK;
     }
 }
