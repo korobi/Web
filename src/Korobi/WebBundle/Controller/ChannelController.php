@@ -91,7 +91,7 @@ class ChannelController extends BaseController {
         $dbCommands = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:ChannelCommand')
-            ->findAllByChannel($network, self::transformChannelName($channel, true))
+            ->findAllByChannel($network, $dbChannel->getChannel())
             ->toArray();
 
         $commands = [];
@@ -175,7 +175,7 @@ class ChannelController extends BaseController {
         if($last_id !== false && \MongoId::isValid($last_id)) {
             $dbChats = $repo->findAllByChannelAndId(
                     $network,
-                    self::transformChannelName($channel, true),
+                    $dbChannel->getChannel(),
                     new \MongoId($last_id),
                     new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
                 )
@@ -183,7 +183,7 @@ class ChannelController extends BaseController {
         } else {
             $dbChats = $repo->findAllByChannelAndDate(
                     $network,
-                    self::transformChannelName($channel, true),
+                    $dbChannel->getChannel(),
                     new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day, $year)))),
                     new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
                 )
