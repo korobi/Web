@@ -163,9 +163,6 @@ class IRCTextParserTest extends WebTestCase {
         $hf = new HtmlFacility(IRCTextParser::parse(
             "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopqrstuvwxyz"
         ));
-        var_dump(IRCTextParser::parse(
-            "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopqrstuvwxyz"
-        ));
 
         // \x02 => bold, \x03 => colour
 
