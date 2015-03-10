@@ -24,6 +24,10 @@
   p:last-of-type {
     margin: 0;
   }
+
+  .light & {
+    background-color: rgba(25, 25, 25, 0.2);
+  }
 }
 
 .content-block {
