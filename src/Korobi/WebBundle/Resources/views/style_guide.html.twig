@@ -15,7 +15,6 @@
 {# **Many many bad things will happen if you try to run a formatter on this file** #}
 
 {% block body %}
-    <script>alert("CSP disabled?");</script>
     <h1>Frontend style guide</h1>
     <p>This page aims to showcase the UI components available and provide some guidance on a consistent approach to
         styling. This page is inspired by <a href="https://github.com/styleguide/css/">GitHub's style guide</a>.</p>
@@ -161,5 +160,15 @@
     <pre><code class="language-markup">&#x3C;abbr title=&#x22;&#x3C;strong&#x3E;Bold test&#x3C;/strong&#x3E;&#x22; rel=&#x22;tooltip&#x22;&#x3E;Tooltip&#x3C;/abbr&#x3E;</code></pre>
     <p>The above code produces the following:</p>
     <p><abbr title="<strong>Bold test</strong>" rel="tooltip">Tooltip</abbr></p>
+
+    <h3>Buttons (SASS library)</h3>
+    <p>
+        <a href="#" class="button button-rounded button-flat">press me</a>
+        <a href="#" class="button button-rounded button-flat-primary">press me</a>
+        <a href="#" class="button button-rounded button-flat-action">press me</a>
+        <a href="#" class="button button-rounded button-flat-highlight">press me</a>
+        <a href="#" class="button button-rounded button-flat-caution">press me</a>
+        <a href="#" class="button button-rounded button-flat-royal">press me</a>
+    </p>
 
 {% endblock %}
