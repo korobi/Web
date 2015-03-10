@@ -65,7 +65,7 @@ class IRCTextParser {
      */
     public static function parseLine($line, $pretty_only) {
         if (!$pretty_only) {
-            $line = self::makeSafe($line, true);
+            $line = self::makeSafe($line);
         }
         $result = '';
         $next = $line;
@@ -353,11 +353,11 @@ class IRCTextParser {
      * @param bool $entities
      * @return mixed|string
      */
-    private static function makeSafe($string, $entities = false) {
+    private static function makeSafe($string, $entities = true) {
         if ($entities) {
-            $string = htmlentities($string, ENT_QUOTES);
+            $string = htmlentities($string, ENT_NOQUOTES | ENT_HTML5);
         } else {
-            $string = htmlspecialchars($string);
+            $string = htmlspecialchars($string, ENT_QUOTES | ENT_HTML5);
         }
 
         // Replace &amp; with & to fix link parsing
@@ -372,6 +372,6 @@ class IRCTextParser {
      * @return string
      */
     private static function createLinkTag($url, $content) {
-        return sprintf('<a href="%s" target="_blank">%s</a>', self::makeSafe($url), self::makeSafe($content));
+        return sprintf('<a href="%s" target="_blank">%s</a>', self::makeSafe($url, false), self::makeSafe($content));
     }
 }
