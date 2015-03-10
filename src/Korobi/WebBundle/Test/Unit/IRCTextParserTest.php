@@ -106,7 +106,7 @@ class IRCTextParserTest extends WebTestCase {
     public function testMessageWithTags() {
         $message = "<script>alert('woo');</script>";
         $this->assertEquals(
-            htmlentities($message),
+            htmlentities($message, ENT_NOQUOTES | ENT_HTML5),
             IRCTextParser::parse($message)
         );
     }
