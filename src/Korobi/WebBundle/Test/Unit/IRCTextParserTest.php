@@ -56,6 +56,7 @@ class HtmlFacility {
 
     private function _getStyle($textFragment, $structure, $styles) {
         foreach ($structure as $value) {
+            $prev_styles = $styles;
             if($value['tag'] == 'span') {
                 // Check for styles
                 switch ($value['class']) {
@@ -77,9 +78,12 @@ class HtmlFacility {
             if(!empty($value['child'])) {
                 list($found, $styles) = $this->_getStyle($textFragment, $value['child'], $styles);
                 if($found) {
+                    // If the fragment was found further down, return it
+                    // (if not, don't take $new_styles into account)
                     return [$found, $styles];
                 }
             }
+            $styles = $prev_styles; // The fragment was not found in this iteration, resetting
         }
         return [false, $styles]; // not found, styles
     }
