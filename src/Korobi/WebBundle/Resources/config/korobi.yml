@@ -8,19 +8,19 @@ korobi_web:
             - title: Networks
               route: 'networks'
               routes:
-              - networks
-              - network
-              - channel
-              - channel_admin
-              - channel_commands
-              - channel_logs
-              - channel_logs_date
-              - channel_logs_date_tail
-              - channel_logs_tail
-              - channel_stats
+                  - networks
+                  - network
+                  - channel
+                  - channel_admin
+                  - channel_commands
+                  - channel_logs
+                  - channel_logs_date
+                  - channel_logs_date_tail
+                  - channel_logs_tail
+                  - channel_stats
 
             - title: Docs
-              route: 'docs_index'
+              route: 'docs'
 
             - title: Admin
               route: 'dummy'

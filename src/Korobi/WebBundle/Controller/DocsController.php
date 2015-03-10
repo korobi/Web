@@ -34,11 +34,4 @@ class DocsController extends BaseController {
         $content = $this->render('KorobiWebBundle::docs.html.twig', $viewData);
         return $content;
     }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function indexAction() {
-        return $this->renderAction("index");
-    }
 }
