@@ -196,6 +196,14 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertTrue($n_style['bold']);
     }
 
+    public function testMessageLink() {
+        $url = 'http://test.com';
+        $this->assertStringMatchesFormat(
+            '<a href="' . $url . '" %s>%s</a>',
+            IRCTextParser::parse($url)
+        );
+    }
+
     /************************************
      * Color tests
      */
