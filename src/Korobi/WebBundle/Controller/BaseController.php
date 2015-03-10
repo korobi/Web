@@ -93,7 +93,7 @@ abstract class BaseController extends Controller {
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
-            ->findByChannel($network, self::transformChannelName($channel, true)) // TODO
+            ->findByChannel($network, self::transformChannelName(preg_quote($channel), true)) // TODO
             ->toArray(false);
 
         // make sure we actually have a channel
