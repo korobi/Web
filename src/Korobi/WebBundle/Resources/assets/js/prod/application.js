@@ -136,7 +136,9 @@ $(function() {
             // and the line they're clicking now.
 
             var lastLine = activeLines[activeLines.length - 1];
-            if (lastLine < line) {
+            if (activeLines.length <= 0) {
+                return;
+            } else if (lastLine < line) {
                 // The just-selected line is in front of the last selected line. Great, we'll
                 // highlight all of the lines in between.
 
