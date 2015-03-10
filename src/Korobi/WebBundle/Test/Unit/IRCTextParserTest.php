@@ -104,11 +104,9 @@ class IRCTextParserTest extends WebTestCase {
     }
 
     public function testMessageWithTags() {
-        $message = "<script>alert('woo');</script>";
-        $this->assertEquals(
-            htmlentities($message, ENT_NOQUOTES | ENT_HTML5),
-            IRCTextParser::parse($message)
-        );
+        $parsed_message = IRCTextParser::parse("<script>alert('woo');</script>");
+        $this->assertNotContains($parsed_message, '<');
+        $this->assertNotContains($parsed_message, '>');
     }
 
     public function testMessageWithFgAndBg() {
