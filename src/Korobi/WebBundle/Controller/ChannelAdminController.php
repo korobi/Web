@@ -25,7 +25,7 @@ class ChannelAdminController extends BaseController {
         /** @var $user User */
         $user = $this->getUser();
         if ($user === null || (!in_array($user->getGitHubUserId(), $dbChannel->getManagers()) && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN'))) {
-            throw new \Exception('No.');
+            throw $this->createAccessDeniedException("You must be a channel manager to access this page");
         }
 
         // --------------
