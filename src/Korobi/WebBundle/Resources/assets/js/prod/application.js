@@ -8,6 +8,9 @@ $(function() {
     }
 
     var activeLines = [],
+        containsLine = function(line) {
+            return activeLines.indexOf(line) != -1;
+        },
         /**
          * @param line
          */
@@ -137,6 +140,8 @@ $(function() {
 
             var lastLine = activeLines[activeLines.length - 1];
             if (activeLines.length <= 0) {
+                return;
+            } else if (containsLine(line)) {
                 return;
             } else if (lastLine < line) {
                 // The just-selected line is in front of the last selected line. Great, we'll
