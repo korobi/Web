@@ -18,9 +18,10 @@ class DocsController extends BaseController {
 
         $parser = new Markdown;
         $parser->no_entities = true;
-        $parser->no_markup = true; // not bulletproof but CSP will fix whatever else we get
+        $parser->no_markup = true; // not bulletproof but CSP and PRs will fix whatever else we get
 
-        $content = $this->render('KorobiWebBundle::docs.html.twig', ["content" => $parser->transform(file_get_contents($fn))]);
+        $viewData = ["fileName" => $file, "content" => $parser->transform(file_get_contents($fn))];
+        $content = $this->render('KorobiWebBundle::docs.html.twig', $viewData);
         return $content;
     }
 
