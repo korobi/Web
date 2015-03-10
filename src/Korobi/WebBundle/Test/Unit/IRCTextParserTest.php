@@ -28,13 +28,17 @@ class HtmlFacility {
      */
     public function getStyle($textFragment) {
         $structure = $this->parse($this->dom);
-        return $this->_getStyle($textFragment, $structure, [
+        list($found, $styles) = $this->_getStyle($textFragment, $structure, [
             'fg' => IRCTextParser::DEFAULT_FOREGROUND,
             'bg' => IRCTextParser::DEFAULT_BACKGROUND,
             'bold' => false,
             'italic' => false,
             'underline' => false
         ]);
+        if (!$found) {
+            // Fail test?
+        }
+        return $styles;
     }
 
     private function parse(\SimpleXMLElement $e) {
@@ -49,7 +53,6 @@ class HtmlFacility {
         }
         return $c;
     }
-
 
     private function _getStyle($textFragment, $structure, $styles) {
         foreach ($structure as $value) {
@@ -68,13 +71,17 @@ class HtmlFacility {
                 }
             }
             if (strpos($value['content'], $textFragment) !== false) {
-                return $styles;
+                return [true, $styles];
             }
             // Go look in children if there is some
             if(!empty($value['child'])) {
-                return $this->_getStyle($textFragment, $value['child'], $styles);
+                list($found, $styles) = $this->_getStyle($textFragment, $value['child'], $styles);
+                if($found) {
+                    return [$found, $styles];
+                }
             }
         }
+        return [false, $styles]; // not found, styles
     }
 }
 
