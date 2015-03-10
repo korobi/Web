@@ -51,6 +51,8 @@ class IRCTextParser {
     const URL_PATTERN = "{\\b(https?://|ftp://)?(?:([^]\\x00-\x20\"(),:-<>[\x7f-\xff]{1,64})(:[^]\\x00-\x20\"(),:-<>[\x7f-\xff]{1,64})?@)?((?:[-a-zA-Z0-9\x7f-\xff]{1,63}\\.)+[a-zA-Z\x7f-\xff][-a-zA-Z0-9\x7f-\xff]{1,62}|(?:[1-9][0-9]{0,2}\\.|0\\.){3}(?:[1-9][0-9]{0,2}|0))((:[0-9]{1,5})?(/[!$-/0-9:;=@_\\':;!a-zA-Z\x7f-\xff]*?)?(\\?[!$-/0-9:;=@_\\':;!a-zA-Z\x7f-\xff]+?)?(#[!$-/0-9?:;=@_\\':;!a-zA-Z\x7f-\xff]+?)?)(?=[)'?.!,;:]*([^-_#$+.!*%'(),;/?:@=&a-zA-Z0-9\x7f-\xff]|$))}i";
 
     /**
+     * Parses an irc line containing irc format control chars, parsing links additionally.
+     *
      * @param string $line
      * @return string
      */
@@ -59,9 +61,11 @@ class IRCTextParser {
     }
 
     /**
+     * Parses an irc line containing irc format control chars.
+     *
      * @param string $line
      * @param bool $pretty_only Whether to also parse links and stuff as well
-     * @return string
+     * @return string An html formatted string
      */
     public static function parseLine($line, $pretty_only) {
         $result = '';
@@ -117,7 +121,13 @@ class IRCTextParser {
         }
     }
 
-    private static function closeTags($styles) {
+    /**
+     * Close all tags opened per the provided style array.
+     *
+     * @param array $styles
+     * @return string
+     */
+    private static function closeTags(array $styles) {
         $result = '';
 
         if (!empty($styles)) {
@@ -137,11 +147,22 @@ class IRCTextParser {
         return $result;
     }
 
+    /**
+     * Returns the closing tag;
+     *
+     * @return string
+     */
     private static function closeTag() {
         return '</span>';
     }
 
-    private static function openTags($styles) {
+    /**
+     * Opens tags corresponding to the provided array.
+     *
+     * @param array $styles
+     * @return string
+     */
+    private static function openTags(array $styles) {
         $result = '';
 
         $fg = array_shift($styles);
@@ -161,7 +182,7 @@ class IRCTextParser {
     }
 
     /**
-     * Create an element to wrap text in.
+     * Creates a formatting element to wrap text in.
      *
      * @param string $style
      * @return string
@@ -177,7 +198,6 @@ class IRCTextParser {
      * @param int $bg
      * @param bool $reverse
      * @return string
-     * @internal param string $style
      */
     private static function createColorTag($fg, $bg, $reverse = false) {
         return '<span class="'. ($reverse
@@ -186,7 +206,7 @@ class IRCTextParser {
     }
 
     /**
-     * Gets the class corresponding to the provided colours.
+     * Gets the css class corresponding to the provided colours.
      *
      * @param int|string $fg
      * @param int|string $bg
@@ -199,9 +219,13 @@ class IRCTextParser {
     }
 
     /**
+     * Parses a string starting with a colour code to extract the foreground and background
+     * colour codes as well as the count of chars to skip (the number of chars taken by the
+     * actual code).
+     *
      * @param string $messageFragment The fragment of message to extract the colours from.
-     * @param string $fg
-     * @param string $bg
+     * @param string $fg The default foreground to use if none is provided
+     * @param string $bg The default background to use if none is provided
      * @return array An array of data containing fg, bg and char count to skip.
      */
     public static function parseColour($messageFragment, $fg = self::DEFAULT_FOREGROUND, $bg = self::DEFAULT_BACKGROUND) {
@@ -234,19 +258,22 @@ class IRCTextParser {
     }
 
     /**
-     * @param $line
+     * Whether a line should be ignored by the transformation methods.
+     *
+     * @param string $line
      * @return bool
      */
     private static function shouldIgnore($line) {
-        if (preg_match("/(\\[\\d\\d:\\d\\d:\\d\\d\\] .*\\* .* (has (joined|quit|left)|is now known|sets mode)).*/", $line)) {
-            return true;
-        }
-
-        return false;
+        return preg_match(
+            "/(\\[\\d\\d:\\d\\d:\\d\\d\\] .*\\* .* (has (joined|quit|left)|is now known|sets mode)).*/",
+            $line
+        );
     }
 
     /**
-     * @param $raw
+     * Transforms a string adding html links while preserving current html tags.
+     *
+     * @param string $raw
      * @return string
      */
     private static function transform($raw) {
@@ -289,7 +316,9 @@ class IRCTextParser {
     }
 
     /**
-     * @param $text
+     * Transforms a string adding html links (doesn't take html tags into account).
+     *
+     * @param string $text
      * @return string
      */
     private static function transformUnsafe($text) {
@@ -346,9 +375,11 @@ class IRCTextParser {
     }
 
     /**
-     * @param $string
-     * @param bool $entities
-     * @return mixed|string
+     * Escape to html safe string.
+     *
+     * @param string $string
+     * @param bool $entities wether to escape html entities or html special chars
+     * @return string
      */
     private static function makeSafe($string, $entities = true) {
         if ($entities) {
@@ -364,8 +395,10 @@ class IRCTextParser {
     }
 
     /**
-     * @param $url
-     * @param $content
+     * Creates an html <a> tag with the provided url and content (both url and content are html escaped).
+     *
+     * @param string $url
+     * @param string $content
      * @return string
      */
     private static function createLinkTag($url, $content) {
