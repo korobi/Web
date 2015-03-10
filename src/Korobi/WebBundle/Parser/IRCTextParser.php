@@ -64,6 +64,9 @@ class IRCTextParser {
      * @return string
      */
     public static function parseLine($line, $pretty_only) {
+        if (!$pretty_only) {
+            $line = self::makeSafe($line, true);
+        }
         $result = '';
         $next = $line;
 
