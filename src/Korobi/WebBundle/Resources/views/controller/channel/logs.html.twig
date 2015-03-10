@@ -63,14 +63,12 @@ setInterval(function() {
                 <span class="timestamp">
                     {{ line.timestamp }}
                 </span>
-                {% spaceless %}
-                    <span class="nick irc--{{ "%02d"|format(line.nickColour) }}-df {% if line.role is not empty %}{{ line.role }}{% endif %}">
-                        {{- line.nick }}
-                    </span>
-                    <span class="message">
-                        {{- line.message|raw }}
-                    </span>
-                {% endspaceless %}
+                <span class="nick irc--{{ "%02d"|format(line.nickColour) }}-df {% if line.role is not empty %}{{ line.role }}{% endif %}">
+                    {{- line.nick -}}
+                </span>
+                <span class="message">
+                    {{- line.message|raw -}}
+                </span>
             </div>
         {% endfor %}
     </div>
