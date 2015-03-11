@@ -62,7 +62,17 @@ class Channel {
     /**
      * @MongoDB\Raw
      */
+    private $account_permissions;
+
+    /**
+     * @MongoDB\Raw
+     */
     private $settings;
+
+    /**
+     * @MongoDB\String
+     */
+    private $commands_link;
 
     /**
      * Get id
@@ -254,6 +264,26 @@ class Channel {
     }
 
     /**
+     * Get accountPermissions
+     *
+     * @return raw $accountPermissions
+     */
+    public function getAccountPermissions() {
+        return $this->account_permissions;
+    }
+
+    /**
+     * Set accountPermissions
+     *
+     * @param raw $accountPermissions
+     * @return self
+     */
+    public function setAccountPermissions($accountPermissions) {
+        $this->account_permissions = $accountPermissions;
+        return $this;
+    }
+
+    /**
      * Get settings
      *
      * @return raw $settings
@@ -270,6 +300,26 @@ class Channel {
      */
     public function setSettings($settings) {
         $this->settings = $settings;
+        return $this;
+    }
+
+    /**
+     * Get commandsLink
+     *
+     * @return string $commandsLink
+     */
+    public function getCommandsLink() {
+        return $this->commands_link;
+    }
+
+    /**
+     * Set commandsLink
+     *
+     * @param string $commandsLink
+     * @return self
+     */
+    public function setCommandsLink($commandsLink) {
+        $this->commands_link = $commandsLink;
         return $this;
     }
 }

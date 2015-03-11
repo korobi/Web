@@ -80,6 +80,16 @@ class Punishment {
     private $actor_anonymous;
 
     /**
+     * @MongoDB\Boolean
+     */
+    private $sticky;
+
+    /**
+     * @MongoDB\Collection
+     */
+    private $exemptions;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -345,6 +355,46 @@ class Punishment {
      */
     public function setActorAnonymous($actorAnonymous) {
         $this->actor_anonymous = $actorAnonymous;
+        return $this;
+    }
+
+    /**
+     * Get sticky
+     *
+     * @return boolean $sticky
+     */
+    public function getSticky() {
+        return $this->sticky;
+    }
+
+    /**
+     * Set sticky
+     *
+     * @param boolean $sticky
+     * @return self
+     */
+    public function setSticky($sticky) {
+        $this->sticky = $sticky;
+        return $this;
+    }
+
+    /**
+     * Get exemptions
+     *
+     * @return collection $exemptions
+     */
+    public function getExemptions() {
+        return $this->exemptions;
+    }
+
+    /**
+     * Set exemptions
+     *
+     * @param collection $exemptions
+     * @return self
+     */
+    public function setExemptions($exemptions) {
+        $this->exemptions = $exemptions;
         return $this;
     }
 }
