@@ -6,7 +6,6 @@ use Korobi\WebBundle\Util\StringUtil;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class StringUtilTest
  * @see Korobi\WebBundle\Util\StringUtil
  * @package Korobi\WebBundle\Test\Unit
  */
@@ -29,5 +28,4 @@ class StringUtilTest extends WebTestCase {
         $this->assertFalse(StringUtil::endsWith("The quick brown fox", "BROWN FOX"));
         $this->assertFalse(StringUtil::endsWith("abcdef", "xtg"));
     }
-
 }

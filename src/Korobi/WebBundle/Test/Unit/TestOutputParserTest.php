@@ -3,7 +3,6 @@
 namespace Korobi\WebBundle\Test\Unit;
 
 use Korobi\WebBundle\Deployment\TestOutputParser;
-use Korobi\WebBundle\Parser\NickColours;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -42,7 +41,9 @@ class TestOutputParserTest extends WebTestCase {
         $str = "Tests: 25, Assertions: 61, Skipped: 4.";
         $sut = new TestOutputParser();
         $data = $sut->parseLine($str);
-        $this->assertEquals('{"incomplete":"4","passed":21,"failures":0,"assertions":"61","status":"Tentative pass","tests":"25"}', json_encode($data));
+        $this->assertEquals(
+            '{"incomplete":"4","passed":21,"failures":0,"assertions":"61","status":"Tentative pass","tests":"25"}',
+            json_encode($data)
+        );
     }
-
 }

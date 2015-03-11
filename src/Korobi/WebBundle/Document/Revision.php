@@ -239,36 +239,22 @@ class Revision {
     }
 
     /**
+     * Get branch
+     *
+     * @return string $branch
+     */
+    public function getBranch() {
+        return $this->branch;
+    }
+
+    /**
      * Set branch
      *
      * @param string $branch
      * @return self
      */
-    public function setBranch($branch)
-    {
+    public function setBranch($branch) {
         $this->branch = $branch;
-        return $this;
-    }
-
-    /**
-     * Get branch
-     *
-     * @return string $branch
-     */
-    public function getBranch()
-    {
-        return $this->branch;
-    }
-
-    /**
-     * Set testsInfo
-     *
-     * @param collection $testsInfo
-     * @return self
-     */
-    public function setTestsInfo($testsInfo)
-    {
-        $this->tests_info = $testsInfo;
         return $this;
     }
 
@@ -277,20 +263,18 @@ class Revision {
      *
      * @return collection $testsInfo
      */
-    public function getTestsInfo()
-    {
+    public function getTestsInfo() {
         return $this->tests_info;
     }
 
     /**
-     * Set statuses
+     * Set testsInfo
      *
-     * @param collection $statuses
+     * @param collection $testsInfo
      * @return self
      */
-    public function setStatuses($statuses)
-    {
-        $this->statuses = $statuses;
+    public function setTestsInfo($testsInfo) {
+        $this->tests_info = $testsInfo;
         return $this;
     }
 
@@ -299,8 +283,18 @@ class Revision {
      *
      * @return collection $statuses
      */
-    public function getStatuses()
-    {
+    public function getStatuses() {
         return $this->statuses;
+    }
+
+    /**
+     * Set statuses
+     *
+     * @param collection $statuses
+     * @return self
+     */
+    public function setStatuses($statuses) {
+        $this->statuses = $statuses;
+        return $this;
     }
 }

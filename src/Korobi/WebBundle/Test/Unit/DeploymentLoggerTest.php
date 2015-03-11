@@ -3,8 +3,6 @@
 namespace Korobi\WebBundle\Test\Unit;
 
 use Korobi\WebBundle\Deployment\DeploymentLogger;
-use Korobi\WebBundle\Document\Chat;
-use Korobi\WebBundle\Parser\LogParser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -23,14 +21,14 @@ class DeploymentLoggerTest extends WebTestCase {
         $loggerInterface = $this->getMockBuilder('Psr\Log\LoggerInterface')
             ->disableOriginalConstructor()
             ->getMock();
-        $message = "Hello World!";
-        $context = [1,2,3,4,5,6];
-        $loggerInterface->expects($this->once())->method("error")->with($message, $context);
+        $message = 'Hello World!';
+        $context = [1, 2, 3, 4, 5, 6];
+        $loggerInterface->expects($this->once())->method('error')->with($message, $context);
 
         $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\Kernel')
             ->disableOriginalConstructor()
             ->getMock();
-        $kernel->expects($this->once())->method("isDebug")->will($this->returnValue(true));
+        $kernel->expects($this->once())->method('isDebug')->will($this->returnValue(true));
 
         $sut = new DeploymentLogger($kernel, $loggerInterface);
         $sut->debug($message, $context, true);
@@ -38,19 +36,19 @@ class DeploymentLoggerTest extends WebTestCase {
 
     public function testDebugForInfo() {
         /** @see DeploymentLogger::debug */
-        $loggerInterface = $this->getMockBuilder('Psr\Log\LoggerInterface')
+        $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')
             ->disableOriginalConstructor()
             ->getMock();
-        $message = "Hello World!";
-        $context = [1,2,3,4,5,6];
-        $loggerInterface->expects($this->once())->method("info")->with($message, $context);
+        $message = 'Hello World!';
+        $context = [1, 2, 3, 4, 5, 6];
+        $logger->expects($this->once())->method('info')->with($message, $context);
 
         $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\Kernel')
             ->disableOriginalConstructor()
             ->getMock();
-        $kernel->expects($this->once())->method("isDebug")->will($this->returnValue(true));
+        $kernel->expects($this->once())->method('isDebug')->will($this->returnValue(true));
 
-        $sut = new DeploymentLogger($kernel, $loggerInterface);
+        $sut = new DeploymentLogger($kernel, $logger);
         $sut->debug($message, $context);
     }
 }

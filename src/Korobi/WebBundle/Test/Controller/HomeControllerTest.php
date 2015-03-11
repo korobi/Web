@@ -20,7 +20,7 @@ class HomeControllerTest extends WebTestCase {
             ->disableOriginalConstructor()
             ->getMock();
 
-        $theme->expects($this->any())->method("isLight")->will($this->returnValue(true));
+        $theme->expects($this->any())->method('isLight')->will($this->returnValue(true));
         $client->getContainer()->set('korobi.theme_service', $theme);
 
         $crawler = $client->request('GET', '/');
@@ -38,8 +38,8 @@ class HomeControllerTest extends WebTestCase {
             ->disableOriginalConstructor()
             ->getMock();
 
-        $gitInfo->expects($this->any())->method("getBranch")->will($this->returnValue("dummy_branch"));
-        $gitInfo->expects($this->any())->method("getShortHash")->will($this->returnValue("1234567"));
+        $gitInfo->expects($this->any())->method('getBranch')->will($this->returnValue('dummy_branch'));
+        $gitInfo->expects($this->any())->method('getShortHash')->will($this->returnValue('1234567'));
         $client->getContainer()->set('korobi.git_info', $gitInfo);
 
         $crawler = $client->request('GET', '/');
@@ -51,9 +51,7 @@ class HomeControllerTest extends WebTestCase {
     public function testCopyrightInfoDisplayedInFooter() {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
-        $year = date("Y");
+        $year = date('Y');
         $this->assertTrue($crawler->filter('footer.footer .footer--copyright:contains("' . $year . '")')->count() > 0);
     }
-
-
 }

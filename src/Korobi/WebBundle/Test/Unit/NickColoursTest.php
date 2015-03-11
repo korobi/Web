@@ -13,5 +13,4 @@ class NickColoursTest extends WebTestCase {
         $this->assertSame(7, NickColours::getColourForNick("Zarthus"), "Zarthus's nick is a sandy brown colour");
         $this->assertSame(12, NickColours::getColourForNick("Kashike"), "Kashike's nick is a light blue");
     }
-
 }
