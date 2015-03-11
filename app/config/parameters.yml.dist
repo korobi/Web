@@ -32,3 +32,10 @@ parameters:
 
     # channel stats base path
     channel_stats_root: ~
+
+    # influx details
+    influx_host: 127.0.0.1
+    influx_port: 8086
+    influx_user: user
+    influx_pass: pass
+    influx_db: database
