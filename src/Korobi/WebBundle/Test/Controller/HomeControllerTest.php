@@ -9,7 +9,7 @@ class HomeControllerTest extends WebTestCase {
     public function testIndexLoadsSuccessfully() {
         $client = static::createClient();
         $client->request('GET', '/');
-        echo "The response was " . $client->getResponse()->getContent();
+
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
