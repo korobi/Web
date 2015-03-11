@@ -153,7 +153,7 @@ class Chat {
     /**
      * Get date
      *
-     * @return date $date
+     * @return \DateTime $date
      */
     public function getDate() {
         return $this->date;
@@ -162,7 +162,7 @@ class Chat {
     /**
      * Set date
      *
-     * @param date $date
+     * @param \DateTime $date
      * @return self
      */
     public function setDate($date) {
