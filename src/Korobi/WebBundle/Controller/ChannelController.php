@@ -254,13 +254,13 @@ class ChannelController extends BaseController {
 
     private function transformToChatMessage(Chat $chat) {
         return [
-            'id'        => $chat->getId(),
-            'timestamp' => date('H:i:s', $chat->getDate()->getTimestamp()),
-            'type'      => strtolower($chat->getType()),
-            'role'      => $chat->getType() == 'MESSAGE' ? strtolower($chat->getActorPrefix()) : '',
-            'colour'    => LogParser::getColourForActor($chat),
-            'nick'      => LogParser::getActorName($chat),
-            'message'   => $this->parseChatMessage($chat)
+            'id'         => $chat->getId(),
+            'timestamp'  => date('H:i:s', $chat->getDate()->getTimestamp()),
+            'type'       => strtolower($chat->getType()),
+            'role'       => $chat->getType() == 'MESSAGE' ? strtolower($chat->getActorPrefix()) : '',
+            'nickColour' => LogParser::getColourForActor($chat),
+            'nick'       => LogParser::getActorName($chat),
+            'message'    => $this->parseChatMessage($chat)
         ];
     }
 

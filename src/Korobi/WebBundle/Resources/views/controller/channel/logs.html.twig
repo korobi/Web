@@ -59,7 +59,7 @@ setInterval(function() {
     <h1>Log for {{ channel_name }} on {{ network_name }} - {{ log_date }}</h1>
     <div class="logs{% if is_tail %} tailing{% endif %}">
         {% for line_num, line in logs %}
-            <div data-event-type="{{ line.type }}" class="line{% if not is_tail %} js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
+            <div data-id="{{ line.id }}" data-event-type="{{ line.type }}" class="line{% if not is_tail %} js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
                 <span class="timestamp">
                     {{ line.timestamp }}
                 </span>
