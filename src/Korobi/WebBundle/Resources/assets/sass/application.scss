@@ -1,35 +1,35 @@
-@import "korobi/reset";
+@import "application/reset";
 
-@import "bourbon/bourbon";
-@import "base/base";
-@import "neat/neat";
+@import "vendor/bourbon/bourbon";
+@import "vendor/base/base";
+@import "vendor/neat/neat";
 
 // base syles
-@import "korobi/config";
-@import "korobi/base";
-@import "korobi/header";
-@import "korobi/footer";
-@import "korobi/symfony_debug";
+@import "application/config";
+@import "application/base";
+@import "application/header";
+@import "application/footer";
+@import "application/symfony";
 
 // components
-@import "korobi/tables";
-@import "korobi/tooltip";
-@import "korobi/forms";
-@import "korobi/flashes";
-@import "korobi/content_blocks";
+@import "application/tables";
+@import "application/tooltip";
+@import "application/forms";
+@import "application/flashes";
+@import "application/content_blocks";
 
 // irc styles
-@import "korobi/irc/base";
-@import "korobi/irc/logs";
-@import "korobi/irc/stats";
+@import "application/irc/base";
+@import "application/irc/logs";
+@import "application/irc/stats";
 
 // code highlighting
-@import "prism/prism";
+@import "vendor/prism/prism";
 
 // style guide
-@import "korobi/style_guide";
+@import "application/style_guide";
 
 // docs
-@import "korobi/docs";
+@import "application/docs";
 
-@import "buttons/buttons";
+@import "application/buttons/buttons";
