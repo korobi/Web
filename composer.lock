@@ -4,8 +4,41 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "72dfc6a2615253874a74a21c10dc4e74",
+    "hash": "0f060929907fc2b0f7b440e9dacd89cb",
     "packages": [
+        {
+            "name": "crodas/influx-php",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crodas/InfluxPHP.git",
+                "reference": "3c0b99efc98c810bdc0dd294574b306583d17446"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crodas/InfluxPHP/zipball/3c0b99efc98c810bdc0dd294574b306583d17446",
+                "reference": "3c0b99efc98c810bdc0dd294574b306583d17446",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-4-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "César D. Rodas",
+                    "email": "crodas@php.net"
+                }
+            ],
+            "description": "Simple client for InfluxDB",
+            "time": "2014-09-28 22:07:51"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.3",
@@ -3403,7 +3436,7 @@
                     "role": "Contributors"
                 }
             ],
-            "description": "Twig, the flexible, fast, and secure template language for PHP.",
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
             "homepage": "http://twig.sensiolabs.org",
             "keywords": [
                 "templating"
