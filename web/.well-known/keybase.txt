@@ -6,17 +6,17 @@ I hereby claim:
 
   * I am an admin of https://korobi.io
   * I am kashike (https://keybase.io/kashike) on keybase.
-  * I have a public key with fingerprint CCBF 9599 623B FA09 06EC  3590 9691 61B5 81F8 EFDF
+  * I have a public key with fingerprint 5F92 7591 ED20 CB41 82F9  0C21 2E9B 1592 FF5F CE16
 
 To do so, I am signing this object:
 
 {
     "body": {
         "key": {
-            "fingerprint": "ccbf9599623bfa0906ec3590969161b581f8efdf",
+            "fingerprint": "5f927591ed20cb4182f90c212e9b1592ff5fce16",
             "host": "keybase.io",
-            "key_id": "969161b581f8efdf",
-            "kid": "0101bbad90d453c73c539cbd38389d738700f38796d39549d940ab878cf23ca3005f0a",
+            "key_id": "2e9b1592ff5fce16",
+            "kid": "01015a9eccb85211626591aa6ae47da8135f3304e6b16cb5a06fa003d97862ab51400a",
             "uid": "8fca5904df6c59a5eacfc10fd0667100",
             "username": "kashike"
         },
@@ -27,10 +27,10 @@ To do so, I am signing this object:
         "type": "web_service_binding",
         "version": 1
     },
-    "ctime": 1425959270,
+    "ctime": 1426088165,
     "expire_in": 157680000,
-    "prev": "9972ce9946a46903aaaa7423b19c92f6778aa1c397b1573d182b4a7e48b4fb1b",
-    "seqno": 6,
+    "prev": "463c07ab2dfbf677a2f9a62948e6899438b2608ba4fb0706cd57244cfe46ac90",
+    "seqno": 10,
     "tag": "signature"
 }
 
@@ -40,29 +40,23 @@ which yields the signature:
 Version: Keybase OpenPGP v2.0.8
 Comment: https://keybase.io/crypto
 
-yMMvAnicbVJrTFRHFF5QKKCWp4ZAbeMt0lIXuO97Z1OMIdU2VqDlGVRC5j5m97Kw
-d9ldFgnSStNQbYxWRAxGCLVaI0XEbrUpII3yqIiLpkoxNkWK4eEPizEidAXSe2n9
-1/NjJvPNd74535nTu2aFIcSv/gi8VD0/88Bv8GpKmSF7SUGVmKBKFZipErPKyxtS
-bGbZYXcoNhdmwkRRQIABgCUpAUEc4KwsUgzAAQsIlhAYnkC8jCSEGTGL6tQzNBkB
-OuUkRdUw7VCoSBr6P3zr8gVO4IQgQAngEs1QIkeJDAVEQaJ4igcSR/EcjiNtBaxE
-AYYGEqBxKPAcLyKSEiGF4wzCoSZXtizHIxFq5dESYkUGQEaGIhIJHEk4y3IEjutE
-p+ywwRJZrxU6LYpVxqqMmAa6FVHWO6AbeUlQHaqg/OvF7lBdqqgWa7DF5bI7TXqa
-q8Ku88plofA/hUJBsUlaD7UMt+xwKqoNMxEaU3QpuiRBk4zWUJLDjZi8x6445EJF
-ZzAcy+Na6O/Ibr1jgCNFGQCahTQLcApqwdHaNxBABCRiOY6HkBApwAlaMiURPCnQ
-kJNpXqCRQAiY7qnUpmImVisTmjVJp2K2QVeZQzN87erulQa/EENggL8+BYaQ4LCX
-s/FOZ5jBG0hmzqcOn1+zo7khxpsfsakirtmV1J8/cT+8sTf20MWUBl+lzZscdyXD
-Mvmz1Tiv9F28nPeia3roI1v34N+vevpO5E0ZrMHeIgHV9PhqPrNnHEwrftw2fHgh
-OPs9C1ltutmaxufWeYq4R0mvODIz4BlyQJ6P/b1u+8kyT+h632SP+17/62mXnq+e
-np44kbMQdH7Tyf6WyZjFqIja8j3npISzL/oLhz5NnIxaGz+7Kr/x7Mz1sL6nbXDX
-2nM+39tL6IcDdk+sedQbMJKSmykbN0clxal33P1NsfFNtW0FG73PTt9+yJQWjH39
-9MFgs5BM+c/0lO4lJzPVL7sM6UN/vG9Sj7Xfi8ETTi3eCNpw64mv5mDW+OxInXHF
-nwOG6JUNRSV53fvv1m6dDTSF1kePPonZtaXpzcy2ZrPnxkhExn33VEe4f/Txo91Z
-HbX1hxLH2vaFB152oNrxsYmc5vbhL95ddeowUXUmNOVKFkMmP0yPjbwwqKKu542n
-s7+5tX6guCVjbmMijx37/vHuO1Xsttzeoc7RXxctnpDVrX1fHf/l0VL8s6TxnC13
-P/+A2VrdsMNTfnvbAfPUb6M1n1znFr67aXxt5MK6vUFufn/7HNpJSts/xCJn3+j4
-+FokOGrdd6SltWDnW+nGBPdfJevmAmzm6dTUEWDaMFfR1Jnct1n+NuKnHyP+AdlR
-rUQ=
-=YFjo
+yMIcAnicbZJJTBRBFIYbQdFxCeIaDR4aDDEiVPV0V3ePG8bEHRIngjGKY3V1FbQD
+08NsCuiB4L5xcosHQTRBTy4HxCggIWNUErgpYji4RY1bVBBFxWqUm3Wp1F//+179
+L9UxOVFwJXjz1pxscXdeTXh4d1lUKBB2vKwSDdusED1Vop+ObMwKFNNQMGQFIqJH
+VJguqYoOqSkBYshQk5gOiAQlqhtQ0SXGFEYoRGKWWGKHnQqOMXCYZls21/jBZ5lc
+/Y/fP3IBIIAK1ikhhqZIECIJ8XYYI0xl1cQadCvM7QYyRQZExFAwQAwD4DZ1VUMS
+NhQoA4A5LjqC0xjBig5kkyGi6FihmDACATMBQioEwDGGaSiAy6jzVhwusfxU3Jsl
+cjFmEepMwAkyarBDtmH9zRIM2RGb2KVcLolEgmGPUxapCDq+XdTw/SP4DCtg8hny
+ihgNhS07IHogd5KI5SChLCGgaRApWSLdHbRC1Gc5DkVFGuDL6UNjHCkjNwEqNiST
+GQypKuaTx0jSZY0iTddlt2Y4JAPLzAAqQMRUVEmWCaMywkR3koZpecDmbA6N4GLO
+DFvFARyJhnji9rZtSUKCSxg3dozzDQTXhJTRz7GjbbxQd7vg7Tv3xvrW5T3X7/XO
+2vO46EkT7o0fkxrmRYdPdK+f69vgSV+a0zD3cGv/q40zl+cO7ErbM1DT+H0q/Bo8
+JST1/Hz6fkH1nbZ3nXU/b1dHvRmr8pHw8XLVh8wfqbnyxeEtHa7Vlw/tLy1v6o1f
+qY3VDk07v29dfUP2jDfAm/z42pGKjM9Jv7fnNE86/uN5YOr7hNN5/dFz8+NdE71n
+M78E06cMT6/8uPDBkpMpp35d2nqrueXMzb7BstUr991JrF5pHXi981nRooy0ocrG
+mmv+ppfxzZv66je0J74oxAfPpVfmdzdfeJRyNHnt4Npctvhb4a3YjftdGmhPLv2c
+Ov1T45zfx2av+AOVECsI
+=eEmp
 -----END PGP MESSAGE-----
 
 And finally, I am proving ownership of this host by posting or
@@ -71,4 +65,3 @@ appending to this document.
 View my publicly-auditable identity here: https://keybase.io/kashike
 
 ==================================================================
-
