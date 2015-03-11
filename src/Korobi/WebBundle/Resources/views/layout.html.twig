@@ -6,11 +6,10 @@
     <meta name='viewport' content='initial-scale=1'>
     <link type="text/plain" rel="author" href="/humans.txt" />
     {% stylesheets filter='scss' '@KorobiWebBundle/Resources/assets/sass/application.scss' output='assets/css/application.css' %}
-    <link rel='stylesheet' href='{{ asset_url }}?cb={{ "now"|date("U") }}' />
+    <link rel='stylesheet' href='{{ asset_url }}{% if app.environment == 'dev' %}?v={{ 'now'|date('U') }}{% endif %}' />
     {% endstylesheets %}
     <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css'>
-    {% block head %}
-    {% endblock %}
+    {% block head %}{% endblock %}
 </head>
 <body{{ (theme.isLight()) ? ' class="light"' : '' }}>
 {{ include('KorobiWebBundle::partials/nav.html.twig') }}
@@ -31,12 +30,12 @@
 {% block javascripts %}
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 {% javascripts '@production' output='assets/js/application.js' filter='uglifyjs2' %}
-<script src="{{ asset_url }}?cb={{ "now"|date("U") }}"></script>
+<script src="{{ asset_url }}{% if app.environment == 'dev' %}?v={{ 'now'|date('U') }}{% endif %}"></script>
 {% endjavascripts %}
 {# only include development js in dev environment #}
 {% if app.environment == 'dev' %}
-{% javascripts '@KorobiWebBundle/Resources/assets/js/dev/*' output='assets/js/dev.js' filter='uglifyjs2' %}
-<script src="{{ asset_url }}?cb={{ "now"|date("U") }}"></script>
+{% javascripts '@staging' output='assets/js/staging.js' filter='uglifyjs2' %}
+<script src="{{ asset_url }}?v={{ 'now'|date('U') }}"></script>
 {% endjavascripts %}
 {% endif %}
 {% endblock %}

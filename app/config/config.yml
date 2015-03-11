@@ -60,14 +60,16 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
     assets:
-        child_frame:
-            inputs:
-                - '@KorobiWebBundle/Resources/assets/js/prod/iframeResizer.contentWindow.js'
         production:
             inputs:
-                - '@KorobiWebBundle/Resources/assets/js/prod/application.js'
-                - '@KorobiWebBundle/Resources/assets/js/prod/iframeResizer.js'
-                - '@KorobiWebBundle/Resources/assets/js/prod/prism.js'
+                - '@KorobiWebBundle/Resources/assets/js/vendor/prism.js'
+                - '@KorobiWebBundle/Resources/assets/js/vendor/tooltips.js'
+                - '@KorobiWebBundle/Resources/assets/js/application/navigation.js'
+                - '@KorobiWebBundle/Resources/assets/js/application/highlighting.js'
+                - '@KorobiWebBundle/Resources/assets/js/application/irc/channel_admin.js'
+        staging:
+            inputs:
+                - '@KorobiWebBundle/Resources/assets/js/staging/symfony.js'
 # Doctrine Configuration
 doctrine_mongodb:
     connections:

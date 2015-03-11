@@ -1,8 +1,8 @@
 $(function() {
-    var $debugToolbar = $('.sf-toolbar');
+    var $toolbar = $('.sf-toolbar');
 
     function getSymfonyPreference(name) {
-        if (!window.localStorage) {
+        if(!window.localStorage) {
             return null;
         }
 
@@ -10,9 +10,9 @@ $(function() {
     }
 
     var $body = $('body');
-    if ($debugToolbar.length != 0) {
-        var dispPref = getSymfonyPreference('toolbar/displayState');
-        if (dispPref == 'block' || dispPref === null) {
+    if($toolbar.length != 0) {
+        var displayState = getSymfonyPreference('toolbar/displayState');
+        if(displayState === null || displayState == 'block') {
             $('.footer').addClass('footer--debug');
             $body.addClass('open-debug');
         }
@@ -20,7 +20,7 @@ $(function() {
 
     function toggleFooterDebugMode() {
         var $debugToolbar = $('.sf-minitoolbar');
-        if ($debugToolbar.css('display') != 'none') {
+        if($debugToolbar.css('display') != 'none') {
             $('.footer').removeClass('footer--debug');
             $('body').removeClass('open-debug');
         } else {
