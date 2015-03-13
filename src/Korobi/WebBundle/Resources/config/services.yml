@@ -91,7 +91,7 @@ services:
         class: Korobi\WebBundle\Util\InfluxService
         arguments:
             - %influx_host%
-            - %influx_prot%
+            - %influx_port%
             - %influx_user%
             - %influx_pass%
             - %influx_db%
