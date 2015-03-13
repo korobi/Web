@@ -2,10 +2,11 @@
 
 namespace Korobi\WebBundle\Controller;
 
+use Korobi\WebBundle\Parser\Markdown;
 use Korobi\WebBundle\Util\StringUtil;
-use Michelf\Markdown;
 
 class DocsController extends BaseController {
+    const BASE_HREF = '/docs/';
 
     /**
      * @param $file
