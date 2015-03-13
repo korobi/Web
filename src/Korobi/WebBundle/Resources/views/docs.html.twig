@@ -4,7 +4,7 @@
 
 {% block body %}
     {% if pageName != "index" %}
-        <a href="{{ path('docs_index') }}">Return to docs index</a>
+        <a href="{{ path('docs') }}">Return to docs index</a>
     {% endif %}
     <section class="docs">
         {{ content | raw }}
