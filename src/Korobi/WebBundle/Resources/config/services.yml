@@ -95,3 +95,13 @@ services:
             - %influx_user%
             - %influx_pass%
             - %influx_db%
+
+    # ----------------------------
+    # ----- Console commands -----
+    # ----------------------------
+    korobi.command.stats_gen:
+        class: Korobi\WebBundle\Console\StatsGeneration
+        arguments:
+            - @korobi.influx
+        tags:
+            -  { name: console.command }
