@@ -156,7 +156,7 @@ class IRCTextParser {
      *
      * @return string
      */
-    private static function closeTag() {
+    public static function closeTag() {
         return '</span>';
     }
 
@@ -203,7 +203,7 @@ class IRCTextParser {
      * @param bool $reverse
      * @return string
      */
-    private static function createColorTag($fg, $bg, $reverse = false) {
+    public static function createColorTag($fg, $bg, $reverse = false) {
         return '<span class="'. ($reverse
             ? self::getColorClass($bg, $fg)
             : self::getColorClass($fg, $bg)) . '">';

@@ -231,9 +231,9 @@ class LogParser {
      * @return string
      */
     private static function getSpanForColour($colour, $text) {
-        return '<span class="' . IRCTextParser::COLOR_CLASS_PREFIX
-            . $colour . '-' . IRCTextParser::DEFAULT_BACKGROUND . '">'
-            . self::transformActor($text) . '</span>';
+        return IRCTextParser::createColorTag($colour, IRCTextParser::DEFAULT_BACKGROUND)
+            . self::transformActor($text)
+            . IRCTextParser::closeTag();
     }
 
     /**
