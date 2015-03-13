@@ -87,3 +87,11 @@ services:
         arguments:
             - %akio_path%
             - %akio_key%
+    korobi.influx:
+        class: Korobi\WebBundle\Util\InfluxService
+        arguments:
+            - %influx_host%
+            - %influx_prot%
+            - %influx_user%
+            - %influx_pass%
+            - %influx_db%
