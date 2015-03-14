@@ -29,7 +29,8 @@ class SecurityController extends BaseController {
         $payload = json_decode($req->getContent(), true);
         $uri = $payload['csp-report']['document-uri'];
         $resource = $payload['csp-report']['blocked-uri'];
-        $message = $this->akio->startMessage()->insertRed()->insertText("[!! CSP !!]")->insertAquaLight()->insertText(" Request to $resource on page $uri blocked.");
+        $ip = $req->getClientIp();
+        $message = $this->akio->startMessage()->insertRed()->insertText("[!! CSP !!]")->insertAquaLight()->insertText(" Request to $resource on page $uri blocked via $ip.");
         $this->akio->sendMessage($message);
         return new JsonResponse("Thanks, browser.");
     }
