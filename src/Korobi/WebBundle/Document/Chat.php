@@ -82,6 +82,16 @@ class Chat {
     private $message;
 
     /**
+     * @MongoDB\Boolean
+     */
+    private $notice;
+
+    /**
+     * @MongoDB\String
+     */
+    private $notice_target;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -347,6 +357,46 @@ class Chat {
      */
     public function setMessage($message) {
         $this->message = $message;
+        return $this;
+    }
+
+    /**
+     * Get notice
+     *
+     * @return boolean $notice
+     */
+    public function getNotice() {
+        return $this->notice;
+    }
+
+    /**
+     * Set notice
+     *
+     * @param boolean $notice
+     * @return self
+     */
+    public function setNotice($notice) {
+        $this->notice = $notice;
+        return $this;
+    }
+
+    /**
+     * Get noticeTarget
+     *
+     * @return string $noticeTarget
+     */
+    public function getNoticeTarget() {
+        return $this->notice_target;
+    }
+
+    /**
+     * Set noticeTarget
+     *
+     * @param string $noticeTarget
+     * @return self
+     */
+    public function setNoticeTarget($noticeTarget) {
+        $this->notice_target = $noticeTarget;
         return $this;
     }
 }

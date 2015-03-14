@@ -203,6 +203,11 @@ class ChannelController extends BaseController {
 
         // process all found chat entries
         foreach ($dbChats as $chat) {
+            /** @var Chat $chat */
+            if ($chat->getNotice() && $chat->getNoticeTarget() !== 'NORMAL') {
+                continue;
+            }
+
             $chats[] = $this->transformToChatMessage($chat);
         }
 
