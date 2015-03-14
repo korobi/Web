@@ -4,8 +4,8 @@
 
 {% block body %}
     <h1>{{ channel_name }} on {{ network_name }}</h1>
-    <strong>Command Prefix: </strong> {{ command_prefix }}
+    <strong>Command Prefix: </strong> {{ command_prefix }}<br>
     {% for link in links %}
-        <a href="{{ link.href }}">{{ link.name }}</a>
+        <a href="{{ link.href }}">{{ link.name }}</a><br>
     {% endfor %}
 {% endblock %}
