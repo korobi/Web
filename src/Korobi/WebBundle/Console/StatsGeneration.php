@@ -36,5 +36,33 @@ class StatsGeneration extends Command {
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         dump($this->influx->getDatabase()->query("SELECT MEAN(normal) FROM user_counts")->current()->mean);
+        $data = $this->influx->getDatabase()->query("SELECT total FROM user_counts GROUP BY TIME(10m)");
+        //dump($data);
+        $runningTotal = 0;
+        $lastItem = 0;
+        foreach ($data as $item) {
+            $runningTotal += $item->total - $lastItem;
+            $lastItem = $item->total;
+        }
+        $mean = $runningTotal / $data->count();
+
+        // p(X = x) = mean^x * e^(-mean) all over x factorial
+
+        $atleastTenUsers = 0;
+        $output->writeln("Approximating as possion with parameter $mean");
+        //computes x <= 9, therefore x >= 10 = 1- x <= 9
+        for ($i = 9; $i != 0; $i--) {
+            $output->writeln("($mean ^ $i * e^(-$mean)) / $i!");
+            $val = pow($mean, $i) * (1 / exp($mean));
+            $fact = 1;
+            for ($z = $i; $z != 1; $z--) {
+                $fact *= $z;
+            }
+            $val = $val / $fact;
+            $atleastTenUsers += $val;
+        }
+        $atleastTenUsers = 1 - $atleastTenUsers;
+        dump("The probability of at least ten users joining in a ten minute period is " . ($atleastTenUsers));
+
     }
 }
