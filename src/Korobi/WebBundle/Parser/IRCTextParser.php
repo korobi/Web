@@ -98,7 +98,7 @@ class IRCTextParser {
             }
 
             // Add text before the style change
-            $result .= substr($next, 0, $index);
+            $result .= self::makeSafe(substr($next, 0, $index));
 
             if($prev_styles != $styles) {
                 // Close previous style and apply the new one
@@ -111,7 +111,7 @@ class IRCTextParser {
         }
 
         // Add the rest of the stuff and close tags
-        $result .= $next . self::closeTags($styles);
+        $result .= self::makeSafe($next) . self::closeTags($styles);
 
         // Apply other transformations if needed
         if ($pretty_only) {
@@ -329,7 +329,7 @@ class IRCTextParser {
         while (preg_match(self::URL_PATTERN, $text, $match, PREG_OFFSET_CAPTURE, $index)) {
             list($url, $urlIndex) = $match[0];
 
-            $result .= self::makeSafe(substr($text, $index, $urlIndex - $index));
+            $result .= substr($text, $index, $urlIndex - $index);
 
             $scheme = $match[1][0];
             $username = $match[2][0];
