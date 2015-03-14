@@ -29,7 +29,7 @@ class SecurityController extends BaseController {
         $payload = json_decode($req->getContent(), true);
         $uri = $payload['csp-report']['document-uri'];
         $resource = $payload['csp-report']['blocked-uri'];
-        $ip = $req->getClientIp();
+        $ip = hash_hmac("sha1", $req->getClientIp(), "bc604aedc9027a1f1880");
         $message = $this->akio->startMessage()->insertRed()->insertText("[!! CSP !!]")->insertAquaLight()->insertText(" Request to $resource on page $uri blocked via $ip.");
         $this->akio->sendMessage($message);
         return new JsonResponse("Thanks, browser.");
