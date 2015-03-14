@@ -50,19 +50,24 @@ class StatsGeneration extends Command {
 
         $atleastTenUsers = 0;
         $output->writeln("Approximating as possion with parameter $mean");
+        $output->writeln("Let X = the net gain in users per a 10 minute period");
+        $output->writeln("Working out X <= 9...");
         //computes x <= 9, therefore x >= 10 = 1- x <= 9
         for ($i = 9; $i != 0; $i--) {
-            $output->writeln("($mean ^ $i * e^(-$mean)) / $i!");
             $val = pow($mean, $i) * (1 / exp($mean));
             $fact = 1;
             for ($z = $i; $z != 1; $z--) {
                 $fact *= $z;
             }
             $val = $val / $fact;
+            $output->writeln("($mean ^ $i * e^(-$mean)) / $i! = $val");
+
             $atleastTenUsers += $val;
         }
         $atleastTenUsers = 1 - $atleastTenUsers;
-        dump("The probability of at least ten users joining in a ten minute period is " . ($atleastTenUsers));
+        $output->writeln("Working out 1 - X <= 9 which is equivalent to X >= 10");
+
+        $output->writeln("The probability of at least ten users joining in a ten minute period is " . ($atleastTenUsers));
 
     }
 }
