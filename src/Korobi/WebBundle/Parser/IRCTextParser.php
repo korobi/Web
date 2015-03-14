@@ -98,11 +98,7 @@ class IRCTextParser {
             }
 
             // Add text before the style change
-            if ($pretty_only) {
-                $result .= substr($next, 0, $index);
-            } else {
-                $result .= self::transform(substr($next, 0, $index));
-            }
+            $result .= self::makeSafe(substr($next, 0, $index));
 
             if($prev_styles != $styles) {
                 // Close previous style and apply the new one
@@ -115,14 +111,14 @@ class IRCTextParser {
         }
 
         // Add the rest of the stuff and close tags
-        if ($pretty_only) {
-            $result .= $next;
-        } else {
-            $result .= self::transform($next);
-        }
-        $result .= self::closeTags($styles);
+        $result .= self::makeSafe($next) . self::closeTags($styles);
 
-        return $result;
+        // Apply other transformations if needed
+        if ($pretty_only) {
+            return $result;
+        } else {
+            return self::transform($result);
+        }
     }
 
     /**
