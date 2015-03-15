@@ -8,6 +8,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Content</th>
                 </tr>
@@ -15,6 +16,7 @@
             <tbody>
                 {% for command in commands %}
                     <tr>
+                        <td>{{ loop.index }}</td>
                         {% if command.aliases or command.is_action %}
                             <td>
                                 <abbr title="{% if command.aliases %}<strong>Aliases:</strong> {{ command.aliases }}{% endif %}{% if command.is_action %}{% if command.aliases %}<br>{% endif %}<strong>Action:</strong> yes{% endif %}" rel="tooltip">
