@@ -37,6 +37,8 @@ class StatsGeneration extends Command {
     protected function execute(InputInterface $input, OutputInterface $output) {
         dump($this->influx->getDatabase()->query("SELECT MEAN(normal) FROM user_counts")->current()->mean);
         $data = $this->influx->getDatabase()->query("SELECT total FROM user_counts GROUP BY TIME(10m)");
+        $distinctChannels = $this->influx->getDatabase()->query("SELECT DISTINCT(channel) FROM user_counts");
+        //dump($distinctChannels);
         //dump($data);
         $runningTotal = 0;
         $lastItem = 0;
