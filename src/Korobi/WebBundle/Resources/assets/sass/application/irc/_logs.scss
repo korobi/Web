@@ -40,6 +40,9 @@
 
     .message {
       word-break: break-all;
+      // Invalid but recognized by some browsers
+      word-break: break-word;
+      @include hyphens(auto);
       padding-right: 0;
       padding-left: 10px;
       white-space: pre-wrap;
