@@ -44,7 +44,7 @@ class IRCTextParser {
         'italic' => false,
         'underline' => false,
     ];
-    const URL_REGEX = '!(https?://[^\s[\]{}()<>"\'?&#]+(?:[^\s[\]{}()<>"\']+))!i';
+    const URL_REGEX = "/(\\b(?:https?:\\/\\/|ftp:\\/\\/)(?:([^]\\\\\\\\\\x00-\\x20\\\"(),:-<>[\\x7f-\\xff]{1,64})(:[^]\\\\\\\\\\x00-\\x20\\\"(),:-<>[\\x7f-\\xff]{1,64})?@)?(?:(?:[-a-zA-Z0-9\\x7f-\\xff]{1,63}\\.)+[a-zA-Z\\x7f-\\xff][-a-zA-Z0-9\\x7f-\\xff]{1,62}|(?:[1-9][0-9]{0,2}\\.|0\\.){3}(?:[1-9][0-9]{0,2}|0))(?:(:[0-9]{1,5})?(?:\\/[!$-\\/0-9:;=@_\\':;!a-zA-Z\\x7f-\\xff]*?)?(?:\\?[!$-\\/0-9:;=@_\\':;!a-zA-Z\\x7f-\\xff]+?)?(?:#[!$-\\/0-9?:;=@_\\':;!a-zA-Z\\x7f-\\xff]+?)?)(?=[)'?.!,;:]*(?:[^-_#$+.!*%'(),;\\/?:@=&a-zA-Z0-9\\x7f-\\xff]|$)))/i";
 
     /**
      * Parses an irc line containing irc format control chars, parsing links additionally.
