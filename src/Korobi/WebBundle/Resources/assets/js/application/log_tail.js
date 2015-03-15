@@ -6,8 +6,8 @@ function pad(n) {
 $(function() {
 
     var logs = $('.logs');
-    if (logs.data('is-tail')) {
-        var lastId = logs.data('tail-last-id');
+    if (logs.hasClass('tailing')) {
+        var lastId = logs.find('.line:last').data('event-id');
 
         $(document).scrollTop($("#bottom").offset().top);
         setInterval(function() {
