@@ -66,6 +66,7 @@ assetic:
                 - '@KorobiWebBundle/Resources/assets/js/vendor/tooltips.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/navigation.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/highlighting.js'
+                - '@KorobiWebBundle/Resources/assets/js/application/log_tail.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/irc/channel_admin.js'
         staging:
             inputs:
