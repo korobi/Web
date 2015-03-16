@@ -53,6 +53,7 @@ services:
         parent: korobi.base_controller
         arguments:
             - @korobi.akio
+            - @logger
     korobi.controller.deploy:
         class: Korobi\WebBundle\Controller\DeploymentController
         parent: korobi.base_controller

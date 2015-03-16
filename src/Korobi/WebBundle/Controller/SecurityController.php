@@ -3,6 +3,7 @@
 namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Util\Akio;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,14 @@ class SecurityController extends BaseController {
     private $akio;
 
     /**
+     * @var LoggerInterface Logger we can use.
+     */
+    private $logger;
+
+    /**
      * @param Akio $akio
      */
-    public function __construct(Akio $akio) {
+    public function __construct(Akio $akio, LoggerInterface $logger) {
         $this->akio = $akio;
     }
 
@@ -29,6 +35,7 @@ class SecurityController extends BaseController {
         $payload = json_decode($req->getContent(), true);
         $uri = $payload['csp-report']['document-uri'];
         $resource = $payload['csp-report']['blocked-uri'];
+        $this->logger->warning('CSP Warning', $payload);
         $ip = hash_hmac("sha1", $req->getClientIp(), "bc604aedc9027a1f1880");
         $message = $this->akio->startMessage()->insertRed()->insertText("[!! CSP !!]")->insertAquaLight()->insertText(" Request to $resource on page $uri blocked via $ip.");
         $this->akio->sendMessage($message);
