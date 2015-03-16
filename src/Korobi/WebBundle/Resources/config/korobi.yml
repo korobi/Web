@@ -18,6 +18,7 @@ korobi_web:
                   - channel_logs_date_tail
                   - channel_logs_tail
                   - channel_stats
+                  - channel_games
 
             - title: Docs
               route: 'docs'

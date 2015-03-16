@@ -1,0 +1,99 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = channel_name ~ " on " ~ network_name ~ " - CAH Game " ~ game_id %}
+
+{% block body %}
+    <h1>Cards Against Humanity game {{ game_id }}</h1>
+    <h3>in {{ channel_name }} on {{ network_name }}</h3>
+    <br>
+    <div class="stats">
+        <strong>Game State:</strong> {{ game_state }}
+
+        <br><br><strong>Start Time:</strong> {{ game.startTime|date('F j, Y h:i:s A') }}
+        <br><strong>End Time:</strong> {{ game.endTime|date('F j, Y h:i:s A') }}
+
+        <br><br><strong>Packs:</strong>
+        {% for pack in game.packs %}
+            {{ pack }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+
+
+        <br><br><strong>Host:</strong> {{ game.host }}
+        <br><strong>Lifetime Hosts:</strong>
+        {% for host in game.lifetimeHosts %}
+            {{ host }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+
+        <br><strong>Players:</strong>
+        {% for player in game.players|sort %}
+            {{ player }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+
+        <br><strong>Lifetime Players:</strong>
+        {% for player in game.lifetimePlayers|sort %}
+            {{ player }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+
+        <br><br><strong>End Scores</strong>
+        <table>
+            <thead>
+            <tr>
+                <th>Nick</th>
+                <th>Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user, score in game.endScores|arsort %}
+                <tr>
+                    <td>{{ user }}</td>
+                    <td>{{ score }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <strong>Card Counts:</strong>
+        <table>
+            <thead>
+            <tr>
+                <th>Nick</th>
+                <th>Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for type, count in card_counts %}
+                <tr>
+                    <td>{{ type }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <br><strong>Rounds</strong>
+        <ol>
+            {% for round in game.rounds|arsort %}
+                <li>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Czar</th>
+                            <th>Black Card</th>
+                            <th>Winner</th>
+                            <th>Plays</th>
+                        </tr>
+                        </thead>
+                        <body>
+                        <tr>
+                            <td>{{ round.czar }}</td>
+                            <td>{{ round.black_card }}</td>
+                            <td><abbr title="{{ cahFullCard(round.black_card, round.plays[round.winner.id]) }}" rel="tooltip">{{ round.winner.player }}</abbr></td>
+                            <td><abbr title="{{ cahPlays(round.black_card, round.plays) }}" rel="tooltip">(hover)</abbr></td>
+                        </tr>
+                        </body>
+                    </table>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}
