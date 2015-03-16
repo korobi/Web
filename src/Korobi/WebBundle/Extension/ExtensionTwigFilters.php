@@ -13,19 +13,24 @@ class ExtensionTwigFilters extends \Twig_Extension {
     public function getFilters() {
         return [
             new \Twig_SimpleFilter('ircformat', [$this, 'ircFormat']),
-            new \Twig_SimpleFilter('commitauthorname', [$this, 'replaceAuthorName'])
+            new \Twig_SimpleFilter('arsort', [$this, 'arsort'])
         ];
     }
 
+    /**
+     * @param $string
+     * @return string
+     */
     public function ircFormat($string) {
         return IRCTextParser::parse($string);
     }
 
-    public function replaceAuthorName($name) {
-        if ($name === 'Joshua Popoff') {
-            return 'kashike';
-        }
-
-        return $name;
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function arsort($data) {
+        arsort($data);
+        return $data;
     }
 }
