@@ -52,11 +52,28 @@ nelmio_security:
                 - 'unsafe-inline'
                 - 'unsafe-eval'
                 - 'https://cdnjs.cloudflare.com'
+                - 'http://cdnjs.cloudflare.com'
+            font-src:
+                - 'self'
+                - 'https://cdnjs.cloudflare.com'
+                - 'http://cdnjs.cloudflare.com'
+                - 'https://fonts.googleapis.com'
+                - 'http://fonts.googleapis.com'
+                - 'https://fonts.gstatic.com'
+                - 'http://fonts.gstatic.com'
             style-src:
                 - 'self'
                 - 'https://cdnjs.cloudflare.com'
+                - 'http://cdnjs.cloudflare.com'
                 - 'https://fonts.googleapis.com'
+                - 'http://fonts.googleapis.com'
                 - 'unsafe-inline'
+            img-src:
+                - 'https:'
+                - 'http:'
+                - 'data:'
+            object-src:
+                - 'none'
 
 
 #swiftmailer:
