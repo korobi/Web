@@ -34,7 +34,7 @@ class ChannelControllerTest extends WebTestCase {
             ->method('getRepository')
             ->will($this->returnValue($netRepo));
         $client->request('GET', '/esper/korobi/logs/2015-03-14');
-        $this->markTestIncomplete("NYI, this is a bitch to do properly :(");
+        $this->markTestSkipped("NYI");
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
 
