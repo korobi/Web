@@ -33,7 +33,7 @@ class ChannelStatsController extends BaseController {
         $stats_file = file_get_contents($this->container->getParameter('channel_stats_root') . $dbNetwork->getSlug() . '/' . self::transformChannelName($dbChannel->getChannel()) . '.html');
         $stats_output = '';
         foreach (explode('\n', $stats_file) as $line) {
-            $stats_output .= IRCTextParser::parseLine($line, true);
+            $stats_output .= $line;//IRCTextParser::parseLine($line, true);
         }
 
         return $this->render('KorobiWebBundle:controller/channel:stats.html.twig', [
