@@ -35,18 +35,23 @@ class StatsGeneration extends Command {
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        dump($this->influx->getDatabase()->query("SELECT MEAN(normal) FROM user_counts")->current()->mean);
-        $data = $this->influx->getDatabase()->query("SELECT total FROM user_counts GROUP BY TIME(10m)");
+        dump($this->influx->getDatabase()->query("SELECT MEAN(normal) FROM user_counts WHERE channel='#drtshock'")->current()->mean);
+        $data = $this->influx->getDatabase()->query("SELECT total FROM user_counts  WHERE channel='#drtshock' GROUP BY TIME(10m)");
         $distinctChannels = $this->influx->getDatabase()->query("SELECT DISTINCT(channel) FROM user_counts");
         //dump($distinctChannels);
         //dump($data);
         $runningTotal = 0;
-        $lastItem = 0;
+        $lastItem = $data->current()->total;
+        $i = 0;
         foreach ($data as $item) {
+            if ($i === 0) {
+                $i = 1;
+                continue;
+            }
             $runningTotal += $item->total - $lastItem;
             $lastItem = $item->total;
         }
-        $mean = $runningTotal / $data->count();
+        $mean = $runningTotal / ($data->count()-1);
 
         // p(X = x) = mean^x * e^(-mean) all over x factorial
 
