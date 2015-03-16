@@ -12,6 +12,12 @@
     font-family: 'Source Code Pro', monospace;
     @include transition(0.25s all);
 
+    .owner:before    { content: '~'; color: nth($irc-colors,  5); }
+    .admin:before    { content: '&'; color: nth($irc-colors, 12); }
+    .operator:before { content: '@'; color: nth($irc-colors, 10); }
+    .half_op:before  { content: '%'; color: nth($irc-colors, 14); }
+    .voice:before    { content: '+'; color: nth($irc-colors,  9); }
+
     &.highlighted {
       font-weight: bold;
       background-color: rgba(255, 10, 10, 0.2);
@@ -30,12 +36,6 @@
     .nick {
       text-align: right;
       border-right: 1px solid #444;
-
-      &.owner:before    { content: '~'; color: nth($irc-colors,  5); }
-      &.admin:before    { content: '&'; color: nth($irc-colors, 12); }
-      &.operator:before { content: '@'; color: nth($irc-colors, 10); }
-      &.half_op:before  { content: '%'; color: nth($irc-colors, 14); }
-      &.voice:before    { content: '+'; color: nth($irc-colors,  9); }
     }
 
     .message {

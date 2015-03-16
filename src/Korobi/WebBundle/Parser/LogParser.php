@@ -24,8 +24,10 @@ class LogParser {
     public static function parseAction(Chat $chat) {
         $result = '';
 
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::getSpanForColour(self::getColourForActor($chat), $chat->getActorName());
+        $result .= self::getSpanForColour(
+            self::getColourForActor($chat),
+            self::transformActor($chat->getActorName(), $chat->getActorPrefix())
+        );
         $result .= ' ';
         $result .= IRCTextParser::parse($chat->getMessage());
 
@@ -40,8 +42,7 @@ class LogParser {
     public static function parseJoin(Chat $chat) {
         $result = '';
 
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
+        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
         $result .= ' (';
         $result .= $chat->getActorHostname();
         $result .= ') ';
@@ -58,11 +59,9 @@ class LogParser {
     public static function parseKick(Chat $chat) {
         $result = '';
 
-        $result .= self::createUserMode($chat->getRecipientPrefix());
-        $result .= self::transformActor($chat->getRecipientName());
+        $result .= self::transformActor($chat->getRecipientName(), $chat->getRecipientPrefix());
         $result .= ' was kicked by ';
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
+        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
         $result .= ' (' . $chat->getMessage() . ')';
 
         return $result;
@@ -88,12 +87,10 @@ class LogParser {
 
         // mode set by internal actor
         if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
-            $result .= self::createUserMode($chat->getActorPrefix());
-            $result .= self::transformActor($chat->getActorName());
+            $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
             $result .= ' sets mode ' . $chat->getMessage();
         } else {
-            $result .= self::createUserMode($chat->getActorPrefix());
-            $result .= self::transformActor($chat->getActorName());
+            $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
             $result .= ' sets mode ' . $chat->getMessage();
         }
 
@@ -118,13 +115,9 @@ class LogParser {
     public static function parseNick(Chat $chat) {
         $result = '';
 
-        $prefix = self::createUserMode($chat->getActorPrefix());
-
-        $result .= $prefix;
-        $result .= $chat->getActorName();
+        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
         $result .= ' is now known as ';
-        $result .= $prefix;
-        $result .= $chat->getRecipientName();
+        $result .= self::transformActor($chat->getRecipientName(), $chat->getActorPrefix());
 
         return $result;
     }
@@ -136,9 +129,7 @@ class LogParser {
     public static function parsePart(Chat $chat) {
         $result = '';
 
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
-
+        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
         $result .= ' (';
         $result .= $chat->getActorHostname();
         $result .= ') ';
@@ -154,8 +145,7 @@ class LogParser {
     public static function parseQuit(Chat $chat) {
         $result = '';
 
-        $result .= self::createUserMode($chat->getActorPrefix());
-        $result .= self::transformActor($chat->getActorName());
+        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
         $result .= ' (';
         $result .= $chat->getActorHostname();
         $result .= ') ';
@@ -174,8 +164,7 @@ class LogParser {
         if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
             $result .= 'Topic is: ' . IRCTextParser::parse($chat->getMessage());
         } else {
-            $result .= self::createUserMode($chat->getActorPrefix());
-            $result .= self::transformActor($chat->getActorName());
+            $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
             $result .= ' has changed the topic to: ' . IRCTextParser::parse($chat->getMessage());
         }
 
@@ -232,45 +221,26 @@ class LogParser {
      */
     private static function getSpanForColour($colour, $text) {
         return IRCTextParser::createColorTag($colour, IRCTextParser::DEFAULT_BACKGROUND)
-            . self::transformActor($text)
-            . IRCTextParser::closeTag();
+            . $text . IRCTextParser::closeTag();
     }
 
     /**
      * Transform an actor name.
      *
      * @param $actor
+     * @param $prefix
      * @return string
      */
-    protected static function transformActor($actor) {
+    protected static function transformActor($actor, $prefix = '') {
         if ($actor == Chat::ACTOR_INTERNAL) {
             return 'Server';
         }
 
-        return $actor;
-    }
-
-    /**
-     * @param $prefix
-     * @return string
-     * @todo Use the css nick classes
-     */
-    private static function createUserMode($prefix) {
-        switch ($prefix) {
-            case 'OWNER':
-                return '<span class="irc--04-' . IRCTextParser::DEFAULT_BACKGROUND . '">~</span>';
-            case 'ADMIN':
-                return '<span class="irc--11-' . IRCTextParser::DEFAULT_BACKGROUND . '">&</span>';
-            case 'OPERATOR':
-                return '<span class="irc--09-' . IRCTextParser::DEFAULT_BACKGROUND . '">@</span>';
-            case 'HALF_OP':
-                return '<span class="irc--13-' . IRCTextParser::DEFAULT_BACKGROUND . '">%</span>';
-            case 'VOICE':
-                return '<span class="irc--08-' . IRCTextParser::DEFAULT_BACKGROUND . '">+</span>';
-            case 'NORMAL':
-            default:
-                return '';
+        if(empty($prefix) || $prefix == 'NORMAL') {
+            return $actor;
         }
+
+        return '<span class="' . strtolower($prefix) . '">' . $actor . '</span>';
     }
 
     /**
