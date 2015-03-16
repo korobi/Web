@@ -12,6 +12,7 @@ use Korobi\WebBundle\Parser\LogParser;
 use Korobi\WebBundle\Repository\ChatRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ChannelController extends BaseController {
 
@@ -212,7 +213,7 @@ class ChannelController extends BaseController {
         }
 
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(json_encode($chats));
+            return new Response(json_encode($chats));
         }
 
         // time to render!
