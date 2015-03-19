@@ -1,4 +1,8 @@
+var permissionCount;
+
 $(function() {
+    permissionCount = $('#permissions').data('permission-count');
+
     $('#permission-add').click(function(event) {
         event.preventDefault();
 
@@ -15,8 +19,8 @@ $(function() {
 
     $('body').on('click', 'a', function(event) {
         if(event.currentTarget.text == 'Remove') {
-            console.log(event);
             event.preventDefault();
+
             var id = $(this).attr('data-related');
             $('*[data-content="' + id + '"]').remove();
             permissionCount--;

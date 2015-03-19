@@ -25,7 +25,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="permissions" data-prototype="{{ form_widget(form.permissions.vars.prototype)|e }}">
+            <tbody id="permissions" data-prototype="{{ form_widget(form.permissions.vars.prototype)|e }}" data-permission-count="{{ form.permissions|length }}">
             {% for permission in form.permissions %}
                 <tr data-content="{{ permission.vars.id }}">
                     <td>{{ form_widget(permission) }}</td>
@@ -38,8 +38,6 @@
         <a href="#" id="permission-add">Add</a>
 
         {{ form_end(form) }}
-    </div>
-
-    <script>var permissionCount = '{{ form.permissions|length }}';</script><br>
+    </div><br>
 {% endblock %}
 
