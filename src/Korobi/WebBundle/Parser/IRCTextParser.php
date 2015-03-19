@@ -83,7 +83,11 @@ class IRCTextParser {
                     $styles[$style] ^= 1;
                     break;
                 case 'colour':
-                    $colour_info = self::parseColour(substr($next, $index + 1, 7));
+                    $colour_info = self::parseColour(
+                        substr($next, $index + 1, 7),
+                        $styles['fg'],
+                        $styles['bg']
+                    );
                     $skip += $colour_info['skip'];
                     $styles['fg'] = $colour_info['fg'];
                     $styles['bg'] = $colour_info['bg'];
@@ -237,12 +241,18 @@ class IRCTextParser {
             if (isset($matches['fg'])) {
                 $result['fg'] = intval($matches['fg'][0]);
                 $result['skip'] += strlen($matches['fg'][0]);
+            } else {
+                // received a color with background only
+                $result['fg'] = self::DEFAULT_FOREGROUND;
             }
 
             if (isset($matches['bg'])) {
                 $result['bg'] = intval($matches['bg'][0]);
                 $result['skip'] += strlen($matches['bg'][0]) + 1; // + 1 for the comma
             }
+        } else {
+            // a color char alone resets the foreground
+            $result['fg'] = self::DEFAULT_FOREGROUND;
         }
 
         return $result;

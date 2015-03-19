@@ -192,7 +192,7 @@ class IRCTextParserTest extends WebTestCase {
 
         $n_style = $hf->getStyle('n');
         $this->assertEquals(IRCTextParser::DEFAULT_FOREGROUND, $n_style['fg']);
-        $this->assertEquals(IRCTextParser::DEFAULT_BACKGROUND, $n_style['bg']);
+        $this->assertEquals(2, $n_style['bg']);
         $this->assertTrue($n_style['bold']);
     }
 
