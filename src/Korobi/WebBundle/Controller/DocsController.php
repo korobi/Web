@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Parser\Markdown;
 use Korobi\WebBundle\Util\StringUtil;
+use Parsedown;
 
 class DocsController extends BaseController {
     const BASE_HREF = '/docs/';
@@ -27,11 +28,10 @@ class DocsController extends BaseController {
             throw $this->createNotFoundException("Doc does not exist, " . $fn);
         }
 
-        $parser = new Markdown;
-        $parser->no_entities = true;
-        $parser->no_markup = true; // not bulletproof but CSP and PRs will fix whatever else we get
+        $parser = new Parsedown;
 
-        $viewData = ["pageName" => $file, "content" => $parser->transform(file_get_contents($fn))];
+
+        $viewData = ["pageName" => $file, "content" => $parser->parse(file_get_contents($fn))];
         $content = $this->render('KorobiWebBundle::docs.html.twig', $viewData);
         return $content;
     }
