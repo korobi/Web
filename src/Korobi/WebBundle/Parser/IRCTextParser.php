@@ -238,7 +238,7 @@ class IRCTextParser {
         );
 
         if (isset($matches['fg']) || isset($matches['bg'])) {
-            if (isset($matches['fg'])) {
+            if (isset($matches['fg']) && $matches['fg'][1] >= 0) {
                 $result['fg'] = intval($matches['fg'][0]);
                 $result['skip'] += strlen($matches['fg'][0]);
             }
