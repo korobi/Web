@@ -230,20 +230,17 @@ class IRCTextParser {
             'skip' => 0
         ];
 
-        $retVal = preg_match(
+        preg_match(
             self::COLOR_REGEX_15,
             $messageFragment,
             $matches,
             PREG_OFFSET_CAPTURE
         );
 
-        if ($retVal) {
+        if (isset($matches['fg']) || isset($matches['bg'])) {
             if (isset($matches['fg'])) {
                 $result['fg'] = intval($matches['fg'][0]);
                 $result['skip'] += strlen($matches['fg'][0]);
-            } else {
-                // received a color with background only
-                $result['fg'] = self::DEFAULT_FOREGROUND;
             }
 
             if (isset($matches['bg'])) {
