@@ -2,7 +2,6 @@
 
 namespace Korobi\WebBundle\Controller;
 
-use Korobi\WebBundle\Parser\Markdown;
 use Korobi\WebBundle\Util\StringUtil;
 use Parsedown;
 
