@@ -6,6 +6,8 @@ services:
         class: Korobi\WebBundle\Extension\ExtensionTwigGlobals
         tags:
             - { name: twig.extension }
+        arguments:
+            - @korobi.git_info
     korobi.extension.twig.filters:
         class: Korobi\WebBundle\Extension\ExtensionTwigFilters
         tags:
