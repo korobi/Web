@@ -2,6 +2,10 @@
 
 {% set page_title = "Docs" %}
 
+{% block head %}
+    <base href="{{ url('docs') }}/">
+{% endblock %}
+
 {% block body %}
     {% if pageName != "index" %}
         <a href="{{ path('docs') }}">Return to docs index</a>
