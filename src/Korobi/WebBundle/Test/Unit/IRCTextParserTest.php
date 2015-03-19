@@ -178,7 +178,7 @@ class IRCTextParserTest extends WebTestCase {
 
     public function testMessageComplexNestedFormats() {
         $hf = new HtmlFacility(IRCTextParser::parse(
-            "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopqrstuvwxyz"
+            "abc\x02d\x031,2efg\x02hijk\x02lm\x03nopq\x031rst\x03,3uvwxyz"
         ));
 
         // \x02 => bold, \x03 => colour
@@ -194,6 +194,14 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertEquals(IRCTextParser::DEFAULT_FOREGROUND, $n_style['fg']);
         $this->assertEquals(2, $n_style['bg']);
         $this->assertTrue($n_style['bold']);
+
+        $r_style = $hf->getStyle('r');
+        $this->assertEquals(1, $r_style['fg']);
+        $this->assertEquals(2, $r_style['bg']);
+
+        $u_style = $hf->getStyle('u');
+        $this->assertEquals(1, $u_style['fg']);
+        $this->assertEquals(3, $u_style['bg']);
     }
 
     /************************************

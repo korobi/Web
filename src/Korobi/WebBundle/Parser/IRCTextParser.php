@@ -219,8 +219,8 @@ class IRCTextParser {
      * actual code).
      *
      * @param string $messageFragment The fragment of message to extract the colours from.
-     * @param string $fg The default foreground to use if none is provided
-     * @param string $bg The default background to use if none is provided
+     * @param string $fg The previous foreground to use if it's not changed
+     * @param string $bg The previous background to use if it's not changed
      * @return array An array of data containing fg, bg and char count to skip.
      */
     public static function parseColour($messageFragment, $fg = self::DEFAULT_FOREGROUND, $bg = self::DEFAULT_BACKGROUND) {
