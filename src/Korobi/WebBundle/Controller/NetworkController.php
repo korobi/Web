@@ -21,7 +21,7 @@ class NetworkController extends BaseController {
             ->toArray(false);
 
         // make sure we actually have a network
-        if (empty($dbNetwork)) {
+        if(empty($dbNetwork)) {
             throw $this->createNotFoundException();
         }
 
@@ -38,19 +38,24 @@ class NetworkController extends BaseController {
         $channels = [];
 
         // create an entry for each channel
-        foreach ($dbChannels as $channel) {
-            /** @var Channel $channel */
+        foreach($dbChannels as $dbChannel) {
+            /** @var Channel $dbChannel */
+
+            $channel = $dbChannel->getChannel();
+            if($channel == null || empty($channel)) {
+                continue;
+            }
 
             // only add channels with keys if we're an admin
-            if ($channel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {
+            if($dbChannel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {
                 continue;
             }
 
             $channels[] = [
-                'name' => $channel->getChannel(),
+                'name' => $channel,
                 'href' => $this->generateUrl('channel', [
                     'network' => $network,
-                    'channel' => self::transformChannelName($channel->getChannel())
+                    'channel' => self::transformChannelName($channel)
                 ])
             ];
         }
@@ -76,7 +81,7 @@ class NetworkController extends BaseController {
         $networks = [];
 
         // create an entry for each channel
-        foreach ($dbNetworks as $network) {
+        foreach($dbNetworks as $network) {
             /** @var Network $network */
 
             // fetch all channels
@@ -89,18 +94,18 @@ class NetworkController extends BaseController {
             $channels = [];
 
             // create an entry for each channel
-            foreach ($dbChannels as $channel) {
+            foreach($dbChannels as $channel) {
                 /** @var Channel $channel */
 
                 // only add channels with keys if we're an admin
-                if ($channel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {
+                if($channel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {
                     continue;
                 }
 
                 $channels[] = $channel;
             }
 
-            if (!empty($channels)) {
+            if(!empty($channels)) {
                 $networks[] = [
                     'name' => $network->getName(),
                     'href' => $this->generateUrl('network', [
