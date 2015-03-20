@@ -14,14 +14,14 @@ $(function() {
             $.ajax({
                 url: window.location.href,
                 data: { last_id: lastId },
+                dataType: "json",
                 type: 'GET',
                 success: function(data) {
-                    var json = JSON.parse(data);
-                    if(json.length == 0) {
+                    if(data.length == 0) {
                         return;
                     }
 
-                    $.each(json, function(index, line) {
+                    $.each(data, function(index, line) {
                         var timestamp = $('<span/>')
                             .addClass('timestamp')
                             .html(line.timestamp);
@@ -44,7 +44,7 @@ $(function() {
                                 .append(message)
                         );
                     });
-                    lastId = json.slice(-1)[0].id;
+                    lastId = data.slice(-1)[0].id;
                     $(document).scrollTop($("#bottom").offset().top);
                 }
             });
