@@ -34,7 +34,6 @@ class NetworkController extends BaseController {
             ->getRepository('KorobiWebBundle:Channel')
             ->findAllByNetwork($network)
             ->toArray();
-        natcasesort($dbChannels);
 
         $channels = [];
 
@@ -52,7 +51,7 @@ class NetworkController extends BaseController {
                 continue;
             }
 
-            $channels[] = [
+            $channels[$channel] = [
                 'name' => $channel,
                 'href' => $this->generateUrl('channel', [
                     'network' => $network,
@@ -60,6 +59,7 @@ class NetworkController extends BaseController {
                 ])
             ];
         }
+        natcasesort($channels);
 
         return $this->render('KorobiWebBundle:controller/network:network.html.twig', [
             'network_name' => $dbNetwork->getName(),
