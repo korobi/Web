@@ -82,3 +82,6 @@ channel_logs_tail:
 channel_stats:
     path: /{network}/{channel}/stats
     defaults: { _controller: korobi.controller.channel_stats:statsAction }
+channel_games:
+    path: /{network}/{channel}/games/{gameId}
+    defaults: { _controller: korobi.controller.channel_games:gameAction }
