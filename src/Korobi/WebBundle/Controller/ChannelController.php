@@ -212,8 +212,8 @@ class ChannelController extends BaseController {
             $chats[] = $this->transformToChatMessage($chat);
         }
 
-        if ($request->isXmlHttpRequest()) {
-            return new Response(json_encode($chats));
+        if (in_array("application/json", $request->getAcceptableContentTypes())) {
+            return new JsonResponse($chats);
         }
 
         // time to render!
