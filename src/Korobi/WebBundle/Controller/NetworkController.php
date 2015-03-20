@@ -34,6 +34,7 @@ class NetworkController extends BaseController {
             ->getRepository('KorobiWebBundle:Channel')
             ->findAllByNetwork($network)
             ->toArray();
+        natcasesort($dbChannels);
 
         $channels = [];
 
