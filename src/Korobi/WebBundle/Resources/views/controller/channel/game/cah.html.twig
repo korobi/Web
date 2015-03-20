@@ -5,34 +5,54 @@
 {% block body %}
     <h1>Cards Against Humanity game {{ game_id }}</h1>
     <h3>in {{ channel_name }} on {{ network_name }}</h3>
-    <br>
-    <div class="stats">
-        <strong>Game State:</strong> {{ game_state }}
+    <div class="cah-stats">
+        <dl class="game-state">
+            <dt>Game state</dt>
+            <dd>{{ game_state }}</dd>
+        </dl>
 
-        <br><br><strong>Start Time:</strong> {{ game.startTime|date('F j, Y h:i:s A') }}
-        <br><strong>End Time:</strong> {{ game.endTime|date('F j, Y h:i:s A') }}
+        <dl class="game-times">
+            <dt>Start Time</dt>
+            <dd>{{ game.startTime|date('F j, Y h:i:s A') }}</dd>
+            <dt>End Time</dt>
+            <dd>{{ game.endTime|date('F j, Y h:i:s A') }}</dd>
+        </dl>
 
-        <br><br><strong>Packs:</strong>
-        {% for pack in game.packs %}
-            {{ pack }}{% if not loop.last %}, {% endif %}
-        {% endfor %}
+        <dl class="game-packs">
+            <dt>Packs</dt>
+            <dd>
+                {% for pack in game.packs %}
+                    {{ pack }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </dd>
+        </dl>
 
+        <dl class="game-details">
+            <dt>Host</dt>
+            <dd>{{ game.host }}</dd>
 
-        <br><br><strong>Host:</strong> {{ game.host }}
-        <br><strong>Lifetime Hosts:</strong>
-        {% for host in game.lifetimeHosts %}
-            {{ host }}{% if not loop.last %}, {% endif %}
-        {% endfor %}
+            <dt>Lifetime Hosts</dt>
+            <dd>
+                {% for host in game.lifetimeHosts %}
+                    {{ host }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </dd>
 
-        <br><strong>Players:</strong>
-        {% for player in game.players|sort %}
-            {{ player }}{% if not loop.last %}, {% endif %}
-        {% endfor %}
+            <dt>Players</dt>
+            <dd>
+                {% for player in game.players|sort %}
+                    {{ player }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </dd>
 
-        <br><strong>Lifetime Players:</strong>
-        {% for player in game.lifetimePlayers|sort %}
-            {{ player }}{% if not loop.last %}, {% endif %}
-        {% endfor %}
+            <dt>Lifetime Players</dt>
+            <dd>
+                {% for player in game.lifetimePlayers|sort %}
+                    {{ player }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </dd>
+        </dl>
+
 
         <br><br><strong>End Scores</strong>
         <table>
