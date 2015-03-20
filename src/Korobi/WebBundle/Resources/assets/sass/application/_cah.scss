@@ -1,0 +1,26 @@
+.cah-stats {
+  dd, dt {
+    margin: 0 0.5em 0 0 !important;
+  }
+
+  dt {
+    float: left;
+  }
+
+  dl dd + dt, dl dd + dd {
+    clear: left;
+  }
+
+  dl {
+    display: block;
+    margin-bottom: 2em;
+  }
+
+  dl dd + dd {
+    float: none;
+  }
+
+  dt :after {
+    content: ':';
+  }
+}
