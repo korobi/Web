@@ -25,6 +25,7 @@ class SecurityController extends BaseController {
      */
     public function __construct(Akio $akio, LoggerInterface $logger) {
         $this->akio = $akio;
+        $this->logger = $logger;
     }
 
     /**
