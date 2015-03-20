@@ -117,8 +117,8 @@ class ChannelGameController extends BaseController {
             }
         }
 
-        $percent['used_black'] = 100 * ($counts['Unused Black'] / $counts['Total Black']);
-        $percent['used_white'] = 100 * ($counts['Unused White'] / $counts['Total White']);
+        $percent['used_black'] = 100 * (1-($counts['Unused Black'] / $counts['Total Black']));
+        $percent['used_white'] = 100 * (1-($counts['Unused White'] / $counts['Total White']));
 
         // time to render!
         return $this->render('KorobiWebBundle:controller/channel/game:cah.html.twig', [
