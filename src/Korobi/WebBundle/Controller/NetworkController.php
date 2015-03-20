@@ -51,7 +51,7 @@ class NetworkController extends BaseController {
                 continue;
             }
 
-            $channels[] = [
+            $channels[$channel] = [
                 'name' => $channel,
                 'href' => $this->generateUrl('channel', [
                     'network' => $network,
@@ -59,6 +59,8 @@ class NetworkController extends BaseController {
                 ])
             ];
         }
+
+        ksort($channels, SORT_NATURAL | SORT_FLAG_CASE);
 
         return $this->render('KorobiWebBundle:controller/network:network.html.twig', [
             'network_name' => $dbNetwork->getName(),
