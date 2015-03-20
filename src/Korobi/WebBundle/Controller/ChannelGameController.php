@@ -104,6 +104,7 @@ class ChannelGameController extends BaseController {
 
         // Put card counts into a certain order, and assign a human-friendly string as the key
         $counts = ['Unused Black' => 0, 'Total Black' => 0, 'Unused White' => 0, 'Total White' => 0];
+        $percent = [];
         foreach($game->getCardCounts() as $key => $value) {
             if($key == 'black_unused') {
                 $counts['Unused Black'] = $value;
@@ -116,6 +117,9 @@ class ChannelGameController extends BaseController {
             }
         }
 
+        $percent['used_black'] = 100 * ($counts['Unused Black'] / $counts['Total Black']);
+        $percent['used_white'] = 100 * ($counts['Unused White'] / $counts['Total White']);
+
         // time to render!
         return $this->render('KorobiWebBundle:controller/channel/game:cah.html.twig', [
             'network_name' => $dbNetwork->getName(),
@@ -123,7 +127,8 @@ class ChannelGameController extends BaseController {
             'game_id' => $gameId,
             'game' => $game,
             'game_state' => $state,
-            'card_counts' => $counts
+            'card_counts' => $counts,
+            'percents' => $percent
         ]);
     }
 }

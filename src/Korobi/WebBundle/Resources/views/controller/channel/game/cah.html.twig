@@ -83,7 +83,14 @@
             <tbody>
             {% for type, count in card_counts %}
                 <tr>
-                    <td>{{ type }}</td>
+                    {% if type == "Unused Black" %}
+                        <td>{{ type }} (used {{ percents.used_black|number_format }}%)</td>
+                    {% elseif type == "Unused White" %}
+                        <td>{{ type }} (used {{ percents.used_white|number_format }}%)</td>
+                    {% else %}
+                        <td>{{ type }}</td>
+                    {% endif %}
+
                     <td>{{ count }}</td>
                 </tr>
             {% endfor %}
