@@ -27,6 +27,9 @@
         Twitter: @drtshock
         GitHub: https://github.com/drtshock/
 
+    mbaxter - work on Kitteh IRC Client Library
+        GitHub: https://github.com/mbax/
+
     jkcclemens - ???
         Twitter: @jkcclemens
         GitHub: https://github.com/jkcclemens/
