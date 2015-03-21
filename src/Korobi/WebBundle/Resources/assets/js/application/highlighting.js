@@ -114,7 +114,10 @@ $(function() {
     // ---- add or remove (if line is already highlighted) a line
     // - Shift + Click:
     // ---- add/remove highlighting to a group of lines
-    $(document).on('click', '.logs .timestamp', function(event) {
+    $(document).on('mousedown', '.logs .timestamp', function(event) {
+        if(event.which == 3) {
+            return;
+        }
         event.preventDefault();
 
         // climb the dom to .line
