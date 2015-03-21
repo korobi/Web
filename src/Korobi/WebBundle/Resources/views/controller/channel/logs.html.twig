@@ -13,7 +13,7 @@
             <div data-nick="{{ line.nick }}" data-event-id="{{ line.id }}" data-event-type="{{ line.type }}" class="line{% if not is_tail %} js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
                 <span class="timestamp">
                     {# The date is UTC, js will translate it to the correct timezone #}
-                    {{ gmdate('H:i:s', line.timestamp) }}
+                    {{ date('H:i:s', line.timestamp) }}
                 </span>
                 <span class="nick irc--{{ "%02d"|format(line.nickColour) }}-df {% if line.role is not empty %}{{ line.role }}{% endif %}">
                     {{- line.nick -}}
