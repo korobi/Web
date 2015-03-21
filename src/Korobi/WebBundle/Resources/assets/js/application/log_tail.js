@@ -4,19 +4,17 @@ function pad(n) {
 }
 
 function dateToStringTimestamp(date) {
-    return pad(date.getHours()) + ':' + pad(new_time.getMinutes()) + ':' + pad(new_time.getSeconds());
+    return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds());
 }
 
 $(function() {
     var logs = $('.logs');
-    if (!logs.hasClass('tailing')) {
-        return;
-    }
 
     // Translate all logs to current timezone
     var timezone_offset = new Date().getTimezoneOffset();
 
     logs.find('.timestamp').each(function(index, time) {
+        time = $(time);
         var time_parts = time.html().split(':');
         time.html(dateToStringTimestamp(new Date(
             0, 0, 0,
@@ -27,6 +25,10 @@ $(function() {
     });
 
     // Start tailing
+    if (!logs.hasClass('tailing')) {
+        return;
+    }
+
     var lastId = logs.find('.line:last').data('event-id');
 
     $(document).scrollTop($("#bottom").offset().top);
