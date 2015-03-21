@@ -261,7 +261,7 @@ class ChannelController extends BaseController {
     private function transformToChatMessage(Chat $chat) {
         return [
             'id'         => $chat->getId(),
-            'timestamp'  => date('H:i:s', $chat->getDate()->getTimestamp()),
+            'timestamp'  => $chat->getDate()->getTimestamp(),
             'type'       => strtolower($chat->getType()),
             'role'       => $chat->getType() == 'MESSAGE' ? strtolower($chat->getActorPrefix()) : '',
             'nickColour' => LogParser::getColourForActor($chat),
