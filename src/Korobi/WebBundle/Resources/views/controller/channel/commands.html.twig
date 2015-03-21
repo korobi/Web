@@ -11,35 +11,27 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Content</th>
+                    <th>Aliases</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for command in commands %}
                     <tr>
                         <td>{{ loop.index }}</td>
-                        {% if command.aliases or command.is_action %}
-                            <td>
-                                <abbr title="{% if command.aliases %}<strong>Aliases:</strong> {{ command.aliases }}{% endif %}{% if command.is_action %}{% if command.aliases %}<br>{% endif %}<strong>Action:</strong> yes{% endif %}" rel="tooltip">
-                                    {{ command.name }}
-                                </abbr>
-                            </td>
-                            <td>
-                                {% for value in command.value %}
-                                    {{ value|ircformat|raw }}{% if not loop.last %}<br>{% endif %}
-                                {% endfor %}
-                            </td>
-                        {% else %}
-                            <td>{{ command.name }}</td>
-                            <td>
-                                {% for value in command.value %}
-                                    {{ value|ircformat|raw }}{% if not loop.last %}<br>{% endif %}
-                                {% endfor %}
-                            </td>
-                        {% endif %}
+                        <td>{{ command.name }}</td>
+                        <td>
+                            {% for value in command.value %}
+                                {{ value|ircformat|raw }}{% if not loop.last %}<br>{% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{ command.aliases ? command.aliases }}</td>
+                        <td>
+                            <i class="fa fa-{{ command.is_action ? 'check' : 'close' }}"></i>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    <small>Hover over a command name for more info.</small>
 {% endblock %}
