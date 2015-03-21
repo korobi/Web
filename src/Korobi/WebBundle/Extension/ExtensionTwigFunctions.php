@@ -13,7 +13,8 @@ class ExtensionTwigFunctions extends \Twig_Extension {
             new \Twig_SimpleFunction('cahFullCard', [$this, 'cahFullCard']),
             new \Twig_SimpleFunction('cahPlays', [$this, 'cahPlays'], [
                 'is_safe' => ['html']
-            ])
+            ]),
+            new \Twig_SimpleFunction('gmdate', [$this, 'gmdate']),
         ];
     }
 
@@ -39,5 +40,9 @@ class ExtensionTwigFunctions extends \Twig_Extension {
 
 
         return $result;
+    }
+
+    public function gmdate($format, $timestamp = null) {
+        return gmdate($format, $timestamp);
     }
 }
