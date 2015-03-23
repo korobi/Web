@@ -1,6 +1,19 @@
 .docs {
   width: 100%;
   text-align: justify;
+  padding: 1em;
+  border-radius: 0.3em;
+  background-color: #141414;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+
+  code {
+    background-color: #000;
+    border-radius: 0.3em;
+    padding: 0.15em 0.3em;
+    font-weight: bold;
+  }
 }
 
 .doc-item ul, .doc-item ol {
@@ -11,11 +24,4 @@
 .doc-item {
   background: transparent;
   padding-bottom: 20px;
-}
-
-.docs code {
-  background-color: #000;
-  border-radius: 0.3em;
-  padding: 0.15em 0.3em;
-  font-weight: bold;
 }

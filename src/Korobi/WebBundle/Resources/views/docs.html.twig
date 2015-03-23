@@ -7,10 +7,12 @@
 {% endblock %}
 
 {% block body %}
-    {% if pageName != "index" %}
-        <a href="{{ path('docs') }}">Return to docs index</a>
-    {% endif %}
-    <section class="docs">
-        {{ content | raw }}
-    </section>
+    <div class="docs">
+        {% if pageName != "index" %}
+            <a href="{{ path('docs') }}">Return to docs index</a>
+        {% endif %}
+        <section>
+            {{ content | raw }}
+        </section>
+    </div>
 {% endblock %}
