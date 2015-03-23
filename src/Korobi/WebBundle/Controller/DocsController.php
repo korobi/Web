@@ -21,7 +21,7 @@ class DocsController extends BaseController {
             throw $this->createNotFoundException("Invalid doc");
         }
 
-        $fn = $this->get('kernel')->getRootDir() . "/../docs/" . $file . ".md";
+        $fn = $this->get('kernel')->getRootDir() . "/../docs/docs/" . $file . ".md";
 
         if (!file_exists($fn) || $file === "README") {
             throw $this->createNotFoundException("Doc does not exist, " . $fn);
