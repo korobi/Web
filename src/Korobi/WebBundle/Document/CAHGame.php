@@ -24,6 +24,11 @@ class CAHGame {
     private $channel;
 
     /**
+     * @MongoDB\Date
+     */
+    private $start_time;
+
+    /**
      * @MongoDB\String
      */
     private $state;
@@ -31,12 +36,12 @@ class CAHGame {
     /**
      * @MongoDB\Collection
      */
-    private $packs;
+    private $card_packs;
 
     /**
      * @MongoDB\Collection
      */
-    private $lifetime_packs;
+    private $card_packs_lifetime;
 
     /**
      * @MongoDB\String
@@ -46,7 +51,7 @@ class CAHGame {
     /**
      * @MongoDB\Collection
      */
-    private $lifetime_hosts;
+    private $hosts_lifetime;
 
     /**
      * @MongoDB\Collection
@@ -56,12 +61,22 @@ class CAHGame {
     /**
      * @MongoDB\Collection
      */
-    private $lifetime_players;
+    private $players_lifetime;
 
     /**
-     * @MongoDB\Date
+     * @MongoDB\Collection
      */
-    private $start_time;
+    private $house_rules;
+
+    /**
+     * @MongoDB\Collection
+     */
+    private $house_rules_lifetime;
+
+    /**
+     * @MongoDB\Boolean
+     */
+    private $start_rushed;
 
     /**
      * @MongoDB\Date
@@ -133,6 +148,26 @@ class CAHGame {
     }
 
     /**
+     * Get startTime
+     *
+     * @return date $startTime
+     */
+    public function getStartTime() {
+        return $this->start_time;
+    }
+
+    /**
+     * Set startTime
+     *
+     * @param date $startTime
+     * @return self
+     */
+    public function setStartTime($startTime) {
+        $this->start_time = $startTime;
+        return $this;
+    }
+
+    /**
      * Get state
      *
      * @return string $state
@@ -153,42 +188,42 @@ class CAHGame {
     }
 
     /**
-     * Get packs
+     * Get cardPacks
      *
-     * @return collection $packs
+     * @return collection $cardPacks
      */
-    public function getPacks() {
-        return $this->packs;
+    public function getCardPacks() {
+        return $this->card_packs;
     }
 
     /**
-     * Set packs
+     * Set cardPacks
      *
-     * @param collection $packs
+     * @param collection $cardPacks
      * @return self
      */
-    public function setPacks($packs) {
-        $this->packs = $packs;
+    public function setCardPacks($cardPacks) {
+        $this->card_packs = $cardPacks;
         return $this;
     }
 
     /**
-     * Get lifetimePacks
+     * Get cardPacksLifetime
      *
-     * @return collection $lifetimePacks
+     * @return collection $cardPacksLifetime
      */
-    public function getLifetimePacks() {
-        return $this->lifetime_packs;
+    public function getCardPacksLifetime() {
+        return $this->card_packs_lifetime;
     }
 
     /**
-     * Set lifetimePacks
+     * Set cardPacksLifetime
      *
-     * @param collection $lifetimePacks
+     * @param collection $cardPacksLifetime
      * @return self
      */
-    public function setLifetimePacks($lifetimePacks) {
-        $this->lifetime_packs = $lifetimePacks;
+    public function setCardPacksLifetime($cardPacksLifetime) {
+        $this->card_packs_lifetime = $cardPacksLifetime;
         return $this;
     }
 
@@ -213,22 +248,22 @@ class CAHGame {
     }
 
     /**
-     * Get lifetimeHosts
+     * Get hostsLifetime
      *
-     * @return collection $lifetimeHosts
+     * @return collection $hostsLifetime
      */
-    public function getLifetimeHosts() {
-        return $this->lifetime_hosts;
+    public function getHostsLifetime() {
+        return $this->hosts_lifetime;
     }
 
     /**
-     * Set lifetimeHosts
+     * Set hostsLifetime
      *
-     * @param collection $lifetimeHosts
+     * @param collection $hostsLifetime
      * @return self
      */
-    public function setLifetimeHosts($lifetimeHosts) {
-        $this->lifetime_hosts = $lifetimeHosts;
+    public function setHostsLifetime($hostsLifetime) {
+        $this->hosts_lifetime = $hostsLifetime;
         return $this;
     }
 
@@ -253,42 +288,82 @@ class CAHGame {
     }
 
     /**
-     * Get lifetimePlayers
+     * Get playersLifetime
      *
-     * @return collection $lifetimePlayers
+     * @return collection $playersLifetime
      */
-    public function getLifetimePlayers() {
-        return $this->lifetime_players;
+    public function getPlayersLifetime() {
+        return $this->players_lifetime;
     }
 
     /**
-     * Set lifetimePlayers
+     * Set playersLifetime
      *
-     * @param collection $lifetimePlayers
+     * @param collection $playersLifetime
      * @return self
      */
-    public function setLifetimePlayers($lifetimePlayers) {
-        $this->lifetime_players = $lifetimePlayers;
+    public function setPlayersLifetime($playersLifetime) {
+        $this->players_lifetime = $playersLifetime;
         return $this;
     }
 
     /**
-     * Get startTime
+     * Get houseRules
      *
-     * @return date $startTime
+     * @return collection $houseRules
      */
-    public function getStartTime() {
-        return $this->start_time;
+    public function getHouseRules() {
+        return $this->house_rules;
     }
 
     /**
-     * Set startTime
+     * Set houseRules
      *
-     * @param date $startTime
+     * @param collection $houseRules
      * @return self
      */
-    public function setStartTime($startTime) {
-        $this->start_time = $startTime;
+    public function setHouseRules($houseRules) {
+        $this->house_rules = $houseRules;
+        return $this;
+    }
+
+    /**
+     * Get houseRulesLifetime
+     *
+     * @return collection $houseRulesLifetime
+     */
+    public function getHouseRulesLifetime() {
+        return $this->house_rules_lifetime;
+    }
+
+    /**
+     * Set houseRulesLifetime
+     *
+     * @param collection $houseRulesLifetime
+     * @return self
+     */
+    public function setHouseRulesLifetime($houseRulesLifetime) {
+        $this->house_rules_lifetime = $houseRulesLifetime;
+        return $this;
+    }
+
+    /**
+     * Get startRushed
+     *
+     * @return boolean $startRushed
+     */
+    public function getStartRushed() {
+        return $this->start_rushed;
+    }
+
+    /**
+     * Set startRushed
+     *
+     * @param boolean $startRushed
+     * @return self
+     */
+    public function setStartRushed($startRushed) {
+        $this->start_rushed = $startRushed;
         return $this;
     }
 

@@ -37,7 +37,7 @@ class ChannelAI {
     /**
      * @MongoDB\Raw
      */
-    private $patterns_map;
+    private $patterns;
 
     /**
      * @MongoDB\Int
@@ -134,22 +134,22 @@ class ChannelAI {
     }
 
     /**
-     * Get patternsMap
+     * Get patterns
      *
-     * @return raw $patternsMap
+     * @return raw $patterns
      */
-    public function getPatternsMap() {
-        return $this->patterns_map;
+    public function getPatterns() {
+        return $this->patterns;
     }
 
     /**
-     * Set patternsMap
+     * Set patterns
      *
-     * @param raw $patternsMap
+     * @param raw $patterns
      * @return self
      */
-    public function setPatternsMap($patternsMap) {
-        $this->patterns_map = $patternsMap;
+    public function setPatterns($patterns) {
+        $this->patterns = $patterns;
         return $this;
     }
 

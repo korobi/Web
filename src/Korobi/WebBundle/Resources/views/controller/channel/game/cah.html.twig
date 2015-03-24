@@ -21,8 +21,17 @@
         <dl class="game-packs">
             <dt>Packs</dt>
             <dd>
-                {% for pack in game.packs %}
+                {% for pack in game.cardPacks %}
                     {{ pack }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </dd>
+        </dl>
+
+        <dl class="game-house-rules">
+            <dt>House Rules</dt>
+            <dd>
+                {% for rule in game.houseRules %}
+                    {{ rule }}{% if not loop.last %}, {% endif %}
                 {% endfor %}
             </dd>
         </dl>
@@ -33,7 +42,7 @@
 
             <dt>Lifetime Hosts</dt>
             <dd>
-                {% for host in game.lifetimeHosts %}
+                {% for host in game.hostsLifetime %}
                     {{ host }}{% if not loop.last %}, {% endif %}
                 {% endfor %}
             </dd>
@@ -47,7 +56,7 @@
 
             <dt>Lifetime Players</dt>
             <dd>
-                {% for player in game.lifetimePlayers|sort %}
+                {% for player in game.playersLifetime|sort %}
                     {{ player }}{% if not loop.last %}, {% endif %}
                 {% endfor %}
             </dd>
