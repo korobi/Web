@@ -42,11 +42,6 @@
       text-overflow: ellipsis;
       text-overflow: '+'; // Use custom elision if supported
       overflow: hidden;
-
-      &:hover {
-        overflow: visible;
-        background-color: #111;
-      }
     }
 
     .message {
