@@ -5,11 +5,6 @@ $(function() {
             $(e)
                 .attr('title', e.innerText)
                 .attr('rel', 'tooltip')
-                .css({
-                    'text-decoration': 'underline',
-                    'text-decoration-style': 'dotted',
-                    'text-decoration-color': '#444'
-                })
             ;
         }
     });
