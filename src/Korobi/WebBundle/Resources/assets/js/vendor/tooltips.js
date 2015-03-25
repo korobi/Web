@@ -22,7 +22,7 @@ $(function() {
         var initTooltip = function() {
             if ($(window).width() < tooltip.outerWidth() * 1.5) {
                 tooltip.css('max-width', $(window).width() / 2);
-            } else {
+            } else if (tip.indexOf(' ') > -1) {
                 tooltip.css('max-width', 340);
             }
 
