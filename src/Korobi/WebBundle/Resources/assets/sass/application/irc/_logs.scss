@@ -25,7 +25,6 @@
 
     & > span {
       display: table-cell;
-      padding-right: 15px;
       border-bottom: 1px solid #1b1b1b;
     }
 
@@ -35,6 +34,7 @@
 
     .nick {
       text-align: right;
+      padding-right: 15px;
       border-right: 1px solid #444;
     }
 
