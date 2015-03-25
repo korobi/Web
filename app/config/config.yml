@@ -63,6 +63,7 @@ assetic:
         production:
             inputs:
                 - '@KorobiWebBundle/Resources/assets/js/vendor/prism.js'
+                - '@KorobiWebBundle/Resources/assets/js/application/log_elision.js'
                 - '@KorobiWebBundle/Resources/assets/js/vendor/tooltips.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/navigation.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/highlighting.js'
