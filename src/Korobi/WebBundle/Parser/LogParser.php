@@ -191,10 +191,12 @@ class LogParser {
     }
 
     /**
+     * Returns the name to display for that chat entry.
+     *
      * @param Chat $chat
      * @return string
      */
-    public static function getActorName(Chat $chat) {
+    public static function getDisplayName(Chat $chat) {
         switch ($chat->getType()) {
             case 'MESSAGE':
                 return $chat->getActorName();
@@ -208,6 +210,19 @@ class LogParser {
             default:
                 return self::ACTION_SERVER_PREFIX;
         }
+    }
+
+    /**
+     * Returns the nickname of the actor for that chat entry or its hostname
+     * in case there is no nickname.
+     *
+     * @param Chat $chat
+     * @return string
+     */
+    public static function getActorName(Chat $chat) {
+        return $chat->getActorName() == Chat::ACTOR_INTERNAL
+            ? $chat->getActorHostname()
+            : $chat->getActorName();
     }
 
     // -----------------

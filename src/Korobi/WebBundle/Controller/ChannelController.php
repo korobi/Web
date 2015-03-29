@@ -265,6 +265,7 @@ class ChannelController extends BaseController {
             'type'       => strtolower($chat->getType()),
             'role'       => $chat->getType() == 'MESSAGE' ? strtolower($chat->getActorPrefix()) : '',
             'nickColour' => LogParser::getColourForActor($chat),
+            'displayNick'=> LogParser::getDisplayName($chat),
             'nick'       => LogParser::getActorName($chat),
             'message'    => $this->parseChatMessage($chat)
         ];

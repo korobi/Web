@@ -49,7 +49,7 @@ $(function() {
                         .html(dateToStringTimestamp(new Date(line.timestamp * 1000)));
                     var nick = $('<span/>')
                         .addClass('nick irc--' + pad(line.nickColour) + '-df ' + line.role)
-                        .html(line.nick);
+                        .html(line.displayNick);
                     var message = $('<span/>')
                         .addClass('message')
                         .html(line.message);
