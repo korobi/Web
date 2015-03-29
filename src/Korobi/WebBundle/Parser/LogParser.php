@@ -221,7 +221,7 @@ class LogParser {
      */
     public static function getActorName(Chat $chat) {
         return $chat->getActorName() == Chat::ACTOR_INTERNAL
-            ? $chat->getActorHostname()
+            ? self::transformActor($chat->getActorHostname())
             : $chat->getActorName();
     }
 
