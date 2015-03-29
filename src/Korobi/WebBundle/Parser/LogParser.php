@@ -85,14 +85,8 @@ class LogParser {
     public static function parseMode(Chat $chat) {
         $result = '';
 
-        // mode set by internal actor
-        if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
-            $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
-            $result .= ' sets mode ' . $chat->getMessage();
-        } else {
-            $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
-            $result .= ' sets mode ' . $chat->getMessage();
-        }
+        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
+        $result .= ' sets mode ' . $chat->getMessage();
 
         if ($chat->getRecipientPrefix() !== null) {
             $result .= self::transformUserModeToLetter($chat->getRecipientPrefix());
