@@ -107,31 +107,27 @@
         </table>
 
         <br><strong>Rounds</strong>
-        <ul>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Czar</th>
+                <th>Black Card</th>
+                <th>Winner</th>
+                <th>Plays</th>
+            </tr>
+            </thead>
+            <tbody>
             {% for round in game.rounds|arsort %}
-                <li>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Czar</th>
-                            <th>Black Card</th>
-                            <th>Winner</th>
-                            <th>Plays</th>
-                        </tr>
-                        </thead>
-                        <body>
-                        <tr>
-                            <td>{{ loop.index }}</td>
-                            <td>{{ round.czar }}</td>
-                            <td>{{ round.black_card }}</td>
-                            <td><abbr title="{{ cahFullCard(round.black_card, round.plays[round.winner.id]) }}" rel="tooltip">{{ round.winner.player }}</abbr></td>
-                            <td><abbr title="{{ cahPlays(round.black_card, round.plays) }}" rel="tooltip">(hover)</abbr></td>
-                        </tr>
-                        </body>
-                    </table>
-                </li>
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ round.czar }}</td>
+                    <td>{{ round.black_card }}</td>
+                    <td><abbr title="{{ cahFullCard(round.black_card, round.plays[round.winner.id]) }}" rel="tooltip">{{ round.winner.player }}</abbr></td>
+                    <td><abbr title="{{ cahPlays(round.black_card, round.plays) }}" rel="tooltip">(hover)</abbr></td>
+                </tr>
             {% endfor %}
-        </ul>
+            </tbody>
+        </table>
     </div>
 {% endblock %}
