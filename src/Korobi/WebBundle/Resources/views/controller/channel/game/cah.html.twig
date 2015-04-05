@@ -85,8 +85,8 @@
         <table>
             <thead>
             <tr>
-                <th>Nick</th>
-                <th>Score</th>
+                <th>Card</th>
+                <th>Count</th>
             </tr>
             </thead>
             <tbody>
@@ -107,12 +107,13 @@
         </table>
 
         <br><strong>Rounds</strong>
-        <ol>
+        <ul>
             {% for round in game.rounds|arsort %}
                 <li>
                     <table>
                         <thead>
                         <tr>
+                            <th>#</th>
                             <th>Czar</th>
                             <th>Black Card</th>
                             <th>Winner</th>
@@ -121,6 +122,7 @@
                         </thead>
                         <body>
                         <tr>
+                            <td>{{ loop.index }}</td>
                             <td>{{ round.czar }}</td>
                             <td>{{ round.black_card }}</td>
                             <td><abbr title="{{ cahFullCard(round.black_card, round.plays[round.winner.id]) }}" rel="tooltip">{{ round.winner.player }}</abbr></td>
@@ -130,6 +132,6 @@
                     </table>
                 </li>
             {% endfor %}
-        </ol>
+        </ul>
     </div>
 {% endblock %}
