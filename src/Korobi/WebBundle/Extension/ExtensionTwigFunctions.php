@@ -27,8 +27,6 @@ class ExtensionTwigFunctions extends \Twig_Extension {
     }
 
     public function cahPlays($blackCard, $plays) {
-        dump($plays);
-
         $result = '';
 
         foreach($plays as $play) {
