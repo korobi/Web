@@ -33,6 +33,9 @@ services:
     korobi.controller.home:
         class: Korobi\WebBundle\Controller\HomeController
         parent: korobi.base_controller
+    korobi.controller.kitty:
+        class: Korobi\WebBundle\Controller\KittyImageController
+        parent: korobi.base_controller
     korobi.controller.network:
         class: Korobi\WebBundle\Controller\NetworkController
         parent: korobi.base_controller

@@ -8,6 +8,9 @@
 home:
     path: /
     defaults: { _controller: korobi.controller.home:homeAction }
+kitty_images:
+    path: /kitty
+    defaults: { _controller: korobi.controller.kitty:homeAction }
 deploy:
     path: /deploy
     defaults: { _controller: korobi.controller.deploy:deployAction }

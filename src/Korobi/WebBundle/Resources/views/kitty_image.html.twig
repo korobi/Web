@@ -1,0 +1,16 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = "Kitty Images" %}
+
+{% block body %}
+    <h1>Kitty Images :3</h1>
+    <div class="kitty-images">
+        {% for image in images %}
+            <img src="{{ image.source }}" />
+            <div class="caption">
+                <p><strong>ID: </strong> {{ image.image_id }}</p>
+                <p><strong>Tags: </strong> {{ image.tags }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
