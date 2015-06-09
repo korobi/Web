@@ -8,8 +8,7 @@
         {% for image in images %}
             <img src="{{ image.source }}" />
             <div class="caption">
-                <p><strong>ID: </strong> {{ image.image_id }}</p>
-                <p><strong>Tags: </strong> {{ image.tags }}</p>
+                <p><strong>ID: </strong> {{ image.image_id }}  |  <strong>Tags: </strong> {{ image.tags }}</p>
             </div>
         {% endfor %}
     </div>
