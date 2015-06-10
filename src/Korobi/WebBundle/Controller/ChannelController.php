@@ -241,7 +241,7 @@ class ChannelController extends BaseController {
 
     private static function createLogNotice($slug, $channel) {
         $result = "We're still working on finishing the website - in the meantime, if you're looking for older logs, simply append the date (/yyyy/mm/dd) to the URL. Example: https://korobi.io/";
-        $result .= $slug . '/' . $channel . '/logs/' . date('Y/n/d', strtotime('Yesterday'));
+        $result .= $slug . '/' . $channel . '/logs/' . date('Y/m/d', strtotime('Yesterday'));
         return $result;
     }
 
@@ -261,7 +261,7 @@ class ChannelController extends BaseController {
         }
 
         if (!$month) {
-            $month = date('n');
+            $month = date('m');
         } else {
             $provided = true;
         }
