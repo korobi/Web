@@ -58,6 +58,9 @@ class NetworkController extends BaseController {
                     'channel' => self::transformChannelName($channel)
                 ])
             ];
+            if($dbChannel->getKey() !== null && $this->authChecker->isGranted('ROLE_ADMIN')) {
+                $channels[$channel]['href'] .= '?key=' . $dbChannel->getKey();
+            }
         }
 
         ksort($channels, SORT_NATURAL | SORT_FLAG_CASE);
