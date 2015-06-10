@@ -41,17 +41,11 @@ class ChannelController extends BaseController {
         $linkBase = ['network' => $network, 'channel' => $channel];
 
         if ($dbChannel->getLogsEnabled()) {
-            $links[] = [
-                'name' => 'Logs',
-                'href' => $this->generateUrl('channel_logs', $linkBase)
-            ];
+            $links[] = $this->createLink($dbChannel, $linkBase, 'Logs', $this->generateUrl('channel_logs', $linkBase));
         }
 
         if ($dbChannel->getCommandsEnabled()) {
-            $links[] = [
-                'name' => 'Commands',
-                'href' => $this->generateUrl('channel_commands', $linkBase)
-            ];
+            $links[] = $this->createLink($dbChannel, $linkBase, 'Commands', $this->generateUrl('channel_commands', $linkBase));
         }
 
         // time to render!
@@ -62,6 +56,19 @@ class ChannelController extends BaseController {
             'command_prefix' => $dbChannel->getCommandPrefix(),
             'links' => $links
         ]);
+    }
+
+    private function createLink($dbChannel, $linkBase, $name, $href) {
+        /** @var Channel $dbChannel */
+        $result = [
+            'name' => $name,
+            'href' => $href
+        ];
+        if($dbChannel->getKey() !== null && $this->authChecker->isGranted('ROLE_ADMIN')) {
+            $result['href'] .= '?key=' . $dbChannel->getKey();
+        }
+
+        return $result;
     }
 
     // ------------------
