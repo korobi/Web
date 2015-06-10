@@ -241,7 +241,7 @@ class ChannelController extends BaseController {
 
     private static function createLogNotice($slug, $channel) {
         $result = "We're still working on finishing the website - in the meantime, if you're looking for older logs, simply append the date (/yyyy/mm/dd) to the URL. Example: https://korobi.io/";
-        $result .= $slug . '/' . $channel . '/logs/' . date('Y') . '/' . date('n') . '/' . (date('d') - 1);
+        $result .= $slug . '/' . $channel . '/logs/' . date('Y/n/d', strtotime('Yesterday'));
         return $result;
     }
 
