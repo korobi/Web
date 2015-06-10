@@ -172,7 +172,8 @@ class ChannelController extends BaseController {
 
         // populate variables with request information if available, or defaults
         // note: validation is done here
-        list($year, $month, $day, $tail) = self::populateRequest($year, $month, $day, $tail);
+        $provided = false;
+        list($year, $month, $day, $tail, $provided) = self::populateRequest($year, $month, $day, $tail);
 
         // fetch all chats
         /** @var ChatRepository $repo */
@@ -223,6 +224,10 @@ class ChannelController extends BaseController {
             return new JsonResponse($chats);
         }
 
+        if (!$provided) {
+            $request->getSession()->getFlashBag()->add('notice', self::createLogNotice($dbNetwork->getSlug(), $channel));
+        }
+
         // time to render!
         return $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
             'network_name' => $dbNetwork->getName(),
@@ -234,6 +239,12 @@ class ChannelController extends BaseController {
         ]);
     }
 
+    private static function createLogNotice($slug, $channel) {
+        $result = "We're still working on finishing the website - in the meantime, if you're looking for older logs, simply append the date (/yyyy/mm/dd) to the URL. Example: https://korobi.io/";
+        $result .= $slug . '/' . $channel . '/logs/' . date('Y') . '/' . date('n') . '/' . (date('d') - 1);
+        return $result;
+    }
+
     /**
      * @param $year
      * @param $month
@@ -242,16 +253,23 @@ class ChannelController extends BaseController {
      * @return array
      */
     private static function populateRequest($year, $month, $day, $tail) {
+        $provided = false;
         if (!$year) {
             $year = date('Y');
+        } else {
+            $provided = true;
         }
 
         if (!$month) {
             $month = date('n');
+        } else {
+            $provided = true;
         }
 
         if (!$day) {
             $day = date('d');
+        } else {
+            $provided = true;
         }
 
         if ($tail !== false) {
@@ -262,7 +280,7 @@ class ChannelController extends BaseController {
             }
         }
 
-        return [$year, $month, $day, $tail];
+        return [$year, $month, $day, $tail, $provided];
     }
 
     private function transformToChatMessage(Chat $chat) {
