@@ -132,6 +132,10 @@ nelmio_security:
                 - 'https:'
                 - 'data:'
                 - 'http://i.imgur.com'
+            media-src:
+                - 'https:'
+                - 'data:'
+                - 'http://i.imgur.com'
             object-src:
                 - 'none'
     external_redirects:
