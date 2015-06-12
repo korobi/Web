@@ -25,7 +25,7 @@ class Camo {
         $digest = $this->getDigest($url);
         $hex = bin2hex($url);
 
-        return 'https://' . $this->domain . '/' . $digest . '/' . $hex . '/';
+        return $this->domain . '/' . $digest . '/' . $hex . '/';
     }
 
     /**
