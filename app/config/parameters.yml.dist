@@ -23,6 +23,7 @@ parameters:
     github_oauth_token: ~
 
     # Akio IRC notifications data
+    akio_enabled: false
     akio_path: ~
     akio_key: ~
 

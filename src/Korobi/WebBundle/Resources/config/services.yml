@@ -98,6 +98,7 @@ services:
     korobi.akio:
         class: Korobi\WebBundle\Util\Akio
         arguments:
+            - %akio_enabled%
             - %akio_path%
             - %akio_key%
     korobi.influx:
