@@ -13,7 +13,7 @@
         {% endfor %}
         {% for video in videos %}
             <video preload autoplay controls loop width="auto" height="auto">
-                <source src="{{ image.source }}" type="video/mp4" />
+                <source src="{{ video.source }}" type="video/mp4" />
             </video>
             <div class="caption">
                 <p><strong>ID: </strong> {{ video.image_id }}{% if video.has_tags %}  |  <strong>Tags: </strong> {{ video.tags }}{% endif %}</p>
