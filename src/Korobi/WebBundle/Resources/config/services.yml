@@ -36,8 +36,6 @@ services:
     korobi.controller.kitty:
         class: Korobi\WebBundle\Controller\KittyImageController
         parent: korobi.base_controller
-        arguments:
-            - @korobi.camo
     korobi.controller.network:
         class: Korobi\WebBundle\Controller\NetworkController
         parent: korobi.base_controller
@@ -93,11 +91,6 @@ services:
         class: Korobi\WebBundle\Util\NavigationCollection
         arguments:
             - %korobi.config%
-    korobi.camo:
-        class: Korobi\WebBundle\Util\Camo
-        arguments:
-            - %camo_key%
-            - %camo_domain%
     korobi.theme_service:
         class: Korobi\WebBundle\Util\ThemeService
         arguments:

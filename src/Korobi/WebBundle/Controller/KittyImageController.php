@@ -3,22 +3,9 @@
 namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Document\KittyImage;
-use Korobi\WebBundle\Util\Camo;
 use Korobi\WebBundle\Util\StringUtil;
 
 class KittyImageController extends BaseController {
-
-    /**
-     * @var Camo
-     */
-    private $camo;
-
-    /**
-     * @param Camo $camo
-     */
-    public function __construct(Camo $camo) {
-        $this->camo = $camo;
-    }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
@@ -45,7 +32,7 @@ class KittyImageController extends BaseController {
             $imageUrl = $dbImage->getUrl();
             $imageData = [
                 'image_id' => $dbImage->getImageId(),
-                'source' => $this->camo->create($imageUrl),
+                'source' => $imageUrl,
                 'tags' => implode(', ', $dbImage->getTags()),
                 'has_tags' => sizeof(implode(', ', $dbImage->getTags())) > 0
             ];
