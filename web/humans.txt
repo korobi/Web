@@ -30,6 +30,10 @@
     mbaxter - work on Kitteh IRC Client Library
         GitHub: https://github.com/mbax/
 
-    jkcclemens - ???
+    jkcclemens - feedback, suggestions, kitten cuddler
         Twitter: @jkcclemens
         GitHub: https://github.com/jkcclemens/
+
+    jamierocks - work on documentation
+        Twitter: @LexteamJamie
+        GitHub: https://github.com/jamierocks/
