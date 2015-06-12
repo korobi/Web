@@ -21,7 +21,8 @@ korobi_web:
                   - channel_games
 
             - title: Docs
-              route: 'docs'
+              route: 'https://docs.korobi.io/'
+              external: true
 
             - title: Admin
               route: 'dummy'
