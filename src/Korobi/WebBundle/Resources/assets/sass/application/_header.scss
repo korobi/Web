@@ -4,7 +4,7 @@ $active-nav-background-color: darken($primaryColour, 10%);
 
 nav.navigation {
   width: 100%;
-  min-height: 3em;
+  height: 3em;
   line-height: 1em;
   background-color: $primaryColour;
   padding: 0 1em 0 1em;
@@ -33,7 +33,7 @@ nav.navigation {
     display: inline-block;
     float: left;
     //font-size: 2.5em;
-    max-height: 3em;
+    height: 3em;
     margin-right: 0.8em;
 
     a {
@@ -53,10 +53,13 @@ nav.navigation {
     float: left;
 
     li {
+      height: 3em;
       display: inline-block;
+      vertical-align: top;
 
       a {
         display: inline-block;
+        height: 3em;
         padding: 1em;
         color: #eee;
         text-decoration: none;
@@ -65,10 +68,6 @@ nav.navigation {
         &:hover,
         &:focus {
           background-color: $active-nav-background-color;
-        }
-
-        i.fa {
-          font-size: 0.9em;
         }
       }
     }
