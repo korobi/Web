@@ -12,7 +12,7 @@
             </div>
         {% endfor %}
         {% for video in videos %}
-            <video src="{{ video.source }}"></video>
+            <video src="{{ video.source }}" preload="auto" autoplay="autoplay" muted="muted" loop="loop" width="auto" height="auto"></video>
             <div class="caption">
                 <p><strong>ID: </strong> {{ video.image_id }}{% if video.has_tags %}  |  <strong>Tags: </strong> {{ video.tags }}{% endif %}</p>
             </div>
