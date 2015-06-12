@@ -35,9 +35,9 @@ class KittyImageController extends BaseController {
                 'source' => $imageUrl,
                 'tags' => implode(', ', $dbImage->getTags()),
                 'has_tags' => sizeof(implode(', ', $dbImage->getTags())) > 0
-            ];;
+            ];
             if (StringUtil::endsWith($imageUrl, 'gifv', true)) {
-                $images[$dbImage->getImageId()] = $imageData;
+                $videos[$dbImage->getImageId()] = $imageData;
             } else {
                 $images[$dbImage->getImageId()] = $imageData;
             }
