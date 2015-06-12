@@ -22,6 +22,10 @@ parameters:
     github_hook_hmac_secret: ~
     github_oauth_token: ~
 
+    # Camo server
+    camo_key: ~
+    camo_domain: ~
+
     # Akio IRC notifications data
     akio_enabled: false
     akio_path: ~
