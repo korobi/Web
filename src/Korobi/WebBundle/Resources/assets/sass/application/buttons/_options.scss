@@ -6,14 +6,14 @@ $unicorn-btn-namespace: ".button"; //prefix for all classes
 $unicorn-btn-glow-namespace: ".glow";
 $unicorn-btn-glow-color: #2c9adb !default;
 $unicorn-btn-bgcolor: #EEE !default;
-$unicorn-btn-height: 32px !default;
+$unicorn-btn-horizontal-padding: 0.9em !default;
 
 
 //////////////////////////////////////////////////////////
 // TYPOGRAPHY ////////////////////////////////////////////
 //////////////////////////////////////////////////////////
-$unicorn-btn-font-color: #666;
-$unicorn-btn-font-size: 14px;
+$unicorn-btn-font-color: #363636;
+$unicorn-btn-font-size: 1em;
 $unicorn-btn-font-weight: 300;
 $unicorn-btn-font-family: "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
 
@@ -23,7 +23,7 @@ $unicorn-btn-font-family: "Helvetica Neue Light", "Helvetica Neue", "Helvetica",
 //////////////////////////////////////////////////////////
 
 // (name background-color font-color) add as many as you like.
-$unicorn-btn-actions: ('primary' #00A1CB #FFFFFF) ('action' #7db500 #FFFFFF) ('highlight' #F18D05 #FFFFFF) ('caution' #E54028 #FFFFFF) ('royal' #87318C #FFFFFF) ;
+$unicorn-btn-actions: ('primary' #2c3e50 #FFFFFF) ('action' #2c503e#FFFFFF) ('caution' #502c2c #FFFFFF);
 // Remove any type to omit from final CSS build
 $unicorn-btn-types: 'flat' 'rounded' 'dropdown';
 $unicorn-btn-sizes: 'jumbo' 'large' 'small' 'tiny' !default;
