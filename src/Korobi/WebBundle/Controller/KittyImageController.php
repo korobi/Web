@@ -3,6 +3,7 @@
 namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Document\KittyImage;
+use Korobi\WebBundle\Util\StringUtil;
 
 class KittyImageController extends BaseController {
 
@@ -22,22 +23,31 @@ class KittyImageController extends BaseController {
         }
 
         $images = [];
+        $videos = [];
 
         // create an entry for each image
         foreach($dbImages as $dbImage) {
             /** @var KittyImage $dbImage */
 
-            $images[$dbImage->getImageId()] = [
+            $imageUrl = $dbImage->getUrl();
+            $imageData = [
                 'image_id' => $dbImage->getImageId(),
-                'source' => $dbImage->getUrl(),
-                'tags' => implode(', ', $dbImage->getTags())
-            ];
+                'source' => $imageUrl,
+                'tags' => implode(', ', $dbImage->getTags()),
+                'has_tags' => sizeof(implode(', ', $dbImage->getTags())) > 0
+            ];;
+            if (StringUtil::endsWith($imageUrl, 'gifv', true)) {
+                $images[$dbImage->getImageId()] = $imageData;
+            } else {
+                $images[$dbImage->getImageId()] = $imageData;
+            }
         }
 
         ksort($images, SORT_NATURAL | SORT_FLAG_CASE);
 
         return $this->render('KorobiWebBundle::kitty_image.html.twig', [
-            'images' => $images
+            'images' => $images,
+            'videos' => $videos
         ]);
     }
 }

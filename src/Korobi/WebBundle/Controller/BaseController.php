@@ -16,10 +16,10 @@ abstract class BaseController extends Controller {
     protected $authChecker;
 
     /**
-     * @param AuthorizationChecker $checker
+     * @param AuthorizationChecker $authChecker
      */
-    public function setAuthChecker(AuthorizationChecker $checker) {
-        $this->authChecker = $checker;
+    public function setAuthChecker(AuthorizationChecker $authChecker) {
+        $this->authChecker = $authChecker;
     }
 
     /**

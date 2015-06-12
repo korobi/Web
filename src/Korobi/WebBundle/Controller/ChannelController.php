@@ -12,7 +12,6 @@ use Korobi\WebBundle\Parser\LogParser;
 use Korobi\WebBundle\Repository\ChatRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class ChannelController extends BaseController {
 

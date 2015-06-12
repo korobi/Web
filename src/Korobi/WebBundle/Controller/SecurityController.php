@@ -22,6 +22,7 @@ class SecurityController extends BaseController {
 
     /**
      * @param Akio $akio
+     * @param LoggerInterface $logger
      */
     public function __construct(Akio $akio, LoggerInterface $logger) {
         $this->akio = $akio;
@@ -29,15 +30,15 @@ class SecurityController extends BaseController {
     }
 
     /**
-     * @param Request $req
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function reportCspAction(Request $req) {
-        $payload = json_decode($req->getContent(), true);
+    public function reportCspAction(Request $request) {
+        $payload = json_decode($request->getContent(), true);
         $uri = $payload['csp-report']['document-uri'];
         $resource = $payload['csp-report']['blocked-uri'];
         $this->logger->warning('CSP Warning', $payload);
-        $ip = hash_hmac("sha1", $req->getClientIp(), "bc604aedc9027a1f1880");
+        $ip = hash_hmac("sha1", $request->getClientIp(), "bc604aedc9027a1f1880");
         $message = $this->akio->startMessage()->insertRed()->insertText("[!! CSP !!]")->insertAquaLight()->insertText(" Request to $resource on page $uri blocked via $ip.");
         $this->akio->sendMessage($message);
         return new JsonResponse("Thanks, browser.");
