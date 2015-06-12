@@ -1,20 +1,21 @@
 $base-spacing: 1.5em !default;
+
 $alert-color: #fff6bf !default;
-$alert-color-dark: #F39C12 !default;
+$alert-color-dark: #c87f0a !default;
 
 $error-color: #fbe3e4 !default;
-$error-color-dark: #E74C3C !default;
+$error-color-dark: #bf2718 !default;
 
 $notice-color: #e5edf8 !default;
-$notice-color-dark: #3498DB !default;
+$notice-color-dark: #1d6fa5 !default;
 
 $success-color: #e6efc2 !default;
-$success-color-dark: #00BC8C !default;
+$success-color-dark: #007053 !default;
 
 @mixin flash($color, $dark: false) {
   background-color: $color;
   @if ($dark) {
-    color: #fff;
+    color: #eee;
   } @else {
     color: darken($color, 60%);
   }
@@ -24,6 +25,10 @@ $success-color-dark: #00BC8C !default;
   margin-bottom: $base-spacing / 2;
   padding: $base-spacing / 2;
   text-align: center;
+
+  & > *:last-of-type {
+    margin-bottom: 0;
+  }
 
   a {
     color: darken($color, 70%);
