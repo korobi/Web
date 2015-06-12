@@ -61,11 +61,15 @@ nav.navigation {
         color: #eee;
         text-decoration: none;
         @include transition(all 0.3s);
-      }
 
-      a:hover,
-      a:focus {
-        background-color: $active-nav-background-color;
+        &:hover,
+        &:focus {
+          background-color: $active-nav-background-color;
+        }
+
+        i.fa {
+          font-size: 0.9em;
+        }
       }
     }
 
