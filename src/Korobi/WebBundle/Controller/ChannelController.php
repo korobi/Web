@@ -228,7 +228,7 @@ class ChannelController extends BaseController {
         }
 
 
-        // time to render!g
+        // time to render!
         return $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
