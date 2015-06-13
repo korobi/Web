@@ -143,6 +143,7 @@ nelmio_security:
         forward_as: redirUrl
         whitelist:
           - github.com
+          - korobi.io
     content_type:
         nosniff: true
     clickjacking:
