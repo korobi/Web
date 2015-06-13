@@ -1,0 +1,42 @@
+.controls {
+  display: flex;
+  justify-content: space-between;
+
+  .toggles {
+    margin: 0;
+    padding-left: 0;
+
+    li {
+      display: inline-block;
+
+      input {
+        display: none;
+      }
+
+      label {
+        padding-left: 0.8em;
+
+        &:before {
+          content: '\f096';
+          font-family: FontAwesome;
+          display: inline-block;
+          width: 1.1em;
+          text-align: left;
+        }
+
+        &.active:before {
+          content: '\f046';
+        }
+      }
+    }
+  }
+
+  .date-selector {
+    display: inline-block;
+    text-align: right;
+
+    input {
+      display: none;
+    }
+  }
+}
