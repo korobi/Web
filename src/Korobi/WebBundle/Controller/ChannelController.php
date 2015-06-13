@@ -227,14 +227,16 @@ class ChannelController extends BaseController {
             $request->getSession()->getFlashBag()->add('notice', self::createLogNotice($dbNetwork->getSlug(), $channel));
         }
 
-        // time to render!
+
+        // time to render!g
         return $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'logs' => $chats,
             'log_date' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
             'last_id' => empty($chats) ? '' : end($chats)['id'],
-            'is_tail' => $tail !== false
+            'is_tail' => $tail !== false,
+            'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel())
         ]);
     }
 
@@ -308,5 +310,63 @@ class ChannelController extends BaseController {
         } catch (\ReflectionException $ex) {
             throw new UnsupportedOperationException("The method $method caused a reflection exception: " . $ex->getMessage());
         }
+    }
+
+    /**
+     * @param string $network The slug of the network
+     * @param string $channel The channel name (Including suitable prefix - e.g. #)
+     * @return array An array of available unique days. Think [["day": 1, "month": 1, "year": 2015],["day": 2, "month": 1, "year": 2015]]
+     */
+    private function grabAvailableLogDays($network, $channel) {
+        // We're working from this:
+        /*
+           [{
+                $match: {
+                    channel: "#korobi",
+                    network: "esper"
+                }
+            }, {
+                $group: {
+                    "_id": {
+                        "day": {
+                            $dayOfMonth: "$date"
+                        },
+                        month: {
+                            $month: "$date"
+                        },
+                        year: {
+                            $year: "$date"
+                        }
+                    }
+                }
+            }]
+         */
+
+        /** @var \MongoCollection $collection */
+        $collection = $this->get('doctrine_mongodb')->getManager()->getDocumentCollection('KorobiWebBundle:Chat')->getMongoCollection();
+
+        // PHP representation of the above
+        $pipeline = [
+            [
+                '$match' => [
+                    "channel" => $channel,
+                    "network" => $network
+                ]
+            ],
+            [
+                '$group' => [
+                    "_id" => [
+                        "day" => ['$dayOfMonth' => '$date'],
+                        "month" => ['$month' => '$date'],
+                        "year" => ['$year' => '$date']
+                    ]
+                ]
+            ]
+        ];
+
+        // Remove the crap that gets returned
+        return array_map(function($item) {
+            return $item['_id'];
+        }, $collection->aggregate($pipeline)['result']);
     }
 }
