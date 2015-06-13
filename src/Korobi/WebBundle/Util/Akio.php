@@ -38,12 +38,16 @@ class Akio {
 
     /**
      * @param AkioMessageBuilder $message
+     * @param $type
      */
-    public function sendMessage(AkioMessageBuilder $message) {
+    public function sendMessage(AkioMessageBuilder $message, $type) {
         if ($this->enabled) {
             $text = $message->getRawText();
             $this->guzzle->get($this->url, [
-                'query' => ['message' => $text],
+                'query' => [
+                    'type' => $type,
+                    'message' => $text
+                ],
                 'headers' => ['X-Korobi-Key' => $this->key]
             ]);
         }

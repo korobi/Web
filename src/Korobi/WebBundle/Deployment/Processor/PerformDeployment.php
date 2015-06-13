@@ -25,7 +25,7 @@ class PerformDeployment extends BaseProcessor implements DeploymentProcessorInte
         $deploymentInfo->getRevision()->setOldCommit($gitInfo->getHash());
 
         if (exec('./deploy_init.sh', $execOutput, $statusCode) === false) {
-            $this->akio->sendMessage($this->akio->startMessage()->insertRed()->insertText("lol768: Deploy failed."));
+            $this->akio->sendMessage($this->akio->startMessage()->insertRed()->insertText('Deployment failed.'), 'deploy');
             $deploymentInfo->getRevision()->setDeploySuccessful(false);
             $this->logger->debug('Failed to run deploy script.', array(), true);
             $deploymentInfo->addStatus(DeploymentStatus::DEPLOY_FAILED);

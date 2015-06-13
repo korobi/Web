@@ -40,7 +40,7 @@ class SecurityController extends BaseController {
         $this->logger->warning('CSP Warning', $payload);
         $ip = hash_hmac("sha1", $request->getClientIp(), "bc604aedc9027a1f1880");
         $message = $this->akio->startMessage()->insertRed()->insertText("[!! CSP !!]")->insertAquaLight()->insertText(" Request to $resource on page $uri blocked via $ip.");
-        $this->akio->sendMessage($message);
+        $this->akio->sendMessage($message, 'csp');
         return new JsonResponse("Thanks, browser.");
     }
 
