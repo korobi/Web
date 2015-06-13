@@ -14,14 +14,13 @@
     padding: 0.15em 0.3em;
     font-weight: bold;
   }
-}
 
-.doc-item ul, .doc-item ol {
-  margin: 1em 0;
-  padding: 0 0 0 40px;
-}
+  .headerlinks {
+    margin-left: 0.2em;
+    color: transparent;
 
-.doc-item {
-  background: transparent;
-  padding-bottom: 20px;
+    h1:hover &, h2:hover &, h3:hover &, h4:hover & {
+      color: #477DCA;
+    }
+  }
 }
