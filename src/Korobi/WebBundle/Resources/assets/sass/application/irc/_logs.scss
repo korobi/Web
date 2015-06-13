@@ -57,6 +57,19 @@
       .italic    { font-style: italic; }
       .bold      { font-weight: bold; }
     }
+
+
+    &[data-event-type=quit],
+    &[data-event-type=join],
+    &[data-event-type=nick],
+    &[data-event-type=mode] {
+      .message { color: #666; }
+      .owner:before    { content: '~'; color: desaturate(nth($irc-colors,  5), 60%); }
+      .admin:before    { content: '&'; color: desaturate(nth($irc-colors, 12), 60%); }
+      .operator:before { content: '@'; color: desaturate(nth($irc-colors, 10), 60%); }
+      .half_op:before  { content: '%'; color: desaturate(nth($irc-colors, 14), 60%); }
+      .voice:before    { content: '+'; color: desaturate(nth($irc-colors,  9), 60%); }
+    }
   }
 
   .js-hl .fa {
