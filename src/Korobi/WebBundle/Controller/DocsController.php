@@ -9,6 +9,10 @@ class DocsController extends BaseController {
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function renderAction($file) {
-        return $this->redirect('https://docs.korobi.io/');
+        if ($file === 'commands') {
+            return $this->redirect('https://docs.korobi.io/channel/commands/index.html', 301);
+        }
+
+        return $this->redirect('https://docs.korobi.io/', 301);
     }
 }
