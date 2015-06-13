@@ -1,26 +1,7 @@
 .sf-minitoolbar {
   background: transparent !important;
-}
 
-img[alt="Symfony"] {
-  // approach described originally in http://css-tricks.com/replace-the-image-in-an-img-with-css/
-  display: block !important;
-  -moz-box-sizing: border-box !important;
-  box-sizing: border-box !important;
-  //noinspection CssUnknownTarget
-  background: url("/assets/images/debug_icon.png") no-repeat !important;
-  width: 26px !important;
-  height: 28px !important;
-  padding-left: 26px !important;
-  position: relative;
-  top: -4px;
-}
-
-.open-debug img[alt="Symfony"] {
-  position: initial !important;
-  width: initial !important;
-  height: initial !important;
-  background: none !important;
-  display: inline !important;
-  padding-left: 0 !important;
+  body:not(.light) & svg path {
+    fill: #fff;
+  }
 }
