@@ -11,21 +11,27 @@
 
       input {
         display: none;
-      }
 
-      label {
-        padding-left: 0.8em;
+        & + label {
+          padding-left: 0.8em;
 
-        &:before {
-          content: '\f096';
-          font-family: FontAwesome;
-          display: inline-block;
-          width: 1.1em;
-          text-align: left;
+          &:before {
+            content: '\f096';
+            font-family: FontAwesome;
+            display: inline-block;
+            width: 1.1em;
+            text-align: left;
+          }
         }
 
-        &.active:before {
-          content: '\f046';
+        &:checked + label {
+          @include transition-duration(0s);
+          background: desaturate(#FFFFFF, 5%);
+          color: darken(#2c3e50, 10%);
+
+          &:before {
+            content: '\f046';
+          }
         }
       }
     }

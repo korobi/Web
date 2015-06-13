@@ -9,11 +9,6 @@ $(function() {
     var $joinPartLabel = $controls.find('label[for=toggle-join-part]');
     $controls.find('#toggle-join-part').change(function(e) {
         var $this = $(this);
-        if($this.prop('checked')) {
-            $joinPartLabel.addClass('active');
-        } else {
-            $joinPartLabel.removeClass('active');
-        }
 
         $('.logs .line').each(function(i, e) {
             var $e = $(e);
