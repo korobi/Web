@@ -18,7 +18,7 @@ class Akio {
 
     /**
      * Initialize the class.
-     * @param $enabled If Akio is enabled
+     * @param boolean $enabled If Akio is enabled
      * @param string $url The instance url
      * @param string $key The auth key
      */
@@ -44,7 +44,7 @@ class Akio {
             $text = $message->getRawText();
             $this->guzzle->get($this->url, [
                 'query' => ['message' => $text],
-                'headers' => ['X-Akio-Korobi' => $this->key]
+                'headers' => ['X-Korobi-Key' => $this->key]
             ]);
         }
     }
