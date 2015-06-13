@@ -64,9 +64,6 @@ network:
 channel:
     path: /{network}/{channel}
     defaults: { _controller: korobi.controller.channel:homeAction }
-channel_admin:
-    path: /{network}/{channel}/admin
-    defaults: { _controller: korobi.controller.channel_admin:homeAction }
 channel_commands:
     path: /{network}/{channel}/commands
     defaults: { _controller: korobi.controller.channel:commandsAction }

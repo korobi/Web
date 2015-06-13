@@ -11,7 +11,6 @@ korobi_web:
                   - networks
                   - network
                   - channel
-                  - channel_admin
                   - channel_commands
                   - channel_logs
                   - channel_logs_date
