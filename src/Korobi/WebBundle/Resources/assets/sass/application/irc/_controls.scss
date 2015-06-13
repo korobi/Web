@@ -1,6 +1,6 @@
 .controls {
-  display: flex;
-  justify-content: space-between;
+  @include display(flex);
+  @include justify-content(space-between);
 
   .toggles {
     margin: 0;
