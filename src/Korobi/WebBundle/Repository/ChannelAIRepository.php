@@ -11,7 +11,7 @@ class ChannelAIRepository extends DocumentRepository {
      * @param $channel
      * @return mixed
      */
-    public function findAllByChannel($network, $channel) {
+    public function findByChannel($network, $channel) {
         return $this->createQueryBuilder()
             ->field('network')->equals($network)
             ->field('channel')->equals($channel)

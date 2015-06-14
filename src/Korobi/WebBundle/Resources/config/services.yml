@@ -51,6 +51,9 @@ services:
     korobi.controller.channel_stat:
         class: Korobi\WebBundle\Controller\Channel\ChannelStatController
         parent: korobi.base_controller
+    korobi.controller.channel_ai:
+        class: Korobi\WebBundle\Controller\Channel\ChannelAIController
+        parent: korobi.base_controller
     korobi.controller.channel_game:
         class: Korobi\WebBundle\Controller\Channel\ChannelGameController
         parent: korobi.base_controller

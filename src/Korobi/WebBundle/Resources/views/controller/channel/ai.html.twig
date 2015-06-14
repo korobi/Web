@@ -1,0 +1,58 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = channel_name ~ " on " ~ network_name ~ " - AI" %}
+
+{% block body %}
+    <h1>AI for {{ channel_name }} on {{ network_name }}</h1>
+    <div class="commands">
+        {% if join_message %}
+        <h3>Join Message</h3>
+        <span>The join message is sent to every user who joins the channel.</span>
+        <table>
+            <thead>
+                <tr>
+                    <th>Enabled</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{% if join_message_enabled %}yes{% else %}no{% endif %}</td>
+                    <td>{{ join_message|raw }}</td>
+                </tr>
+            </tbody>
+        </table>
+        {% endif %}
+        <h3>Patterns</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Pattern</th>
+                <th>Enabled</th>
+                <th>Details</th>
+                <th>Messages</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pattern in patterns %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ pattern.pattern }}</td>
+                    <td>{% if pattern.enabled %}yes{% else %}no{% endif %}</td>
+                    <td class="no-wrapping-paper">
+                        <abbr title="<strong>Type:</strong> {{ pattern.type|lower }}<br><strong>Case Insensitive:</strong> {% if pattern.case_insensitive %}yes{% else %}no{% endif %}
+                        <br><strong>User Type:</strong> {{ pattern.user_mode|lower }}
+                        {% if not pattern.exemptions is empty %}<br><br><strong>Exemptions:</strong> {% for exemption in pattern.exemptions %}{% if not loop.first %}<br>{% endif %}{{ exemption }}{% endfor %}{% endif %}" rel="tooltip">(details)</abbr>
+                    </td>
+                    <td>
+                        {% for message in pattern.messages %}
+                            {{ message|ircformat|raw }}{% if not loop.last %}<br>{% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
