@@ -5,7 +5,7 @@ $(function() {
         title = false,
         tip;
 
-    targets.bind('mouseenter', function() {
+    targets.bind('mouseover', function() {
         target = $(this);
         tip = target.attr('title');
         tooltip = $('<div id="tooltip"></div>');
@@ -70,7 +70,7 @@ $(function() {
             target.attr('title', tip);
         };
 
-        target.bind('mouseleave', removeTooltip);
+        target.bind('mouseout', removeTooltip);
         tooltip.bind('click', removeTooltip);
     });
 });
