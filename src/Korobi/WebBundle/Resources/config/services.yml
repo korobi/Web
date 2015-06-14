@@ -39,14 +39,20 @@ services:
     korobi.controller.network:
         class: Korobi\WebBundle\Controller\NetworkController
         parent: korobi.base_controller
-    korobi.controller.channel:
-        class: Korobi\WebBundle\Controller\ChannelController
+    korobi.controller.channel_home:
+        class: Korobi\WebBundle\Controller\Channel\ChannelHomeController
         parent: korobi.base_controller
-    korobi.controller.channel_stats:
-        class: Korobi\WebBundle\Controller\ChannelStatsController
+    korobi.controller.channel_log:
+        class: Korobi\WebBundle\Controller\Channel\ChannelLogController
         parent: korobi.base_controller
-    korobi.controller.channel_games:
-        class: Korobi\WebBundle\Controller\ChannelGameController
+    korobi.controller.channel_command:
+        class: Korobi\WebBundle\Controller\Channel\ChannelCommandController
+        parent: korobi.base_controller
+    korobi.controller.channel_stat:
+        class: Korobi\WebBundle\Controller\Channel\ChannelStatController
+        parent: korobi.base_controller
+    korobi.controller.channel_game:
+        class: Korobi\WebBundle\Controller\Channel\ChannelGameController
         parent: korobi.base_controller
     korobi.controller.revisions:
         class: Korobi\WebBundle\Controller\RevisionsController

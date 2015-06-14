@@ -1,13 +1,13 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Channel;
 
+use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
-use Korobi\WebBundle\Parser\IRCTextParser;
 use Symfony\Component\HttpFoundation\Request;
 
-class ChannelStatsController extends BaseController {
+class ChannelStatController extends BaseController {
 
     /**
      * @param Request $request

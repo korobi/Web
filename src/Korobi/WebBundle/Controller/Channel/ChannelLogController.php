@@ -1,149 +1,23 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Channel;
 
+use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
-use Korobi\WebBundle\Document\ChannelCommand;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Exception\UnsupportedOperationException;
-use Korobi\WebBundle\Parser\ChatMessage;
 use Korobi\WebBundle\Parser\LogParser;
 use Korobi\WebBundle\Repository\ChatRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class ChannelController extends BaseController {
+class ChannelLogController extends BaseController {
 
     /**
      * @var \ReflectionClass The log parser reflection class.
      */
     private $logParser;
-
-    // --------------
-    // ---- Home ----
-    // --------------
-
-    /**
-     * @param $network
-     * @param $channel
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function homeAction($network, $channel) {
-        /** @var Network $dbNetwork */
-        /** @var Channel $dbChannel */
-        list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
-
-        // create appropriate links
-        $links = [];
-        $linkBase = ['network' => $network, 'channel' => $channel];
-
-        if ($dbChannel->getLogsEnabled()) {
-            $links[] = $this->createLink($dbChannel, $linkBase, 'Logs', $this->generateUrl('channel_logs', $linkBase));
-        }
-
-        if ($dbChannel->getCommandsEnabled()) {
-            $links[] = $this->createLink($dbChannel, $linkBase, 'Commands', $this->generateUrl('channel_commands', $linkBase));
-        }
-
-        // time to render!
-        return $this->render('KorobiWebBundle:controller/channel:home.html.twig', [
-            'network_name' => $dbNetwork->getName(),
-            'channel_name' => $dbChannel->getChannel(),
-            'slug' => self::transformChannelName($dbChannel->getChannel()),
-            'command_prefix' => $dbChannel->getCommandPrefix(),
-            'links' => $links
-        ]);
-    }
-
-    private function createLink($dbChannel, $linkBase, $name, $href) {
-        /** @var Channel $dbChannel */
-        $result = [
-            'name' => $name,
-            'href' => $href
-        ];
-        if($dbChannel->getKey() !== null && $this->authChecker->isGranted('ROLE_ADMIN')) {
-            $result['href'] .= '?key=' . $dbChannel->getKey();
-        }
-
-        return $result;
-    }
-
-    // ------------------
-    // ---- Commands ----
-    // ------------------
-
-    /**
-     * @param Request $request
-     * @param $network
-     * @param $channel
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function commandsAction(Request $request, $network, $channel) {
-        /** @var Network $dbNetwork */
-        /** @var Channel $dbChannel */
-        list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
-
-        // check if this channel requires a key
-        if ($dbChannel->getKey() !== null) {
-            $key = $request->query->get('key');
-            if ($key === null || $key !== $dbChannel->getKey()) {
-                throw new \Exception('Unauthorized'); // TODO
-            }
-        }
-
-        // fetch all commands
-        $dbCommands = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:ChannelCommand')
-            ->findAllByChannel($network, $dbChannel->getChannel())
-            ->toArray();
-
-        $commands = [];
-
-        // process all found commands
-        foreach ($dbCommands as $dbCommand) {
-            /** @var ChannelCommand $dbCommand */
-
-            // skip if this command is an alias
-            if ($dbCommand->getIsAlias()) {
-                continue;
-            }
-
-            // fetch aliases for this command
-            $rawAliases = $this->get('doctrine_mongodb')
-                ->getManager()
-                ->getRepository('KorobiWebBundle:ChannelCommand')
-                ->findAliasesFor($network, self::transformChannelName($channel, true), $dbCommand->getName()) // TODO
-                ->toArray();
-
-            $aliases = [];
-            foreach ($rawAliases as $alias) {
-                /** @var ChannelCommand $alias */
-                $aliases[] = $alias->getName();
-            }
-
-            $commands[] = [
-                'name' => $dbCommand->getName(),
-                'value' => $dbCommand->getValue(),
-                'aliases' => implode(', ', $aliases),
-                'is_action' => $dbCommand->getIsAction()
-            ];
-        }
-
-        // time to render!
-        return $this->render('KorobiWebBundle:controller/channel:commands.html.twig', [
-            'network_name' => $dbNetwork->getName(),
-            'channel_name' => $dbChannel->getChannel(),
-            'commands' => $commands
-        ]);
-    }
-
-    // --------------
-    // ---- Logs ----
-    // --------------
 
     /**
      * @param Request $request
@@ -182,19 +56,19 @@ class ChannelController extends BaseController {
         $last_id = $request->query->get('last_id', false);
         if($last_id !== false && \MongoId::isValid($last_id)) {
             $dbChats = $repo->findAllByChannelAndId(
-                    $network,
-                    $dbChannel->getChannel(),
-                    new \MongoId($last_id),
-                    new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
-                )
+                $network,
+                $dbChannel->getChannel(),
+                new \MongoId($last_id),
+                new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
+            )
                 ->toArray();
         } else {
             $dbChats = $repo->findAllByChannelAndDate(
-                    $network,
-                    $dbChannel->getChannel(),
-                    new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day, $year)))),
-                    new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
-                )
+                $network,
+                $dbChannel->getChannel(),
+                new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day, $year)))),
+                new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
+            )
                 ->toArray();
         }
 

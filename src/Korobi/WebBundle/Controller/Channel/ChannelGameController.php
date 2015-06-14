@@ -1,6 +1,6 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Channel;
 
 use Korobi\WebBundle\Document\CAHGame;
 use Korobi\WebBundle\Document\Channel;
