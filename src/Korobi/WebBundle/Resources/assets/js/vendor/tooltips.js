@@ -53,7 +53,7 @@ $(function() {
             }).animate({
                 top: '+=10',
                 opacity: 1
-            }, 150);
+            }, 120);
         };
 
         initTooltip();
@@ -63,7 +63,7 @@ $(function() {
             tooltip.animate({
                 top: '-=10',
                 opacity: 0
-            }, 150, function() {
+            }, 120, function() {
                 $(this).remove();
             });
 
