@@ -14,9 +14,9 @@ $(function() {
     var timezone_offset = new Date().getTimezoneOffset();
 
     logs.find('.timestamp').each(function(index, time) {
-        time = $(time);
-        var time_parts = time.html().split(':');
-        time.html(dateToStringTimestamp(new Date(
+        var $time = $(time);
+        var time_parts = $time.text().split(':');
+        $time.text(dateToStringTimestamp(new Date(
             0, 0, 0,
             time_parts[0],
             time_parts[1] - timezone_offset,
