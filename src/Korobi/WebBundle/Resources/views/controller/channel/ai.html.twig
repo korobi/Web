@@ -30,7 +30,10 @@
                 <th>#</th>
                 <th>Pattern</th>
                 <th>Enabled</th>
-                <th>Details</th>
+                <th>Type</th>
+                <th>Case Insensitive</th>
+                <th>User Type</th>
+                <th>Exemptions</th>
                 <th>Messages</th>
             </tr>
             </thead>
@@ -40,11 +43,10 @@
                     <td>{{ loop.index }}</td>
                     <td>{{ pattern.pattern }}</td>
                     <td>{% if pattern.enabled %}yes{% else %}no{% endif %}</td>
-                    <td class="no-wrapping-paper">
-                        <abbr title="<strong>Type:</strong> {{ pattern.type|lower }}<br><strong>Case Insensitive:</strong> {% if pattern.case_insensitive %}yes{% else %}no{% endif %}
-                        <br><strong>User Type:</strong> {{ pattern.user_mode|lower }}
-                        {% if not pattern.exemptions is empty %}<br><br><strong>Exemptions:</strong> {% for exemption in pattern.exemptions %}{% if not loop.first %}<br>{% endif %}{{ exemption }}{% endfor %}{% endif %}" rel="tooltip">(details)</abbr>
-                    </td>
+                    <td>{{ pattern.type|lower }}</td>
+                    <td>{% if pattern.case_insensitive %}yes{% else %}no{% endif %}</td>
+                    <td>{{ pattern.user_mode|lower }}</td>
+                    <td>{% if not pattern.exemptions is empty %}<abbr title="<strong>Exemptions:</strong> {% for exemption in pattern.exemptions %}{% if not loop.first %}<br>{% endif %}{{ exemption }}{% endfor %}" rel="tooltip">(hover)</abbr>{% else %}none{% endif %}</td>
                     <td>
                         {% for message in pattern.messages %}
                             {{ message|ircformat|raw }}{% if not loop.last %}<br>{% endif %}
