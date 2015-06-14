@@ -15,14 +15,18 @@
     font-weight: bold;
   }
 
-  .headerlink {
-    margin-left: 0.2em;
-    color: transparent;
+  h1, h2, h3, h4 {
+    .headerlink {
+      margin-left: 0.2em;
+      color: transparent;
 
-    h1:hover &, h2:hover &, h3:hover &, h4:hover & {
+    }
+
+    &:hover .headerlink {
       color: #477DCA;
     }
   }
+
 
   .admonition {
     &.warning {
