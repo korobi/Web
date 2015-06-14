@@ -329,7 +329,6 @@ button#{$unicorn-btn-namespace}:disabled {
       &:active, &.is-active, &.active {
         @include transition-duration(0s);
         background: desaturate($unicorn-btn-background, 5%);
-        color: darken($unicorn-btn-font-color, 10%);
       }
       &.disabled {
         box-shadow: none;
