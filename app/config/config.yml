@@ -113,6 +113,9 @@ hwi_oauth:
 
 #Nelmio sec bundle config
 nelmio_security:
+    forced_ssl:
+        hsts_max_age: 31557600 # A long time
+        hsts_subdomains: true
     csp:
         enforce:
             report-uri: [/csp/report]
