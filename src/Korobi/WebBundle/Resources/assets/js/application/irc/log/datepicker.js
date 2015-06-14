@@ -14,10 +14,10 @@ $(function() {
                 if(date.getDate() === availableDays[i].day
                         && date.getMonth() + 1 === availableDays[i].month
                         && date.getYear() + 1900 === availableDays[i].year) {
-                    return 'has-data';
+                    return availableDays[i].hasAMessage ? 'has-data' : true;
                 }
             }
-            return true;
+            return false;
         }
     });
     $('label[for=log-date]').click(function() {
