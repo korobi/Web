@@ -25,10 +25,10 @@
   }
 
   .admonition {
-    .warning {
+    &.warning {
       @extend .flash-error;
     }
-    .note {
+    &.note {
       @extend .flash-notice;
     }
   }
