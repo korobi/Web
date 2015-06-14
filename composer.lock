@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ba984353870d5cccc30a2920f98343e3",
+    "hash": "84ffb6aaa776e76191f2945023859838",
     "packages": [
         {
             "name": "crodas/influx-php",
@@ -926,7 +926,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/c06e8d40a3fd77a9c24481247890863ea858355c",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/d6ea2247abfaa29513835941d9b560aeefbf3ca9",
                 "reference": "c06e8d40a3fd77a9c24481247890863ea858355c",
                 "shasum": ""
             },
@@ -1067,6 +1067,55 @@
                 "symfony"
             ],
             "time": "2015-05-14 17:52:49"
+        },
+        {
+            "name": "enygma/yubikey",
+            "version": "3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/enygma/yubikey.git",
+                "reference": "2a1b38754e94d8fa291f3747b237c492602229e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/enygma/yubikey/zipball/2a1b38754e94d8fa291f3747b237c492602229e3",
+                "reference": "2a1b38754e94d8fa291f3747b237c492602229e3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "4.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Yubikey": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Cornutt",
+                    "email": "ccornutt@phpdeveloper.org",
+                    "homepage": "http://www.phpdeveloper.org/"
+                }
+            ],
+            "description": "PHP library to interface with the Yubikey REST API",
+            "homepage": "https://github.com/enygma/yubikey.git",
+            "keywords": [
+                "api",
+                "rest",
+                "twofactor",
+                "yubico",
+                "yubikey"
+            ],
+            "time": "2015-04-20 23:52:22"
         },
         {
             "name": "erusev/parsedown",

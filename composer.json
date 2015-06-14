@@ -27,7 +27,8 @@
         "knplabs/github-api": "1.4.2",
         "salavert/time-ago-in-words": "1.*",
         "nelmio/security-bundle": "~1.6",
-        "crodas/influx-php": "*"
+        "crodas/influx-php": "*",
+        "enygma/yubikey": "^3.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

@@ -7,14 +7,14 @@
             <a href="/" class="navigation--brandlink" role="menuitem">{{ app_name }}</a>
             <i class="navigation--menutoggle fa fa-navicon"></i>
         </div>
-        <ul class="navigation--links">
+        <ul class="navigation--links" role="menubar">
             {% spaceless %}
                 {% for item in navigation.getPrimary() %}
                     {{ nav.nav_link(item) }}
                 {% endfor %}
             {% endspaceless %}
         </ul>
-        <ul class="navigation--links navigation--links-secondary">
+        <ul class="navigation--links navigation--links-secondary" role="menubar">
             {% spaceless %}
                 {% for item in navigation.getSecondary() %}
                     {{ nav.nav_link(item) }}
