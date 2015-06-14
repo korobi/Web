@@ -23,4 +23,13 @@
       color: #477DCA;
     }
   }
+
+  .admonition {
+    .warning {
+      @extend .flash-error;
+    }
+    .note {
+      @extend .flash-notice;
+    }
+  }
 }
