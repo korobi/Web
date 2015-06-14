@@ -27,7 +27,8 @@
                 Calendar
                 <i class="fa fa-calendar"></i>
             </label>
-            <input type="date" id="log-date">
+            <script type="application/json" id="available-log-days">{{ available_log_days|json_encode|raw }}</script>
+            <input type="text" id="log-date" value="{{ log_date }}">
         </div>
     </div>
 

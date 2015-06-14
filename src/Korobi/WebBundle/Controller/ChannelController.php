@@ -233,7 +233,8 @@ class ChannelController extends BaseController {
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'logs' => $chats,
-            'log_date' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
+            'log_date_formatted' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
+            'log_date' => date('Y/m/d', mktime(0, 0, 0, $month, $day, $year)),
             'last_id' => empty($chats) ? '' : end($chats)['id'],
             'is_tail' => $tail !== false,
             'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel())

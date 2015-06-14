@@ -40,9 +40,31 @@
   .date-selector {
     display: inline-block;
     text-align: right;
+    position: relative;
 
     input {
-      display: none;
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      padding: 0;
+      margin: 0;
     }
   }
+}
+
+.datepicker .has-data:after {
+  content: ' ';
+  display: block;
+  margin: auto;
+  position: relative;
+  top: -4px;
+
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: green;
 }
