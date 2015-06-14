@@ -1,26 +1,35 @@
 $(function() {
     var $controls = $('.controls');
     var statusEvents = ['join', 'quit', 'part'];
+    var hiddenEvents = [];
 
     if(!$controls.length) {
         return;
     }
 
-    var $joinPartLabel = $controls.find('label[for=toggle-join-part]');
-    $controls.find('#toggle-join-part').change(function(e) {
+    $controls.find('#toggle-join-part').change(function() {
         var $this = $(this);
+        if($this.prop('checked')) {
+            hiddenEvents = hiddenEvents.filter(function(e) {
+                return statusEvents.indexOf(e) === -1;
+            });
+        } else {
+            hiddenEvents = hiddenEvents
+                .concat(statusEvents)
+                .filter(function(e, i, arr) {
+                    return arr.indexOf(e) === i;
+                });
+        }
 
         $('.logs .line').each(function(i, e) {
             var $e = $(e);
-            var isStatus = statusEvents.indexOf($e.attr('data-event-type')) > -1;
-            if(isStatus) {
-                if($this.prop('checked')) {
-                    $e.removeClass('hidden');
-                } else {
-                    $e.addClass('hidden');
-                }
+            var shouldHide = hiddenEvents.indexOf($e.attr('data-event-type')) !== -1;
+            if(shouldHide) {
+                $e.addClass('hidden');
+            } else {
+                $e.removeClass('hidden');
             }
-        })
+        });
     });
 
     var $dateSelectorLabel = $controls.find('label[for=log-date]');
