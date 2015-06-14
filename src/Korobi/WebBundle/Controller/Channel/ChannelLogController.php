@@ -169,9 +169,9 @@ class ChannelLogController extends BaseController {
             'type'       => strtolower($chat->getType()),
             'role'       => $chat->getType() == 'MESSAGE' ? strtolower($chat->getActorPrefix()) : '',
             'nickColour' => LogParser::getColourForActor($chat),
-            'displayNick'=> substr($nick, 0, self::MAX_NICK_LENGTH),
+            'displayNick'=> substr($nick, 0, self::MAX_NICK_LENGTH + 1),
             'realNick'   => $nick,
-            'nickTooLong'=> strlen($nick) > self::MAX_NICK_LENGTH,
+            'nickTooLong'=> strlen($nick) - self::MAX_NICK_LENGTH > 1,
             'nick'       => LogParser::getActorName($chat),
             'message'    => $this->parseChatMessage($chat)
         ];
