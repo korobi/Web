@@ -55,6 +55,16 @@ class Channel {
     private $punishments_enabled;
 
     /**
+     * @MongoDB\Boolean
+     */
+    private $kitty_image;
+
+    /**
+     * @MongoDB\Boolean
+     */
+    private $meow_module_enabled;
+
+    /**
      * @MongoDB\Collection
      */
     private $permissions;
@@ -73,6 +83,11 @@ class Channel {
      * @MongoDB\String
      */
     private $commands_link;
+
+    /**
+     * @MongoDB\Collection
+     */
+    private $repositories;
 
     /**
      * Get id
@@ -244,6 +259,46 @@ class Channel {
     }
 
     /**
+     * Get kittyImage
+     *
+     * @return boolean $kittyImage
+     */
+    public function getKittyImage() {
+        return $this->kitty_image;
+    }
+
+    /**
+     * Set kittyImage
+     *
+     * @param boolean $kittyImage
+     * @return self
+     */
+    public function setKittyImage($kittyImage) {
+        $this->kitty_image = $kittyImage;
+        return $this;
+    }
+
+    /**
+     * Get meowModuleEnabled
+     *
+     * @return boolean $meowModuleEnabled
+     */
+    public function getMeowModuleEnabled() {
+        return $this->meow_module_enabled;
+    }
+
+    /**
+     * Set meowModuleEnabled
+     *
+     * @param boolean $meowModuleEnabled
+     * @return self
+     */
+    public function setMeowModuleEnabled($meowModuleEnabled) {
+        $this->meow_module_enabled = $meowModuleEnabled;
+        return $this;
+    }
+
+    /**
      * Get permissions
      *
      * @return collection $permissions
@@ -320,6 +375,26 @@ class Channel {
      */
     public function setCommandsLink($commandsLink) {
         $this->commands_link = $commandsLink;
+        return $this;
+    }
+
+    /**
+     * Get repositories
+     *
+     * @return collection $repositories
+     */
+    public function getRepositories() {
+        return $this->repositories;
+    }
+
+    /**
+     * Set repositories
+     *
+     * @param collection $repositories
+     * @return self
+     */
+    public function setRepositories($repositories) {
+        $this->repositories = $repositories;
         return $this;
     }
 }

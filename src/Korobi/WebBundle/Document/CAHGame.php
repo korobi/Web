@@ -8,6 +8,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  * @MongoDB\Document(collection="cah_games",repositoryClass="Korobi\WebBundle\Repository\CAHGameRepository")
  */
 class CAHGame {
+
     /**
      * @MongoDB\Id(strategy="auto")
      */
