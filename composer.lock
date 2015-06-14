@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "84ffb6aaa776e76191f2945023859838",
+    "hash": "f15391433380091dd446b71ca61ecbda",
     "packages": [
         {
             "name": "crodas/influx-php",
@@ -922,12 +922,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "c06e8d40a3fd77a9c24481247890863ea858355c"
+                "reference": "b6aa8620e4f29d2952fffe4209b49acff39f1547"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/d6ea2247abfaa29513835941d9b560aeefbf3ca9",
-                "reference": "c06e8d40a3fd77a9c24481247890863ea858355c",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/b6aa8620e4f29d2952fffe4209b49acff39f1547",
+                "reference": "b6aa8620e4f29d2952fffe4209b49acff39f1547",
                 "shasum": ""
             },
             "require": {
@@ -996,7 +996,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2015-06-11 22:02:59"
+            "time": "2015-06-13 23:31:18"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -1116,45 +1116,6 @@
                 "yubikey"
             ],
             "time": "2015-04-20 23:52:22"
-        },
-        {
-            "name": "erusev/parsedown",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/erusev/parsedown.git",
-                "reference": "790066e9a7dbac9b1441005b902531ec9de0ed00"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/790066e9a7dbac9b1441005b902531ec9de0ed00",
-                "reference": "790066e9a7dbac9b1441005b902531ec9de0ed00",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Parsedown": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Emanuil Rusev",
-                    "email": "hello@erusev.com",
-                    "homepage": "http://erusev.com"
-                }
-            ],
-            "description": "Parser for Markdown.",
-            "homepage": "http://parsedown.org",
-            "keywords": [
-                "markdown",
-                "parser"
-            ],
-            "time": "2015-05-26 10:37:45"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2153,16 +2114,16 @@
         },
         {
             "name": "phpunit/php-timer",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "19689d4354b295ee3d8c54b4f42c3efb69cbc17c"
+                "reference": "83fe1bdc5d47658b727595c14da140da92b3d66d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/19689d4354b295ee3d8c54b4f42c3efb69cbc17c",
-                "reference": "19689d4354b295ee3d8c54b4f42c3efb69cbc17c",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/83fe1bdc5d47658b727595c14da140da92b3d66d",
+                "reference": "83fe1bdc5d47658b727595c14da140da92b3d66d",
                 "shasum": ""
             },
             "require": {
@@ -2171,13 +2132,10 @@
             "type": "library",
             "autoload": {
                 "classmap": [
-                    "PHP/"
+                    "src/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                ""
-            ],
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2193,7 +2151,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2013-08-02 07:42:54"
+            "time": "2015-06-13 07:35:30"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -3559,8 +3517,7 @@
         "doctrine/mongodb-odm": 20,
         "doctrine/mongodb-odm-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
-        "hwi/oauth-bundle": 20,
-        "erusev/parsedown": 20
+        "hwi/oauth-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
