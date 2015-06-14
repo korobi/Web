@@ -10,7 +10,7 @@ $(function() {
         tip = target.attr('title');
         tooltip = $('<div id="tooltip"></div>');
 
-        if (!tip || tip == '') {
+        if (!tip || tip === '') {
             return false;
         }
 
@@ -53,7 +53,7 @@ $(function() {
             }).animate({
                 top: '+=10',
                 opacity: 1
-            }, 50);
+            }, 150);
         };
 
         initTooltip();
@@ -63,7 +63,7 @@ $(function() {
             tooltip.animate({
                 top: '-=10',
                 opacity: 0
-            }, 50, function() {
+            }, 150, function() {
                 $(this).remove();
             });
 
