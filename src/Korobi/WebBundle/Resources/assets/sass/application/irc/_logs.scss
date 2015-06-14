@@ -47,6 +47,7 @@
       text-overflow: ellipsis;
       text-overflow: '+'; // Use custom elision if supported
       overflow: hidden;
+      white-space: nowrap;
     }
 
     .message {
