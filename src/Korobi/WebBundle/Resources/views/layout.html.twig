@@ -28,16 +28,16 @@
 
 <div id="bottom"></div>
 {% block javascripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-{% javascripts '@production' output='assets/js/application.js' filter='uglifyjs2' %}
-<script src="{{ asset_url }}{% if app.environment == 'dev' %}?v={{ 'now'|date('U') }}{% else %}?v={{ git_hash }}{% endif %}"></script>
-{% endjavascripts %}
-{# only include development js in dev environment #}
-{% if app.environment == 'dev' %}
-{% javascripts '@staging' output='assets/js/staging.js' filter='uglifyjs2' %}
-<script src="{{ asset_url }}?v={{ 'now'|date('U') }}"></script>
-{% endjavascripts %}
-{% endif %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    {% javascripts '@production' output='assets/js/application.js' filter='uglifyjs2' %}
+        <script src="{{ asset_url }}{% if app.environment == 'dev' %}?v={{ 'now'|date('U') }}{% else %}?v={{ git_hash }}{% endif %}"></script>
+    {% endjavascripts %}
+    {# only include development js in dev environment #}
+    {% if app.environment == 'dev' %}
+        {% javascripts '@staging' output='assets/js/staging.js' filter='uglifyjs2' %}
+            <script src="{{ asset_url }}?v={{ 'now'|date('U') }}"></script>
+        {% endjavascripts %}
+    {% endif %}
 {% endblock %}
 </body>
 </html>
