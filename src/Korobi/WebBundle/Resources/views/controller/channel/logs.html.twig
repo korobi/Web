@@ -22,7 +22,13 @@
                 </label>
             </li>
         </ul>
-        <div class="date-selector">
+        <div class="right">
+            {% if not is_tail %}
+                <a class="button button-rounded button-flat-primary" href="{{ tail_url }}">
+                    Tail
+                    <i class="fa fa-ellipsis-h"></i>
+                </a>
+            {% endif %}
             <label for="log-date" class="button button-rounded button-flat-primary">
                 Calendar
                 <i class="fa fa-calendar"></i>
