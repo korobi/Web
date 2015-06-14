@@ -220,6 +220,12 @@ class ChannelLogController extends BaseController {
                         }
                     }
                 }
+            }, {
+                $project: {
+                    hasAMessage: {
+                        $setIsSubset: [["MESSAGE"], "$test"]
+                    }
+                }
             }]
          */
 
@@ -240,6 +246,18 @@ class ChannelLogController extends BaseController {
                         "day" => ['$dayOfMonth' => '$date'],
                         "month" => ['$month' => '$date'],
                         "year" => ['$year' => '$date']
+                    ],
+                    "test" => [
+                        '$addToSet' => '$type'
+                    ]
+                ]
+            ],
+            [
+                '$project' => [
+                    "hasAMessage" => [
+                        '$setIsSubset' => [
+                            ["MESSAGE"], '$test'
+                        ]
                     ]
                 ]
             ]
@@ -247,7 +265,7 @@ class ChannelLogController extends BaseController {
 
         // Remove the crap that gets returned
         return array_map(function($item) {
-            return $item['_id'];
+            return array_merge($item['_id'], ["hasAMessage" => $item['hasAMessage']]);
         }, $collection->aggregate($pipeline)['result']);
     }
 }
