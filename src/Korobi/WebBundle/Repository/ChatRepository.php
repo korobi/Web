@@ -71,4 +71,14 @@ class ChatRepository extends DocumentRepository {
             ->getQuery()
             ->execute();
     }
+
+    public function findFirstByChannel($network, $channel) {
+        return $this->createQueryBuilder()
+            ->sort('date', 'ASC')
+            ->field('network')->equals($network)
+            ->field('channel')->equals($channel)
+            ->limit(1)
+            ->getQuery()
+            ->execute();
+    }
 }
