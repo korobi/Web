@@ -42,11 +42,6 @@
       padding-left: 15px;
       padding-right: 15px;
       border-right: 1px solid #444;
-      max-width: 9em; // Legacy
-      max-width: 15ch;
-      text-overflow: ellipsis;
-      text-overflow: '+'; // Use custom elision if supported
-      overflow: hidden;
       white-space: nowrap;
     }
 

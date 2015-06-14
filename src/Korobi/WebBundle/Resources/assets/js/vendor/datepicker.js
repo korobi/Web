@@ -1775,8 +1775,5 @@
 			datepickerPlugin.call($this, 'show');
 		}
 	);
-	$(function(){
-		datepickerPlugin.call($('[data-provide="datepicker-inline"]'));
-	});
 
 }(window.jQuery));

@@ -64,7 +64,6 @@ assetic:
             inputs:
                 - '@KorobiWebBundle/Resources/assets/js/vendor/datepicker.js'
                 - '@KorobiWebBundle/Resources/assets/js/vendor/prism.js'
-                - '@KorobiWebBundle/Resources/assets/js/application/log_elision.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/log_controls.js'
                 - '@KorobiWebBundle/Resources/assets/js/vendor/tooltips.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/datepicker.js'

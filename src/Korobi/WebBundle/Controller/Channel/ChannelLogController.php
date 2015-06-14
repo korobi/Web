@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ChannelLogController extends BaseController {
 
+    const MAX_NICK_LENGTH = 10;
+
     /**
      * @var \ReflectionClass The log parser reflection class.
      */
@@ -160,13 +162,16 @@ class ChannelLogController extends BaseController {
     }
 
     private function transformToChatMessage(Chat $chat) {
+        $nick = LogParser::getDisplayName($chat);
         return [
             'id'         => $chat->getId(),
             'timestamp'  => $chat->getDate()->getTimestamp(),
             'type'       => strtolower($chat->getType()),
             'role'       => $chat->getType() == 'MESSAGE' ? strtolower($chat->getActorPrefix()) : '',
             'nickColour' => LogParser::getColourForActor($chat),
-            'displayNick'=> LogParser::getDisplayName($chat),
+            'displayNick'=> substr($nick, 0, self::MAX_NICK_LENGTH),
+            'realNick'   => $nick,
+            'nickTooLong'=> strlen($nick) > self::MAX_NICK_LENGTH,
             'nick'       => LogParser::getActorName($chat),
             'message'    => $this->parseChatMessage($chat)
         ];

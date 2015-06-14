@@ -40,8 +40,13 @@
                     {# The date is UTC, js will translate it to the correct timezone #}
                     {{ gmdate('H:i:s', line.timestamp) }}
                 </span>
-                <span class="nick irc--{{ "%02d"|format(line.nickColour) }}-df {% if line.role is not empty %}{{ line.role }}{% endif %}">
+                <span class="nick irc--{{ "%02d"|format(line.nickColour) }}-df
+                        {%- if line.role is not empty %} {{ line.role }}{% endif %}"
+                        {%- if line.nickTooLong %} title="{{ line.realNick }}" rel="tooltip"{% endif %}>
                     {{- line.displayNick -}}
+                    {%- if line.nickTooLong -%}
+                        +
+                    {%- endif -%}
                 </span>
                 <span class="message">
                     {{- line.message|raw -}}
