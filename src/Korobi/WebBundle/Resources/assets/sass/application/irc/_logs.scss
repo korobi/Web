@@ -21,7 +21,7 @@
 
     &.highlighted {
       font-weight: bold;
-      background-color: rgba(255, 10, 10, 0.2);
+      background-color: transparentize(#2C3E50, 0.5);
     }
 
     & > span {

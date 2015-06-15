@@ -6,7 +6,7 @@ $(function() {
         return;
     }
 
-    var activeLines = [];
+    var activeLines;
     var lastSelection = null;
 
     /**
@@ -118,11 +118,11 @@ $(function() {
     // ---- add or remove (if line is already highlighted) a line
     // - Shift + Click:
     // ---- add/remove highlighting to a group of lines
-    $logs.find('.timestamp').mousedown(function(event) {
-        if(event.which === 3) {
+    $logs.find('.timestamp').mousedown(function(e) {
+        if(e.which === 3) {
             return;
         }
-        event.preventDefault();
+        e.preventDefault();
 
         // climb the dom to .line
         var line = $(this).closest('.line').data('line-num');
@@ -130,7 +130,7 @@ $(function() {
 
         // If ctrl/command is being held while clicking, either highlight the line or remove
         // existing highlighting from the line.
-        if(event.ctrlKey || event.metaKey) {
+        if(e.ctrlKey || e.metaKey) {
             if((index = activeLines.indexOf(line)) === -1) {
                 activeLines.push(line);
             } else {
@@ -138,7 +138,7 @@ $(function() {
             }
             lastSelection = line;
 
-        } else if(event.shiftKey) {
+        } else if(e.shiftKey) {
             if(lastSelection === null) {
                 // The user never clicked before
                 activeLines = [line];
@@ -150,8 +150,6 @@ $(function() {
                 while(first <= last) {
                     if((index = activeLines.indexOf(first)) === -1) {
                         activeLines.push(first);
-                    } else {
-                        //activeLines.splice(index, 1);
                     }
                     ++first;
                 }
