@@ -20,7 +20,6 @@ $(function() {
                 if(date.getDate() === availableDays[i].day
                         && date.getMonth() + 1 === availableDays[i].month
                         && date.getYear() + 1900 === availableDays[i].year) {
-                    console.log(date.getYear() + 1900, availableDays[i].year);
                     return availableDays[i].hasAMessage ? 'has-data' : true;
                 }
             }
