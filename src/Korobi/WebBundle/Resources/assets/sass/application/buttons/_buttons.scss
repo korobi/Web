@@ -38,6 +38,13 @@ $unicorn-btn-jumbofs: inherit;
   text-decoration: none;
   text-align: center;
 
+  // Prevent user selection
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
   &:hover, &:focus, &:active, &.is-active, &.active {
     text-decoration: none;
   }
