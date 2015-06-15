@@ -113,7 +113,7 @@ class ChannelLogController extends BaseController {
             'log_date' => date('Y/m/d', mktime(0, 0, 0, $month, $day, $year)),
             'last_id' => empty($chats) ? '' : end($chats)['id'],
             'is_tail' => $tail !== false,
-            'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel()),
+            'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->current()->getDate()->format('Y/m/d'),
             'tail_url' => $this->generateUrl('channel_logs_tail', ['network' => $network, 'channel' => $channel]),
             'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel())
         ]);

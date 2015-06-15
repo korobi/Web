@@ -1,19 +1,26 @@
 $(function() {
+    var $dateInput = $('#log-date');
+    if($dateInput.length === 0) {
+        return;
+    }
+
     var moving = false;
     var availableDays = JSON.parse($('#available-log-days').text());
-    var $dateInput = $('#log-date');
+
     $dateInput.datepicker({
-        format: "yyyy/mm/dd",
-        endDate: "today",
-        todayBtn: "linked",
-        language: "en-GB",
-        orientation: "top right",
+        format: 'yyyy/mm/dd',
+        startDate: $dateInput.attr('data-start-date'),
+        endDate: 'today',
+        todayBtn: 'linked',
+        language: 'en-GB',
+        orientation: 'top right',
         forceParse: false,
-        beforeShowDay: function (date) {
+        beforeShowDay: function(date) {
             for(var i = 0; i < availableDays.length; ++i) {
                 if(date.getDate() === availableDays[i].day
                         && date.getMonth() + 1 === availableDays[i].month
                         && date.getYear() + 1900 === availableDays[i].year) {
+                    console.log(date.getYear() + 1900, availableDays[i].year);
                     return availableDays[i].hasAMessage ? 'has-data' : true;
                 }
             }
