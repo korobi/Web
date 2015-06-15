@@ -103,7 +103,6 @@ class ChannelLogController extends BaseController {
             $request->getSession()->getFlashBag()->add('notice', self::createLogNotice($dbNetwork->getSlug(), $channel));
         }
 
-
         // time to render!
         return $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
             'network_name' => $dbNetwork->getName(),
@@ -113,7 +112,7 @@ class ChannelLogController extends BaseController {
             'log_date' => date('Y/m/d', mktime(0, 0, 0, $month, $day, $year)),
             'last_id' => empty($chats) ? '' : end($chats)['id'],
             'is_tail' => $tail !== false,
-            'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->current()->getDate()->format('Y/m/d'),
+            'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
             'tail_url' => $this->generateUrl('channel_logs_tail', ['network' => $network, 'channel' => $channel]),
             'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel())
         ]);
