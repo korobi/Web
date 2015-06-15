@@ -5,20 +5,7 @@ $(function() {
     }
 
     function hideEvents(events) {
-        if(events.length === 0) {
-            $('.logs .line.hidden').removeClass('hidden');
-            return;
-        }
-        var $e;
-        $('.logs .line').each(function(i, e) {
-            $e = $(e);
-
-            if(events.indexOf($e.attr('data-event-type')) !== -1) {
-                $e.addClass('hidden');
-            } else {
-                $e.removeClass('hidden');
-            }
-        });
+        $('#logs').attr('data-event-hidden', events.join(' '));
     }
 
     var $toggleJoinPartInput = $controls.find('#toggle-join-part');

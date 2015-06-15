@@ -19,10 +19,6 @@
     .half_op:before  { content: '%'; color: nth($irc-colors, 14); }
     .voice:before    { content: '+'; color: nth($irc-colors,  9); }
 
-    &.hidden {
-      display: none;
-    }
-
     &.highlighted {
       font-weight: bold;
       background-color: rgba(255, 10, 10, 0.2);

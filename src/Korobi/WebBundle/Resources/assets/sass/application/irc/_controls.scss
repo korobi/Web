@@ -55,6 +55,14 @@
   }
 }
 
+$actions: action join kick message mode nick part quit topic;
+
+@each $action in $actions {
+  #logs[data-event-hidden*=#{$action}] .line[data-event-type=#{$action}] {
+    display: none;
+  }
+}
+
 .datepicker .has-data:after {
   content: ' ';
   display: block;
