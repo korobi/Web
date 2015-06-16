@@ -5,6 +5,7 @@ namespace Korobi\WebBundle\Controller\Channel;
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Chat;
+use Korobi\WebBundle\Document\ChatIndex;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Exception\UnsupportedOperationException;
 use Korobi\WebBundle\Parser\LogParser;
@@ -196,76 +197,21 @@ class ChannelLogController extends BaseController {
     /**
      * @param string $network The slug of the network
      * @param string $channel The channel name (Including suitable prefix - e.g. #)
-     * @return array An array of available unique days. Think [["day": 1, "month": 1, "year": 2015],["day": 2, "month": 1, "year": 2015]]
+     * @return array An array of available unique days.
      */
     private function grabAvailableLogDays($network, $channel) {
-        // We're working from this:
-        /*
-           [{
-                $match: {
-                    channel: "#korobi",
-                    network: "esper"
-                }
-            }, {
-                $group: {
-                    "_id": {
-                        "day": {
-                            $dayOfMonth: "$date"
-                        },
-                        month: {
-                            $month: "$date"
-                        },
-                        year: {
-                            $year: "$date"
-                        }
-                    }
-                }
-            }, {
-                $project: {
-                    hasAMessage: {
-                        $setIsSubset: [["MESSAGE"], "$test"]
-                    }
-                }
-            }]
-         */
-
-        /** @var \MongoCollection $collection */
-        $collection = $this->get('doctrine_mongodb')->getManager()->getDocumentCollection('KorobiWebBundle:Chat')->getMongoCollection();
-
-        // PHP representation of the above
-        $pipeline = [
-            [
-                '$match' => [
-                    "channel" => $channel,
-                    "network" => $network
-                ]
-            ],
-            [
-                '$group' => [
-                    "_id" => [
-                        "day" => ['$dayOfMonth' => '$date'],
-                        "month" => ['$month' => '$date'],
-                        "year" => ['$year' => '$date']
-                    ],
-                    "test" => [
-                        '$addToSet' => '$type'
-                    ]
-                ]
-            ],
-            [
-                '$project' => [
-                    "hasAMessage" => [
-                        '$setIsSubset' => [
-                            ["MESSAGE"], '$test'
-                        ]
-                    ]
-                ]
-            ]
-        ];
-
-        // Remove the crap that gets returned
-        return array_map(function($item) {
-            return array_merge($item['_id'], ["hasAMessage" => $item['hasAMessage']]);
-        }, $collection->aggregate($pipeline)['result']);
+        return array_map(function(ChatIndex $item) {
+            return [
+                'year' => $item->getYear(),
+                'dayOfYear' => $item->getDayOfYear(),
+                'hasAMessage' => $item->getHasValidContent(),
+            ];
+        }, $this
+                ->get('doctrine_mongodb')
+                ->getManager()
+                ->getRepository('KorobiWebBundle:ChatIndex')
+                ->findAllByChannel($network, $channel)
+                ->toArray(false)
+        );
     }
 }
