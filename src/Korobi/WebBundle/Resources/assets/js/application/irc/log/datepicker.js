@@ -7,6 +7,21 @@ $(function() {
     var moving = false;
     var availableDays = JSON.parse($('#available-log-days').text());
 
+    function isLeapYear(date) {
+        var yr = date.getFullYear();
+        return !((yr % 4) || (!(yr % 100) && (yr % 400)));
+    }
+    function dayOfYear(date) {
+        var _dayOfYearOffsets = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+
+        var m = date.getMonth();
+        var d = date.getDate();
+        if(isLeapYear(date) && m > 1) {
+            return _dayOfYearOffsets[m] + d + 1;
+        }
+        return _dayOfYearOffsets[m] + d;
+    }
+
     $dateInput.datepicker({
         format: 'yyyy/mm/dd',
         startDate: $dateInput.attr('data-start-date'),
@@ -17,9 +32,8 @@ $(function() {
         forceParse: false,
         beforeShowDay: function(date) {
             for(var i = 0; i < availableDays.length; ++i) {
-                if(date.getDate() === availableDays[i].day
-                        && date.getMonth() + 1 === availableDays[i].month
-                        && date.getYear() + 1900 === availableDays[i].year) {
+                if(dayOfYear(date) === availableDays[i].dayOfYear
+                        && date.getFullYear() === availableDays[i].year) {
                     return availableDays[i].hasAMessage ? 'has-data' : true;
                 }
             }
