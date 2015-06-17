@@ -3,7 +3,9 @@
 {% set page_title = channel_name ~ " on " ~ network_name ~ " - Tail" %}
 
 {% block head %}
-<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+    {% if not showing_current %}
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+    {% endif %}
 {% endblock %}
 
 {% block body %}
@@ -24,7 +26,7 @@
         </ul>
         <div class="right">
             {% if not is_tail %}
-                <a class="button button-rounded button-flat-primary" href="{{ tail_url }}">
+                <a class="button button-rounded button-flat-primary" href="{{ tail_url }}" rel="nofollow">
                     Tail
                     <i class="fa fa-ellipsis-h"></i>
                 </a>

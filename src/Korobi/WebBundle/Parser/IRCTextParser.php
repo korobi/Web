@@ -288,7 +288,7 @@ class IRCTextParser {
      */
     private static function createLinkTag($url) {
         return sprintf(
-            '<a href="%s" target="_blank">%s</a>',
+            '<a href="%s" target="_blank" rel="nofollow">%s</a>',
             htmlspecialchars($url),
             htmlentities($url, ENT_HTML5)
         );

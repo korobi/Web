@@ -48,6 +48,7 @@ class ChannelLogController extends BaseController {
 
         // populate variables with request information if available, or defaults
         // note: validation is done here
+        $showingCurrent = !$year;
         list($year, $month, $day, $tail) = self::populateRequest($year, $month, $day, $tail);
 
         // fetch all chats
@@ -108,6 +109,7 @@ class ChannelLogController extends BaseController {
             'log_date' => date('Y/m/d', mktime(0, 0, 0, $month, $day, $year)),
             'last_id' => empty($chats) ? '' : end($chats)['id'],
             'is_tail' => $tail !== false,
+            'showing_current' => $showingCurrent,
             'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
             'tail_url' => $this->generateUrl('channel_logs_tail', ['network' => $network, 'channel' => $channel]),
             'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel())
