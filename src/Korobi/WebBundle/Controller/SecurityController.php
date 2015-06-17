@@ -48,6 +48,10 @@ class SecurityController extends BaseController {
         return new JsonResponse('Thanks, browser.');
     }
 
+    /**
+     * @param Request $req
+     * @return Response
+     */
     public function showRedirectAction(Request $req) {
         $response = new Response($this->renderView('KorobiWebBundle::error-redirect.html.twig', [
             'url' => $req->get('redirUrl')

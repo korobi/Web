@@ -2,6 +2,7 @@
 
 namespace Korobi\WebBundle\Controller\Channel;
 
+use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\CAHGame;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
