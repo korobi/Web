@@ -10,7 +10,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 class Punishment {
 
     /**
-     * @MongoDB\Id(strategy="auto")
+     * @MongoDB\Id
      */
     protected $id;
 

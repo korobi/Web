@@ -75,7 +75,7 @@ class DeploymentController extends BaseController {
     }
 
     public function viewAction($id) {
-        if (!$this->authChecker->isGranted("ROLE_SUPER_ADMIN")) {
+        if (!$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
 
@@ -88,6 +88,8 @@ class DeploymentController extends BaseController {
             throw $this->createNotFoundException();
         }
 
-        return $this->render('KorobiWebBundle::deployment.html.twig', ["doc" => $deployment]);
+        return $this->render('KorobiWebBundle::deployment.html.twig', [
+            'doc' => $deployment
+        ]);
     }
 }

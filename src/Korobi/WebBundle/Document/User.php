@@ -11,7 +11,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser {
 
     /**
-     * @MongoDB\Id(strategy="auto")
+     * @MongoDB\Id
      */
     protected $id;
 

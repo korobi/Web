@@ -2,7 +2,9 @@
 
 namespace Korobi\WebBundle\Parser;
 
-/* ---- Colour Map ----
+/*
+ * --------------------
+ * ---- Colour Map ----
  * --------------------
  *    00 - white
  *    01 - black

@@ -7,8 +7,8 @@ use Korobi\WebBundle\Deployment\DeploymentInfo;
 interface DeploymentProcessorInterface {
 
     /**
-     * @param DeploymentInfo $deploymentInfo
+     * @param DeploymentInfo $info
      * @return string Status of deployment
      */
-    public function handle(DeploymentInfo $deploymentInfo);
+    public function handle(DeploymentInfo $info);
 }

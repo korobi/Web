@@ -21,6 +21,9 @@ class UserProvider extends FOSUBUserProvider {
         $this->secret = $secret;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response) {
         $username = $response->getUsername();
 
@@ -47,6 +50,9 @@ class UserProvider extends FOSUBUserProvider {
         return $user;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function connect(UserInterface $user, UserResponseInterface $response) {
         parent::connect($user, $response);
     }

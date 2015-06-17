@@ -38,14 +38,20 @@ class SecurityController extends BaseController {
         $uri = $payload['csp-report']['document-uri'];
         $resource = $payload['csp-report']['blocked-uri'];
         $this->logger->warning('CSP Warning', $payload);
-        $ip = hash_hmac("sha1", $request->getClientIp(), "bc604aedc9027a1f1880");
-        $message = $this->akio->startMessage()->insertRed()->insertText("[!! CSP !!]")->insertAquaLight()->insertText(" Request to $resource on page $uri blocked via $ip.");
-        $this->akio->sendMessage($message, 'csp');
-        return new JsonResponse("Thanks, browser.");
+        $ip = hash_hmac('sha1', $request->getClientIp(), 'bc604aedc9027a1f1880');
+        $this->akio->message()
+            ->red()
+            ->text("[!! CSP !!]")
+            ->aquaLight()
+            ->text(" Request to $resource on page $uri blocked via $ip.")
+            ->send('csp');
+        return new JsonResponse('Thanks, browser.');
     }
 
     public function showRedirectAction(Request $req) {
-        $response = new Response($this->renderView("KorobiWebBundle::error-redirect.html.twig", ["url" => $req->get("redirUrl")]), 403);
+        $response = new Response($this->renderView('KorobiWebBundle::error-redirect.html.twig', [
+            'url' => $req->get('redirUrl')
+        ]), 403);
         return $response;
     }
 }

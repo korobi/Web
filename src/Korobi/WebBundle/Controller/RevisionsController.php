@@ -6,7 +6,7 @@ use Github\Client;
 
 class RevisionsController extends BaseController {
 
-    private static $repositories = ['Web', 'Freya', 'Akio', 'Korobi', 'pircbotx'];
+    private static $repositories = ['Korobi', 'Web', 'Felix'];
 
     /**
      * @param $repository

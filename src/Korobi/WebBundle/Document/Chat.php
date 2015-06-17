@@ -12,7 +12,7 @@ class Chat {
     const ACTOR_INTERNAL = '$Internal';
 
     /**
-     * @MongoDB\Id(strategy="auto")
+     * @MongoDB\Id
      */
     protected $id;
 

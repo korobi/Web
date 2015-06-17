@@ -13,8 +13,10 @@ class ChatIndexRepository extends DocumentRepository {
      */
     public function findAllByChannel($network, $channel) {
         return $this->createQueryBuilder()
-            ->field('network')->equals($network)
-            ->field('channel')->equals($channel)
+            ->field('network')
+                ->equals($network)
+            ->field('channel')
+                ->equals($channel)
             ->getQuery()
             ->execute();
     }

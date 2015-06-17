@@ -11,13 +11,12 @@ use GuzzleHttp\Client as GuzzleClient;
  */
 class Akio {
 
-    protected $guzzle;
+    private $guzzle;
     private $enabled;
     private $url;
     private $key;
 
     /**
-     * Initialize the class.
      * @param boolean $enabled If Akio is enabled
      * @param string $url The instance url
      * @param string $key The auth key
@@ -32,8 +31,8 @@ class Akio {
     /**
      * @return AkioMessageBuilder
      */
-    public function startMessage() {
-        return new AkioMessageBuilder();
+    public function message() {
+        return new AkioMessageBuilder($this);
     }
 
     /**
@@ -42,13 +41,15 @@ class Akio {
      */
     public function sendMessage(AkioMessageBuilder $message, $type) {
         if ($this->enabled) {
-            $text = $message->getRawText();
+            $text = $message->getText();
             $this->guzzle->get($this->url, [
                 'query' => [
                     'type' => $type,
                     'message' => $text
                 ],
-                'headers' => ['X-Korobi-Key' => $this->key]
+                'headers' => [
+                    'X-Korobi-Key' => $this->key
+                ]
             ]);
         }
     }

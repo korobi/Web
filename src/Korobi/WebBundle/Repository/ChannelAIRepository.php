@@ -13,8 +13,10 @@ class ChannelAIRepository extends DocumentRepository {
      */
     public function findByChannel($network, $channel) {
         return $this->createQueryBuilder()
-            ->field('network')->equals($network)
-            ->field('channel')->equals($channel)
+            ->field('network')
+                ->equals($network)
+            ->field('channel')
+                ->equals($channel)
             ->getQuery()
             ->execute();
     }

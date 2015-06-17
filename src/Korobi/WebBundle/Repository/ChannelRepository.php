@@ -13,7 +13,8 @@ class ChannelRepository extends DocumentRepository {
     public function findAllByNetwork($network) {
         return $this->createQueryBuilder()
             ->sort('channel', 'ASC')
-            ->field('network')->equals($network)
+            ->field('network')
+                ->equals($network)
             ->getQuery()
             ->execute();
     }
@@ -26,8 +27,10 @@ class ChannelRepository extends DocumentRepository {
     public function findByChannel($network, $channel) {
         return $this->createQueryBuilder()
             ->sort('channel', 'ASC')
-            ->field('network')->equals($network)
-            ->field('channel')->equals(new \MongoRegex('/^' . $channel . '/i'))
+            ->field('network')
+                ->equals($network)
+            ->field('channel')
+                ->equals(new \MongoRegex('/^' . $channel . '/i'))
             ->getQuery()
             ->execute();
     }

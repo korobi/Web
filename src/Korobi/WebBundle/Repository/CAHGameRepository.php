@@ -12,7 +12,8 @@ class CAHGameRepository extends DocumentRepository {
      */
     public function findById($id) {
         return $this->createQueryBuilder()
-            ->field('_id')->equals($id)
+            ->field('_id')
+                ->equals($id)
             ->getQuery()
             ->execute();
     }

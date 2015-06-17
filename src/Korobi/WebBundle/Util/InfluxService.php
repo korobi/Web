@@ -2,7 +2,6 @@
 
 namespace Korobi\WebBundle\Util;
 
-
 use crodas\InfluxPHP\Client;
 
 class InfluxService {
@@ -40,5 +39,4 @@ class InfluxService {
     public function getDatabase() {
         return $this->client->getDatabase($this->database);
     }
-
 }

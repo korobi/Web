@@ -6,9 +6,8 @@ use Korobi\WebBundle\Deployment\DeploymentLogger;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class DeploymentLoggerTest
- * @see DeploymentLogger
  * @package Korobi\WebBundle\Test\Unit
+ * @see DeploymentLogger
  */
 class DeploymentLoggerTest extends WebTestCase {
 

@@ -14,8 +14,10 @@ class ChatRepository extends DocumentRepository {
     public function findAllByChannel($network, $channel) {
         return $this->createQueryBuilder()
             ->sort('date', 'ASC')
-            ->field('network')->equals($network)
-            ->field('channel')->equals($channel)
+            ->field('network')
+                ->equals($network)
+            ->field('channel')
+                ->equals($channel)
             ->getQuery()
             ->execute();
     }
@@ -30,10 +32,14 @@ class ChatRepository extends DocumentRepository {
     public function findAllByChannelAndDate($network, $channel, \MongoDate $from, \MongoDate $to) {
         return $this->createQueryBuilder()
             ->sort('date', 'ASC')
-            ->field('network')->equals($network)
-            ->field('channel')->equals($channel)
-            ->field('date')->gte($from)
-            ->field('date')->lt($to)
+            ->field('network')
+                ->equals($network)
+            ->field('channel')
+                ->equals($channel)
+            ->field('date')
+                ->gte($from)
+            ->field('date')
+                ->lt($to)
             ->getQuery()
             ->execute();
     }
@@ -48,10 +54,14 @@ class ChatRepository extends DocumentRepository {
     public function findAllByChannelAndId($network, $channel, \MongoId $from, \MongoDate $to) {
         return $this->createQueryBuilder()
             ->sort('date', 'ASC')
-            ->field('network')->equals($network)
-            ->field('channel')->equals($channel)
-            ->field('_id')->gt($from)
-            ->field('date')->lt($to)
+            ->field('network')
+                ->equals($network)
+            ->field('channel')
+                ->equals($channel)
+            ->field('_id')
+                ->gt($from)
+            ->field('date')
+                ->lt($to)
             ->getQuery()
             ->execute();
     }
@@ -65,18 +75,28 @@ class ChatRepository extends DocumentRepository {
     public function findAllByChannelAndType($network, $channel, $type) {
         return $this->createQueryBuilder()
             ->sort('date', 'ASC')
-            ->field('network')->equals($network)
-            ->field('channel')->equals($channel)
-            ->field('type')->equals($type)
+            ->field('network')
+                ->equals($network)
+            ->field('channel')
+                ->equals($channel)
+            ->field('type')
+                ->equals($type)
             ->getQuery()
             ->execute();
     }
 
+    /**
+     * @param $network
+     * @param $channel
+     * @return mixed
+     */
     public function findFirstByChannel($network, $channel) {
         return $this->createQueryBuilder()
             ->sort('date', 'ASC')
-            ->field('network')->equals($network)
-            ->field('channel')->equals($channel)
+            ->field('network')
+                ->equals($network)
+            ->field('channel')
+                ->equals($channel)
             ->limit(1)
             ->getQuery()
             ->execute();

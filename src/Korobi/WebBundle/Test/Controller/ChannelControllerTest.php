@@ -6,9 +6,8 @@ use Korobi\WebBundle\Document\Network;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class ChannelControllerTest
- * @see ChannelController
  * @package Korobi\WebBundle\Test\Controller
+ * @see ChannelController
  */
 class ChannelControllerTest extends WebTestCase {
 
@@ -36,9 +35,5 @@ class ChannelControllerTest extends WebTestCase {
         $client->request('GET', '/esper/korobi/logs/2015-03-14');
         $this->markTestSkipped("NYI");
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-
     }
-
-
 }

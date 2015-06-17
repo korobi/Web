@@ -10,6 +10,7 @@ $(function() {
     }
 
     var $body = $('body');
+
     if($toolbar.length != 0) {
         var displayState = getSymfonyPreference('toolbar/displayState');
         if(displayState === null || displayState == 'block') {
@@ -27,10 +28,9 @@ $(function() {
             $('.footer').addClass('footer--debug');
             $('body').addClass('open-debug');
         }
-
     }
 
-    $body.on("click", ".hide-button, a[title='Show Symfony toolbar']", function() {
+    $body.on('click', ".hide-button, a[title='Show Symfony toolbar']", function() {
         toggleFooterDebugMode();
     });
 });

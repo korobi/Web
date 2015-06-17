@@ -15,32 +15,34 @@ class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
 
     /**
      * Does the actual test work.
-     * @param DeploymentInfo $deploymentInfo
+     *
+     * @param DeploymentInfo $info
      * @return string
      */
-    public function handle(DeploymentInfo $deploymentInfo) {
-        chdir($deploymentInfo->getRootPath() . DIRECTORY_SEPARATOR . 'app');
+    public function handle(DeploymentInfo $info) {
+        chdir($info->getRootPath() . DIRECTORY_SEPARATOR . 'app');
         $execOutput = [];
         $testOutput = exec('phpunit', $execOutput);
         $parsed = (new TestOutputParser())->parseLine($testOutput);
 
-        $message = $this->akio->startMessage()->insertGreen()->insertText($parsed['passed'] . " tests passed.");
+        $message = $this->akio->message()->green()->text($parsed['passed'] . ' tests passed.');
 
         if ($parsed['incomplete'] > 0) {
-            $message = $message->insertYellow()->insertText(" " . $parsed['incomplete'] . " skipped/incomplete tests.");
+            $message = $message->yellow()->text(' ' . $parsed['incomplete'] . ' skipped/incomplete tests.');
         }
 
         if ($parsed['failures'] > 0) {
             $this->logger->debug("Tests failed!", [implode("\n", $execOutput)], true);
-            $message = $message->insertRed()->insertText(" " . $parsed['failures'] . " failed.");
-            $deploymentInfo->addStatus(DeploymentStatus::TESTS_FAILED);
+            $message = $message->red()->text(" " . $parsed['failures'] . ' failed.');
+            $info->addStatus(DeploymentStatus::TESTS_FAILED);
         }
 
-        $this->akio->sendMessage($message, 'deploy');
+        $message->send('deploy');
 
-        $deploymentInfo->getRevision()->setTestsOutput(implode("\n", $execOutput));
-        $deploymentInfo->getRevision()->setTestsPassed($parsed['failures'] === 0);
-        $deploymentInfo->getRevision()->setTestsInfo($parsed);
-        return parent::handle($deploymentInfo);
+        $info->getRevision()->setTestsOutput(implode("\n", $execOutput));
+        $info->getRevision()->setTestsPassed($parsed['failures'] === 0);
+        $info->getRevision()->setTestsInfo($parsed);
+
+        return parent::handle($info);
     }
 }

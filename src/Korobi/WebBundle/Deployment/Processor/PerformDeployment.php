@@ -13,32 +13,32 @@ use Korobi\WebBundle\Util\GitInfo;
  */
 class PerformDeployment extends BaseProcessor implements DeploymentProcessorInterface {
 
-    public function handle(DeploymentInfo $deploymentInfo) {
-        $this->logger->debug("About to execute " . $deploymentInfo->getRootPath() . 'deploy_init.sh');
+    public function handle(DeploymentInfo $info) {
+        $this->logger->debug("About to execute " . $info->getRootPath() . 'deploy_init.sh');
 
         // move to the root path, or you'll get screamed at because 'app/console' could not be found
-        chdir($deploymentInfo->getRootPath());
+        chdir($info->getRootPath());
 
         $execOutput = [];
         $statusCode = -1;
         $gitInfo = new GitInfo();
-        $deploymentInfo->getRevision()->setOldCommit($gitInfo->getHash());
+        $info->getRevision()->setOldCommit($gitInfo->getHash());
 
         if (exec('./deploy_init.sh', $execOutput, $statusCode) === false) {
-            $this->akio->sendMessage($this->akio->startMessage()->insertRed()->insertText('Deployment failed.'), 'deploy');
-            $deploymentInfo->getRevision()->setDeploySuccessful(false);
+            $this->akio->message()->red()->text('Deployment failed.')->send('deploy');
+            $info->getRevision()->setDeploySuccessful(false);
             $this->logger->debug('Failed to run deploy script.', array(), true);
-            $deploymentInfo->addStatus(DeploymentStatus::DEPLOY_FAILED);
+            $info->addStatus(DeploymentStatus::DEPLOY_FAILED);
         } else {
             $this->logger->debug('Deploy output: ', $execOutput);
-            $deploymentInfo->getRevision()->setDeploySuccessful(true);
+            $info->getRevision()->setDeploySuccessful(true);
         }
-        $deploymentInfo->getRevision()->setDeployOutput(implode("\n", $execOutput));
+        $info->getRevision()->setDeployOutput(implode("\n", $execOutput));
 
         // get latest git info
         $gitInfo->updateData();
-        $deploymentInfo->getRevision()->setNewCommit($gitInfo->getHash());
-        $deploymentInfo->getRevision()->setBranch($gitInfo->getBranch());
-        return parent::handle($deploymentInfo);
+        $info->getRevision()->setNewCommit($gitInfo->getHash());
+        $info->getRevision()->setBranch($gitInfo->getBranch());
+        return parent::handle($info);
     }
 }

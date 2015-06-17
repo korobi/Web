@@ -41,12 +41,12 @@ abstract class BaseProcessor implements DeploymentProcessorInterface {
 
 
     /**
-     * @param DeploymentInfo $deploymentInfo
+     * @param DeploymentInfo $info
      * @return string Status of deployment
      */
-    public function handle(DeploymentInfo $deploymentInfo) {
+    public function handle(DeploymentInfo $info) {
         if ($this->next !== null) {
-            return $this->next->handle($deploymentInfo);
+            return $this->next->handle($info);
         }
         return DeploymentStatus::OK;
     }

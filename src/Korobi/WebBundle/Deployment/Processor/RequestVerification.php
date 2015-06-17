@@ -14,23 +14,23 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
  */
 class RequestVerification extends BaseProcessor implements DeploymentProcessorInterface {
 
-    public function handle(DeploymentInfo $deploymentInfo) {
-        $deploymentInfo->getRevision()->setDate(new \DateTime());
+    public function handle(DeploymentInfo $info) {
+        $info->getRevision()->setDate(new \DateTime());
 
-        $req = $deploymentInfo->getRequest();
+        $req = $info->getRequest();
         $signature = $this->getSignatureFromRequest($req);
-        $isSuperUser = $this->isSuperUser($deploymentInfo->getAuthorisationChecker());
-        $signatureVerified = $this->verifySignature($signature, $deploymentInfo->getHmacKey(), $req->getContent());
+        $isSuperUser = $this->isSuperUser($info->getAuthorisationChecker());
+        $signatureVerified = $this->verifySignature($signature, $info->getHmacKey(), $req->getContent());
         $okayToProceed = $signatureVerified || $isSuperUser;
 
-        $deploymentInfo->getRevision()->setManual($isSuperUser);
+        $info->getRevision()->setManual($isSuperUser);
 
         if ($okayToProceed) {
             $this->logger->debug("Verified deployment request");
-            return parent::handle($deploymentInfo);
+            return parent::handle($info);
         }
         $this->logger->debug("Rejecting unauthorised deployment request", ["signature" => $signatureVerified, "superuser" => $isSuperUser]);
-        $deploymentInfo->addStatus(DeploymentStatus::UNAUTHORISED);
+        $info->addStatus(DeploymentStatus::UNAUTHORISED);
         return DeploymentStatus::UNAUTHORISED;
     }
 

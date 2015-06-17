@@ -12,10 +12,10 @@ use Korobi\WebBundle\Deployment\DeploymentStatus;
  */
 class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInterface {
 
-    public function handle(DeploymentInfo $deploymentInfo) {
-        $this->dm->persist($deploymentInfo->getRevision());
+    public function handle(DeploymentInfo $info) {
+        $this->dm->persist($info->getRevision());
         $this->dm->flush();
-        $this->akio->sendMessage($this->akio->startMessage()->insertText("Full details at https://dev.korobi.io/deploy/view/" . $deploymentInfo->getRevision()->getId()), 'deploy');
+        $this->akio->message()->text('Full details at https://dev.korobi.io/deploy/view/' . $info->getRevision()->getId())->send('deploy');
 
         return DeploymentStatus::OK;
     }

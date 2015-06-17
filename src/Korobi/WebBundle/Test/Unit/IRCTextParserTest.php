@@ -28,6 +28,7 @@ class HtmlFacility {
      */
     public function getStyle($textFragment) {
         $structure = $this->parse($this->dom);
+
         list($found, $styles) = $this->_getStyle($textFragment, $structure, [
             'fg' => IRCTextParser::DEFAULT_FOREGROUND,
             'bg' => IRCTextParser::DEFAULT_BACKGROUND,
@@ -35,9 +36,11 @@ class HtmlFacility {
             'italic' => false,
             'underline' => false
         ]);
+
         if (!$found) {
             // Fail test?
         }
+
         return $styles;
     }
 
@@ -57,6 +60,7 @@ class HtmlFacility {
     private function _getStyle($textFragment, $structure, $styles) {
         foreach ($structure as $value) {
             $prev_styles = $styles;
+
             if($value['tag'] == 'span') {
                 // Check for styles
                 switch ($value['class']) {
@@ -71,28 +75,35 @@ class HtmlFacility {
                         $styles['bg'] = $colour_info[3];
                 }
             }
+
             if (strpos($value['content'], $textFragment) !== false) {
                 return [true, $styles];
             }
+
             // Go look in children if there is some
             if(!empty($value['child'])) {
                 list($found, $styles) = $this->_getStyle($textFragment, $value['child'], $styles);
+
                 if($found) {
                     // If the fragment was found further down, return it
                     // (if not, don't take $new_styles into account)
                     return [$found, $styles];
                 }
             }
+
             $styles = $prev_styles; // The fragment was not found in this iteration, resetting
         }
+
         return [false, $styles]; // not found, styles
     }
 }
 
 class IRCTextParserTest extends WebTestCase {
 
-    /************************************
-     * Message tests
+    /*
+     * -----------------------
+     * ---- Message tests ----
+     * -----------------------
      */
 
     public function testStrippedMessage() {
@@ -204,83 +215,84 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertEquals(3, $u_style['bg']);
     }
 
-    /************************************
-     * Color tests
+    /*
+     * ----------------------
+     * ---- Colour tests ----
+     * ----------------------
      */
 
     public function testSimpleColour() {
-        $message = "05Hello world!";
+        $message = '05Hello world!';
         $this->assertEquals([
-                "fg" => 5,
-                "bg" => IRCTextParser::DEFAULT_BACKGROUND,
-                "skip" => 2
+                'fg' => 5,
+                'bg' => IRCTextParser::DEFAULT_BACKGROUND,
+                'skip' => 2
             ],
             IRCTextParser::parseColour($message)
         );
     }
 
     public function testSimpleColourWithBackground() {
-        $message = "05,04Hello world!";
+        $message = '05,04Hello world!';
         $this->assertEquals([
-                "fg" => 5,
-                "bg" => 4,
-                "skip" => 5
+                'fg' => 5,
+                'bg' => 4,
+                'skip' => 5
             ],
             IRCTextParser::parseColour($message)
         );
     }
 
     public function testColoursWithSingleNumbers() {
-        $message = "5,4Hello world!";
+        $message = '5,4Hello world!';
         $this->assertEquals([
-                "fg" => 5,
-                "bg" => 4,
-                "skip" => 3
+                'fg' => 5,
+                'bg' => 4,
+                'skip' => 3
             ],
             IRCTextParser::parseColour($message)
         );
     }
 
     public function testColoursWithDefaults() {
-        $message = "5Hello world!";
+        $message = '5Hello world!';
         $this->assertEquals([
-                "fg" => 5,
-                "bg" => 2,
-                "skip" => 1
+                'fg' => 5,
+                'bg' => 2,
+                'skip' => 1
             ],
             IRCTextParser::parseColour($message, 99, 2)
         );
     }
 
     public function testInvalidColourCode() {
-        $message = "320Hello world!";
+        $message = '320Hello world!';
         $this->assertEquals([
-                "fg" => 3,
-                "bg" => IRCTextParser::DEFAULT_BACKGROUND,
-                "skip" => 1
+                'fg' => 3,
+                'bg' => IRCTextParser::DEFAULT_BACKGROUND,
+                'skip' => 1
             ],
             IRCTextParser::parseColour($message)
         );
 
-        $message = "250,320Hello world!";
+        $message = '250,320Hello world!';
         $this->assertEquals([
-                "fg" => 2,
-                "bg" => IRCTextParser::DEFAULT_BACKGROUND,
-                "skip" => 1
+                'fg' => 2,
+                'bg' => IRCTextParser::DEFAULT_BACKGROUND,
+                'skip' => 1
             ],
             IRCTextParser::parseColour($message)
         );
     }
 
     public function testInvalidColourFragment() {
-        $message = "Hello world!";
+        $message = 'Hello world!';
         $this->assertEquals([
-                "fg" => IRCTextParser::DEFAULT_FOREGROUND,
-                "bg" => IRCTextParser::DEFAULT_BACKGROUND,
-                "skip" => 0
+                'fg' => IRCTextParser::DEFAULT_FOREGROUND,
+                'bg' => IRCTextParser::DEFAULT_BACKGROUND,
+                'skip' => 0
             ],
             IRCTextParser::parseColour($message)
         );
     }
-
 }
