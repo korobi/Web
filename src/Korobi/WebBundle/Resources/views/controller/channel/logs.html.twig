@@ -52,7 +52,7 @@
     {% endif %}
     <div class="logs{% if is_tail %} tailing{% endif %}" id="logs">
         {% if logs is empty %}
-            <p>Sorry, no logs are available for the requested date.</p>
+            <div>Sorry, no logs are available for the requested date.</div>
         {% else %}
         {% for line_num, line in logs %}
             <div data-nick="{{ line.nick }}" data-event-id="{{ line.id }}" data-event-type="{{ line.type }}" class="line{% if not is_tail %} js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
