@@ -101,7 +101,7 @@ class ChannelLogController extends BaseController {
         }
 
         // time to render!
-        return $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
+        $response = $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'network_slug' => $dbNetwork->getSlug(),
             'channel_name' => $dbChannel->getChannel(),
@@ -115,6 +115,12 @@ class ChannelLogController extends BaseController {
             'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
             'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel())
         ]);
+
+        if (count($chats) == 0) {
+            $response->setStatusCode(404);
+        }
+
+        return $response;
     }
 
     /**
