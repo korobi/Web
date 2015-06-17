@@ -108,8 +108,9 @@ class NetworkController extends BaseController {
             }
 
             if(!empty($channels)) {
-                $networks[] = [
-                    'name' => $network->getName(),
+                $networkName = $network->getName();
+                $networks[$networkName] = [
+                    'name' => $networkName,
                     'href' => $this->generateUrl('network', [
                         'network' => $network->getSlug()
                     ])
