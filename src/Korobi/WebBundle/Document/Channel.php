@@ -90,6 +90,11 @@ class Channel {
     private $repositories;
 
     /**
+     * @MongoDB\Date
+     */
+    private $last_activity;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -395,6 +400,26 @@ class Channel {
      */
     public function setRepositories($repositories) {
         $this->repositories = $repositories;
+        return $this;
+    }
+
+    /**
+     * Get lastActivity
+     *
+     * @return date $lastActivity
+     */
+    public function getLastActivity() {
+        return $this->last_activity;
+    }
+
+    /**
+     * Set lastActivity
+     *
+     * @param date $lastActivity
+     * @return self
+     */
+    public function setLastActivity($lastActivity) {
+        $this->last_activity = $lastActivity;
         return $this;
     }
 }
