@@ -35,6 +35,9 @@ class SecurityController extends BaseController {
      */
     public function reportCspAction(Request $request) {
         $payload = json_decode($request->getContent(), true);
+        if ($payload === null) {
+            $payload = [];
+        }
         $uri = $payload['csp-report']['document-uri'];
         $resource = $payload['csp-report']['blocked-uri'];
         $this->logger->warning('CSP Warning', $payload);
