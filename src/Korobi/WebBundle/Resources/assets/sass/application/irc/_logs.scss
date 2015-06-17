@@ -2,7 +2,7 @@
 
 .logs {
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 1em;
+  padding: 0.8em 0;
   border-radius: 3px;
   display: table;
   width: 100%;
@@ -27,6 +27,7 @@
 
     & > span {
       display: table-cell;
+      vertical-align: middle;
       border-bottom: 1px solid #1b1b1b;
     }
 
@@ -34,10 +35,16 @@
       border-bottom: none;
     }
 
+    .timestamp {
+      max-width: 8em;
+      padding-left: 1em;
+    }
+
     .nick {
       text-align: right;
       padding-left: 15px;
       padding-right: 15px;
+      max-width: 11em;
       border-right: 1px solid #444;
       white-space: nowrap;
     }
@@ -47,7 +54,7 @@
       // Invalid but recognized by some browsers
       word-break: break-word;
       @include hyphens(auto);
-      padding-right: 0;
+      padding-right: 1em;
       padding-left: 10px;
       white-space: pre-wrap;
 
