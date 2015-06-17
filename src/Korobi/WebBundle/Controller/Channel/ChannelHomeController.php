@@ -5,10 +5,13 @@ namespace Korobi\WebBundle\Controller\Channel;
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class ChannelHomeController extends BaseController {
 
     /**
+     * @Route("/channel/{network}/{channel}/", name = "channel")
+     *
      * @param $network
      * @param $channel
      * @return \Symfony\Component\HttpFoundation\Response
@@ -46,7 +49,7 @@ class ChannelHomeController extends BaseController {
             'name' => $name,
             'href' => $href
         ];
-        if($dbChannel->getKey() !== null && $this->authChecker->isGranted('ROLE_ADMIN')) {
+        if($dbChannel->getKey() !== null && $this->getAuthChecker()->isGranted('ROLE_ADMIN')) {
             $result['href'] .= '?key=' . $dbChannel->getKey();
         }
 

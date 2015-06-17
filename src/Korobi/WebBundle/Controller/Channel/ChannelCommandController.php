@@ -6,11 +6,14 @@ use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChannelCommand;
 use Korobi\WebBundle\Document\Network;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 class ChannelCommandController extends BaseController {
 
     /**
+     * @Route("/channel/{network}/{channel}/commands/", name = "channel_commands")
+     *
      * @param Request $request
      * @param $network
      * @param $channel

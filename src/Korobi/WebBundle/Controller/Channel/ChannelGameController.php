@@ -7,6 +7,7 @@ use Korobi\WebBundle\Document\CAHGame;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Repository\CAHGameRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 class ChannelGameController extends BaseController {
@@ -15,6 +16,8 @@ class ChannelGameController extends BaseController {
     const CAH_CHANNEL = '#CardsAgainstHumanity';
 
     /**
+     * @Route("/channel/{network}/{channel}/games/{gameId}/", name = "channel_games")
+     *
      * @param Request $request
      * @param $network
      * @param $channel

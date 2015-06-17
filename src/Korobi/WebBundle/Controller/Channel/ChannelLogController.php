@@ -10,6 +10,7 @@ use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Exception\UnsupportedOperationException;
 use Korobi\WebBundle\Parser\LogParser;
 use Korobi\WebBundle\Repository\ChatRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,6 +24,10 @@ class ChannelLogController extends BaseController {
     private $logParser;
 
     /**
+     * @Route("/channel/{network}/{channel}/logs/", name = "channel_logs")
+     * @Route("/channel/{network}/{channel}/logs/{year}/{month}/{day}/", name = "channel_logs_date")
+     * @Route("/channel/{network}/{channel}/logs/tail/{tail}/", name = "channel_logs_tail", defaults = {"tail": 30})
+     *
      * @param Request $request
      * @param $network
      * @param $channel

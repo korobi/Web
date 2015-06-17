@@ -7,10 +7,20 @@ use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChannelAI;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Parser\IRCTextParser;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 class ChannelAIController extends BaseController {
 
+    /**
+     * @Route("/channel/{network}/{channel}/ai/",name = "channel_ai")
+     *
+     * @param Request $request
+     * @param $network
+     * @param $channel
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function listAction(Request $request, $network, $channel) {
         /** @var Network $dbNetwork */
         /** @var Channel $dbChannel */

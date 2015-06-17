@@ -25,5 +25,6 @@ app_login_github:
     pattern: /auth/connect/check-github
 
 app:
-    resource: '@KorobiWebBundle/Resources/config/routing.yml'
+    resource: '@KorobiWebBundle/Controller'
+    type: annotation
     prefix: /
