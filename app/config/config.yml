@@ -73,6 +73,7 @@ assetic:
         staging:
             inputs:
                 - '@KorobiWebBundle/Resources/assets/js/staging/symfony.js'
+
 # Doctrine Configuration
 doctrine_mongodb:
     connections:
@@ -92,6 +93,7 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+# FOSUserBundle Configuration
 fos_user:
     db_driver: mongodb
     firewall_name: app
@@ -100,6 +102,7 @@ fos_user:
         confirmation:
             enabled: false
 
+# HWIOAuthBundle Configuration
 hwi_oauth:
     firewall_name: app
     resource_owners:
@@ -111,9 +114,10 @@ hwi_oauth:
         properties:
             github: githubUserId
 
-#Nelmio sec bundle config
+# NelmioSecurityBundle Configuration
 nelmio_security:
     forced_ssl:
+        # NOTE: In production/staging these values are controleld by CloudFlare.
         hsts_max_age: 31557600 # A long time
         hsts_subdomains: true
     csp:
