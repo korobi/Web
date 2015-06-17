@@ -1,6 +1,9 @@
 {% extends 'KorobiWebBundle::layout.html.twig' %}
-
-{% set page_title = channel_name ~ " on " ~ network_name ~ " - Tail" %}
+{% if is_tail %}
+    {% set page_title = channel_name ~ " on " ~ network_name ~ " - Tail" %}
+{% else %}
+    {% set page_title = channel_name ~ " on " ~ network_name ~ " - Logs" %}
+{% endif %}
 
 {% block head %}
     {% if not showing_current %}
