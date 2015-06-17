@@ -7,6 +7,10 @@
   display: table;
   width: 100%;
 
+  .empty {
+    padding: 0 1em;
+  }
+
   .line {
     display: table-row;
     font-weight: 400;
