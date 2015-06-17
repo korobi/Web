@@ -14,9 +14,9 @@
         </tr>
         </thead>
         <tbody>
-        {% for network in networks %}
+        {% for name, url in networks %}
             <tr>
-                <td><a href="{{ network.href }}">{{ network.name }}</a></td>
+                <td><a href="{{ url }}">{{ name }}</a></td>
             </tr>
         {% endfor %}
         </tbody>

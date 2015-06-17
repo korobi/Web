@@ -51,13 +51,10 @@ class NetworkController extends BaseController {
                 continue;
             }
 
-            $channels[$channel] = [
-                'name' => $channel,
-                'href' => $this->generateUrl('channel', [
-                    'network' => $network,
-                    'channel' => self::transformChannelName($channel)
-                ])
-            ];
+            $channels[$channel] = $this->generateUrl('channel', [
+                'network' => $network,
+                'channel' => self::transformChannelName($channel)
+            ]);
         }
 
         ksort($channels, SORT_NATURAL | SORT_FLAG_CASE);
@@ -108,13 +105,9 @@ class NetworkController extends BaseController {
             }
 
             if(!empty($channels)) {
-                $networkName = $network->getName();
-                $networks[$networkName] = [
-                    'name' => $networkName,
-                    'href' => $this->generateUrl('network', [
-                        'network' => $network->getSlug()
-                    ])
-                ];
+                $networks[$network->getName()] = $this->generateUrl('network', [
+                    'network' => $network->getSlug()
+                ]);
             }
         }
 

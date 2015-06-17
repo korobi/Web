@@ -14,9 +14,9 @@
             </tr>
         </thead>
         <tbody>
-        {% for channel in channels %}
+        {% for name, url in channels %}
             <tr>
-                <td><a href="{{ channel.href }}">{{ channel.name }}</a></td>
+                <td><a href="{{ url }}">{{ name }}</a></td>
             </tr>
         {% endfor %}
         </tbody>
