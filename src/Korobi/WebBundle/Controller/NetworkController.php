@@ -117,6 +117,8 @@ class NetworkController extends BaseController {
             }
         }
 
+        ksort($networks, SORT_NATURAL | SORT_FLAG_CASE);
+
         return $this->render('KorobiWebBundle:controller/network:networks.html.twig', [
             'all_networks_private' => empty($networks),
             'networks' => $networks
