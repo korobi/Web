@@ -32,9 +32,9 @@ $(function() {
         forceParse: false,
         beforeShowDay: function(date) {
             for(var i = 0; i < availableDays.length; ++i) {
-                if(dayOfYear(date) === availableDays[i].dayOfYear
+                if(dayOfYear(date) === availableDays[i].day_of_year
                         && date.getFullYear() === availableDays[i].year) {
-                    return availableDays[i].hasAMessage ? 'has-data' : true;
+                    return availableDays[i].has_valid_content ? 'has-data' : true;
                 }
             }
             return false;

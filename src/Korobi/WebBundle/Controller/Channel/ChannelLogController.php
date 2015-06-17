@@ -203,8 +203,8 @@ class ChannelLogController extends BaseController {
         return array_map(function(ChatIndex $item) {
             return [
                 'year' => $item->getYear(),
-                'dayOfYear' => $item->getDayOfYear(),
-                'hasAMessage' => $item->getHasValidContent(),
+                'day_of_year' => $item->getDayOfYear(),
+                'has_valid_content' => $item->getHasValidContent(),
             ];
         }, $this
                 ->get('doctrine_mongodb')
