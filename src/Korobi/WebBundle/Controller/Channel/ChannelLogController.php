@@ -105,6 +105,7 @@ class ChannelLogController extends BaseController {
             'network_name' => $dbNetwork->getName(),
             'network_slug' => $dbNetwork->getSlug(),
             'channel_name' => $dbChannel->getChannel(),
+            'channel_slug' => $channel,
             'logs' => $chats,
             'log_date_formatted' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
             'log_date' => date('Y/m/d', mktime(0, 0, 0, $month, $day, $year)),
