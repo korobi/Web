@@ -103,6 +103,7 @@ class ChannelLogController extends BaseController {
         // time to render!
         return $this->render('KorobiWebBundle:controller/channel:logs.html.twig', [
             'network_name' => $dbNetwork->getName(),
+            'network_slug' => $dbNetwork->getSlug(),
             'channel_name' => $dbChannel->getChannel(),
             'logs' => $chats,
             'log_date_formatted' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
