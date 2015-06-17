@@ -1,9 +1,5 @@
 body {
   background: rgb(34, 34, 34);
-  @include linear-gradient(0deg, rgba(34, 34, 34, 1) 0%, rgba(34, 34, 34, 0) 100%);
-  @include linear-gradient(90deg, rgba(32, 32, 32, 1) 0%, rgba(32, 32, 32, 0) 100%);
-  @include linear-gradient(180deg, rgba(36, 36, 36, 1) 0%, rgba(36, 36, 36, 0) 100%);
-  @include linear-gradient(270deg, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
   background-image: $bodyBackgroundImage;
   background-repeat: repeat;
 }
