@@ -18,19 +18,7 @@ php app/console assetic:dump
 
 echo "** Clearing cache..."
 php app/console cache:clear
+php app/console cache:clear
 
-ls docs | grep index
-if [ $? -ne 1 ]; then
-    echo "** Found docs index file"
-    echo "** Updating docs submodule with git pull"
-    git submodule foreach git pull origin master
-else
-    echo "** Didn't find docs index file!"
-    echo "** Initialising docs submodule"
-    git submodule foreach git pull origin master
-    mkdir docs && git submodule init docs
-    git submodule update docs
-    git submodule foreach git pull origin master
-fi
-
-
+echo "Generating database hydrators..."
+php app/console doctrine:mongodb:generate:hydrators
