@@ -17,13 +17,13 @@ use Symfony\Component\Debug\Debug;
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }*/
 if (!isset($_SERVER['HTTP_X_GITHUB_DELIVERY']) && !isset($_SERVER['HTTP_X_HUB_SIGNATURE']) && strpos($_SERVER['HTTP_USER_AGENT'], 'GitHub-Hookshot/') === false) {
-    if ($_SERVER['HTTP_X_KOROBI_AUTH'] != 'nkYPUztAKf3gv82FnuMd9BB') {
+    if (!isset($_SERVER['HTTP_X_KOROBI_AUTH']) || $_SERVER['HTTP_X_KOROBI_AUTH'] != 'nkYPUztAKf3gv82FnuMd9BB') {
         header('HTTP/1.0 403 Forbidden');
         exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
     }
-} else if (parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) !== "/deploy/") {
+} else if (parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) !== '/deploy/') {
     header('HTTP/1.0 403 Forbidden');
-    exit("Oops, you look like a GitHub but you're not requesting a deploy?");
+    exit('Oops, you look like a GitHub but you\'re not requesting a deploy?');
 }
 
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
