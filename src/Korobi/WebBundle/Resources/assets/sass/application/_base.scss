@@ -1,6 +1,27 @@
 body {
   background-image: $bodyBackgroundImage;
   background-repeat: repeat;
+  background: rgb(34, 34, 34);
+  background: linear-gradient(0deg, rgba(34, 34, 34, 1) 0%, rgba(34, 34, 34, 0) 100%),
+  linear-gradient(90deg, rgba(32, 32, 32, 1) 0%, rgba(32, 32, 32, 0) 100%),
+  linear-gradient(180deg, rgba(36, 36, 36, 1) 0%, rgba(36, 36, 36, 0) 100%),
+  linear-gradient(270deg, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
+-webkit-linear-gradient(0 deg, rgba(34, 34, 34, 1) 0 %, rgba(34, 34, 34, 0) 100 %),
+-webkit-linear-gradient(90 deg, rgba(32, 32, 32, 1) 0 %, rgba(32, 32, 32, 0) 100 %),
+-webkit-linear-gradient(180 deg, rgba(36, 36, 36, 1) 0 %, rgba(36, 36, 36, 0) 100 %),
+-webkit-linear-gradient(270 deg, rgba(38, 38, 38, 1) 0 %, rgba(38, 38, 38, 0) 100 %),
+-moz-linear-gradient(0 deg, rgba(34, 34, 34, 1) 0 %, rgba(34, 34, 34, 0) 100 %),
+-moz-linear-gradient(90 deg, rgba(32, 32, 32, 1) 0 %, rgba(32, 32, 32, 0) 100 %),
+-moz-linear-gradient(180 deg, rgba(36, 36, 36, 1) 0 %, rgba(36, 36, 36, 0) 100 %),
+-moz-linear-gradient(270 deg, rgba(38, 38, 38, 1) 0 %, rgba(38, 38, 38, 0) 100 %),
+-o-linear-gradient(0 deg, rgba(34, 34, 34, 1) 0 %, rgba(34, 34, 34, 0) 100 %),
+-o-linear-gradient(90 deg, rgba(32, 32, 32, 1) 0 %, rgba(32, 32, 32, 0) 100 %),
+-o-linear-gradient(180 deg, rgba(36, 36, 36, 1) 0 %, rgba(36, 36, 36, 0) 100 %),
+-o-linear-gradient(270 deg, rgba(38, 38, 38, 1) 0 %, rgba(38, 38, 38, 0) 100 %),
+-ms-linear-gradient(0 deg, rgba(34, 34, 34, 1) 0 %, rgba(34, 34, 34, 0) 100 %),
+-ms-linear-gradient(90 deg, rgba(32, 32, 32, 1) 0 %, rgba(32, 32, 32, 0) 100 %),
+-ms-linear-gradient(180 deg, rgba(36, 36, 36, 1) 0 %, rgba(36, 36, 36, 0) 100 %),
+-ms-linear-gradient(270 deg, rgba(38, 38, 38, 1) 0 %, rgba(38, 38, 38, 0) 100 %);
 }
 
 main {
