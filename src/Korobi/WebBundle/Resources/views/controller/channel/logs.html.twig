@@ -31,7 +31,7 @@
                     <i class="fa fa-ellipsis-h"></i>
                 </a>
             {% else %}
-                <a class="button button-rounded button-flat-primary" href="{{ path('channel_logs', {'channel': channel_name, 'network': network_slug}) }}">
+                <a class="button button-rounded button-flat-primary" href="{{ path('channel_logs', {'channel': channel_name|trim('#'), 'network': network_slug}) }}">
                     Today's logs
                     <i class="fa fa-clock-o"></i>
                 </a>
