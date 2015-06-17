@@ -106,7 +106,7 @@ $(function() {
         if(activeLines.length > 0) {
             var shift = Math.min.apply(Math, activeLines);
             var elem = $logs.find('.line[data-line-num=' + shift + ']');
-            $(window).scrollTop(elem.offset().top - 0.33 * $(window).height());
+            $(window).scrollTop(elem.offset().top - 0.05 * $(window).height());
         }
     }
 
@@ -180,6 +180,8 @@ $(function() {
 
     // delay load
     activeLines = parseHash();
-    highlightLines(activeLines);
+    setTimeout(function() {
+        highlightLines(activeLines);
+    }, 1000);
     jumpToFirstLine();
 });

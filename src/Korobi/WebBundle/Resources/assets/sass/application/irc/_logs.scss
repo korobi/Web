@@ -11,7 +11,7 @@
     display: table-row;
     font-weight: 400;
     font-family: 'Source Code Pro', monospace;
-    @include transition(0.25s all);
+    @include transition(0.5s ease-out background-color);
 
     .owner:before    { content: '~'; color: nth($irc-colors,  5); }
     .admin:before    { content: '&'; color: nth($irc-colors, 12); }
@@ -22,6 +22,7 @@
     &.highlighted {
       font-weight: bold;
       background-color: transparentize(#2C3E50, 0.5);
+      @include transition(0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) background-color);
     }
 
     & > span {
