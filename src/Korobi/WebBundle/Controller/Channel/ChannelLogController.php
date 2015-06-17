@@ -113,7 +113,6 @@ class ChannelLogController extends BaseController {
             'is_tail' => $tail !== false,
             'showing_current' => $showingCurrent,
             'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
-            'tail_url' => $this->generateUrl('channel_logs_tail', ['network' => $network, 'channel' => $channel]),
             'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel())
         ]);
     }
