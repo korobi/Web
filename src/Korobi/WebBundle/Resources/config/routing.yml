@@ -52,7 +52,7 @@ unexpected_redirect:
 dummy:
     path: /dummy/
     defaults:
-        _controller: korobi.controller.home:homeAction }
+        _controller: korobi.controller.home:homeAction
 ################################################################
 ##                           NOTICE                           ##
 ################################################################
