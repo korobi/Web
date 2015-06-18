@@ -1,4 +1,6 @@
 $(function() {
+    'use strict';
+
     var $dateInput = $('#log-date');
     if($dateInput.length === 0) {
         return;

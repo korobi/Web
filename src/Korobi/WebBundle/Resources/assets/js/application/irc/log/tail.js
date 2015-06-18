@@ -8,6 +8,8 @@ function dateToStringTimestamp(date) {
 }
 
 $(function() {
+    'use strict';
+
     var logs = $('.logs');
 
     // Translate all logs to current timezone

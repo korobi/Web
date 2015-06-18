@@ -1,4 +1,6 @@
 $(function() {
+    'use strict';
+
     var $logs = $('#logs');
 
     // Check if line highlighting is needed
@@ -146,14 +148,12 @@ $(function() {
             } else {
                 var first = Math.min(lastSelection, line);
                 var last =  Math.max(lastSelection, line);
-                console.log(first, last);
                 while(first <= last) {
                     if((index = activeLines.indexOf(first)) === -1) {
                         activeLines.push(first);
                     }
                     ++first;
                 }
-                console.log(activeLines);
             }
 
         } else {
