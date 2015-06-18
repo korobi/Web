@@ -1,37 +1,14 @@
-function pad(n) {
-    n = n + '';
-    return n.length >= 2 ? n : new Array(2 - n.length + 1).join('0') + n;
-}
-
-function dateToStringTimestamp(date) {
-    return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds());
-}
-
 $(function() {
     'use strict';
 
-    var logs = $('.logs');
-
-    // Translate all logs to current timezone
-    var timezone_offset = new Date().getTimezoneOffset();
-
-    logs.find('.timestamp').each(function(index, time) {
-        var $time = $(time);
-        var time_parts = $time.text().split(':');
-        $time.text(dateToStringTimestamp(new Date(
-            0, 0, 0,
-            time_parts[0],
-            time_parts[1] - timezone_offset,
-            time_parts[2]
-        )));
-    });
+    var $logs = $('.logs');
 
     // Start tailing
-    if (!logs.hasClass('tailing')) {
+    if (!$logs.hasClass('tailing')) {
         return;
     }
 
-    var lastId = logs.find('.line:last').data('event-id');
+    var lastId = $logs.find('.line:last').data('event-id');
 
     $(document).scrollTop($("#bottom").offset().top);
     setInterval(function () {
@@ -41,21 +18,29 @@ $(function() {
             dataType: "json",
             type: 'GET',
             success: function (data) {
-                if (data.length == 0) {
+                if (data.length === 0) {
                     return;
                 }
 
+                var info;
                 $.each(data, function (index, line) {
+                    info = {
+                        time: new Date(line.timestamp * 1000),
+                        nick: line.displayNick,
+                        message: line.message,
+                    };
+                    $logs.trigger('new_line', info);
+
                     var timestamp = $('<span/>')
                         .addClass('timestamp')
-                        .html(dateToStringTimestamp(new Date(line.timestamp * 1000)));
+                        .text(dateToStringTimestamp(info.time));
                     var nick = $('<span/>')
                         .addClass('nick irc--' + pad(line.nickColour) + '-df ' + line.role)
-                        .html(line.displayNick);
+                        .text(info.nick);
                     var message = $('<span/>')
                         .addClass('message')
-                        .html(line.message);
-                    logs.append(
+                        .html(info.message);
+                    $logs.append(
                         $('<div/>')
                             .attr({
                                 'data-nick': line.nick,
