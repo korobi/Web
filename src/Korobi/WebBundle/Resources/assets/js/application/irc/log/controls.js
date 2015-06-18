@@ -50,21 +50,23 @@ $(function() {
 
         if(fromStorage = localStorage.getItem(timezoneKey)) {
             useLocalTimezone = fromStorage === '1' || fromStorage === undefined;
-            if(useLocalTimezone) {
-                $logs.find('.timestamp').each(function(index, time) {
-                    var $time = $(time);
-                    var timeParts = $time.text().split(':');
-                    $time.text(dateToStringTimestamp(new Date(
-                        0, 0, 0,
-                        timeParts[0],
-                        timeParts[1] - timezoneOffset,
-                        timeParts[2]
-                    )));
-                });
-            } else {
-                $toggleLocalTimezoneInput.prop('checked', false);
-            }
         }
+    }
+
+    if(useLocalTimezone) {
+        // Translate all timezones
+        $logs.find('.timestamp').each(function(index, time) {
+            var $time = $(time);
+            var timeParts = $time.text().split(':');
+            $time.text(dateToStringTimestamp(new Date(
+                0, 0, 0,
+                timeParts[0],
+                timeParts[1] - timezoneOffset,
+                timeParts[2]
+            )));
+        });
+    } else {
+        $toggleLocalTimezoneInput.prop('checked', false);
     }
 
     // Status event toggle
@@ -100,7 +102,7 @@ $(function() {
     });
 
     $logs.on('new_line', function(e, line) {
-        if(useLocalTimezone) {
+        if(!useLocalTimezone) {
             line.time.setMinutes(line.time.getMinutes() + timezoneOffset);
         }
     });
