@@ -11,6 +11,19 @@ function dateToStringTimestamp(date) {
 $(function() {
     'use strict';
 
+    function translateTimezones(add) {
+        $logs.find('.timestamp').each(function(index, time) {
+            var $time = $(time);
+            var timeParts = $time.text().trim().split(':');
+            $time.text(dateToStringTimestamp(new Date(
+                0, 0, 0,
+                timeParts[0],
+                parseInt(timeParts[1]) + (add ? 1 : -1) * timezoneOffset,
+                timeParts[2]
+            )));
+        });
+    }
+
     var $controls = $('.controls');
     if(!$controls.length) {
         return;
@@ -55,16 +68,7 @@ $(function() {
 
     if(useLocalTimezone) {
         // Translate all timezones
-        $logs.find('.timestamp').each(function(index, time) {
-            var $time = $(time);
-            var timeParts = $time.text().split(':');
-            $time.text(dateToStringTimestamp(new Date(
-                0, 0, 0,
-                timeParts[0],
-                timeParts[1] - timezoneOffset,
-                timeParts[2]
-            )));
-        });
+        translateTimezones(false);
     } else {
         $toggleLocalTimezoneInput.prop('checked', false);
     }
@@ -92,6 +96,8 @@ $(function() {
     // Local timezone toggle
     $toggleLocalTimezoneInput.change(function() {
         useLocalTimezone = $(this).prop('checked');
+        translateTimezones(!useLocalTimezone);
+
         if(window.localStorage) {
             if(useLocalTimezone) {
                 localStorage.setItem(timezoneKey, 1);
