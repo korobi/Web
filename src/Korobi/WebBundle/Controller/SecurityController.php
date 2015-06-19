@@ -4,6 +4,8 @@ namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Util\Akio;
 use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +32,9 @@ class SecurityController extends BaseController {
     }
 
     /**
+     * @Route("/csp/report/", name = "csp_report")
+     * @Method({"POST"})
+     *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -52,6 +57,8 @@ class SecurityController extends BaseController {
     }
 
     /**
+     * @Route("/unexpected-redirect/", name = "unexpected_redirect")
+     *
      * @param Request $req
      * @return Response
      */

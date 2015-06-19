@@ -13,13 +13,17 @@ abstract class BaseController extends Controller {
     /**
      * @var AuthorizationChecker
      */
-    protected $authChecker;
+    private $authChecker;
 
     /**
-     * @param AuthorizationChecker $authChecker
+     * @return AuthorizationChecker
      */
-    public function setAuthChecker(AuthorizationChecker $authChecker) {
-        $this->authChecker = $authChecker;
+    public function getAuthChecker() {
+        if ($this->authChecker == null) {
+            $this->authChecker = $this->get('security.authorization_checker');
+        }
+
+        return $this->authChecker;
     }
 
     /**

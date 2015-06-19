@@ -4,10 +4,13 @@ namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Document\KittyImage;
 use Korobi\WebBundle\Util\StringUtil;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class KittyImageController extends BaseController {
 
     /**
+     * @Route("/kitty/", name = "kitty_images")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function homeAction() {

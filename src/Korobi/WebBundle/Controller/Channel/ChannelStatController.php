@@ -5,11 +5,14 @@ namespace Korobi\WebBundle\Controller\Channel;
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 class ChannelStatController extends BaseController {
 
     /**
+     * @Route("/channel/{network}/{channel}/stats/", name = "channel_stats")
+     *
      * @param Request $request
      * @param $network
      * @param $channel

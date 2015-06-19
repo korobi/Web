@@ -3,16 +3,19 @@
 namespace Korobi\WebBundle\Controller;
 
 use Github\Client;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RevisionsController extends BaseController {
 
     private static $repositories = ['Korobi', 'Web', 'Felix'];
 
     /**
+     * @Route("/revisions/{repository}/", name="revisions")
+     *
      * @param $repository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function listAction($repository) {
+    public function listAction($repository = 'Web') {
         // only allow viewing of certain repositories
         if (!in_array($repository, self::$repositories)) {
             return $this->redirectToRoute('revisions');

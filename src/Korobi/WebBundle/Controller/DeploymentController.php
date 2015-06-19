@@ -8,10 +8,13 @@ use Korobi\WebBundle\Document\Revision;
 use Korobi\WebBundle\Util\Akio;
 use Korobi\WebBundle\Util\GitInfo;
 use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * @Route(service = "korobi.controller.deploy")
+ */
 class DeploymentController extends BaseController {
 
     /**
@@ -63,19 +66,31 @@ class DeploymentController extends BaseController {
         $this->hmacKey = $key;
     }
 
+    /**
+     * @Route("/deploy/", name = "deploy")
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function deployAction(Request $request) {
         /** @var \Korobi\WebBundle\Document\User $user */
         $user = $this->getUser();
 
-        $info = new DeploymentInfo($request, new Revision(), $user, $this->authChecker, $this->hmacKey, $this->rootPath);
+        $info = new DeploymentInfo($request, new Revision(), $user, $this->getAuthChecker(), $this->hmacKey, $this->rootPath);
         $processor = new DeploymentProcessor($info, $this->logger, $this->container->get('kernel'), $this->akio, $this->get('doctrine_mongodb')->getManager());
         $status = $processor->performDeployment();
 
         return new JsonResponse(["status" => $status]);
     }
 
+    /**
+     * @Route("/deploy/view/{id}/", name = "deploy_view")
+     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function viewAction($id) {
-        if (!$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
+        if (!$this->getAuthChecker()->isGranted('ROLE_SUPER_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
 
