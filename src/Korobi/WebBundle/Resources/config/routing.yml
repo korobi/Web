@@ -22,6 +22,10 @@ deploy_view:
     defaults:
         _controller: korobi.controller.deploy:viewAction
 docs:
+    path: /docs/
+    defaults:
+        _controller: korobi.controller.docs:renderAction
+docs_index:
     path: /docs/{file}/
     defaults:
         _controller: korobi.controller.docs:renderAction
@@ -69,7 +73,7 @@ networks:
     defaults:
         _controller: korobi.controller.network:networksAction
 network:
-    path: /{network}/
+    path: /network/{network}/
     defaults:
         _controller: korobi.controller.network:networkAction
 
@@ -77,35 +81,56 @@ network:
 # ---- Channels ----
 # ------------------
 channel:
-    path: /{network}/{channel}/
+    path: /channel/{network}/{channel}/
     defaults:
         _controller: korobi.controller.channel_home:homeAction
 channel_commands:
-    path: /{network}/{channel}/commands/
+    path: /channel/{network}/{channel}/commands/
     defaults:
         _controller: korobi.controller.channel_command:commandsAction
 channel_logs:
-    path: /{network}/{channel}/logs/
+    path: /channel/{network}/{channel}/logs/
     defaults:
         _controller: korobi.controller.channel_log:logsAction
 channel_logs_date:
-    path: /{network}/{channel}/logs/{year}/{month}/{day}/
+    path: /channel/{network}/{channel}/logs/{year}/{month}/{day}/
     defaults:
         _controller: korobi.controller.channel_log:logsAction
 channel_logs_tail:
-    path: /{network}/{channel}/logs/tail/{tail}/
+    path: /channel/{network}/{channel}/logs/tail/{tail}/
     defaults:
         _controller: korobi.controller.channel_log:logsAction
         tail: 30
 channel_stats:
-    path: /{network}/{channel}/stats/
+    path: /channel/{network}/{channel}/stats/
     defaults:
         _controller: korobi.controller.channel_stat:statsAction
 channel_ai:
-    path: /{network}/{channel}/ai/
+    path: /channel/{network}/{channel}/ai/
     defaults:
         _controller: korobi.controller.channel_ai:listAction
 channel_games:
-    path: /{network}/{channel}/games/{gameId}/
+    path: /channel/{network}/{channel}/games/{gameId}/
     defaults:
         _controller: korobi.controller.channel_game:gameAction
+
+legacy_rewrite_core:
+    path: /{network}/{channel}/
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction
+legacy_rewrite_component:
+    path: /{network}/{channel}/{component}/
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction
+legacy_rewrite_game:
+    path: /{network}/{channel}/{component}/{gameId}/
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction
+legacy_rewrite_log_date:
+    path: /{network}/{channel}/{component}/{year}/{month}/{day}/
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction
+legacy_rewrite_log_tail:
+    path: /{network}/{channel}/{component}/tail/{tail}
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction
