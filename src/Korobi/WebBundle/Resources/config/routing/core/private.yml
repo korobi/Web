@@ -1,0 +1,11 @@
+# ------------------------
+# ---- Private Routes ----
+# ------------------------
+deploy:
+    path: /deploy/
+    defaults:
+        _controller: korobi.controller.deploy:deployAction
+deploy_view:
+    path: /deploy/view/{id}/
+    defaults:
+        _controller: korobi.controller.deploy:viewAction
