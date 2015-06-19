@@ -27,7 +27,8 @@ class GitInfo {
         $ref = (new \SplFileObject($root . '.git/HEAD'))->getCurrentLine();
         $ref = trim(explode(' ', $ref)[1]);
 
-        $this->branch = trim(array_reverse(explode('/', $ref))[0]);
+        // refs/heads/feature/channel-activity
+        $this->branch = str_replace('refs/heads/', '', $ref);
         $this->hash = (new \SplFileObject($root . '.git/' . $ref))->getCurrentLine();
     }
 
