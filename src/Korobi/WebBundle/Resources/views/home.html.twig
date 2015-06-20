@@ -4,4 +4,9 @@
 
 {% block body %}
     Hi there! Please excuse the mess, we're still working on this site. ^.^
+    <ul>
+        {% for channel in channels %}
+            <li>{{ channel.channel }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
