@@ -95,6 +95,11 @@ class Channel {
     private $last_activity;
 
     /**
+     * @MongoDB\Date
+     */
+    private $last_valid_content_at;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -420,6 +425,26 @@ class Channel {
      */
     public function setLastActivity($lastActivity) {
         $this->last_activity = $lastActivity;
+        return $this;
+    }
+
+    /**
+     * Get lastValidContentAt
+     *
+     * @return date $lastValidContentAt
+     */
+    public function getLastValidContentAt() {
+        return $this->last_valid_content_at;
+    }
+
+    /**
+     * Set lastValidContentAt
+     *
+     * @param date $lastValidContentAt
+     * @return self
+     */
+    public function setLastValidContentAt($lastValidContentAt) {
+        $this->last_valid_content_at = $lastValidContentAt;
         return $this;
     }
 }
