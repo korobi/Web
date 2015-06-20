@@ -27,7 +27,8 @@
         "salavert/time-ago-in-words": "1.*",
         "nelmio/security-bundle": "~1.6",
         "crodas/influx-php": "*",
-        "enygma/yubikey": "^3.2"
+        "enygma/yubikey": "^3.2",
+        "raven/raven": "0.12.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

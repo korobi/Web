@@ -23,3 +23,8 @@ monolog:
             level: debug
         console:
             type:  console
+        sentry:
+            type: raven
+            dsn: '%sentry_dsn%'
+            level: error
+            bubble: false

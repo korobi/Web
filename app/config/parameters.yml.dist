@@ -27,6 +27,8 @@ parameters:
     akio_path: ~
     akio_key: ~
 
+    sentry_dsn: ~
+
     # bin paths
     sass_path: ~
     uglifyjs_path: ~
