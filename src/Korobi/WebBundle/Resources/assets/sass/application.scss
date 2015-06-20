@@ -18,12 +18,14 @@
 @import "application/flashes";
 @import "application/content_blocks";
 @import "application/datepicker";
+@import "application/buttons/buttons";
 
 // irc styles
 @import "application/irc/base";
 @import "application/irc/controls";
 @import "application/irc/logs";
 @import "application/irc/stats";
+@import "application/irc/games";
 
 // code highlighting
 @import "vendor/prism/prism";
@@ -33,8 +35,3 @@
 
 // docs
 @import "application/docs";
-
-// CAH stats
-@import "application/cah";
-
-@import "application/buttons/buttons";
