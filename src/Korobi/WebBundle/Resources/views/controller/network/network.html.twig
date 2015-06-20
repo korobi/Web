@@ -11,12 +11,14 @@
         <thead>
             <tr>
                 <th>Channel</th>
+                <th>Jump To</th>
             </tr>
         </thead>
         <tbody>
         {% for name, url in channels %}
             <tr>
                 <td><a href="{{ url }}">{{ name }}</a></td>
+                <td><a href="{{  url }}logs/">Logs</a></td>
             </tr>
         {% endfor %}
         </tbody>
