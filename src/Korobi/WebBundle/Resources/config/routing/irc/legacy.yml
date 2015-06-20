@@ -20,7 +20,7 @@ legacy_rewrite_log_date:
     defaults:
         _controller: korobi.controller.rewrite:rewriteAction
 legacy_rewrite_log_tail:
-    path: /{network}/{channel}/{component}/tail/{tail}
+    path: /{network}/{channel}/{component}/tail/{tail}/
     defaults:
         _controller: korobi.controller.rewrite:rewriteAction
 
