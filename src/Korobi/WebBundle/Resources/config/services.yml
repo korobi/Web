@@ -91,6 +91,10 @@ services:
     korobi.controller.channel.game:
         class: Korobi\WebBundle\Controller\Channel\ChannelGameController
         parent: korobi.base_controller
+    # Legacy
+    korobi.controller.rewrite:
+        class: Korobi\WebBundle\Controller\RewriteController
+        parent: korobi.base_controller
 
     # ---------------------------
     # ---- Helpers/Utilities ----

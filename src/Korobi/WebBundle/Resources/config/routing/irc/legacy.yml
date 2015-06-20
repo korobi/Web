@@ -1,0 +1,31 @@
+# -----------------------
+# ---- Legacy Routes ----
+# -----------------------
+
+# Channel
+legacy_rewrite_core:
+    path: /{network}/{channel}/
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction
+legacy_rewrite_component:
+    path: /{network}/{channel}/{component}/
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction
+legacy_rewrite_game:
+    path: /{network}/{channel}/{component}/{gameId}/
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction
+legacy_rewrite_log_date:
+    path: /{network}/{channel}/{component}/{year}/{month}/{day}/
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction
+legacy_rewrite_log_tail:
+    path: /{network}/{channel}/{component}/tail/{tail}/
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction
+
+# Network
+legacy_rewrite_network:
+    path: /{network}/
+    defaults:
+        _controller: korobi.controller.rewrite:rewriteAction

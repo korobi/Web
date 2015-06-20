@@ -6,6 +6,6 @@ networks:
     defaults:
         _controller: korobi.controller.network:networksAction
 network:
-    path: /{network}/
+    path: /network/{network}/
     defaults:
         _controller: korobi.controller.network:networkAction
