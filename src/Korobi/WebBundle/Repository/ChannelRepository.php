@@ -36,12 +36,14 @@ class ChannelRepository extends DocumentRepository {
     }
 
     /**
+     * Looks for messages, actions etc (valid content only).
+     *
      * @param int $limit Number of channels to grab.
      * @return array The public n last channels.
      */
     public function getRecentlyActiveChannels($limit) {
         return $this->createQueryBuilder()
-            ->sort('last_activity', 'DESC')
+            ->sort('last_valid_content_at', 'DESC')
             ->field('key')
             ->equals(null)
             ->limit($limit)
