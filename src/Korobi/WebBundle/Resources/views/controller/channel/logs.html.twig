@@ -26,12 +26,12 @@
         </ul>
         <div class="right">
             {% if not is_tail %}
-                <a class="button button-rounded button-flat-primary" href="{{ path('channel_logs_tail', {'channel': channel_slug, 'network': network_slug}) }}" rel="nofollow">
+                <a class="button button-rounded button-flat-primary" href="{{ path('channel_log_tail', {'channel': channel_slug, 'network': network_slug}) }}" rel="nofollow">
                     Tail
                     <i class="fa fa-ellipsis-h"></i>
                 </a>
             {% else %}
-                <a class="button button-rounded button-flat-primary" href="{{ path('channel_logs', {'channel': channel_slug, 'network': network_slug}) }}">
+                <a class="button button-rounded button-flat-primary" href="{{ path('channel_log', {'channel': channel_slug, 'network': network_slug}) }}">
                     Today's logs
                     <i class="fa fa-clock-o"></i>
                 </a>

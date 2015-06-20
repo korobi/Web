@@ -4,33 +4,33 @@
 channel:
     path: /{network}/{channel}/
     defaults:
-        _controller: korobi.controller.channel_home:homeAction
-channel_commands:
+        _controller: korobi.controller.channel.home:homeAction
+channel_command:
     path: /{network}/{channel}/commands/
     defaults:
-        _controller: korobi.controller.channel_command:commandsAction
-channel_logs:
+        _controller: korobi.controller.channel.command:commandsAction
+channel_log:
     path: /{network}/{channel}/logs/
     defaults:
-        _controller: korobi.controller.channel_log:logsAction
-channel_logs_date:
+        _controller: korobi.controller.channel.log:logsAction
+channel_log_date:
     path: /{network}/{channel}/logs/{year}/{month}/{day}/
     defaults:
-        _controller: korobi.controller.channel_log:logsAction
-channel_logs_tail:
+        _controller: korobi.controller.channel.log:logsAction
+channel_log_tail:
     path: /{network}/{channel}/logs/tail/{tail}/
     defaults:
-        _controller: korobi.controller.channel_log:logsAction
+        _controller: korobi.controller.channel.log:logsAction
         tail: 30
-channel_stats:
+channel_stat:
     path: /{network}/{channel}/stats/
     defaults:
-        _controller: korobi.controller.channel_stat:statsAction
+        _controller: korobi.controller.channel.stat:statsAction
 channel_ai:
     path: /{network}/{channel}/ai/
     defaults:
         _controller: korobi.controller.channel_ai:listAction
-channel_games:
+channel_game:
     path: /{network}/{channel}/games/{gameId}/
     defaults:
-        _controller: korobi.controller.channel_game:gameAction
+        _controller: korobi.controller.channel.game:gameAction

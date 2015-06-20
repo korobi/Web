@@ -23,11 +23,11 @@ class ChannelHomeController extends BaseController {
         $linkBase = ['network' => $network, 'channel' => $channel];
 
         if ($dbChannel->getLogsEnabled()) {
-            $links[] = $this->createLink($dbChannel, 'Logs', $this->generateUrl('channel_logs', $linkBase));
+            $links[] = $this->createLink($dbChannel, 'Logs', $this->generateUrl('channel_log', $linkBase));
         }
 
         if ($dbChannel->getCommandsEnabled()) {
-            $links[] = $this->createLink($dbChannel, 'Commands', $this->generateUrl('channel_commands', $linkBase));
+            $links[] = $this->createLink($dbChannel, 'Commands', $this->generateUrl('channel_command', $linkBase));
         }
 
         // time to render!

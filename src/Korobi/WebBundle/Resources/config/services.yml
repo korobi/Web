@@ -30,32 +30,12 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
             - [setAuthChecker, ["@security.authorization_checker"]]
+    # Public
     korobi.controller.home:
         class: Korobi\WebBundle\Controller\HomeController
         parent: korobi.base_controller
     korobi.controller.kitty:
         class: Korobi\WebBundle\Controller\KittyImageController
-        parent: korobi.base_controller
-    korobi.controller.network:
-        class: Korobi\WebBundle\Controller\NetworkController
-        parent: korobi.base_controller
-    korobi.controller.channel_home:
-        class: Korobi\WebBundle\Controller\Channel\ChannelHomeController
-        parent: korobi.base_controller
-    korobi.controller.channel_log:
-        class: Korobi\WebBundle\Controller\Channel\ChannelLogController
-        parent: korobi.base_controller
-    korobi.controller.channel_command:
-        class: Korobi\WebBundle\Controller\Channel\ChannelCommandController
-        parent: korobi.base_controller
-    korobi.controller.channel_stat:
-        class: Korobi\WebBundle\Controller\Channel\ChannelStatController
-        parent: korobi.base_controller
-    korobi.controller.channel_ai:
-        class: Korobi\WebBundle\Controller\Channel\ChannelAIController
-        parent: korobi.base_controller
-    korobi.controller.channel_game:
-        class: Korobi\WebBundle\Controller\Channel\ChannelGameController
         parent: korobi.base_controller
     korobi.controller.revisions:
         class: Korobi\WebBundle\Controller\RevisionsController
@@ -72,6 +52,12 @@ services:
         arguments:
             - @korobi.akio
             - @logger
+    korobi.theme_controller:
+        class: Korobi\WebBundle\Controller\ThemeController
+        parent: korobi.base_controller
+        arguments:
+            - @session
+    # Private
     korobi.controller.deploy:
         class: Korobi\WebBundle\Controller\DeploymentController
         parent: korobi.base_controller
@@ -82,11 +68,29 @@ services:
         calls:
             - [setHmacKey, ["%github_hook_hmac_secret%"]]
             - [setRootPath, ["%kernel.root_dir%"]]
-    korobi.theme_controller:
-        class: Korobi\WebBundle\Controller\ThemeController
+    # Network
+    korobi.controller.network:
+        class: Korobi\WebBundle\Controller\NetworkController
         parent: korobi.base_controller
-        arguments:
-            - @session
+    # Channel
+    korobi.controller.channel.home:
+        class: Korobi\WebBundle\Controller\Channel\ChannelHomeController
+        parent: korobi.base_controller
+    korobi.controller.channel.log:
+        class: Korobi\WebBundle\Controller\Channel\ChannelLogController
+        parent: korobi.base_controller
+    korobi.controller.channel.command:
+        class: Korobi\WebBundle\Controller\Channel\ChannelCommandController
+        parent: korobi.base_controller
+    korobi.controller.channel.stat:
+        class: Korobi\WebBundle\Controller\Channel\ChannelStatController
+        parent: korobi.base_controller
+    korobi.controller.channel.ai:
+        class: Korobi\WebBundle\Controller\Channel\ChannelAIController
+        parent: korobi.base_controller
+    korobi.controller.channel.game:
+        class: Korobi\WebBundle\Controller\Channel\ChannelGameController
+        parent: korobi.base_controller
 
     # ---------------------------
     # ---- Helpers/Utilities ----

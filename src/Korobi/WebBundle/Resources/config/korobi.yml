@@ -11,13 +11,12 @@ korobi_web:
                   - networks
                   - network
                   - channel
-                  - channel_commands
-                  - channel_logs
-                  - channel_logs_date
-                  - channel_logs_date_tail
-                  - channel_logs_tail
-                  - channel_stats
-                  - channel_games
+                  - channel_command
+                  - channel_log
+                  - channel_log_date
+                  - channel_log_tail
+                  - channel_stat
+                  - channel_game
 
             - title: Docs
               route: 'https://docs.korobi.io/'
