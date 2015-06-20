@@ -34,4 +34,18 @@ class ChannelRepository extends DocumentRepository {
             ->getQuery()
             ->execute();
     }
+
+    /**
+     * @param int $limit Number of channels to grab.
+     * @return array The public n last channels.
+     */
+    public function getRecentlyActiveChannels($limit) {
+        return $this->createQueryBuilder()
+            ->sort('last_activity', 'DESC')
+            ->field('key')
+            ->equals(null)
+            ->limit($limit)
+            ->getQuery()
+            ->execute();
+    }
 }
