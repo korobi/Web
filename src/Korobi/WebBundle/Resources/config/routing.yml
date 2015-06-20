@@ -7,3 +7,6 @@ _irc_network:
     resource: '@KorobiWebBundle/Resources/config/routing/irc/network.yml'
 _irc_channel:
     resource: '@KorobiWebBundle/Resources/config/routing/irc/channel.yml'
+    prefix: /network/
+_irc_legacy:
+    resource: '@KorobiWebBundle/Resources/config/routing/irc/legacy.yml'
