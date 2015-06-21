@@ -24,7 +24,7 @@
             {% for channel in channels %}
                 <tr>
                     <td>{{ channel.channel }}</td>
-                    <td>{{ channel.last_valid_content_at|date("c") }}</td>
+                    <td>{{ channel.LastValidContentAt|date("c") }}</td>
                 </tr>
             {% endfor %}
             </tbody>
