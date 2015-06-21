@@ -1,0 +1,15 @@
+// Homepage styles! :-D
+// Author: lol768 (please don't show bendem or he'll stab me for doing it all wrong :P)
+
+.homepage-feature {
+  @include span-columns(4);
+}
+
+.homepage-feature-holder, .homepage-secondary-holder {
+  @include outer-container;
+}
+
+.homepage-secondary-holder table, .homepage-secondary-holder div.about {
+  @include span-columns(6);
+}
+
