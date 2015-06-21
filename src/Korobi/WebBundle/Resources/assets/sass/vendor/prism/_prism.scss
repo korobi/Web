@@ -45,13 +45,6 @@ pre[class*="language-"], .code {
   background: rgba(0, 0, 0, 0.5);
 }
 
-body.light {
-  :not(pre) > code[class*="language-"],
-  pre[class*="language-"] {
-    background: rgba(0, 0, 0, 0.85);
-  }
-}
-
 /* Inline code */
 :not(pre) > code[class*="language-"] {
   padding: 0.1em 0.1em;

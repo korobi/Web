@@ -42,35 +42,17 @@ $success-color-dark: #007053 !default;
 }
 
 .flash-alert {
-  @include flash($alert-color);
+  @include flash($alert-color-dark, true);
 }
 
 .flash-error {
-  @include flash($error-color);
+  @include flash($error-color-dark, true);
 }
 
 .flash-notice {
-  @include flash($notice-color);
+  @include flash($notice-color-dark, true);
 }
 
 .flash-success {
-  @include flash($success-color);
-}
-
-body:not(.light) {
-  .flash-alert {
-    @include flash($alert-color-dark, true);
-  }
-
-  .flash-error {
-    @include flash($error-color-dark, true);
-  }
-
-  .flash-notice {
-    @include flash($notice-color-dark, true);
-  }
-
-  .flash-success {
-    @include flash($success-color-dark, true);
-  }
+  @include flash($success-color-dark, true);
 }

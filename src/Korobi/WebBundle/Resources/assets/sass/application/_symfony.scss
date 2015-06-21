@@ -1,7 +1,7 @@
 .sf-minitoolbar {
   background: transparent !important;
 
-  body:not(.light) & svg path {
+  & svg path {
     fill: #fff;
   }
 }

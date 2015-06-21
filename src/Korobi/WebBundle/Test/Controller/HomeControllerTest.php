@@ -13,24 +13,6 @@ class HomeControllerTest extends WebTestCase {
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testIndexWithLightTheme() {
-        $client = static::createClient();
-
-        $theme = $this->getMockBuilder('Korobi\WebBundle\Util\ThemeService')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $theme->expects($this->any())->method('isLight')->will($this->returnValue(true));
-        $client->getContainer()->set('korobi.theme_service', $theme);
-
-        $crawler = $client->request('GET', '/');
-
-        $this->assertTrue($crawler->filter('body.light')->count() > 0);
-        // everything resets..
-        $crawler = $client->request('GET', '/');
-        $this->assertTrue($crawler->filter('body.light')->count() === 0);
-    }
-
     public function testBranchAndCommitDisplayedInFooter() {
         $client = static::createClient();
 

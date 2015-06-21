@@ -84,25 +84,6 @@
   .js-hl .fa {
     cursor: pointer;
   }
-
-  // Light theme
-  body.light & {
-    background-color: #ddd;
-
-    .line {
-      &.highlighted {
-        background-color: rgba(255, 239, 0, 0.75);
-      }
-
-      & > span {
-        border-color: #ccc;
-      }
-
-      .nick {
-        border-right-color: #888;
-      }
-    }
-  }
 }
 
 /* Only enable when not tailing */

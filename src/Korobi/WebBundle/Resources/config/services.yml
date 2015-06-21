@@ -52,11 +52,6 @@ services:
         arguments:
             - @korobi.akio
             - @logger
-    korobi.theme_controller:
-        class: Korobi\WebBundle\Controller\ThemeController
-        parent: korobi.base_controller
-        arguments:
-            - @session
     # Private
     korobi.controller.deploy:
         class: Korobi\WebBundle\Controller\DeploymentController
@@ -105,10 +100,6 @@ services:
         class: Korobi\WebBundle\Util\NavigationCollection
         arguments:
             - %korobi.config%
-    korobi.theme_service:
-        class: Korobi\WebBundle\Util\ThemeService
-        arguments:
-            - @session
     korobi.akio:
         class: Korobi\WebBundle\Util\Akio
         arguments:

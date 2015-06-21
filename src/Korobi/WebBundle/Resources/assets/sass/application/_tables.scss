@@ -36,17 +36,3 @@ table {
     padding: 1em;
   }
 }
-
-body.light {
-  thead > tr > th {
-    background-color: rgba(25, 25, 25, 0.3);
-  }
-  tr {
-    & > td {
-      background-color: rgba(25, 25, 25, 0.05);
-    }
-    &:nth-child(2n+1) > td {
-      background-color: rgba(25, 25, 25, 0.1);
-    }
-  }
-}

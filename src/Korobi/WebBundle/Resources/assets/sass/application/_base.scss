@@ -20,28 +20,9 @@ i.fa {
   color: #eee;
 }
 
-body.light {
-  background-image: none;
-  color: #333;
-
-  i.fa {
-    color: #333;
-  }
-
-  .footer i.fa {
-    color: #eee;
-  }
-}
-
-a:active, a:focus {
+a:active,
+a:focus {
   outline: dotted 1px #eee;
-}
-
-body.light {
-  a:active,
-  a:focus {
-    outline: dotted 1px #333;
-  }
 }
 
 h1 {
