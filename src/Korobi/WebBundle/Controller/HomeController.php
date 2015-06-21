@@ -11,7 +11,7 @@ class HomeController extends BaseController {
         $dbChannels = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
-            ->getRecentlyActiveChannels(10)
+            ->getRecentlyActiveChannels(5)
             ->toArray();
 
         return $this->render('KorobiWebBundle::home.html.twig', ["channels" => $dbChannels]);
