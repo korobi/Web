@@ -12,13 +12,15 @@
     {% block head %}{% endblock %}
 </head>
 <body{{ (theme.isLight()) ? ' class="light"' : '' }}>
-<div class="flash-alert js-warning">
-    <p>
-        Hi there! It looks like you have JS disabled which means you might miss out on some of the more interactive
-        parts of the site. We try to ensure that some of the more basic functionality works anyway but please be
-        prepared for some things to not work as expected. Thanks :)
-    </p>
-</div>
+<noscript>
+    <div class="flash-alert js-warning">
+        <p>
+            Hi there! It looks like you have JS disabled which means you might miss out on some of the more interactive
+            parts of the site. We try to ensure that some of the more basic functionality works anyway but please be
+            prepared for some things to not work as expected. Thanks :)
+        </p>
+    </div>
+</noscript>
 {{ include('KorobiWebBundle::partials/nav.html.twig') }}
 
 <main>
