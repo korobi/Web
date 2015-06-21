@@ -2,7 +2,8 @@
 
 @import "vendor/bourbon/bourbon";
 @import "vendor/base/base";
-$visual-grid: true;
+@import "vendor/neat/neat-helpers";
+@import "application/grid";
 @import "vendor/neat/neat";
 
 // base syles
