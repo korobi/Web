@@ -4,6 +4,11 @@ body {
   background-repeat: repeat;
 }
 
+.js-warning {
+  width: 100%;
+  margin: 0;
+}
+
 main {
   @include outer-container;
   margin-top: 1em;
