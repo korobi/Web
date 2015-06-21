@@ -12,4 +12,4 @@ $font-size-base: 14px !default;
 $font-size-small: ceil(($font-size-base * 0.85)) !default; // ~12px
 
 $visual-grid: true;
-$mobile: 68em;
+$mobile: new-breakpoint(min-width em(68) 12);
