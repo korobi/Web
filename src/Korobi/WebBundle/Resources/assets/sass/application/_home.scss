@@ -3,6 +3,9 @@
 
 .homepage-feature {
   @include span-columns(4);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
 }
 
 .homepage-feature-holder, .homepage-secondary-holder {
@@ -11,6 +14,9 @@
 
 .homepage-secondary-holder .recent-channel-activity, .homepage-secondary-holder div.about {
   @include span-columns(6);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
 }
 
 .homepage-feature-holder {
@@ -21,4 +27,6 @@
   border: 1px solid rgb(85, 85, 85);
   margin: 0 0 0.75em;
   width: 100%;
+  border-collapse: separate;
+  border-radius: 0.3em;
 }
