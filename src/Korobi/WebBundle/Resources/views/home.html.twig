@@ -14,23 +14,24 @@
     </div>
 
     <div class="homepage-secondary-holder">
-
-        <table>
-            <thead>
-            <tr>
-                <th>Channel</th>
-                <th>Last Message</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for channel in channels %}
+        <div class="recent-channel-activity">
+            <table>
+                <thead>
                 <tr>
-                    <td>{{ channel.channel }}</td>
-                    <td>{{ channel.LastValidContentAt|date("c") }}</td>
+                    <th>Channel</th>
+                    <th>Last Message</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for channel in channels %}
+                    <tr>
+                        <td>{{ channel.channel }}</td>
+                        <td>{{ channel.LastValidContentAt|date("c") }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         <div class="about">
             <div class="content-block">
@@ -42,7 +43,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 {% endblock %}

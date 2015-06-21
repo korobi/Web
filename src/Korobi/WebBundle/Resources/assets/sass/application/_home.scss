@@ -9,7 +9,16 @@
   @include outer-container;
 }
 
-.homepage-secondary-holder table, .homepage-secondary-holder div.about {
+.homepage-secondary-holder .recent-channel-activity, .homepage-secondary-holder div.about {
   @include span-columns(6);
 }
 
+.homepage-feature-holder {
+  margin-bottom: 0.75em;
+}
+
+.homepage-secondary-holder table {
+  border: 1px solid rgb(85, 85, 85);
+  margin: 0 0 0.75em;
+  width: 100%;
+}
