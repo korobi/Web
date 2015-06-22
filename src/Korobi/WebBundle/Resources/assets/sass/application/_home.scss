@@ -29,10 +29,3 @@
   border-collapse: separate;
   border-radius: 0.3em;
 }
-
-
-@include media($mobile) {
-  body {
-    background: #894500 !important;
-  }
-}
