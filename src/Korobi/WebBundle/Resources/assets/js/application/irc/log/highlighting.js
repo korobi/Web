@@ -8,14 +8,15 @@ $(function() {
         return;
     }
 
-    var activeLines;
+    var activeLines = [];
+    var activeNick = null;
     var lastSelection = null;
 
     /**
      * @returns {string}
      */
     function createHash() {
-        var result = 'L'; // hash (#) is automatically added
+        var result = '';
         var first = true;
         var lastAdded = null;
         var rangeCreated = false;
@@ -23,7 +24,7 @@ $(function() {
         activeLines.sort(function(e1, e2) { return e1 - e2; }).forEach(function(entry) {
             if(first) {
                 first = false;
-                result += entry;
+                result = 'lines=' + entry;
                 lastAdded = entry;
                 return;
             }
@@ -49,37 +50,71 @@ $(function() {
             result += lastAdded;
         }
 
+        if(activeNick) {
+            if(!first) {
+                result += '&';
+            }
+            result += 'nick=' + activeNick;
+        }
+
         return result;
     }
 
-    function highlightLines(lines) {
+    function highlight() {
         $logs.find('.highlighted').removeClass('highlighted');
-        lines.forEach(function(line) {
+
+        if(activeNick) {
+            $logs.find('.line[data-nick=' + activeNick + ']').addClass('highlighted');
+        }
+
+        activeLines.forEach(function(line) {
             $logs.find('.line[data-line-num=' + line + ']').addClass('highlighted');
         });
     }
 
     function parseHash() {
-        var result = [];
+        activeLines = [];
+        activeNick = null;
         if($logs.length === 0) {
-            return result;
+            return;
         }
 
         var hash = window.location.hash;
-        var remainingPart = hash.substr(0, 2);
-        if(remainingPart != "#L") {
-            return result;
+        if(hash[0] === '#') {
+            hash = hash.substr(1);
         }
 
-        var remainingParts = hash.substr(2).split(',');
+        if(hash.length === 0) {
+            return;
+        }
+
+        // Legacy #L1-3,5 urls
+        if(hash[0] === 'L') {
+            parseLineNumbers(hash.substr(1));
+            return;
+        }
+
+        var parts = hash.split('&');
+        for(var i = 0; i < parts.length; ++i) {
+            var pair = parts[i].split('=');
+            if(pair[0] === 'lines') {
+                parseLineNumbers(pair[1]);
+            } else if(pair[0] === 'nick') {
+                activeNick = pair[1];
+            }
+        }
+    }
+
+    function parseLineNumbers(numbers) {
+        var parts = numbers.split(',');
         var number;
-        for(var i = 0; i < remainingParts.length; ++i) {
-            var part = remainingParts[i];
+        for(var i = 0; i < parts.length; ++i) {
+            var part = parts[i];
 
             if(part.indexOf('-') === -1) {
                 number = Number(part);
                 if(!isNaN(number) && isFinite(number)) {
-                    result.push(number);
+                    activeLines.push(number);
                 }
             } else {
                 var match = part.split(/-/);
@@ -96,20 +131,18 @@ $(function() {
                 }
 
                 for(var j = min; j <= max; j++) {
-                    result.push(j);
+                    activeLines.push(j);
                 }
             }
         }
-
-        return result;
     }
 
-    function jumpToFirstLine(activeLines) {
-        if(activeLines.length > 0) {
-            var shift = Math.min.apply(Math, activeLines);
-            var elem = $logs.find('.line[data-line-num=' + shift + ']');
-            $(window).scrollTop(elem.offset().top - 0.05 * $(window).height());
+    function jumpToLine(line) {
+        if(line === undefined) {
+            return;
         }
+        var $elem = $logs.find('.line[data-line-num=' + line + ']');
+        $(window).scrollTop($elem.offset().top - 0.05 * $(window).height());
     }
 
     // Allow lines to be highlighted by clicking the timestamp next to the log line.
@@ -157,16 +190,17 @@ $(function() {
             }
 
         } else {
-            if(activeLines.length === 1 && activeLines[0] === line) {
+            if(activeLines.length === 1 && activeLines[0] === line && activeNick === null) {
                 // The user just clicked the currently selected line
                 return;
             }
 
+            activeNick = null;
             activeLines = [line];
             lastSelection = line;
         }
 
-        highlightLines(activeLines);
+        highlight();
 
         // set the new hash
         var hash = createHash();
@@ -179,15 +213,14 @@ $(function() {
     });
 
     $(window).on('hashchange', function() {
-        activeLines = parseHash();
-        highlightLines(activeLines);
-        jumpToFirstLine(activeLines);
+        parseHash();
+        highlight();
     });
 
     // delay load
-    activeLines = parseHash();
+    parseHash();
     setTimeout(function() {
-        highlightLines(activeLines);
+        highlight();
     }, 1000);
-    jumpToFirstLine(activeLines);
+    jumpToLine(activeLines[0]);
 });
