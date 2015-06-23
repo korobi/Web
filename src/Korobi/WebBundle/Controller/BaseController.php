@@ -46,22 +46,20 @@ abstract class BaseController extends Controller {
      */
     protected static function transformChannelName($channel, $reverse = false) {
         if (!$reverse) {
-            // change for double (and above) #
-            $length = strlen('##');
-            if (substr($channel, 0, $length) === '##') {
+            // Do nothing if the channel name starts with two number signs ('##').
+            if (substr($channel, 0, 2) === '##') {
                 return $channel;
             }
 
-            // remove for single #
+            // Remove single '#' from the channel name.
             return str_replace('#', '', $channel);
         } else {
-            // change for double (and above) %23
-            $length = strlen('#');
-            if (substr($channel, 0, $length) === '#') {
+            // Assume that any channels provided that start with a single number sign ('#') do not require any changes.
+            if (substr($channel, 0, 1) === '#') {
                 return $channel;
             }
 
-            // add single #
+            // There was no number sign in front of the channel name, so we add one.
             return '#' . $channel;
         }
     }
@@ -93,7 +91,7 @@ abstract class BaseController extends Controller {
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
-            ->findByChannel($network, self::transformChannelName(preg_quote($channel), true)) // TODO
+            ->findByChannel($network, self::transformChannelName(preg_quote($channel), true))
             ->toArray(false);
 
         // make sure we actually have a channel

@@ -13,12 +13,12 @@ if [ $? -ne 1 ]; then
     composer install --no-scripts 2>&1
 fi
 
-echo "** Dumping asset files..."
+echo "** Dumping assets..."
 php app/console assetic:dump
 
 echo "** Clearing cache..."
 php app/console cache:clear
 php app/console cache:clear --env prod
 
-echo "Generating database hydrators..."
+echo "** Generating database hydrators..."
 php app/console doctrine:mongodb:generate:hydrators

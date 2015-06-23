@@ -2,6 +2,7 @@
 
 namespace Korobi\WebBundle\Controller;
 
+use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
 
 /**
@@ -81,11 +82,50 @@ class RewriteController extends BaseController {
                         'gameId' => $gameId
                     ], 301);
                 default:
-                    return $this->redirectToRoute('channel', [
-                        'network' => $network,
-                        'channel' => $channel
-                    ], 301);
+                    if ($this->doesChannelExistForNetwork($network, $channel)) {
+                        return $this->redirectToRoute('channel', [
+                            'network' => $network,
+                            'channel' => $channel
+                        ], 301);
+                    } else {
+                        throw $this->createNotFoundException();
+                    }
             }
         }
+    }
+
+    /**
+     * @param $network
+     * @param $channel
+     * @return bool
+     */
+    private function doesChannelExistForNetwork($network, $channel) {
+        // validate network
+        /** @var Network $dbNetwork */
+        $dbNetwork = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Network')
+            ->findNetwork($network)
+            ->toArray(false);
+
+        // make sure we actually have a network
+        if (empty($dbNetwork)) {
+            return false;
+        }
+
+        // fetch channel
+        /** @var Channel $dbChannel */
+        $dbChannel = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Channel')
+            ->findByChannel($network, self::transformChannelName(preg_quote($channel), true))
+            ->toArray(false);
+
+        // make sure we actually have a channel
+        if (empty($dbChannel)) {
+            return false;
+        }
+
+        return true;
     }
 }

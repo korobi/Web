@@ -52,7 +52,7 @@ class ChannelCommandController extends BaseController {
             $rawAliases = $this->get('doctrine_mongodb')
                 ->getManager()
                 ->getRepository('KorobiWebBundle:ChannelCommand')
-                ->findAliasesFor($network, self::transformChannelName($channel, true), $dbCommand->getName()) // TODO
+                ->findAliasesFor($network, self::transformChannelName($channel, true), $dbCommand->getName())
                 ->toArray();
 
             $aliases = [];
