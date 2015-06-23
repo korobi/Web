@@ -45,7 +45,7 @@ class SecurityController extends BaseController {
         $ip = hash_hmac('sha1', $request->getClientIp(), 'bc604aedc9027a1f1880');
         $this->akio->message()
             ->red()
-            ->text("[!! CSP !!]")
+            ->text('[!! CSP !!]')
             ->aquaLight()
             ->text(" Request to $resource on page $uri blocked via $ip.")
             ->send('csp');

@@ -165,14 +165,14 @@ class IRCTextParserTest extends WebTestCase {
 
         $this->assertTrue($hf->isValid());
 
-        $b_style = $hf->getStyle("b");
+        $b_style = $hf->getStyle('b');
         $this->assertEquals(IRCTextParser::DEFAULT_FOREGROUND, $b_style['fg']);
         $this->assertEquals(IRCTextParser::DEFAULT_BACKGROUND, $b_style['bg']);
         $this->assertFalse($b_style['bold']);
         $this->assertFalse($b_style['underline']);
         $this->assertFalse($b_style['italic']);
 
-        $d_style = $hf->getStyle("d");
+        $d_style = $hf->getStyle('d');
         $this->assertTrue($d_style['bold']);
         $this->assertEquals(IRCTextParser::DEFAULT_FOREGROUND, $d_style['fg']);
         $this->assertEquals(IRCTextParser::DEFAULT_BACKGROUND, $d_style['bg']);

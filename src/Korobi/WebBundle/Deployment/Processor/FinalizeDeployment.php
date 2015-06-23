@@ -15,7 +15,7 @@ class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInt
     public function handle(DeploymentInfo $info) {
         $this->dm->persist($info->getRevision());
         $this->dm->flush();
-        $this->akio->message()->text('Full details at https://dev.korobi.io/deploy/view/' . $info->getRevision()->getId() . "/")->send('deploy');
+        $this->akio->message()->text('Full details at https://dev.korobi.io/deploy/view/' . $info->getRevision()->getId() . '/')->send('deploy');
 
         return DeploymentStatus::OK;
     }

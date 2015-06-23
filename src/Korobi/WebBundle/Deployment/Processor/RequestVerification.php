@@ -26,10 +26,10 @@ class RequestVerification extends BaseProcessor implements DeploymentProcessorIn
         $info->getRevision()->setManual($isSuperUser);
 
         if ($okayToProceed) {
-            $this->logger->debug("Verified deployment request");
+            $this->logger->debug('Verified deployment request');
             return parent::handle($info);
         }
-        $this->logger->debug("Rejecting unauthorised deployment request", ["signature" => $signatureVerified, "superuser" => $isSuperUser]);
+        $this->logger->debug('Rejecting unauthorised deployment request', ['signature' => $signatureVerified, 'superuser' => $isSuperUser]);
         $info->addStatus(DeploymentStatus::UNAUTHORISED);
         return DeploymentStatus::UNAUTHORISED;
     }

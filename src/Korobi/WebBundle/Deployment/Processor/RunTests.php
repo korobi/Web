@@ -32,8 +32,8 @@ class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
         }
 
         if ($parsed['failures'] > 0) {
-            $this->logger->debug("Tests failed!", [implode("\n", $execOutput)], true);
-            $message = $message->red()->text(" " . $parsed['failures'] . ' failed.');
+            $this->logger->debug('Tests failed!', [implode("\n", $execOutput)], true);
+            $message = $message->red()->text(' ' . $parsed['failures'] . ' failed.');
             $info->addStatus(DeploymentStatus::TESTS_FAILED);
         }
 

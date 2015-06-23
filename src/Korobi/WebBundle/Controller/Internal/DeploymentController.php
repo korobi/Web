@@ -71,7 +71,7 @@ class DeploymentController extends BaseController {
         $processor = new DeploymentProcessor($info, $this->logger, $this->container->get('kernel'), $this->akio, $this->get('doctrine_mongodb')->getManager());
         $status = $processor->performDeployment();
 
-        return new JsonResponse(["status" => $status]);
+        return new JsonResponse(['status' => $status]);
     }
 
     public function viewAction($id) {

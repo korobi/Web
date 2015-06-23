@@ -18,11 +18,11 @@ class ChannelControllerTest extends WebTestCase {
             ->disableOriginalConstructor()
             ->getMock();
         $fakeNetwork = new Network();
-        $fakeNetwork->setName("esper");
-        $fakeNetwork->setSlug("esper");
+        $fakeNetwork->setName('esper');
+        $fakeNetwork->setSlug('esper');
         $netRepo->expects($this->once())
             ->method('findNetwork')
-            ->with("esper")
+            ->with('esper')
             ->will($this->returnValue($fakeNetwork));
 
         // Last, mock the EntityManager to return the mock of the repository
@@ -33,7 +33,7 @@ class ChannelControllerTest extends WebTestCase {
             ->method('getRepository')
             ->will($this->returnValue($netRepo));
         $client->request('GET', '/esper/korobi/logs/2015-03-14');
-        $this->markTestSkipped("NYI");
+        $this->markTestSkipped('NYI');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 }

@@ -82,7 +82,7 @@ class ChannelLogController extends BaseController {
         }
 
         // grab reflection class for log parser
-        $this->logParser = new \ReflectionClass("Korobi\\WebBundle\\Parser\\LogParser");
+        $this->logParser = new \ReflectionClass('Korobi\\WebBundle\\Parser\\LogParser');
 
         $chats = [];
 
@@ -96,7 +96,7 @@ class ChannelLogController extends BaseController {
             $chats[] = $this->transformToChatMessage($chat);
         }
 
-        if (in_array("application/json", $request->getAcceptableContentTypes())) {
+        if (in_array('application/json', $request->getAcceptableContentTypes())) {
             return new JsonResponse($chats);
         }
 

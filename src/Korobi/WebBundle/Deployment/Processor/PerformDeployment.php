@@ -14,7 +14,7 @@ use Korobi\WebBundle\Util\GitInfo;
 class PerformDeployment extends BaseProcessor implements DeploymentProcessorInterface {
 
     public function handle(DeploymentInfo $info) {
-        $this->logger->debug("About to execute " . $info->getRootPath() . 'deploy_init.sh');
+        $this->logger->debug('About to execute ' . $info->getRootPath() . 'deploy_init.sh');
 
         // move to the root path, or you'll get screamed at because 'app/console' could not be found
         chdir($info->getRootPath());
