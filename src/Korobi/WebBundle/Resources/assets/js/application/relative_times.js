@@ -11,7 +11,7 @@ $(function() {
         if (elapsed < 15000) {
             return 'a few seconds ago';
         } else if (elapsed < msPerMinute) {
-            return Math.round(elapsed/100) + ' seconds ago';
+            return Math.round(elapsed/1000) + ' seconds ago';
         } else if (elapsed < msPerHour) {
             return Math.round(elapsed/msPerMinute) + ' minutes ago';
         } else if (elapsed < msPerDay ) {
