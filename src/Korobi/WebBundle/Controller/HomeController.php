@@ -33,7 +33,7 @@ class HomeController extends BaseController {
         $elapsed = $current - $previous;
 
         if ($elapsed < $msPerMinute) {
-            return round($elapsed/1000) . ' seconds ago';
+            return round($elapsed) . ' seconds ago';
         } else if ($elapsed < $msPerHour) {
             return round($elapsed/$msPerMinute) . ' minutes ago';
         } else if ($elapsed < $msPerDay ) {
