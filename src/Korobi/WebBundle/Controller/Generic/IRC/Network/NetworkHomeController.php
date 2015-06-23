@@ -1,11 +1,12 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Generic\IRC\Network;
 
+use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
 
-class NetworkController extends BaseController {
+class NetworkHomeController extends BaseController {
 
     /**
      * @param $network
@@ -59,7 +60,7 @@ class NetworkController extends BaseController {
 
         ksort($channels, SORT_NATURAL | SORT_FLAG_CASE);
 
-        return $this->render('KorobiWebBundle:controller/network:network.html.twig', [
+        return $this->render('KorobiWebBundle:controller/generic/irc/network:network.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'all_channels_private' => empty($channels),
             'channels' => $channels
@@ -113,7 +114,7 @@ class NetworkController extends BaseController {
 
         ksort($networks, SORT_NATURAL | SORT_FLAG_CASE);
 
-        return $this->render('KorobiWebBundle:controller/network:networks.html.twig', [
+        return $this->render('KorobiWebBundle:controller/generic/irc/network:networks.html.twig', [
             'all_networks_private' => empty($networks),
             'networks' => $networks
         ]);

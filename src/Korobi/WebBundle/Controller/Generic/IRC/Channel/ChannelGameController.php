@@ -1,6 +1,6 @@
 <?php
 
-namespace Korobi\WebBundle\Controller\Channel;
+namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\CAHGame;
@@ -122,7 +122,7 @@ class ChannelGameController extends BaseController {
         $percent['used_white'] = 100 * (1-($counts['Unused White'] / $counts['Total White']));
 
         // time to render!
-        return $this->render('KorobiWebBundle:controller/channel/game:cah.html.twig', [
+        return $this->render('KorobiWebBundle:controller/generic/irc/channel/game:cah.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'game_id' => $gameId,

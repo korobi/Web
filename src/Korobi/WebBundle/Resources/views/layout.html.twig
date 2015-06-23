@@ -1,4 +1,4 @@
-{% import 'KorobiWebBundle::macros/nav_link.html.twig' as nav %}
+{% import 'KorobiWebBundle::macro/nav_link.html.twig' as nav %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +21,9 @@
         </p>
     </div>
 </noscript>
-{{ include('KorobiWebBundle::partials/nav.html.twig') }}
+{{ include('KorobiWebBundle::partial/nav.html.twig') }}
+
+{% block hero %}{% endblock %}
 
 <main>
     {# flash notices #}
@@ -33,7 +35,7 @@
     {% block body %}{% endblock %}
 </main>
 
-{{ include('KorobiWebBundle::partials/footer.html.twig') }}
+{{ include('KorobiWebBundle::partial/footer.html.twig') }}
 
 <div id="bottom"></div>
 {% block javascripts %}

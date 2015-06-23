@@ -1,6 +1,8 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Generic;
+
+use Korobi\WebBundle\Controller\BaseController;
 
 class HomeController extends BaseController {
 
@@ -19,5 +21,4 @@ class HomeController extends BaseController {
             'channels' => $dbChannels,
         ]);
     }
-
 }

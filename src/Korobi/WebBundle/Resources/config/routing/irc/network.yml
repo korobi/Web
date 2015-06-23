@@ -4,8 +4,8 @@
 networks:
     path: /networks/
     defaults:
-        _controller: korobi.controller.network:networksAction
+        _controller: korobi.controller.network.home:networksAction
 network:
     path: /network/{network}/
     defaults:
-        _controller: korobi.controller.network:networkAction
+        _controller: korobi.controller.network.home:networkAction

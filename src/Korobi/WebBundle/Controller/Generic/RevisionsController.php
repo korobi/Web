@@ -1,8 +1,9 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Generic;
 
 use Github\Client;
+use Korobi\WebBundle\Controller\BaseController;
 
 class RevisionsController extends BaseController {
 
@@ -21,7 +22,7 @@ class RevisionsController extends BaseController {
         $client = new Client();
         $client->authenticate($this->container->getParameter('github_oauth_token'), Client::AUTH_HTTP_TOKEN);
 
-        return $this->render('KorobiWebBundle::revisions.html.twig', [
+        return $this->render('KorobiWebBundle:controller/generic:revisions.html.twig', [
             'repository' => $repository,
             'revisions' => $client
                 ->api('repo')

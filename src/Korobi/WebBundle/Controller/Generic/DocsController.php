@@ -1,6 +1,8 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Generic;
+
+use Korobi\WebBundle\Controller\BaseController;
 
 class DocsController extends BaseController {
 

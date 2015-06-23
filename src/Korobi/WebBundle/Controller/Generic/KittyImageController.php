@@ -1,7 +1,8 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Generic;
 
+use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\KittyImage;
 use Korobi\WebBundle\Util\StringUtil;
 
@@ -45,7 +46,7 @@ class KittyImageController extends BaseController {
 
         ksort($images, SORT_NATURAL | SORT_FLAG_CASE);
 
-        return $this->render('KorobiWebBundle::kitty_image.html.twig', [
+        return $this->render('KorobiWebBundle:controller/generic:kitty_image.html.twig', [
             'images' => $images,
             'videos' => $videos
         ]);

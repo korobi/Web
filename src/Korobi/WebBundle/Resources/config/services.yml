@@ -32,29 +32,29 @@ services:
             - [setAuthChecker, ["@security.authorization_checker"]]
     # Public
     korobi.controller.home:
-        class: Korobi\WebBundle\Controller\HomeController
+        class: Korobi\WebBundle\Controller\Generic\HomeController
         parent: korobi.base_controller
     korobi.controller.kitty:
-        class: Korobi\WebBundle\Controller\KittyImageController
+        class: Korobi\WebBundle\Controller\Generic\KittyImageController
         parent: korobi.base_controller
     korobi.controller.revisions:
-        class: Korobi\WebBundle\Controller\RevisionsController
+        class: Korobi\WebBundle\Controller\Generic\RevisionsController
         parent: korobi.base_controller
     korobi.controller.docs:
-        class: Korobi\WebBundle\Controller\DocsController
+        class: Korobi\WebBundle\Controller\Generic\DocsController
         parent: korobi.base_controller
     korobi.controller.style_guide:
-        class: Korobi\WebBundle\Controller\StyleGuideController
+        class: Korobi\WebBundle\Controller\Generic\StyleGuideController
         parent: korobi.base_controller
     korobi.controller.security:
-        class: Korobi\WebBundle\Controller\SecurityController
+        class: Korobi\WebBundle\Controller\Generic\SecurityController
         parent: korobi.base_controller
         arguments:
             - @korobi.akio
             - @logger
     # Private
     korobi.controller.deploy:
-        class: Korobi\WebBundle\Controller\DeploymentController
+        class: Korobi\WebBundle\Controller\Internal\DeploymentController
         parent: korobi.base_controller
         arguments:
             - @logger
@@ -64,27 +64,27 @@ services:
             - [setHmacKey, ["%github_hook_hmac_secret%"]]
             - [setRootPath, ["%kernel.root_dir%"]]
     # Network
-    korobi.controller.network:
-        class: Korobi\WebBundle\Controller\NetworkController
+    korobi.controller.network.home:
+        class: Korobi\WebBundle\Controller\Generic\IRC\Network\NetworkHomeController
         parent: korobi.base_controller
     # Channel
     korobi.controller.channel.home:
-        class: Korobi\WebBundle\Controller\Channel\ChannelHomeController
+        class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelHomeController
         parent: korobi.base_controller
     korobi.controller.channel.log:
-        class: Korobi\WebBundle\Controller\Channel\ChannelLogController
+        class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelLogController
         parent: korobi.base_controller
     korobi.controller.channel.command:
-        class: Korobi\WebBundle\Controller\Channel\ChannelCommandController
+        class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelCommandController
         parent: korobi.base_controller
     korobi.controller.channel.stat:
-        class: Korobi\WebBundle\Controller\Channel\ChannelStatController
+        class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelStatController
         parent: korobi.base_controller
     korobi.controller.channel.ai:
-        class: Korobi\WebBundle\Controller\Channel\ChannelAIController
+        class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelAIController
         parent: korobi.base_controller
     korobi.controller.channel.game:
-        class: Korobi\WebBundle\Controller\Channel\ChannelGameController
+        class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelGameController
         parent: korobi.base_controller
     # Legacy
     korobi.controller.rewrite:

@@ -1,6 +1,12 @@
-{% extends 'KorobiWebBundle::home_layout.html.twig' %}
+{% extends 'KorobiWebBundle::layout.html.twig' %}
 
 {% set page_title = "Home" %}
+
+{% block hero %}
+    <div class="hero">
+        <h1>Korobi <small>IRC made easy.</small></h1>
+    </div>
+{% endblock %}
 
 {% block body %}
     <div class="flash-notice"><p>Hi there! Please excuse the mess, we're still working on this site. ^.^</p></div>

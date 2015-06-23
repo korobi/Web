@@ -1,6 +1,6 @@
 <?php
 
-namespace Korobi\WebBundle\Controller\Channel;
+namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
@@ -36,7 +36,7 @@ class ChannelStatController extends BaseController {
             $stats_output .= $line;//IRCTextParser::parseLine($line, true);
         }
 
-        return $this->render('KorobiWebBundle:controller/channel:stats.html.twig', [
+        return $this->render('KorobiWebBundle:controller/generic/irc/channel:stats.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'data' => $stats_output,

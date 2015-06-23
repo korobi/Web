@@ -1,6 +1,6 @@
 <?php
 
-namespace Korobi\WebBundle\Controller\Channel;
+namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
@@ -55,7 +55,7 @@ class ChannelAIController extends BaseController {
 
 
         // time to render!
-        return $this->render('KorobiWebBundle:controller/channel:ai.html.twig', [
+        return $this->render('KorobiWebBundle:controller/generic/irc/channel:ai.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'join_message_enabled' => $dbChannelAI->getJoinMessageEnabled(),

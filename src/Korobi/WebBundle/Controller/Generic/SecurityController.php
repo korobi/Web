@@ -1,7 +1,8 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Generic;
 
+use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Util\Akio;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -56,7 +57,7 @@ class SecurityController extends BaseController {
      * @return Response
      */
     public function showRedirectAction(Request $req) {
-        $response = new Response($this->renderView('KorobiWebBundle::error-redirect.html.twig', [
+        $response = new Response($this->renderView('KorobiWebBundle:error:unexpected-redirect.html.twig', [
             'url' => $req->get('redirUrl')
         ]), 403);
         return $response;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Korobi\WebBundle\Controller\Channel;
+namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
@@ -31,7 +31,7 @@ class ChannelHomeController extends BaseController {
         }
 
         // time to render!
-        return $this->render('KorobiWebBundle:controller/channel:home.html.twig', [
+        return $this->render('KorobiWebBundle:controller/generic/irc/channel:home.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'slug' => self::transformChannelName($dbChannel->getChannel()),

@@ -1,7 +1,8 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Internal;
 
+use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Deployment\DeploymentProcessor;
 use Korobi\WebBundle\Document\Revision;
@@ -10,7 +11,6 @@ use Korobi\WebBundle\Util\GitInfo;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DeploymentController extends BaseController {
 
@@ -88,7 +88,7 @@ class DeploymentController extends BaseController {
             throw $this->createNotFoundException();
         }
 
-        return $this->render('KorobiWebBundle::deployment.html.twig', [
+        return $this->render('KorobiWebBundle:controller/internal:deployment.html.twig', [
             'doc' => $deployment
         ]);
     }
