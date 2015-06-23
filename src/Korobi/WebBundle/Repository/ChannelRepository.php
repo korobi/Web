@@ -45,7 +45,7 @@ class ChannelRepository extends DocumentRepository {
         return $this->createQueryBuilder()
             ->sort('last_valid_content_at', 'DESC')
             ->field('key')
-            ->equals(null)
+                ->equals(null)
             ->limit($limit)
             ->getQuery()
             ->execute();
