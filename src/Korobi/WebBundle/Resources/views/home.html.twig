@@ -31,10 +31,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for channel in channels %}
+                {% for name, last_activity in channels %}
                     <tr>
-                        <td>{{ channel.channel }}</td>
-                        <td>{{ channel.LastValidContentAt|date("c") }}</td>
+                        <td>{{ name }}</td>
+                        <td>{{ last_activity }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
