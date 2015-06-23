@@ -107,52 +107,44 @@
     <p>Useful for sidebar items and simply separating parts of a page into distinct groups, content blocks have a block header.
         Combined with Neat, these can take up only part of the page.</p>
     <p>The following code creates a relatively simple content block with an icon in the title.</p>
-<pre><code class="language-markup">&lt;div class=&quot;example-container&quot;&gt;
-    &lt;div class=&quot;content-block&quot;&gt;
-        &lt;h1&gt;&lt;i class=&quot;fa fa-pencil&quot;&gt;&lt;/i&gt; My title&lt;/h1&gt;
-        &lt;div class=&quot;content&quot;&gt;
-            &lt;p&gt;
-                The kraken fears with urchin, break the pacific ocean before it screams.
-                The rum hails with power, drink the pacific ocean before it travels.
-                Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
-                The skull hoists with strength, hail the seychelles before it sings.
-                clouds travel with hunger.
-            &lt;/p&gt;
-            &lt;p&gt;
-                The kraken fears with urchin, break the pacific ocean before it screams.
-                The rum hails with power, drink the pacific ocean before it travels.
-                Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
-                The skull hoists with strength, hail the seychelles before it sings.
-                clouds travel with hunger.
-            &lt;/p&gt;
-        &lt;/div&gt;
+<pre><code class="language-markup">&lt;div class=&quot;content-block&quot;&gt;
+    &lt;h2 class=&quot;content-block-header&quot;&gt;&lt;i class=&quot;fa fa-pencil&quot;&gt;&lt;/i&gt; My title&lt;/h2&gt;
+    &lt;div class=&quot;content-block-content&quot;&gt;
+        &lt;p&gt;
+            The kraken fears with urchin, break the pacific ocean before it screams.
+            The rum hails with power, drink the pacific ocean before it travels.
+            Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
+            The skull hoists with strength, hail the seychelles before it sings.
+            clouds travel with hunger.
+        &lt;/p&gt;
+        &lt;p&gt;
+            The kraken fears with urchin, break the pacific ocean before it screams.
+            The rum hails with power, drink the pacific ocean before it travels.
+            Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
+            The skull hoists with strength, hail the seychelles before it sings.
+            clouds travel with hunger.
+        &lt;/p&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-    <p>Some small SASS is used to tell Neat to make the content block sit in a container which occupies 6 columns:</p>
-    <pre><code class="language-scss">.example-container {
-    @include span-columns(8);
-}</code></pre>
     <p>This results in the following:</p>
-    <div class="example-container">
-        <div class="content-block">
-            <h1><i class="fa fa-pencil"></i> My title</h1>
-            <div class="content">
-                <p>
-                    The kraken fears with urchin, break the pacific ocean before it screams.
-                    The rum hails with power, drink the pacific ocean before it travels.
-                    Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
-                    The skull hoists with strength, hail the seychelles before it sings.
-                    clouds travel with hunger.
-                </p>
-                <p>
-                    The kraken fears with urchin, break the pacific ocean before it screams.
-                    The rum hails with power, drink the pacific ocean before it travels.
-                    Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
-                    The skull hoists with strength, hail the seychelles before it sings.
-                    clouds travel with hunger.
-                </p>
-            </div>
+    <div class="content-block">
+        <h2 class="content-block-header"><i class="fa fa-pencil"></i> My title</h2>
+        <div class="content-block-content">
+            <p>
+                The kraken fears with urchin, break the pacific ocean before it screams.
+                The rum hails with power, drink the pacific ocean before it travels.
+                Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
+                The skull hoists with strength, hail the seychelles before it sings.
+                clouds travel with hunger.
+            </p>
+            <p>
+                The kraken fears with urchin, break the pacific ocean before it screams.
+                The rum hails with power, drink the pacific ocean before it travels.
+                Treasure is a rainy lass. Weird, old skiffs fiery crush a jolly, misty shore.
+                The skull hoists with strength, hail the seychelles before it sings.
+                clouds travel with hunger.
+            </p>
         </div>
     </div>
     <h3>Tooltips</h3>

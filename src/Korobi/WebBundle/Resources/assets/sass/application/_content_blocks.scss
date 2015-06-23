@@ -1,42 +1,33 @@
-.content-block > h1 {
-  background-color: rgba(0, 0, 0, 0.5);
-  font-size: 1em;
-  font-weight: bold;
-  padding: 1em;
-  margin: 0;
-  border-bottom: 1px solid rgb(85, 85, 85);
-  border-top-left-radius: 0.3em;
-  border-top-right-radius: 0.3em;
-  width: 100%;
-  i.fa.right {
-    float: right;
-  }
-  i.fa {
-    margin-right: 0.5em;
-  }
-}
-
-.content-block .content {
-  padding: 1em;
-  background-color: rgba(25, 25, 25, 0.8);
-  border-bottom-left-radius: 0.3em;
-  border-bottom-right-radius: 0.3em;
-  p:last-of-type {
-    margin: 0;
-  }
-
-  .light & {
-    background-color: rgba(25, 25, 25, 0.2);
-  }
-}
-
 .content-block {
   border: 1px solid rgb(85, 85, 85);
   margin-bottom: 1em;
   border-radius: 0.3em;
-}
 
-.example-container {
-  @include span-columns(8);
-  float: none;
+  .content-block-header {
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 1em;
+    font-weight: bold;
+    padding: 1em;
+    margin: 0;
+    border-bottom: 1px solid rgb(85, 85, 85);
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+    width: 100%;
+
+    .fa {
+      margin-right: 0.5em;
+      &.right { float: right; }
+    }
+  }
+
+  .content-block-content {
+    padding: 1em;
+    background-color: rgba(25, 25, 25, 0.8);
+    border-bottom-left-radius: 0.3em;
+    border-bottom-right-radius: 0.3em;
+
+    p:last-of-type {
+      margin: 0;
+    }
+  }
 }
