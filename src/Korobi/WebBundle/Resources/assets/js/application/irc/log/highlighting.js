@@ -201,9 +201,4 @@ $(function() {
     });
 
     hashChange();
-    // delay load
-    setTimeout(function() {
-        highlightLines(activeLines);
-    }, 1000);
-    jumpToFirstLine(activeLines);
 });
