@@ -1,0 +1,48 @@
+{% import 'KorobiWebBundle::macros/nav_link.html.twig' as nav %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ app_name }}</title>
+    <meta name="viewport" content="initial-scale=1">
+    <link type="text/plain" rel="author" href="/humans.txt" />
+    {% stylesheets filter='scss' '@KorobiWebBundle/Resources/assets/sass/application.scss' output='assets/css/application.css' %}
+    <link rel='stylesheet' href="{{ asset_url }}{% if app.environment == 'dev' %}?v={{ 'now'|date('U') }}{% else %}?v={{ git_hash }}{% endif %}" />
+    {% endstylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+{{ include('KorobiWebBundle::partials/nav.html.twig') }}
+
+<div class="hero">
+    <h1>Korobi <small>IRC made easy.</small></h1>
+</div>
+
+<main>
+    {# flash notices #}
+    {% for flashMessage in app.session.flashbag.get('alert') %}<div class="alert-error">{{ flashMessage }}</div>{% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}<div class="flash-error">{{ flashMessage }}</div>{% endfor %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}<div class="flash-notice">{{ flashMessage }}</div>{% endfor %}
+    {% for flashMessage in app.session.flashbag.get('success') %}<div class="flash-success">{{ flashMessage }}</div>{% endfor %}
+
+    {% block body %}{% endblock %}
+</main>
+
+{{ include('KorobiWebBundle::partials/footer.html.twig') }}
+
+<div id="bottom"></div>
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    {% javascripts '@production' output='assets/js/application.js' filter='uglifyjs2' %}
+        <script src="{{ asset_url }}{% if app.environment == 'dev' %}?v={{ 'now'|date('U') }}{% else %}?v={{ git_hash }}{% endif %}"></script>
+    {% endjavascripts %}
+    {# only include development js in dev environment #}
+    {% if app.environment == 'dev' %}
+        {% javascripts '@staging' output='assets/js/staging.js' filter='uglifyjs2' %}
+            <script src="{{ asset_url }}?v={{ 'now'|date('U') }}"></script>
+        {% endjavascripts %}
+    {% endif %}
+{% endblock %}
+</body>
+</html>

@@ -1,5 +1,30 @@
 // Homepage styles! :-D
 
+.hero {
+  width: 100%;
+  padding: 25vh 0 5vh;
+  margin-bottom: 10vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: right;
+
+  h1 {
+    display: inline-block;
+    font-size: 5rem;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-shadow: 1px 1px 1px #666;
+    margin: 0;
+    padding: 0.5rem 2ch 0.5rem 0.7ch;
+    border-radius: 4px 0 0 4px;
+
+    small {
+      font-size: 1.5rem;
+      font-weight: normal;
+      white-space: nowrap;
+    }
+  }
+}
+
 .homepage-feature {
   @include span-columns(4);
   @include media($mobile) {
