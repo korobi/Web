@@ -8,6 +8,7 @@ nav.navigation {
   line-height: 1em;
   background-color: $primaryColour;
   padding: 0 1em 0 1em;
+  box-shadow: 0 0 5px #000;
   //border-bottom: 1px solid $active-nav-background-color;
 
   .navigation--inner {
