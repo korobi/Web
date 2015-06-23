@@ -53,4 +53,8 @@
   width: 100%;
   border-collapse: separate;
   border-radius: 0.3em;
+
+  th {
+    border-bottom: 1px solid rgb(85, 85, 85);
+  }
 }
