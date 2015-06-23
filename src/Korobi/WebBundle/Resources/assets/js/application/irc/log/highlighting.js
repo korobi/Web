@@ -104,7 +104,7 @@ $(function() {
         return result;
     }
 
-    function jumpToFirstLine() {
+    function jumpToFirstLine(activeLines) {
         if(activeLines.length > 0) {
             var shift = Math.min.apply(Math, activeLines);
             var elem = $logs.find('.line[data-line-num=' + shift + ']');
@@ -178,10 +178,16 @@ $(function() {
         }
     });
 
+    $(window).on('hashchange', function() {
+        activeLines = parseHash();
+        highlightLines(activeLines);
+        jumpToFirstLine(activeLines);
+    });
+
     // delay load
     activeLines = parseHash();
     setTimeout(function() {
         highlightLines(activeLines);
     }, 1000);
-    jumpToFirstLine();
+    jumpToFirstLine(activeLines);
 });
