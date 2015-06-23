@@ -10,7 +10,7 @@ body {
 }
 
 main {
-  @include outer-container;
+  @include outer-container($main-width);
   margin-top: 1em;
   margin-bottom: $footerHeight + 0.5;
   padding: 0 1em;

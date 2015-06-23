@@ -14,10 +14,10 @@
     background-color: rgba(0, 0, 0, 0.4);
     text-shadow: 1px 1px 1px #666;
     margin: 0;
-    padding: 0.5rem calc((100vw - 68rem) / 2 + 1rem) 0.5rem 0.3em;
+    padding: 0.5rem calc((100vw - #{$main-width}) / 2 + 1rem) 0.5rem 0.3em;
     border-radius: 4px 0 0 4px;
 
-    @media (max-width: 68rem) {
+    @media (max-width: $main-width) {
       & {
         padding-right: 1rem;
       }
