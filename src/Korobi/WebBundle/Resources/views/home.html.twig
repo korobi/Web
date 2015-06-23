@@ -34,9 +34,7 @@
                 {% for channel in channels %}
                     <tr>
                         <td>{{ channel.channel }}</td>
-                        <td class="relative-time" data-timestamp="{{ channel.LastValidContentAt.getTimestamp() }}">
-                            {{ channel.LastValidContentAt|date("c") }}
-                        </td>
+                        <td>{{ channel.LastValidContentAt|date("c") }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
