@@ -60,8 +60,8 @@ class ExtensionTwigFunctions extends \Twig_Extension {
             return 'just now';
         }
 
-        $prevSeconds = 60;
-        $prevName = 'seconds';
+        $prevSeconds = 1;
+        $prevName = 'second';
         foreach($secondsIn as $name => $seconds) {
             if($elapsed < $seconds) {
                 return self::plural(round($elapsed / $prevSeconds), $prevName) . ' ago';
