@@ -64,6 +64,7 @@ assetic:
                 - '@KorobiWebBundle/Resources/assets/js/vendor/datepicker.js'
                 - '@KorobiWebBundle/Resources/assets/js/vendor/prism.js'
                 - '@KorobiWebBundle/Resources/assets/js/vendor/tooltips.js'
+                - '@KorobiWebBundle/Resources/assets/js/vendor/hash.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/navigation.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/irc/log/controls.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/irc/log/datepicker.js'

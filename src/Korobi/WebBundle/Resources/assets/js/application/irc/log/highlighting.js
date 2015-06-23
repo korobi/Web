@@ -8,7 +8,7 @@ $(function() {
         return;
     }
 
-    var activeLines;
+    var activeLines = [];
     var lastSelection = null;
 
     /**
@@ -112,6 +112,24 @@ $(function() {
         }
     }
 
+    function hashChange() {
+        var $nick = $.kHash.get('nick');
+        if ($nick !== undefined) {
+            activeLines = [];
+            $logs.find('[data-nick="' + $nick + '"]').each(function() {
+                activeLines.push($(this).data('line-num'));
+            })
+        } else {
+            activeLines = parseHash();
+        }
+
+        // delay load
+        setTimeout(function() {
+            highlightLines(activeLines);
+        }, 1000);
+        jumpToFirstLine(activeLines);
+    }
+
     // Allow lines to be highlighted by clicking the timestamp next to the log line.
     // The behaviour for clicks is as follows:
     // - Click:
@@ -162,7 +180,7 @@ $(function() {
                 return;
             }
 
-            activeLines = [line];
+            activeLines.push(line);
             lastSelection = line;
         }
 
@@ -179,13 +197,11 @@ $(function() {
     });
 
     $(window).on('hashchange', function() {
-        activeLines = parseHash();
-        highlightLines(activeLines);
-        jumpToFirstLine(activeLines);
+        hashChange();
     });
 
+    hashChange();
     // delay load
-    activeLines = parseHash();
     setTimeout(function() {
         highlightLines(activeLines);
     }, 1000);
