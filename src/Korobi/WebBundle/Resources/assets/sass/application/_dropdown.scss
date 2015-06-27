@@ -1,0 +1,176 @@
+@mixin checklist__open {
+  overflow: visible;
+
+  & > dt > label {
+    background-color: #F1F6F9;
+    border-radius: .25em .25em 0 0;
+
+    &:before {
+      bottom: 0;
+      content: '';
+      cursor: default;
+      left: 0;
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+  }
+}
+
+@mixin checkbox--checked {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAIAAAD9iXMrAAABKklEQVR42mPo6+8nBjEA8Rds4MePHz9//vz27RuQjVC3bvNOZHTyzIW5yw+Ut62+c//J169fUdSdPn8Vgs5cuPb23cfwrLkuUZN27r8ANBKLurMXrz149Gz9jvOuUZNSy5c+f/4C3d6rN+/ef/T06o07nz5/iStc6B4zZc/ha7fv3EFRd/Tk2ZPn7y5ed+Ltu3e7Dl71jJuWUrYU6JWrV6+hqLv34GFe/SqgGeevPEqvWO6dMH37/qtAl925ew9F3dnzF+89fOkRO9UzfhpQUWLxkh8/fwHFHz56hKLu2IlTr9586J652yt+uk/ijA07L0IC79mzZyjqTp0+c+vW7fuPXvbM3DVh7t5Pn7+9efv29es3L1++QlEHAcAgBRoDdD6QgRw3UHXEIACXTnWqjZfS2AAAAABJRU5ErkJggg==);
+}
+
+%ie8-checkbox--checked {
+  @include checkbox--checked;
+}
+
+%checkbox--checked {
+  @include checkbox--checked;
+}
+
+@mixin checklist--checked {
+  display: block;
+}
+
+%ie8-checklist--checked {
+  @include checklist--checked;
+}
+
+%checklist--checked {
+  @include checklist--checked;
+}
+
+%checkbox--focus {
+  border-color: black;
+}
+
+.checklist {
+  display: inline;
+
+  .option-label {
+    color: #000;
+  }
+
+  & > input {
+    filter: Alpha(opacity=0);
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+  }
+
+  $j: 'label:first-child';
+  $j2: 'li:first-child';
+  $k: '.check_base';
+  @for $i from 1 through 9 {
+    @if $i > 1 {
+      $j: $j + ' + label';
+      $j2: $j2 + ' + li';
+    }
+    $k: $k + ' + .check_option';
+
+    & > #{$k}.checked ~ .check_dropdown > .check_options > #{$j} {
+      @extend %ie8-checkbox--checked;
+    }
+
+    & > #{$k}.checked ~ .check_options > #{$j2} {
+      @extend %ie8-checklist--checked;
+    }
+
+    & > .check_option:nth-of-type(#{$i + 1}):checked ~ .check_dropdown > .check_options > label:nth-of-type(#{$i}) {
+      @extend %checkbox--checked;
+    }
+
+    & > .check_option:nth-of-type(#{$i + 1}):checked ~ .check_options > li:nth-of-type(#{$i}) {
+      @extend %checklist--checked;
+    }
+
+    & > .check_option:nth-of-type(#{$i + 1}):focus ~ .check_dropdown > .check_options > label:nth-of-type(#{$i}),
+    & > .check_option:nth-of-type(#{$i + 1}):focus ~ .check_options > li:nth-of-type(#{$i}) > label {
+      @extend %checkbox--focus;
+    }
+  }
+
+  & > .check_base.checked ~ .check_dropdown {
+    @include checklist__open;
+  }
+
+  & > .check_base:checked ~ .check_dropdown {
+    @include checklist__open;
+  }
+
+  & > .check_base:focus ~ .check_dropdown > dt > label {
+    border-color: #2070C7;
+  }
+
+  & > .check_dropdown {
+    display: inline-block;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    vertical-align: top;
+    z-index: 1;
+
+    & > .check_options {
+      background: #FFF;
+      border: 1px solid #CCC;
+      border-top: 0;
+      border-radius: 0 0 .25em .25em;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0;
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      z-index: 1;
+
+      & > label {
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAIAAAD9iXMrAAAAv0lEQVR42o2RTQ6CMBCF6fy13gH36tbExAPhcWQvN3HjyquwwTuUV0rUshBfSjIdvrw3MHJt2+oPCZ5L0/yGbl0nubo/not3zjlV9irn03H2y9rW9btWYVUx5b7vP7nfInIqYiYJnc6SIyJmEiZvcBIR3MhMCw7d4BHFIFCAwnzoh7ApOJu4ySmJeY4LISz94KQpLAkzwC/GiIjST/NMkiFo/jVScsHbMLy892pq+No8X6yYS+6w363vDWtZ3e8In9cWpY8nBn4AAAAASUVORK5CYII=) no-repeat .25em 55%;
+        border: 1px dotted transparent;
+        cursor: pointer;
+        display: block;
+        line-height: 1.5;
+        padding: .25em .25em 0 20px;
+        vertical-align: top;
+
+        &:hover {
+          background-color: #2070C7;
+          color: #FFF;
+        }
+      }
+    }
+  }
+
+  & > .check_options {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    & > li {
+      display: none;
+      margin: 2px;
+
+      & > label {
+        background: #2070C7;
+        border: 1px dotted transparent;
+        border-radius: .25em;
+        color: #FFF;
+        cursor: pointer;
+        display: inline-block;
+        padding: .25em .25em 0;
+        vertical-align: middle;
+
+        &:before {
+          content: 'x';
+          display: inline-block;
+          font-variant: small-caps;
+          font-weight: bold;
+          padding: 0 .25em .25em;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}

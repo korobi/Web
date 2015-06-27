@@ -11,11 +11,21 @@
 {% block body %}
     <div class="controls">
         <ul class="toggles">
-            <li>
-                <input type="checkbox" id="toggle-join-part" checked>
-                <label for="toggle-join-part" class="button button-rounded button-flat active">
-                    Join/part messages
-                </label>
+            <li class="checklist">
+                <input type="checkbox" id="toggle-chat-types" class="check_base">
+                <input type="checkbox" id="join" class="check_option" data-type="join" checked>
+                <input type="checkbox" id="nick" class="check_option" data-type="nick" checked>
+                <input type="checkbox" id="part" class="check_option" data-type="part" checked>
+                <input type="checkbox" id="quit" class="check_option" data-type="quit" checked>
+                <div class="check_dropdown">
+                    <label for="toggle-chat-types" class="button button-rounded button-flat active">Toggle types</label>
+                    <div class="check_options">
+                        <label for="join" class="option-label">Join</label>
+                        <label for="nick" class="option-label">Nick</label>
+                        <label for="part" class="option-label">Part</label>
+                        <label for="quit" class="option-label">Quit</label>
+                    </div>
+                </div>
             </li>
             <li>
                 <input type="checkbox" id="toggle-timezone" checked>

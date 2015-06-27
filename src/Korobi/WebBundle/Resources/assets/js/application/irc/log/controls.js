@@ -35,9 +35,8 @@ $(function() {
         $logs.attr('data-event-hidden', events.join(' '));
     }
 
-    var $toggleJoinPartInput = $controls.find('#toggle-join-part');
+    var $toggleChatTypes = $controls.find('.check_option');
     var eventsKey = 'korobi-hidden-events';
-    var statusEvents = ['join', 'quit', 'part'];
     var hiddenEvents = [];
 
     var $toggleLocalTimezoneInput = $controls.find('#toggle-timezone');
@@ -51,10 +50,6 @@ $(function() {
         if(fromStorage = localStorage.getItem(eventsKey)) {
             try {
                 hiddenEvents = JSON.parse(fromStorage);
-                var joinPartHidden = statusEvents.every(function (e) {
-                    return hiddenEvents.indexOf(e) !== -1;
-                });
-                $toggleJoinPartInput.prop('checked', !joinPartHidden);
                 hideEvents(hiddenEvents);
             } catch (ex) {
                 localStorage.removeItem(eventsKey);
@@ -74,24 +69,27 @@ $(function() {
     }
 
     // Status event toggle
-    $toggleJoinPartInput.change(function() {
-        var $this = $(this);
-        if($this.prop('checked')) {
-            hiddenEvents = hiddenEvents.filter(function(e) {
-                return statusEvents.indexOf(e) === -1;
-            });
-        } else {
-            hiddenEvents = hiddenEvents
-                .concat(statusEvents)
-                .filter(function(e, i, arr) {
-                    return arr.indexOf(e) === i;
-                });
-        }
-        if(window.localStorage) {
-            localStorage.setItem(eventsKey, JSON.stringify(hiddenEvents));
-        }
-        hideEvents(hiddenEvents);
+    $.each($toggleChatTypes, function(i, e){
+        $(e).change(function() {
+            var $this = $(this);
+            var $type = $this.data('type');
+            if($this.prop('checked')) {
+                var index;
+                if((index = hiddenEvents.indexOf($type)) !== -1) {
+                    hiddenEvents.splice(index, 1);
+                }
+            } else {
+                hiddenEvents.push($type);
+            }
+
+            if(window.localStorage) {
+                localStorage.setItem(eventsKey, JSON.stringify(hiddenEvents));
+            }
+
+            hideEvents(hiddenEvents);
+        });
     });
+
 
     // Local timezone toggle
     $toggleLocalTimezoneInput.change(function() {
