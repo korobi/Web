@@ -3,7 +3,7 @@
 .hero {
   width: 100%;
   padding: 30vh 0 5vh;
-  margin-bottom: 10vh;
+  margin-bottom: 5vh;
   background-color: rgba(0, 0, 0, 0.2);
   text-align: right;
   position: relative;
@@ -50,10 +50,35 @@
   }
 }
 
+.logs-header::before {
+  content: "";
+}
+
+.commands-header::before {
+  content: "";
+}
+
+.stats-header::before {
+  content: "";
+}
+
 .homepage-feature {
   @include span-columns(4);
   @include media($mobile) {
     @include span-columns(12);
+  }
+  text-align: center;
+  i {
+    font-size: 2em;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  h2::before {
+    margin-right: 0.3em;
+    font-family: 'FontAwesome';
   }
 }
 
@@ -81,5 +106,6 @@
 
   th {
     border-bottom: 1px solid rgb(85, 85, 85);
+    line-height: 1.2;
   }
 }
