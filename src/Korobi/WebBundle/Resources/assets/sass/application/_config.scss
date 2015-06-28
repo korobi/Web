@@ -6,7 +6,11 @@ $main-width: 68rem;
 //noinspection CssUnknownTarget
 $bodyBackgroundImage: url("/assets/images/bg.png?a");
 
-$footerHeight: 2em;
+$navigationHeight: 3em;
+$navigationShadow: 0 0 5px #000;
+
+$footerHeight: $navigationHeight;
+$footerShadow: $navigationShadow;
 $footerBackgroundColour: $primaryColour;
 $footerColor: #eee;
 

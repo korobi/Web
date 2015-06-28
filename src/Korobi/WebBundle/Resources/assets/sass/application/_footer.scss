@@ -14,14 +14,13 @@ footer.footer {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: $footerHeight;
   width: 100%;
   background-color: $footerBackgroundColour;
-  padding-left: 1em;
-  padding-right: 1em;
+  box-shadow: $footerShadow;
 
   div.footer--inner {
     @include outer-container;
+    height: $footerHeight;
     line-height: $footerHeight;
   }
 }
