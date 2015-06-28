@@ -4,6 +4,11 @@ body {
   background-repeat: repeat;
 }
 
+html {
+  // stop the page jumping about :)
+  overflow-y: scroll;
+}
+
 .js-warning {
   width: 100%;
   margin: 0 !important;
