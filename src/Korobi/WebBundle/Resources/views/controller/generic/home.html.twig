@@ -42,9 +42,18 @@
                 </thead>
                 <tbody>
                 {% for channel in channels %}
+                    {% set lastValidContent = channel.LastValidContentAt %}
                     <tr>
-                        <td>{{ channel.channel }}</td>
-                        <td>{{ relativeTime(now, channel.LastValidContentAt.getTimestamp()) }}</td>
+                        <td><a href="{{ path('channel', {'channel': channel.channel[1:], 'network': channel.network}) }}">{{ channel.channel }}</a></td>
+                        {% if lastValidContent == null %}
+                            <td><em>Never</em></td>
+                        {% else %}
+                            <td>
+                                <time datetime="{{ lastValidContent.getTimestamp() }}" title="{{ lastValidContent.getTimestamp() }}">
+                                    {{ relativeTime(now, channel.LastValidContentAt.getTimestamp()) }}
+                                </time>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>
