@@ -35,6 +35,7 @@ class ChannelHomeController extends BaseController {
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'channel' => $dbChannel,
+            'now' => time(),
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
             'links' => $links
