@@ -100,6 +100,12 @@ class Channel {
     private $last_valid_content_at;
 
     /**
+     * @MongoDB\Raw
+     */
+    private $topic;
+
+
+    /**
      * Get id
      *
      * @return id $id
@@ -446,5 +452,27 @@ class Channel {
     public function setLastValidContentAt($lastValidContentAt) {
         $this->last_valid_content_at = $lastValidContentAt;
         return $this;
+    }
+
+    /**
+     * Set topic
+     *
+     * @param raw $topic
+     * @return self
+     */
+    public function setTopic($topic)
+    {
+        $this->topic = $topic;
+        return $this;
+    }
+
+    /**
+     * Get topic
+     *
+     * @return raw $topic
+     */
+    public function getTopic()
+    {
+        return $this->topic;
     }
 }
