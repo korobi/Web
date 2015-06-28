@@ -60,12 +60,14 @@ $(function() {
         $(window).resize(initTooltip);
 
         var removeTooltip = function() {
+            tooltip.one('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+                // http://osvaldas.info/detecting-css-animation-transition-end-with-javascript
+                tooltip.remove();
+            });
             tooltip.animate({
                 top: '-=10',
                 opacity: 0
-            }, 120, function() {
-                $(this).remove();
-            });
+            }, 120);
 
             target.attr('title', tip);
         };
