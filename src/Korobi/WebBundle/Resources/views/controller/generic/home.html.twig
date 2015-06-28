@@ -49,7 +49,7 @@
                             <td><em>Never</em></td>
                         {% else %}
                             <td>
-                                <time datetime="{{ lastValidContent.getTimestamp() }}" title="{{ lastValidContent.getTimestamp() }}">
+                                <time datetime="{{ lastValidContent.getTimestamp() }}" title="{{ lastValidContent.getTimestamp()|date("c") }}">
                                     {{ relativeTime(now, channel.LastValidContentAt.getTimestamp()) }}
                                 </time>
                             </td>
