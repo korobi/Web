@@ -455,24 +455,22 @@ class Channel {
     }
 
     /**
+     * Get topic
+     *
+     * @return raw $topic
+     */
+    public function getTopic() {
+        return $this->topic;
+    }
+
+    /**
      * Set topic
      *
      * @param raw $topic
      * @return self
      */
-    public function setTopic($topic)
-    {
+    public function setTopic($topic) {
         $this->topic = $topic;
         return $this;
-    }
-
-    /**
-     * Get topic
-     *
-     * @return raw $topic
-     */
-    public function getTopic()
-    {
-        return $this->topic;
     }
 }
