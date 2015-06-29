@@ -15,11 +15,30 @@
 {% endblock %}
 
 {% block body %}
-    {# Each feature occupies 33% on desktop screens, hopefully (4 cols in neat) #}
+    {# Each feature block occupies a third of the space in the width on desktop screens. #}
     <div class="homepage-feature-holder">
-        <div class="homepage-feature"><h2 class="logs-header">Logs</h2><p>The klingon is proudly seismic. All hands tremble. Yell revolutionary like a fantastic girl. The mind is a united spacecraft. United particles, to the center. Pathway of a terrifying paralysis, outweigh the moon! Shields up.</p></div>
-        <div class="homepage-feature"><h2 class="commands-header">Commands</h2><p>The klingon is proudly seismic. All hands tremble. Yell revolutionary like a fantastic girl. The mind is a united spacecraft. United particles, to the center. Pathway of a terrifying paralysis, outweigh the moon! Shields up.</p></div>
-        <div class="homepage-feature"><h2 class="stats-header">Stats</h2><p>The klingon is proudly seismic. All hands tremble. Yell revolutionary like a fantastic girl. The mind is a united spacecraft. United particles, to the center. Pathway of a terrifying paralysis, outweigh the moon! Shields up.</p></div>
+        <div class="homepage-feature">
+            <h2 class="logs-header">Logs</h2>
+            <p>
+                One of the services provided by the IRC bot is the <em>logging</em> of your channel, be it publicly or privately. 
+                These logs generate channel statistics, are neatly organized and easily searchable within our website.
+            </p>
+        </div>
+        <div class="homepage-feature">
+            <h2 class="commands-header">Commands</h2>
+            <p>
+                Another service provided by the IRC bot is the ability to create factoid commands on the fly. 
+                Allowing for easy and flexible creation of responses based on frequently asked questions, and even listen for certain triggers to have it respond automatically.
+            </p>
+        </div>
+        <div class="homepage-feature">
+            <h2 class="stats-header">Stats</h2>
+            <p>
+                Statistics are generated based off of the logs collected by the IRC bot. 
+                We are able to generate statistics to accurately capture who is the most active person by hours, 
+                along with other things like whom uses the most smileys, who has been granted the most karma, and which person can make sailors blush with their vulgar language.
+            </p>
+        </div>
     </div>
 
     <div class="homepage-secondary-holder">
