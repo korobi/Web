@@ -18,7 +18,6 @@ php app/console assetic:dump
 
 echo "** Clearing cache..."
 php app/console cache:clear
-php app/console cache:clear --env prod
 
 echo "** Generating database hydrators..."
 php app/console doctrine:mongodb:generate:hydrators
