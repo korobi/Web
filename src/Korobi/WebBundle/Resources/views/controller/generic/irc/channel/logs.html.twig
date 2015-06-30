@@ -3,7 +3,7 @@
 {% set page_title = channel_name ~ ' on ' ~ network_name ~ ' - ' ~ (is_tail ? 'Tail' : 'Logs') %}
 
 {% block head %}
-    {% if not showing_current %}
+    {% if not showing_current or true %}
         <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
     {% endif %}
 {% endblock %}
