@@ -16,7 +16,7 @@ class HomeController extends BaseController {
             ->getRecentlyActiveChannels(5)
             ->toArray();
 
-        return $this->render('KorobiWebBundle:controller/generic:home.html.twig', [
+        return $this->render('KorobiWebBundle:controller/generic:home_old.html.twig', [
             'now' => time(),
             'channels' => $dbChannels,
         ]);
