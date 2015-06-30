@@ -181,7 +181,6 @@ $(function() {
     $(window).on('hashchange', function() {
         activeLines = parseHash();
         highlightLines(activeLines);
-        jumpToFirstLine(activeLines);
     });
 
     // delay load
