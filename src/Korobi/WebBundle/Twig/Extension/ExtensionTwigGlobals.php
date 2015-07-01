@@ -1,6 +1,6 @@
 <?php
 
-namespace Korobi\WebBundle\Extension;
+namespace Korobi\WebBundle\Twig\Extension;
 
 use Korobi\WebBundle\Util\GitInfo;
 

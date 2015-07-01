@@ -3,17 +3,17 @@ services:
     # ---- Twig Extensions ----
     # -------------------------
     korobi.extension.twig.globals:
-        class: Korobi\WebBundle\Extension\ExtensionTwigGlobals
+        class: Korobi\WebBundle\Twig\Extension\ExtensionTwigGlobals
         tags:
             - { name: twig.extension }
         arguments:
             - @korobi.git_info
     korobi.extension.twig.filters:
-        class: Korobi\WebBundle\Extension\ExtensionTwigFilters
+        class: Korobi\WebBundle\Twig\Extension\ExtensionTwigFilters
         tags:
             - { name: twig.extension }
     korobi.extension.twig.functions:
-        class: Korobi\WebBundle\Extension\ExtensionTwigFunctions
+        class: Korobi\WebBundle\Twig\Extension\ExtensionTwigFunctions
         tags:
             - { name: twig.extension }
     salavert.twig.time_ago:

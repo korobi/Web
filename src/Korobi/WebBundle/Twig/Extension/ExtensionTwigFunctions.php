@@ -1,6 +1,6 @@
 <?php
 
-namespace Korobi\WebBundle\Extension;
+namespace Korobi\WebBundle\Twig\Extension;
 
 class ExtensionTwigFunctions extends \Twig_Extension {
 
@@ -36,7 +36,6 @@ class ExtensionTwigFunctions extends \Twig_Extension {
             $result .= '<br><br>';
             next($plays);
         }
-
 
         return $result;
     }
