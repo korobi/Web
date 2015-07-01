@@ -14,7 +14,7 @@ if [ $? -ne 1 ]; then
 fi
 
 echo "** Dumping assets..."
-php app/console assetic:dump
+php app/console assetic:dump -vvv
 
 echo "** Clearing cache..."
 php app/console cache:clear
