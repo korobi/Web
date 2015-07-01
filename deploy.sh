@@ -16,6 +16,9 @@ fi
 echo "** Clearing cache..."
 php app/console cache:clear --no-warmup
 
+echo "** Removing existing CSS..."
+rm web/assets/css/*.css
+
 echo "** Generating database hydrators..."
 php app/console doctrine:mongodb:generate:hydrators
 
