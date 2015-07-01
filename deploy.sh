@@ -19,5 +19,8 @@ php app/console cache:clear
 echo "** Dumping assets..."
 php app/console assetic:dump
 
+echo "** Clearing cache..."
+php app/console cache:clear
+
 echo "** Generating database hydrators..."
 php app/console doctrine:mongodb:generate:hydrators
