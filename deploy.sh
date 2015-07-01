@@ -13,6 +13,9 @@ if [ $? -ne 1 ]; then
     composer install --no-scripts 2>&1
 fi
 
+echo "** Removing assetic..."
+rm app/cache/dev/assetic/ -rf
+
 echo "** Clearing cache..."
 php app/console cache:clear
 
