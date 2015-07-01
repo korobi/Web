@@ -1,5 +1,5 @@
 fieldset {
-  background-color: lighten($base-border-color, 10%);
+  background-color: $secondary-background-color;
   border: $base-border;
   margin: 0 0 $small-spacing;
   padding: $base-spacing;
@@ -18,8 +18,7 @@ label {
   margin-bottom: $small-spacing / 2;
 
   &.required::after {
-    color: #AA3333;
-    content: " *";
+    content: "*";
   }
 
   abbr {
@@ -28,8 +27,7 @@ label {
 }
 
 #{$all-text-inputs},
-select[multiple=multiple],
-textarea {
+select[multiple=multiple] {
   background-color: $base-background-color;
   border: $base-border;
   border-radius: $base-border-radius;
@@ -37,19 +35,28 @@ textarea {
   box-sizing: border-box;
   font-family: $base-font-family;
   font-size: $base-font-size;
-  margin-bottom: $base-spacing / 2;
+  margin-bottom: $small-spacing;
   padding: $base-spacing / 3;
-  transition: border-color;
+  transition: border-color $base-duration $base-timing;
   width: 100%;
 
   &:hover {
-    border-color: darken($base-border-color, 10%);
+    border-color: shade($base-border-color, 20%);
   }
 
   &:focus {
     border-color: $action-color;
     box-shadow: $form-box-shadow-focus;
     outline: none;
+  }
+
+  &:disabled {
+    background-color: shade($base-background-color, 5%);
+    cursor: not-allowed;
+
+    &:hover {
+      border: $base-border;
+    }
   }
 }
 
@@ -58,7 +65,7 @@ textarea {
 }
 
 input[type="search"] {
-  @include appearance(none);
+  appearance: none;
 }
 
 input[type="checkbox"],
@@ -68,7 +75,7 @@ input[type="radio"] {
 }
 
 input[type="file"] {
-  padding-bottom: $small-spacing;
+  margin-bottom: $small-spacing;
   width: 100%;
 }
 
