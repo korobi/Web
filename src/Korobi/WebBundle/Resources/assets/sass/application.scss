@@ -41,3 +41,7 @@
 
 // home
 @import "application/home";
+
+.someTestClassThatDoesNotExist {
+    display: block;   
+}
