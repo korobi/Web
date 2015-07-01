@@ -26,3 +26,6 @@ echo "** Dumping assets..."
 php app/console assetic:dump
 
 echo "** Hello, I am "`whoami`
+
+cat src/Korobi/WebBundle/Resources/assets/sass/application.scss
+echo "abc" > web/assets/css/testfile
