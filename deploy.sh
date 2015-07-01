@@ -17,7 +17,7 @@ echo "** Removing assetic..."
 rm app/cache/dev/assetic/ -rf
 
 echo "** Clearing cache..."
-php app/console cache:clear
+php app/console cache:clear --no-warmup
 
 echo "** Dumping assets..."
 php app/console assetic:dump
