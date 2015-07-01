@@ -20,4 +20,4 @@ echo "** Generating database hydrators..."
 php app/console doctrine:mongodb:generate:hydrators
 
 echo "** Dumping assets..."
-php app/console assetic:dump --force
+php app/console assetic:dump
