@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b2fbbe36a8c70fd516113b123afb57d8",
+    "hash": "fda55df9e014efa81557deacc8da53f4",
     "packages": [
         {
             "name": "crodas/influx-php",
@@ -922,12 +922,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "9addf539dfbdbe83799abbf90f70503eb36ef3e3"
+                "reference": "b1089b723df8ae2230694a3899941e05d560c41f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/9addf539dfbdbe83799abbf90f70503eb36ef3e3",
-                "reference": "9addf539dfbdbe83799abbf90f70503eb36ef3e3",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/b1089b723df8ae2230694a3899941e05d560c41f",
+                "reference": "b1089b723df8ae2230694a3899941e05d560c41f",
                 "shasum": ""
             },
             "require": {
@@ -996,7 +996,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2015-06-15 20:10:22"
+            "time": "2015-06-24 10:28:44"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -1793,16 +1793,16 @@
         },
         {
             "name": "kriswallsmith/buzz",
-            "version": "v0.14",
+            "version": "v0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/Buzz.git",
-                "reference": "f802a9b9d01b53496f50c9c5e09b5c779cbbd300"
+                "reference": "d4041666c3ffb379af02a92dabe81c904b35fab8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/f802a9b9d01b53496f50c9c5e09b5c779cbbd300",
-                "reference": "f802a9b9d01b53496f50c9c5e09b5c779cbbd300",
+                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/d4041666c3ffb379af02a92dabe81c904b35fab8",
+                "reference": "d4041666c3ffb379af02a92dabe81c904b35fab8",
                 "shasum": ""
             },
             "require": {
@@ -1837,7 +1837,7 @@
                 "curl",
                 "http client"
             ],
-            "time": "2015-06-02 16:48:29"
+            "time": "2015-06-25 17:26:56"
         },
         {
             "name": "monolog/monolog",
@@ -2102,16 +2102,16 @@
         },
         {
             "name": "salavert/time-ago-in-words",
-            "version": "v1.6.1",
+            "version": "v1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/salavert/time-ago-in-words.git",
-                "reference": "92929ed6a6e1ae732dfddb453472bb85b08e9b1b"
+                "reference": "1e2d9f01dee90790057aee7f3370a289c33f52c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/salavert/time-ago-in-words/zipball/92929ed6a6e1ae732dfddb453472bb85b08e9b1b",
-                "reference": "92929ed6a6e1ae732dfddb453472bb85b08e9b1b",
+                "url": "https://api.github.com/repos/salavert/time-ago-in-words/zipball/1e2d9f01dee90790057aee7f3370a289c33f52c6",
+                "reference": "1e2d9f01dee90790057aee7f3370a289c33f52c6",
                 "shasum": ""
             },
             "require": {
@@ -2154,7 +2154,7 @@
                 "time ago in words",
                 "twig"
             ],
-            "time": "2015-06-19 20:44:30"
+            "time": "2015-06-30 17:31:54"
         },
         {
             "name": "sensio/distribution-bundle",

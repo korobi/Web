@@ -14,7 +14,7 @@
         "doctrine/mongodb-odm-bundle": "3.0.*@dev",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "twig/extensions": "~1.2",
-        "symfony/assetic-bundle": "~2.3",
+        "symfony/assetic-bundle": "~2.6",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
