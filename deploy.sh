@@ -24,3 +24,5 @@ php app/console doctrine:mongodb:generate:hydrators
 
 echo "** Dumping assets..."
 php app/console assetic:dump
+
+echo "** Hello, I am "`whoami`
