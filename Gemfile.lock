@@ -1,0 +1,42 @@
+GIT
+  remote: https://github.com/korobi/capifony.git
+  revision: cffdb8f2bd3ced0c5b1bd5402060742e5b790772
+  specs:
+    capifony (2.8.7.dev)
+      capistrano (>= 2.13.5, <= 2.16.0)
+      capistrano-maintenance (= 0.0.3)
+      colored (>= 1.2.0)
+      inifile (>= 2.0.2, < 3.0.0)
+      ruby-progressbar (= 1.4.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    capistrano (2.15.5)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    capistrano-maintenance (0.0.3)
+      capistrano (>= 2.0.0)
+    colored (1.2)
+    highline (1.7.2)
+    inifile (2.0.2)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.2)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
+    ruby-progressbar (1.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  capifony!
+
+BUNDLED WITH
+   1.10.5
