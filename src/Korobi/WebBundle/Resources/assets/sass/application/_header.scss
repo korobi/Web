@@ -105,17 +105,28 @@ nav.navigation:after {
   }
   input {
     display: inline-block;
-    border: none;
     background: #101010;
     margin: 0 0 0 0.75em;
     color: #aaa;
     z-index: 9999;
     width: auto;
     box-shadow: none;
+    border: 1px solid transparent;
   }
-  input:focus {
+  input:hover {
+    border: 1px solid transparent;
+  }
+
+  input:focus, input:active {
     color: #fff;
+    box-shadow: none;
+    border-right: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid #555;
   }
+
+
   label:before {
     content: "\f002";
     font-family: 'FontAwesome';
