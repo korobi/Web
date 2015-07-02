@@ -3,8 +3,8 @@
     {# We have a bit of logic in here relating to whether the user's an admin or not (admins get shiny links!) #}
     {% if app.user and is_granted('ROLE_SUPER_ADMIN') %}
         <div class="footer--revision">
-            <i class="fa fa-code-fork"></i> <a href="https://github.com/Korobi">Korobi</a>/<a href="https://github.com/Korobi/Web">Web</a>
-            (<a href="https://github.com/Korobi/Web/commit/{{ info.getHash() }}">{{ info.getShortHash() }}</a>) on <a href="https://github.com/Korobi/Web/tree/{{ info.getBranch() }}">{{ info.getBranch() }}</a>
+            <i class="fa fa-code-fork"></i> <a href="https://github.com/korobi">Korobi</a>/<a href="https://github.com/korobi/Web">Web</a>
+            (<a href="https://github.com/korobi/Web/commit/{{ info.getHash() }}">{{ info.getShortHash() }}</a>) on <a href="https://github.com/korobi/Web/tree/{{ info.getBranch() }}">{{ info.getBranch() }}</a>
         </div>
     {% else %}
         <div class="footer--revision">
