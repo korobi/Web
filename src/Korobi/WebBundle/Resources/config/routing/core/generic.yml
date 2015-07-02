@@ -5,6 +5,10 @@ home:
     path: /
     defaults:
         _controller: korobi.controller.generic.home:homeAction
+about:
+    path: /about/
+    defaults:
+        _controller: korobi.controller.generic.about:homeAction
 csp_report:
     path: /csp/report/
     defaults:

@@ -2,6 +2,9 @@ services:
     korobi.controller.generic.home:
         class: Korobi\WebBundle\Controller\Generic\HomeController
         parent: korobi.base_controller
+    korobi.controller.generic.about:
+        class: Korobi\WebBundle\Controller\Generic\AboutController
+        parent: korobi.base_controller
     korobi.controller.generic.docs:
         class: Korobi\WebBundle\Controller\Generic\DocsController
         parent: korobi.base_controller
