@@ -14,19 +14,10 @@ if [ $? -ne 1 ]; then
 fi
 
 echo "** Clearing cache..."
-php app/console cache:clear --no-warmup
-
-echo "** Removing existing CSS..."
-rm web/assets/css/*.css
+php app/console cache:clear
 
 echo "** Generating database hydrators..."
 php app/console doctrine:mongodb:generate:hydrators
 
 echo "** Dumping assets..."
 php app/console assetic:dump
-
-echo "** Hello, I am "`whoami`
-
-cat src/Korobi/WebBundle/Resources/assets/sass/application.scss
-
-printenv
