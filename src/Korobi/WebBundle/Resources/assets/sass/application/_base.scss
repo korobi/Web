@@ -68,8 +68,6 @@ small,
 }
 
 
-ul {
+ul:not(.footer--links) {
   @extend %default-ul;
-  margin-bottom: 0;
-  padding-left: 0;
 }
