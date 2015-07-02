@@ -20,7 +20,7 @@ class RevisionsController extends BaseController {
         }
 
         $client = new Client();
-        $client->authenticate($this->container->getParameter('github_oauth_token'), Client::AUTH_HTTP_TOKEN);
+        $client->authenticate($this->container->getParameter('github.oauth_token'), Client::AUTH_HTTP_TOKEN);
 
         return $this->render('KorobiWebBundle:controller/generic:revisions.html.twig', [
             'repository' => $repository,

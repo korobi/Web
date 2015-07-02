@@ -16,16 +16,16 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    # GitHub OAuth authentication
-    github_client_id: ~
-    github_client_secret: ~
-    github_hook_hmac_secret: ~
-    github_oauth_token: ~
+    # GitHub authentication
+    github.client_id: ~
+    github.client_secret: ~
+    github.hook_hmac_secret: ~
+    github.oauth_token: ~
 
-    # Akio IRC notifications data
-    akio_enabled: false
-    akio_path: ~
-    akio_key: ~
+    # Akio notifications
+    akio.enabled: false
+    akio.path: ~
+    akio.key: ~
 
     sentry_dsn: ~
 
@@ -37,8 +37,8 @@ parameters:
     channel_stats_root: ~
 
     # influx details
-    influx_host: 127.0.0.1
-    influx_port: 8086
-    influx_user: user
-    influx_pass: pass
-    influx_db: database
+    influx.host: 127.0.0.1
+    influx.port: 8086
+    influx.user: user
+    influx.pass: pass
+    influx.db: database

@@ -7,5 +7,5 @@ services:
             - @korobi.git_info
             - @korobi.akio
         calls:
-            - [setHmacKey, ["%github_hook_hmac_secret%"]]
+            - [setHmacKey, ["%github.hook_hmac_secret%"]]
             - [setRootPath, ["%kernel.root_dir%"]]
