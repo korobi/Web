@@ -101,15 +101,20 @@ nav.navigation:after {
 
   label {
     display: inline-block;
+    margin-left: 0.75em;
   }
   input {
     display: inline-block;
     border: none;
     background: #101010;
-    margin: 0 0 0 2em;
-    color: #fff;
+    margin: 0 0 0 0.75em;
+    color: #aaa;
     z-index: 9999;
     width: auto;
+    box-shadow: none;
+  }
+  input:focus {
+    color: #fff;
   }
   label:before {
     content: "\f002";
