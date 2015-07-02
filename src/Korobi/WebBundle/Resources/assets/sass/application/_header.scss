@@ -94,7 +94,6 @@ nav.navigation:after {
 }
 
 .navigation--search {
-  z-index: 9998;
   display: inline-block;
   border: 1px solid #555;
   background-color: #101010;
@@ -108,7 +107,6 @@ nav.navigation:after {
     background: #101010;
     margin: 0 0 0 0.75em;
     color: #aaa;
-    z-index: 9999;
     width: auto;
     box-shadow: none;
     border: 1px solid transparent;
