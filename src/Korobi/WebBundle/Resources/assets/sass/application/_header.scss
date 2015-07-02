@@ -93,6 +93,29 @@ nav.navigation:after {
   clear: both;
 }
 
+.navigation--search {
+  z-index: 9998;
+  display: inline-block;
+  border: 1px solid #555;
+  background-color: #101010;
+
+  label {
+    display: inline-block;
+  }
+  input {
+    display: inline-block;
+    border: none;
+    background: #101010;
+    margin: 0 0 0 2em;
+    color: #fff;
+    z-index: 9999;
+  }
+  label:before {
+    content: "\f002";
+    font-family: 'FontAwesome';
+  }
+}
+
 @media (max-width: $medium-screen) {
   nav.navigation {
     padding-left: 0;
