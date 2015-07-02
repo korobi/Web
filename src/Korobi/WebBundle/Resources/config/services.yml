@@ -64,31 +64,31 @@ services:
             - [setHmacKey, ["%github_hook_hmac_secret%"]]
             - [setRootPath, ["%kernel.root_dir%"]]
     # Network
-    korobi.controller.network.home:
+    korobi.controller.irc.network.home:
         class: Korobi\WebBundle\Controller\Generic\IRC\Network\NetworkHomeController
         parent: korobi.base_controller
     # Channel
-    korobi.controller.channel.home:
+    korobi.controller.irc.channel.home:
         class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelHomeController
         parent: korobi.base_controller
-    korobi.controller.channel.log:
+    korobi.controller.irc.channel.log:
         class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelLogController
         parent: korobi.base_controller
-    korobi.controller.channel.command:
+    korobi.controller.irc.channel.command:
         class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelCommandController
         parent: korobi.base_controller
-    korobi.controller.channel.stat:
+    korobi.controller.irc.channel.stat:
         class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelStatController
         parent: korobi.base_controller
-    korobi.controller.channel.ai:
+    korobi.controller.irc.channel.ai:
         class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelAIController
         parent: korobi.base_controller
-    korobi.controller.channel.game:
+    korobi.controller.irc.channel.game:
         class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelGameController
         parent: korobi.base_controller
     # Legacy
-    korobi.controller.rewrite:
-        class: Korobi\WebBundle\Controller\RewriteController
+    korobi.controller.irc.rewrite:
+        class: Korobi\WebBundle\Controller\Generic\IRC\RewriteController
         parent: korobi.base_controller
 
     # ---------------------------

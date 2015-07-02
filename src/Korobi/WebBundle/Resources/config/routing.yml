@@ -1,7 +1,7 @@
-_core_public:
-    resource: '@KorobiWebBundle/Resources/config/routing/core/public.yml'
-_core_private:
-    resource: '@KorobiWebBundle/Resources/config/routing/core/private.yml'
+_core_generic:
+    resource: '@KorobiWebBundle/Resources/config/routing/core/generic.yml'
+_core_internal:
+    resource: '@KorobiWebBundle/Resources/config/routing/core/internal.yml'
 
 _irc_network:
     resource: '@KorobiWebBundle/Resources/config/routing/irc/network.yml'

@@ -1,7 +1,8 @@
 <?php
 
-namespace Korobi\WebBundle\Controller;
+namespace Korobi\WebBundle\Controller\Generic\IRC;
 
+use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
 
