@@ -66,3 +66,8 @@ small,
 .no-wrapping-paper {
   white-space: nowrap
 }
+
+
+ul {
+  @extend %default-ul;
+}
