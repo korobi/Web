@@ -10,7 +10,7 @@ framework:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
     form:            ~
-    csrf_protection: ~
+    csrf_protection: true
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
@@ -108,6 +108,8 @@ hwi_oauth:
             type: github
             client_id: "%github.client_id%"
             client_secret: "%github.client_secret%"
+            options:
+                csrf: true
     fosub:
         properties:
             github: githubUserId
