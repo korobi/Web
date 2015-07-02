@@ -68,6 +68,6 @@ small,
 }
 
 
-ul:not(.footer--links) {
+ul:not(.footer--links):not(.navigation--links) {
   @extend %default-ul;
 }
