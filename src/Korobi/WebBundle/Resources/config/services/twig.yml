@@ -1,0 +1,20 @@
+services:
+    korobi.extension.twig.globals:
+        class: Korobi\WebBundle\Twig\Extension\ExtensionTwigGlobals
+        tags:
+            - { name: twig.extension }
+        arguments:
+            - @korobi.git_info
+    korobi.extension.twig.filters:
+        class: Korobi\WebBundle\Twig\Extension\ExtensionTwigFilters
+        tags:
+            - { name: twig.extension }
+    korobi.extension.twig.functions:
+        class: Korobi\WebBundle\Twig\Extension\ExtensionTwigFunctions
+        tags:
+            - { name: twig.extension }
+    salavert.twig.time_ago:
+        class: Salavert\Twig\Extension\TimeAgoExtension
+        arguments: [@translator]
+        tags:
+          - { name: twig.extension }

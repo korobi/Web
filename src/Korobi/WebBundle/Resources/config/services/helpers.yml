@@ -1,0 +1,22 @@
+services:
+
+    korobi.git_info:
+        class: Korobi\WebBundle\Util\GitInfo
+    korobi.navigation_collection:
+        class: Korobi\WebBundle\Util\NavigationCollection
+        arguments:
+            - %korobi.config%
+    korobi.akio:
+        class: Korobi\WebBundle\Util\Akio
+        arguments:
+            - %akio_enabled%
+            - %akio_path%
+            - %akio_key%
+    korobi.influx:
+        class: Korobi\WebBundle\Util\InfluxService
+        arguments:
+            - %influx_host%
+            - %influx_port%
+            - %influx_user%
+            - %influx_pass%
+            - %influx_db%

@@ -1,0 +1,22 @@
+services:
+    korobi.controller.generic.home:
+        class: Korobi\WebBundle\Controller\Generic\HomeController
+        parent: korobi.base_controller
+    korobi.controller.generic.docs:
+        class: Korobi\WebBundle\Controller\Generic\DocsController
+        parent: korobi.base_controller
+    korobi.controller.generic.kitty:
+        class: Korobi\WebBundle\Controller\Generic\KittyImageController
+        parent: korobi.base_controller
+    korobi.controller.generic.revisions:
+        class: Korobi\WebBundle\Controller\Generic\RevisionsController
+        parent: korobi.base_controller
+    korobi.controller.generic.security:
+        class: Korobi\WebBundle\Controller\Generic\SecurityController
+        parent: korobi.base_controller
+        arguments:
+            - @korobi.akio
+            - @logger
+    korobi.controller.generic.style_guide:
+        class: Korobi\WebBundle\Controller\Generic\StyleGuideController
+        parent: korobi.base_controller

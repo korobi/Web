@@ -1,0 +1,13 @@
+imports:
+    - { resource: services/controller/generic.yml }
+    - { resource: services/controller/internal.yml }
+    - { resource: services/controller/irc/channel.yml }
+    - { resource: services/controller/irc/network.yml }
+    - { resource: services/controller/irc/legacy.yml }
+
+services:
+    korobi.base_controller:
+        class: Korobi\WebBundle\Controller\BaseController
+        calls:
+            - [setContainer, ["@service_container"]]
+            - [setAuthChecker, ["@security.authorization_checker"]]

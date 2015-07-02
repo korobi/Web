@@ -1,0 +1,4 @@
+services:
+    korobi.controller.irc.rewrite:
+        class: Korobi\WebBundle\Controller\Generic\IRC\RewriteController
+        parent: korobi.base_controller

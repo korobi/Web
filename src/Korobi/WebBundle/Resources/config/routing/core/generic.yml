@@ -4,45 +4,41 @@
 home:
     path: /
     defaults:
-        _controller: korobi.controller.home:homeAction
+        _controller: korobi.controller.generic.home:homeAction
+csp_report:
+    path: /csp/report/
+    defaults:
+        _controller: korobi.controller.generic.security:reportCspAction
+    methods: [POST]
 docs:
     path: /docs/
     defaults:
-        _controller: korobi.controller.docs:renderAction
+        _controller: korobi.controller.generic.docs:renderAction
         file: index
 docs_file:
     path: /docs/{file}/
     defaults:
-        _controller: korobi.controller.docs:renderAction
+        _controller: korobi.controller.generic.docs:renderAction
         file: index
 kitty_images:
     path: /kitty/
     defaults:
-        _controller: korobi.controller.kitty:homeAction
+        _controller: korobi.controller.generic.kitty:homeAction
 revisions:
     path: /revisions/{repository}/
     defaults:
-        _controller: korobi.controller.revisions:listAction
+        _controller: korobi.controller.generic.revisions:listAction
         repository: Web
-theme_toggle:
-    path: /theme/
-    defaults:
-        _controller: korobi.theme_controller:toggleAction
 style_guide:
     path: /style-guide/
     defaults:
-        _controller: korobi.controller.style_guide:displayAction
-csp_report:
-    path: /csp/report/
-    defaults:
-        _controller: korobi.controller.security:reportCspAction
-    methods: [POST]
+        _controller: korobi.controller.generic.style_guide:displayAction
 unexpected_redirect:
     path: /unexpected-redirect/
     defaults:
-        _controller: korobi.controller.security:showRedirectAction
+        _controller: korobi.controller.generic.security:showRedirectAction
 # temporary
 dummy:
     path: /dummy/
     defaults:
-        _controller: korobi.controller.home:homeAction
+        _controller: korobi.controller.generic.home:homeAction

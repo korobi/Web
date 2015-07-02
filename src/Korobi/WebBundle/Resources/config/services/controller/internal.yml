@@ -1,0 +1,11 @@
+services:
+    korobi.controller.internal.deploy:
+        class: Korobi\WebBundle\Controller\Internal\DeploymentController
+        parent: korobi.base_controller
+        arguments:
+            - @logger
+            - @korobi.git_info
+            - @korobi.akio
+        calls:
+            - [setHmacKey, ["%github_hook_hmac_secret%"]]
+            - [setRootPath, ["%kernel.root_dir%"]]

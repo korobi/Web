@@ -1,0 +1,7 @@
+services:
+    korobi.command.stats_gen:
+        class: Korobi\WebBundle\Console\StatsGeneration
+        arguments:
+            - @korobi.influx
+        tags:
+            -  { name: console.command }
