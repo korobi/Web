@@ -22,6 +22,9 @@ korobi_web:
               route: 'https://docs.korobi.io/'
               external: true
 
+            - title: About
+              route: 'about'
+
             - title: Admin
               route: 'dummy'
               requires_admin: true

@@ -83,6 +83,13 @@
 
 .homepage-feature-holder, .homepage-secondary-holder {
   @include outer-container;
+  padding: 0;
+}
+
+.homepage-feature-holder {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1em;
+  border-radius: 0.3em;
 }
 
 .homepage-secondary-holder .recent-channel-activity, .homepage-secondary-holder div.about {
