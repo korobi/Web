@@ -30,6 +30,8 @@ class ChannelHomeController extends BaseController {
             $links[] = $this->createLink($dbChannel, 'Commands', $this->generateUrl('channel_command', $linkBase));
         }
 
+        dump($dbChannel->getTopic());
+
         // time to render!
         return $this->render('KorobiWebBundle:controller/generic/irc/channel:home.html.twig', [
             'network_name' => $dbNetwork->getName(),
