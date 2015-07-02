@@ -1,5 +1,4 @@
 services:
-
     korobi.git_info:
         class: Korobi\WebBundle\Util\GitInfo
     korobi.navigation_collection:

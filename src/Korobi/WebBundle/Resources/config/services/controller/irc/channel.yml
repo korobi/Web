@@ -1,5 +1,4 @@
 services:
-
     korobi.controller.irc.channel.home:
         class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelHomeController
         parent: korobi.base_controller
