@@ -25,7 +25,7 @@ class ExtensionTwigGlobals extends \Twig_Extension {
     public function getGlobals() {
         return [
             'app_name' => 'Korobi',
-            'git_hash' => $this->gitInfo->getShortHash()
+            'git_hash' => $this->gitInfo->getShortHash(),
         ];
     }
 }

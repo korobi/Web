@@ -45,11 +45,11 @@ class Akio {
             $this->guzzle->get($this->url, [
                 'query' => [
                     'type' => $type,
-                    'message' => $text
+                    'message' => $text,
                 ],
                 'headers' => [
-                    'X-Korobi-Key' => $this->key
-                ]
+                    'X-Korobi-Key' => $this->key,
+                ],
             ]);
         }
     }

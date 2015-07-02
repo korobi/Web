@@ -40,7 +40,7 @@ class ChannelHomeController extends BaseController {
             'now' => time(),
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
-            'links' => $links
+            'links' => $links,
         ]);
     }
 
@@ -48,7 +48,7 @@ class ChannelHomeController extends BaseController {
         /** @var Channel $dbChannel */
         $result = [
             'name' => $name,
-            'href' => $href
+            'href' => $href,
         ];
         if($dbChannel->getKey() !== null && $this->authChecker->isGranted('ROLE_ADMIN')) {
             $result['href'] .= '?key=' . $dbChannel->getKey();

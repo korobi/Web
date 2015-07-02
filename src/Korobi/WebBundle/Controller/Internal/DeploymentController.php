@@ -89,7 +89,7 @@ class DeploymentController extends BaseController {
         }
 
         return $this->render('KorobiWebBundle:controller/internal:deployment.html.twig', [
-            'doc' => $deployment
+            'doc' => $deployment,
         ]);
     }
 }

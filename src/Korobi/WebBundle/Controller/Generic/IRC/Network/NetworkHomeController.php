@@ -54,7 +54,7 @@ class NetworkHomeController extends BaseController {
 
             $channels[$channel] = $this->generateUrl('channel', [
                 'network' => $network,
-                'channel' => self::transformChannelName($channel)
+                'channel' => self::transformChannelName($channel),
             ]);
         }
 
@@ -63,7 +63,7 @@ class NetworkHomeController extends BaseController {
         return $this->render('KorobiWebBundle:controller/generic/irc/network:network.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'all_channels_private' => empty($channels),
-            'channels' => $channels
+            'channels' => $channels,
         ]);
     }
 
@@ -107,7 +107,7 @@ class NetworkHomeController extends BaseController {
 
             if(!empty($channels)) {
                 $networks[$network->getName()] = $this->generateUrl('network', [
-                    'network' => $network->getSlug()
+                    'network' => $network->getSlug(),
                 ]);
             }
         }
@@ -116,7 +116,7 @@ class NetworkHomeController extends BaseController {
 
         return $this->render('KorobiWebBundle:controller/generic/irc/network:networks.html.twig', [
             'all_networks_private' => empty($networks),
-            'networks' => $networks
+            'networks' => $networks,
         ]);
     }
 }

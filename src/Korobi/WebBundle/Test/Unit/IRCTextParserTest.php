@@ -34,7 +34,7 @@ class HtmlFacility {
             'bg' => IRCTextParser::DEFAULT_BACKGROUND,
             'bold' => false,
             'italic' => false,
-            'underline' => false
+            'underline' => false,
         ]);
 
         if (!$found) {
@@ -51,7 +51,7 @@ class HtmlFacility {
                 'content' => $content[0]->__toString(),
                 'class' => $content->attributes()->__toString(),
                 'tag' => $tag,
-                'child' => $this->parse($content)
+                'child' => $this->parse($content),
             ];
         }
         return $c;
@@ -226,7 +226,7 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertEquals([
                 'fg' => 5,
                 'bg' => IRCTextParser::DEFAULT_BACKGROUND,
-                'skip' => 2
+                'skip' => 2,
             ],
             IRCTextParser::parseColour($message)
         );
@@ -237,7 +237,7 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertEquals([
                 'fg' => 5,
                 'bg' => 4,
-                'skip' => 5
+                'skip' => 5,
             ],
             IRCTextParser::parseColour($message)
         );
@@ -248,7 +248,7 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertEquals([
                 'fg' => 5,
                 'bg' => 4,
-                'skip' => 3
+                'skip' => 3,
             ],
             IRCTextParser::parseColour($message)
         );
@@ -259,7 +259,7 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertEquals([
                 'fg' => 5,
                 'bg' => 2,
-                'skip' => 1
+                'skip' => 1,
             ],
             IRCTextParser::parseColour($message, 99, 2)
         );
@@ -270,7 +270,7 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertEquals([
                 'fg' => 3,
                 'bg' => IRCTextParser::DEFAULT_BACKGROUND,
-                'skip' => 1
+                'skip' => 1,
             ],
             IRCTextParser::parseColour($message)
         );
@@ -279,7 +279,7 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertEquals([
                 'fg' => 2,
                 'bg' => IRCTextParser::DEFAULT_BACKGROUND,
-                'skip' => 1
+                'skip' => 1,
             ],
             IRCTextParser::parseColour($message)
         );
@@ -290,7 +290,7 @@ class IRCTextParserTest extends WebTestCase {
         $this->assertEquals([
                 'fg' => IRCTextParser::DEFAULT_FOREGROUND,
                 'bg' => IRCTextParser::DEFAULT_BACKGROUND,
-                'skip' => 0
+                'skip' => 0,
             ],
             IRCTextParser::parseColour($message)
         );

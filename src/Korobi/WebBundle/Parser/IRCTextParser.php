@@ -197,7 +197,7 @@ class IRCTextParser {
      * @return string
      */
     public static function createColorTag($fg, $bg, $reverse = false) {
-        return '<span class="'. ($reverse
+        return '<span class="' . ($reverse
             ? self::getColorClass($bg, $fg)
             : self::getColorClass($fg, $bg)) . '">';
     }
@@ -229,7 +229,7 @@ class IRCTextParser {
         $result = [
             'fg' => $fg,
             'bg' => $bg,
-            'skip' => 0
+            'skip' => 0,
         ];
 
         preg_match(

@@ -13,7 +13,7 @@ class ExtensionTwigFilters extends \Twig_Extension {
     public function getFilters() {
         return [
             new \Twig_SimpleFilter('ircformat', [$this, 'ircFormat']),
-            new \Twig_SimpleFilter('arsort', [$this, 'arsort'])
+            new \Twig_SimpleFilter('arsort', [$this, 'arsort']),
         ];
     }
 

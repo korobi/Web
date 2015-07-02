@@ -112,7 +112,7 @@ class ChannelLogController extends BaseController {
             'is_tail' => $tail !== false,
             'showing_current' => $showingCurrent,
             'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
-            'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel())
+            'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
         ]);
 
         if (count($chats) == 0) {
@@ -165,7 +165,7 @@ class ChannelLogController extends BaseController {
             'realNick'   => $nick,
             'nickTooLong'=> strlen($nick) - self::MAX_NICK_LENGTH > 1,
             'nick'       => LogParser::getActorName($chat),
-            'message'    => $this->parseChatMessage($chat)
+            'message'    => $this->parseChatMessage($chat),
         ];
     }
 

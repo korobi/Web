@@ -2,8 +2,8 @@
 
 namespace Korobi\WebBundle\Deployment;
 
-use Korobi\WebBundle\Document\User;
 use Korobi\WebBundle\Document\Revision;
+use Korobi\WebBundle\Document\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 

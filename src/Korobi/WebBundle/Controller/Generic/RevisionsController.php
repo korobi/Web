@@ -27,7 +27,7 @@ class RevisionsController extends BaseController {
             'revisions' => $client
                 ->api('repo')
                 ->commits()
-                ->all('korobi', $repository, ['sha' => 'master'])
+                ->all('korobi', $repository, ['sha' => 'master']),
         ]);
     }
 }

@@ -11,7 +11,7 @@ class TestOutputParser {
             'passed' => 0,
             'failures' => 0,
             'assertions' => 0,
-            'status' => 'Pass'
+            'status' => 'Pass',
         ];
         $regex = '/(?J)(?|Tests: (?P<tests>[0-9]+), Assertions: (?P<assertions>[0-9]+), Failures: (?P<failures>[0-9]+)(?:, (?:Incomplete|Skipped): (?P<incomplete>[0-9]+))?)|(?|OK \((?P<tests>[0-9]+) tests, (?P<assertions>[0-9]+) assertions\))|(?|Tests: (?P<tests>[0-9]+), Assertions: (?P<assertions>[0-9]+), (?:Incomplete|Skipped): (?P<incomplete>[0-9]+)\.)/';
         $matches = [];

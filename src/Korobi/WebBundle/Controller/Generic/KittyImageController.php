@@ -35,7 +35,7 @@ class KittyImageController extends BaseController {
                 'image_id' => $dbImage->getImageId(),
                 'source' => $imageUrl,
                 'tags' => implode(', ', $dbImage->getTags()),
-                'has_tags' => sizeof(implode(', ', $dbImage->getTags())) > 0
+                'has_tags' => sizeof(implode(', ', $dbImage->getTags())) > 0,
             ];
             if (StringUtil::endsWith($imageUrl, 'gifv', true)) {
                 $videos[$dbImage->getImageId()] = $imageData;
@@ -48,7 +48,7 @@ class KittyImageController extends BaseController {
 
         return $this->render('KorobiWebBundle:controller/generic:kitty_image.html.twig', [
             'images' => $images,
-            'videos' => $videos
+            'videos' => $videos,
         ]);
     }
 }

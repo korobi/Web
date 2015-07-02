@@ -47,7 +47,7 @@ class ChannelAIController extends BaseController {
                 // will throw an exception. instead, provide some default values for it to use instead
                 'case_insensitive' => false,
                 'user_mode' => 'none',
-                'exemptions' => []
+                'exemptions' => [],
             ], $dbPattern);
             $pattern['case_insensitive'] = $pattern['case_insensitive'] ? 'true' : 'false';
             $patterns[] = $pattern;
@@ -60,7 +60,7 @@ class ChannelAIController extends BaseController {
             'channel_name' => $dbChannel->getChannel(),
             'join_message_enabled' => $dbChannelAI->getJoinMessageEnabled(),
             'join_message' => IRCTextParser::parse($dbChannelAI->getJoinMessage()),
-            'patterns' => $patterns
+            'patterns' => $patterns,
         ]);
     }
 }

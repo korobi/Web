@@ -58,7 +58,7 @@ class SecurityController extends BaseController {
      */
     public function showRedirectAction(Request $req) {
         $response = new Response($this->renderView('KorobiWebBundle:error:unexpected-redirect.html.twig', [
-            'url' => $req->get('redirUrl')
+            'url' => $req->get('redirUrl'),
         ]), 403);
         return $response;
     }

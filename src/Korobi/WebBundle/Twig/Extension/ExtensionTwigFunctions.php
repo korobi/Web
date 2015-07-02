@@ -12,7 +12,7 @@ class ExtensionTwigFunctions extends \Twig_Extension {
         return [
             new \Twig_SimpleFunction('cahFullCard', [$this, 'cahFullCard']),
             new \Twig_SimpleFunction('cahPlays', [$this, 'cahPlays'], [
-                'is_safe' => ['html']
+                'is_safe' => ['html'],
             ]),
             new \Twig_SimpleFunction('gmdate', [$this, 'gmdate']),
             new \Twig_SimpleFunction('relativeTime', [$this, 'relativeTime']),

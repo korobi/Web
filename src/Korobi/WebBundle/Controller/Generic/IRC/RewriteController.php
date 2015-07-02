@@ -41,7 +41,7 @@ class RewriteController extends BaseController {
             }
 
             return $this->redirectToRoute('network', [
-                'network' => $network
+                'network' => $network,
             ], 301);
         }
 
@@ -64,29 +64,29 @@ class RewriteController extends BaseController {
                 case 'logs':
                     return $this->redirectToRoute('channel_log', [
                         'network' => $network,
-                        'channel' => $channel
+                        'channel' => $channel,
                     ], 301);
                 case 'commands':
                     return $this->redirectToRoute('channel_command', [
                         'network' => $network,
-                        'channel' => $channel
+                        'channel' => $channel,
                     ], 301);
                 case 'ai':
                     return $this->redirectToRoute('channel_ai', [
                         'network' => $network,
-                        'channel' => $channel
+                        'channel' => $channel,
                     ], 301);
                 case 'games':
                     return $this->redirectToRoute('channel_game', [
                         'network' => $network,
                         'channel' => $channel,
-                        'gameId' => $gameId
+                        'gameId' => $gameId,
                     ], 301);
                 default:
                     if ($this->doesChannelExistForNetwork($network, $channel)) {
                         return $this->redirectToRoute('channel', [
                             'network' => $network,
-                            'channel' => $channel
+                            'channel' => $channel,
                         ], 301);
                     } else {
                         throw $this->createNotFoundException();

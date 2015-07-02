@@ -129,7 +129,7 @@ class ChannelGameController extends BaseController {
             'game' => $game,
             'game_state' => $state,
             'card_counts' => $counts,
-            'percents' => $percent
+            'percents' => $percent,
         ]);
     }
 }

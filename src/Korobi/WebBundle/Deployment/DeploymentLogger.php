@@ -34,7 +34,7 @@ class DeploymentLogger {
      * @param array $context The log context.
      * @param bool $error If this log entry is an error.
      */
-    public function debug($message, array $context = array(), $error = false) {
+    public function debug($message, array $context = [], $error = false) {
         if ($this->kernel->isDebug()) {
             if ($error) {
                 $this->logger->error($message, $context);

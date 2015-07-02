@@ -12,7 +12,7 @@ class NavigationCollection {
     private $items = [
         'primary' => [],
         'secondary' => [],
-        'footer' => []
+        'footer' => [],
     ];
 
     public function __construct(array $config) {
