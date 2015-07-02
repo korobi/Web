@@ -1,27 +1,28 @@
-@import "application/reset";
+@import "application/base/reset";
 
 // vendor styles
 @import "vendor/bourbon/bourbon";
 @import "vendor/base/base";
 @import "vendor/neat/neat-helpers";
-@import "application/grid";
+@import "application/base/grid";
 @import "vendor/neat/neat";
+@import "vendor/prism/prism";
 
 // base syles
-@import "application/config";
-@import "application/base";
-@import "application/header";
-@import "application/footer";
-@import "application/symfony";
+@import "application/base/config";
+@import "application/base/base";
+@import "application/base/header";
+@import "application/base/footer";
+@import "application/base/symfony";
 
 // components
-@import "application/tables";
-@import "application/tooltip";
-@import "application/forms";
-@import "application/flashes";
-@import "application/content_blocks";
-@import "application/datepicker";
-@import "application/buttons/buttons";
+@import "application/components/tables";
+@import "application/components/tooltip";
+@import "application/components/forms";
+@import "application/components/flashes";
+@import "application/components/content_blocks";
+@import "application/components/datepicker";
+@import "application/components/buttons/buttons";
 
 // irc styles
 @import "application/irc/base";
@@ -30,14 +31,11 @@
 @import "application/irc/stats";
 @import "application/irc/games";
 
-// code highlighting
-@import "vendor/prism/prism";
-
-// style guide
-@import "application/style_guide";
+// home
+@import "application/home";
 
 // docs
 @import "application/docs";
 
-// home
-@import "application/home";
+// style guide
+@import "application/style_guide";
