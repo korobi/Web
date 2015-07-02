@@ -3,16 +3,19 @@
 security:
     # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+        FOS\UserBundle\Model\UserInterface:
+            algorithm: sha512
+            encode_as_base64: false
+            iterations: 1
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN: [ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        fos_userbundle:
+        korobi:
             id: fos_user.user_provider.username
 
     # the main part of the security, where you can set up firewalls
@@ -24,11 +27,11 @@ security:
                 failure_path: /auth/connect/github
                 login_path: /auth/connect/github
                 check_path: /auth/connect/github
-                provider: fos_userbundle
+                provider: korobi
                 resource_owners:
                     github: '/auth/connect/check-github'
                 oauth_user_provider:
-                    service: app_user_provider
+                    service: korobi.user_provider
             logout:
                 path: /auth/logout
                 target: /
@@ -42,5 +45,6 @@ security:
     # of your application based on roles, ip, host or methods
     # http://symfony.com/doc/current/cookbook/security/access_control.html
     access_control:
-        - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/auth/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }

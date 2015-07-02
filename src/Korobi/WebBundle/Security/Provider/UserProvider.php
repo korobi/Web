@@ -1,6 +1,6 @@
 <?php
 
-namespace Korobi\WebBundle\Security;
+namespace Korobi\WebBundle\Security\Provider;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;

@@ -3,3 +3,8 @@ imports:
     - { resource: services/helpers.yml }
     - { resource: services/controllers.yml }
     - { resource: services/console.yml }
+
+services:
+    korobi.user_provider:
+        class: Korobi\WebBundle\Security\Provider\UserProvider
+        arguments: [@fos_user.user_manager, {github: githubUserId}, %secret%]
