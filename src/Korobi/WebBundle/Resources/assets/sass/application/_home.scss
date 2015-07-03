@@ -12,16 +12,40 @@
   border-top: 1px solid #222;
   border-bottom: 1px solid #222;
 
-  img {
+  .logs {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
+    top: 0;
+    left: -25vw;
+    margin: 0;
+    padding: 0;
+    width: 150%;
     z-index: -1;
+    text-align: left;
+
+    @include filter(
+        blur(0.5px)
+        saturate(1.7)
+    );
+    @include transform(
+        skew(-15deg)
+        scaleX(1.1)
+        scaleY(1.1)
+        rotate3d(589, -290, 40, 47deg)
+        translateY(-50%)
+    );
+
+    @media (max-width: 1200px) {
+      & {
+        left: -40vw;
+        @include transform(
+            skew(-5deg)
+            scaleX(1.1)
+            scaleY(1.1)
+            rotate3d(589, -290, 40, 47deg)
+            translateY(-50%)
+        );
+      }
+    }
   }
 
   h1 {

@@ -101,4 +101,15 @@ class ChatRepository extends DocumentRepository {
             ->getQuery()
             ->execute();
     }
+
+    public function findLastMessages($count) {
+        return $this->createQueryBuilder()
+            ->sort('date', 'DESC')
+            ->field('type')
+                ->equals('MESSAGE')
+            ->limit($count)
+            ->getQuery()
+            ->execute();
+    }
+
 }
