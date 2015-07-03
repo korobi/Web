@@ -14,7 +14,6 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
-
 nelmio_security:
     forced_ssl:
         enabled: false

@@ -42,6 +42,3 @@ parameters:
     influx.user: user
     influx.pass: pass
     influx.db: database
-
-    # performance
-    doctrine_cache_backend: array
