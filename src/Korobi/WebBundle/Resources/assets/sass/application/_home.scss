@@ -34,7 +34,7 @@
         translateY(-50%)
     );
 
-    @media (max-width: 1200px) {
+    @media (max-width: 46em) {
       & {
         left: -40vw;
         @include transform(
