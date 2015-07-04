@@ -11,6 +11,7 @@ class HomeControllerTest extends WebTestCase {
         $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        echo $client->getResponse()->getContent();
     }
 
     public function testBranchAndCommitDisplayedInFooter() {
