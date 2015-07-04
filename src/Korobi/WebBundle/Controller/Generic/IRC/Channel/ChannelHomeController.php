@@ -5,6 +5,7 @@ namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\Parser\IRCTextParser;
 
 class ChannelHomeController extends BaseController {
 
@@ -37,6 +38,7 @@ class ChannelHomeController extends BaseController {
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'channel' => $dbChannel,
+            'topic' => IRCTextParser::parse($dbChannel->getTopic()['value']),
             'now' => time(),
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),

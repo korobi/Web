@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>{{ channel_name }} on {{ network_name }}</h1>
-    <h2>Topic: <em>TODO: Felix needs to store these</em></h2>
+    <h2>Topic: <em>{{ topic|raw }}</em></h2>
     <strong>Command Prefix: </strong> {{ command_prefix }}<br>
     <strong>Last activity: </strong> <time datetime="{{ channel.LastActivityValid.getTimestamp() }}" title="{{ channel.LastActivityValid.getTimestamp()|date("c") }}">
     {{ relativeTime(now, channel.LastActivityValid.getTimestamp()) }}
