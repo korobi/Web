@@ -43,7 +43,7 @@ class ChannelRepository extends DocumentRepository {
      */
     public function getRecentlyActiveChannels($limit) {
         return $this->createQueryBuilder()
-            ->sort('last_valid_content_at', 'DESC')
+            ->sort('last_valid_content_at', 'DESC') // TODO
             ->field('key')
                 ->equals(null)
             ->limit($limit)
