@@ -25,19 +25,14 @@ class Channel {
     private $channel;
 
     /**
-     * @MongoDB\Collection
-     */
-    private $managers;
-
-    /**
      * @MongoDB\String(nullable=true)
      */
     private $key;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Collection
      */
-    private $command_prefix;
+    private $managers;
 
     /**
      * @MongoDB\Boolean
@@ -50,39 +45,19 @@ class Channel {
     private $commands_enabled;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\String
      */
-    private $punishments_enabled;
-
-    /**
-     * @MongoDB\Boolean
-     */
-    private $kitty_image;
-
-    /**
-     * @MongoDB\Boolean
-     */
-    private $meow_module_enabled;
-
-    /**
-     * @MongoDB\Collection
-     */
-    private $permissions;
-
-    /**
-     * @MongoDB\Raw
-     */
-    private $account_permissions;
-
-    /**
-     * @MongoDB\Raw
-     */
-    private $settings;
+    private $command_prefix;
 
     /**
      * @MongoDB\String
      */
     private $commands_link;
+
+    /**
+     * @MongoDB\Boolean
+     */
+    private $punishments_enabled;
 
     /**
      * @MongoDB\Collection
@@ -97,12 +72,27 @@ class Channel {
     /**
      * @MongoDB\Date
      */
-    private $last_valid_content_at;
+    private $last_activity_valid;
+
+    /**
+     * @MongoDB\Collection
+     */
+    private $permissions;
 
     /**
      * @MongoDB\Raw
      */
     private $topic;
+
+    /**
+     * @MongoDB\Boolean
+     */
+    private $kitty_image;
+
+    /**
+     * @MongoDB\Boolean
+     */
+    private $meow_module_enabled;
 
 
     /**
@@ -155,26 +145,6 @@ class Channel {
     }
 
     /**
-     * Get managers
-     *
-     * @return collection $managers
-     */
-    public function getManagers() {
-        return $this->managers;
-    }
-
-    /**
-     * Set managers
-     *
-     * @param collection $managers
-     * @return self
-     */
-    public function setManagers($managers) {
-        $this->managers = $managers;
-        return $this;
-    }
-
-    /**
      * Get key
      *
      * @return string $key
@@ -195,22 +165,22 @@ class Channel {
     }
 
     /**
-     * Get command_prefix
+     * Get managers
      *
-     * @return string $command_prefix
+     * @return collection $managers
      */
-    public function getCommandPrefix() {
-        return $this->command_prefix;
+    public function getManagers() {
+        return $this->managers;
     }
 
     /**
-     * Set command_prefix
+     * Set managers
      *
-     * @param string $command_prefix
+     * @param collection $managers
      * @return self
      */
-    public function setCommandPrefix($command_prefix) {
-        $this->command_prefix = $command_prefix;
+    public function setManagers($managers) {
+        $this->managers = $managers;
         return $this;
     }
 
@@ -255,122 +225,22 @@ class Channel {
     }
 
     /**
-     * Get punishmentsEnabled
+     * Get command_prefix
      *
-     * @return boolean $punishmentsEnabled
+     * @return string $command_prefix
      */
-    public function getPunishmentsEnabled() {
-        return $this->punishments_enabled;
+    public function getCommandPrefix() {
+        return $this->command_prefix;
     }
 
     /**
-     * Set punishmentsEnabled
+     * Set command_prefix
      *
-     * @param boolean $punishmentsEnabled
+     * @param string $command_prefix
      * @return self
      */
-    public function setPunishmentsEnabled($punishmentsEnabled) {
-        $this->punishments_enabled = $punishmentsEnabled;
-        return $this;
-    }
-
-    /**
-     * Get kittyImage
-     *
-     * @return boolean $kittyImage
-     */
-    public function getKittyImage() {
-        return $this->kitty_image;
-    }
-
-    /**
-     * Set kittyImage
-     *
-     * @param boolean $kittyImage
-     * @return self
-     */
-    public function setKittyImage($kittyImage) {
-        $this->kitty_image = $kittyImage;
-        return $this;
-    }
-
-    /**
-     * Get meowModuleEnabled
-     *
-     * @return boolean $meowModuleEnabled
-     */
-    public function getMeowModuleEnabled() {
-        return $this->meow_module_enabled;
-    }
-
-    /**
-     * Set meowModuleEnabled
-     *
-     * @param boolean $meowModuleEnabled
-     * @return self
-     */
-    public function setMeowModuleEnabled($meowModuleEnabled) {
-        $this->meow_module_enabled = $meowModuleEnabled;
-        return $this;
-    }
-
-    /**
-     * Get permissions
-     *
-     * @return collection $permissions
-     */
-    public function getPermissions() {
-        return $this->permissions;
-    }
-
-    /**
-     * Set permissions
-     *
-     * @param collection $permissions
-     * @return self
-     */
-    public function setPermissions($permissions) {
-        $this->permissions = $permissions;
-        return $this;
-    }
-
-    /**
-     * Get accountPermissions
-     *
-     * @return raw $accountPermissions
-     */
-    public function getAccountPermissions() {
-        return $this->account_permissions;
-    }
-
-    /**
-     * Set accountPermissions
-     *
-     * @param raw $accountPermissions
-     * @return self
-     */
-    public function setAccountPermissions($accountPermissions) {
-        $this->account_permissions = $accountPermissions;
-        return $this;
-    }
-
-    /**
-     * Get settings
-     *
-     * @return raw $settings
-     */
-    public function getSettings() {
-        return $this->settings;
-    }
-
-    /**
-     * Set settings
-     *
-     * @param raw $settings
-     * @return self
-     */
-    public function setSettings($settings) {
-        $this->settings = $settings;
+    public function setCommandPrefix($command_prefix) {
+        $this->command_prefix = $command_prefix;
         return $this;
     }
 
@@ -391,6 +261,26 @@ class Channel {
      */
     public function setCommandsLink($commandsLink) {
         $this->commands_link = $commandsLink;
+        return $this;
+    }
+
+    /**
+     * Get punishmentsEnabled
+     *
+     * @return boolean $punishmentsEnabled
+     */
+    public function getPunishmentsEnabled() {
+        return $this->punishments_enabled;
+    }
+
+    /**
+     * Set punishmentsEnabled
+     *
+     * @param boolean $punishmentsEnabled
+     * @return self
+     */
+    public function setPunishmentsEnabled($punishmentsEnabled) {
+        $this->punishments_enabled = $punishmentsEnabled;
         return $this;
     }
 
@@ -435,22 +325,22 @@ class Channel {
     }
 
     /**
-     * Get lastValidContentAt
+     * Get lastActivityValid
      *
-     * @return date $lastValidContentAt
+     * @return date $lastActivityValid
      */
-    public function getLastValidContentAt() {
-        return $this->last_valid_content_at;
+    public function getLastActivityValid() {
+        return $this->last_activity_valid;
     }
 
     /**
-     * Set lastValidContentAt
+     * Set lastActivityValid
      *
-     * @param date $lastValidContentAt
+     * @param date $lastActivityValid
      * @return self
      */
-    public function setLastValidContentAt($lastValidContentAt) {
-        $this->last_valid_content_at = $lastValidContentAt;
+    public function setLastActivityValid($lastActivityValid) {
+        $this->last_activity_valid = $lastActivityValid;
         return $this;
     }
 
@@ -471,6 +361,66 @@ class Channel {
      */
     public function setTopic($topic) {
         $this->topic = $topic;
+        return $this;
+    }
+
+    /**
+     * Get permissions
+     *
+     * @return collection $permissions
+     */
+    public function getPermissions() {
+        return $this->permissions;
+    }
+
+    /**
+     * Set permissions
+     *
+     * @param collection $permissions
+     * @return self
+     */
+    public function setPermissions($permissions) {
+        $this->permissions = $permissions;
+        return $this;
+    }
+
+    /**
+     * Get kittyImage
+     *
+     * @return boolean $kittyImage
+     */
+    public function getKittyImage() {
+        return $this->kitty_image;
+    }
+
+    /**
+     * Set kittyImage
+     *
+     * @param boolean $kittyImage
+     * @return self
+     */
+    public function setKittyImage($kittyImage) {
+        $this->kitty_image = $kittyImage;
+        return $this;
+    }
+
+    /**
+     * Get meowModuleEnabled
+     *
+     * @return boolean $meowModuleEnabled
+     */
+    public function getMeowModuleEnabled() {
+        return $this->meow_module_enabled;
+    }
+
+    /**
+     * Set meowModuleEnabled
+     *
+     * @param boolean $meowModuleEnabled
+     * @return self
+     */
+    public function setMeowModuleEnabled($meowModuleEnabled) {
+        $this->meow_module_enabled = $meowModuleEnabled;
         return $this;
     }
 }
