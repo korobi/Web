@@ -119,6 +119,8 @@ class ChatRepository extends DocumentRepository {
                 ->equals($network)
             ->field('channel')
                 ->equals($channel)
+            ->field('type')
+                ->equals('MESSAGE')
             ->limit($count)
             ->getQuery()
             ->execute();
