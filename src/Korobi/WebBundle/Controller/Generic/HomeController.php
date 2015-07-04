@@ -27,15 +27,25 @@ class HomeController extends BaseController {
             ->findNetworks()
             ->toArray(false);
 
-        $this->getLogger()->info("Now is " . microtime(true));
+
+        $targetChannel = $dbChannels[0]->getChannel();
+        $targetNetwork = $dbChannels[0]->getNetwork();
+
+        if ($targetChannel == "#spigot") {
+            // This is to ensure we have a more interesting log section on the homepage
+            // The Esper-facing Spigot channel only has one user speaking and isn't colourful
+
+            $targetChannel = $dbChannels[1]->getChannel();
+            $targetNetwork = $dbChannels[1]->getNetwork();
+        }
+
         $messages = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Chat')
-            ->findLastChatsByChannel($dbChannels[0]->getNetwork(), $dbChannels[0]->getChannel(), 50)
+            ->findLastChatsByChannel($targetChannel, $targetNetwork, 50)
             ->toArray(false);
         $messages = array_reverse($messages);
 
-        $this->getLogger()->info("After is " . microtime(true));
 
         $networks = [];
         /** @var Network $dbNetwork */
