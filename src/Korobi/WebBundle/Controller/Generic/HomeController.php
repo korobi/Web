@@ -29,7 +29,7 @@ class HomeController extends BaseController {
         $messages = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Chat')
-            ->findLastMessages(30)
+            ->findLastChatsByChannel("esper", "#korobi", 30)
             ->toArray(false);
         $this->getLogger()->info("After is " . microtime(true));
 

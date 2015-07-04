@@ -112,4 +112,16 @@ class ChatRepository extends DocumentRepository {
             ->execute();
     }
 
+    public function findLastChatsByChannel($network, $channel, $count) {
+        return $this->createQueryBuilder()
+            ->sort('date', 'DESC')
+            ->field('network')
+                ->equals($network)
+            ->field('channel')
+                ->equals($channel)
+            ->limit($count)
+            ->getQuery()
+            ->execute();
+    }
+
 }
