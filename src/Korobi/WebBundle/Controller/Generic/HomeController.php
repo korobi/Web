@@ -33,6 +33,7 @@ class HomeController extends BaseController {
             ->getRepository('KorobiWebBundle:Chat')
             ->findLastChatsByChannel($dbChannels[0]->getNetwork(), $dbChannels[0]->getChannel(), 50)
             ->toArray(false);
+        $messages = array_reverse($messages);
 
         $this->getLogger()->info("After is " . microtime(true));
 
