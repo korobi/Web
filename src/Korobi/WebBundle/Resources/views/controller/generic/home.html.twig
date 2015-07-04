@@ -95,7 +95,7 @@
                         {% else %}
                             <td>
                                 <time datetime="{{ lastValidContent.getTimestamp() }}" title="{{ lastValidContent.getTimestamp()|date("c") }}">
-                                    {{ relativeTime(now, channel.LastValidContentAt.getTimestamp()) }}
+                                    {{ relativeTime(now, channel.LastActivityValid.getTimestamp()) }}
                                 </time>
                             </td>
                         {% endif %}

@@ -71,6 +71,7 @@ class Channel {
 
     /**
      * @MongoDB\Date
+     * @MongoDB\AlsoLoad("last_valid_content_at")
      */
     private $last_activity_valid;
 
