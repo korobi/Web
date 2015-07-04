@@ -81,6 +81,10 @@ ul.footer--links {
     }
   }
 
+  .external a i {
+    margin-left: 0.2em;
+  }
+
   li.active a {
     @include active-footer-link
   }
