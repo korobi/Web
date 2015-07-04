@@ -87,7 +87,7 @@
                 </thead>
                 <tbody>
                 {% for channel in channels %}
-                    {% set lastValidContent = channel.LastValidContentAt %}
+                    {% set lastValidContent = channel.LastActivityValid %}
                     <tr>
                         <td><a href="{{ path('channel', {'channel': channel.channel[1:], 'network': channel.network}) }}"><abrr title="<strong>Network:</strong> {{ attribute(networks, channel.network) }}" rel="tooltip">{{ channel.channel }}</abrr></a></td>
                         {% if lastValidContent == null %}
