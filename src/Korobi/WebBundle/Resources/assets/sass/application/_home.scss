@@ -35,7 +35,7 @@
     width: 150%;
     z-index: -1;
     text-align: left;
-    @include animation(logScroller 15s linear);
+    @include animation(logScroller 60s linear);
     // This animation should only play infinity
     @include animation-iteration-count(infinite);
     @include animation-fill-mode(forwards);
