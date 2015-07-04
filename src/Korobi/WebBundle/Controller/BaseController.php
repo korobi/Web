@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
@@ -103,5 +104,12 @@ abstract class BaseController extends Controller {
         $dbChannel = $dbChannel[0];
 
         return [$dbNetwork, $dbChannel];
+    }
+
+    /**
+     * @return LoggerInterface
+     */
+    protected function getLogger() {
+        return $this->get('logger');
     }
 }

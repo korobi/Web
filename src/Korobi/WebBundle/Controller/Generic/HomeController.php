@@ -25,11 +25,13 @@ class HomeController extends BaseController {
             ->findNetworks()
             ->toArray(false);
 
+        $this->getLogger()->info("Now is " . microtime(true));
         $messages = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Chat')
             ->findLastMessages(30)
             ->toArray(false);
+        $this->getLogger()->info("After is " . microtime(true));
 
         $networks = [];
         /** @var Network $dbNetwork */
