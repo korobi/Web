@@ -15,12 +15,12 @@ class HomeController extends BaseController {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function homeAction() {
-        /** @var Channel[] $dbChannels */
+
         $dbChannels = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
             ->getRecentlyActiveChannels(5)
-            ->toArray();
+            ->toArray(false);
         $dbNetworks = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Network')
