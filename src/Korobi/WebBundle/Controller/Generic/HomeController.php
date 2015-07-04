@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Controller\Generic;
 
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelLogController;
+use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Parser\LogParser;
@@ -14,6 +15,7 @@ class HomeController extends BaseController {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function homeAction() {
+        /** @var Channel[] $dbChannels */
         $dbChannels = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
@@ -29,8 +31,9 @@ class HomeController extends BaseController {
         $messages = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Chat')
-            ->findLastChatsByChannel("esper", "#korobi", 30)
+            ->findLastChatsByChannel($dbChannels[0]->getNetwork(), $dbChannels[0]->getChannel(), 50)
             ->toArray(false);
+
         $this->getLogger()->info("After is " . microtime(true));
 
         $networks = [];

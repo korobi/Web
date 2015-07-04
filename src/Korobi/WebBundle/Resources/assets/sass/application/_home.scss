@@ -1,5 +1,20 @@
 // Homepage styles! :D
 
+// animation
+
+@include keyframes(logScroller) {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: -18em;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+
 .hero {
   width: 100%;
   padding: 30vh 0 5vh;
@@ -15,24 +30,27 @@
   .logs {
     position: absolute;
     top: 0;
-    left: -25vw;
     margin: 0;
     padding: 0;
     width: 150%;
     z-index: -1;
     text-align: left;
+    @include animation(logScroller 15s linear);
+    // This animation should only play infinity
+    @include animation-iteration-count(infinite);
+    @include animation-fill-mode(forwards);
 
     @include filter(
         blur(0.5px)
         saturate(1.7)
     );
-    @include transform(
-        skew(-15deg)
-        scaleX(1.1)
-        scaleY(1.1)
-        rotate3d(589, -290, 40, 47deg)
-        translateY(-50%)
-    );
+    /*@include transform(
+    //    skew(-15deg)
+    //    scaleX(1.1)
+    //    scaleY(1.1)
+    //    rotate3d(589, -290, 40, 47deg)
+    //    translateY(-50%)
+    //);
 
     @media (max-width: 46em) {
       & {
@@ -45,7 +63,7 @@
             translateY(-50%)
         );
       }
-    }
+    }*/
   }
 
   h1 {
