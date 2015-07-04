@@ -9,9 +9,9 @@ class HomeControllerTest extends WebTestCase {
     public function testIndexLoadsSuccessfully() {
         $client = static::createClient();
         $client->request('GET', '/');
+        echo $client->getResponse()->getContent();
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        echo $client->getResponse()->getContent();
     }
 
     public function testBranchAndCommitDisplayedInFooter() {
