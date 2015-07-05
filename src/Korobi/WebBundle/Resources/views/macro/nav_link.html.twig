@@ -13,7 +13,7 @@
     {% import _self as nav %}
     {% if item.getRequiresAuth() %}
         {% if item.getRequiresAdmin() %}
-            {% if app.user and is_granted('ROLE_SUPER_ADMIN') %}
+            {% if app.user and is_granted('ROLE_ADMIN') %}
                 {{ nav.nav_link_html(item) }}
             {% endif %}
         {% else %}

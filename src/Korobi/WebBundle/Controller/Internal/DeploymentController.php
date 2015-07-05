@@ -75,7 +75,7 @@ class DeploymentController extends BaseController {
     }
 
     public function viewAction($id) {
-        if (!$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
+        if (!$this->authChecker->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
 

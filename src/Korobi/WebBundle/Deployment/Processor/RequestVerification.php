@@ -19,23 +19,26 @@ class RequestVerification extends BaseProcessor implements DeploymentProcessorIn
 
         $req = $info->getRequest();
         $signature = $this->getSignatureFromRequest($req);
-        $isSuperUser = $this->isSuperUser($info->getAuthorisationChecker());
+        $isAdmin = $this->isAdmin($info->getAuthorisationChecker());
         $signatureVerified = $this->verifySignature($signature, $info->getHmacKey(), $req->getContent());
-        $okayToProceed = $signatureVerified || $isSuperUser;
+        $okayToProceed = $signatureVerified || $isAdmin;
 
-        $info->getRevision()->setManual($isSuperUser);
+        $info->getRevision()->setManual($isAdmin);
 
         if ($okayToProceed) {
             $this->logger->debug('Verified deployment request');
             return parent::handle($info);
         }
-        $this->logger->debug('Rejecting unauthorised deployment request', ['signature' => $signatureVerified, 'superuser' => $isSuperUser]);
+        $this->logger->debug('Rejecting unauthorised deployment request', [
+            'signature' => $signatureVerified,
+            'admin' => $isAdmin,
+        ]);
         $info->addStatus(DeploymentStatus::UNAUTHORISED);
         return DeploymentStatus::UNAUTHORISED;
     }
 
-    private function isSuperUser(AuthorizationChecker $authChecker) {
-        return $authChecker->isGranted('ROLE_SUPER_ADMIN');
+    private function isAdmin(AuthorizationChecker $authChecker) {
+        return $authChecker->isGranted('ROLE_ADMIN');
     }
 
     /**
