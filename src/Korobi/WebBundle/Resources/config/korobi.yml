@@ -37,3 +37,7 @@ korobi_web:
             - title: Revisions
               route: 'revisions'
               type: 'footer'
+
+    homepage_excluded_channels:
+         - channel: '#spigot'
+           network: 'esper'
