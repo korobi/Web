@@ -48,7 +48,7 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
   }
   @include span-columns(3);
   @include media($mobile) {
-    @include span-columns(6);
+    @include span-columns(5);
   }
   @include media($small-mobile) {
     @include span-columns(12);
@@ -67,4 +67,10 @@ a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
   border-color: $action-color;
+}
+
+.team-holder {
+  @include outer-container;
+  margin-left: auto;
+  margin-right: auto;
 }
