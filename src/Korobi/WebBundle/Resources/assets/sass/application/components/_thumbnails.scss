@@ -1,0 +1,63 @@
+
+//** Padding around the thumbnail image
+$thumbnail-padding:           4px !default;
+//** Thumbnail background color
+$thumbnail-bg:                rgb(34, 34, 34) !default;
+//** Thumbnail border color
+$thumbnail-border:            #ddd !default;
+//** Thumbnail border radius
+$border-radius-base:        4px !default;
+$thumbnail-border-radius:     $border-radius-base !default;
+//** Custom text color for thumbnail captions
+$thumbnail-caption-color:     $base-font-color !default;
+//** Padding around the thumbnail caption
+$thumbnail-caption-padding:   9px !default;
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        1.428571429 !default; // 20/14
+
+
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed:    floor(($font-size-base * $line-height-base)) !default; // ~20px
+
+
+//
+// Thumbnails
+// --------------------------------------------------
+
+
+// Mixin and adjust the regular image class
+.thumbnail {
+  display: block;
+  padding: $thumbnail-padding;
+  margin-bottom: $line-height-computed;
+  line-height: $line-height-base;
+  background-color: $thumbnail-bg;
+  border: 1px solid $thumbnail-border;
+  border-radius: $thumbnail-border-radius;
+  @include transition(border .2s ease-in-out);
+
+  > img,
+  a > img {
+    display: block;
+    max-width: 100%; // Part 1: Set a maximum relative to the parent
+    height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  // [converter] extracted a&:hover, a&:focus, a&.active to a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active
+
+  // Image captions
+  .caption {
+    padding: $thumbnail-caption-padding;
+    color: $thumbnail-caption-color;
+  }
+}
+
+// Add a hover state for linked versions only
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active {
+  border-color: $action-color;
+}
