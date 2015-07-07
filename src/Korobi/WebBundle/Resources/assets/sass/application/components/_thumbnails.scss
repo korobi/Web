@@ -29,13 +29,7 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
 // Mixin and adjust the regular image class
 .thumbnail {
   display: block;
-  @include span-columns(3);
-  @include media($small-mobile) {
-    @include span-columns(12);
-  }
-  @include media($mobile) {
-    @include span-columns(6);
-  }
+
   padding: $thumbnail-padding;
   margin-bottom: $line-height-computed;
   line-height: $line-height-base;
@@ -52,7 +46,13 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
     margin-left: auto;
     margin-right: auto;
   }
-
+  @include span-columns(3);
+  @include media($mobile) {
+    @include span-columns(6);
+  }
+  @include media($small-mobile) {
+    @include span-columns(12);
+  }
   // [converter] extracted a&:hover, a&:focus, a&.active to a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active
 
   // Image captions
