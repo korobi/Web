@@ -11,6 +11,14 @@ class Configuration implements ConfigurationInterface {
         $treeBuilder = new TreeBuilder();
         $root = $treeBuilder->root('korobi_web');
         $root->children()
+            ->arrayNode('homepage_excluded_channels')
+                ->prototype('array')
+                    ->children()
+                        ->scalarNode("channel")->end()
+                        ->scalarNode("network")->end()
+                    ->end()
+                ->end()
+            ->end()
             ->arrayNode('navigation')->children()
                 ->arrayNode('items')->prototype('array')
                     ->children()

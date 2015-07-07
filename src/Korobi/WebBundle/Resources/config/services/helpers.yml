@@ -9,7 +9,7 @@ services:
         class: Korobi\WebBundle\Util\ExcludedHomepageChannels
         arguments:
             - %korobi.config%
-     korobi.akio:
+    korobi.akio:
         class: Korobi\WebBundle\Util\Akio
         arguments:
             - %akio.enabled%
