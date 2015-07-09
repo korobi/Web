@@ -8,6 +8,7 @@ use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Parser\LogParser;
+use Korobi\WebBundle\Util\ExcludedHomepageChannels;
 
 class HomeController extends BaseController {
 
@@ -30,10 +31,11 @@ class HomeController extends BaseController {
 
         $targetChannel = $dbChannels[0]->getChannel();
         $targetNetwork = $dbChannels[0]->getNetwork();
+        $blacklist = $this->getHomepageBlacklist();
 
-        if ($targetChannel == "#spigot") {
+        if ($blacklist->isBlacklisted($targetNetwork, $targetChannel)) {
             // This is to ensure we have a more interesting log section on the homepage
-            // The Esper-facing Spigot channel only has one user speaking and isn't colourful
+            // E.g. The Esper-facing Spigot channel only has one user speaking and isn't colourful
 
             $targetChannel = $dbChannels[1]->getChannel();
             $targetNetwork = $dbChannels[1]->getNetwork();
@@ -59,6 +61,15 @@ class HomeController extends BaseController {
             'networks' => $networks,
             'messages' => array_map([$this, 'transformMessage'], $messages),
         ]);
+    }
+
+    /**
+     * @return ExcludedHomepageChannels
+     */
+    protected function getHomepageBlacklist() {
+        /** @var ExcludedHomepageChannels $blacklist */
+        $blacklist = $this->get('korobi.homepage_excluded_channels');
+        return $blacklist;
     }
 
     private function transformMessage(Chat $chat) {
