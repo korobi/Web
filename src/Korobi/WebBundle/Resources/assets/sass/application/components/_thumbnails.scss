@@ -47,11 +47,14 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
     margin-right: auto;
   }
   @include span-columns(3);
+  @include omega(4n);
   @include media($mobile) {
-    @include span-columns(5);
+    @include span-columns(6);
+    @include omega(2n);
   }
   @include media($small-mobile) {
     @include span-columns(12);
+    @include omega(1n);
   }
   // [converter] extracted a&:hover, a&:focus, a&.active to a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active
 
