@@ -45,7 +45,7 @@ class ChannelLogController extends BaseController {
                 throw new \Exception('Unauthorized'); // TODO
             }
         } else if(!$dbChannel->getLogsEnabled() && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
-            throw new \Exception('Unauthorized'); // TODO
+            throw $this->createNotFoundException();
         }
 
         // populate variables with request information if available, or defaults
