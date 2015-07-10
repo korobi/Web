@@ -68,7 +68,8 @@ class DeploymentController extends BaseController {
         $user = $this->getUser();
 
         $info = new DeploymentInfo($request, new Revision(), $user, $this->authChecker, $this->hmacKey, $this->rootPath);
-        $processor = new DeploymentProcessor($info, $this->logger, $this->container->get('kernel'), $this->akio, $this->get('doctrine_mongodb')->getManager());
+        $processor = new DeploymentProcessor($info, $this->logger, $this->container->get('kernel'), $this->akio,
+            $this->get('doctrine_mongodb')->getManager(), $this->get("korobi.git_info"));
         $status = $processor->performDeployment();
 
         return new JsonResponse(['status' => $status]);

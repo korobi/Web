@@ -21,7 +21,7 @@ class PerformDeployment extends BaseProcessor implements DeploymentProcessorInte
 
         $execOutput = [];
         $statusCode = -1;
-        $gitInfo = new GitInfo();
+        $gitInfo = $this->gitInfo;
         $info->getRevision()->setOldCommit($gitInfo->getHash());
 
         if (exec('./deploy_init.sh', $execOutput, $statusCode) === false) {

@@ -25,13 +25,13 @@ class DeploymentProcessor {
      */
     private $info;
 
-    public function __construct(DeploymentInfo $info, $logger, $kernel, $akio, $docManager) {
+    public function __construct(DeploymentInfo $info, $logger, $kernel, $akio, $docManager, $gitInfo) {
         $logger = new DeploymentLogger($kernel, $logger);
 
-        $firstStep = new RequestVerification($logger, $akio, $docManager);
-        $secondStep = new PerformDeployment($logger, $akio, $docManager);
-        $thirdStep = new RunTests($logger, $akio, $docManager);
-        $fourthStep = new FinalizeDeployment($logger, $akio, $docManager);
+        $firstStep = new RequestVerification($logger, $akio, $docManager, $gitInfo);
+        $secondStep = new PerformDeployment($logger, $akio, $docManager, $gitInfo);
+        $thirdStep = new RunTests($logger, $akio, $docManager, $gitInfo);
+        $fourthStep = new FinalizeDeployment($logger, $akio, $docManager, $gitInfo);
         $firstStep->setNext($secondStep);
         $secondStep->setNext($thirdStep);
         $thirdStep->setNext($fourthStep);

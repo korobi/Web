@@ -7,6 +7,7 @@ use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Deployment\DeploymentLogger;
 use Korobi\WebBundle\Deployment\DeploymentStatus;
 use Korobi\WebBundle\Util\Akio;
+use Korobi\WebBundle\Util\GitInfo;
 
 /**
  * All processors extend this.
@@ -28,15 +29,19 @@ abstract class BaseProcessor implements DeploymentProcessorInterface {
      */
     protected $akio;
 
+    /** @var GitInfo */
+    protected $gitInfo;
+
     /**
      * @var DocumentManager
      */
     protected $dm;
 
-    public function __construct(DeploymentLogger $logger, Akio $akio, DocumentManager $dm) {
+    public function __construct(DeploymentLogger $logger, Akio $akio, DocumentManager $dm, GitInfo $gi) {
         $this->logger = $logger;
         $this->akio = $akio;
         $this->dm = $dm;
+        $this->gitInfo = $gi;
     }
 
 
