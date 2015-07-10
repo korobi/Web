@@ -38,7 +38,7 @@ class ChannelHomeController extends BaseController {
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'channel' => $dbChannel,
-            'topic' => $dbChannel->getTopic()['value'],
+            'topic' => IRCTextParser::parse($dbChannel->getTopic()),
             'now' => time(),
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
