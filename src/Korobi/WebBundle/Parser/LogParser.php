@@ -44,7 +44,7 @@ class LogParser {
 
         $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
         $result .= ' (';
-        $result .= $chat->getActorHostname();
+        $result .= IRCTextParser::createHostnameTag($chat->getActorHostname());
         $result .= ') ';
         $result .= 'joined the channel';
 
@@ -125,7 +125,7 @@ class LogParser {
 
         $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
         $result .= ' (';
-        $result .= $chat->getActorHostname();
+        $result .= IRCTextParser::createHostnameTag($chat->getActorHostname());
         $result .= ') ';
         $result .= 'left the channel';
 
@@ -141,7 +141,7 @@ class LogParser {
 
         $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
         $result .= ' (';
-        $result .= $chat->getActorHostname();
+        $result .= IRCTextParser::createHostnameTag($chat->getActorHostname());
         $result .= ') ';
         $result .= 'has quit (' . $chat->getMessage() . ')';
 

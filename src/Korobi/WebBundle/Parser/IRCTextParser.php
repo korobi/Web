@@ -203,6 +203,16 @@ class IRCTextParser {
     }
 
     /**
+     * Creates an element to wrap hostname text in.
+     *
+     * @param string $hostname Hostname
+     * @return string
+     */
+    public static function createHostnameTag($hostname) {
+        return '<span class="user-hostname">' . htmlentities($hostname) . '</span>';
+    }
+
+    /**
      * Gets the css class corresponding to the provided colours.
      *
      * @param int|string $fg
