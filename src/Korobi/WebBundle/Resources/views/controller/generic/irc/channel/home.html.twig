@@ -5,6 +5,7 @@
 {% block body %}
     <h1>{{ channel_name }} on {{ network_name }}</h1>
     <h2>Topic: <em>{{ topic_html|raw }}</em></h2>
+    <h3>Topic set by: <em>{{ topic.actor_nick }}</em> on {{ topic.time|date("c") }}</h3>
     <strong>Command Prefix: </strong> {{ command_prefix }}<br>
     {% if channel.LastActivityValid != null %}
     <strong>Last activity: </strong> <time datetime="{{ channel.LastActivityValid.getTimestamp() }}" title="{{ channel.LastActivityValid.getTimestamp()|date("c") }}">
