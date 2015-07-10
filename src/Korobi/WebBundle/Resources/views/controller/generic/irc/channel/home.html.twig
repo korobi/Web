@@ -4,7 +4,8 @@
 
 {% block body %}
     <h1>{{ channel_name }} on {{ network_name }}</h1>
-    <h2>Topic: <em>{{ topic|raw }}</em></h2>
+    <h2>Topic: <em>{{ topic.value|ircformat }}</em></h2>
+    <h3>Topic set by: <em>{{ topic.setter_nick }}</em> on {{ topic.time }}</h3>
     <strong>Command Prefix: </strong> {{ command_prefix }}<br>
     {% if channel.LastActivityValid != null %}
     <strong>Last activity: </strong> <time datetime="{{ channel.LastActivityValid.getTimestamp() }}" title="{{ channel.LastActivityValid.getTimestamp()|date("c") }}">

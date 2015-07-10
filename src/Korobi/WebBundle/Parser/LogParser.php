@@ -240,7 +240,7 @@ class LogParser {
      * @param $prefix
      * @return string
      */
-    protected static function transformActor($actor, $prefix = '') {
+    public static function transformActor($actor, $prefix = '') {
         if ($actor == Chat::ACTOR_INTERNAL) {
             return 'Server';
         }

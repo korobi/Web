@@ -6,6 +6,7 @@ use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Parser\IRCTextParser;
+use Korobi\WebBundle\Parser\LogParser;
 
 class ChannelHomeController extends BaseController {
 
@@ -31,14 +32,19 @@ class ChannelHomeController extends BaseController {
             $links[] = $this->createLink($dbChannel, 'Commands', $this->generateUrl('channel_command', $linkBase));
         }
 
-        dump($dbChannel->getTopic());
+        $dbTopic = $dbChannel->getTopic();
+        $topic = [
+            'value' => $dbTopic['value'],
+            'setter_nick' => LogParser::transformActor($dbTopic['actor_nick']),
+            'time' => date('F j, Y h:i:s a', $dbTopic['time']->sec)
+        ];
 
         // time to render!
         return $this->render('KorobiWebBundle:controller/generic/irc/channel:home.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
             'channel' => $dbChannel,
-            'topic' => IRCTextParser::parse($dbChannel->getTopic()['value']),
+            'topic' => $topic,
             'now' => time(),
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
