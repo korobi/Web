@@ -13,23 +13,29 @@ class GitInfo {
     protected $hash;
 
     /**
-     * Initialize the class.
+     * @param $environment
      */
-    public function __construct() {
-        $this->updateData();
+    public function __construct($environment) {
+        $this->updateData($environment);
     }
 
     /**
      * Force update data.
+     *
+     * @param string $environment
      */
-    public function updateData() {
+    public function updateData($environment = 'dev') {
         $root = __DIR__ . '/../../../../'; // bit of a hack
         $ref = (new \SplFileObject($root . '.git/HEAD'))->getCurrentLine();
         $ref = trim(explode(' ', $ref)[1]);
 
-        // refs/heads/feature/channel-activity
-        $this->branch = str_replace('refs/heads/', '', $ref);
-        $this->hash = (new \SplFileObject($root . '.git/' . $ref))->getCurrentLine();
+        if($environment === 'prod' && file_exists($root . 'REVISION') && str_replace('refs/heads/', '', $ref) === 'deploy') {
+            $this->branch = 'www1-stable';
+            $this->hash = (new \SplFileObject($root . 'REVISION'))->getCurrentLine();
+        } else {
+            $this->branch = str_replace('refs/heads/', '', $ref);
+            $this->hash = (new \SplFileObject($root . '.git/' . $ref))->getCurrentLine();
+        }
     }
 
     /**

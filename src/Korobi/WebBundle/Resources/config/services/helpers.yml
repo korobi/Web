@@ -1,6 +1,8 @@
 services:
     korobi.git_info:
         class: Korobi\WebBundle\Util\GitInfo
+        arguments:
+            - %kernel.environment%
     korobi.navigation_collection:
         class: Korobi\WebBundle\Util\NavigationCollection
         arguments:
