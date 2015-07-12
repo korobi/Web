@@ -44,14 +44,14 @@
             <input type="text" id="log-date" value="{{ log_date }}" data-start-date="{{ first_for_channel }}">
         </div>
     </div>
-    {% block links %}
+    {% set reusableLinks %}
         <a href="{{ path('channel', {'channel': channel_slug, 'network': network_slug}) }}">
             {{ channel_name }}</a> on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a>
-    {% endblock %}
+    {% endset %}
     {% if is_tail %}
-        <h1>Tail log for {{ block('links') }}</h1>
+        <h1>Tail log for {{ reusableLinks }}</h1>
     {% else %}
-        <h1>Log for {{ block('links') }} - {{ log_date }}</h1>
+        <h1>Log for {{ reusableLinks }} - {{ log_date }}</h1>
     {% endif %}
     <div class="logs{% if is_tail %} tailing{% endif %}" id="logs">
         {% if logs is empty %}
