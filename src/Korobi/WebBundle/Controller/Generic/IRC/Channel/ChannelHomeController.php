@@ -42,6 +42,7 @@ class ChannelHomeController extends BaseController {
         // time to render!
         return $this->render('KorobiWebBundle:controller/generic/irc/channel:home.html.twig', [
             'network_name' => $dbNetwork->getName(),
+            'network_slug' => $dbNetwork->getSlug(),
             'channel_name' => $dbChannel->getChannel(),
             'channel' => $dbChannel,
             'topic' => $topic,
