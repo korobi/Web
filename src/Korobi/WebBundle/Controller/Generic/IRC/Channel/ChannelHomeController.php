@@ -24,9 +24,14 @@ class ChannelHomeController extends BaseController {
         // create appropriate links
         $links = [];
         $linkBase = ['network' => $network, 'channel' => $channel];
-
+        $messages = [];
         if ($dbChannel->getLogsEnabled()) {
             $links[] = $this->createLink($dbChannel, 'Logs', $this->generateUrl('channel_log', $linkBase));
+            $messages = $this->get('doctrine_mongodb')
+                ->getManager()
+                ->getRepository('KorobiWebBundle:Chat')
+                ->findLastChatsByChannel($dbNetwork->getSlug(), $dbChannel->getChannel(), 5)
+                ->toArray(false);
         }
 
         if ($dbChannel->getCommandsEnabled()) {
@@ -40,11 +45,7 @@ class ChannelHomeController extends BaseController {
             'time' => date('F j, Y h:i:s a', $dbTopic['time']->sec)
         ];
 
-        $messages = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Chat')
-            ->findLastChatsByChannel($dbNetwork->getSlug(), $dbChannel->getChannel(), 5)
-            ->toArray(false);
+
 
         // time to render!
         return $this->render('KorobiWebBundle:controller/generic/irc/channel:home.html.twig', [
