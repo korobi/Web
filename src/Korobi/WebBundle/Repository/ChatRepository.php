@@ -133,8 +133,7 @@ class ChatRepository extends DocumentRepository {
                 ->equals('MESSAGE')
             ->limit($count)
             ->getQuery()
-            ->execute()
-            ->sort(['date' => 1]);
+            ->execute();
     }
 
 }

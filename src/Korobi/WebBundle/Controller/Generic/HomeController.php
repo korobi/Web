@@ -44,6 +44,7 @@ class HomeController extends BaseController {
             ->getRepository('KorobiWebBundle:Chat')
             ->findLastChatsByChannel($targetNetwork, $targetChannel, 50)
             ->toArray(false);
+        array_reverse($messages);
 
         $networks = [];
         /** @var Network $dbNetwork */
