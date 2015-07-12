@@ -6,6 +6,7 @@ use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelLogController;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\Parser\ChatTransformer;
 use Korobi\WebBundle\Parser\LogParser;
 use Korobi\WebBundle\Util\ExcludedHomepageChannels;
 
@@ -56,7 +57,7 @@ class HomeController extends BaseController {
             'now' => time(),
             'channels' => $dbChannels,
             'networks' => $networks,
-            'messages' => array_map(['\Korobi\WebBundle\Parser\ChatTransformer', 'transformMessage'], $messages),
+            'messages' => array_map([ChatTransformer::class, 'transformMessage'], $messages),
         ]);
     }
 

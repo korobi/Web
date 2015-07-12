@@ -5,6 +5,7 @@ namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\Parser\ChatTransformer;
 use Korobi\WebBundle\Parser\IRCTextParser;
 use Korobi\WebBundle\Parser\LogParser;
 
@@ -53,7 +54,7 @@ class ChannelHomeController extends BaseController {
             'channel' => $dbChannel,
             'topic' => $topic,
             'now' => time(),
-            'sample_logs' => array_map(['\Korobi\WebBundle\Parser\ChatTransformer', 'transformMessage'], $messages),
+            'sample_logs' => array_map([ChatTransformer::class, 'transformMessage'], $messages),
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
             'links' => $links,
