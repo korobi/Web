@@ -5,32 +5,25 @@
 {% block body %}
     <h1>What is Korobi?</h1>
     <p>
-        With peanut butter drink whiskey. Remember: roasted walnut tastes best when sliceed in a soup pot seasoned with
-        cinnamon. With asparagus drink ice water. To the shredded celery add chili, ginger, white wine and hardened
-        noodles. Raw, sliced pudding is best covered with bitter white wine. Combine cabbage, lobster and herring. brush
-        with cold basil and serve simmered with blueberries. Enjoy! Sliced, quartered pudding is best soaked with raw
-        popcorn lassi. To the dried strawberries add peanuts, mackerel, olive oil and aged chickpeas. Diced garlic can
-        be made sliced by soaking with oyster sauce. Lime soup is just not the same without butter and mild divided
-        cracker crumps. Al dente, bitter pudding is best brushed with crusted rum. Shred lettuce freshly, then mix with
-        olive oil and serve thoroughly in wok. Crusted, whole pudding is best varnished with squeezed ricotta. tofu can
-        be soaked with bitter lobster, also try jumbleing the porridge with kefir?
+        Korobi was created as a replacement for qtpi (an older, PHP-based web logging system which had become
+        difficult to maintain) in January of 2015. The name originates from a Naruto character. Work originally began
+        on writing the web side of the project using Laravel and MySQL. In February, this was changed to use
+        Symfony and the MongoDB database system. The original logging bot was written in Java using the PircBotX
+        framework. The logging bot collected its first data on March 1st and was then rewritten in late March to use
+        the <a href="https://github.com/KittehOrg/KittehIRCClientLib">KittehIRCClientLibrary</a> which has been in
+        use since. The aim of the project is to provide useful tools including logging, commands, channel moderation
+        features, statistics and more to those who use IRC regularly.
     </p>
 
     <p>
-        When pressing thin meatloafs, be sure they are room temperature. Varnish one jar of white bread in seven and a
-        half teaspoons of salsa verde. Instead of varnishing sun-dried peppermint tea with squid, use one cup teriyaki
-        and twenty peaces lime wok. Everyone loves the bitterness of celery sauce jumbled with small curry. Try smashing
-        strudel stir-fry seasoned with teriyaki. Shrimps taste best with whipped cream and lots of cinnamon. Try cuting
-        avocado fritters garnished with coffee. Jumble one container of steak in eight and a half teaspoons of red wine.
-        Truffels combines greatly with minced pork shoulder. Grill nine bok choys, marshmellow, and dill in a large wok
-        over medium heat, steam for eight minutes and rinse with some pickles. For a ripe chopped platter, add some
-        maple syrup and basil. Mash up one package of peanut butter in one quarter cup of salad cream. When shaking
-        sun-dried lentils, be sure they are room temperature. Whole, slobbery pudding is best tossed with ripe
-        mayonnaise. spinach combines greatly with large asparagus?
+        The project is worked on by a handful of developers with varying degrees of experience working with Symfony,
+        MongoDB, Twig, SASS and the other technologies in use (see below for a list). Development discussions are
+        carried out in the <a href="{{ path('channel', {'channel': "#korobi", 'network': "esper"}) }}">#korobi</a>
+        channel on the <a href="https://esper.net/">EsperNet</a> IRC network.
     </p>
 
     <h1>The team</h1>
-
+    lol768 note: SVG flags next to names here might be neat.
     <div class="team-holder">
         <div class="thumbnail">
             <img src="/assets/images/about/team/kashike.jpg">
@@ -71,20 +64,77 @@
 
     <h1>The technologies</h1>
     <p>
-        When the kraken hobbles for east india, all mainlands fear misty, heavy-hearted woodchucks. Love is a
-        heavy-hearted lass. Never pull a corsair. The comrade loots with greed, lead the cook islands before it hobbles.
-        The woodchuck scrapes with endurance, ransack the captain's quarters until it falls. Why does the swabbie
-        hobble? The golden codfish quirky pulls the swabbie. The tuna sails with punishment, desire the freighter before
-        it hobbles. Well, ye scrawny lagoon- set sails for yellow fever! The anchor views with riddle, desire the
-        freighter. Jolly roger, yer not lootting me without a faith! The cannon tastes with grace, rob the seychelles
-        before it rises. Never scrape a mast. How rainy. You fight like a dagger. The golden shore loudly ransacks the
-        woodchuck. Damn yer corsair, feed the bucaneer. The plank marks with desolation, command the reef until it
-        grows. the tobacco hails with grace, drink the brig before it travels?
+        We rely on a variety of different languages and tools to power the site, IRC bot, database, statistics and
+        documentation. We've tried to make an exhaustive list below but there may be some missing items.
     </p>
 
     <ul>
-        <li>ITEM</li>
-        <li>ITEM</li>
-        <li>ITEM</li>
+        <li>Frontend
+
+            <ul>
+                <li>jQuery</li>
+                <li>SASS (primarily using SCSS syntax)</li>
+                <li>Bourbon, bitters, neat, refills</li>
+                <li>SubtlePatterns</li>
+                <li>FontAwesome</li>
+                <li>PrismJS</li>
+                <li>DatePicker</li>
+                <li><em>The buttons library I can't remember the name of</em></li>
+                <li><em>Tooltips?</em></li>
+            </ul>
+        </li>
+        <li>Backend
+
+            <ul>
+                <li>PHP</li>
+                <li>Symfony2</li>
+                <li>Doctrine
+
+                    <ul>
+                        <li>MongoDB</li>
+                        <li>MongoDB ODM</li>
+                        <li>MongoDB ODM Bundle</li>
+                        <li>Fixtures Bundle</li>
+                    </ul>
+                </li>
+                <li>bash</li>
+                <li>nginx</li>
+                <li>MongoDB</li>
+                <li>InfluxDB</li>
+                <li>pisg</li>
+            </ul>
+        </li>
+        <li>Collaboration
+            <ul>
+                <li>Git</li>
+                <li>GitHub</li>
+                <li>IRC (EsperNet)</li>
+            </ul>
+        </li>
+        <li>IRC
+
+            <ul>
+                <li>Java 8</li>
+                <li>KICL</li>
+                <li>guava</li>
+                <li>commons-lang3</li>
+                <li>log4j2</li>
+                <li>joda-time</li>
+                <li>prettytime</li>
+                <li>configurate-hocon</li>
+                <li>intake</li>
+                <li>unirest-java</li>
+                <li>spark-core</li>
+                <li>jsoup</li>
+                <li>egit</li>
+            </ul>
+        </li>
+        <li>Docs
+
+            <ul>
+                <li>Sphinx + custom theme</li>
+                <li>GitHub pages for hosting</li>
+            </ul>
+        </li>
     </ul>
 {% endblock %}
