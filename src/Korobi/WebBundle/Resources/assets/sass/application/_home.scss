@@ -4,13 +4,13 @@
 
 @include keyframes(logScroller) {
   0% {
-    top: 0;
+    bottom: -100%;
   }
   50% {
-    top: -60em;
+    bottom: 0;
   }
   100% {
-    top: 0;
+    bottom: -100%;
   }
 }
 
@@ -29,13 +29,13 @@
 
   .logs {
     position: absolute;
-    top: 0;
+    bottom: -100%;
     margin: 0;
     padding: 0;
     width: 150%;
     z-index: -1;
     text-align: left;
-    @include animation(logScroller 60s linear);
+    @include animation(logScroller 30s linear);
     // This animation should only play infinity
     @include animation-iteration-count(infinite);
     @include animation-fill-mode(forwards);
@@ -44,26 +44,6 @@
         blur(0.5px)
         saturate(1.7)
     );
-    /*@include transform(
-    //    skew(-15deg)
-    //    scaleX(1.1)
-    //    scaleY(1.1)
-    //    rotate3d(589, -290, 40, 47deg)
-    //    translateY(-50%)
-    //);
-
-    @media (max-width: 46em) {
-      & {
-        left: -40vw;
-        @include transform(
-            skew(-5deg)
-            scaleX(1.1)
-            scaleY(1.1)
-            rotate3d(589, -290, 40, 47deg)
-            translateY(-50%)
-        );
-      }
-    }*/
   }
 
   h1 {
