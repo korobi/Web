@@ -39,6 +39,12 @@ class ChannelHomeController extends BaseController {
             'time' => date('F j, Y h:i:s a', $dbTopic['time']->sec)
         ];
 
+        $messages = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Chat')
+            ->findLastChatsByChannel($dbNetwork->getSlug(), $dbChannel->getChannel(), 5)
+            ->toArray(false);
+
         // time to render!
         return $this->render('KorobiWebBundle:controller/generic/irc/channel:home.html.twig', [
             'network_name' => $dbNetwork->getName(),
@@ -47,6 +53,7 @@ class ChannelHomeController extends BaseController {
             'channel' => $dbChannel,
             'topic' => $topic,
             'now' => time(),
+            'sample_logs' => $messages,
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
             'links' => $links,
