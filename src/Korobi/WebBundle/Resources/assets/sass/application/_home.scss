@@ -4,16 +4,20 @@
 
 @include keyframes(logScroller) {
   0% {
-    bottom: -100%;
+    transform: translate3d(0, 0, 0);
   }
-  50% {
-    bottom: 0;
+  55% {
+    // 35vh: .hero padding,
+    // 1rem: .hero h1 padding,
+    // 1rem: .hero h1 line-height (5 * 1.2),
+    // 5rem: .hero h1 font-size,
+    // 4px: borders
+    transform: translate3d(0, calc(0px - 100% + 35vh + 7rem + 4px), 0);
   }
   100% {
-    bottom: -100%;
+    transform: translate3d(0, 0, 0);
   }
 }
-
 
 .hero {
   width: 100%;
@@ -29,7 +33,7 @@
 
   .logs {
     position: absolute;
-    bottom: -100%;
+    top: 0;
     margin: 0;
     padding: 0;
     width: 150%;
@@ -41,7 +45,7 @@
     @include animation-fill-mode(forwards);
 
     @include filter(
-        blur(0.5px)
+        blur(1px)
         saturate(1.7)
     );
   }
