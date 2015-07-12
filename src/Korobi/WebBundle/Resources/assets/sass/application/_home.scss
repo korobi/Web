@@ -6,16 +6,13 @@
   0% {
     transform: translate3d(0, 0, 0);
   }
-  55% {
+  100% {
     // 35vh: .hero padding,
     // 1rem: .hero h1 padding,
     // 1rem: .hero h1 line-height (5 * 1.2),
     // 5rem: .hero h1 font-size,
-    // 4px: borders
-    transform: translate3d(0, calc(0px - 100% + 35vh + 7rem + 4px), 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
+    // 2px: borders
+    transform: translate3d(0, calc(0px - 100% + 35vh + 7rem + 2px), 0);
   }
 }
 
@@ -38,9 +35,7 @@
     padding: 0;
     z-index: -1;
     text-align: left;
-    @include animation(logScroller 30s linear);
-    // This animation should only play infinity
-    @include animation-iteration-count(infinite);
+    @include animation(logScroller 15s linear);
     @include animation-fill-mode(forwards);
 
     @include filter(
