@@ -1,7 +1,5 @@
 body {
-  background: rgb(34, 34, 34);
-  background-image: $bodyBackgroundImage;
-  background-repeat: repeat;
+  background: $bodyBackgroundImage repeat;
 }
 
 html {
