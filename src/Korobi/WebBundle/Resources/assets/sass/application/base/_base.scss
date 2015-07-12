@@ -1,5 +1,6 @@
 body {
-  background: $bodyBackgroundImage repeat;
+  background-image: $bodyBackgroundImage;
+  background-repeat: repeat;
 }
 
 html {
