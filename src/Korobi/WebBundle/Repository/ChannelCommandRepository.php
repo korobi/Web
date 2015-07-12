@@ -7,9 +7,9 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 class ChannelCommandRepository extends DocumentRepository {
 
     /**
-     * @param $network
-     * @param $channel
-     * @return mixed
+     * @param string $network
+     * @param string $channel
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findAllByChannel($network, $channel) {
         return $this->createQueryBuilder()
@@ -22,6 +22,12 @@ class ChannelCommandRepository extends DocumentRepository {
             ->execute();
     }
 
+    /**
+     * @param string $network
+     * @param string $channel
+     * @param string $command
+     * @return \Doctrine\MongoDB\Cursor
+     */
     public function findAliasesFor($network, $channel, $command) {
         return $this->createQueryBuilder()
             ->sort('name', 'ASC')

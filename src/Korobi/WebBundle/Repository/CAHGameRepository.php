@@ -8,7 +8,7 @@ class CAHGameRepository extends DocumentRepository {
 
     /**
      * @param $id
-     * @return mixed
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findById($id) {
         return $this->createQueryBuilder()

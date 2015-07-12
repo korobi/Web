@@ -7,7 +7,7 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 class NetworkRepository extends DocumentRepository {
 
     /**
-     * @return mixed
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findNetworks() {
         return $this->createQueryBuilder()
@@ -17,8 +17,8 @@ class NetworkRepository extends DocumentRepository {
     }
 
     /**
-     * @param $slug
-     * @return mixed
+     * @param string $slug
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findNetwork($slug) {
         return $this->createQueryBuilder()

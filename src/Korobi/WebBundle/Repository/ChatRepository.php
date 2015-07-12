@@ -7,9 +7,9 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 class ChatRepository extends DocumentRepository {
 
     /**
-     * @param $network
-     * @param $channel
-     * @return mixed
+     * @param string $network
+     * @param string $channel
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findAllByChannel($network, $channel) {
         return $this->createQueryBuilder()
@@ -23,11 +23,11 @@ class ChatRepository extends DocumentRepository {
     }
 
     /**
-     * @param $network
-     * @param $channel
+     * @param string $network
+     * @param string $channel
      * @param \MongoDate $from
      * @param \MongoDate $to
-     * @return mixed
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findAllByChannelAndDate($network, $channel, \MongoDate $from, \MongoDate $to) {
         return $this->createQueryBuilder()
@@ -45,11 +45,11 @@ class ChatRepository extends DocumentRepository {
     }
 
     /**
-     * @param $network
-     * @param $channel
+     * @param string $network
+     * @param string $channel
      * @param \MongoId $from
      * @param \MongoDate $to
-     * @return mixed
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findAllByChannelAndId($network, $channel, \MongoId $from, \MongoDate $to) {
         return $this->createQueryBuilder()
@@ -67,10 +67,10 @@ class ChatRepository extends DocumentRepository {
     }
 
     /**
-     * @param $network
-     * @param $channel
-     * @param $type
-     * @return mixed
+     * @param string $network
+     * @param string $channel
+     * @param string $type
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findAllByChannelAndType($network, $channel, $type) {
         return $this->createQueryBuilder()
@@ -86,9 +86,9 @@ class ChatRepository extends DocumentRepository {
     }
 
     /**
-     * @param $network
-     * @param $channel
-     * @return mixed
+     * @param string $network
+     * @param string $channel
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findFirstByChannel($network, $channel) {
         return $this->createQueryBuilder()
@@ -102,6 +102,10 @@ class ChatRepository extends DocumentRepository {
             ->execute();
     }
 
+    /**
+     * @param int $count
+     * @return \Doctrine\MongoDB\Cursor
+     */
     public function findLastMessages($count) {
         return $this->createQueryBuilder()
             ->sort('date', 'DESC')
@@ -112,6 +116,12 @@ class ChatRepository extends DocumentRepository {
             ->execute();
     }
 
+    /**
+     * @param string $network
+     * @param string $channel
+     * @param int $count
+     * @return \Doctrine\MongoDB\Cursor
+     */
     public function findLastChatsByChannel($network, $channel, $count) {
         return $this->createQueryBuilder()
             ->sort('date', 'DESC')

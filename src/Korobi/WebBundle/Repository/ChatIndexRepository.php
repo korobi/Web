@@ -7,9 +7,9 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 class ChatIndexRepository extends DocumentRepository {
 
     /**
-     * @param $network
-     * @param $channel
-     * @return mixed
+     * @param string $network
+     * @param string $channel
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findAllByChannel($network, $channel) {
         return $this->createQueryBuilder()

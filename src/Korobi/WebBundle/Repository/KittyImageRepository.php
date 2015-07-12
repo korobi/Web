@@ -7,7 +7,7 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 class KittyImageRepository extends DocumentRepository {
 
     /**
-     * @return mixed
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findAllImages() {
         return $this->createQueryBuilder()

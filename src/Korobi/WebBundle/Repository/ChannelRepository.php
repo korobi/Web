@@ -7,8 +7,8 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 class ChannelRepository extends DocumentRepository {
 
     /**
-     * @param $network
-     * @return mixed
+     * @param string $network
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findAllByNetwork($network) {
         return $this->createQueryBuilder()
@@ -20,9 +20,9 @@ class ChannelRepository extends DocumentRepository {
     }
 
     /**
-     * @param $network
-     * @param $channel
-     * @return mixed
+     * @param string $network
+     * @param string $channel
+     * @return \Doctrine\MongoDB\Cursor
      */
     public function findByChannel($network, $channel) {
         return $this->createQueryBuilder()
@@ -39,7 +39,7 @@ class ChannelRepository extends DocumentRepository {
      * Looks for messages, actions etc (valid content only).
      *
      * @param int $limit Number of channels to grab.
-     * @return array The public n last channels.
+     * @return \Doctrine\MongoDB\Cursor The public n last channels.
      */
     public function getRecentlyActiveChannels($limit) {
         return $this->createQueryBuilder()
