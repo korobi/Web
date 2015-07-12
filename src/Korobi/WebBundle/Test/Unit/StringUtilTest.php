@@ -28,4 +28,9 @@ class StringUtilTest extends WebTestCase {
         $this->assertFalse(StringUtil::endsWith('The quick brown fox', 'BROWN FOX'));
         $this->assertFalse(StringUtil::endsWith('abcdef', 'xtg'));
     }
+
+    public function testStringContains() {
+        $this->assertTrue(StringUtil::stringContains('abc', 'c'));
+        $this->assertFalse(StringUtil::stringContains('zed', 'c'));
+    }
 }

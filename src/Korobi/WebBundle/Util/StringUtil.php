@@ -25,4 +25,13 @@ class StringUtil {
     public static function endsWith($haystack, $needle, $ignoreCase = false) {
         return $needle === '' || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($ignoreCase ? strtolower($haystack) : $haystack, $ignoreCase ? strtolower($needle) : $needle, $temp) !== false);
     }
+
+    /**
+     * @param $haystack
+     * @param $needle
+     * @return bool
+     */
+    public static function stringContains($haystack, $needle) {
+        return (strpos($haystack, $needle) !== false);
+    }
 }

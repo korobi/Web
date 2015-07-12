@@ -2,6 +2,8 @@
 
 namespace Korobi\WebBundle\Deployment;
 
+use Korobi\WebBundle\Util\StringUtil;
+
 class TestOutputParser {
 
     public static function parseLine($line) {
@@ -34,6 +36,10 @@ class TestOutputParser {
 
         if ($data['failures'] > 0) {
             $data['status'] = 'Fail';
+        }
+
+        if (StringUtil::stringContains($line, "OK") && $data['status'] == "Pass") {
+            $data['passed'] = $data['tests'];
         }
 
         return $data;

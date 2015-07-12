@@ -33,6 +33,14 @@ class TestOutputParserTest extends WebTestCase {
         $this->assertEquals('Pass', $data['status']);
     }
 
+    public function testWhenNoExplicitPassNumber() {
+        $data = (new TestOutputParser())->parseLine('OK (26 tests, 98 assertions)');
+        $this->assertEquals(26, $data['tests']);
+        $this->assertEquals(26, $data['passed']);
+        $this->assertEquals(98, $data['assertions']);
+        $this->assertEquals('Pass', $data['status']);
+    }
+
     public function testRealLifeExample() {
         $data = (new TestOutputParser())->parseLine('Tests: 25, Assertions: 61, Skipped: 4.');
         $this->assertEquals(
