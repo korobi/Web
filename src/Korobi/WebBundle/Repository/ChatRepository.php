@@ -132,6 +132,7 @@ class ChatRepository extends DocumentRepository {
             ->field('type')
                 ->equals('MESSAGE')
             ->limit($count)
+            ->sort('date', 'ASC')
             ->getQuery()
             ->execute();
     }
