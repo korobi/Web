@@ -11,9 +11,9 @@
     <strong>Command Prefix: </strong> {{ command_prefix }}<br>
     {% if channel.LastActivityValid != null %}
     <strong>Last activity: </strong> <time datetime="{{ channel.LastActivityValid.getTimestamp() }}" title="{{ channel.LastActivityValid.getTimestamp()|date("c") }}">
-    {{ relativeTime(now, channel.LastActivityValid.getTimestamp()) }}
+    {{ relativeTime(now, channel.LastActivityValid.getTimestamp()) }}</time>
     {% endif %}
-</time><br>
+    <br>
     {% for link in links %}
         <a href="{{ link.href }}">{{ link.name }}</a><br>
     {% endfor %}
