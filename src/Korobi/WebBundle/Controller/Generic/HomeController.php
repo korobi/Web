@@ -56,7 +56,7 @@ class HomeController extends BaseController {
             'now' => time(),
             'channels' => $dbChannels,
             'networks' => $networks,
-            'messages' => array_map([$this, 'transformMessage'], $messages),
+            'messages' => array_map(['\Korobi\WebBundle\Parser\ChatTransformer', 'transformMessage'], $messages),
         ]);
     }
 
@@ -69,18 +69,5 @@ class HomeController extends BaseController {
         return $blacklist;
     }
 
-    private function transformMessage(Chat $chat) {
-        $nick = LogParser::getDisplayName($chat);
-        return [
-            'timestamp'  => $chat->getDate()->getTimestamp(),
-            'role'       => strtolower($chat->getActorPrefix()),
-            'nickColour' => LogParser::getColourForActor($chat),
-            'displayNick'=> substr($nick, 0, ChannelLogController::MAX_NICK_LENGTH + 1),
-            'realNick'   => $nick,
-            'nickTooLong'=> strlen($nick) - ChannelLogController::MAX_NICK_LENGTH > 1,
-            'nick'       => LogParser::getActorName($chat),
-            'message'    => LogParser::parseMessage($chat),
-        ];
-    }
 
 }

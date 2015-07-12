@@ -53,7 +53,7 @@ class ChannelHomeController extends BaseController {
             'channel' => $dbChannel,
             'topic' => $topic,
             'now' => time(),
-            'sample_logs' => $messages,
+            'sample_logs' => array_map(['\Korobi\WebBundle\Parser\ChatTransformer', 'transformMessage'], $messages),
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
             'links' => $links,
