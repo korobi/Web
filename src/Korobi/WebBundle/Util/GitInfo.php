@@ -25,7 +25,7 @@ class GitInfo {
      * @param string $environment
      */
     public function updateData($environment = 'dev') {
-        $root = __DIR__ . '/../../../../'; // bit of a hack
+        $root = __DIR__ . '/../../../../'; // just a bit of a hack
         $ref = (new \SplFileObject($root . '.git/HEAD'))->getCurrentLine();
         $ref = trim(explode(' ', $ref)[1]);
 
