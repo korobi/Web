@@ -37,7 +37,7 @@ class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
             $info->addStatus(DeploymentStatus::TESTS_FAILED);
         }
 
-        $this->messageQueue[] = $message;
+        $info->addMessageToQueue($message);
 
         $info->getRevision()->setTestsOutput(implode("\n", $execOutput));
         $info->getRevision()->setTestsPassed($parsed['failures'] === 0);

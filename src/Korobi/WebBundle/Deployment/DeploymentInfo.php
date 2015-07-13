@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Deployment;
 
 use Korobi\WebBundle\Document\Revision;
 use Korobi\WebBundle\Document\User;
+use Korobi\WebBundle\Util\AkioMessageBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
@@ -47,6 +48,11 @@ class DeploymentInfo {
      * @var array Array of statuses
      */
     private $status;
+
+    /**
+     * @var AkioMessageBuilder[] Holds a queue of messages to send all at once.
+     */
+    protected $messageQueue = [];
 
     /**
      * @param $request Request
@@ -115,5 +121,19 @@ class DeploymentInfo {
     public function addStatus($status) {
         $this->status[] = $status;
         $this->revision->setStatuses($this->status);
+    }
+
+    /**
+     * @param AkioMessageBuilder $message The message to add.
+     */
+    public function addMessageToQueue(AkioMessageBuilder $message) {
+        $this->messageQueue[] = $message;
+    }
+
+    /**
+     * @return \Korobi\WebBundle\Util\AkioMessageBuilder[]
+     */
+    public function getAllMessagesInQueue() {
+        return $this->messageQueue;
     }
 }

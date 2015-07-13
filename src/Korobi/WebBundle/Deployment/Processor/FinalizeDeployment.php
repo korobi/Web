@@ -16,12 +16,11 @@ class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInt
     public function handle(DeploymentInfo $info) {
         $this->dm->persist($info->getRevision());
         $this->dm->flush();
-        $this->messageQueue[] = $this->akio->message()->text('Full details at https://dev.korobi.io/deploy/view/' .
-            $info->getRevision()->getId() . '/');
+        $info->addMessageToQueue($this->akio->message()->text('Full details at https://dev.korobi.io/deploy/view/' .
+            $info->getRevision()->getId() . '/'));
 
         if ($info->getRevision()->getOldCommit() !== $info->getRevision()->getNewCommit()) {
-            /** @var AkioMessageBuilder $message */
-            foreach ($this->messageQueue as $message) {
+            foreach ($info->getAllMessagesInQueue() as $message) {
                 $message->send("deploy");
             }
         }

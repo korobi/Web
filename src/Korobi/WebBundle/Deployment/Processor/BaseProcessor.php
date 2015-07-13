@@ -7,7 +7,6 @@ use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Deployment\DeploymentLogger;
 use Korobi\WebBundle\Deployment\DeploymentStatus;
 use Korobi\WebBundle\Util\Akio;
-use Korobi\WebBundle\Util\AkioMessageBuilder;
 use Korobi\WebBundle\Util\GitInfo;
 
 /**
@@ -39,11 +38,6 @@ abstract class BaseProcessor implements DeploymentProcessorInterface {
      * @var DocumentManager
      */
     protected $dm;
-
-    /**
-     * @var AkioMessageBuilder[] Holds a queue of messages to send all at once.
-     */
-    protected $messageQueue = [];
 
     public function __construct(DeploymentLogger $logger, Akio $akio, DocumentManager $dm, GitInfo $gi) {
         $this->logger = $logger;
