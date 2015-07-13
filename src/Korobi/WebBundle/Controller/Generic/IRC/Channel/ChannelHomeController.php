@@ -5,6 +5,7 @@ namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\IrcLogs\RenderManager;
 use Korobi\WebBundle\Parser\ChatTransformer;
 use Korobi\WebBundle\Parser\LogParser;
 
@@ -40,7 +41,7 @@ class ChannelHomeController extends BaseController {
         $dbTopic = $dbChannel->getTopic();
         $topic = [
             'value' => $dbTopic['value'],
-            'setter_nick' => LogParser::transformActor($dbTopic['actor_nick']),
+            'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
             'time' => date('F j, Y h:i:s a', $dbTopic['time']->sec),
         ];
 
@@ -54,7 +55,7 @@ class ChannelHomeController extends BaseController {
             'channel' => $dbChannel,
             'topic' => $topic,
             'now' => time(),
-            'sample_logs' => array_map([ChatTransformer::class, 'transformMessage'], $messages),
+            'sample_logs' => $this->getRenderManager()->renderLogs($messages),
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
             'links' => $links,
