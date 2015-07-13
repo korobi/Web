@@ -6,7 +6,6 @@ use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Parser\ChatTransformer;
-use Korobi\WebBundle\Parser\IRCTextParser;
 use Korobi\WebBundle\Parser\LogParser;
 
 class ChannelHomeController extends BaseController {
@@ -42,7 +41,7 @@ class ChannelHomeController extends BaseController {
         $topic = [
             'value' => $dbTopic['value'],
             'setter_nick' => LogParser::transformActor($dbTopic['actor_nick']),
-            'time' => date('F j, Y h:i:s a', $dbTopic['time']->sec)
+            'time' => date('F j, Y h:i:s a', $dbTopic['time']->sec),
         ];
 
 

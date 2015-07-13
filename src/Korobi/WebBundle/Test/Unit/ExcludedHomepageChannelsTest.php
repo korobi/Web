@@ -18,9 +18,9 @@ class ExcludedHomepageChannelsTest extends WebTestCase {
         $sut = new ExcludedHomepageChannels($config);
 
         // assert
-        $this->assertTrue($sut->isBlacklisted("bar", "#foo"));
-        $this->assertFalse($sut->isBlacklisted("foobar", "#foo"));
-        $this->assertFalse($sut->isBlacklisted("foo", "#foobar"));
+        $this->assertTrue($sut->isBlacklisted('bar', '#foo'));
+        $this->assertFalse($sut->isBlacklisted('bar', '##foo'));
+        $this->assertFalse($sut->isBlacklisted('foobar', '#foo'));
+        $this->assertFalse($sut->isBlacklisted('foo', '#foobar'));
     }
-
 }
