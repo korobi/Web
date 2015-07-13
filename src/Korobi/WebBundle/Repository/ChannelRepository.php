@@ -30,7 +30,7 @@ class ChannelRepository extends DocumentRepository {
             ->field('network')
                 ->equals($network)
             ->field('channel')
-                ->equals(new \MongoRegex('/^' . preg_quote($channel) . '/i'))
+                ->equals(new \MongoRegex('/^' . preg_quote($channel, '/') . '/i'))
             ->getQuery()
             ->execute();
     }
