@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Deployment\Processor;
 
 use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Deployment\DeploymentStatus;
+use Korobi\WebBundle\Util\AkioMessageBuilder;
 
 /**
  * Saves deployment results to the database.
@@ -15,7 +16,15 @@ class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInt
     public function handle(DeploymentInfo $info) {
         $this->dm->persist($info->getRevision());
         $this->dm->flush();
-        $this->akio->message()->text('Full details at https://dev.korobi.io/deploy/view/' . $info->getRevision()->getId() . '/')->send('deploy');
+        $this->messageQueue[] = $this->akio->message()->text('Full details at https://dev.korobi.io/deploy/view/' .
+            $info->getRevision()->getId() . '/');
+
+        if ($info->getRevision()->getOldCommit() !== $info->getRevision()->getNewCommit()) {
+            /** @var AkioMessageBuilder $message */
+            foreach ($this->messageQueue as $message) {
+                $message->send("deploy");
+            }
+        }
 
         return DeploymentStatus::OK;
     }
