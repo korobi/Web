@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\IrcLogs\RenderManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -111,5 +112,12 @@ abstract class BaseController extends Controller {
      */
     protected function getLogger() {
         return $this->get('logger');
+    }
+
+    /**
+     * @return RenderManager
+     */
+    protected function getRenderManager() {
+        return $this->get("korobi.irc.render_manager");
     }
 }

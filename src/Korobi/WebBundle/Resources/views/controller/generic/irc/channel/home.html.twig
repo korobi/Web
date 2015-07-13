@@ -1,4 +1,5 @@
 {% extends 'KorobiWebBundle::layout.html.twig' %}
+{% import "KorobiWebBundle::macro/log_render.html.twig" as log_render %}
 
 {% set page_title = channel_name ~ ' on ' ~ network_name %}
 
@@ -6,7 +7,11 @@
     <h1>{{ channel_name }} on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a></h1>
     <h2>Topic: <em>{{ topic.value|ircformat|raw }}</em></h2>
     <h3>Topic set by: <em>{{ topic.setter_nick }}</em> on {{ topic.time }}</h3>
-    <strong>Live logs</strong>
+
+    {% if sample_logs is not empty %}
+        <strong>Live logs</strong>
+        {# {{  log_render.log_render(sample_logs, true) }} #}
+    {% endif %}
     <pre>{{ sample_logs|json_encode }}</pre>
     <strong>Command Prefix: </strong> {{ command_prefix }}<br>
     {% if channel.LastActivityValid != null %}

@@ -55,7 +55,7 @@ class HomeController extends BaseController {
             'now' => time(),
             'channels' => $dbChannels,
             'networks' => $networks,
-            'messages' => array_map([ChatTransformer::class, 'transformMessage'], $messages),
+            'messages' => $this->getRenderManager()->renderLogs($messages, ["message"]),
         ]);
     }
 

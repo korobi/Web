@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>irc.joined_channel</source>
+                <target>%actor% (%actor_hostname%) joined the channel</target>
+                <note>Used in IRC logs, example: "@Kashike joined the channel"</note>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>irc.kicked_by</source>
+                <target>%recipient_actor% was kicked by %actor% (%kick_message%)</target>
+                <note>Used in IRC logs, example: "@lol768 was kicked by @Kashike (hello)"</note>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>irc.set_mode</source>
+                <target>%actor% sets mode %mode%</target>
+                <note>Used in IRC logs, example: "@Kashike sets mode +b *!*@test.com". Please note that %mode% includes the entire last part "+b *!*@test.com".</note>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>irc.known_as</source>
+                <target>%original_actor% is now known as %new_actor%</target>
+                <note>Used in IRC logs, example: "@drtshock is now known as @Trent"</note>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>irc.left_channel</source>
+                <target>%actor% (%actor_hostname%) left the channel</target>
+                <note>Used in IRC logs, example: "lol768 (lol768!lol7681@bnc.lol768.com) left the channel"</note>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>irc.has_quit</source>
+                <target>%actor% (%actor_hostname%) has quit (%quit_message%)</target>
+                <note>Used in IRC logs, example: "lol768 (lol768!lol7681@bnc.lol768.com) has quit (I hate you all)"</note>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>irc.topic_is</source>
+                <target>Topic is: %topic%</target>
+                <note>Used in IRC logs, example: "lol768 (lol768!lol7681@bnc.lol768.com) left the channel"</note>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>irc.has_changed_topic_to</source>
+                <target>%actor% has changed the topic to: %topic%</target>
+                <note>Used in IRC logs, example: "@lol768 has changed the topic to: testing123</note>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>irc.server</source>
+                <target>Server</target>
+                <note>Used in IRC logs where the server is responsible (this becomes %actor%).</note>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
