@@ -32,6 +32,7 @@ class ChannelHomeController extends BaseController {
                 ->getRepository('KorobiWebBundle:Chat')
                 ->findLastChatsByChannel($dbNetwork->getSlug(), $dbChannel->getChannel(), 5)
                 ->toArray(false);
+            $messages = array_reverse($messages);
         }
 
         if ($dbChannel->getCommandsEnabled()) {
