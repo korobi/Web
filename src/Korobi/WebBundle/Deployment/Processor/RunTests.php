@@ -25,7 +25,7 @@ class RunTests extends BaseProcessor implements DeploymentProcessorInterface {
         $testOutput = exec('phpunit', $execOutput);
         $parsed = (new TestOutputParser())->parseLine($testOutput);
 
-        $message = $this->akio->message()->green()->text($parsed['passed'] . ' tests passed.');
+        $message = $this->akio->message()->green()->text($parsed['passed'] . ' tests passed!');
 
         if ($parsed['incomplete'] > 0) {
             $message = $message->yellow()->text(' ' . $parsed['incomplete'] . ' skipped/incomplete tests.');
