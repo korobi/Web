@@ -10,9 +10,8 @@
 
     {% if sample_logs is not empty %}
         <strong>Live logs</strong>
-        {# {{  log_render.log_render(sample_logs, true) }} #}
+        <div class="logs">{{  log_render.log_render(sample_logs, true) }}</div>
     {% endif %}
-    <pre>{{ sample_logs|json_encode }}</pre>
     <strong>Command Prefix: </strong> {{ command_prefix }}<br>
     {% if channel.LastActivityValid != null %}
     <strong>Last activity: </strong> <time datetime="{{ channel.LastActivityValid.getTimestamp() }}" title="{{ channel.LastActivityValid.getTimestamp()|date("c") }}">

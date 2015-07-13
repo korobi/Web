@@ -16,13 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ChannelLogController extends BaseController {
 
-    const MAX_NICK_LENGTH = 10;
-
-    /**
-     * @var \ReflectionClass The log parser reflection class.
-     */
-    private $logParser;
-
     /**
      * @param Request $request
      * @param $network
