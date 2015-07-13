@@ -1,5 +1,5 @@
 {% macro log_render(logs, linkable, use_id) %}
-    <div class="logs{% if linkable|default(false) %} linkable{% endif %}" {% if use_id|default(true) %}id="logs"{% endif %}>
+    <div class="logs{% if linkable|default(false) %} linkable{% endif %}" {% if use_id|default(false) %}id="logs"{% endif %}>
         {% for line_num, line in logs %}
             <div data-nick="{{ line.nick }}" data-event-id="{{ line.id }}" data-event-type="{{ line.type }}"
                  class="line{% if linkable|default(false) %} js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
