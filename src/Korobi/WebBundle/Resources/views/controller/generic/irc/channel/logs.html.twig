@@ -1,4 +1,5 @@
 {% extends 'KorobiWebBundle::layout.html.twig' %}
+{% import "KorobiWebBundle::macro/log_render.html.twig" as log_render %}
 
 {% set page_title = channel_name ~ ' on ' ~ network_name ~ ' - ' ~ (is_tail ? 'Tail' : 'Logs') %}
 
@@ -57,25 +58,7 @@
         {% if logs is empty %}
             <div class="empty">Sorry, no logs are available for the requested date.</div>
         {% else %}
-            {% for line_num, line in logs %}
-                <div data-nick="{{ line.nick }}" data-event-id="{{ line.id }}" data-event-type="{{ line.type }}" class="line{% if not is_tail %} js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
-                    <span class="timestamp">
-                        {# The date is UTC, js will translate it to the correct timezone #}
-                        {{ gmdate('H:i:s', line.timestamp) }}
-                    </span>
-                    <span class="nick irc--{{ "%02d"|format(line.nickColour) }}-df
-                            {%- if line.role is not empty %} {{ line.role }}{% endif %}"
-                            {%- if line.nickTooLong %} title="{{ line.realNick }}" rel="tooltip"{% endif %}>
-                        {{- line.displayNick -}}
-                        {%- if line.nickTooLong -%}
-                            +
-                        {%- endif -%}
-                    </span>
-                    <span class="message">
-                        {{- line.message|raw -}}
-                    </span>
-                </div>
-            {% endfor %}
+            {{ log_render.log_render(logs, is_tail) }}
         {% endif %}
     </div>
 {% endblock %}

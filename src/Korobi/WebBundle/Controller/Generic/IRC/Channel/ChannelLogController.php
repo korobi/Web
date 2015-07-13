@@ -8,6 +8,7 @@ use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\ChatIndex;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Exception\UnsupportedOperationException;
+use Korobi\WebBundle\IrcLogs\RenderManager;
 use Korobi\WebBundle\Parser\LogParser;
 use Korobi\WebBundle\Repository\ChatRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -83,20 +84,8 @@ class ChannelLogController extends BaseController {
             $dbChats = array_slice($dbChats, -$tail);
         }
 
-        // grab reflection class for log parser
-        $this->logParser = new \ReflectionClass('Korobi\\WebBundle\\Parser\\LogParser');
-
-        $chats = [];
-
-        // process all found chat entries
-        foreach ($dbChats as $chat) {
-            /** @var Chat $chat */
-            if ($chat->getNotice() && $chat->getNoticeTarget() !== 'NORMAL') {
-                continue;
-            }
-
-            $chats[] = $this->transformToChatMessage($chat);
-        }
+        // get the data back for the twig frontend to render, from our chats in the database
+        $chats = $this->getRenderManager()->renderLogs($dbChats);
 
         if (in_array('application/json', $request->getAcceptableContentTypes())) {
             return new JsonResponse($chats);
@@ -153,37 +142,6 @@ class ChannelLogController extends BaseController {
         }
 
         return [$year, $month, $day, $tail];
-    }
-
-    private function transformToChatMessage(Chat $chat) {
-        $nick = LogParser::getDisplayName($chat);
-        return [
-            'id'         => $chat->getId(),
-            'timestamp'  => $chat->getDate()->getTimestamp(),
-            'type'       => strtolower($chat->getType()),
-            'role'       => $chat->getType() == 'MESSAGE' ? strtolower($chat->getActorPrefix()) : '',
-            'nickColour' => LogParser::getColourForActor($chat),
-            'displayNick'=> substr($nick, 0, self::MAX_NICK_LENGTH + 1),
-            'realNick'   => $nick,
-            'nickTooLong'=> strlen($nick) - self::MAX_NICK_LENGTH > 1,
-            'nick'       => LogParser::getActorName($chat),
-            'message'    => $this->parseChatMessage($chat),
-        ];
-    }
-
-    /**
-     * @param Chat $chat The chat entry to pass off to the parser.
-     * @return string
-     * @throws UnsupportedOperationException If you try and parse an unsupported message type.
-     */
-    private function parseChatMessage(Chat $chat) {
-        $method = 'parse' . ucfirst(strtolower($chat->getType()));
-        try {
-            $method = $this->logParser->getMethod($method);
-            return $method->invokeArgs(null, [$chat]);
-        } catch (\ReflectionException $ex) {
-            throw new UnsupportedOperationException("The method $method caused a reflection exception: " . $ex->getMessage());
-        }
     }
 
     /**

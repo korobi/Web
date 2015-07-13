@@ -3,30 +3,34 @@
 namespace Korobi\WebBundle\Parser;
 
 use Korobi\WebBundle\Document\Chat;
+use Korobi\WebBundle\IrcLogs\RenderSettings;
+use Symfony\Component\Translation\TranslatorInterface;
 
-class LogParser {
+class LogParser implements LogParserInterface {
 
-    const JOIN_USER_PREFIX = '-->';
-    const PART_USER_PREFIX = '<--';
-    const ACTION_USER_PREFIX = '*';
-    const ACTION_SERVER_PREFIX = '--';
-    const ACTION_SERVER_COLOUR = '14';
+    /**
+     * @var TranslatorInterface
+     */
+    private $t;
 
-    // -----------------
-    // ---- Parsing ----
-    // -----------------
+    /**
+     * @param TranslatorInterface $t
+     */
+    public function __construct(TranslatorInterface $t) {
+        $this->t = $t;
+    }
 
     /**
      * @param Chat $chat
      * @return string
      */
     // @Kashike flails
-    public static function parseAction(Chat $chat) {
+    public function parseAction(Chat $chat) {
         $result = '';
 
-        $result .= self::getSpanForColour(
-            self::getColourForActor($chat),
-            self::transformActor($chat->getActorName(), $chat->getActorPrefix())
+        $result .= $this->getSpanForColour(
+            $this->getColourForActor($chat),
+            $this->transformActor($chat->getActorName(), $chat->getActorPrefix())
         );
         $result .= ' ';
         $result .= IRCTextParser::parse($chat->getMessage());
@@ -39,14 +43,10 @@ class LogParser {
      * @return string
      */
     // @Kashike joined the channel
-    public static function parseJoin(Chat $chat) {
-        $result = '';
-
-        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
-        $result .= ' (';
-        $result .= IRCTextParser::createHostnameTag($chat->getActorHostname());
-        $result .= ') ';
-        $result .= 'joined the channel';
+    public function parseJoin(Chat $chat) {
+        $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
+        $actorHostname = IRCTextParser::createHostnameTag($chat->getActorHostname());
+        $result = $this->t->trans('irc.joined_channel', ['%actor%' => $actor, '%actor_hostname%' => $actorHostname]);
 
         return $result;
     }
@@ -56,13 +56,12 @@ class LogParser {
      * @return string
      */
     // @lol768 was kicked by @Kashike (hello)
-    public static function parseKick(Chat $chat) {
-        $result = '';
-
-        $result .= self::transformActor($chat->getRecipientName(), $chat->getRecipientPrefix());
-        $result .= ' was kicked by ';
-        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
-        $result .= ' (' . $chat->getMessage() . ')';
+    public function parseKick(Chat $chat) {
+        $recipientActor = $this->transformActor($chat->getRecipientName(), $chat->getRecipientPrefix());
+        $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
+        $kickMessage = $chat->getMessage();
+        $result = $this->t->trans('irc.was_kicked_by',
+            ['%recipient_actor%' => $recipientActor, '%actor%' => $actor, '%kick_message%' => $kickMessage]);
 
         return $result;
     }
@@ -72,7 +71,7 @@ class LogParser {
      * @return string
      */
     // meow!
-    public static function parseMessage(Chat $chat) {
+    public function parseMessage(Chat $chat) {
         return IRCTextParser::parse($chat->getMessage());
     }
 
@@ -82,21 +81,22 @@ class LogParser {
      */
     // Server sets mode +CQnst
     // @Kashike sets mode +b *!*@test.com
-    public static function parseMode(Chat $chat) {
-        $result = '';
+    public function parseMode(Chat $chat) {
+        $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
+        $mode = $chat->getMessage();
 
-        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
-        $result .= ' sets mode ' . $chat->getMessage();
-
+        // I see this format as part of IRC< hence why not in i18n
         if ($chat->getRecipientPrefix() !== null) {
-            $result .= self::transformUserModeToLetter($chat->getRecipientPrefix());
-            $result .= ' ';
-            $result .= self::transformActor($chat->getRecipientName());
+            $mode .= $this->transformUserModeToLetter($chat->getRecipientPrefix());
+            $mode .= ' ';
+            $mode .= $this->transformActor($chat->getRecipientName());
         } else if ($chat->getChannelMode() !== null) {
-            $result .= self::transformChannelModeToLetter($chat->getChannelMode());
-            $result .= ' ';
-            $result .= self::transformActor($chat->getRecipientHostname());
+            $mode .= $this->transformChannelModeToLetter($chat->getChannelMode());
+            $mode .= ' ';
+            $mode .= $this->transformActor($chat->getRecipientHostname());
         }
+
+        $result = $this->t->trans('irc.set_mode', ['%actor%' => $actor, '%mode%' => $mode]);
 
         return $result;
     }
@@ -106,12 +106,10 @@ class LogParser {
      * @return string
      */
     // [00:00:00] ** @drtshock is now known as @Trent
-    public static function parseNick(Chat $chat) {
-        $result = '';
-
-        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
-        $result .= ' is now known as ';
-        $result .= self::transformActor($chat->getRecipientName(), $chat->getActorPrefix());
+    public function parseNick(Chat $chat) {
+        $originalActor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
+        $newActor = $this->transformActor($chat->getRecipientName(), $chat->getActorPrefix());
+        $result = $this->t->trans('irc.known_as', ['%original_actor%' => $originalActor, '%new_actor%' => $newActor]);
 
         return $result;
     }
@@ -120,14 +118,10 @@ class LogParser {
      * @param Chat $chat
      * @return string
      */
-    public static function parsePart(Chat $chat) {
-        $result = '';
-
-        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
-        $result .= ' (';
-        $result .= IRCTextParser::createHostnameTag($chat->getActorHostname());
-        $result .= ') ';
-        $result .= 'left the channel';
+    public function parsePart(Chat $chat) {
+        $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
+        $actorHostname = IRCTextParser::createHostnameTag($chat->getActorHostname());
+        $result = $this->t->trans('irc.left_channel', ['%actor%' => $actor, '%actor_hostname%' => $actorHostname]);
 
         return $result;
     }
@@ -136,14 +130,10 @@ class LogParser {
      * @param Chat $chat
      * @return string
      */
-    public static function parseQuit(Chat $chat) {
-        $result = '';
-
-        $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
-        $result .= ' (';
-        $result .= IRCTextParser::createHostnameTag($chat->getActorHostname());
-        $result .= ') ';
-        $result .= 'has quit (' . $chat->getMessage() . ')';
+    public function parseQuit(Chat $chat) {
+        $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
+        $actorHostname = IRCTextParser::createHostnameTag($chat->getActorHostname());
+        $result = $this->t->trans('irc.has_quit', ['%actor%' => $actor, '%actor_hostname%' => $actorHostname]);
 
         return $result;
     }
@@ -152,14 +142,13 @@ class LogParser {
      * @param Chat $chat
      * @return string
      */
-    public static function parseTopic(Chat $chat) {
-        $result = '';
-
+    public function parseTopic(Chat $chat) {
+        $topic = IRCTextParser::parse($chat->getMessage());
         if ($chat->getActorName() === Chat::ACTOR_INTERNAL) {
-            $result .= 'Topic is: ' . IRCTextParser::parse($chat->getMessage());
+            $result = $this->t->trans('irc.topic_is', ['%topic%' => $topic]);
         } else {
-            $result .= self::transformActor($chat->getActorName(), $chat->getActorPrefix());
-            $result .= ' has changed the topic to: ' . IRCTextParser::parse($chat->getMessage());
+            $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
+            $result = ' ' . $this->t->trans('irc.has_changed_topic_to', ['%topic%' => $topic, '%actor%' => $actor]);
         }
 
         return $result;
@@ -169,18 +158,18 @@ class LogParser {
      * @param Chat $chat
      * @return string
      */
-    public static function getColourForActor(Chat $chat) {
+    public function getColourForActor(Chat $chat) {
         switch ($chat->getType()) {
             case 'ACTION':
             case 'MESSAGE':
-                return NickColours::getColourForNick(self::transformActor($chat->getActorName()));
+                return NickColours::getColourForNick($this->transformActor($chat->getActorName()));
             case 'PART':
             case 'QUIT':
                 return '04';
             case 'JOIN':
                 return '03';
             default:
-                return self::ACTION_SERVER_COLOUR;
+                return RenderSettings::ACTION_SERVER_COLOUR;
         }
     }
 
@@ -190,19 +179,19 @@ class LogParser {
      * @param Chat $chat
      * @return string
      */
-    public static function getDisplayName(Chat $chat) {
+    public function getDisplayName(Chat $chat) {
         switch ($chat->getType()) {
             case 'MESSAGE':
                 return $chat->getActorName();
             case 'ACTION':
-                return self::ACTION_USER_PREFIX;
+                return RenderSettings::ACTION_USER_PREFIX;
             case 'JOIN':
-                return self::JOIN_USER_PREFIX;
+                return RenderSettings::JOIN_USER_PREFIX;
             case 'PART':
             case 'QUIT':
-                return self::PART_USER_PREFIX;
+                return RenderSettings::PART_USER_PREFIX;
             default:
-                return self::ACTION_SERVER_PREFIX;
+                return RenderSettings::ACTION_SERVER_PREFIX;
         }
     }
 
@@ -213,9 +202,9 @@ class LogParser {
      * @param Chat $chat
      * @return string
      */
-    public static function getActorName(Chat $chat) {
+    public function getActorName(Chat $chat) {
         return $chat->getActorName() == Chat::ACTOR_INTERNAL
-            ? self::transformActor($chat->getActorHostname())
+            ? $this->transformActor($chat->getActorHostname())
             : $chat->getActorName();
     }
 
@@ -228,7 +217,7 @@ class LogParser {
      * @param $text
      * @return string
      */
-    private static function getSpanForColour($colour, $text) {
+    private function getSpanForColour($colour, $text) {
         return IRCTextParser::createColorTag($colour, IRCTextParser::DEFAULT_BACKGROUND)
             . $text . IRCTextParser::closeTag();
     }
@@ -240,9 +229,9 @@ class LogParser {
      * @param $prefix
      * @return string
      */
-    public static function transformActor($actor, $prefix = '') {
+    public function transformActor($actor, $prefix = '') {
         if ($actor == Chat::ACTOR_INTERNAL) {
-            return 'Server';
+            return $this->t->trans('irc.server');
         }
 
         if(empty($prefix) || $prefix == 'NORMAL') {
@@ -256,7 +245,7 @@ class LogParser {
      * @param $mode
      * @return string
      */
-    private static function transformChannelModeToLetter($mode) {
+    private function transformChannelModeToLetter($mode) {
         switch ($mode) {
             case 'BAN':
                 return 'b';
@@ -272,7 +261,7 @@ class LogParser {
      * @param $mode
      * @return string
      */
-    private static function transformUserModeToLetter($mode) {
+    private function transformUserModeToLetter($mode) {
         switch ($mode) {
             case 'OWNER':
                 return 'q';
