@@ -10,7 +10,8 @@
 
     {% if sample_logs is not empty %}
         <strong>Live logs</strong>
-        <div class="logs">{{  log_render.log_render(sample_logs, true) }}</div>
+        {# I'd love https://github.com/twigphp/Twig/issues/929 #}
+        {{  log_render.log_render(sample_logs, false, false) }}
     {% endif %}
     <strong>Command Prefix: </strong> {{ command_prefix }}<br>
     {% if channel.LastActivityValid != null %}

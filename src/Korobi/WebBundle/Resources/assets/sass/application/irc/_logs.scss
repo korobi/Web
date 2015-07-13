@@ -85,8 +85,8 @@
   }
 }
 
-/* Only enable when not tailing */
-.logs:not(.tailing) .timestamp {
+/* Only enable when linkable */
+.logs.linkable .timestamp {
   cursor: pointer;
 
   &:hover {

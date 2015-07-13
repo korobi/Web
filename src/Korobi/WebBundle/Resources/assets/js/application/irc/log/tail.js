@@ -1,10 +1,10 @@
 $(function() {
     'use strict';
 
-    var $logs = $('.logs');
+    var $logs = $('#logs');
 
     // Start tailing
-    if (!$logs.hasClass('tailing')) {
+    if ($logs.length == 0 || $logs.hasClass('linkable')) {
         return;
     }
 

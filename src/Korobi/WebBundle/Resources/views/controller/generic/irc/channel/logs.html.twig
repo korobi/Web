@@ -58,7 +58,7 @@
         {% if logs is empty %}
             <div class="empty">Sorry, no logs are available for the requested date.</div>
         {% else %}
-            {{ log_render.log_render(logs, is_tail) }}
+            {{ log_render.log_render(logs, not is_tail, true) }}
         {% endif %}
     </div>
 {% endblock %}

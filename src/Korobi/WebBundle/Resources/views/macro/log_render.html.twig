@@ -1,7 +1,8 @@
-{% macro log_render(logs, is_tail) %}
-    {% for line_num, line in logs %}
-        <div data-nick="{{ line.nick }}" data-event-id="{{ line.id }}" data-event-type="{{ line.type }}"
-             class="line{% if not is_tail %} js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
+{% macro log_render(logs, linkable, use_id) %}
+    <div class="logs{% if linkable|default(false) %} linkable{% endif %}" {% if use_id|default(true) %}id="logs"{% endif %}>
+        {% for line_num, line in logs %}
+            <div data-nick="{{ line.nick }}" data-event-id="{{ line.id }}" data-event-type="{{ line.type }}"
+                 class="line{% if linkable|default(false) %} js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
                     <span class="timestamp">
                         {# The date is UTC, js will translate it to the correct timezone #}
                         {{ gmdate('H:i:s', line.timestamp) }}
@@ -17,6 +18,7 @@
                     <span class="message">
                         {{- line.message|raw -}}
                     </span>
-        </div>
-    {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
 {% endmacro %}

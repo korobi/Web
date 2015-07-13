@@ -4,7 +4,7 @@ $(function() {
     var $logs = $('#logs');
 
     // Check if line highlighting is needed
-    if($logs.is('.tailing')) {
+    if(!$logs.is('.linkable')) {
         return;
     }
 
