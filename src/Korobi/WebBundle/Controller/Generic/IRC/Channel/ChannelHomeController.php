@@ -38,6 +38,7 @@ class ChannelHomeController extends BaseController {
         }
 
         $dbTopic = $dbChannel->getTopic();
+        dump($dbTopic);
         $topic = [
             'value' => $dbTopic['value'],
             'setter_nick' => LogParser::transformActor($dbTopic['actor_nick']),
