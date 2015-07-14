@@ -256,7 +256,7 @@ class LogParser implements LogParserInterface {
                 return 'q';
             case 'NORMAL':
             default:
-                return '';
+                return $mode;
         }
     }
 
