@@ -21,6 +21,7 @@
                 <td>
                     {% if data.db.logsEnabled %}
                         <a href="{{ data.url }}logs/" class="jump-link-logs">Logs</a>
+                        <a href="{{ data.url }}logs/" class="jump-link-logs-tail">Tail</a>
                     {% endif %}
                     {% if data.db.commandsEnabled %}
                         <a href="{{ data.url }}commands/" class="jump-link-commands">Commands</a>
