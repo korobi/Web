@@ -1,0 +1,4 @@
+admin_home:
+    path: /admin/
+    defaults:
+        _controller: korobi.controller.internal.admin.home:homeAction

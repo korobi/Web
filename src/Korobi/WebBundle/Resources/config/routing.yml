@@ -2,6 +2,8 @@ _core_generic:
     resource: '@KorobiWebBundle/Resources/config/routing/core/generic.yml'
 _core_internal:
     resource: '@KorobiWebBundle/Resources/config/routing/core/internal.yml'
+_core_admin:
+    resource: '@KorobiWebBundle/Resources/config/routing/core/admin.yml'
 
 _irc_network:
     resource: '@KorobiWebBundle/Resources/config/routing/irc/network.yml'

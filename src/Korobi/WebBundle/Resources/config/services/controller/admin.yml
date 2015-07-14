@@ -1,0 +1,4 @@
+services:
+    korobi.controller.internal.admin.home:
+        class: Korobi\WebBundle\Controller\Internal\Admin\AdminHomeController
+        parent: korobi.base_controller
