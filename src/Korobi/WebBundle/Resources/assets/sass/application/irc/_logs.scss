@@ -39,7 +39,6 @@
     }
 
     .timestamp {
-      max-width: 8em;
       padding-left: 1em;
     }
 
@@ -47,7 +46,6 @@
       text-align: right;
       padding-left: 15px;
       padding-right: 15px;
-      max-width: 11em;
       border-right: 1px solid #444;
       white-space: nowrap;
     }
@@ -60,6 +58,7 @@
       padding-right: 1em;
       padding-left: 10px;
       white-space: pre-wrap;
+      width: 100%;
 
       .underline { text-decoration: underline; }
       .italic    { font-style: italic; }
