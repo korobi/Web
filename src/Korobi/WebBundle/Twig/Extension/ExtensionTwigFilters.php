@@ -2,6 +2,7 @@
 
 namespace Korobi\WebBundle\Twig\Extension;
 
+use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Parser\IRCTextParser;
 
 class ExtensionTwigFilters extends \Twig_Extension {
@@ -12,9 +13,18 @@ class ExtensionTwigFilters extends \Twig_Extension {
 
     public function getFilters() {
         return [
+            new \Twig_SimpleFilter('transformChannelName', [$this, 'transformChannelName']),
             new \Twig_SimpleFilter('ircformat', [$this, 'ircFormat']),
             new \Twig_SimpleFilter('arsort', [$this, 'arsort']),
         ];
+    }
+
+    /**
+     * @param $channel
+     * @return mixed
+     */
+    public function transformChannelName($channel) {
+        return BaseController::transformChannelName($channel);
     }
 
     /**

@@ -17,6 +17,12 @@ channel_log_date:
     path: /{network}/channel/{channel}/logs/{year}/{month}/{day}/
     defaults:
         _controller: korobi.controller.irc.channel.log:logsAction
+# todo - this needs to be done cleaner
+channel_log_tail__zero:
+    path: /{network}/channel/{channel}/logs/tail/
+    defaults:
+        _controller: korobi.controller.irc.channel.log:logsAction
+        tail: 30
 channel_log_tail:
     path: /{network}/channel/{channel}/logs/tail/{tail}/
     defaults:

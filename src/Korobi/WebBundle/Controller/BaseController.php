@@ -46,7 +46,8 @@ abstract class BaseController extends Controller {
      * @param bool $reverse
      * @return mixed
      */
-    protected static function transformChannelName($channel, $reverse = false) {
+    // todo move this
+    public static function transformChannelName($channel, $reverse = false) {
         if (!$reverse) {
             // Do nothing if the channel name starts with two number signs ('##').
             if (substr($channel, 0, 2) === '##') {

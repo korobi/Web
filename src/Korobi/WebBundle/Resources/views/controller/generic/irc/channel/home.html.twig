@@ -8,23 +8,27 @@
     {% if topic.value is empty %}
         <h3>No topic is available.</h3>
     {% else %}
-        <h2>Topic: <em>{{ topic.value|ircformat|raw }}</em></h2>
-        <h3>Topic set by: <em>{{ topic.setter_nick }}</em> on {{ topic.time }}</h3>
+        <h3>Topic: <em>{{ topic.value|ircformat|raw }}</em></h3>
+        <h4>Topic set by: <em>{{ topic.setter_nick }}</em> on {{ topic.time }}</h4>
     {% endif %}
 
+    {% if channel.LastActivityValid != null %}
+        <h4>Last activity: <time datetime="{{ channel.LastActivityValid.getTimestamp() }}" title="{{ channel.LastActivityValid.getTimestamp()|date("c") }}">
+                {{ relativeTime(now, channel.LastActivityValid.getTimestamp()) }}</time></h4>
+    {% endif %}
+
+    <br>
 
     {% if sample_logs is not empty %}
         <strong>Live logs</strong>
         {# I'd love https://github.com/twigphp/Twig/issues/929 #}
         {{  log_render.log_render(sample_logs, false, false) }}
     {% endif %}
-    <strong>Command Prefix: </strong> {{ command_prefix }}<br>
-    {% if channel.LastActivityValid != null %}
-        <strong>Last activity: </strong> <time datetime="{{ channel.LastActivityValid.getTimestamp() }}" title="{{ channel.LastActivityValid.getTimestamp()|date("c") }}">
-        {{ relativeTime(now, channel.LastActivityValid.getTimestamp()) }}</time>
+    {% if channel.LogsEnabled %}
+        <p><a href="{{ path('channel_log', {'network': network_slug, 'channel': channel_name|transformChannelName}) ~ key }}">View today's full log</a>
+            &mdash; <a href="{{ path('channel_log_tail', {'network': network_slug, 'channel': channel_name|transformChannelName}) ~ key }}">View tail</a></p>
     {% endif %}
-    <br>
-    {% for link in links %}
-        <a href="{{ link.href }}">{{ link.name }}</a><br>
-    {% endfor %}
+
+    <strong>Command Prefix: </strong> {{ command_prefix }}<br>
+    <a href="{{ path('channel_command', {'network': network_slug, 'channel': channel_name|transformChannelName}) }}">Commands</a>
 {% endblock %}
