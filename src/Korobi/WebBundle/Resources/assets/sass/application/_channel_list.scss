@@ -1,8 +1,15 @@
 .channel-list {
-
   td, th {
     &:last-child {
       text-align: right;
+
+      a {
+        padding: 0.2em 0.3em;
+
+        &:before {
+          margin-right: 0.5em;
+        }
+      }
     }
   }
 }
