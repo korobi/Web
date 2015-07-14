@@ -44,8 +44,8 @@
 
     .nick {
       text-align: right;
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: 1em;
+      padding-right: 0.5em;
       border-right: 1px solid #444;
       white-space: nowrap;
     }
@@ -56,7 +56,7 @@
       word-break: break-word;
       @include hyphens(auto);
       padding-right: 1em;
-      padding-left: 10px;
+      padding-left: 0.5em;
       white-space: pre-wrap;
       width: 100%;
 
