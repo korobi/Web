@@ -25,6 +25,11 @@ class Network {
     private $name;
 
     /**
+     * @MongoDB\String
+     */
+    private $description_short;
+
+    /**
      * Get id
      *
      * @return id $id
@@ -70,6 +75,26 @@ class Network {
      */
     public function setName($name) {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Get descriptionShort
+     *
+     * @return string $descriptionShort
+     */
+    public function getDescriptionShort() {
+        return $this->description_short;
+    }
+
+    /**
+     * Set descriptionShort
+     *
+     * @param string $descriptionShort
+     * @return self
+     */
+    public function setDescriptionShort($descriptionShort) {
+        $this->description_short = $descriptionShort;
         return $this;
     }
 }
