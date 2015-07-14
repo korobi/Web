@@ -20,14 +20,14 @@
                     <td><a href="{{ data.url }}">{{ name }}</a></td>
                     <td>
                         {% if data.db.logsEnabled %}
-                            <a href="{{ data.url }}logs/" class="button button-rounded button-flat fa fa-comments-o">Logs</a>
-                            <a href="{{ data.url }}logs/tail/30/" class="button button-rounded button-flat fa fa-ellipsis-h">Tail</a>
+                            <a href="{{ data.url }}logs/" class="button button-flat-primary button-rounded">Logs <i class="fa fa-comments-o"></i></a>
+                            <a href="{{ data.url }}logs/tail/30/" class="button button-flat-primary button-rounded">Tail <i class="fa fa-ellipsis-h"></i></a>
                         {% endif %}
                         {% if data.db.commandsEnabled %}
-                            <a href="{{ data.url }}commands/" class="button button-rounded button-flat fa fa-terminal">Commands</a>
+                            <a href="{{ data.url }}commands/" class="button button-flat-primary button-rounded">Commands <i class="fa fa-terminal"></i></a>
                         {% endif %}
                         {% if data.db.logsEnabled %}
-                            <a href="{{ data.url }}stats/" class="button button-rounded button-flat fa fa-area-chart">Stats</a>
+                            <a href="{{ data.url }}stats/" class="button button-flat-primary button-rounded">Stats <i class="fa fa-area-chart"></i></a>
                         {% endif %}
                     </td>
                 </tr>
