@@ -46,7 +46,7 @@
                 Allowing for easy and flexible creation of responses based on frequently asked questions, and even listen for certain triggers to have it respond automatically.
             </p>
         </div>
-        <!-- I'm not happy about this feature block since the length doesn't match the other two and I think it's a little wordy -->
+        {# I'm not happy about this feature block since the length doesn't match the other two and I think it's a little wordy #}
         <div class="homepage-feature">
             <h2 class="stats-header">Stats</h2>
             <p>
@@ -98,7 +98,7 @@
                 {% for channel in channels %}
                     {% set lastValidContent = channel.LastActivityValid %}
                     <tr>
-                        <td><a href="{{ path('channel', {'channel': channel.channel[1:], 'network': channel.network}) }}"><abrr title="<strong>Network:</strong> {{ attribute(networks, channel.network) }}" rel="tooltip">{{ channel.channel }}</abrr></a></td>
+                        <td><a href="{{ path('channel', {'channel': channel.channel[1:], 'network': channel.network}) }}"><abbr title="<strong>Network:</strong> {{ attribute(networks, channel.network) }}" rel="tooltip">{{ channel.channel }}</abbr></a></td>
                         {% if lastValidContent == null %}
                             <td><em>Never</em></td>
                         {% else %}

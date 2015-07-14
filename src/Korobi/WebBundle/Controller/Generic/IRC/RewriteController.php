@@ -26,8 +26,6 @@ class RewriteController extends BaseController {
     public function rewriteAction($network, $channel = null, $component = 'home', $year = false, $month = false, $day = false, $tail = false, $gameId = false) {
         // If no channel is provided we assume we're looking for a network.
         if ($channel === null) {
-            // Instead of blindly redirecting to the network route, first make sure the network slug is valid. If the
-            // slug is not a valid network slug, create a FOUR OH FOUR; otherwise redirect.
             /** @var Network $dbNetwork */
             $dbNetwork = $this->get('doctrine_mongodb')
                 ->getManager()
@@ -35,7 +33,8 @@ class RewriteController extends BaseController {
                 ->findNetwork($network)
                 ->toArray(false);
 
-            // make sure we actually have a network
+            // Instead of blindly redirecting to the network route, first make sure the network slug is valid. If the
+            // slug is not a valid network slug, create a FOUR OH FOUR; otherwise redirect.
             if(empty($dbNetwork)) {
                 throw $this->createNotFoundException();
             }
