@@ -59,6 +59,6 @@
                 <div class="empty">Sorry, no logs are available for the requested date.</div>
             </div>
         {% else %}
-            {{ log_render.log_render(logs, not is_tail, true) }}
+            {{ log_render.log_render(logs, not is_tail, true, topic) }}
         {% endif %}
 {% endblock %}

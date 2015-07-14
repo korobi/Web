@@ -29,6 +29,10 @@
       @include transition(0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) background-color);
     }
 
+    &.topic span:first-child {
+      text-align: right;
+    }
+
     & > span {
       display: table-cell;
       border-bottom: 1px solid #1b1b1b;

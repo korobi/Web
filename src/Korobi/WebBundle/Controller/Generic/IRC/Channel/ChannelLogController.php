@@ -6,6 +6,7 @@ use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChatIndex;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\Parser\IRCTextParser;
 use Korobi\WebBundle\Repository\ChatRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,12 +81,22 @@ class ChannelLogController extends BaseController {
             return new JsonResponse($chats);
         }
 
+        $topic = null;
+        $dbTopic = $dbChannel->getTopic();
+        if($dbTopic) {
+            $topic = [
+                'value' => $dbTopic['value'],
+                'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
+            ];
+        }
+
         // time to render!
         $response = $this->render('KorobiWebBundle:controller/generic/irc/channel:logs.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'network_slug' => $dbNetwork->getSlug(),
             'channel_name' => $dbChannel->getChannel(),
             'channel_slug' => $channel,
+            'topic' => $topic,
             'logs' => $chats,
             'log_date_formatted' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
             'log_date' => date('Y/m/d', mktime(0, 0, 0, $month, $day, $year)),
