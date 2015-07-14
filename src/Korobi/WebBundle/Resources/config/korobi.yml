@@ -26,7 +26,7 @@ korobi_web:
               route: 'about'
 
             - title: admin
-              route: 'dummy'
+              route: 'admin_home'
               requires_admin: true
 
             - title: issues
