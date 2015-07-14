@@ -3,9 +3,7 @@
 namespace Korobi\WebBundle\Controller\Generic;
 
 use Korobi\WebBundle\Controller\BaseController;
-use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\Network;
-use Korobi\WebBundle\Parser\ChatTransformer;
 use Korobi\WebBundle\Util\ExcludedHomepageChannels;
 
 class HomeController extends BaseController {

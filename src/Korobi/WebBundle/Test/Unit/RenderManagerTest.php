@@ -11,57 +11,58 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RenderManagerTest extends WebTestCase {
 
-
     public function testRenderingIllegalNotice() {
         $sut = new RenderManager(new ParserStub());
         $illegalNotice = new Chat();
-        $illegalNotice->setType("MESSAGE");
+        $illegalNotice->setType('MESSAGE');
         $illegalNotice->setNotice(true);
-        $illegalNotice->setNoticeTarget("VOICE");
+        $illegalNotice->setNoticeTarget('VOICE');
         $this->assertEmpty($sut->renderLogs([$illegalNotice]));
     }
 
     public function testRenderingMultipleDocuments() {
         $sut = new RenderManager(new ParserStub());
         $chat1 = new Chat();
-        $chat1->setType("KICK");
+        $chat1->setType('KICK');
         $chat1->setDate(new DateTime());
         $chat2 = new Chat();
         $chat2->setDate(new DateTime());
-        $chat2->setType("MESSAGE");
+        $chat2->setType('MESSAGE');
         $this->assertCount(2, $sut->renderLogs([$chat1, $chat2]));
     }
 
     public function testActualDataReturned() {
         $sut = new RenderManager(new ParserStub());
         $chat1 = new Chat();
-        $chat1->setType("EXOTIC");
+        $chat1->setType('EXOTIC');
         $chat1->setDate(new DateTime());
         $out = $sut->renderLogs([$chat1]);
         $forTwig = $out[0];
         $this->assertCount(1, $out);
-        $this->assertArrayHasKeys(['id', "timestamp", "type", "role", "nickColour", "displayNick", "realNick",
-            "nickTooLong", "nick", "message"], $forTwig);
-        $this->assertEquals($forTwig['type'], "exotic");
-        $this->assertEquals($forTwig['message'], "A message");
+        $this->assertArrayHasKeys([
+            'id', 'timestamp', 'type', 'role', 'nickColour',
+            'displayNick', 'realNick', 'nickTooLong', 'nick', 'message',
+        ], $forTwig);
+        $this->assertEquals($forTwig['type'], 'exotic');
+        $this->assertEquals($forTwig['message'], 'A message');
     }
 
     public function testRenderingWhitelist() {
         $sut = new RenderManager(new ParserStub());
         $chat1 = new Chat();
-        $chat1->setType("KICK");
+        $chat1->setType('KICK');
         $chat1->setDate(new DateTime());
         $chat2 = new Chat();
         $chat2->setDate(new DateTime());
-        $chat2->setType("MESSAGE");
-        $this->assertCount(1, $sut->renderLogs([$chat1, $chat2], ["message"]));
+        $chat2->setType('MESSAGE');
+        $this->assertCount(1, $sut->renderLogs([$chat1, $chat2], ['message']));
     }
 
     public function testNickChopping() {
         $sut = new RenderManager(new ParserStub());
         $chat1 = new Chat();
-        $chat1->setType("EXOTIC");
-        $name = str_repeat("a", RenderSettings::MAX_NICK_LENGTH + 5);
+        $chat1->setType('EXOTIC');
+        $name = str_repeat('a', RenderSettings::MAX_NICK_LENGTH + 5);
         $chat1->setActorName($name);
         $chat1->setDate(new DateTime());
         $out = $sut->renderLogs([$chat1]);
@@ -77,7 +78,7 @@ class RenderManagerTest extends WebTestCase {
     public function testParsingUnparsableType() {
         $sut = new RenderManager(new ParserStub());
         $chat1 = new Chat();
-        $chat1->setType("CAT");
+        $chat1->setType('CAT');
         $chat1->setDate(new DateTime());
         $sut->renderLogs([$chat1]);
     }
@@ -96,7 +97,7 @@ class ParserStub implements LogParserInterface {
      * @return string
      */
     public function parseExotic(Chat $chat) {
-        return "A message";
+        return 'A message';
     }
 
     /**

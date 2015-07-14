@@ -63,7 +63,7 @@ class LogParser implements LogParserInterface {
         $result = $this->t->trans('irc.was_kicked_by', [
             '%recipient_actor%' => $recipientActor,
             '%actor%' => $actor,
-            '%kick_message%' => $kickMessage
+            '%kick_message%' => $kickMessage,
         ]);
 
         return $result;

@@ -4,7 +4,6 @@ namespace Korobi\WebBundle\Deployment\Processor;
 
 use Korobi\WebBundle\Deployment\DeploymentInfo;
 use Korobi\WebBundle\Deployment\DeploymentStatus;
-use Korobi\WebBundle\Util\AkioMessageBuilder;
 
 /**
  * Saves deployment results to the database.

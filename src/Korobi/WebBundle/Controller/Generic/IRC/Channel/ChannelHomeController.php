@@ -5,9 +5,6 @@ namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
-use Korobi\WebBundle\IrcLogs\RenderManager;
-use Korobi\WebBundle\Parser\ChatTransformer;
-use Korobi\WebBundle\Parser\LogParser;
 
 class ChannelHomeController extends BaseController {
 

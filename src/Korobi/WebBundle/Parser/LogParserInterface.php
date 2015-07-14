@@ -1,4 +1,5 @@
 <?php
+
 namespace Korobi\WebBundle\Parser;
 
 use Korobi\WebBundle\Document\Chat;

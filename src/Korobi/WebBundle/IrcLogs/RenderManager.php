@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Korobi\WebBundle\IrcLogs;
 
 use Korobi\WebBundle\Document\Chat;
@@ -38,7 +37,7 @@ class RenderManager {
      * @return array Array of data after applying RenderManager::processChatDocument
      * @see processChatDocument
      */
-    public function renderLogs(array $chats, array $typeWhitelist=[]) {
+    public function renderLogs(array $chats, array $typeWhitelist = []) {
         $out = [];
         $emptyWhitelist = count($typeWhitelist) == 0;
 
@@ -56,6 +55,7 @@ class RenderManager {
 
     /**
      * Gives an array of data for one chat document.
+     *
      * @param Chat $chat A single chat document.
      * @return array The array of data for the twig macro.
      */
@@ -98,6 +98,4 @@ class RenderManager {
     private function getReflectionLogParser() {
         return new \ReflectionClass($this->logParser);
     }
-
-
 }
