@@ -6,7 +6,7 @@
 {% block body %}
     <h1>{{ channel_name }} on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a></h1>
     {% if topic.value is empty %}
-        <h3>No topic set</h3>
+        <h3>No topic is available.</h3>
     {% else %}
         <h2>Topic: <em>{{ topic.value|ircformat|raw }}</em></h2>
         <h3>Topic set by: <em>{{ topic.setter_nick }}</em> on {{ topic.time }}</h3>
