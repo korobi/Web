@@ -1,6 +1,7 @@
 <?php
 
 namespace Korobi\WebBundle\Util;
+
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
