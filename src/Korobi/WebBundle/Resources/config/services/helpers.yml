@@ -7,6 +7,7 @@ services:
         class: Korobi\WebBundle\Util\NavigationCollection
         arguments:
             - %korobi.config%
+            - @translator
     korobi.homepage_excluded_channels:
         class: Korobi\WebBundle\Util\ExcludedHomepageChannels
         arguments:

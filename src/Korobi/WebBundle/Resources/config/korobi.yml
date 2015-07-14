@@ -2,10 +2,10 @@
 korobi_web:
     navigation:
         items:
-            - title: Home
+            - title: home
               route: 'home'
 
-            - title: Networks
+            - title: networks
               route: 'networks'
               routes:
                   - networks
@@ -18,23 +18,23 @@ korobi_web:
                   - channel_stat
                   - channel_game
 
-            - title: Docs
+            - title: docs
               route: 'https://docs.korobi.io/'
               external: true
 
-            - title: About
+            - title: about
               route: 'about'
 
-            - title: Admin
+            - title: admin
               route: 'dummy'
               requires_admin: true
 
-            - title: Issues
+            - title: issues
               route: 'https://github.com/korobi/Korobi/issues'
               type: 'footer'
               external: true
 
-            - title: Revisions
+            - title: revisions
               route: 'revisions'
               type: 'footer'
 

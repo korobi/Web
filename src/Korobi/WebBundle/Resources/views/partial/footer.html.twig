@@ -9,9 +9,9 @@
                 {% endfor %}
             {% endspaceless %}
             {% if not app.user %}
-                <li><a href="/auth/connect/github" rel="nofollow">Login</a></li>
+                <li><a href="/auth/connect/github" rel="nofollow">{% trans %}nav.login{% endtrans %}</a></li>
             {% else %}
-                <li><a href="/auth/logout">Logout</a></li>
+                <li><a href="/auth/logout">{% trans %}nav.logout{% endtrans %}</a></li>
             {% endif %}
         </ul>
     </div>

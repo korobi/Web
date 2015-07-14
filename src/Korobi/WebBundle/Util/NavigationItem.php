@@ -1,6 +1,7 @@
 <?php
 
 namespace Korobi\WebBundle\Util;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * A 'Plain Old PHP Object' for navigation items.
@@ -15,6 +16,11 @@ class NavigationItem {
     private $requiresAuth;
     private $requiresAdmin;
     private $externalUrl;
+
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
 
     /**
      * @param $title
@@ -34,10 +40,10 @@ class NavigationItem {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTitle() {
-        return $this->title;
+        return $this->translator->trans("nav." . $this->title);
     }
 
     /**
@@ -87,5 +93,14 @@ class NavigationItem {
         } else {
             return $ext . '';
         }
+    }
+
+    /**
+     * Sets the translator to use for navigation titles.
+     * Piped in from @see NavigationCollection
+     * @param TranslatorInterface $translator
+     */
+    public function setTranslator(TranslatorInterface $translator) {
+        $this->translator = $translator;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Korobi\WebBundle\Util;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Holds many NavigationItems.
@@ -15,10 +16,10 @@ class NavigationCollection {
         'footer' => [],
     ];
 
-    public function __construct(array $config) {
+    public function __construct(array $config, TranslatorInterface $translator) {
         $items = $config['navigation']['items'];
-        array_walk($items, function($value, $key) {
-            $this->items[$value['type']][] = new NavigationItem(
+        array_walk($items, function($value, $key) use ($translator) {
+            $navItem = new NavigationItem(
                 $value['title'],
                 $value['route'],
                 $value['routes'],
@@ -26,6 +27,8 @@ class NavigationCollection {
                 $value['requires_admin'],
                 $value['external']
             );
+            $navItem->setTranslator($translator);
+            $this->items[$value['type']][] = $navItem;
         });
     }
 

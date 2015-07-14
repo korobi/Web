@@ -47,6 +47,46 @@
                 <target>Server</target>
                 <note>Used in IRC logs where the server is responsible (this becomes %actor%).</note>
             </trans-unit>
+            <trans-unit id="10">
+                <source>nav.home</source>
+                <target>Home</target>
+                <note>Used in navigation (header/footer). Used for homepage link.</note>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>nav.networks</source>
+                <target>Networks</target>
+                <note>Used in navigation (header/footer). Used for link to list of networks.</note>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>nav.docs</source>
+                <target>Docs</target>
+                <note>Used in navigation (header/footer). Used for external link to documentation.</note>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>nav.about</source>
+                <target>About</target>
+                <note>Used in navigation (header/footer). Used for link to 'about' page which describes the project.</note>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>nav.issues</source>
+                <target>Issues</target>
+                <note>Used in navigation (header/footer). Used for external link to issue tracker.</note>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>nav.revisions</source>
+                <target>Revisions</target>
+                <note>Used in navigation (header/footer). Used for link to list of code changes/revisions.</note>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>nav.login</source>
+                <target>Login</target>
+                <note>Used in navigation (header/footer). Appears for logged out users, allowing them to login.</note>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>nav.logout</source>
+                <target>Logout</target>
+                <note>Used in navigation (header/footer). Appears for logged in users, allowing them to logout.</note>
+            </trans-unit>
         </body>
     </file>
 </xliff>
