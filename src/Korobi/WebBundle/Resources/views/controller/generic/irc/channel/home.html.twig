@@ -20,8 +20,8 @@
     {% endif %}
     <strong>Command Prefix: </strong> {{ command_prefix }}<br>
     {% if channel.LastActivityValid != null %}
-    <strong>Last activity: </strong> <time datetime="{{ channel.LastActivityValid.getTimestamp() }}" title="{{ channel.LastActivityValid.getTimestamp()|date("c") }}">
-    {{ relativeTime(now, channel.LastActivityValid.getTimestamp()) }}</time>
+        <strong>Last activity: </strong> <time datetime="{{ channel.LastActivityValid.getTimestamp() }}" title="{{ channel.LastActivityValid.getTimestamp()|date("c") }}">
+        {{ relativeTime(now, channel.LastActivityValid.getTimestamp()) }}</time>
     {% endif %}
     <br>
     {% for link in links %}

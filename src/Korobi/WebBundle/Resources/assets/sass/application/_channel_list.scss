@@ -1,24 +1,8 @@
-.jump-link-logs:before {
-  content: '\f0e6';
-  font-family: "FontAwesome";
-}
+.channel-list {
 
-.jump-link-logs-tail:before {
-  content: '\f141';
-  font-family: "FontAwesome";
-}
-
-.jump-link-commands:before {
-  content: '\f120';
-  font-family: "FontAwesome";
-}
-
-.jump-link-stats:before {
-  content: '\f1fe';
-  font-family: "FontAwesome";
-}
-
-
-.jump-link-commands, .jump-link-logs, .jump-link-logs-tail, .jump-link-stats {
-  display: none;
+  td, th {
+    &:last-child {
+      text-align: right;
+    }
+  }
 }
