@@ -20,15 +20,21 @@
     <br>
 
     {% if sample_logs is not empty %}
-        <strong>Live logs</strong>
+        <strong>Latest logs</strong>
         {# I'd love https://github.com/twigphp/Twig/issues/929 #}
         {{  log_render.log_render(sample_logs, false, false) }}
     {% endif %}
     {% if channel.LogsEnabled %}
         <p><a href="{{ path('channel_log', {'network': network_slug, 'channel': channel_name|transformChannelName}) ~ key }}">View today's full log</a>
-            &mdash; <a href="{{ path('channel_log_tail', {'network': network_slug, 'channel': channel_name|transformChannelName}) ~ key }}">View tail</a></p>
+            &mdash; <a href="{{ path('channel_log_tail', {'network': network_slug, 'channel': channel_name|transformChannelName}) ~ key }}">View tail</a>
+            &mdash; <a href="{{ path('channel_stat', {'network': network_slug, 'channel': channel_name|transformChannelName}) ~ key }}">View statistics</a>
+        </p>
     {% endif %}
 
-    <strong>Command Prefix: </strong> {{ command_prefix }}<br>
-    <a href="{{ path('channel_command', {'network': network_slug, 'channel': channel_name|transformChannelName}) }}">Commands</a>
+    {% if channel.CommandsEnabled %}
+        <p>
+            <strong>Command Prefix: </strong> {{ command_prefix }}<br>
+            <a href="{{ path('channel_command', {'network': network_slug, 'channel': channel_name|transformChannelName}) }}">Commands</a>
+        </p>
+    {% endif %}
 {% endblock %}
