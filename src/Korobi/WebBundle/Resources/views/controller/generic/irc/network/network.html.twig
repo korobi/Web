@@ -15,18 +15,18 @@
             </tr>
         </thead>
         <tbody>
-        {% for name, url in channels %}
+        {% for name, data in channels %}
             <tr>
-                <td><a href="{{ url }}">{{ name }}</a></td>
+                <td><a href="{{ data.url }}">{{ name }}</a></td>
                 <td>
-                    {% if db_channels[loop.index0].logsEnabled %}
-                        <a href="{{ url }}logs/" class="jump-link-logs">Logs</a>
+                    {% if data.db.logsEnabled %}
+                        <a href="{{ data.url }}logs/" class="jump-link-logs">Logs</a>
                     {% endif %}
-                    {% if db_channels[loop.index0].commandsEnabled %}
-                        <a href="{{ url }}commands/" class="jump-link-commands">Commands</a>
+                    {% if data.db.commandsEnabled %}
+                        <a href="{{ data.url }}commands/" class="jump-link-commands">Commands</a>
                     {% endif %}
-                    {% if db_channels[loop.index0].logsEnabled %}
-                        <a href="{{ url }}stats/" class="jump-link-stats">Stats</a></td>
+                    {% if data.db.logsEnabled %}
+                        <a href="{{ data.url }}stats/" class="jump-link-stats">Stats</a></td>
                     {% endif %}
             </tr>
         {% endfor %}
