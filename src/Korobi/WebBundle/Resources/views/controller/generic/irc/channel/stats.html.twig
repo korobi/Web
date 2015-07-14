@@ -5,8 +5,12 @@
 {% block body %}
     <h1>Stats for {{ channel_name }} on {{ network_name }}</h1>
     <div class="logs">
-        {% autoescape false %}
-        {{ data|raw }}
-        {% endautoescape %}
+        {% if data is empty %}
+            <div class="empty">Sorry, no stats are available for the requested channel.</div>
+        {% else %}
+            {% autoescape false %}
+                {{ data|raw }}
+            {% endautoescape %}
+        {% endif %}
     </div>
 {% endblock %}

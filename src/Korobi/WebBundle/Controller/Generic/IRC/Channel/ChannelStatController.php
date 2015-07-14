@@ -29,17 +29,20 @@ class ChannelStatController extends BaseController {
             }
         }
 
-        // TODO
-        $stats_file = file_get_contents($this->container->getParameter('channel_stats_root') . $dbNetwork->getSlug() . '/' . self::transformChannelName($dbChannel->getChannel()) . '.html');
-        $stats_output = '';
-        foreach (explode('\n', $stats_file) as $line) {
-            $stats_output .= $line;//IRCTextParser::parseLine($line, true);
+        $statData = '';
+
+        $statFilePath = $this->container->getParameter('channel_stats_root') . $dbNetwork->getSlug() . '/' . self::transformChannelName($dbChannel->getChannel()) . '.html';
+        if(file_exists($statFilePath)) {
+            $statFileContent = file_get_contents($statFilePath);
+            foreach (explode('\n', $statFileContent) as $line) {
+                $statData .= $line;//IRCTextParser::parseLine($line, true);
+            }
         }
 
         return $this->render('KorobiWebBundle:controller/generic/irc/channel:stats.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
-            'data' => $stats_output,
+            'data' => $statData,
         ]);
     }
 }
