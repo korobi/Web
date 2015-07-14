@@ -19,9 +19,15 @@
             <tr>
                 <td><a href="{{ url }}">{{ name }}</a></td>
                 <td>
-                    <a href="{{  url }}logs/" class="jump-link-logs">Logs</a>
-                    <a href="{{  url }}commands/" class="jump-link-commands">Commands</a>
-                    <a href="{{  url }}stats/" class="jump-link-stats">Stats</a></td>
+                    {% if db_channels[loop.index0].logsEnabled %}
+                        <a href="{{ url }}logs/" class="jump-link-logs">Logs</a>
+                    {% endif %}
+                    {% if db_channels[loop.index0].commandsEnabled %}
+                        <a href="{{ url }}commands/" class="jump-link-commands">Commands</a>
+                    {% endif %}
+                    {% if db_channels[loop.index0].logsEnabled %}
+                        <a href="{{ url }}stats/" class="jump-link-stats">Stats</a></td>
+                    {% endif %}
             </tr>
         {% endfor %}
         </tbody>

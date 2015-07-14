@@ -64,6 +64,7 @@ class NetworkHomeController extends BaseController {
             'network_name' => $dbNetwork->getName(),
             'all_channels_private' => empty($channels),
             'channels' => $channels,
+            'db_channels' => array_values($dbChannels)
         ]);
     }
 
