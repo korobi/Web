@@ -60,8 +60,11 @@ class LogParser implements LogParserInterface {
         $recipientActor = $this->transformActor($chat->getRecipientName(), $chat->getRecipientPrefix());
         $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
         $kickMessage = $chat->getMessage();
-        $result = $this->t->trans('irc.was_kicked_by',
-            ['%recipient_actor%' => $recipientActor, '%actor%' => $actor, '%kick_message%' => $kickMessage]);
+        $result = $this->t->trans('irc.was_kicked_by', [
+            '%recipient_actor%' => $recipientActor,
+            '%actor%' => $actor,
+            '%kick_message%' => $kickMessage
+        ]);
 
         return $result;
     }
