@@ -136,7 +136,7 @@ class LogParser implements LogParserInterface {
     public function parseQuit(Chat $chat) {
         $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
         $actorHostname = IRCTextParser::createHostnameTag($chat->getActorHostname());
-        $result = $this->t->trans('irc.has_quit', ['%actor%' => $actor, '%actor_hostname%' => $actorHostname, '%quit_message' => $chat->getMessage()]);
+        $result = $this->t->trans('irc.has_quit', ['%actor%' => $actor, '%actor_hostname%' => $actorHostname, '%quit_message%' => $chat->getMessage()]);
 
         return $result;
     }
