@@ -136,15 +136,36 @@ class ChatRepository extends DocumentRepository {
             ->execute();
     }
 
-    public function findAllBySearchTerm($term, $page=1, $pageSize=20) {
-        return $this->createQueryBuilder()
-            ->skip(($page -1) * $pageSize)
-            ->limit($pageSize)
-            ->text($term)
-            // We really want to JOIN with the channels table here
-            // and exclude keyed channels :(
-            ->getQuery()
-            ->execute();
+    public function findAllBySearchTerm($term, $ignoredNetworkChannelPairs, $page = 1, $pageSize = 20) {
+        return $this
+            ->getDocumentManager()
+            ->getDocumentCollection('KorobiWebBundle:Chat')
+            ->getMongoCollection()
+            ->aggregate([
+                [
+                    '$match' => [
+                        'type' => ['$in' => ['MESSAGE', 'ACTION']],
+                        '$text' => ['$search' => $term]
+                    ]
+                ], [
+                    '$project' => [
+                        'network_channel' => ['$concat' => ['$network', '$channel']],
+                        'date'=> 1,
+                        'actor_hostname'=> 1,
+                        'actor_name'=> 1,
+                        'message'=> 1,
+                        'type'=> 1,
+                    ]
+                ], [
+                    '$match' => ['network_channel' => ['$nin' => $ignoredNetworkChannelPairs]]
+                ], [
+                    '$sort' => ['date' => -1]
+                ], [
+                    '$skip' => $pageSize * $page
+                ], [
+                    '$limit' => $pageSize
+                ]
+            ])['result'];
     }
 
 }

@@ -29,41 +29,8 @@ class SearchController extends BaseController {
             return $channel->getNetwork() . $channel->getChannel();
         }, $dbChannels);
 
-        /** @var \MongoCollection $collection */
-        $collection = $this
-            ->get('doctrine_mongodb')
-            ->getManager()
-            ->getDocumentCollection('KorobiWebBundle:Chat')
-            ->getMongoCollection();
-
-        $pipeline = [
-            [
-                '$match' => [
-                    'type' => ['$in' => ['MESSAGE', 'ACTION']],
-                    '$text' => ['$search' => $term]
-                ]
-            ], [
-                '$project' => [
-                    'network_channel' => ['$concat' => ['$network', '$channel']],
-                    'date'=> 1,
-                    'actor_hostname'=> 1,
-                    'actor_name'=> 1,
-                    'message'=> 1,
-                    'type'=> 1,
-                ]
-            ], [
-                '$match' => ['network_channel' => ['$nin' => $channels]]
-            ], [
-                '$sort' => ['date' => -1]
-            ], [
-                '$skip' => self::RESULT_PER_PAGE * $page
-            ], [
-                '$limit' => self::RESULT_PER_PAGE
-            ]
-        ];
-
-
-        var_dump($collection->aggregate($pipeline)['result']);
+        $result = $this->getChatRepository()->findAllBySearchTerm($term, $channels, $page);
+        var_dump($result);
         die();
     }
 
