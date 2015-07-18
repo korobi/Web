@@ -2,11 +2,11 @@
 
 namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 
+use Doctrine\Common\Cache\FilesystemCache;
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChatIndex;
 use Korobi\WebBundle\Document\Network;
-use Korobi\WebBundle\Parser\IRCTextParser;
 use Korobi\WebBundle\Repository\ChatRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +41,7 @@ class ChannelLogController extends BaseController {
 
         // populate variables with request information if available, or defaults
         // note: validation is done here
-        $showingCurrent = !$year;
+        $showingToday = !$year;
         list($year, $month, $day, $tail) = self::populateRequest($year, $month, $day, $tail);
 
         // fetch all chats
@@ -101,7 +101,7 @@ class ChannelLogController extends BaseController {
             'log_date_formatted' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
             'log_date' => date('Y/m/d', mktime(0, 0, 0, $month, $day, $year)),
             'is_tail' => $tail !== false,
-            'showing_current' => $showingCurrent,
+            'showing_today' => $showingToday,
             'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
             'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
         ]);
