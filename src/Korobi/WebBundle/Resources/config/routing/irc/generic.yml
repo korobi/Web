@@ -1,0 +1,7 @@
+# ----------------------------------------------------------------
+# ---- Generic IRC routes (not tied to a channel nor network) ----
+# ----------------------------------------------------------------
+search:
+    path: /search/
+    defaults:
+        _controller: korobi.controller.irc.search:searchAction

@@ -4,6 +4,7 @@ imports:
     - { resource: services/controller/admin.yml }
     - { resource: services/controller/irc/channel.yml }
     - { resource: services/controller/irc/network.yml }
+    - { resource: services/controller/irc/generic.yml }
     - { resource: services/controller/irc/legacy.yml }
 
 services:

@@ -136,4 +136,15 @@ class ChatRepository extends DocumentRepository {
             ->execute();
     }
 
+    public function findAllBySearchTerm($term, $page=1, $pageSize=20) {
+        return $this->createQueryBuilder()
+            ->skip(($page -1) * $pageSize)
+            ->limit($pageSize)
+            ->text($term)
+            // We really want to JOIN with the channels table here
+            // and exclude keyed channels :(
+            ->getQuery()
+            ->execute();
+    }
+
 }
