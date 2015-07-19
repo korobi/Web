@@ -16,8 +16,7 @@ class LogCacheClearCommand extends ContainerAwareCommand {
             ->setName('korobi:cache:logs:clear')
             ->setDescription('Clears the logs cache')
             ->addArgument('network', InputArgument::OPTIONAL)
-            ->addArgument('channel', InputArgument::OPTIONAL)
-            ;
+            ->addArgument('channel', InputArgument::OPTIONAL);
     }
 
     protected function execute(InputInterface $in, OutputInterface $out) {

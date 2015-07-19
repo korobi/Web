@@ -12,8 +12,7 @@ class LogCacheStatsCommand extends ContainerAwareCommand {
     protected function configure() {
         $this
             ->setName('korobi:cache:logs:stats')
-            ->setDescription('Get log cache statistics')
-        ;
+            ->setDescription('Get log cache statistics');
     }
 
     protected function execute(InputInterface $in, OutputInterface $out) {
@@ -21,7 +20,7 @@ class LogCacheStatsCommand extends ContainerAwareCommand {
         $stats = $cache->getStats();
 
         $out->writeln('');
-        $out->writeln('Cache stats');
+        $out->writeln('Log cache stats');
         $out->writeln('|   hits     ' . $stats['hits']);
         $out->writeln('|   misses   ' . $stats['misses']);
         $out->writeln('|   changes  ' . $stats['changes']);
