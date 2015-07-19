@@ -58,9 +58,11 @@ class FileCache {
     public function set($key, $value) {
         $this->checkKey($key);
 
-        $dir = $this->getDir($key);
-        if(!is_dir($dir)) {
-            mkdir($dir, 0777, true);
+        if(is_array($key)) {
+            $dir = $this->getDir($key);
+            if (!is_dir($dir)) {
+                mkdir($dir, 0777, true);
+            }
         }
         file_put_contents($this->getPath($key), serialize($value));
 
@@ -73,7 +75,7 @@ class FileCache {
         $path = $this->getPath($this->checkKey($key), false);
 
         if(is_dir($path)) {
-            return $this->removeRecursively($path);
+            return FileUtil::removeRecursively($path);
         } else if(is_file($path . $this->extension)) {
             unlink($path . $this->extension);
             return 1;
@@ -107,25 +109,6 @@ class FileCache {
             $key .= $this->extension;
         }
         return $this->root . $key;
-    }
-
-    private function removeRecursively($path) {
-        $count = 0;
-
-        foreach(array_diff(scandir($path), ['.', '..']) as $subpath) {
-            $subpath = $path . DIRECTORY_SEPARATOR . $subpath;
-            if(is_dir($subpath)) {
-                $count += $this->removeRecursively($subpath);
-            }
-        }
-
-        foreach(array_diff(scandir($path), ['.', '..']) as $subpath) {
-            unlink($path . DIRECTORY_SEPARATOR . $subpath);
-            ++$count;
-        }
-
-        rmdir($path);
-        return $count + 1;
     }
 
 }

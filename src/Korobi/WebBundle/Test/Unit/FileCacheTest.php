@@ -3,6 +3,7 @@
 namespace Korobi\WebBundle\Test\Unit;
 
 use Korobi\WebBundle\Util\FileCache;
+use Korobi\WebBundle\Util\FileUtil;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class FileCacheTest extends KernelTestCase {
@@ -17,24 +18,12 @@ class FileCacheTest extends KernelTestCase {
     }
 
     public function teardown() {
-        $this->clean($this->cacheFolder);
+        $this->cache = null;
+        FileUtil::removeRecursively($this->cacheFolder);
     }
 
     private function path($key) {
         return $this->cacheFolder . DIRECTORY_SEPARATOR . $key;
-    }
-
-    private function clean($path) {
-        foreach(array_diff(scandir($path), ['.', '..']) as $subpath) {
-            $subpath = $path . DIRECTORY_SEPARATOR . $subpath;
-            if(is_dir($subpath)) {
-                $this->clean($subpath);
-            }
-        }
-        foreach(array_diff(scandir($path), ['.', '..']) as $subpath) {
-            unlink($path . DIRECTORY_SEPARATOR . $subpath);
-        }
-        rmdir($path);
     }
 
     public function testExists() {
