@@ -36,6 +36,7 @@ class TestOutputParser {
 
         if ($data['failures'] > 0) {
             $data['status'] = 'Fail';
+            $data['passed'] = $data['tests'] - $data['failures'];
         }
 
         if (StringUtil::stringContains($line, "OK") && $data['status'] == "Pass") {

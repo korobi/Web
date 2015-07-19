@@ -41,6 +41,14 @@ class TestOutputParserTest extends WebTestCase {
         $this->assertEquals('Pass', $data['status']);
     }
 
+    public function testWhenNoExplicitPassNumberWithFailures() {
+        $data = (new TestOutputParser())->parseLine('Tests: 41, Assertions: 134, Failures: 2.');
+        $this->assertEquals(41, $data['tests']);
+        $this->assertEquals(39, $data['passed']);
+        $this->assertEquals(134, $data['assertions']);
+        $this->assertEquals('Fail', $data['status']);
+    }
+
     public function testRealLifeExample() {
         $data = (new TestOutputParser())->parseLine('Tests: 25, Assertions: 61, Skipped: 4.');
         $this->assertEquals(
