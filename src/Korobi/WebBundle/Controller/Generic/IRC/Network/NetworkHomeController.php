@@ -51,11 +51,15 @@ class NetworkHomeController extends BaseController {
             if($dbChannel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {
                 continue;
             }
+            $key = "";
+            if ($dbChannel->getKey() !== null && $this->authChecker->isGranted('ROLE_ADMIN')) {
+                $key = "?key=" . $dbChannel->getKey();
+            }
 
             $channels[$channel] = ["url" => $this->generateUrl('channel', [
                 'network' => $network,
                 'channel' => self::transformChannelName($channel),
-            ]), "db" => $dbChannel];
+            ]), "db" => $dbChannel, 'key' => $key];
         }
 
         ksort($channels, SORT_NATURAL | SORT_FLAG_CASE);
