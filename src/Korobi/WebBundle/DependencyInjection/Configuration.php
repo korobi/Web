@@ -19,6 +19,7 @@ class Configuration implements ConfigurationInterface {
                     ->end()
                 ->end()
             ->end()
+            ->scalarNode('log_cache_directory')->end()
             ->arrayNode('navigation')->children()
                 ->arrayNode('items')->prototype('array')
                     ->children()

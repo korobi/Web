@@ -6,8 +6,8 @@ use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChatIndex;
 use Korobi\WebBundle\Document\Network;
-use Korobi\WebBundle\Parser\IRCTextParser;
 use Korobi\WebBundle\Repository\ChatRepository;
+use Korobi\WebBundle\Util\FileCache;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -41,76 +41,99 @@ class ChannelLogController extends BaseController {
 
         // populate variables with request information if available, or defaults
         // note: validation is done here
-        $showingCurrent = !$year;
-        list($year, $month, $day, $tail) = self::populateRequest($year, $month, $day, $tail);
+        list($date, $tail) = self::populateRequest($year, $month, $day, $tail);
+        $dateTime = new \DateTime();
+        $showingToday = $date->getTimestamp() - $dateTime->setTime(0, 0, 0)->getTimestamp() == 0;
 
-        // fetch all chats
-        /** @var ChatRepository $repo */
-        $repo = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Chat');
-        $last_id = $request->query->get('last_id', false);
-        if($last_id !== false && \MongoId::isValid($last_id)) {
-            $dbChats = $repo->findAllByChannelAndId(
-                $network,
-                $dbChannel->getChannel(),
-                new \MongoId($last_id),
-                new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
-            )
-                ->toArray();
+        $cache = $this->getCache();
+        $cacheKey = $this->generateCacheKey($dbNetwork, $dbChannel, $date);
+
+        if(!$showingToday && $cache->exists($cacheKey)) {
+            $params = $cache->get($cacheKey);
+
         } else {
-            $dbChats = $repo->findAllByChannelAndDate(
-                $network,
-                $dbChannel->getChannel(),
-                new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day, $year)))),
-                new \MongoDate(strtotime(date('Y-m-d\TH:i:s.000\Z', mktime(0, 0, 0, $month, $day + 1, $year))))
-            )
-                ->toArray();
-        }
+            // fetch all chats
+            /** @var ChatRepository $repo */
+            $repo = $this->get('doctrine_mongodb')
+                ->getManager()
+                ->getRepository('KorobiWebBundle:Chat');
+            $last_id = $request->query->get('last_id', false);
+            if($last_id !== false && \MongoId::isValid($last_id)) {
+                $dbChats = $repo->findAllByChannelAndId(
+                    $network,
+                    $dbChannel->getChannel(),
+                    new \MongoId($last_id),
+                    new \MongoDate($date->getTimestamp())
+                )
+                    ->toArray();
+            } else {
+                $dbChats = $repo->findAllByChannelAndDate(
+                    $network,
+                    $dbChannel->getChannel(),
+                    new \MongoDate($date->modify('-1 day')->getTimestamp()),
+                    new \MongoDate($date->getTimestamp())
+                )
+                    ->toArray();
+            }
 
-        // if a tail is requested and no last id was provided...
-        if ($tail !== false && $last_id === false) {
-            // ... grab the last X chats
-            $dbChats = array_slice($dbChats, -$tail);
-        }
+            // if a tail is requested and no last id was provided...
+            if ($tail !== false && $last_id === false) {
+                // ... grab the last X chats
+                $dbChats = array_slice($dbChats, -$tail);
+            }
 
-        // get the data back for the twig frontend to render, from our chats in the database
-        $chats = $this->getRenderManager()->renderLogs($dbChats);
+            // get the data back for the twig frontend to render, from our chats in the database
+            $chats = $this->getRenderManager()->renderLogs($dbChats);
 
-        if (in_array('application/json', $request->getAcceptableContentTypes())) {
-            return new JsonResponse($chats);
-        }
+            if (in_array('application/json', $request->getAcceptableContentTypes())) {
+                return new JsonResponse($chats);
+            }
 
-        $topic = null;
-        $dbTopic = $dbChannel->getTopic();
-        if($dbTopic) {
-            $topic = [
-                'value' => $dbTopic['value'],
-                'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
+            $topic = null;
+            $dbTopic = $dbChannel->getTopic();
+            if($dbTopic) {
+                $topic = [
+                    'value' => $dbTopic['value'],
+                    'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
+                ];
+            }
+
+            $params = [
+                'network_name' => $dbNetwork->getName(),
+                'network_slug' => $dbNetwork->getSlug(),
+                'channel_name' => $dbChannel->getChannel(),
+                'channel_slug' => $channel,
+                'topic' => $topic,
+                'logs' => $chats,
+                'log_date_formatted' => $date->format('F j, Y'),
+                'log_date' => $date->format('Y/m/d'),
+                'is_tail' => $tail !== false,
+                'showing_today' => $showingToday,
+                'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
+                'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
             ];
+            $cache->set($cacheKey, $params);
         }
 
         // time to render!
-        $response = $this->render('KorobiWebBundle:controller/generic/irc/channel:logs.html.twig', [
-            'network_name' => $dbNetwork->getName(),
-            'network_slug' => $dbNetwork->getSlug(),
-            'channel_name' => $dbChannel->getChannel(),
-            'channel_slug' => $channel,
-            'topic' => $topic,
-            'logs' => $chats,
-            'log_date_formatted' => date('F j, Y', mktime(0, 0, 0, $month, $day, $year)),
-            'log_date' => date('Y/m/d', mktime(0, 0, 0, $month, $day, $year)),
-            'is_tail' => $tail !== false,
-            'showing_current' => $showingCurrent,
-            'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
-            'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
-        ]);
+        $response = $this->render('KorobiWebBundle:controller/generic/irc/channel:logs.html.twig', $params);
 
-        if (count($chats) == 0) {
+        if (count($params['logs']) == 0) {
             $response->setStatusCode(404);
         }
 
         return $response;
+    }
+
+    /**
+     * @return FileCache
+     */
+    private function getCache() {
+        return new FileCache($this->getParameter('korobi.config')['log_cache_directory']);
+    }
+
+    private function generateCacheKey(Network $network, Channel $channel, \DateTimeInterface $date) {
+        return [$network->getSlug(), $channel->getChannel(), $date->format("Y-z")];
     }
 
     /**
@@ -141,7 +164,8 @@ class ChannelLogController extends BaseController {
             }
         }
 
-        return [$year, $month, $day, $tail];
+        $date = new \DateTimeImmutable();
+        return [$date->setTime(0, 0, 0)->setDate($year, $month, $day), $tail];
     }
 
     /**

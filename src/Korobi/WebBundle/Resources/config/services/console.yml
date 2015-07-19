@@ -5,3 +5,13 @@ services:
             - @korobi.influx
         tags:
             -  { name: console.command }
+
+    korobi.command.log_cache_clear:
+        class: Korobi\WebBundle\Console\LogCacheClearCommand
+        tags:
+            -  { name: console.command }
+
+    korobi.command.log_cache_stats:
+        class: Korobi\WebBundle\Console\LogCacheStatsCommand
+        tags:
+            -  { name: console.command }
