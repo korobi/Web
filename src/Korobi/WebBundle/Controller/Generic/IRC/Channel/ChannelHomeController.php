@@ -54,7 +54,7 @@ class ChannelHomeController extends BaseController {
             'sample_logs' => $this->getRenderManager()->renderLogs($messages),
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
-            'key' => $key
+            'key' => $key,
         ]);
     }
 }
