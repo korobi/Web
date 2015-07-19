@@ -13,3 +13,6 @@ todo
 
 ## Installation
 todo
+## Helpful commands
+
+Commands are available on the [wiki](https://github.com/korobi/Web/wiki).
