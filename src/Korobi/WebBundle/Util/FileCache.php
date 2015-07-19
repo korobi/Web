@@ -4,8 +4,6 @@ namespace Korobi\WebBundle\Util;
 
 class FileCache {
 
-    const KEY_VALIDATION = '/[a-z0-9\-_\.]/i';
-
     private $root;
     private $extension;
 
@@ -13,7 +11,7 @@ class FileCache {
         if(!is_dir($root)) {
             mkdir($root, 0777, true);
         }
-        $this->root = $root;
+        $this->root = rtrim($root, '/\\') . DIRECTORY_SEPARATOR;
         $this->extension = $extension;
     }
 
@@ -52,13 +50,12 @@ class FileCache {
     }
 
     private function checkKey($key) {
-        if(is_array($key)) {
-            $test = implode('', $key);
+        $test = is_array($key) ? implode('', $key) : $key;
+
+        if(strpos($test, DIRECTORY_SEPARATOR) !== false) {
+            throw new \InvalidArgumentException('Key must not contain directory separator');
         }
 
-        if(preg_match(self::KEY_VALIDATION, $test) === false) {
-            throw new \InvalidArgumentException('Key must match the regex "' . self::KEY_VALIDATION . '"');
-        }
         return $key;
     }
 
@@ -78,13 +75,15 @@ class FileCache {
 
     private function removeRecursively($path) {
         foreach(array_diff(scandir($path), ['.', '..']) as $subpath) {
+            $subpath = $path . DIRECTORY_SEPARATOR . $subpath;
             if(is_dir($subpath)) {
-                $this->removeRecursively($path . DIRECTORY_SEPARATOR . $subpath);
-                rmdir($path);
-            } else {
-                unlink($subpath);
+                $this->removeRecursively($subpath);
             }
         }
+        foreach(array_diff(scandir($path), ['.', '..']) as $subpath) {
+            unlink($path . DIRECTORY_SEPARATOR . $subpath);
+        }
+        rmdir($path);
     }
 
 }
