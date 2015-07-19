@@ -187,8 +187,9 @@ class AkioMessageBuilder {
 
     /**
      * @param $type
+     * @param string $context
      */
-    public function send($type) {
-        $this->akio->sendMessage($this, $type);
+    public function send($type, $context = 'public') {
+        $this->akio->sendMessage($this, $context, $type);
     }
 }

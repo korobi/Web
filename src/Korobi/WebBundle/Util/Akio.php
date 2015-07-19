@@ -37,13 +37,15 @@ class Akio {
 
     /**
      * @param AkioMessageBuilder $message
+     * @param $context
      * @param $type
      */
-    public function sendMessage(AkioMessageBuilder $message, $type) {
+    public function sendMessage(AkioMessageBuilder $message, $context, $type) {
         if ($this->enabled) {
             $text = $message->getText();
             $this->guzzle->get($this->url, [
                 'query' => [
+                    'context' => $context,
                     'type' => $type,
                     'message' => $text,
                 ],
