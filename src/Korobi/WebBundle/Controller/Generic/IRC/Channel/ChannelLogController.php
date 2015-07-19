@@ -2,12 +2,12 @@
 
 namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 
-use Doctrine\Common\Cache\FilesystemCache;
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChatIndex;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Repository\ChatRepository;
+use Korobi\WebBundle\Util\FileCache;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -48,8 +48,9 @@ class ChannelLogController extends BaseController {
         $cache = $this->getCache();
         $cacheKey = $this->generateCacheKey($dbNetwork, $dbChannel, $date);
 
-        if(!$showingToday && $cache->contains($cacheKey)) {
-            $params = $cache->fetch($cacheKey);
+        if(!$showingToday && $cache->exists($cacheKey)) {
+            $params = $cache->get($cacheKey);
+            var_dump('cached');
 
         } else {
             // fetch all chats
@@ -112,7 +113,7 @@ class ChannelLogController extends BaseController {
                 'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
                 'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
             ];
-            $cache->save($cacheKey, $params);
+            $cache->set($cacheKey, $params);
         }
 
         // time to render!
@@ -126,14 +127,14 @@ class ChannelLogController extends BaseController {
     }
 
     /**
-     * @return FilesystemCache
+     * @return FileCache
      */
     private function getCache() {
-        return new FilesystemCache($this->getParameter('korobi.config')['log_cache_directory'], '.cache');
+        return new FileCache($this->getParameter('korobi.config')['log_cache_directory']);
     }
 
     private function generateCacheKey(Network $network, Channel $channel, \DateTimeInterface $date) {
-        return $network->getSlug() . $channel->getChannel() . $date->format("Y-z");
+        return [$network->getSlug(), $channel->getChannel(), $date->format("Y-z")];
     }
 
     /**

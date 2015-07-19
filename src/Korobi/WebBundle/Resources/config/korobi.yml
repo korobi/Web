@@ -38,7 +38,7 @@ korobi_web:
               route: 'revisions'
               type: 'footer'
 
-    log_cache_directory: %kernel.cache_dir%/logs/
+    log_cache_directory: %kernel.cache_dir%/korobi/logs/
 
     homepage_excluded_channels:
        - channel: '#spigot'
