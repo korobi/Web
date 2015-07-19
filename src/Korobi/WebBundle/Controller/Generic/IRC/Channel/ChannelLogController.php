@@ -42,8 +42,8 @@ class ChannelLogController extends BaseController {
         // populate variables with request information if available, or defaults
         // note: validation is done here
         list($date, $tail) = self::populateRequest($year, $month, $day, $tail);
-        $dateTime = new \DateTime();
-        $showingToday = $date->getTimestamp() - $dateTime->setTime(0, 0, 0)->getTimestamp() == 0;
+        $now = new \DateTime();
+        $showingToday = $date->getTimestamp() - $now->setTime(0, 0, 0)->getTimestamp() == 0;
 
         $cache = $this->getCache();
         $cacheKey = $this->generateCacheKey($dbNetwork, $dbChannel, $date);
@@ -63,15 +63,15 @@ class ChannelLogController extends BaseController {
                     $network,
                     $dbChannel->getChannel(),
                     new \MongoId($last_id),
-                    new \MongoDate($date->getTimestamp())
+                    new \MongoDate($date->modify('+1 day')->getTimestamp())
                 )
                     ->toArray();
             } else {
                 $dbChats = $repo->findAllByChannelAndDate(
                     $network,
                     $dbChannel->getChannel(),
-                    new \MongoDate($date->modify('-1 day')->getTimestamp()),
-                    new \MongoDate($date->getTimestamp())
+                    new \MongoDate($date->getTimestamp()),
+                    new \MongoDate($date->modify('+1 day')->getTimestamp())
                 )
                     ->toArray();
             }
