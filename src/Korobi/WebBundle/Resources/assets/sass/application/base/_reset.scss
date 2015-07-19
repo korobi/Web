@@ -54,7 +54,8 @@ del {
   text-decoration: line-through;
 }
 
-abbr[title], dfn[title] {
+abbr[title], dfn[title],
+abbr[rel="tooltip"]:hover, dfn[rel="tooltip"]:hover {
   border-bottom: 1px dotted;
   cursor: help;
 }

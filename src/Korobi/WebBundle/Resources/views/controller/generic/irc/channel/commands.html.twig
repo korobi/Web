@@ -2,6 +2,10 @@
 
 {% set page_title = channel_name ~ ' on ' ~ network_name ~ ' - Commands' %}
 
+{% block head %}
+    <meta name="description" content="User-created channel commands for IRC channel {{ channel_name }} on network {{ network_name }}.">
+{% endblock head %}
+
 {% block body %}
     <h1>Commands for {{ channel_name }} on {{ network_name }}</h1>
     <div class="commands">
