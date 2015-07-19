@@ -29,7 +29,7 @@ class InfluxService {
         $this->user = $user;
         $this->password = $password;
         $this->database = $database;
-        $this->connect();
+        //$this->connect();
     }
 
     protected function connect() {
