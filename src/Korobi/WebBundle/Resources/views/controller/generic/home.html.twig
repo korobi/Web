@@ -5,6 +5,8 @@
 {% block hero %}
     <div class="hero">
         <h1>Korobi <small>Kitten powered.</small></h1>
+        {# TODO: Put a decent description here for Google. #}
+        <!--googleoff: all-->
         <div class="logs">
             {% for line_num, line in messages %}
                 <div class="line">
@@ -26,6 +28,7 @@
                 </div>
             {% endfor %}
         </div>
+        <!--googleon: all-->
     </div>
 {% endblock %}
 
