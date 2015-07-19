@@ -50,7 +50,6 @@ class ChannelLogController extends BaseController {
 
         if(!$showingToday && $cache->exists($cacheKey)) {
             $params = $cache->get($cacheKey);
-            var_dump('cached');
 
         } else {
             // fetch all chats

@@ -37,8 +37,6 @@ class LogCacheClearCommand extends ContainerAwareCommand {
         }
 
         $cache = new FileCache($cachePath);
-        dump($key);
-        dump($cache);
 
         $count = $cache->remove($key);
         $out->writeln('Cache cleared for "' . implode(DIRECTORY_SEPARATOR, $key) . '", ' . $count . ' files and folders');
