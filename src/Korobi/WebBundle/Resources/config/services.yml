@@ -6,6 +6,23 @@ imports:
     - { resource: services/irc_logs.yml }
 
 services:
+    # application mongo
+    app_mongo.connection:
+        class: Doctrine\MongoDB\Connection
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method: getConnection
+        calls:
+            - [initialize, []]
+    app_mongo:
+        class: Mongo
+        factory_service: app_mongo.connection
+        factory_method: getMongo
+    # database sessions provider
+    session.handler.mongodb:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler
+        arguments: [ @app_mongo, { database: %database_name%, collection: sessions } ]
+
+    # user provider
     korobi.user_provider:
         class: Korobi\WebBundle\Security\Provider\UserProvider
         arguments: [@fos_user.user_manager, {github: githubUserId}, %secret%]
