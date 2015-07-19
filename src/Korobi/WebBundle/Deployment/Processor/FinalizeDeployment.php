@@ -20,7 +20,7 @@ class FinalizeDeployment extends BaseProcessor implements DeploymentProcessorInt
 
         if ($info->getRevision()->getOldCommit() !== $info->getRevision()->getNewCommit()) {
             foreach ($info->getAllMessagesInQueue() as $message) {
-                $message->send("deploy");
+                $message->send('deploy', 'private');
             }
         }
 
