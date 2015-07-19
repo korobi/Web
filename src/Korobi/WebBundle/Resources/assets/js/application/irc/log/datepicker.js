@@ -51,6 +51,6 @@ $(function() {
             return;
         }
         moving = true;
-        window.location = window.location.href.replace(/logs\/?.*/, 'logs/' + $dateInput.val() + '/');
+        window.location = window.location.href.replace(/logs\/?.*/, 'logs/' + $dateInput.val() + '/') + window.location.search;
     })
 });
