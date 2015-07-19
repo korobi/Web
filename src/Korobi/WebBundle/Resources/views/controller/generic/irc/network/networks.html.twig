@@ -2,6 +2,10 @@
 
 {% set page_title = 'Networks' %}
 
+{% block head %}
+    <meta name="description" content="IRC networks which are supported by Korobi.">
+{% endblock head %}
+
 {% block body %}
     <h1>Networks</h1>
     {% if all_networks_private %}
