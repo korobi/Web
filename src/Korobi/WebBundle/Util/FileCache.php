@@ -6,18 +6,46 @@ class FileCache {
 
     private $root;
     private $extension;
+    private $stats;
+    private $statPath;
 
     public function __construct($root, $extension = '.cache') {
+        if($extension == '.cache-stat') {
+            throw new \InvalidArgumentException('Extension cannot be .cache-stat');
+        }
         if(!is_dir($root)) {
             mkdir($root, 0777, true);
         }
         $this->root = rtrim($root, '/\\') . DIRECTORY_SEPARATOR;
         $this->extension = $extension;
+
+        $this->statPath = $this->root . 'stats.cache-stat';
+        if(is_file($this->statPath)) {
+            $this->stats = unserialize(file_get_contents($this->statPath));
+        } else {
+            $this->stats = [
+                'hits' => 0,
+                'misses' => 0,
+                'changes' => 0,
+            ];
+        }
+    }
+
+    public function __destruct() {
+        file_put_contents($this->statPath, serialize($this->stats));
+    }
+
+    public function getStats() {
+        return $this->stats;
     }
 
     public function exists($key) {
         $path = $this->getPath($this->checkKey($key));
-        return is_file($path);
+        $exists = is_file($path);
+
+        ++$this->stats[$exists ? 'hits' : 'misses'];
+
+        return $exists;
     }
 
     public function get($key) {
@@ -35,18 +63,23 @@ class FileCache {
             mkdir($dir, 0777, true);
         }
         file_put_contents($this->getPath($key), serialize($value));
+
+        ++$this->stats['changes'];
+
         return $this;
     }
 
     public function remove($key) {
-        $path = $this->getPath($this->checkKey($key));
-        if(file_exists($path)) {
-            if(is_dir($path)) {
-                $this->removeRecursively($path);
-            } else {
-                unlink($path);
-            }
+        $path = $this->getPath($this->checkKey($key), false);
+
+        if(is_dir($path)) {
+            return $this->removeRecursively($path);
+        } else if(is_file($path . $this->extension)) {
+            unlink($path . $this->extension);
+            return 1;
         }
+
+        return 0;
     }
 
     private function checkKey($key) {
@@ -66,24 +99,33 @@ class FileCache {
         return $this->root . $key;
     }
 
-    private function getPath($key) {
+    private function getPath($key, $includeExtension = true) {
         if(is_array($key)) {
             $key = implode(DIRECTORY_SEPARATOR, $key);
         }
-        return $this->root . $key . $this->extension;
+        if($includeExtension) {
+            $key .= $this->extension;
+        }
+        return $this->root . $key;
     }
 
     private function removeRecursively($path) {
+        $count = 0;
+
         foreach(array_diff(scandir($path), ['.', '..']) as $subpath) {
             $subpath = $path . DIRECTORY_SEPARATOR . $subpath;
             if(is_dir($subpath)) {
-                $this->removeRecursively($subpath);
+                $count += $this->removeRecursively($subpath);
             }
         }
+
         foreach(array_diff(scandir($path), ['.', '..']) as $subpath) {
             unlink($path . DIRECTORY_SEPARATOR . $subpath);
+            ++$count;
         }
+
         rmdir($path);
+        return $count + 1;
     }
 
 }
