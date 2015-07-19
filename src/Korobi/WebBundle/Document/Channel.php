@@ -146,6 +146,15 @@ class Channel {
     }
 
     /**
+     * Get if this channel is private.
+     *
+     * @return bool
+     */
+    public function isPrivate() {
+        return $this->getKey() != null;
+    }
+
+    /**
      * Get key
      *
      * @return string $key
