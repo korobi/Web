@@ -2,6 +2,10 @@
 
 {% set page_title = channel_name ~ ' on ' ~ network_name ~ ' - Stats' %}
 
+{% block head %}
+    <meta name="description" content="Chat statistics for IRC channel {{ channel_name }} on network {{ network_name }}.">
+{% endblock head %}
+
 {% block body %}
     <h1>Stats for {{ channel_name }} on {{ network_name }}</h1>
     <div class="logs">
