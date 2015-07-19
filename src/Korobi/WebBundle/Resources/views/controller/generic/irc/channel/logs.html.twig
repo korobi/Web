@@ -4,8 +4,10 @@
 {% set page_title = channel_name ~ ' on ' ~ network_name ~ ' - ' ~ (is_tail ? 'Tail' : 'Logs') %}
 
 {% block head %}
-    {% if not showing_today or true %}
+    {% if not showing_today or is_tail %}
         <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+    {% else %}
+        <meta name="description" content="Current logs for channel {{ channel_name }} on IRC network {{ network_name }}."
     {% endif %}
 {% endblock %}
 
@@ -54,11 +56,11 @@
     {% else %}
         <h1>Log for {{ reusableLinks }} - {{ log_date }}</h1>
     {% endif %}
-        {% if logs is empty %}
-            <div class="logs{% if is_tail %} tailing{% endif %}" id="logs">
-                <div class="empty">Sorry, no logs are available for the requested date.</div>
-            </div>
-        {% else %}
-            {{ log_render.log_render(logs, not is_tail, true, topic) }}
-        {% endif %}
+    {% if logs is empty %}
+        <div class="logs{% if is_tail %} tailing{% endif %}" id="logs">
+            <div class="empty">Sorry, no logs are available for the requested date.</div>
+        </div>
+    {% else %}
+        {{ log_render.log_render(logs, not is_tail, true, topic) }}
+    {% endif %}
 {% endblock %}
