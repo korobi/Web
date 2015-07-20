@@ -8,11 +8,10 @@ A development instance is available at https://dev.korobi.io/. Authentication is
  - `master` - Automatically deployed to staging **instantly**.
  - `www1-stable` - Production, commits should come into this branch from PRs only.
 
-## Requirements
-todo
+## Installation and Requirements
 
-## Installation
-todo
+For installation instructions, please visit the [wiki page](https://github.com/korobi/Web/wiki/Installation)
+
 ## Helpful commands
 
 Commands are available on the [wiki](https://github.com/korobi/Web/wiki).
