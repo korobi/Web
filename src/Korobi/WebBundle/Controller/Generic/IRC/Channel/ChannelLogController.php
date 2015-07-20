@@ -41,9 +41,7 @@ class ChannelLogController extends BaseController {
 
         // populate variables with request information if available, or defaults
         // note: validation is done here
-        list($date, $tail) = self::populateRequest($year, $month, $day, $tail);
-        $now = new \DateTime();
-        $showingToday = $date->getTimestamp() - $now->setTime(0, 0, 0)->getTimestamp() == 0;
+        list($date, $showingToday, $tail) = self::populateRequest($year, $month, $day, $tail);
 
         $cache = $this->getCache();
         $cacheKey = $this->generateCacheKey($dbNetwork, $dbChannel, $date);
@@ -143,17 +141,20 @@ class ChannelLogController extends BaseController {
      * @param $tail
      * @return array
      */
-    private static function populateRequest($year, $month, $day, $tail) {
+    private function populateRequest($year, $month, $day, $tail) {
+        $today = (new \DateTime('now', new \DateTimeZone('UTC')))->setTime(0, 0, 0);
+        $timestamp = $today->getTimestamp();
+
         if (!$year) {
-            $year = date('Y');
+            $year = date('Y', $timestamp);
         }
 
         if (!$month) {
-            $month = date('m');
+            $month = date('m', $timestamp);
         }
 
         if (!$day) {
-            $day = date('d');
+            $day = date('d', $timestamp);
         }
 
         if ($tail !== false) {
@@ -164,8 +165,11 @@ class ChannelLogController extends BaseController {
             }
         }
 
-        $date = new \DateTimeImmutable();
-        return [$date->setTime(0, 0, 0)->setDate($year, $month, $day), $tail];
+        $date = (new \DateTimeImmutable('now', new \DateTimeZone('UTC')))
+            ->setTime(0, 0, 0)
+            ->setDate($year, $month, $day);
+
+        return [$date, $date == $today, $tail];
     }
 
     /**
