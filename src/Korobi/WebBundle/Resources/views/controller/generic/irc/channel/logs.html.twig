@@ -44,7 +44,7 @@
                 <i class="fa fa-calendar"></i>
             </label>
             <script type="application/json" id="available-log-days">{{ available_log_days|json_encode|raw }}</script>
-            <input type="text" id="log-date" value="{{ log_date }}" data-start-date="{{ first_for_channel }}">
+            <input type="text" id="log-date" value="{{ date.format('Y/m/d') }}" data-start-date="{{ first_for_channel }}">
         </div>
     </div>
     {% set reusableLinks %}
@@ -54,7 +54,7 @@
     {% if is_tail %}
         <h1>Tail log for {{ reusableLinks }}</h1>
     {% else %}
-        <h1>Log for {{ reusableLinks }} - {{ log_date }}</h1>
+        <h1>Log for {{ reusableLinks }} - {{ date.format('Y/m/d') }}</h1>
     {% endif %}
     {% if logs is empty %}
         <div class="logs{% if is_tail %} tailing{% endif %}" id="logs">
