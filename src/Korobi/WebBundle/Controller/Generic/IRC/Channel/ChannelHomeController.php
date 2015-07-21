@@ -34,7 +34,7 @@ class ChannelHomeController extends BaseController {
             'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
         ];
         if($dbTopic['time'] != null) {
-            $topic['time'] = date('F j, Y h:i:s a', $dbTopic['time']->sec);
+            $topic['time'] = gmdate('F j, Y h:i:s a', $dbTopic['time']->sec);
         }
 
         $key = '';

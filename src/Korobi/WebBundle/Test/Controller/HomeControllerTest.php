@@ -32,7 +32,7 @@ class HomeControllerTest extends WebTestCase {
     public function testCopyrightInfoDisplayedInFooter() {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
-        $year = date('Y');
+        $year = gmdate('Y');
         $this->assertTrue($crawler->filter('footer.footer .footer--copyright:contains("' . $year . '")')->count() > 0);
     }
 }

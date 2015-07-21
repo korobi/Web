@@ -26,7 +26,8 @@ class LogCacheClearCommand extends ContainerAwareCommand {
         $cachePath = $this->getContainer()->getParameter('korobi.config')['log_cache_directory'];
 
         if(!$network) {
-            FileUtil::removeRecursively($cachePath);
+            $count = FileUtil::removeRecursively($cachePath);
+            $out->writeln($count . ' files cleared');
             return;
         }
 

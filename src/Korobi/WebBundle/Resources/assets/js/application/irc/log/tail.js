@@ -4,8 +4,13 @@ $(function() {
     var $logs = $('#logs');
 
     // Start tailing
-    if ($logs.length == 0 || $logs.hasClass('linkable')) {
+    if ($logs.length === 0 || $logs.hasClass('linkable')) {
         return;
+    }
+
+    var $empty = $logs.find('.empty');
+    if($empty.length === 0) {
+        $empty = null;
     }
 
     var lastId = $logs.find('.line:last').data('event-id');
@@ -20,6 +25,11 @@ $(function() {
             success: function (data) {
                 if (data.length === 0) {
                     return;
+                }
+
+                if($empty !== null) {
+                    $empty.remove();
+                    $empty = null;
                 }
 
                 var info;
