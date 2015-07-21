@@ -145,15 +145,15 @@ class ChannelLogController extends BaseController {
         $timestamp = $today->getTimestamp();
 
         if (!$year) {
-            $year = date('Y', $timestamp);
+            $year = gmdate('Y', $timestamp);
         }
 
         if (!$month) {
-            $month = date('m', $timestamp);
+            $month = gmdate('m', $timestamp);
         }
 
         if (!$day) {
-            $day = date('d', $timestamp);
+            $day = gmdate('d', $timestamp);
         }
 
         if ($tail !== false) {
