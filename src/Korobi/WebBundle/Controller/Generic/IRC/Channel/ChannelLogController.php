@@ -109,7 +109,10 @@ class ChannelLogController extends BaseController {
                 'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
                 'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
             ];
-            $cache->set($cacheKey, $params);
+
+            if(!$showingToday) {
+                $cache->set($cacheKey, $params);
+            }
         }
 
         // time to render!
