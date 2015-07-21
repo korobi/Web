@@ -27,6 +27,10 @@ class ChannelLogController extends BaseController {
     public function logsAction(Request $request, $network, $channel, $year = false, $month = false, $day = false, $tail = false) {
         /** @var Network $dbNetwork */
         /** @var Channel $dbChannel */
+        var_dump(new \DateTime('now', new \DateTimeZone('UTC')));
+        var_dump((new \MongoDate((new \DateTime('now', new \DateTimeZone('UTC')))->getTimestamp()))->toDateTime());
+        die();
+
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if this channel requires a key
