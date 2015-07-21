@@ -13,13 +13,16 @@ class FileCache {
         if($extension == '.cache-stat') {
             throw new \InvalidArgumentException('Extension cannot be .cache-stat');
         }
+
         if(!is_dir($root)) {
+            // todo error
             mkdir($root, 0777, true);
         }
+
         $this->root = rtrim($root, '/\\') . DIRECTORY_SEPARATOR;
         $this->extension = $extension;
-
         $this->statPath = $this->root . 'stats.cache-stat';
+
         if(is_file($this->statPath)) {
             $this->stats = unserialize(file_get_contents($this->statPath));
         } else {
@@ -52,6 +55,7 @@ class FileCache {
         if($this->exists($key)) {
             return unserialize(file_get_contents($this->getPath($key)));
         }
+
         return null;
     }
 
@@ -60,10 +64,12 @@ class FileCache {
 
         if(is_array($key)) {
             $dir = $this->getDir($key);
+
             if (!is_dir($dir)) {
                 mkdir($dir, 0777, true);
             }
         }
+
         file_put_contents($this->getPath($key), serialize($value));
 
         ++$this->stats['changes'];
@@ -98,6 +104,7 @@ class FileCache {
         if(is_array($key)) {
             $key = implode(DIRECTORY_SEPARATOR, array_slice($key, 0, -1));
         }
+
         return $this->root . $key;
     }
 
@@ -105,10 +112,11 @@ class FileCache {
         if(is_array($key)) {
             $key = implode(DIRECTORY_SEPARATOR, $key);
         }
+
         if($includeExtension) {
             $key .= $this->extension;
         }
+
         return $this->root . $key;
     }
-
 }
