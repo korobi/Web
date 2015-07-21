@@ -12,7 +12,7 @@
                  class="line{% if linkable|default(false) %} js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
                     <span class="timestamp">
                         {# The date is UTC, js will translate it to the correct timezone #}
-                        {{ gmdate('H:i:s', line.timestamp) }}
+                        {{ line.timestamp.format('H:i:s') }}
                     </span>
                     <span class="nick irc--{{ "%02d"|format(line.nickColour) }}-df
                             {%- if line.role is not empty %} {{ line.role }}{% endif %}"

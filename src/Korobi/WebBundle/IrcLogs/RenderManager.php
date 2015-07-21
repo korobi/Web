@@ -63,7 +63,7 @@ class RenderManager {
         $nick = $this->logParser->getDisplayName($chat);
         return [
             'id'          => $chat->getId(), // MongoID of chat document
-            'timestamp'   => $chat->getDate()->getTimestamp(), // Unix timestamp integer of chat document
+            'timestamp'   => $chat->getDate()->setTimezone(new \DateTimeZone('UTC')),
             'type'        => strtolower($chat->getType()), // Lowercase type identifier (e.g. 'join' or 'action')
             'role'        => $chat->getType() == 'MESSAGE' ? strtolower($chat->getActorPrefix()) : '', // @, + etc
             'nickColour'  => $this->logParser->getColourForActor($chat), // Colour of nick (applies weechat algorithm)

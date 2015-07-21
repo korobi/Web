@@ -28,6 +28,7 @@ parameters:
     akio.key: ~
 
     # bin paths
+    bin_path.ruby: /usr/bin/ruby
     sass_path: ~
     uglifyjs_path: ~
 

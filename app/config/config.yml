@@ -42,7 +42,7 @@ assetic:
     use_controller: false
     bundles:        [ 'KorobiWebBundle' ]
     #java: /usr/bin/java
-    ruby: /usr/bin/ruby
+    ruby: %bin_path.ruby%
     sass: "%sass_path%"
     filters:
         cssrewrite: ~
