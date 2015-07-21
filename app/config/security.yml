@@ -22,7 +22,7 @@ security:
     # for specific sections of your app
     firewalls:
         app:
-            pattern: ^/
+            pattern: .*
             oauth:
                 failure_path: /auth/connect/github
                 login_path: /auth/connect/github
