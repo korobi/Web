@@ -35,7 +35,7 @@ $(function() {
                 var info;
                 $.each(data, function (index, line) {
                     info = {
-                        time: new Date(line.timestamp * 1000),
+                        time: new Date(line.timestamp.date + ' ' + line.timestamp.timezone),
                         nick: line.displayNick,
                         message: line.message,
                     };
