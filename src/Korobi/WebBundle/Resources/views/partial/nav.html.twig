@@ -1,10 +1,10 @@
 <nav class="navigation" role="navigation">
     <div class="navigation--inner">
         <div class="navigation--brand-mobile">
-            <a href="/" class="navigation--brandlink navigation--brandlink-mobile">{{ app_name }}</a>
+            <a href="{{ path('home') }}" class="navigation--brandlink navigation--brandlink-mobile">{{ app_name }}</a>
         </div>
         <div class="navigation--brand">
-            <a href="/" class="navigation--brandlink" role="menuitem">{{ app_name }}</a>
+            <a href="{{ path('home') }}" class="navigation--brandlink" role="menuitem">{{ app_name }}</a>
             <i class="navigation--menutoggle fa fa-navicon"></i>
         </div>
         <ul class="navigation--links" role="menubar">
