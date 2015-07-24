@@ -83,7 +83,10 @@ class ChannelLogController extends BaseController {
             $chats = $this->getRenderManager()->renderLogs($dbChats);
 
             if (in_array('application/json', $request->getAcceptableContentTypes())) {
-                return new JsonResponse($chats);
+                return new JsonResponse(array_map(function($line) {
+                    $line['timestamp'] = $line['timestamp']->getTimestamp();
+                    return $line;
+                }, $chats));
             }
 
             $topic = null;
