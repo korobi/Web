@@ -47,8 +47,7 @@ class ChannelLogController extends BaseController {
         $cacheKey = $this->generateCacheKey($dbNetwork, $dbChannel, $date);
 
         if(!$showingToday && $cache->exists($cacheKey)) {
-            $params = $cache->get($cacheKey);
-
+            $logData = $cache->get($cacheKey);
         } else {
             // fetch all chats
             /** @var ChatRepository $repo */
@@ -84,7 +83,10 @@ class ChannelLogController extends BaseController {
             $chats = $this->getRenderManager()->renderLogs($dbChats);
 
             if (in_array('application/json', $request->getAcceptableContentTypes())) {
-                return new JsonResponse($chats);
+                return new JsonResponse(array_map(function($line) {
+                    $line['timestamp'] = $line['timestamp']->getTimestamp();
+                    return $line;
+                }, $chats));
             }
 
             $topic = null;
@@ -96,7 +98,7 @@ class ChannelLogController extends BaseController {
                 ];
             }
 
-            $params = [
+            $logData = [
                 'network_name' => $dbNetwork->getName(),
                 'network_slug' => $dbNetwork->getSlug(),
                 'channel_name' => $dbChannel->getChannel(),
@@ -110,15 +112,16 @@ class ChannelLogController extends BaseController {
                 'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
             ];
 
+            // Do not cache logs if we are rendering the current date's logs.
             if(!$showingToday) {
-                $cache->set($cacheKey, $params);
+                $cache->set($cacheKey, $logData);
             }
         }
 
         // time to render!
-        $response = $this->render('KorobiWebBundle:controller/generic/irc/channel:logs.html.twig', $params);
+        $response = $this->render('KorobiWebBundle:controller/generic/irc/channel:logs.html.twig', $logData);
 
-        if (count($params['logs']) == 0) {
+        if (count($logData['logs']) == 0) {
             $response->setStatusCode(404);
         }
 
@@ -132,8 +135,14 @@ class ChannelLogController extends BaseController {
         return new FileCache($this->getParameter('korobi.config')['log_cache_directory']);
     }
 
+    /**
+     * @param Network $network
+     * @param Channel $channel
+     * @param \DateTimeInterface $date
+     * @return array
+     */
     private function generateCacheKey(Network $network, Channel $channel, \DateTimeInterface $date) {
-        return [$network->getSlug(), $channel->getChannel(), $date->format("Y-z")];
+        return [$network->getSlug(), $channel->getChannel(), $date->format('Y-z')];
     }
 
     /**

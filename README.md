@@ -5,7 +5,7 @@ Copyright &copy; 2014 - 2015 korobi.io
 A development instance is available at https://dev.korobi.io/. Authentication is required via the X-Korobi-Auth header (see app_dev.php in the web directory for more information).
 
 ## Core branches
- - `master` - Automatically deployed to staging **instantly**.
+ - `master` - Automatically deployed to staging **after every push**.
  - `www1-stable` - Production, commits should come into this branch from PRs only.
 
 ## Installation and Requirements
