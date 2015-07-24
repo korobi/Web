@@ -44,7 +44,7 @@
                 <i class="fa fa-calendar"></i>
             </label>
             <script type="application/json" id="available-log-days">{{ available_log_days|json_encode|raw }}</script>
-            <input type="text" id="log-date" value="{{ date.format('Y/m/d') }}" data-start-date="{{ first_for_channel }}">
+            <input type="text" id="log-date" readonly value="{{ date.format('Y/m/d') }}" data-start-date="{{ first_for_channel }}">
         </div>
     </div>
     {% set reusableLinks %}
