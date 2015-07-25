@@ -87,7 +87,7 @@ class NetworkHomeController extends BaseController {
         $dbChannels = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
-            ->countPublicChannelsByNetwork();
+            ->countChannelsByNetwork($this->authChecker->isGranted('ROLE_ADMIN'));
 
         $validNetworks = array_column($dbChannels, 'network');
 
