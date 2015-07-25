@@ -49,8 +49,8 @@
                     'year': yesterday.format('Y'),
                     'month': yesterday.format('m'),
                     'day': yesterday.format('d'),
-                }) }}" class="button button-rounded button-flat-primary" aria-label="logs for day before">
-                    <i class="fa fa-chevron-left"></i>
+                }) }}" class="button button-rounded button-flat-primary" aria-label="logs for day before"{% if showing_first_day %} disabled{% endif %}>
+                    <i class="fa fa-{% if showing_first_day %}times{% else %}chevron-left{% endif %}"></i>
                 </a>
 
                 <script type="application/json" id="available-log-days">{{ available_log_days|json_encode|raw }}</script>
