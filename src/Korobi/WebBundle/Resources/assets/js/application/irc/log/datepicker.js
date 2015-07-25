@@ -28,7 +28,6 @@ $(function() {
         format: 'yyyy/mm/dd',
         startDate: $dateInput.attr('data-start-date'),
         endDate: 'today',
-        todayBtn: 'linked',
         language: 'en-GB',
         orientation: 'top right',
         forceParse: false,
