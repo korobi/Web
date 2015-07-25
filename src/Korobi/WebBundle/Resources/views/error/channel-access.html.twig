@@ -1,0 +1,8 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = "Unexpected redirect" %}
+
+{% block body %}
+    <h1>Unexpected Redirect</h1>
+    <p>For security reasons, a redirect to {{ url }} was disallowed.</p>
+{% endblock %}
