@@ -48,7 +48,10 @@ class ChannelRepository extends DocumentRepository {
             ->getMongoCollection()
             ->aggregate([
                 [
-                    '$match' => ['key' => null],
+                    '$match' => [
+                        'key' => null,
+                        'channel' => ['$ne' => null],
+                    ],
                 ], [
                     '$group' => [
                         '_id' => ['network' => '$network'],
