@@ -12,6 +12,8 @@
 {% endblock %}
 
 {% block body %}
+    {% set yesterday, tomorrow = date.modify('-1 day'), date.modify('+1 day') %}
+
     <div class="controls">
         <ul class="toggles">
             <li>
@@ -44,24 +46,26 @@
                 <a href="{{ path('channel_log_date', {
                     'channel': channel_slug,
                     'network': network_slug,
-                    'year': date.modify('-1 day').format('Y'),
-                    'month': date.modify('-1 day').format('m'),
-                    'day': date.modify('-1 day').format('d'),
+                    'year': yesterday.format('Y'),
+                    'month': yesterday.format('m'),
+                    'day': yesterday.format('d'),
                 }) }}" class="button button-rounded button-flat-primary" aria-label="logs for day before">
                     <i class="fa fa-chevron-left"></i>
                 </a>
+
                 <script type="application/json" id="available-log-days">{{ available_log_days|json_encode|raw }}</script>
                 <input type="text" id="log-date" readonly value="{{ date.format('Y/m/d') }}" data-start-date="{{ first_for_channel }}">
                 <label for="log-date" class="button button-rounded button-flat-primary">
                     Calendar
                     <i class="fa fa-calendar"></i>
                 </label>
+
                 <a href="{{ showing_today ? '' : path('channel_log_date', {
                     'channel': channel_slug,
                     'network': network_slug,
-                    'year': date.modify('+1 day').format('Y'),
-                    'month': date.modify('+1 day').format('m'),
-                    'day': date.modify('+1 day').format('d'),
+                    'year': tomorrow.format('Y'),
+                    'month': tomorrow.format('m'),
+                    'day': tomorrow.format('d'),
                 }) }}" class="button button-rounded button-flat-primary" aria-label="logs for day after"{% if showing_today %} disabled{% endif %}>
                     <i class="fa fa-{% if showing_today %}times{% else %}chevron-right{% endif %}"></i>
                 </a>
