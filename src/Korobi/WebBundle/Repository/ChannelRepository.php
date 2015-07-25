@@ -68,8 +68,8 @@ class ChannelRepository extends DocumentRepository {
         return $this
             ->getDocumentManager()
             ->getDocumentCollection('KorobiWebBundle:Channel')
-            ->getMongoCollection()
-            ->aggregate($query)['result'];
+            ->aggregate($query)
+            ->toArray();
     }
 
     /**
