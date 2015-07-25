@@ -113,7 +113,7 @@ class ChannelLogController extends BaseController {
                 'is_tail' => $tail !== false,
                 'showing_today' => $showingToday,
                 'first_for_channel' => $firstChannelEvent->getDate()->format('Y/m/d'),
-                'showing_first_day' => ($firstChannelEvent->getDate()->setTime(0, 0, 0) == $date),
+                'showing_first_day' => $firstChannelEvent->getDate()->setTime(0, 0, 0) == $date,
                 'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
             ];
 
