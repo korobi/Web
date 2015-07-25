@@ -84,32 +84,17 @@ class NetworkHomeController extends BaseController {
 
         $networks = [];
 
+        $dbChannels = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('KorobiWebBundle:Channel')
+            ->countPublicChannelsByNetwork();
+
+        $validNetworks = array_column($dbChannels, 'network');
+
         // create an entry for each channel
         foreach($dbNetworks as $network) {
             /** @var Network $network */
-
-            // fetch all channels
-            $dbChannels = $this->get('doctrine_mongodb')
-                ->getManager()
-                ->getRepository('KorobiWebBundle:Channel')
-                ->findAllByNetwork($network->getSlug())
-                ->toArray();
-
-            $channels = [];
-
-            // create an entry for each channel
-            foreach($dbChannels as $channel) {
-                /** @var Channel $channel */
-
-                // only add channels with keys if we're an admin
-                if($channel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {
-                    continue;
-                }
-
-                $channels[] = $channel;
-            }
-
-            if(!empty($channels)) {
+            if(in_array($network->getSlug(), $validNetworks)) {
                 $networks[$network->getName()] = $this->generateUrl('network', [
                     'network' => $network->getSlug(),
                 ]);

@@ -36,6 +36,37 @@ class ChannelRepository extends DocumentRepository {
     }
 
     /**
+     * Returns an array containing every network containing at least 1 public channel
+     * and the number of public channels it contains.
+     *
+     * @return array
+     */
+    public function countPublicChannelsByNetwork() {
+        return $this
+            ->getDocumentManager()
+            ->getDocumentCollection('KorobiWebBundle:Channel')
+            ->getMongoCollection()
+            ->aggregate([
+                [
+                    '$match' => ['key' => null],
+                ], [
+                    '$group' => [
+                        '_id' => ['network' => '$network'],
+                        'count' => ['$sum' => 1]
+                    ]
+                ], [
+                    '$project' => [
+                        '_id' => 0,
+                        'network' => '$_id.network',
+                        'count' => '$count',
+                    ]
+                ], [
+                    '$match' => ['count' => ['$ne' => 0]]
+                ]
+            ])['result'];
+    }
+
+    /**
      * Looks for messages, actions etc (valid content only).
      *
      * @param int $limit Number of channels to grab.
