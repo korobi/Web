@@ -41,6 +41,14 @@
     text-align: right;
     position: relative;
 
+    .button-group {
+      vertical-align: top;
+
+      [disabled] {
+        pointer-events: none;
+      }
+    }
+
     input {
       background-color: transparent;
       border: none;
