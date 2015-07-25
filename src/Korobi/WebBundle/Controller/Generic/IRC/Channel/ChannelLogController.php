@@ -113,10 +113,7 @@ class ChannelLogController extends BaseController {
                 'is_tail' => $tail !== false,
                 'showing_today' => $showingToday,
                 'first_for_channel' => $firstChannelEvent->getDate()->format('Y/m/d'),
-
-                // I don't like this implementation, but it's simpler than checking year, month & day. I did try using
-                // ->diff(DateTime $dt) too and looking at the time interval object you get back w/o luck.
-                'showing_first_day' => ($firstChannelEvent->getDate()->format("Y-m-d") === $date->format("Y-m-d")),
+                'showing_first_day' => ($firstChannelEvent->getDate()->setTime(0, 0, 0) == $date),
                 'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
             ];
 
