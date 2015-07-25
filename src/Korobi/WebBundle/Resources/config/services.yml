@@ -1,4 +1,5 @@
 imports:
+    - { resource: services/events.yml }
     - { resource: services/twig.yml }
     - { resource: services/helpers.yml }
     - { resource: services/controllers.yml }
