@@ -35,6 +35,7 @@ security:
             logout:
                 path: /auth/logout
                 target: /
+                success_handler: korobi.logout_handler
             anonymous: true
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
