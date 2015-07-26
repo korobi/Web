@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Korobi\WebBundle\Handler;
 
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
