@@ -11,4 +11,3 @@ services:
         arguments: [@fos_user.user_manager, {github: githubUserId}, %secret%]
     korobi.logout_handler:
         class: Korobi\WebBundle\Handler\LogoutHandler
-        arguments:  [@router]
