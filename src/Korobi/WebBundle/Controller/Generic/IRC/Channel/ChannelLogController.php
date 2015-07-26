@@ -92,29 +92,18 @@ class ChannelLogController extends BaseController {
                 }, $chats));
             }
 
-            $topic = null;
-            $dbTopic = $dbChannel->getTopic();
-            if($dbTopic) {
-                $topic = [
-                    'value' => $dbTopic['value'],
-                    'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
-                ];
-            }
-
             $firstChannelEvent = $this->getFirstChannelEvent($repo, $dbNetwork, $dbChannel);
             $logData = [
                 'network_name' => $dbNetwork->getName(),
                 'network_slug' => $dbNetwork->getSlug(),
                 'channel_name' => $dbChannel->getChannel(),
                 'channel_slug' => $channel,
-                'topic' => $topic,
                 'logs' => $chats,
                 'date' => $date,
                 'is_tail' => $tail !== false,
                 'showing_today' => $showingToday,
                 'first_for_channel' => $firstChannelEvent->getDate()->format('Y/m/d'),
                 'showing_first_day' => $firstChannelEvent->getDate()->setTime(0, 0, 0) == $date,
-                'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
             ];
 
             // Do not cache logs if we are rendering the current date's logs.
@@ -122,6 +111,20 @@ class ChannelLogController extends BaseController {
                 $cache->set($cacheKey, $logData);
             }
         }
+
+        // Grab the topic while it's fresh
+        $topic = null;
+        $dbTopic = $dbChannel->getTopic();
+        if($dbTopic) {
+            $topic = [
+                'value' => $dbTopic['value'],
+                'time' => $dbTopic['time']->toDateTime(),
+                'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
+            ];
+        }
+        $logData['topic'] = $topic;
+
+        $logData['available_log_days'] = $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel());
 
         // time to render!
         $response = $this->render('KorobiWebBundle:controller/generic/irc/channel:logs.html.twig', $logData);
