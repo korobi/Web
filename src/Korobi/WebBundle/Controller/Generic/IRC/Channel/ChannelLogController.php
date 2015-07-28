@@ -97,6 +97,7 @@ class ChannelLogController extends BaseController {
             if($dbTopic) {
                 $topic = [
                     'value' => $dbTopic['value'],
+                    'time' => $dbTopic['time']->toDateTime(),
                     'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
                 ];
             }

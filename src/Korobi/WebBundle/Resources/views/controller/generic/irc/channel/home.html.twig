@@ -22,7 +22,7 @@
     {% if sample_logs is not empty %}
         <strong>Latest logs</strong>
         {# I'd love https://github.com/twigphp/Twig/issues/929 #}
-        {{  log_render.log_render(sample_logs, false, false) }}
+        {{  log_render.log_render(sample_logs, false, false, topic) }}
     {% endif %}
     {% if channel.LogsEnabled %}
         <p><a href="{{ path('channel_log', {'network': network_slug, 'channel': channel_name|transformChannelName}) ~ key }}">View today's full log</a>
