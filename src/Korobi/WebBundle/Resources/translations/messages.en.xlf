@@ -2,6 +2,14 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="-1">
+                <source>irc.topic</source>
+                <target>Topic</target>
+            </trans-unit>
+            <trans-unit id="0">
+                <source>irc.topic_info</source>
+                <target>Topic set on %time% by %setter_nick%</target>
+            </trans-unit>
             <trans-unit id="1">
                 <source>irc.joined_channel</source>
                 <target>%actor% (%actor_hostname%) joined the channel</target>

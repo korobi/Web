@@ -50,6 +50,8 @@ nav.navigation {
 
   ul.navigation--links {
     float: left;
+    margin: 0;
+    padding: 0;
 
     li {
       height: 3em;
@@ -175,9 +177,17 @@ nav.navigation:after {
 
   nav.navigation > .navigation--inner > ul.navigation--links {
     float: none;
+    position: absolute;
+    background-color: inherit;
+    z-index: 1;
+    left: 0;
+    top: $navigationHeight;
+    border-top: 1px dashed #111;
   }
 
   nav.navigation.on-mobile > .navigation--inner {
+    background-color: inherit;
+
     ul.navigation--links > li {
       display: list-item !important;
     }

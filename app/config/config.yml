@@ -104,6 +104,7 @@ fos_user:
 # HWIOAuthBundle Configuration
 hwi_oauth:
     firewall_name: app
+    target_path_parameter: _destination
     resource_owners:
         github:
             type: github
@@ -148,7 +149,7 @@ nelmio_security:
             object-src:
                 - 'none'
     external_redirects:
-        override: /unexpected-redirect
+        override: /unexpected-redirect/
         forward_as: redirUrl
         whitelist:
           - github.com

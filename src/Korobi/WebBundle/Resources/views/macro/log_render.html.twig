@@ -1,12 +1,25 @@
 {% macro log_render(logs, linkable, use_id, topic) %}
     <div class="logs{% if linkable|default(false) %} linkable{% endif %}" {% if use_id|default(false) %}id="logs"{% endif %}>
         {% if topic|default(false) %}
-            <div class="line topic">
-                <span>Topic</span>
-                <span class="nick">{{ topic.setter_nick }}</span>
-                <span class="message">{{ topic.value|ircformat|raw }}</span>
+            <div class="line topic" data-event-type="topic">
+                <span>{%- trans %}irc.topic{% endtrans %}</span>
+                <span class="nick irc--{{ constant('\\Korobi\\WebBundle\\IrcLogs\\RenderSettings::ACTION_SERVER_COLOUR') }}-df">{{ constant('\\Korobi\\WebBundle\\IrcLogs\\RenderSettings::ACTION_SERVER_PREFIX') }}</span>
+                <span class="message">{%- trans %}irc.topic{% endtrans %}: {{ topic.value|ircformat|raw }}</span>
+            </div>
+            <div class="line topic" data-event-type="topic">
+                <span>{%- trans %}irc.topic{% endtrans %}</span>
+                <span class="nick irc--{{ constant('\\Korobi\\WebBundle\\IrcLogs\\RenderSettings::ACTION_SERVER_COLOUR') }}-df">{{ constant('\\Korobi\\WebBundle\\IrcLogs\\RenderSettings::ACTION_SERVER_PREFIX') }}</span>
+                <span class="message">
+                    {%- trans with {
+                        '%time%': topic.time.format(constant('DateTime::ISO8601')),
+                        '%setter_nick%': topic.setter_nick
+                    } -%}
+                        irc.topic_info
+                    {%- endtrans -%}
+                </span>
             </div>
         {% endif %}
+
         {% for line_num, line in logs %}
             <div data-nick="{{ line.nick }}" data-event-id="{{ line.id }}" data-event-type="{{ line.type }}"
                  class="line{% if linkable|default(false) %} js-hl" data-line-num="{{ line_num + 1 }}{% endif %}">
