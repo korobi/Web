@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Controller\Generic\IRC\Channel;
 
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
+use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\ChatIndex;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Repository\ChatRepository;
@@ -41,6 +42,7 @@ class ChannelLogController extends BaseController {
 
         // populate variables with request information if available, or defaults
         // note: validation is done here
+        /** @var $date \DateTime */
         list($date, $showingToday, $tail) = self::populateRequest($year, $month, $day, $tail);
 
         $cache = $this->getCache();
@@ -55,6 +57,7 @@ class ChannelLogController extends BaseController {
                 ->getManager()
                 ->getRepository('KorobiWebBundle:Chat');
             $last_id = $request->query->get('last_id', false);
+
             if($last_id !== false && \MongoId::isValid($last_id)) {
                 $dbChats = $repo->findAllByChannelAndId(
                     $network,
@@ -89,27 +92,18 @@ class ChannelLogController extends BaseController {
                 }, $chats));
             }
 
-            $topic = null;
-            $dbTopic = $dbChannel->getTopic();
-            if($dbTopic) {
-                $topic = [
-                    'value' => $dbTopic['value'],
-                    'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
-                ];
-            }
-
+            $firstChannelEvent = $this->getFirstChannelEvent($repo, $dbNetwork, $dbChannel);
             $logData = [
                 'network_name' => $dbNetwork->getName(),
                 'network_slug' => $dbNetwork->getSlug(),
                 'channel_name' => $dbChannel->getChannel(),
                 'channel_slug' => $channel,
-                'topic' => $topic,
                 'logs' => $chats,
                 'date' => $date,
                 'is_tail' => $tail !== false,
                 'showing_today' => $showingToday,
-                'first_for_channel' => $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0]->getDate()->format('Y/m/d'),
-                'available_log_days' => $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel()),
+                'first_for_channel' => $firstChannelEvent->getDate()->format('Y/m/d'),
+                'showing_first_day' => $firstChannelEvent->getDate()->setTime(0, 0, 0) == $date,
             ];
 
             // Do not cache logs if we are rendering the current date's logs.
@@ -117,6 +111,20 @@ class ChannelLogController extends BaseController {
                 $cache->set($cacheKey, $logData);
             }
         }
+
+        // Grab the topic while it's fresh
+        $topic = null;
+        $dbTopic = $dbChannel->getTopic();
+        if($dbTopic) {
+            $topic = [
+                'value' => $dbTopic['value'],
+                'time' => $dbTopic['time']->toDateTime(),
+                'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
+            ];
+        }
+        $logData['topic'] = $topic;
+
+        $logData['available_log_days'] = $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel());
 
         // time to render!
         $response = $this->render('KorobiWebBundle:controller/generic/irc/channel:logs.html.twig', $logData);
@@ -202,5 +210,17 @@ class ChannelLogController extends BaseController {
                 ->findAllByChannel($network, $channel)
                 ->toArray(false)
         );
+    }
+
+    /**
+     * Grabs the first available chat entry for a given channel/network combination.
+     *
+     * @param ChatRepository $repo
+     * @param Network $dbNetwork
+     * @param Channel $dbChannel
+     * @return Chat
+     */
+    private function getFirstChannelEvent($repo, $dbNetwork, $dbChannel) {
+        return $repo->findFirstByChannel($dbNetwork->getSlug(), $dbChannel->getChannel())->toArray(false)[0];
     }
 }
