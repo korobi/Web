@@ -29,7 +29,7 @@ class ChannelHomeController extends BaseController {
         }
 
         $dbTopic = $dbChannel->getTopic();
-        $topic = [];
+        $topic = null;
         if ($dbTopic && !empty($dbTopic['value'])) {
             $topic = [
                 'value' => $dbTopic['value'],
