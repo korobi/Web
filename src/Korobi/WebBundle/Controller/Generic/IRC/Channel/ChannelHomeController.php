@@ -31,11 +31,10 @@ class ChannelHomeController extends BaseController {
         $dbTopic = $dbChannel->getTopic();
         $topic = [
             'value' => $dbTopic['value'],
+            'time' => $dbTopic['time']->toDateTime(),
             'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
         ];
-        if($dbTopic['time'] != null) {
-            $topic['time'] = gmdate('F j, Y h:i:s a', $dbTopic['time']->sec);
-        }
+
 
         $key = '';
         if($dbChannel->getKey() !== null && $this->authChecker->isGranted('ROLE_ADMIN')) {
