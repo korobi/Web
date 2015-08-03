@@ -94,17 +94,9 @@ class LogParser implements LogParserInterface {
             $mode .= ' ';
             $mode .= $this->transformActor($chat->getRecipientName());
         } else if ($chat->getChannelMode() !== null) {
-            $modeLetter = $this->transformChannelModeToLetter($chat->getChannelMode());
-
-            // Hide channel mode 'k' (channel key) from view.
-            if ($modeLetter == 'k') {
-                $mode .= $modeLetter;
-                $mode .= ' &lt;hidden&gt;';
-            } else {
-                $mode .= $modeLetter;
-                $mode .= ' ';
-                $mode .= $this->transformActor($chat->getRecipientHostname());
-            }
+            $mode .= $this->transformChannelModeToLetter($chat->getChannelMode());
+            $mode .= ' ';
+            $mode .= $this->transformActor($chat->getRecipientHostname());
         }
 
         $result = $this->t->trans('irc.set_mode', ['%actor%' => $actor, '%mode%' => $mode]);
