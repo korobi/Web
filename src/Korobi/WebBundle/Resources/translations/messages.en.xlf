@@ -32,8 +32,8 @@
             </trans-unit>
             <trans-unit id="5">
                 <source>irc.left_channel</source>
-                <target>%actor% (%actor_hostname%) left the channel</target>
-                <note>Used in IRC logs, example: "lol768 (lol768!lol7681@bnc.lol768.com) left the channel"</note>
+                <target>%actor% (%actor_hostname%) left the channel (%part_message%)</target>
+                <note>Used in IRC logs, example: "lol768 (lol768!lol7681@bnc.lol768.com) left the channel (Leaving)"</note>
             </trans-unit>
             <trans-unit id="6">
                 <source>irc.has_quit</source>
