@@ -115,7 +115,7 @@ class ChannelLogController extends BaseController {
         // Grab the topic while it's fresh
         $topic = null;
         $dbTopic = $dbChannel->getTopic();
-        if($dbTopic) {
+        if($dbTopic) { // TODO: Extract to RenderManager
             $topic = [
                 'value' => $dbTopic['value'],
                 'time' => $dbTopic['time']->toDateTime(),

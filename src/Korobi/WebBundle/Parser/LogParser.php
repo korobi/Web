@@ -46,7 +46,10 @@ class LogParser implements LogParserInterface {
     public function parseJoin(Chat $chat) {
         $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
         $actorHostname = IRCTextParser::createHostnameTag($chat->getActorHostname());
-        $result = $this->t->trans('irc.joined_channel', ['%actor%' => $actor, '%actor_hostname%' => $actorHostname]);
+        $result = $this->t->trans('irc.joined_channel', [
+            '%actor%' => $actor,
+            '%actor_hostname%' => $actorHostname
+        ]);
 
         return $result;
     }
@@ -59,7 +62,7 @@ class LogParser implements LogParserInterface {
     public function parseKick(Chat $chat) {
         $recipientActor = $this->transformActor($chat->getRecipientName(), $chat->getRecipientPrefix());
         $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
-        $kickMessage = $chat->getMessage();
+        $kickMessage = IRCTextParser::parse($chat->getMessage());
         $result = $this->t->trans('irc.kicked_by', [
             '%recipient_actor%' => $recipientActor,
             '%actor%' => $actor,
@@ -94,9 +97,12 @@ class LogParser implements LogParserInterface {
             $mode .= ' ';
             $mode .= $this->transformActor($chat->getRecipientName());
         } else if ($chat->getChannelMode() !== null) {
-            $mode .= $this->transformChannelModeToLetter($chat->getChannelMode());
+            $modeLetter = $chat->getChannelMode();
+            $mode .= $modeLetter;
             $mode .= ' ';
-            $mode .= $this->transformActor($chat->getRecipientHostname());
+
+            // Hide channel mode 'k' (channel key) from view.
+            $mode .= $modeLetter == 'k' ? '&lt;hidden&gt;' : $this->transformActor($chat->getRecipientHostname());
         }
 
         $result = $this->t->trans('irc.set_mode', ['%actor%' => $actor, '%mode%' => $mode]);
@@ -124,7 +130,11 @@ class LogParser implements LogParserInterface {
     public function parsePart(Chat $chat) {
         $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
         $actorHostname = IRCTextParser::createHostnameTag($chat->getActorHostname());
-        $result = $this->t->trans('irc.left_channel', ['%actor%' => $actor, '%actor_hostname%' => $actorHostname]);
+        $result = $this->t->trans('irc.left_channel', [
+            '%actor%' => $actor,
+            '%actor_hostname%' => $actorHostname,
+            '%part_message%' => IRCTextParser::parse($chat->getMessage())
+        ]);
 
         return $result;
     }
@@ -136,7 +146,11 @@ class LogParser implements LogParserInterface {
     public function parseQuit(Chat $chat) {
         $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
         $actorHostname = IRCTextParser::createHostnameTag($chat->getActorHostname());
-        $result = $this->t->trans('irc.has_quit', ['%actor%' => $actor, '%actor_hostname%' => $actorHostname, '%quit_message%' => $chat->getMessage()]);
+        $result = $this->t->trans('irc.has_quit', [
+            '%actor%' => $actor,
+            '%actor_hostname%' => $actorHostname,
+            '%quit_message%' => IRCTextParser::parse($chat->getMessage())
+        ]);
 
         return $result;
     }
@@ -237,27 +251,13 @@ class LogParser implements LogParserInterface {
             return $this->t->trans('irc.server');
         }
 
+        $actor = htmlentities($actor, ENT_HTML5);
+
         if(empty($prefix) || $prefix == 'NORMAL') {
             return $actor;
         }
 
         return '<span class="' . strtolower($prefix) . '">' . $actor . '</span>';
-    }
-
-    /**
-     * @param $mode
-     * @return string
-     */
-    private function transformChannelModeToLetter($mode) {
-        switch ($mode) {
-            case 'BAN':
-                return 'b';
-            case 'QUIET':
-                return 'q';
-            case 'NORMAL':
-            default:
-                return $mode;
-        }
     }
 
     /**

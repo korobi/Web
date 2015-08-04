@@ -11,7 +11,7 @@
                 <span class="nick irc--{{ constant('\\Korobi\\WebBundle\\IrcLogs\\RenderSettings::ACTION_SERVER_COLOUR') }}-df">{{ constant('\\Korobi\\WebBundle\\IrcLogs\\RenderSettings::ACTION_SERVER_PREFIX') }}</span>
                 <span class="message">
                     {%- trans with {
-                        '%time%': topic.time.format(constant('DateTime::ISO8601')),
+                        '%time%': topic.time.format('F j, Y h:i:s a'),
                         '%setter_nick%': topic.setter_nick
                     } -%}
                         irc.topic_info

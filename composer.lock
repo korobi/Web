@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "79bfeff45b74eef6a58659547e13dde3",
+    "hash": "afc7bc8eb190679dbc4a82382d9ae2a2",
     "packages": [
         {
             "name": "crodas/influx-php",
@@ -847,12 +847,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb.git",
-                "reference": "350447749274cdf4fb6500e12985d582cb79d86a"
+                "reference": "91461ef9ef1b18a3b834767207bbef5481337de3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb/zipball/350447749274cdf4fb6500e12985d582cb79d86a",
-                "reference": "350447749274cdf4fb6500e12985d582cb79d86a",
+                "url": "https://api.github.com/repos/doctrine/mongodb/zipball/91461ef9ef1b18a3b834767207bbef5481337de3",
+                "reference": "91461ef9ef1b18a3b834767207bbef5481337de3",
                 "shasum": ""
             },
             "require": {
@@ -914,7 +914,7 @@
                 "mongodb",
                 "persistence"
             ],
-            "time": "2015-07-03 05:54:11"
+            "time": "2015-07-29 19:46:37"
         },
         {
             "name": "doctrine/mongodb-odm",
@@ -922,12 +922,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "f3ea0fcb7fa916b85d286be07bf3794c0ab5665f"
+                "reference": "e934061c53758634e2376c082efc19afe21770de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/f3ea0fcb7fa916b85d286be07bf3794c0ab5665f",
-                "reference": "f3ea0fcb7fa916b85d286be07bf3794c0ab5665f",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/e934061c53758634e2376c082efc19afe21770de",
+                "reference": "e934061c53758634e2376c082efc19afe21770de",
                 "shasum": ""
             },
             "require": {
@@ -996,7 +996,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2015-07-18 14:13:39"
+            "time": "2015-07-31 07:30:15"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -1123,12 +1123,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "3efbc08a97f218d0a4524dee926fc4381e3d0947"
+                "reference": "5d7017d35f73cdb74e069f9d607cd0448d305078"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3efbc08a97f218d0a4524dee926fc4381e3d0947",
-                "reference": "3efbc08a97f218d0a4524dee926fc4381e3d0947",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/5d7017d35f73cdb74e069f9d607cd0448d305078",
+                "reference": "5d7017d35f73cdb74e069f9d607cd0448d305078",
                 "shasum": ""
             },
             "require": {
@@ -1182,7 +1182,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2015-06-10 08:27:05"
+            "time": "2015-07-31 13:22:19"
         },
         {
             "name": "guzzle/guzzle",
@@ -1658,16 +1658,16 @@
         },
         {
             "name": "knplabs/github-api",
-            "version": "1.4.2",
+            "version": "1.4.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/php-github-api.git",
-                "reference": "d49e34124f8c6a5ce326ba508f597913ab09fa58"
+                "reference": "9010dbe21f4b0bae0edae26bbe031d7d91347938"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/php-github-api/zipball/d49e34124f8c6a5ce326ba508f597913ab09fa58",
-                "reference": "d49e34124f8c6a5ce326ba508f597913ab09fa58",
+                "url": "https://api.github.com/repos/KnpLabs/php-github-api/zipball/9010dbe21f4b0bae0edae26bbe031d7d91347938",
+                "reference": "9010dbe21f4b0bae0edae26bbe031d7d91347938",
                 "shasum": ""
             },
             "require": {
@@ -1688,8 +1688,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Github\\": "lib/"
+                "psr-4": {
+                    "Github\\": "lib/Github/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1715,7 +1715,7 @@
                 "gist",
                 "github"
             ],
-            "time": "2015-02-12 23:29:28"
+            "time": "2015-07-03 14:59:20"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2104,21 +2104,21 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.30",
+            "version": "v4.0.0",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "f1758b30096202aeede61f79a1dffd69da091517"
+                "reference": "97929c0a642977acead3d911b2c5c1a944739d40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/f1758b30096202aeede61f79a1dffd69da091517",
-                "reference": "f1758b30096202aeede61f79a1dffd69da091517",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/97929c0a642977acead3d911b2c5c1a944739d40",
+                "reference": "97929c0a642977acead3d911b2c5c1a944739d40",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
+                "php": ">=5.3.9",
                 "sensiolabs/security-checker": "~2.0",
                 "symfony/class-loader": "~2.2",
                 "symfony/framework-bundle": "~2.3",
@@ -2137,7 +2137,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "4.0.x-dev"
                 }
             },
             "autoload": {
@@ -2160,7 +2160,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-06-05 22:32:22"
+            "time": "2015-06-11 20:55:01"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2498,16 +2498,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.2",
+            "version": "2.8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84"
+                "reference": "317d30b6efd4e906e9c84fbe558934448379285c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/969d709ad428076bf1084e386dc26dd904d9fb84",
-                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/317d30b6efd4e906e9c84fbe558934448379285c",
+                "reference": "317d30b6efd4e906e9c84fbe558934448379285c",
                 "shasum": ""
             },
             "require": {
@@ -2545,7 +2545,6 @@
                 "symfony/proxy-manager-bridge": "self.version",
                 "symfony/routing": "self.version",
                 "symfony/security": "self.version",
-                "symfony/security-acl": "self.version",
                 "symfony/security-bundle": "self.version",
                 "symfony/security-core": "self.version",
                 "symfony/security-csrf": "self.version",
@@ -2571,12 +2570,13 @@
                 "ircmaxell/password-compat": "~1.0",
                 "monolog/monolog": "~1.11",
                 "ocramius/proxy-manager": "~0.4|~1.0",
-                "symfony/phpunit-bridge": "self.version"
+                "symfony/phpunit-bridge": "self.version",
+                "symfony/security-acl": "~2.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -2616,7 +2616,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-07-13 19:27:49"
+            "time": "2015-08-01 12:00:55"
         },
         {
             "name": "twig/extensions",
@@ -2672,16 +2672,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.18.2",
+            "version": "v1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "e8e6575abf6102af53ec283f7f14b89e304fa602"
+                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e8e6575abf6102af53ec283f7f14b89e304fa602",
-                "reference": "e8e6575abf6102af53ec283f7f14b89e304fa602",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/edbeaf43b0a606cdaadc32a11d2673614a377b90",
+                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90",
                 "shasum": ""
             },
             "require": {
@@ -2690,7 +2690,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.18-dev"
+                    "dev-master": "1.19-dev"
                 }
             },
             "autoload": {
@@ -2725,7 +2725,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-06-06 23:31:24"
+            "time": "2015-07-31 13:45:26"
         }
     ],
     "packages-dev": [
@@ -2781,6 +2781,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "symfony/symfony": 20,
         "doctrine/mongodb": 20,
         "doctrine/mongodb-odm": 20,
         "doctrine/mongodb-odm-bundle": 20,
