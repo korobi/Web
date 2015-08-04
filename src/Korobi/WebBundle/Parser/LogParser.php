@@ -102,7 +102,7 @@ class LogParser implements LogParserInterface {
             $mode .= ' ';
 
             // Hide channel mode 'k' (channel key) from view.
-            $mode .= $modeLetter == 'k' ? '<hidden>' : $this->transformActor($chat->getRecipientHostname());
+            $mode .= $modeLetter == 'k' ? '&lt;hidden&gt;' : $this->transformActor($chat->getRecipientHostname());
         }
 
         $result = $this->t->trans('irc.set_mode', ['%actor%' => $actor, '%mode%' => $mode]);
