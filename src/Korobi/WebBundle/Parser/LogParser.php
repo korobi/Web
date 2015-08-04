@@ -97,7 +97,7 @@ class LogParser implements LogParserInterface {
             $mode .= ' ';
             $mode .= $this->transformActor($chat->getRecipientName());
         } else if ($chat->getChannelMode() !== null) {
-            $mode .= $this->transformChannelModeToLetter($chat->getChannelMode());
+            $mode .= $chat->getChannelMode();
             $mode .= ' ';
             $mode .= $this->transformActor($chat->getRecipientHostname());
         }
@@ -255,22 +255,6 @@ class LogParser implements LogParserInterface {
         }
 
         return '<span class="' . strtolower($prefix) . '">' . $actor . '</span>';
-    }
-
-    /**
-     * @param $mode
-     * @return string
-     */
-    private function transformChannelModeToLetter($mode) {
-        switch ($mode) {
-            case 'BAN':
-                return 'b';
-            case 'QUIET':
-                return 'q';
-            case 'NORMAL':
-            default:
-                return $mode;
-        }
     }
 
     /**
