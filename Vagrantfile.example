@@ -1,0 +1,12 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = 'ubuntu/trusty64'
+  config.vm.box_url = 'ubuntu/trusty64'
+
+  config.vm.hostname = 'korobi-web'
+
+  config.vm.network "forwarded_port", guest: 80, host: 8080     # http
+  config.vm.network "forwarded_port", guest: 443, host: 4443    # https
+  config.vm.network "forwarded_port", guest: 27017, host: 27017 # mongodb
+
+  config.vm.provision :shell, path: '.vagrant_bootstrap.sh'
+end

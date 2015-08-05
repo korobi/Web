@@ -1,0 +1,27 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: 27017
+    database_name: korobi
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 1d64dce239c4437b7736041db089e1b9
+    locale: en
+    github.client_id: meow
+    github.client_secret: meow
+    github.hook_hmac_secret: meow
+    github.oauth_token: meow
+    akio.enabled: false
+    akio.path: null
+    akio.key: null
+    sass_path: /usr/bin/sass
+    uglifyjs_path: /usr/bin/uglifyjs
+    channel_stats_root: null
+    influx.host: 127.0.0.1
+    influx.port: 8086
+    influx.user: user
+    influx.pass: pass
+    influx.db: database
+    bin_path.ruby: /usr/bin/ruby
