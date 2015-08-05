@@ -34,7 +34,7 @@ class ChannelHomeController extends BaseController {
             $topic = [
                 'value' => $dbTopic['value'],
                 'setter_nick' => $this->get("korobi.irc.log_parser")->transformActor($dbTopic['actor_nick']),
-                'time' => $dbTopic['time']->toDateTime()
+                'time' => $dbTopic['time']->toDateTime(),
             ];
         }
 

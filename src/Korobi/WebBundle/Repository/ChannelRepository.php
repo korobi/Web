@@ -47,17 +47,17 @@ class ChannelRepository extends DocumentRepository {
             [
                 '$group' => [
                     '_id' => ['network' => '$network'],
-                    'count' => ['$sum' => 1]
-                ]
+                    'count' => ['$sum' => 1],
+                ],
             ], [
                 '$project' => [
                     '_id' => 0,
                     'network' => '$_id.network',
                     'count' => '$count',
-                ]
+                ],
             ], [
-                '$match' => ['count' => ['$ne' => 0]]
-            ]
+                '$match' => ['count' => ['$ne' => 0]],
+            ],
         ];
         if(!$private) {
             array_unshift($query, [

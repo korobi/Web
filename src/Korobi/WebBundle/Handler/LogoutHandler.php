@@ -2,10 +2,9 @@
 
 namespace Korobi\WebBundle\Handler;
 
-use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
 class LogoutHandler implements LogoutSuccessHandlerInterface {
 
