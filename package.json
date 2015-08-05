@@ -1,6 +1,7 @@
 {
   "name": "KorobiWeb",
   "license": "proprietary",
+  "private": true,
   "version": "1.0.0",
   "description": "The Korobi web component",
   "repository": {
@@ -10,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/korobi/Web/issues"
   },
-  "devDependencies": {
+  "dependencies": {
     "uglifyjs": "^2.4.10"
   }
 }
