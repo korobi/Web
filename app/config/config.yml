@@ -148,6 +148,8 @@ nelmio_security:
                 - 'http://i.imgur.com'
             object-src:
                 - 'none'
+            connect-src:
+                - 'ws.korobi.io'
     external_redirects:
         override: /unexpected-redirect/
         forward_as: redirUrl
