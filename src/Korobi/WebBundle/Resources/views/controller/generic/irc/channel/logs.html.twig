@@ -78,6 +78,7 @@
     {% endset %}
     {% if is_tail %}
         <h1>Tail log for {{ reusableLinks }}</h1>
+        <script type="text/json" id="log-info">{{ { 'network': network_slug, 'channel': channel_name }|json_encode|raw }}</script>
     {% else %}
         <h1>Log for {{ reusableLinks }} - {{ date.format('Y/m/d') }}</h1>
     {% endif %}

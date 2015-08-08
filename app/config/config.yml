@@ -68,7 +68,8 @@ assetic:
                 - '@KorobiWebBundle/Resources/assets/js/application/irc/log/controls.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/irc/log/datepicker.js'
                 - '@KorobiWebBundle/Resources/assets/js/application/irc/log/highlighting.js'
-                - '@KorobiWebBundle/Resources/assets/js/application/irc/log/tail.js'
+#                - '@KorobiWebBundle/Resources/assets/js/application/irc/log/tail.js'
+                - '@KorobiWebBundle/Resources/assets/js/application/irc/log/websocket.js'
         staging:
             inputs:
                 - '@KorobiWebBundle/Resources/assets/js/staging/symfony.js'
