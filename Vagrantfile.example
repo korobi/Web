@@ -4,9 +4,11 @@ Vagrant.configure(2) do |config|
 
   config.vm.hostname = 'korobi-web'
 
+  # If your machine runs neither of these services locally, you may choose to
+  # use the default ports to avoid inconveniencing yourself.
   config.vm.network "forwarded_port", guest: 80, host: 8080     # http
   config.vm.network "forwarded_port", guest: 443, host: 4443    # https
-  config.vm.network "forwarded_port", guest: 27017, host: 27017 # mongodb
+  config.vm.network "forwarded_port", guest: 27017, host: 27717 # mongodb
 
   config.vm.provision :shell, path: '.vagrant_bootstrap.sh'
 end

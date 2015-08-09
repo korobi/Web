@@ -8,6 +8,10 @@ SSL_DIR="/home/vagrant/ssl" # dir to put the generated SSL certificate
 
 SYMFONY_APP_DIR="/vagrant/app"
 SYMFONY_CONFIG_DIR="$SYMFONY_APP_DIR/config"
+
+# Just for cosmetic purposes
+SSH_PORT=2222
+HTTPS_PORT=4443
 ## End Of Configuration ##
 
 PROVISION_START=`date +%s`
@@ -27,11 +31,24 @@ echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.
 
 echo "Updating packages.."
 apt-get update -y && apt-get upgrade -y
-apt-get install mongodb-org php5 openssl ruby2.1 nodejs $WEBSERVER -y
+
+if [[ $WEBSERVER == "apache2" ]]; then
+  PHP_EXTRAS=""
+elif [[ $WEBSERVER == "nginx" ]]; then
+  PHP_EXTRAS="php-fpm"
+else
+  PHP_EXTRAS=""
+fi
+
+apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs npm git $PHP_EXTRAS $WEBSERVER -y
 
 echo "Installing composer.."
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/bin/composer
+
+echo "Getting PHPUnit.."
+wget https://phar.phpunit.de/phpunit.phar
+mv phpunit.phar /usr/bin/phpunit
 
 echo "Installing bundler & ruby project dependencies.."
 gem install bundler
@@ -64,6 +81,7 @@ echo "Populating databases with dummy data.." # TODO
 echo "NYI"
 
 echo "Generating files for local SSL.."
+SSL_SAFE_DIR=`echo $SSL_DIR | sed 's/\//\\\//'`
 mkdir -p $SSL_DIR
 cd $SSL_DIR
 openssl req \
@@ -72,9 +90,10 @@ openssl req \
     -days 365 \
     -nodes \
     -x509 \
-    -subj "/C=US/ST=Localhost/L=Localhost/O=Korobi/CN=korobi.dev" \
+    -subj "/C=CA/ST=Vancouver/L=Vancouver/O=Korobi/OU=Web Development/CN=korobi.dev" \
     -keyout korobi.key \
     -out korobi.crt
+
 
 echo "Creating configuration for $WEBSERVER.."
 if [[ $WEBSERVER == 'apache2' ]]; then
@@ -89,11 +108,11 @@ else
   ENDIR="$WEBDIR/sites-enabled"
 fi
 
-cp "$TEMPLATE_DIR/$FPREFIX.conf" "$WEBDIR/$FPREFIX.conf"
-cat "$TEMPLATE_DIR/${FPREFIX}_site.conf" | sed -E "s/%ssl_dir%/$SSL_DIR/" > "$SITEDIR/${FPREFIX}_site.conf"
+# cp "$TEMPLATE_DIR/$FPREFIX.conf" "$WEBDIR/$FPREFIX.conf"
+cat "$TEMPLATE_DIR/${FPREFIX}_site.conf" | sed "s/%ssl_dir%/$SSL_SAFE_DIR/" > "$SITEDIR/${FPREFIX}_site.conf"
 
 echo "Enabling site for webserver.."
-ln -s "$SITEDIR/$FPREFIX_site.conf" "$ENDIR/${FPREFIX}_site.conf"
+ln -s "$SITEDIR/${FPREFIX}_site.conf" "$ENDIR/${FPREFIX}_site.conf"
 
 echo "Restarting $WEBSERVER.."
 service $WEBSERVER restart
@@ -107,4 +126,4 @@ echo "Provisioning ended: $(date)"
 echo "Time taken: $(($PROVISION_END - $PROVISION_START)) seconds"
 echo
 echo "Done!"
-echo "Connect to SSH via vagrant@localhost:2222 or visit the page on https://localhost:4443 or https://korobi.dev:4443"
+echo "Connect to SSH via vagrant@localhost:${SSH_PORT} or visit the page on https://localhost:${HTTPS_PORT} or https://korobi.dev:${HTTPS_PORT}"
