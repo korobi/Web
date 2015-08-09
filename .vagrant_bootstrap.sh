@@ -35,7 +35,7 @@ apt-get update -y && apt-get upgrade -y
 if [[ $WEBSERVER == "apache2" ]]; then
   PHP_EXTRAS=""
 elif [[ $WEBSERVER == "nginx" ]]; then
-  PHP_EXTRAS="php-fpm"
+  PHP_EXTRAS="php5-fpm"
 else
   PHP_EXTRAS=""
 fi
@@ -81,7 +81,7 @@ echo "Populating databases with dummy data.." # TODO
 echo "NYI"
 
 echo "Generating files for local SSL.."
-SSL_SAFE_DIR=`echo $SSL_DIR | sed 's/\//\\\//'`
+SSL_SAFE_DIR=`echo $SSL_DIR | sed 's/\//\\\//g'`
 mkdir -p $SSL_DIR
 cd $SSL_DIR
 openssl req \
@@ -90,7 +90,7 @@ openssl req \
     -days 365 \
     -nodes \
     -x509 \
-    -subj "/C=CA/ST=Vancouver/L=Vancouver/O=Korobi/OU=Web Development/CN=korobi.dev" \
+    -subj "/C=CA/ST=British Columbia/L=Vancouver/O=Korobi/OU=Web Development/CN=korobi.dev" \
     -keyout korobi.key \
     -out korobi.crt
 
@@ -101,6 +101,8 @@ if [[ $WEBSERVER == 'apache2' ]]; then
   WEBDIR="/etc/apache2"
   SITEDIR="$WEBDIR/sites-available"
   ENDIR="$WEBDIR/sites-enabled"
+
+  a2enmod ssl
 else
   FPREFIX="nginx"
   WEBDIR="/etc/nginx"
@@ -117,7 +119,7 @@ ln -s "$SITEDIR/${FPREFIX}_site.conf" "$ENDIR/${FPREFIX}_site.conf"
 echo "Restarting $WEBSERVER.."
 service $WEBSERVER restart
 
-cd /vagrant
+cd /vagrant/app
 echo "Running tests.."
 sudo -u vagrant phpunit
 
