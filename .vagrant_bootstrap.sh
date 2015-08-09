@@ -9,6 +9,7 @@ SYMFONY_APP_DIR="/vagrant/app"
 SYMFONY_CONFIG_DIR="$SYMFONY_APP_DIR/config"
 
 VAGRANT_USER="vagrant"
+SYMLINK_NAME=$(hostname)
 
 # Just for cosmetic purposes
 SSH_PORT=2222
@@ -72,15 +73,15 @@ sudo -i -u $VAGRANT_USER bundle install --path=/vagrant --gemfile=/vagrant/Gemfi
 echo "Installing nodejs project dependencies.."
 npm install -g uglify-js
 
-echo "Symlinking /vagrant to /home/vagrant"
-ln -s /vagrant /home/vagrant/korobi-web
+echo "Symlinking /vagrant to /home/vagrant/$SYMLINK_NAME"
+ln -s /vagrant /home/vagrant/$SYMLINK_NAME
 
 echo "Copying params.yml.."
 cp "$TEMPLATE_DIR/symfony_params.yml" "$SYMFONY_CONFIG_DIR/parameters.yml"
 
 cd /vagrant
 echo "Running composer install.."
-sudo -i -u $VAGRANT_USER composer install -d /vagrant --no-interaction
+su -c "cd /vagrant; composer install --no-interaction" $VAGRANT_USER
 
 echo "Starting mongod.."
 service mongod start
@@ -136,9 +137,20 @@ ln -s "$SITEDIR/${FPREFIX}_site.conf" "$ENDIR/${FPREFIX}_site.conf"
 echo "Restarting $WEBSERVER.."
 service $WEBSERVER restart
 
+echo "Initializing Symfony.."
+su -c 'cd /vagrant; composer dump' $VAGRANT_USER
+curl -k https://korobi.dev &>/dev/null # Generates bootstrap.php.cache
+su -c 'cd /vagrant; php app/console assetic:dump' $VAGRANT_USER
+
 cd /vagrant/app
 echo "Running tests in $(pwd).."
 sudo -i -u $VAGRANT_USER phpunit .
+
+TAIL_BASHRC=$(tail -1 /home/$VAGRANT_USER/.bashrc)
+if [[ $TAIL_BASHRC != 'cd $SYMLINK_NAME' ]]; then
+  echo "Appending bashrc to cd to directory.."
+ sudo -i -u $VAGRANT_USER echo "cd $SYMLINK_NAME" >> /home/$VAGRANT_USER/.bashrc
+fi
 
 PROVISION_END=`date +%s`
 echo "Provisioning ended: $(date)"
