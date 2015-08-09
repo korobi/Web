@@ -86,15 +86,10 @@ su -c "cd /vagrant; composer install --no-interaction --prefer-dist" $VAGRANT_US
 echo "Starting mongod.."
 service mongod start
 
-echo "Creating databases.." # TODO
+echo "Populating database with data.." # TODO
 echo "NYI"
-# mongoimport --db korobi --collection channels --file "$TEMPLATE_DIR/channels.json" --jsonArray
-# mongoimport --db korobi --collection chat_indexes --file "$TEMPLATE_DIR/chat_indexes.json" --jsonArray
-# mongoimport --db korobi --collection chats  --file "$TEMPLATE_DIR/chats.json" --jsonArray
-# mongoimport --db korobi --collection networks --file "$TEMPLATE_DIR/networks.json" --jsonArray
+# mongod korobi file.js
 
-echo "Populating databases with dummy data.." # TODO
-echo "NYI"
 
 echo "Creating configuration for $WEBSERVER.."
 if [[ $WEBSERVER == 'apache2' ]]; then
