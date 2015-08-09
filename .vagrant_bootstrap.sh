@@ -44,7 +44,7 @@ echo "deb http://packages.dotdeb.org ${DEB_VERSION} all" >> /etc/apt/sources.lis
 echo "deb-src http://packages.dotdeb.org ${DEB_VERSION} all" >> /etc/apt/sources.list
 
 echo "Updating packages.."
-apt-get update -y && apt-get upgrade -y
+apt-get update -y -q && apt-get upgrade -y -q
 
 if [[ $WEBSERVER == "apache2" ]]; then
     PHP_EXTRAS=""
@@ -54,7 +54,7 @@ else
     PHP_EXTRAS=""
 fi
 
-apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs npm git $PHP_EXTRAS $WEBSERVER -y
+apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs npm git $PHP_EXTRAS $WEBSERVER -y -q
 
 echo "Installing composer.."
 curl -sS https://getcomposer.org/installer | php
@@ -65,11 +65,12 @@ wget --quiet https://phar.phpunit.de/phpunit.phar
 mv phpunit.phar /usr/bin/phpunit
 
 echo "Installing bundler & ruby project dependencies.."
-gem install bundler
-sudo -i -u $VAGRANT_USER bundle install
+gem install bundler scss
+sudo -i -u $VAGRANT_USER bundle install --path=/vagrant --gemfile=/vagrant/Gemfile
+
 
 echo "Installing nodejs project dependencies.."
-sudo -i -u $VAGRANT_USER npm install /vagrant
+npm install -g uglify-js
 
 echo "Symlinking /vagrant to /home/vagrant"
 ln -s /vagrant /home/vagrant/korobi-web
