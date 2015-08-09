@@ -16,8 +16,8 @@ parameters:
     akio.enabled: false
     akio.path: null
     akio.key: null
-    sass_path: /usr/bin/sass
-    uglifyjs_path: /usr/bin/uglifyjs
+    sass_path: /usr/local/bin/sass
+    uglifyjs_path: /usr/local/bin/uglifyjs
     channel_stats_root: null
     influx.host: 127.0.0.1
     influx.port: 8086

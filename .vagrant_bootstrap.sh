@@ -55,7 +55,7 @@ else
     PHP_EXTRAS=""
 fi
 
-apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs npm git $PHP_EXTRAS $WEBSERVER -y -q
+apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs nodejs-legacy npm git $PHP_EXTRAS $WEBSERVER -y -q
 
 echo "Installing composer.."
 curl -sS https://getcomposer.org/installer | php
@@ -66,7 +66,7 @@ wget --quiet https://phar.phpunit.de/phpunit.phar
 mv phpunit.phar /usr/bin/phpunit
 
 echo "Installing bundler & ruby project dependencies.."
-gem install bundler scss
+gem install bundler scss sass
 sudo -i -u $VAGRANT_USER bundle install --path=/vagrant --gemfile=/vagrant/Gemfile
 
 
@@ -81,7 +81,7 @@ cp "$TEMPLATE_DIR/symfony_params.yml" "$SYMFONY_CONFIG_DIR/parameters.yml"
 
 cd /vagrant
 echo "Running composer install.."
-su -c "cd /vagrant; composer install --no-interaction" $VAGRANT_USER
+su -c "cd /vagrant; composer install --no-interaction --prefer-dist" $VAGRANT_USER
 
 echo "Starting mongod.."
 service mongod start
