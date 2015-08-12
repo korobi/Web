@@ -32,17 +32,8 @@ echo "Adding key for MongoDB.."
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 
-echo "Adding dotdeb key for PHP.."
-wget --quiet https://www.dotdeb.org/dotdeb.gpg
-apt-key add dotdeb.gpg
-rm dotdeb.gpg
-
-DEB_VERSION=$(cat /etc/debian_version | grep -o -E '^[^/]+')
-
-echo "Adding dotdeb packages to sources.list for OS: ${DEB_VERSION}"
-echo "" >> /etc/apt/sources.list
-echo "deb http://packages.dotdeb.org ${DEB_VERSION} all" >> /etc/apt/sources.list
-echo "deb-src http://packages.dotdeb.org ${DEB_VERSION} all" >> /etc/apt/sources.list
+echo "Adding PPA for PHP.."
+apt-add-repository ppa:ondrej/php5-5.6
 
 echo "Updating packages.."
 apt-get update -y -qq && apt-get upgrade -y -qq
@@ -55,6 +46,7 @@ else
     EXTRA_PACKAGES=""
 fi
 
+apt-get build-dep $WEBSERVER -y -qq
 apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs nodejs-legacy npm git $EXTRA_PACKAGES $WEBSERVER -y -qq
 
 echo "Installing composer.."
@@ -66,7 +58,7 @@ wget --quiet https://phar.phpunit.de/phpunit.phar
 mv phpunit.phar /usr/bin/phpunit
 
 echo "Installing bundler & ruby project dependencies.."
-gem install bundler scss sass
+gem install bundler sass
 sudo -i -u $VAGRANT_USER bundle install --path=/vagrant --gemfile=/vagrant/Gemfile
 
 
