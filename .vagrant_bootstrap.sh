@@ -36,7 +36,7 @@ echo "Adding PPA for PHP.."
 apt-add-repository ppa:ondrej/php5-5.6
 
 echo "Updating packages.."
-apt-get update -y -qq && apt-get upgrade -y -qq
+apt-get update -y > ~/provision-apt-get-update.log && apt-get upgrade -y > ~/provision-apt-get-upgrade.log
 
 if [[ $WEBSERVER == "apache2" ]]; then
     EXTRA_PACKAGES=""
@@ -46,8 +46,9 @@ else
     EXTRA_PACKAGES=""
 fi
 
-apt-get build-dep $WEBSERVER -y -qq
-apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs nodejs-legacy npm git $EXTRA_PACKAGES $WEBSERVER -y -qq
+apt-get build-dep $WEBSERVER -y > ~/provision-apt-get-builddep.log
+apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs nodejs-legacy npm git $EXTRA_PACKAGES $WEBSERVER -y > ~/provision-apt-get-install.log
+echo "Done. apt logs are in $HOME"
 
 echo "Installing composer.."
 curl -sS https://getcomposer.org/installer | php
