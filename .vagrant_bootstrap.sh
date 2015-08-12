@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Configuration ##
-WEBSERVER="apache2" # apache2 or nginx
+WEBSERVER="nginx" # apache2 or nginx
 
 TEMPLATE_DIR="/vagrant/templates" # dir where all template files are.
 
@@ -45,17 +45,17 @@ echo "deb http://packages.dotdeb.org ${DEB_VERSION} all" >> /etc/apt/sources.lis
 echo "deb-src http://packages.dotdeb.org ${DEB_VERSION} all" >> /etc/apt/sources.list
 
 echo "Updating packages.."
-apt-get update -y -q && apt-get upgrade -y -q
+apt-get update -y -qq && apt-get upgrade -y -qq
 
 if [[ $WEBSERVER == "apache2" ]]; then
-    PHP_EXTRAS=""
+    EXTRA_PACKAGES=""
 elif [[ $WEBSERVER == "nginx" ]]; then
-    PHP_EXTRAS="php5-fpm"
+    EXTRA_PACKAGES="php5-fpm nginx-core"
 else
-    PHP_EXTRAS=""
+    EXTRA_PACKAGES=""
 fi
 
-apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs nodejs-legacy npm git $PHP_EXTRAS $WEBSERVER -y -q
+apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs nodejs-legacy npm git $EXTRA_PACKAGES $WEBSERVER -y -qq
 
 echo "Installing composer.."
 curl -sS https://getcomposer.org/installer | php
