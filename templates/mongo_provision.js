@@ -145,7 +145,7 @@ if (db.networks.find({"slug": network_name}).count() === 0) {
 
     db.networks.insert({
         "slug" : network_name,
-        "name" : network_name + " Network",
+        "name" : network_friendly_name,
         "network_id" : network_name
     })
 }
