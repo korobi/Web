@@ -37,6 +37,7 @@ class MongoProvisionCommand extends ContainerAwareCommand {
             return;
         }
 
+        // TODO: $this->getContainer()->get('kernel')->getRootDir() does not work with PHPUnit.
         $provisionScript = __DIR__ . "/../../../../templates/mongo_provision.js";
         $mongoArgs = "--eval='var channel_name = \"$channel\"; var network_name = \"$network\"'";
 
