@@ -136,9 +136,9 @@ var channel_query = {
 if (db.networks.find({"slug": network_name}).count() === 0) {
     network_map = {
         "esper": "EsperNet",
-        "spigotmc": "Spigot",
-        "spigot": "Spigot",
-        "freenode": "Freenode"
+        "rizon": "Rizon",
+        "spigot": "SpigotMC",
+        "freenode": "freenode"
     }
 
     var network_friendly_name  = network_map[network_name] || network_name + " Network"
