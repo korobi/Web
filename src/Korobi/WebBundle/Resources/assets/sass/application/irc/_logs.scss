@@ -17,6 +17,7 @@
     font-family: 'Source Code Pro', monospace;
     @include transition(0.5s ease-out background-color);
 
+    .official_join:before { content: '!'; color: nth($irc-colors, 4); }
     .owner:before    { content: '~'; color: nth($irc-colors,  5); }
     .admin:before    { content: '&'; color: nth($irc-colors, 12); }
     .operator:before { content: '@'; color: nth($irc-colors, 10); }
@@ -77,6 +78,7 @@
     &[data-event-type=nick],
     &[data-event-type=mode] {
       .message { color: #666; }
+      .official_join:before { content: '!'; color: desaturate(nth($irc-colors, 4), 60%); }
       .owner:before    { content: '~'; color: desaturate(nth($irc-colors,  5), 60%); }
       .admin:before    { content: '&'; color: desaturate(nth($irc-colors, 12), 60%); }
       .operator:before { content: '@'; color: desaturate(nth($irc-colors, 10), 60%); }

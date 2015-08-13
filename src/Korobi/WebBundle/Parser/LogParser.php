@@ -266,6 +266,8 @@ class LogParser implements LogParserInterface {
      */
     private function transformUserModeToLetter($mode) {
         switch ($mode) {
+            case 'OFFICIAL_JOIN':
+                return 'y';
             case 'OWNER':
                 return 'q';
             case 'ADMIN':
