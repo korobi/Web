@@ -7,7 +7,7 @@ if(channel_name === undefined) {
 if(network_name === undefined) {
     network_name = "esper"
 }
-network_name.toLowerCase();
+network_name = network_name.toLowerCase();
 
 // Mock stuff
 var channel = {
