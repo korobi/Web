@@ -8,6 +8,14 @@ if(network_name === undefined) {
     network_name = "esper"
 }
 
+if (db.networks.find({"slug": network_name}).count() === 0) {
+    db.networks.insert({
+        "slug" : network_name,
+        "name" : network_name + " Network",
+        "network_id" : network_name
+    })
+}
+
 // Mock stuff
 var channel = {
     channel: channel_name,
