@@ -79,11 +79,6 @@ su -c "cd /vagrant; composer install --no-interaction --prefer-dist" $VAGRANT_US
 echo "Starting mongod.."
 service mongod start
 
-echo "Populating database with data.." # TODO
-echo "NYI"
-# mongod korobi file.js
-
-
 echo "Creating configuration for $WEBSERVER.."
 if [[ $WEBSERVER == 'apache2' ]]; then
     FPREFIX="apache"
@@ -130,9 +125,13 @@ su -c 'cd /vagrant; composer dump' $VAGRANT_USER
 curl -k https://korobi.dev &>/dev/null # Generates bootstrap.php.cache
 su -c 'cd /vagrant; php app/console assetic:dump' $VAGRANT_USER
 
+echo "Populating database with data.."
+su -c 'cd /vagrant; php app/console korobi:db:provision' $VAGRANT_USER
+
+
 cd /vagrant/app
 echo "Running tests in $(pwd).."
-sudo -i -u $VAGRANT_USER phpunit .
+su -c 'cd /vagrant/app; phpunit' $VAGRANT_USER
 
 TAIL_BASHRC=$(tail -1 /home/$VAGRANT_USER/.bashrc)
 if [[ $TAIL_BASHRC != 'cd $SYMLINK_NAME' ]]; then
@@ -145,7 +144,7 @@ echo "Provisioning ended: $(date)"
 echo "Time taken: $(($PROVISION_END - $PROVISION_START)) seconds"
 echo
 echo "Done!"
-echo "Connect to SSH via vagrant@localhost:${SSH_PORT} or visit the page on https://localhost:${HTTPS_PORT} or https://korobi.dev:${HTTPS_PORT}"
+echo "Connect to SSH via ${VAGRANT_USER}@localhost:${SSH_PORT} or visit the page on https://localhost:${HTTPS_PORT} or https://korobi.dev:${HTTPS_PORT}"
 
 function cleanup() {  # TODO - actually use it somewhere
     echo "Cleanup check: Composer"
