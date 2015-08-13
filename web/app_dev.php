@@ -16,8 +16,7 @@ use Symfony\Component\Debug\Debug;
     header('HTTP/1.0 403 Forbidden');
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }*/
-
-if (!isInternalAddress()) {
+if (!array_key_exists('REMOTE_ADDR', $_SERVER) || array_key_exists('REMOTE_ADDR', $_SERVER) && !isInternalIpAddress($_SERVER['REMOTE_ADDR'])) {
     if (!isset($_SERVER['HTTP_X_GITHUB_DELIVERY']) && !isset($_SERVER['HTTP_X_HUB_SIGNATURE']) && strpos($_SERVER['HTTP_USER_AGENT'], 'GitHub-Hookshot/') === false) {
         if (!isset($_SERVER['HTTP_X_KOROBI_AUTH']) || $_SERVER['HTTP_X_KOROBI_AUTH'] != 'nkYPUztAKf3gv82FnuMd9BB') {
             header('HTTP/1.0 403 Forbidden');
@@ -41,11 +40,8 @@ $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
 
-function isInternalAddress() {
-    if (!array_key_exists('HTTP_HOST', $_SERVER) || !array_key_exists('REMOTE_ADDR', $_SERVER)) {
-        return false;
-    }
-
-    return in_array($_SERVER['HTTP_HOST'], ['korobi.dev', 'localhost']) ||
-           in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', 'fe80::1', '::1']);
+function isInternalIpAddress($ip) {
+    // 10.0.0.0/8, 192.168.0.0/16, 172.16.0.0 - 172.31.255.255
+    return in_array($ip, ['127.0.0.1', 'fe80::1', '::1']) ||
+        preg_match('/^10\.|^192\.168\.|^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[01]\./', $ip);
 }
