@@ -7,6 +7,7 @@ if(channel_name === undefined) {
 if(network_name === undefined) {
     network_name = "esper"
 }
+network_name.toLowerCase();
 
 // Mock stuff
 var channel = {
@@ -133,6 +134,15 @@ var channel_query = {
 
 // Insert stuff
 if (db.networks.find({"slug": network_name}).count() === 0) {
+    network_map = {
+        "esper": "EsperNet",
+        "spigotmc": "Spigot",
+        "spigot": "Spigot",
+        "freenode": "Freenode"
+    }
+
+    var network_friendly_name  = network_map[network_name] || network_name + " Network"
+
     db.networks.insert({
         "slug" : network_name,
         "name" : network_name + " Network",
