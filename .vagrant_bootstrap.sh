@@ -15,6 +15,7 @@ SYMLINK_NAME=$(hostname)
 SSH_PORT=2222
 ## End Of Configuration ##
 
+export DEBIAN_FRONTEND=noninteractive
 
 PROVISION_START=`date +%s`
 echo "Starting to provision: $(date)"
@@ -47,16 +48,18 @@ else
 fi
 
 apt-get build-dep $WEBSERVER -y > ~/provision-apt-get-builddep.log
-apt-get install mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs nodejs-legacy npm git $EXTRA_PACKAGES $WEBSERVER -y > ~/provision-apt-get-install.log
+apt-get install language-pack-en mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs nodejs-legacy npm git $EXTRA_PACKAGES $WEBSERVER -y > ~/provision-apt-get-install.log
 echo "Done. apt logs are in $HOME"
 
 echo "Installing composer.."
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/bin/composer
+chmod +x /usr/bin/composer
 
 echo "Getting PHPUnit.."
 wget --quiet https://phar.phpunit.de/phpunit.phar
 mv phpunit.phar /usr/bin/phpunit
+chmod +x /usr/bin/phpunit
 
 echo "Installing bundler & ruby project dependencies.."
 gem install bundler sass
