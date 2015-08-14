@@ -1,9 +1,9 @@
 services:
     korobi.irc.log_parser:
-        class: Korobi\WebBundle\Parser\LogParser
+        class: Korobi\WebBundle\IRC\Parser\LogParser
         arguments:
             - @translator
     korobi.irc.render_manager:
-        class: Korobi\WebBundle\IrcLogs\RenderManager
+        class: Korobi\WebBundle\IRC\Log\Render\RenderManager
         arguments:
              - @korobi.irc.log_parser

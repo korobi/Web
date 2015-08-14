@@ -1,9 +1,9 @@
 <?php
 
-namespace Korobi\WebBundle\Parser;
+namespace Korobi\WebBundle\IRC\Parser;
 
 use Korobi\WebBundle\Document\Chat;
-use Korobi\WebBundle\IrcLogs\RenderSettings;
+use Korobi\WebBundle\IRC\Log\Render\RenderSettings;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class LogParser implements LogParserInterface {

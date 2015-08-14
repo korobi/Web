@@ -4,9 +4,9 @@ namespace Korobi\WebBundle\Test\Unit;
 
 use DateTime;
 use Korobi\WebBundle\Document\Chat;
-use Korobi\WebBundle\IrcLogs\RenderManager;
-use Korobi\WebBundle\IrcLogs\RenderSettings;
-use Korobi\WebBundle\Parser\LogParserInterface;
+use Korobi\WebBundle\IRC\Log\Render\RenderManager;
+use Korobi\WebBundle\IRC\Log\Render\RenderSettings;
+use Korobi\WebBundle\IRC\Parser\LogParserInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RenderManagerTest extends WebTestCase {

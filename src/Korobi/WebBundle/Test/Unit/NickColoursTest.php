@@ -2,8 +2,8 @@
 
 namespace Korobi\WebBundle\Test\Unit;
 
-use Korobi\WebBundle\Parser\IRCTextParser;
-use Korobi\WebBundle\Parser\NickColours;
+use Korobi\WebBundle\IRC\Parser\IRCTextParser;
+use Korobi\WebBundle\IRC\Parser\NickColours;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class NickColoursTest extends WebTestCase {

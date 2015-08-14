@@ -6,7 +6,7 @@ use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChannelAI;
 use Korobi\WebBundle\Document\Network;
-use Korobi\WebBundle\Parser\IRCTextParser;
+use Korobi\WebBundle\IRC\Parser\IRCTextParser;
 use Symfony\Component\HttpFoundation\Request;
 
 class ChannelAIController extends BaseController {

@@ -3,8 +3,8 @@
 namespace Korobi\WebBundle\Test\Unit;
 
 use Korobi\WebBundle\Document\Chat;
-use Korobi\WebBundle\Parser\IRCTextParser;
-use Korobi\WebBundle\Parser\LogParser;
+use Korobi\WebBundle\IRC\Parser\IRCTextParser;
+use Korobi\WebBundle\IRC\Parser\LogParser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HtmlFacility {
