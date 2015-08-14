@@ -37,3 +37,12 @@
 
 # I'm too sassy for you.
 /.sass-cache/
+
+# Bundler
+.bundle
+ruby
+
+# Vagrant
+Vagrantfile
+.vagrant
+
