@@ -67,9 +67,24 @@ class RenderManagerTest extends WebTestCase {
         $chat1->setDate(new DateTime());
         $out = $sut->renderLogs([$chat1]);
         $forTwig = $out[0];
-        $this->assertEquals($forTwig['realNick'], $name);
-        $this->assertNotEquals($forTwig['displayNick'], $name);
+        $this->assertEquals($name, $forTwig['realNick']);
+        $this->assertNotEquals($name, $forTwig['displayNick']);
+        $this->assertEquals(str_repeat('a', RenderSettings::MAX_NICK_LENGTH), $forTwig['displayNick']);
         $this->assertTrue($forTwig['nickTooLong']);
+    }
+
+    public function testNickChoppingWithNickIdenticalToChopLength() {
+        $sut = new RenderManager(new ParserStub());
+        $chat1 = new Chat();
+        $chat1->setType('EXOTIC');
+        $name = str_repeat('a', RenderSettings::MAX_NICK_LENGTH);
+        $chat1->setActorName($name);
+        $chat1->setDate(new DateTime());
+        $out = $sut->renderLogs([$chat1]);
+        $forTwig = $out[0];
+        $this->assertEquals($name, $forTwig['realNick']);
+        $this->assertEquals($name, $forTwig['displayNick']);
+        $this->assertFalse($forTwig['nickTooLong']);
     }
 
     /**

@@ -61,15 +61,21 @@ class RenderManager {
      */
     public function processChatDocument($chat) {
         $nick = $this->logParser->getDisplayName($chat);
+        $nickLength = strlen($nick);
+
+        $chopSize = $nickLength == RenderSettings::MAX_NICK_LENGTH + 1 ?
+            RenderSettings::MAX_NICK_LENGTH + 1 :
+            RenderSettings::MAX_NICK_LENGTH;
+
         return [
             'id'          => $chat->getId(), // MongoID of chat document
             'timestamp'   => $chat->getDate()->setTimezone(new \DateTimeZone('UTC')),
             'type'        => strtolower($chat->getType()), // Lowercase type identifier (e.g. 'join' or 'action')
             'role'        => $chat->getType() == 'MESSAGE' ? strtolower($chat->getActorPrefix()) : '', // @, + etc
             'nickColour'  => $this->logParser->getColourForActor($chat), // Colour of nick (applies weechat algorithm)
-            'displayNick' => substr($nick, 0, RenderSettings::MAX_NICK_LENGTH + 1), // Chopped nick
+            'displayNick' => substr($nick, 0, $chopSize), // Chopped nick
             'realNick'    => $nick, // Full nick
-            'nickTooLong' => strlen($nick) - RenderSettings::MAX_NICK_LENGTH > 1, // If the nick got chopped
+            'nickTooLong' => $nickLength - RenderSettings::MAX_NICK_LENGTH > 1, // If the nick got chopped
             'nick'        => $this->logParser->getActorName($chat), // TODO: Better naming - returns hostname/nick
             'message'     => $this->getHtmlFragmentForChatMessage($chat), // HTML'd message
         ];
