@@ -98,6 +98,9 @@ nav.navigation:after {
 .navigation--search {
   display: inline-block;
   border: 1px solid #555;
+  float: right;
+  position: relative;
+  top: 2px;
   background-color: #101010;
 
   label {

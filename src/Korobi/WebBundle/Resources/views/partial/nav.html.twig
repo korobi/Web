@@ -14,13 +14,6 @@
                 {% endfor %}
             {% endspaceless %}
         </ul>
-        <ul class="navigation--links navigation--links-secondary" role="menubar">
-            {% spaceless %}
-                {% for item in navigation.getSecondary() %}
-                    {{ nav.nav_link(item) }}
-                {% endfor %}
-            {% endspaceless %}
-        </ul>
 
         <div class="navigation--search">
             <form action="{{ path('search') }}" method="POST"><label for="search-box" title="Search"></label><input type="text" class="navigation--search-box" name="term" id="search-box"></form>
