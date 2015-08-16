@@ -7,6 +7,8 @@ legacy_rewrite_core:
     path: /{network}/{channel}/
     defaults:
         _controller: korobi.controller.irc.rewrite:rewriteAction
+    requirements:
+        network: "esper|freenode|spigot"
 legacy_rewrite_component:
     path: /{network}/{channel}/{component}/
     defaults:
