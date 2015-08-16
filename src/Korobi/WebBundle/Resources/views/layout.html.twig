@@ -54,6 +54,10 @@
             <script src="{{ asset_url }}?v={{ 'now'|date('U') }}"></script>
         {% endjavascripts %}
     {% endif %}
+    {% if analytics_enabled %}
+    <script type="text/javascript">var _paq=_paq||[];_paq.push(["trackPageView"]),_paq.push(["enableLinkTracking"]),function(){var e="https://analytics.korobi.io/";_paq.push(["setTrackerUrl",e+"piwik.php"]),_paq.push(["setSiteId",{{ analytics_siteid }}]);var a=document,p=a.createElement("script"),t=a.getElementsByTagName("script")[0];p.type="text/javascript",p.async=!0,p.defer=!0,p.src=e+"piwik.js",t.parentNode.insertBefore(p,t)}();</script>
+    <noscript><p><img src="https://analytics.korobi.io/piwik.php?idsite={{ analytics_siteid }}" style="border:0;" alt="" /></p></noscript>
+    {% endif %}
 {% endblock %}
 </body>
 </html>
