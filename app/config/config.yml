@@ -126,7 +126,7 @@ nelmio_security:
         hsts_subdomains: true
     csp:
         enforce:
-            report-uri: [/csp/report]
+            report-uri: [/csp/report/]
             default-src: ['self']
             script-src:
                 - 'self'
