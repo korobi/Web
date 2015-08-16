@@ -1,51 +1,51 @@
-@import "application/base/_reset";
+@import "application/base/reset";
 
 // vendor styles
-@import "vendor/bourbon/_bourbon";
-@import "vendor/base/_base";
-@import "vendor/neat/_neat-helpers";
-@import "application/base/_grid";
-@import "vendor/neat/_neat";
-@import "vendor/prism/_prism";
+@import "vendor/bourbon/bourbon";
+@import "vendor/base/base";
+@import "vendor/neat/neat-helpers";
+@import "application/base/grid";
+@import "vendor/neat/neat";
+@import "vendor/prism/prism";
 
 // base syles
-@import "application/base/_config";
-@import "application/base/_base";
-@import "application/base/_header";
-@import "application/base/_footer";
-@import "application/base/_symfony";
+@import "application/base/config";
+@import "application/base/base";
+@import "application/base/header";
+@import "application/base/footer";
+@import "application/base/symfony";
 
 // components
-@import "application/components/_tables";
-@import "application/components/_tooltip";
-@import "application/components/_forms";
-@import "application/components/_flashes";
-@import "application/components/_content_blocks";
-@import "application/components/_datepicker";
-@import "application/components/buttons/_buttons";
-@import "application/components/_thumbnails";
+@import "application/components/tables";
+@import "application/components/tooltip";
+@import "application/components/forms";
+@import "application/components/flashes";
+@import "application/components/content_blocks";
+@import "application/components/datepicker";
+@import "application/components/buttons/buttons";
+@import "application/components/thumbnails";
 
 // irc styles
-@import "application/irc/_base";
-@import "application/irc/_controls";
-@import "application/irc/_logs";
-@import "application/irc/_stats";
-@import "application/irc/_games";
+@import "application/irc/base";
+@import "application/irc/controls";
+@import "application/irc/logs";
+@import "application/irc/stats";
+@import "application/irc/games";
 
 // home
-@import "application/_home";
+@import "application/home";
 
 // docs
-@import "application/_docs";
+@import "application/docs";
 
 // maintenance
-@import "application/_maintenance";
+@import "application/maintenance";
 
 // style guide
-@import "application/_style_guide";
+@import "application/style_guide";
 
 // channel_list
-@import "application/_channel_list";
+@import "application/channel_list";
 
 // about
-@import "application/_about";
+@import "application/about";
