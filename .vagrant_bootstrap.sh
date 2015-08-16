@@ -33,6 +33,17 @@ echo "Adding key for MongoDB.."
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 
+echo "Adding Java PPA.."
+add-apt-repository ppa:webupd8team/java
+
+echo "Accepting Java EULA.."
+echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+
+echo "Adding key and repository for ElasticSearch.."
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" | tee -a /etc/apt/sources.list.d/elasticsearch-1.7.list
+
 echo "Adding PPA for PHP.."
 apt-add-repository ppa:ondrej/php5-5.6
 
@@ -48,8 +59,11 @@ else
 fi
 
 apt-get build-dep $WEBSERVER -y > ~/provision-apt-get-builddep.log
-apt-get install language-pack-en mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs nodejs-legacy npm git $EXTRA_PACKAGES $WEBSERVER -y > ~/provision-apt-get-install.log
+apt-get install language-pack-en mongodb-org php5 php5-cli php5-curl php5-mcrypt php5-mongo openssl ruby2.1 nodejs nodejs-legacy npm git oracle-java8-installer elasticsearch $EXTRA_PACKAGES $WEBSERVER -y > ~/provision-apt-get-install.log
 echo "Done. apt logs are in $HOME"
+
+echo "Activating ElasticSearch.."
+update-rc.d elasticsearch defaults 95 10
 
 echo "Installing composer.."
 curl -sS https://getcomposer.org/installer | php
