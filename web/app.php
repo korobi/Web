@@ -31,7 +31,7 @@ if (!inMaintenance()) {
     $kernel->terminate($request, $response);
 } else {
     http_response_code(503);
-    require_once('maintenance.php');
+    require_once 'maintenance.php';
     die(0);
 }
 

@@ -45,7 +45,7 @@ if (!inMaintenance()) {
     $kernel->terminate($request, $response);
 } else {
     http_response_code(503);
-    require_once('maintenance.php');
+    require_once 'maintenance.php';
     die(0);
 }
 
@@ -56,5 +56,5 @@ function inMaintenance() {
 function isInternalIpAddress($ip) {
     // 10.0.0.0/8, 192.168.0.0/16, 172.16.0.0 - 172.31.255.255
     return in_array($ip, ['127.0.0.1', 'fe80::1', '::1']) ||
-    preg_match('/^10\.|^192\.168\.|^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[01]\./', $ip);
+        preg_match('/^10\.|^192\.168\.|^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[01]\./', $ip);
 }
