@@ -142,6 +142,9 @@ su -c 'cd /vagrant; composer dump' $VAGRANT_USER
 curl -k https://korobi.dev &>/dev/null # Generates bootstrap.php.cache
 su -c 'cd /vagrant; php app/console assetic:dump' $VAGRANT_USER
 
+echo "Starting ElasticSearch.."
+service elasticsearch start
+
 echo "Populating database with data.."
 su -c 'cd /vagrant; php app/console korobi:db:provision' $VAGRANT_USER
 
