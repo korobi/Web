@@ -20,18 +20,18 @@ class MaintenanceFileTests extends PHPUnit_Framework_TestCase
     }
 
     public function assertFileCanBeCreated() {
-        $this->assertTrue(touch(MaintenanceCommand::MAINTENANCE_FILE . self::TEST_APPEND));
+        $this->assertTrue(touch(self::MAINTENANCE_FILE));
     }
 
     public function assertFileReadable() {
-        $this->assertTrue(is_readable(MaintenanceCommand::MAINTENANCE_FILE . self::TEST_APPEND));
+        $this->assertTrue(is_readable(self::MAINTENANCE_FILE));
     }
 
     public function assertFileUnlinkable() {
-        $this->assertTrue(unlink(MaintenanceCommand::MAINTENANCE_FILE . self::TEST_APPEND));
+        $this->assertTrue(unlink(self::MAINTENANCE_FILE));
     }
 
     public function assertFileDoesNotExist() {
-        $this->assertFalse(file_exists(MaintenanceCommand::MAINTENANCE_FILE . self::TEST_APPEND));
+        $this->assertFalse(file_exists(self::MAINTENANCE_FILE));
     }
 }
