@@ -25,3 +25,5 @@ parameters:
     influx.pass: pass
     influx.db: database
     bin_path.ruby: /usr/bin/ruby
+    analytics.enabled: false
+    analytics.site_id: 123
