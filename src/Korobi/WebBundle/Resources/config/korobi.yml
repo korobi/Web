@@ -43,3 +43,5 @@ korobi_web:
     homepage_excluded_channels:
        - channel: '#spigot'
          network: 'esper'
+       - channel: '#RileyCraft'
+         network: 'spigot'
