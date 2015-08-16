@@ -31,7 +31,7 @@ if (!inMaintenance()) {
     $kernel->terminate($request, $response);
 } else {
     header('HTTP/1.0 503 Service Unavailable');
-    include('maintenance.php');
+    require_once('maintenance.php');
     die(0);
 }
 
