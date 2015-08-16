@@ -30,7 +30,7 @@ if (!inMaintenance()) {
     $response->send();
     $kernel->terminate($request, $response);
 } else {
-    header('HTTP/1.0 503 Service Unavailable');
+    http_response_code(503);
     require_once('maintenance.php');
     die(0);
 }
