@@ -1,12 +1,12 @@
 <?php
+
 use Korobi\WebBundle\Console\MongoProvisionCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class MongoProvisionCommandTest extends \PHPUnit_Framework_TestCase
-{
-    public function testExecute()
-    {
+class MongoProvisionCommandTest extends \PHPUnit_Framework_TestCase {
+
+    public function testExecute() {
         $application = new Application();
         $application->add(new MongoProvisionCommand());
 

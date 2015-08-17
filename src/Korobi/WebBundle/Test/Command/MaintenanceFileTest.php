@@ -1,15 +1,14 @@
 <?php
-use Korobi\WebBundle\Console\MaintenanceCommand;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Tester\CommandTester;
 
-class MaintenanceFileTests extends PHPUnit_Framework_TestCase
-{
+use Korobi\WebBundle\Console\MaintenanceCommand;
+
+class MaintenanceFileTests extends \PHPUnit_Framework_TestCase {
+
     /**
      * @const string - Ensure we do not enable maintenance mode during tests on accident by appending
      *        to the file string.
      */
-    const MAINTENANCE_FILE = MaintenanceCommand::MAINTENANCE_FILE . "_tests";
+    const MAINTENANCE_FILE = MaintenanceCommand::MAINTENANCE_FILE . '_tests';
 
     public function testMaintenanceModeFilePermissions() {
         $this->assertFileDoesNotExist();

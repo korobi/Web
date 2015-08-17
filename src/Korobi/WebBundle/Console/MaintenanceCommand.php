@@ -3,12 +3,13 @@
 namespace Korobi\WebBundle\Console;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MaintenanceCommand extends ContainerAwareCommand {
-    const MAINTENANCE_FILE = __DIR__ . "/../../maintenance";
+
+    const MAINTENANCE_FILE = __DIR__ . '/../../maintenance';
 
     protected function configure() {
         $this
@@ -17,12 +18,11 @@ class MaintenanceCommand extends ContainerAwareCommand {
             ->addArgument('option', InputArgument::OPTIONAL, 'Enable or disable maintenance mode.');
     }
 
-    protected function execute(InputInterface $in, OutputInterface $out)
-    {
+    protected function execute(InputInterface $in, OutputInterface $out) {
         $option = $in->getArgument('option');
 
         if (empty($option)) {
-            $out->writeln("Maintenance mode is currently " . ($this->inMaintenance() ? 'enabled' : 'disabled'));
+            $out->writeln('Maintenance mode is currently ' . ($this->inMaintenance() ? 'enabled' : 'disabled'));
             return;
         }
 

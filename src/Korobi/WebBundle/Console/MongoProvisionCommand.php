@@ -3,14 +3,15 @@
 namespace Korobi\WebBundle\Console;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MongoProvisionCommand extends ContainerAwareCommand {
-    const DEFAULT_CHANNEL = "#korobi";
-    const DEFAULT_NETWORK = "esper";
+
+    const DEFAULT_CHANNEL = '#korobi';
+    const DEFAULT_NETWORK = 'esper';
 
     protected function configure() {
         $this
@@ -21,8 +22,7 @@ class MongoProvisionCommand extends ContainerAwareCommand {
             ->addOption('dry', 'd', InputOption::VALUE_NONE, 'Do not commit to the database.');
     }
 
-    protected function execute(InputInterface $in, OutputInterface $out)
-    {
+    protected function execute(InputInterface $in, OutputInterface $out) {
         $channel = $in->getArgument('channel');
         $network = $in->getArgument('network');
         $dry_run = $in->getOption('dry');
