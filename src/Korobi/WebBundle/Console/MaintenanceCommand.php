@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MaintenanceCommand extends ContainerAwareCommand {
-    const MAINTENANCE_FILE = __DIR__ . "../../maintenance";
+    const MAINTENANCE_FILE = __DIR__ . "/../../maintenance";
 
     protected function configure() {
         $this
