@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8">
     <title>Maintenance | Korobi</title>
-    <link rel="stylesheet" href="/assets/css/application_application_1.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/assets/css/application_application_1.css?v=<?php time() ?>">
 </head>
 <body>
     <div id="maintenance">
