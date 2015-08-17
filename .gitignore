@@ -25,6 +25,9 @@
 !/web/assets/js/.gitkeep
 /web/bundles/
 
+# Maintenance file
+src/Korobi/WebBundle/maintenance
+
 # intellij
 /.idea/
 *.iml

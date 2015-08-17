@@ -16,29 +16,42 @@ use Symfony\Component\Debug\Debug;
     header('HTTP/1.0 403 Forbidden');
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }*/
-if (!array_key_exists('REMOTE_ADDR', $_SERVER) || array_key_exists('REMOTE_ADDR', $_SERVER) && !isInternalIpAddress($_SERVER['REMOTE_ADDR'])) {
-    if (!isset($_SERVER['HTTP_X_GITHUB_DELIVERY']) && !isset($_SERVER['HTTP_X_HUB_SIGNATURE']) && strpos($_SERVER['HTTP_USER_AGENT'], 'GitHub-Hookshot/') === false) {
-        if (!isset($_SERVER['HTTP_X_KOROBI_AUTH']) || $_SERVER['HTTP_X_KOROBI_AUTH'] != 'nkYPUztAKf3gv82FnuMd9BB') {
-            header('HTTP/1.0 403 Forbidden');
-            exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
+
+if (!inMaintenance()) {
+    if (!array_key_exists('REMOTE_ADDR', $_SERVER) || array_key_exists('REMOTE_ADDR', $_SERVER) && !isInternalIpAddress($_SERVER['REMOTE_ADDR'])) {
+        if (!isset($_SERVER['HTTP_X_GITHUB_DELIVERY']) && !isset($_SERVER['HTTP_X_HUB_SIGNATURE']) && strpos($_SERVER['HTTP_USER_AGENT'], 'GitHub-Hookshot/') === false) {
+            if (!isset($_SERVER['HTTP_X_KOROBI_AUTH']) || $_SERVER['HTTP_X_KOROBI_AUTH'] != 'nkYPUztAKf3gv82FnuMd9BB') {
+                http_response_code(403);
+                exit('You are not allowed to access this file. Check ' . basename(__FILE__) . ' for more information.');
+            }
+        } else {
+            if (parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) !== '/deploy/') {
+                http_response_code(403);
+                exit('Oops, you look like a GitHub but you\'re not requesting a deploy?');
+            }
         }
-    } else if (parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) !== '/deploy/') {
-        header('HTTP/1.0 403 Forbidden');
-        exit('Oops, you look like a GitHub but you\'re not requesting a deploy?');
     }
+
+    $loader = require_once __DIR__ . '/../app/bootstrap.php.cache';
+    Debug::enable();
+
+    require_once __DIR__ . '/../app/AppKernel.php';
+
+    $kernel = new AppKernel('dev', true);
+    $kernel->loadClassCache();
+    $request = Request::createFromGlobals();
+    $response = $kernel->handle($request);
+    $response->send();
+    $kernel->terminate($request, $response);
+} else {
+    http_response_code(503);
+    require_once 'maintenance.php';
+    die(0);
 }
 
-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
-Debug::enable();
-
-require_once __DIR__.'/../app/AppKernel.php';
-
-$kernel = new AppKernel('dev', true);
-$kernel->loadClassCache();
-$request = Request::createFromGlobals();
-$response = $kernel->handle($request);
-$response->send();
-$kernel->terminate($request, $response);
+function inMaintenance() {
+    return file_exists(__DIR__ . '/../src/Korobi/WebBundle/maintenance');
+}
 
 function isInternalIpAddress($ip) {
     // 10.0.0.0/8, 192.168.0.0/16, 172.16.0.0 - 172.31.255.255
