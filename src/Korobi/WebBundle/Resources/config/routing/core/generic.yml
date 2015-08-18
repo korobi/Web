@@ -17,7 +17,7 @@ csp_report:
 analytics_script:
     path: /dynamic/analytics/
     defaults:
-        _controller: korobi.controller.generic.security:safelyReturnScriptSource
+        _controller: korobi.controller.generic.dynamic:analyticsScriptSource
 docs:
     path: /docs/
     defaults:
