@@ -62,4 +62,10 @@ class SecurityController extends BaseController {
         ]), 403);
         return $response;
     }
+
+    public function safelyReturnScriptSource(Request $req) {
+        $resp = $this->render("KorobiWebBundle:partial:analytics.js.twig");
+        $resp->headers->set("Content-Type", "application/javascript");
+        return $resp;
+    }
 }

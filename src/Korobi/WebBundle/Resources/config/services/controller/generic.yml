@@ -20,6 +20,9 @@ services:
         arguments:
             - @korobi.akio
             - @logger
+    korobi.controller.generic.dynamic:
+        class: Korobi\WebBundle\Controller\Generic\DynamicController
+        parent: korobi.base_controller
     korobi.controller.generic.style_guide:
         class: Korobi\WebBundle\Controller\Generic\StyleGuideController
         parent: korobi.base_controller
