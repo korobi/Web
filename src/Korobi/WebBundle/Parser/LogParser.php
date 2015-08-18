@@ -48,7 +48,7 @@ class LogParser implements LogParserInterface {
         $actorHostname = IRCTextParser::createHostnameTag($chat->getActorHostname());
         $result = $this->t->trans('irc.joined_channel', [
             '%actor%' => $actor,
-            '%actor_hostname%' => $actorHostname
+            '%actor_hostname%' => $actorHostname,
         ]);
 
         return $result;
@@ -133,7 +133,7 @@ class LogParser implements LogParserInterface {
         $result = $this->t->trans('irc.left_channel', [
             '%actor%' => $actor,
             '%actor_hostname%' => $actorHostname,
-            '%part_message%' => IRCTextParser::parse($chat->getMessage())
+            '%part_message%' => IRCTextParser::parse($chat->getMessage()),
         ]);
 
         return $result;
@@ -149,7 +149,7 @@ class LogParser implements LogParserInterface {
         $result = $this->t->trans('irc.has_quit', [
             '%actor%' => $actor,
             '%actor_hostname%' => $actorHostname,
-            '%quit_message%' => IRCTextParser::parse($chat->getMessage())
+            '%quit_message%' => IRCTextParser::parse($chat->getMessage()),
         ]);
 
         return $result;
@@ -266,6 +266,8 @@ class LogParser implements LogParserInterface {
      */
     private function transformUserModeToLetter($mode) {
         switch ($mode) {
+            case 'OFFICIAL_JOIN':
+                return 'y';
             case 'OWNER':
                 return 'q';
             case 'ADMIN':

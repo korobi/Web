@@ -2,7 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% if page_title is defined %}{{ page_title }} | {% endif %}{{ app_name }}</title>
+    {% if do_not_touch_title is defined %}
+        {# if the title isn't defined, we *need* to fail #}
+        <title>{{ page_title }}</title>
+    {% else %}
+        <title>{% if page_title is defined %}{{ page_title }} | {% endif %}{{ app_name }}</title>
+    {% endif %}
     <meta name='viewport' content='initial-scale=1'>
     <link type="text/plain" rel="author" href="/humans.txt" />
     {% stylesheets filter='scss' '@KorobiWebBundle/Resources/assets/sass/application.scss' output='assets/css/application.css' %}
@@ -48,6 +53,10 @@
         {% javascripts '@staging' output='assets/js/staging.js' filter='uglifyjs2' %}
             <script src="{{ asset_url }}?v={{ 'now'|date('U') }}"></script>
         {% endjavascripts %}
+    {% endif %}
+    {% if analytics_enabled %}
+    <script type="text/javascript">var _paq=_paq||[];_paq.push(["trackPageView"]),_paq.push(["enableLinkTracking"]),function(){var e="https://analytics.korobi.io/";_paq.push(["setTrackerUrl",e+"piwik.php"]),_paq.push(["setSiteId",{{ analytics_siteid }}]);var a=document,p=a.createElement("script"),t=a.getElementsByTagName("script")[0];p.type="text/javascript",p.async=!0,p.defer=!0,p.src=e+"piwik.js",t.parentNode.insertBefore(p,t)}();</script>
+    <noscript><p><img src="https://analytics.korobi.io/piwik.php?idsite={{ analytics_siteid }}" style="border:0;" alt="" /></p></noscript>
     {% endif %}
 {% endblock %}
 </body>

@@ -15,3 +15,13 @@ services:
         class: Korobi\WebBundle\Console\LogCacheStatsCommand
         tags:
             -  { name: console.command }
+
+    korobi.command.db_provision:
+        class: Korobi\WebBundle\Console\MongoProvisionCommand
+        tags:
+            -  { name: console.command }
+
+    korobi.command.maintenance:
+        class: Korobi\WebBundle\Console\MaintenanceCommand
+        tags:
+            -  { name: console.command }

@@ -2,7 +2,9 @@
 
 namespace Korobi\WebBundle\Test\Unit;
 
+use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Parser\IRCTextParser;
+use Korobi\WebBundle\Parser\LogParser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HtmlFacility {
@@ -118,6 +120,20 @@ class IRCTextParserTest extends WebTestCase {
         $parsed_message = IRCTextParser::parse("<script>alert('woo');</script>");
         $this->assertNotContains($parsed_message, '<');
         $this->assertNotContains($parsed_message, '>');
+    }
+
+    public function testQuitPartJoinKickMessageWithTags() {
+        $logParser = new LogParser(new DummyNoXssTranslator());
+        $chat = new Chat();
+        // we use <marquee> because it should never actually be used in the HTML..
+        $chat->setMessage("I like <marquee>");
+        $chat->setActorName("mr_<marquee>man</marquee>");
+        $chat->setActorHostname("mr_<marquee>man</marquee>!woo@<marquee></marquee>tags.are.cool.com");
+        $chat->setActorPrefix("+");
+        $logParser->parseQuit($chat);
+        $logParser->parsePart($chat);
+        $logParser->parseJoin($chat);
+        $logParser->parseKick($chat);
     }
 
     public function testMessageWithFgAndBg() {

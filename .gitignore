@@ -25,6 +25,9 @@
 !/web/assets/js/.gitkeep
 /web/bundles/
 
+# Maintenance file
+src/Korobi/WebBundle/maintenance
+
 # intellij
 /.idea/
 *.iml
@@ -37,3 +40,12 @@
 
 # I'm too sassy for you.
 /.sass-cache/
+
+# Bundler
+.bundle
+ruby
+
+# Vagrant
+Vagrantfile
+.vagrant
+

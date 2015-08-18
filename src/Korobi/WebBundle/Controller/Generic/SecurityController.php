@@ -48,7 +48,7 @@ class SecurityController extends BaseController {
             ->text('[!! CSP !!]')
             ->aquaLight()
             ->text(" Request to $resource on page $uri blocked via $ip.")
-            ->send('csp');
+            ->send('csp', 'private');
         return new JsonResponse('Thanks, browser.');
     }
 

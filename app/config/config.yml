@@ -35,6 +35,8 @@ twig:
     globals:
         gitInfo: "@korobi.git_info"
         navigation: "@korobi.navigation_collection"
+        analytics_enabled: "%analytics.enabled%"
+        analytics_siteid: "%analytics.site_id%"
 
 
 # Assetic Configuration
@@ -124,11 +126,12 @@ nelmio_security:
         hsts_subdomains: true
     csp:
         enforce:
-            report-uri: [/csp/report]
+            report-uri: [/csp/report/]
             default-src: ['self']
             script-src:
                 - 'self'
                 - 'https://cdnjs.cloudflare.com'
+                - 'https://analytics.korobi.io'
             font-src:
                 - 'self'
                 - 'https://cdnjs.cloudflare.com'
@@ -142,12 +145,16 @@ nelmio_security:
                 - 'https:'
                 - 'data:'
                 - 'http://i.imgur.com'
+                - 'https://analytics.korobi.io'
             media-src:
                 - 'https:'
                 - 'data:'
                 - 'http://i.imgur.com'
             object-src:
                 - 'none'
+            connect-src:
+                - 'self'
+                - 'wss://ws.korobi.io'
     external_redirects:
         override: /unexpected-redirect/
         forward_as: redirUrl
