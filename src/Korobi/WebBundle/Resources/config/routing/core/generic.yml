@@ -15,7 +15,7 @@ csp_report:
         _controller: korobi.controller.generic.security:reportCspAction
     methods: [POST]
 analytics_script:
-    path: /script/analytics/
+    path: /dynamic/analytics/
     defaults:
         _controller: korobi.controller.generic.security:safelyReturnScriptSource
 docs:
