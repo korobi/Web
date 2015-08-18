@@ -35,8 +35,6 @@ twig:
     globals:
         gitInfo: "@korobi.git_info"
         navigation: "@korobi.navigation_collection"
-        analytics_enabled: "%analytics.enabled%"
-        analytics_siteid: "%analytics.site_id%"
 
 
 # Assetic Configuration
