@@ -52,9 +52,11 @@ class SecurityController extends BaseController {
         }
         $uri = $payload['csp-report']['document-uri'];
         $resource = $payload['csp-report']['blocked-uri'];
+        $directive = $payload['csp-report']['violated-directive'];
+        
         $this->logger->warning('CSP Warning', $payload);
         $ip = $request->getClientIp();
-        $hash = hash_hmac('sha1', $ip . $uri, 'bc604aedc9027a1f1880');
+        $hash = hash_hmac('sha1', $ip .  $resource . $directive, 'bc604aedc9027a1f1880');
 
         if ($this->shouldReportCspAction($hash)) {
             $amount = (int) $this->lastHashIdenticalReportCount + 1;
