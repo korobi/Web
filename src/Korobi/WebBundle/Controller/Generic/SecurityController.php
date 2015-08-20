@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends BaseController {
-    const CACHE_FILE = 'csp_cache.json';
 
     /**
      * @var Akio
@@ -21,16 +20,6 @@ class SecurityController extends BaseController {
      * @var LoggerInterface Logger we can use.
      */
     private $logger;
-
-    /**
-     * @var String Last hash reported
-     */
-    protected $lastHashReported;
-
-    /**
-     * @var int Every time an identical hash gets reported, this value is increased.
-     */
-    protected $lastHashIdenticalReportCount = 0;
 
     /**
      * @param Akio $akio
@@ -53,21 +42,13 @@ class SecurityController extends BaseController {
         $uri = $payload['csp-report']['document-uri'];
         $resource = $payload['csp-report']['blocked-uri'];
         $this->logger->warning('CSP Warning', $payload);
-        $ip = $request->getClientIp();
-        $hash = hash_hmac('sha1', $ip . $uri, 'bc604aedc9027a1f1880');
-
-        if ($this->shouldReportCspAction($hash)) {
-            $amount = (int) $this->lastHashIdenticalReportCount + 1;
-            $text = $amount . ($amount == 1 ? ' request' : ' requests') . " to $resource on page $uri blocked via $ip.";
-
-            $this->akio->message()
-                ->red()
-                ->text('[!! CSP !!]')
-                ->aquaLight()
-                ->text($text)
-                ->send('csp', 'private');
-        }
-
+        $ip = hash_hmac('sha1', $request->getClientIp(), 'bc604aedc9027a1f1880');
+//        $this->akio->message()
+//            ->red()
+//            ->text('[!! CSP !!]')
+//            ->aquaLight()
+//            ->text(" Request to $resource on page $uri blocked via $ip.")
+//            ->send('csp', 'private');
         return new JsonResponse('Thanks, browser.');
     }
 
@@ -86,66 +67,5 @@ class SecurityController extends BaseController {
         $resp = $this->render("KorobiWebBundle:partial:analytics.js.twig");
         $resp->headers->set("Content-Type", "application/javascript");
         return $resp;
-    }
-
-    /**
-     * @param String $hash
-     * @return bool Report message or not
-     */
-    protected function shouldReportCspAction($hash) {
-        if ($this->lastHashReported === null) {
-          $this->loadHashCache();
-        }
-
-        if ($hash === $this->lastHashReported) {
-            $this->lastHashIdenticalReportCount++;
-        } else {
-            $this->lastHashReported = $hash;
-            $this->lastHashIdenticalReportCount = 0;
-        }
-
-        $this->cacheHashData();
-        return $this->lastHashIdenticalReportCount % 10 == 0;
-    }
-
-    /**
-     * @return bool successfully reloaded cache or not
-     */
-    protected function loadHashCache() {
-        $cachePath = $this->getCacheFile();
-        if (!file_exists($cachePath) || !is_readable($cachePath)) return false;
-
-        $content = file_get_contents($cachePath);
-        if ($content === false) return false;
-
-        $cache = unserialize($content);
-        if ($cache === false) return false;
-
-        $this->lastHashReported = $cache['hash'];
-        $this->lastHashIdenticalReportCount = $cache['hash_count'];
-        return true;
-    }
-
-    /**
-     * @return bool successfully cached data or not
-     */
-    protected function cacheHashData() {
-        if (!$this->lastHashReported) return false;
-        $cachePath = $this->getCacheFile();
-
-        $contents = serialize([
-            'hash' => $this->lastHashReported,
-            'hash_count' => $this->lastHashIdenticalReportCount
-        ]);
-
-        $success = file_put_contents($cachePath, $contents);
-        return $success !== false;
-    }
-
-    /**
-     * @return String path to cache file
-     */
-    protected function getCacheFile() {
-        return $this->get('kernel')->getCacheDir() . DIRECTORY_SEPARATOR . self::CACHE_FILE;
     }
 }
