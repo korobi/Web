@@ -56,7 +56,7 @@ class SecurityController extends BaseController {
         
         $this->logger->warning('CSP Warning', $payload);
         $ip = $request->getClientIp();
-        $hash = hash_hmac('sha1', $ip . $uri . $resource . $directive, 'bc604aedc9027a1f1880');
+        $hash = hash_hmac('sha1', $ip .  $resource . $directive, 'bc604aedc9027a1f1880');
 
         if ($this->shouldReportCspAction($hash)) {
             $amount = (int) $this->lastHashIdenticalReportCount + 1;
