@@ -51,7 +51,7 @@ class SecurityController extends BaseController {
             $payload = [];
         }
         $uri = $payload['csp-report']['document-uri'];
-        $resource = $payload['csp-report']['blocked-uri'];
+        $resource = isset($payload['csp-report']['blocked-uri']) ? $payload['csp-report']['blocked-uri'] : '[unknown resource]';
         $directive = $payload['csp-report']['violated-directive'];
         
         $this->logger->warning('CSP Warning', $payload);
