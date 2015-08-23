@@ -155,6 +155,7 @@ nelmio_security:
             connect-src:
                 - 'self'
                 - 'wss://ws.korobi.io'
+                - 'https://analytics.korobi.io'
     external_redirects:
         override: /unexpected-redirect/
         forward_as: redirUrl
