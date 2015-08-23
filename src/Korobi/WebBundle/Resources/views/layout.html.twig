@@ -54,6 +54,10 @@
             <script src="{{ asset_url }}?v={{ 'now'|date('U') }}"></script>
         {% endjavascripts %}
     {% endif %}
+    {% if analytics_enabled %}
+    <script type="text/javascript" src="/dynamic/analytics/"></script>
+    <noscript><p><img src="https://analytics.korobi.io/piwik.php?idsite={{ analytics_siteid }}" style="border:0;" alt="" /></p></noscript>
+    {% endif %}
 {% endblock %}
 </body>
 </html>

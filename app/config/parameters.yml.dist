@@ -41,3 +41,9 @@ parameters:
     influx.user: user
     influx.pass: pass
     influx.db: database
+
+    # analytics
+    analytics.enabled: false
+    # 1 prod
+    # 2 dev
+    analytics.site_id: 2
