@@ -121,7 +121,7 @@ hwi_oauth:
 # NelmioSecurityBundle Configuration
 nelmio_security:
     forced_ssl:
-        # NOTE: In production/staging these values are controleld by CloudFlare.
+        # NOTE: In production/staging these values are controlled by CloudFlare.
         hsts_max_age: 31557600 # A long time
         hsts_subdomains: true
     csp:
