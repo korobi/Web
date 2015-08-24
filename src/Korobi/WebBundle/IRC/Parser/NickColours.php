@@ -1,9 +1,9 @@
 <?php
 
-namespace Korobi\WebBundle\Parser;
+namespace Korobi\WebBundle\IRC\Parser;
 
 /**
- * @package Korobi\WebBundle\Parser
+ * @package Korobi\WebBundle\IRC\Parser
  */
 class NickColours {
 

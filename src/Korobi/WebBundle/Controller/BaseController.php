@@ -4,7 +4,7 @@ namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
-use Korobi\WebBundle\IrcLogs\RenderManager;
+use Korobi\WebBundle\IRC\Log\Render\RenderManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

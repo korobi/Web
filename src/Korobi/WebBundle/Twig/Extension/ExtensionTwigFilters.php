@@ -3,7 +3,7 @@
 namespace Korobi\WebBundle\Twig\Extension;
 
 use Korobi\WebBundle\Controller\BaseController;
-use Korobi\WebBundle\Parser\IRCTextParser;
+use Korobi\WebBundle\IRC\Parser\IRCTextParser;
 
 class ExtensionTwigFilters extends \Twig_Extension {
 

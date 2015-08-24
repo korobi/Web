@@ -1,10 +1,10 @@
 <?php
 
-namespace Korobi\WebBundle\IrcLogs;
+namespace Korobi\WebBundle\IRC\Log\Render;
 
 /**
  * Provides common global settings for @see RenderManager.
- * @package Korobi\WebBundle\IrcLogs
+ * @package Korobi\WebBundle\IRC\Log\Render
  */
 class RenderSettings {
 
