@@ -3,12 +3,12 @@
         {% if topic|default(false) %}
             <div class="line topic" data-event-type="topic">
                 <span>{%- trans %}irc.topic{% endtrans %}</span>
-                <span class="nick irc--{{ constant('\\Korobi\\WebBundle\\IrcLogs\\RenderSettings::ACTION_SERVER_COLOUR') }}-df">{{ constant('\\Korobi\\WebBundle\\IrcLogs\\RenderSettings::ACTION_SERVER_PREFIX') }}</span>
+                <span class="nick irc--{{ constant('\\Korobi\\WebBundle\\IRC\\Log\\Render\\RenderSettings::ACTION_SERVER_COLOUR') }}-df">{{ constant('\\Korobi\\WebBundle\\IRC\\Log\\Render\\RenderSettings::ACTION_SERVER_PREFIX') }}</span>
                 <span class="message">{%- trans %}irc.topic{% endtrans %}: {{ topic.value|ircformat|raw }}</span>
             </div>
             <div class="line topic" data-event-type="topic">
                 <span>{%- trans %}irc.topic{% endtrans %}</span>
-                <span class="nick irc--{{ constant('\\Korobi\\WebBundle\\IrcLogs\\RenderSettings::ACTION_SERVER_COLOUR') }}-df">{{ constant('\\Korobi\\WebBundle\\IrcLogs\\RenderSettings::ACTION_SERVER_PREFIX') }}</span>
+                <span class="nick irc--{{ constant('\\Korobi\\WebBundle\\IRC\\Log\\Render\\RenderSettings::ACTION_SERVER_COLOUR') }}-df">{{ constant('\\Korobi\\WebBundle\\IRC\\Log\\Render\\RenderSettings::ACTION_SERVER_PREFIX') }}</span>
                 <span class="message">
                     {%- trans with {
                         '%time%': topic.time.format('F j, Y h:i:s a'),
