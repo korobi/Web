@@ -50,7 +50,7 @@ class SecurityController extends BaseController {
         if ($payload === null) {
             $payload = [];
         }
-        $uri = isset($payload['csp-report']['document-uri']) && $payload['csp-report']['blocked-uri'] != ''
+        $uri = isset($payload['csp-report']['document-uri']) && $payload['csp-report']['document-uri'] != ''
             ? $this->stripChannelKey($payload['csp-report']['document-uri'])
             : '[uri]';
             
