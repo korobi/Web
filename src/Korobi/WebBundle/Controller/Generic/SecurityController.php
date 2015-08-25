@@ -103,7 +103,7 @@ class SecurityController extends BaseController {
         if (strpos($uri, '?key=') === false) 
             return $uri;
 
-        $repl = preg_replace('/?key=.*$/', '',  $uri);
+        $repl = preg_replace('/\?key=.*$/', '',  $uri);
         
         if ($repl === null)
             return '[uri snipped]';
