@@ -123,6 +123,7 @@ class ChannelLogController extends BaseController {
             ];
         }
         $logData['topic'] = $topic;
+        $logData['key'] = $dbChannel->getKey();
 
         $logData['available_log_days'] = $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel());
 

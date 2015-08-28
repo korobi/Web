@@ -7,7 +7,11 @@
 {% endblock head %}
 
 {% block body %}
-    <h1>Stats for {{ channel_name }} on {{ network_name }}</h1>
+    <h1>
+        Stats for {{ channel_name }}
+        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'key': channel_key, 'super': true} %}
+        on {{ network_name }}
+    </h1>
     <div class="logs">
         {% if data is empty %}
             <div class="empty">Sorry, no stats are available for the requested channel.</div>
