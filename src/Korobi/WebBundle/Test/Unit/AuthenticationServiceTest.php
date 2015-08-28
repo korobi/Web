@@ -56,6 +56,20 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($sut->hasAccessToChannel($channel, $stub));
     }
 
+    public function testAuthorisedByLackOfKey() {
+        $sut = new AuthenticationService(new DummyAuthService(true));
+        $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
+            ->getMock();
+        $reflection = new ReflectionClass($stub);
+        $reflection_property = $reflection->getProperty('query');
+        $bag = new ParameterBag([]);
+
+        $reflection_property->setValue($stub, $bag);
+
+        $channel = new Channel();
+        $this->assertTrue($sut->hasAccessToChannel($channel, $stub));
+    }
+
 }
 
 class DummyAuthService implements AuthorizationCheckerInterface {
