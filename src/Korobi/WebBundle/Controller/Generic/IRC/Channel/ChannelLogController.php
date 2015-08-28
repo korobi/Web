@@ -31,7 +31,7 @@ class ChannelLogController extends BaseController {
         /** @var Channel $dbChannel */
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
-        if(!$dbChannel->getLogsEnabled() && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
+        if(!$dbChannel->getLogsEnabled() && !$this->authChecker->isGranted('ROLE_PRIVATE_ACCESS')) {
             throw new FeatureNotEnabledException($dbNetwork->getName(), $dbChannel->getChannel(), "logs");
         }
 

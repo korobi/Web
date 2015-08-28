@@ -29,7 +29,7 @@ class AuthenticationService implements IAuthenticationService {
     public function hasAccessToChannel(Channel $dbChannel, Request $request) {
         if ($dbChannel->getKey() !== null) {
             $key = $request->query->get('key');
-            if (($key === null || $key !== $dbChannel->getKey()) && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
+            if (($key === null || $key !== $dbChannel->getKey()) && !$this->authChecker->isGranted('ROLE_PRIVATE_ACCESS')) {
                 return false;
             }
         }
