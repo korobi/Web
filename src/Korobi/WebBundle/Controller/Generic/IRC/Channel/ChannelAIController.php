@@ -16,14 +16,6 @@ class ChannelAIController extends BaseController {
         /** @var Channel $dbChannel */
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
-        // check if this channel requires a key
-        if ($dbChannel->getKey() !== null) {
-            $key = $request->query->get('key');
-            if ($key === null || $key !== $dbChannel->getKey()) {
-                throw new \Exception('Unauthorized'); // TODO
-            }
-        }
-
         // fetch document
         /** @var ChannelAI $dbChannelAI */
         $dbChannelAI = $this->get('doctrine_mongodb')

@@ -4,6 +4,7 @@ imports:
     - { resource: services/controllers.yml }
     - { resource: services/console.yml }
     - { resource: services/irc_logs.yml }
+    - { resource: services/services.yml }
 
 services:
     korobi.user_provider:
