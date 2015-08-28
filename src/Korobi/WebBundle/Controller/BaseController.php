@@ -105,8 +105,13 @@ abstract class BaseController extends Controller {
             throw $this->createNotFoundException('Could not find channel');
         }
 
+        // FIXME: Will break for Symfony 3!
+
+        /** @var Request $request */
+        $request = $this->container->get('request');
+
         // ensure the user is appropriately authenticated
-        if (!$this->getAuthenticationService()->hasAccessToChannel($dbChannel, $this->getRequestNotDeprecated())) {
+        if (!$this->getAuthenticationService()->hasAccessToChannel($dbChannel, $request)) {
             throw new ChannelAccessException($dbNetwork->getName(), $dbChannel->getChannel());
         }
 
@@ -135,15 +140,5 @@ abstract class BaseController extends Controller {
      */
     protected function getRenderManager() {
         return $this->get("korobi.irc.render_manager");
-    }
-
-    /**
-     * Future-proof past Symfony 3!
-     */
-    protected function getRequestNotDeprecated() {
-        // I'll understand if you think this is terrible, I'm inclined to agree
-        // Trouble is, if we inject Request via the constructor, all the other controllers
-        // then need to use DI to grab yet another dependency via the constructor.
-        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }
