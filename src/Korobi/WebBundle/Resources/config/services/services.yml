@@ -1,0 +1,4 @@
+services:
+    korobi.authentication_service:
+        class: Korobi\WebBundle\Service\AuthenticationService
+        arguments: ["@security.authorization_checker"]

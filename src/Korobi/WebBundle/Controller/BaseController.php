@@ -4,7 +4,9 @@ namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\Exception\ChannelAccessException;
 use Korobi\WebBundle\IRC\Log\Render\RenderManager;
+use Korobi\WebBundle\Service\IAuthenticationService;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,6 +73,7 @@ abstract class BaseController extends Controller {
      * @param $network
      * @param $channel
      * @return array
+     * @throws ChannelAccessException If the user doesn't have access to the channel.
      */
     protected function createNetworkChannelPair($network, $channel) {
         // validate network
@@ -102,6 +105,11 @@ abstract class BaseController extends Controller {
             throw $this->createNotFoundException('Could not find channel');
         }
 
+        // ensure the user is appropriately authenticated
+        if (!$this->getAuthenticationService()->hasAccessToChannel($dbChannel, $this->getRequestNotDeprecated())) {
+            throw new ChannelAccessException($dbNetwork->getName(), $dbChannel->getChannel());
+        }
+
         // grab first slice
         $dbChannel = $dbChannel[0];
 
@@ -116,9 +124,26 @@ abstract class BaseController extends Controller {
     }
 
     /**
+     * @return IAuthenticationService
+     */
+    protected function getAuthenticationService() {
+        return $this->get("korobi.authentication_service");
+    }
+
+    /**
      * @return RenderManager
      */
     protected function getRenderManager() {
         return $this->get("korobi.irc.render_manager");
+    }
+
+    /**
+     * Future-proof past Symfony 3!
+     */
+    protected function getRequestNotDeprecated() {
+        // I'll understand if you think this is terrible, I'm inclined to agree
+        // Trouble is, if we inject Request via the constructor, all the other controllers
+        // then need to use DI to grab yet another dependency via the constructor.
+        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

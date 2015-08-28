@@ -8,7 +8,6 @@ use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\ChatIndex;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Repository\ChatRepository;
-use Korobi\WebBundle\Util\AuthenticationUtil;
 use Korobi\WebBundle\Util\FileCache;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,8 +30,6 @@ class ChannelLogController extends BaseController {
         /** @var Channel $dbChannel */
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
-        // check if this channel requires a key
-        AuthenticationUtil::checkKeyAccess($dbChannel, $request, $this->authChecker);
         if(!$dbChannel->getLogsEnabled() && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
             throw $this->createNotFoundException(); // TODO
         }
