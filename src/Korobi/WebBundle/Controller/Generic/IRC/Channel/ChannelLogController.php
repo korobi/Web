@@ -97,7 +97,6 @@ class ChannelLogController extends BaseController {
                 'network_name' => $dbNetwork->getName(),
                 'network_slug' => $dbNetwork->getSlug(),
                 'channel_name' => $dbChannel->getChannel(),
-                'channel_private' => $dbChannel->isPrivate(),
                 'channel_slug' => $channel,
                 'logs' => $chats,
                 'date' => $date,
@@ -124,6 +123,9 @@ class ChannelLogController extends BaseController {
             ];
         }
         $logData['topic'] = $topic;
+
+        // key should not be cached
+        $logData['channel_private'] = $dbChannel->isPrivate();
 
         $logData['available_log_days'] = $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel());
 
