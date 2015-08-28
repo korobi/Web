@@ -1,3 +1,3 @@
-{% if private %}
-    <i class="private-channel-icon {% if inline is defined and inline %}inline{% endif %} {% if super is defined and super %}super{% endif %} fa fa-lock" title="Private"></i>
+{% if is_private %}
+    <i class="private-channel-icon {% if inline|default(false) %}inline{% endif %} {% if super|default(false) %}super{% endif %} fa fa-lock" title="Private"></i>
 {% endif %}

@@ -9,7 +9,7 @@
 {% block body %}
     <h1>
         Stats for {{ channel_name }}
-        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'private': channel_private, 'super': true} %}
+        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'is_private': channel_private, 'super': true} %}
         on {{ network_name }}
     </h1>
     <div class="logs">

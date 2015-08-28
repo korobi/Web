@@ -23,7 +23,7 @@
                 <tr>
                     <td>
                         <a href="{{ data.url }}">{{ name }}</a>
-                        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'private': data.db.isPrivate, 'inline': true} %}
+                        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'is_private': data.db.isPrivate, 'inline': true} %}
                     </td>
                     <td>
                         {% if data.db.logsEnabled %}
