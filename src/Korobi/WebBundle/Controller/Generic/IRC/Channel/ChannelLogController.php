@@ -7,6 +7,7 @@ use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\ChatIndex;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\Exception\FeatureNotEnabledException;
 use Korobi\WebBundle\Repository\ChatRepository;
 use Korobi\WebBundle\Util\FileCache;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,7 +32,7 @@ class ChannelLogController extends BaseController {
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         if(!$dbChannel->getLogsEnabled() && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
-            throw $this->createNotFoundException(); // TODO
+            throw new FeatureNotEnabledException($dbNetwork->getName(), $dbChannel->getChannel(), "logs");
         }
 
         // populate variables with request information if available, or defaults
