@@ -57,10 +57,15 @@ class NetworkHomeController extends BaseController {
                 $key = $dbChannel->getKey();
             }
 
-            $channels[$channel] = ["url" => $this->generateUrl('channel', [
-                'network' => $network,
-                'channel' => self::transformChannelName($channel),
-            ]), "db" => $dbChannel, 'key' => $key];
+            $channels[$channel] = [
+                'url' => $this->generateUrl('channel', [
+                    'network' => $network,
+                    'channel' => self::transformChannelName($channel),
+                    'key' => $key,
+                ]),
+                'db' => $dbChannel,
+                'key' => $key
+            ];
         }
 
         ksort($channels, SORT_NATURAL | SORT_FLAG_CASE);
