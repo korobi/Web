@@ -151,7 +151,7 @@ class Channel {
      * @return bool
      */
     public function isPrivate() {
-        return $this->getKey() != null;
+        return $this->getKey() !== null;
     }
 
     /**
