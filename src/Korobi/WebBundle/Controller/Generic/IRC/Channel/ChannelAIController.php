@@ -7,6 +7,7 @@ use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChannelAI;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\IRC\Parser\IRCTextParser;
+use Korobi\WebBundle\Util\AuthenticationUtil;
 use Symfony\Component\HttpFoundation\Request;
 
 class ChannelAIController extends BaseController {
@@ -17,12 +18,7 @@ class ChannelAIController extends BaseController {
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if this channel requires a key
-        if ($dbChannel->getKey() !== null) {
-            $key = $request->query->get('key');
-            if ($key === null || $key !== $dbChannel->getKey()) {
-                throw new \Exception('Unauthorized'); // TODO
-            }
-        }
+        AuthenticationUtil::checkKeyAccess($dbChannel, $request, $this->authChecker);
 
         // fetch document
         /** @var ChannelAI $dbChannelAI */

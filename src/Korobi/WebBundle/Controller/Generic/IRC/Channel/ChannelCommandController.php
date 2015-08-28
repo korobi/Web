@@ -6,6 +6,7 @@ use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\ChannelCommand;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\Util\AuthenticationUtil;
 use Symfony\Component\HttpFoundation\Request;
 
 class ChannelCommandController extends BaseController {
@@ -23,12 +24,7 @@ class ChannelCommandController extends BaseController {
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
         // check if this channel requires a key
-        if ($dbChannel->getKey() !== null) {
-            $key = $request->query->get('key');
-            if ($key === null || $key !== $dbChannel->getKey()) {
-                throw new \Exception('Unauthorized'); // TODO
-            }
-        }
+        AuthenticationUtil::checkKeyAccess($dbChannel, $request, $this->authChecker);
 
         // fetch all commands
         $dbCommands = $this->get('doctrine_mongodb')
