@@ -33,7 +33,8 @@ class ChannelLogController extends BaseController {
         // check if this channel requires a key
         if ($dbChannel->getKey() !== null) {
             $key = $request->query->get('key');
-            if ($key === null || $key !== $dbChannel->getKey()) {
+            if (($key === null || $key !== $dbChannel->getKey())
+                && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
                 throw new \Exception('Unauthorized'); // TODO
             }
         } else if(!$dbChannel->getLogsEnabled() && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
