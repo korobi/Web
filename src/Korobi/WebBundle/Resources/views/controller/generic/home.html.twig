@@ -86,7 +86,12 @@
                 {% for channel in channels %}
                     {% set lastValidContent = channel.LastActivityValid %}
                     <tr>
-                        <td><a href="{{ path('channel', {'channel': channel.channel[1:], 'network': channel.network}) }}"><abbr title="<strong>Network:</strong> {{ attribute(networks, channel.network) }}" rel="tooltip">{{ channel.channel }}</abbr></a></td>
+                        <td>
+                            <a href="{{ path('channel', {'channel': channel.channel[1:], 'network': channel.network}) }}">
+                                <abbr title="<strong>Network:</strong> {{ attribute(networks, channel.network) }}" rel="tooltip">{{ channel.channel }}</abbr>
+                            </a>
+                            {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'is_private': channel.isPrivate, 'inline': true} %}
+                        </td>
                         {% if lastValidContent == null %}
                             <td><em>Never</em></td>
                         {% else %}

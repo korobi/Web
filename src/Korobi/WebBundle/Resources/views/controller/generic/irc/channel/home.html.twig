@@ -4,7 +4,10 @@
 {% set page_title = channel_name ~ ' on ' ~ network_name %}
 
 {% block body %}
-    <h1>{{ channel_name }} on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a></h1>
+    <h1>
+        {{ channel_name }}
+        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'is_private': channel_private, 'super': true} %}
+        on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a></h1>
     {% if topic is empty %}
         <h3>No topic is available.</h3>
     {% else %}

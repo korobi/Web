@@ -124,6 +124,9 @@ class ChannelLogController extends BaseController {
         }
         $logData['topic'] = $topic;
 
+        // key should not be cached
+        $logData['channel_private'] = $dbChannel->isPrivate();
+
         $logData['available_log_days'] = $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel());
 
         // time to render!

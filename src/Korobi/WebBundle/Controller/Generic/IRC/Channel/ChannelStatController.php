@@ -42,6 +42,7 @@ class ChannelStatController extends BaseController {
         return $this->render('KorobiWebBundle:controller/generic/irc/channel:stats.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
+            'channel_private' => $dbChannel->isPrivate(),
             'data' => $statData,
         ]);
     }

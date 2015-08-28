@@ -21,7 +21,10 @@
             <tbody>
             {% for name, data in channels %}
                 <tr>
-                    <td><a href="{{ data.url }}">{{ name }}</a></td>
+                    <td>
+                        <a href="{{ data.url }}">{{ name }}</a>
+                        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'is_private': data.db.isPrivate, 'inline': true} %}
+                    </td>
                     <td>
                         {% if data.db.logsEnabled %}
                             <a href="{{ path('channel_log', {'network': data.db.network, 'channel': name|transformChannelName}) ~ data.key }}" class="button button-flat-primary button-rounded">Logs <i class="fa fa-comments-o"></i></a>

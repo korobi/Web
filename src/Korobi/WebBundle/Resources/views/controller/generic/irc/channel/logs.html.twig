@@ -73,8 +73,9 @@
         </div>
     </div>
     {% set reusableLinks %}
-        <a href="{{ path('channel', {'channel': channel_slug, 'network': network_slug}) }}">
-            {{ channel_name }}</a> on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a>
+        <a href="{{ path('channel', {'channel': channel_slug, 'network': network_slug}) }}">{{ channel_name }}</a>
+        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'is_private': channel_private, 'super': true} %}
+        on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a>
     {% endset %}
     {% if is_tail %}
         <h1>Tail log for {{ reusableLinks }}</h1>
