@@ -12,12 +12,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
 
     public function testUnauthorised() {
-        $sut = new AuthenticationService(new DummyAuthService(true));
+        $sut = new AuthenticationService(new DummyAuthService(false));
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
         $reflection_property = $reflection->getProperty('query');
-        $reflection_property->setAccessible(true);
         $bag = new ParameterBag(["key" => "kitten"]);
 
         $reflection_property->setValue($stub, $bag);
@@ -28,12 +27,11 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testAuthorisedByKey() {
-        $sut = new AuthenticationService(new DummyAuthService(true));
+        $sut = new AuthenticationService(new DummyAuthService(false));
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
         $reflection_property = $reflection->getProperty('query');
-        $reflection_property->setAccessible(true);
         $bag = new ParameterBag(["key" => "cats"]);
 
         $reflection_property->setValue($stub, $bag);
@@ -44,12 +42,11 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testAuthorisedByAdmin() {
-        $sut = new AuthenticationService(new DummyAuthService(false));
+        $sut = new AuthenticationService(new DummyAuthService(true));
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
         $reflection_property = $reflection->getProperty('query');
-        $reflection_property->setAccessible(true);
         $bag = new ParameterBag([]);
 
         $reflection_property->setValue($stub, $bag);
@@ -63,14 +60,14 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
 
 class DummyAuthService implements AuthorizationCheckerInterface {
 
-    private $reject;
+    private $accept;
 
     /**
      * DummyAuthService constructor.
-     * @param $reject
+     * @param bool $accept
      */
-    public function __construct($reject) {
-        $this->reject = $reject;
+    public function __construct($accept) {
+        $this->accept = $accept;
     }
 
 
@@ -83,6 +80,6 @@ class DummyAuthService implements AuthorizationCheckerInterface {
      * @return bool
      */
     public function isGranted($attributes, $object = null) {
-        return !$this->reject;
+        return $this->accept;
     }
 }
