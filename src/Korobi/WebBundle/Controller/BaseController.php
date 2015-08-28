@@ -77,7 +77,6 @@ abstract class BaseController extends Controller {
      */
     protected function createNetworkChannelPair($network, $channel) {
         // validate network
-        /** @var Network $dbNetwork */
         $dbNetwork = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Network')
@@ -90,10 +89,10 @@ abstract class BaseController extends Controller {
         }
 
         // grab first slice
+        /** @var Network $dbNetwork */
         $dbNetwork = $dbNetwork[0];
 
         // fetch channel
-        /** @var Channel $dbChannel */
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
@@ -106,6 +105,7 @@ abstract class BaseController extends Controller {
         }
 
         // grab first slice
+        /** @var Channel $dbChannel */
         $dbChannel = $dbChannel[0];
 
         // FIXME: Will break for Symfony 3!
