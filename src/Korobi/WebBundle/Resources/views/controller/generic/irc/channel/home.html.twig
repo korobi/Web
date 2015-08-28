@@ -6,7 +6,7 @@
 {% block body %}
     <h1>
         {{ channel_name }}
-        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'key': channel_key, 'super': true} %}
+        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'private': channel_private, 'super': true} %}
         on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a></h1>
     {% if topic is empty %}
         <h3>No topic is available.</h3>

@@ -50,7 +50,7 @@ class ChannelHomeController extends BaseController {
             'network_name' => $dbNetwork->getName(),
             'network_slug' => $dbNetwork->getSlug(),
             'channel_name' => $dbChannel->getChannel(),
-            'channel_key' => $dbChannel->getKey(),
+            'channel_private' => $dbChannel->isPrivate(),
             'channel' => $dbChannel,
             'topic' => $topic,
             'now' => time(),

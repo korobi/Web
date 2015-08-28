@@ -9,7 +9,7 @@
 {% block body %}
     <h1>
         Commands for {{ channel_name }}
-        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'key': channel_key, 'super': true} %}
+        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'private': channel_private, 'super': true} %}
         on {{ network_name }}
     </h1>
     <div class="commands">

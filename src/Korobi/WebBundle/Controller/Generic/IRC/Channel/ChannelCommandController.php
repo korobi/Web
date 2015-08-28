@@ -73,7 +73,7 @@ class ChannelCommandController extends BaseController {
         return $this->render('KorobiWebBundle:controller/generic/irc/channel:commands.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
-            'channel_key' => $dbChannel->getKey(),
+            'channel_private' => $dbChannel->isPrivate(),
             'commands' => $commands,
         ]);
     }
