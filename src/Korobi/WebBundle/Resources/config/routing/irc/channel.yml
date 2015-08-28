@@ -36,7 +36,3 @@ channel_ai:
     path: /{network}/channel/{channel}/ai/
     defaults:
         _controller: korobi.controller.irc.channel.ai:listAction
-channel_game:
-    path: /{network}/channel/{channel}/games/{gameId}/
-    defaults:
-        _controller: korobi.controller.irc.channel.game:gameAction

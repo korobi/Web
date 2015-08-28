@@ -19,11 +19,10 @@ class RewriteController extends BaseController {
      * @param bool|int $month
      * @param bool|int $day
      * @param bool $tail
-     * @param bool $gameId
      * @return \Symfony\Component\HttpFoundation\Response
      * @internal param Request $request
      */
-    public function rewriteAction($network, $channel = null, $component = 'home', $year = false, $month = false, $day = false, $tail = false, $gameId = false) {
+    public function rewriteAction($network, $channel = null, $component = 'home', $year = false, $month = false, $day = false, $tail = false) {
         // If no channel is provided we assume we're looking for a network.
         if ($channel === null) {
             /** @var Network $dbNetwork */
@@ -74,12 +73,6 @@ class RewriteController extends BaseController {
                     return $this->redirectToRoute('channel_ai', [
                         'network' => $network,
                         'channel' => $channel,
-                    ], 301);
-                case 'games':
-                    return $this->redirectToRoute('channel_game', [
-                        'network' => $network,
-                        'channel' => $channel,
-                        'gameId' => $gameId,
                     ], 301);
                 default:
                     if ($this->doesChannelExistForNetwork($network, $channel)) {
