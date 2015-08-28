@@ -27,14 +27,30 @@
                     </td>
                     <td>
                         {% if data.db.logsEnabled %}
-                            <a href="{{ path('channel_log', {'network': data.db.network, 'channel': name|transformChannelName}) ~ data.key }}" class="button button-flat-primary button-rounded">Logs <i class="fa fa-comments-o"></i></a>
-                            <a href="{{ path('channel_log_tail', {'network': data.db.network, 'channel': name|transformChannelName}) ~ data.key }}" class="button button-flat-primary button-rounded">Tail <i class="fa fa-ellipsis-h"></i></a>
+                            <a href="{{ path('channel_log', {
+                                'network': data.db.network,
+                                'channel': name|transformChannelName,
+                                'key': data.key
+                            }) }}" class="button button-flat-primary button-rounded">Logs <i class="fa fa-comments-o"></i></a>
+                            <a href="{{ path('channel_log_tail', {
+                                'network': data.db.network,
+                                'channel': name|transformChannelName,
+                                'key': data.key
+                            }) }}" class="button button-flat-primary button-rounded">Tail <i class="fa fa-ellipsis-h"></i></a>
                         {% endif %}
                         {% if data.db.commandsEnabled %}
-                            <a href="{{ path('channel_command', {'network': data.db.network, 'channel': name|transformChannelName}) ~ data.key }}" class="button button-flat-primary button-rounded">Commands <i class="fa fa-terminal"></i></a>
+                            <a href="{{ path('channel_command', {
+                                'network': data.db.network,
+                                'channel': name|transformChannelName,
+                                'key': data.key
+                            }) }}" class="button button-flat-primary button-rounded">Commands <i class="fa fa-terminal"></i></a>
                         {% endif %}
                         {% if data.db.logsEnabled %}
-                            <a href="{{ path('channel_stat', {'network': data.db.network, 'channel': name|transformChannelName}) ~ data.key }}" class="button button-flat-primary button-rounded">Stats <i class="fa fa-area-chart"></i></a>
+                            <a href="{{ path('channel_stat', {
+                                'network': data.db.network,
+                                'channel': name|transformChannelName,
+                                'key': data.key
+                            }) }}" class="button button-flat-primary button-rounded">Stats <i class="fa fa-area-chart"></i></a>
                         {% endif %}
                     </td>
                 </tr>
