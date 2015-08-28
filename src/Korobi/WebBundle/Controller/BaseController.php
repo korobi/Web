@@ -105,6 +105,9 @@ abstract class BaseController extends Controller {
             throw $this->createNotFoundException('Could not find channel');
         }
 
+        // grab first slice
+        $dbChannel = $dbChannel[0];
+
         // FIXME: Will break for Symfony 3!
 
         /** @var Request $request */
@@ -114,9 +117,6 @@ abstract class BaseController extends Controller {
         if (!$this->getAuthenticationService()->hasAccessToChannel($dbChannel, $request)) {
             throw new ChannelAccessException($dbNetwork->getName(), $dbChannel->getChannel());
         }
-
-        // grab first slice
-        $dbChannel = $dbChannel[0];
 
         return [$dbNetwork, $dbChannel];
     }
