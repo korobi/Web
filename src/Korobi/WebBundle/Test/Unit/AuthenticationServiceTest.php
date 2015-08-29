@@ -17,10 +17,10 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
-        $reflection_property = $reflection->getProperty('query');
+        $reflectionProperty = $reflection->getProperty('query');
         $bag = new ParameterBag(["key" => "kitten"]);
 
-        $reflection_property->setValue($stub, $bag);
+        $reflectionProperty->setValue($stub, $bag);
 
         $channel = new Channel();
         $channel->setKey("cats");
@@ -32,10 +32,10 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
-        $reflection_property = $reflection->getProperty('query');
+        $reflectionProperty = $reflection->getProperty('query');
         $bag = new ParameterBag(["key" => "cats"]);
 
-        $reflection_property->setValue($stub, $bag);
+        $reflectionProperty->setValue($stub, $bag);
 
         $channel = new Channel();
         $channel->setKey("cats");
@@ -47,10 +47,10 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
-        $reflection_property = $reflection->getProperty('query');
+        $reflectionProperty = $reflection->getProperty('query');
         $bag = new ParameterBag([]);
 
-        $reflection_property->setValue($stub, $bag);
+        $reflectionProperty->setValue($stub, $bag);
 
         $channel = new Channel();
         $channel->setKey("cats");
@@ -62,10 +62,10 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
-        $reflection_property = $reflection->getProperty('query');
+        $reflectionProperty = $reflection->getProperty('query');
         $bag = new ParameterBag([]);
 
-        $reflection_property->setValue($stub, $bag);
+        $reflectionProperty->setValue($stub, $bag);
 
         $channel = new Channel();
         $this->assertEquals(IAuthenticationService::ALLOW, $sut->hasAccessToChannel($channel, $stub));
