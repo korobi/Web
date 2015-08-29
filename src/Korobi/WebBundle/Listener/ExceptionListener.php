@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class ExceptionListener {
+
     const TEMPLATE_NAME_PREFIX = "KorobiWebBundle:error/:";
 
     /**

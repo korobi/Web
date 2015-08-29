@@ -4,5 +4,5 @@
 
 {% block body %}
     <h1>Channel feature unavailable</h1>
-    <p>{{ exception.message }}</p>
+    <p>The requested feature &ldquo;{{ exception.feature }}&rdquo; for channel &ldquo;{{ exception.channel }}&rdquo; on network &ldquo;{{ exception.network }}&rdquo; is unavailable.</p>
 {% endblock %}
