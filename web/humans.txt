@@ -1,4 +1,4 @@
-/* WEB */
+/* Web */
 
     bendem - general purpose magician
         Twitter: @bendembd
@@ -6,9 +6,9 @@
 
     bionicrm - the casual do whatever guy
         Twitter: @bionicrm
-        Github: https://github.com/bionicrm/
+        GitHub: https://github.com/bionicrm/
 
-    Kashike - developer, kitten cuddler
+    kashike - developer, kitten cuddler
         Twitter: @_kashike
         GitHub: https://github.com/kashike/
 
@@ -26,7 +26,7 @@
         Twitter: @bendembd
         GitHub: https://github.com/bendem/
 
-    Kashike - developer, kitten cuddler
+    kashike - developer, kitten cuddler
         Twitter: @_kashike
         GitHub: https://github.com/kashike/
 
@@ -34,7 +34,7 @@
         Twitter: @lol768
         GitHub: https://github.com/lol768/
 
-/* THANKS */
+/* Thanks */
 
     drtshock - feedback on the site and bot
         Twitter: @drtshock
