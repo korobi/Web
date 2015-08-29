@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Korobi\WebBundle\Listener;
-
 
 use Korobi\WebBundle\Exception\CustomPageExceptionInterface;
 use Symfony\Bundle\TwigBundle\TwigEngine;
