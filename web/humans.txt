@@ -1,6 +1,6 @@
 /* WEB */
 
-    Kashike - backend developer, javascript hitter, kitten cuddler
+    Kashike - developer, kitten cuddler
         Twitter: @_kashike
         GitHub: https://github.com/kashike/
 
@@ -20,7 +20,7 @@
         Twitter: @bionicrm
         Github: https://github.com/bionicrm/
 
-/* IRC */
+/* IRC bot */
 
     Kashike - developer, kitten cuddler
         Twitter: @_kashike
