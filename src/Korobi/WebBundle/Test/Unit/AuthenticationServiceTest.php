@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Test\Unit;
 
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Service\AuthenticationService;
+use Korobi\WebBundle\Service\IAuthenticationService;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -23,7 +24,7 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
 
         $channel = new Channel();
         $channel->setKey("cats");
-        $this->assertFalse($sut->hasAccessToChannel($channel, $stub));
+        $this->assertEquals(IAuthenticationService::WRONG_KEY, $sut->hasAccessToChannel($channel, $stub));
     }
 
     public function testAuthorisedByKey() {
@@ -38,7 +39,7 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
 
         $channel = new Channel();
         $channel->setKey("cats");
-        $this->assertTrue($sut->hasAccessToChannel($channel, $stub));
+        $this->assertEquals(IAuthenticationService::ALLOW, $sut->hasAccessToChannel($channel, $stub));
     }
 
     public function testAuthorisedByAdmin() {
@@ -53,7 +54,7 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
 
         $channel = new Channel();
         $channel->setKey("cats");
-        $this->assertTrue($sut->hasAccessToChannel($channel, $stub));
+        $this->assertEquals(IAuthenticationService::ALLOW, $sut->hasAccessToChannel($channel, $stub));
     }
 
     public function testAuthorisedByLackOfKey() {
@@ -67,7 +68,7 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $reflection_property->setValue($stub, $bag);
 
         $channel = new Channel();
-        $this->assertTrue($sut->hasAccessToChannel($channel, $stub));
+        $this->assertEquals(IAuthenticationService::ALLOW, $sut->hasAccessToChannel($channel, $stub));
     }
 
 }

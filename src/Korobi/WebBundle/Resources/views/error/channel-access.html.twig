@@ -4,6 +4,9 @@
 
 {% block body %}
     <h1>You don't have permission to view that channel</h1>
+    {% if exception.failureType == constant('\\Korobi\\WebBundle\\Exception\\ChannelAccessException::INVALID_KEY_SUPPLIED') %}
+        <div class="flash-error">Invalid key was supplied.</div>
+    {% endif %}
     <p>The channel &ldquo;{{ exception.channel }}&rdquo; on network &ldquo;{{ exception.network }}&rdquo; is protected by a key. If you know the key, you can enter it below:</p>
     <form method="get" class="channel-key-entry"><input type="text" name="key"><input type="submit" value="Submit"></form>
 
