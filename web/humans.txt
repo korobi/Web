@@ -20,7 +20,7 @@
         GitHub: https://github.com/Zarthus/
         Website: https://luradi.com
 
-/* IRC */
+/* Felix */
 
     bendem - general purpose magician
         Twitter: @bendembd
