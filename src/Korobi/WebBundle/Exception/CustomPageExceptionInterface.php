@@ -8,6 +8,7 @@ namespace Korobi\WebBundle\Exception;
  * @package Korobi\WebBundle\Exception
  */
 interface CustomPageExceptionInterface {
+
     /**
      * @return string Error page name used to display error details to user.
      */
