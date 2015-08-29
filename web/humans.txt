@@ -12,8 +12,9 @@
         Twitter: @bendembd
         GitHub: https://github.com/bendem/
 
-    Zarthus - work on colour parser and advice
+    Zarthus - front, back, side and up-end developer
         GitHub: https://github.com/Zarthus/
+        Website: https://luradi.com
 
     bionicrm - the casual do whatever guy
         Twitter: @bionicrm
@@ -34,9 +35,6 @@
         GitHub: https://github.com/bendem/
 
 /* THANKS */
-
-    Zarthus - work on colour parser and advice
-        GitHub: https://github.com/Zarthus/
 
     drtshock - feedback on the site and bot
         Twitter: @drtshock
