@@ -1,8 +1,8 @@
 {% extends 'KorobiWebBundle::layout.html.twig' %}
 
-{% set page_title = "Unexpected redirect" %}
+{% set page_title = "Channel access" %}
 
 {% block body %}
-    <h1>Unexpected Redirect</h1>
-    <p>For security reasons, a redirect to {{ url }} was disallowed.</p>
+    <h1>Channel access error</h1>
+    <p>{{ exception->getMessage() }}</p>
 {% endblock %}
