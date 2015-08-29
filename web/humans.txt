@@ -1,27 +1,13 @@
 /* WEB */
 
-    Kashike - developer, kitten cuddler
-        Twitter: @_kashike
-        GitHub: https://github.com/kashike/
-
-    lol768 - backend developer
-        Twitter: @lol768
-        GitHub: https://github.com/lol768/
-
     bendem - general purpose magician
         Twitter: @bendembd
         GitHub: https://github.com/bendem/
-
-    Zarthus - front, back, side and up-end developer
-        GitHub: https://github.com/Zarthus/
-        Website: https://luradi.com
 
     bionicrm - the casual do whatever guy
         Twitter: @bionicrm
         Github: https://github.com/bionicrm/
 
-/* IRC bot */
-
     Kashike - developer, kitten cuddler
         Twitter: @_kashike
         GitHub: https://github.com/kashike/
@@ -30,9 +16,23 @@
         Twitter: @lol768
         GitHub: https://github.com/lol768/
 
+    Zarthus - front, back, side and up-end developer
+        GitHub: https://github.com/Zarthus/
+        Website: https://luradi.com
+
+/* IRC */
+
     bendem - general purpose magician
         Twitter: @bendembd
         GitHub: https://github.com/bendem/
+
+    Kashike - developer, kitten cuddler
+        Twitter: @_kashike
+        GitHub: https://github.com/kashike/
+
+    lol768 - backend developer
+        Twitter: @lol768
+        GitHub: https://github.com/lol768/
 
 /* THANKS */
 
@@ -40,13 +40,13 @@
         Twitter: @drtshock
         GitHub: https://github.com/drtshock/
 
-    mbaxter - work on Kitteh IRC Client Library
-        GitHub: https://github.com/mbax/
+    jamierocks - work on documentation
+        Twitter: @LexteamJamie
+        GitHub: https://github.com/jamierocks/
 
     jkcclemens - feedback, suggestions, kitten cuddler
         Twitter: @jkcclemens
         GitHub: https://github.com/jkcclemens/
 
-    jamierocks - work on documentation
-        Twitter: @LexteamJamie
-        GitHub: https://github.com/jamierocks/
+    mbaxter - work on Kitteh IRC Client Library
+        GitHub: https://github.com/mbax/
