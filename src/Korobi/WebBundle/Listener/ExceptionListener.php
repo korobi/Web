@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class ExceptionListener {
+    const TEMPLATE_NAME_PREFIX = "KorobiWebBundle:error/:";
 
     /**
      * @var TwigEngine
@@ -49,7 +50,8 @@ class ExceptionListener {
      * @return Response
      */
     private function getResponseForException($exception) {
-        $response = $this->templatingEngine->renderResponse($exception->getViewName(), $this->getViewParametersForException($exception));
+        $viewName = self::TEMPLATE_NAME_PREFIX . $exception->getViewName() . ".html.twig";
+        $response = $this->templatingEngine->renderResponse($viewName, $this->getViewParametersForException($exception));
         $response->setStatusCode($exception->getCode());
         return $response;
     }
