@@ -2,7 +2,7 @@
 
 namespace Korobi\WebBundle\Exception;
 
-class FeatureNotEnabledException extends \Exception {
+class FeatureNotEnabledException extends \Exception implements CustomPageExceptionInterface {
 
     private $network;
     private $channel;
@@ -15,6 +15,7 @@ class FeatureNotEnabledException extends \Exception {
      * @param string $feature
      */
     public function __construct($network, $channel, $feature) {
+        parent::__construct("The requested feature $feature is not enabled for $channel on network $network.", 404);
         $this->network = $network;
         $this->channel = $channel;
         $this->feature = $feature;
@@ -39,5 +40,12 @@ class FeatureNotEnabledException extends \Exception {
      */
     public function getFeature() {
         return $this->feature;
+    }
+
+    /**
+     * @return string Error page name used to display error details to user.
+     */
+    public function getViewName() {
+        return "feature-not-enabled";
     }
 }
