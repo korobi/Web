@@ -24,7 +24,6 @@ class ExceptionListener {
         $this->templatingEngine = $templatingEngine;
     }
 
-
     /**
      * Handle kernel exceptions that come in and provide responses for exceptions we know about.
      * @param GetResponseForExceptionEvent $event
