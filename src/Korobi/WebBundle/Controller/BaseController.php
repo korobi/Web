@@ -119,6 +119,7 @@ abstract class BaseController extends Controller {
             $failureType = ChannelAccessException::NO_KEY_SUPPLIED;
             if ($accessResponse === IAuthenticationService::INVALID_KEY) {
                 $failureType = ChannelAccessException::INVALID_KEY_SUPPLIED;
+                $this->addFlash('error', 'Invalid key was supplied.');
             }
             throw new ChannelAccessException($dbNetwork->getName(), $dbChannel->getChannel(), $failureType);
         }
