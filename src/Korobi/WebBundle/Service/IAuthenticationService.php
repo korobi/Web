@@ -9,7 +9,7 @@ interface IAuthenticationService {
 
     const ALLOW = 0;
     const INVALID_KEY = 1;
-    const REJECT = 2;
+    const MISSING_KEY = 2;
 
     /**
      * @param Channel $dbChannel

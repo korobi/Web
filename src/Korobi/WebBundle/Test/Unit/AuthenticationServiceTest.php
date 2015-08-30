@@ -27,6 +27,21 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(IAuthenticationService::INVALID_KEY, $sut->hasAccessToChannel($channel, $stub));
     }
 
+    public function testUnauthorisedByNoKey() {
+        $sut = new AuthenticationService(new DummyAuthService(false));
+        $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
+            ->getMock();
+        $reflection = new ReflectionClass($stub);
+        $reflectionProperty = $reflection->getProperty('query');
+        $bag = new ParameterBag([]);
+
+        $reflectionProperty->setValue($stub, $bag);
+
+        $channel = new Channel();
+        $channel->setKey("cats");
+        $this->assertEquals(IAuthenticationService::MISSING_KEY, $sut->hasAccessToChannel($channel, $stub));
+    }
+
     public function testAuthorisedByKey() {
         $sut = new AuthenticationService(new DummyAuthService(false));
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')

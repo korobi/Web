@@ -34,7 +34,7 @@ class AuthenticationService implements IAuthenticationService {
         if ($dbChannel->getKey() !== null) {
             $key = $request->query->get('key');
             if ($key === null) {
-                return IAuthenticationService::REJECT;
+                return IAuthenticationService::MISSING_KEY;
             }
             if ($key !== $dbChannel->getKey()) {
                 return IAuthenticationService::INVALID_KEY;
