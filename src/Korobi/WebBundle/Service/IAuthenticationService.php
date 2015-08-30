@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 interface IAuthenticationService {
 
     const ALLOW = 0;
-    const WRONG_KEY = 1;
+    const INVALID_KEY = 1;
     const REJECT = 2;
 
     /**

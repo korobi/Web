@@ -117,7 +117,7 @@ abstract class BaseController extends Controller {
         $accessResponse = $this->getAuthenticationService()->hasAccessToChannel($dbChannel, $request);
         if ($accessResponse !== IAuthenticationService::ALLOW) {
             $failureType = ChannelAccessException::NO_KEY_SUPPLIED;
-            if ($accessResponse === IAuthenticationService::WRONG_KEY) {
+            if ($accessResponse === IAuthenticationService::INVALID_KEY) {
                 $failureType = ChannelAccessException::INVALID_KEY_SUPPLIED;
             }
             throw new ChannelAccessException($dbNetwork->getName(), $dbChannel->getChannel(), $failureType);

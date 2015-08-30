@@ -24,7 +24,7 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
 
         $channel = new Channel();
         $channel->setKey("cats");
-        $this->assertEquals(IAuthenticationService::WRONG_KEY, $sut->hasAccessToChannel($channel, $stub));
+        $this->assertEquals(IAuthenticationService::INVALID_KEY, $sut->hasAccessToChannel($channel, $stub));
     }
 
     public function testAuthorisedByKey() {
