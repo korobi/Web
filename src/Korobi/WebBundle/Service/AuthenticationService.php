@@ -27,12 +27,19 @@ class AuthenticationService implements IAuthenticationService {
      * @return bool
      */
     public function hasAccessToChannel(Channel $dbChannel, Request $request) {
+        if ($this->authChecker->isGranted('ROLE_PRIVATE_ACCESS')) {
+            return IAuthenticationService::ALLOW;
+        }
+
         if ($dbChannel->getKey() !== null) {
             $key = $request->query->get('key');
-            if (($key === null || $key !== $dbChannel->getKey()) && !$this->authChecker->isGranted('ROLE_PRIVATE_ACCESS')) {
-                return false;
+            if ($key === null) {
+                return IAuthenticationService::MISSING_KEY;
+            }
+            if ($key !== $dbChannel->getKey()) {
+                return IAuthenticationService::INVALID_KEY;
             }
         }
-        return true;
+        return IAuthenticationService::ALLOW;
     }
 }

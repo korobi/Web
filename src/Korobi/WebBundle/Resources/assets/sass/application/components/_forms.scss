@@ -1,4 +1,5 @@
 // ---- taken from bootstrap ----
+// I'm sure this looks great on a dark page.
 $form-gray-base: #000 !default;
 $form-gray-dark: lighten($form-gray-base, 20%) !default; // #333
 $form-text-color: $form-gray-dark !default;
@@ -19,3 +20,24 @@ $form-text-color: $form-gray-dark !default;
   color: #a94442;
 }
 // ---- thank you, bootstrap ----
+
+
+// key entry styles
+// form styles right now are pretty bad, this just makes things usable.
+
+.channel-key-entry {
+  input[type=text] {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #999;
+    width: 50%;
+    vertical-align: baseline;
+    margin-right: 0.5em;
+    display: inline-block;
+  }
+  input[type=submit] {
+    background-color: $primaryColour;
+    vertical-align: baseline;
+    display: inline-block;
+  }
+}

@@ -114,8 +114,13 @@ abstract class BaseController extends Controller {
         $request = $this->container->get('request');
 
         // ensure the user is appropriately authenticated
-        if (!$this->getAuthenticationService()->hasAccessToChannel($dbChannel, $request)) {
-            throw new ChannelAccessException($dbNetwork->getName(), $dbChannel->getChannel());
+        $accessResponse = $this->getAuthenticationService()->hasAccessToChannel($dbChannel, $request);
+        if ($accessResponse !== IAuthenticationService::ALLOW) {
+            $failureType = ChannelAccessException::NO_KEY_SUPPLIED;
+            if ($accessResponse === IAuthenticationService::INVALID_KEY) {
+                $failureType = ChannelAccessException::INVALID_KEY_SUPPLIED;
+            }
+            throw new ChannelAccessException($dbNetwork->getName(), $dbChannel->getChannel(), $failureType);
         }
 
         return [$dbNetwork, $dbChannel];

@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Test\Unit;
 
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Service\AuthenticationService;
+use Korobi\WebBundle\Service\IAuthenticationService;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -16,14 +17,29 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
-        $reflection_property = $reflection->getProperty('query');
+        $reflectionProperty = $reflection->getProperty('query');
         $bag = new ParameterBag(["key" => "kitten"]);
 
-        $reflection_property->setValue($stub, $bag);
+        $reflectionProperty->setValue($stub, $bag);
 
         $channel = new Channel();
         $channel->setKey("cats");
-        $this->assertFalse($sut->hasAccessToChannel($channel, $stub));
+        $this->assertEquals(IAuthenticationService::INVALID_KEY, $sut->hasAccessToChannel($channel, $stub));
+    }
+
+    public function testUnauthorisedByNoKey() {
+        $sut = new AuthenticationService(new DummyAuthService(false));
+        $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
+            ->getMock();
+        $reflection = new ReflectionClass($stub);
+        $reflectionProperty = $reflection->getProperty('query');
+        $bag = new ParameterBag([]);
+
+        $reflectionProperty->setValue($stub, $bag);
+
+        $channel = new Channel();
+        $channel->setKey("cats");
+        $this->assertEquals(IAuthenticationService::MISSING_KEY, $sut->hasAccessToChannel($channel, $stub));
     }
 
     public function testAuthorisedByKey() {
@@ -31,14 +47,14 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
-        $reflection_property = $reflection->getProperty('query');
+        $reflectionProperty = $reflection->getProperty('query');
         $bag = new ParameterBag(["key" => "cats"]);
 
-        $reflection_property->setValue($stub, $bag);
+        $reflectionProperty->setValue($stub, $bag);
 
         $channel = new Channel();
         $channel->setKey("cats");
-        $this->assertTrue($sut->hasAccessToChannel($channel, $stub));
+        $this->assertEquals(IAuthenticationService::ALLOW, $sut->hasAccessToChannel($channel, $stub));
     }
 
     public function testAuthorisedByAdmin() {
@@ -46,14 +62,14 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
-        $reflection_property = $reflection->getProperty('query');
+        $reflectionProperty = $reflection->getProperty('query');
         $bag = new ParameterBag([]);
 
-        $reflection_property->setValue($stub, $bag);
+        $reflectionProperty->setValue($stub, $bag);
 
         $channel = new Channel();
         $channel->setKey("cats");
-        $this->assertTrue($sut->hasAccessToChannel($channel, $stub));
+        $this->assertEquals(IAuthenticationService::ALLOW, $sut->hasAccessToChannel($channel, $stub));
     }
 
     public function testAuthorisedByLackOfKey() {
@@ -61,13 +77,13 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase {
         $stub = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
             ->getMock();
         $reflection = new ReflectionClass($stub);
-        $reflection_property = $reflection->getProperty('query');
+        $reflectionProperty = $reflection->getProperty('query');
         $bag = new ParameterBag([]);
 
-        $reflection_property->setValue($stub, $bag);
+        $reflectionProperty->setValue($stub, $bag);
 
         $channel = new Channel();
-        $this->assertTrue($sut->hasAccessToChannel($channel, $stub));
+        $this->assertEquals(IAuthenticationService::ALLOW, $sut->hasAccessToChannel($channel, $stub));
     }
 
 }

@@ -1,0 +1,6 @@
+services:
+    korobi.exception_listener:
+        class: Korobi\WebBundle\Listener\ExceptionListener
+        arguments: ["@templating"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
