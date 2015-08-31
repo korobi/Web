@@ -1,4 +1,5 @@
 {% import 'KorobiWebBundle::macro/nav_link.html.twig' as nav %}
+{% set asset_hash = '?v=' ~ ((app.environment == 'prod' or app.environment == 'staging') ? git_hash : 'now'|date('U')) %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
     <meta name='viewport' content='initial-scale=1'>
     <link type="text/plain" rel="author" href="{{ asset('humans.txt') }}" />
     {% stylesheets filter='scss' '@KorobiWebBundle/Resources/assets/sass/application.scss' output='assets/css/application.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}{% if app.environment == 'dev' %}?v={{ 'now'|date('U') }}{% else %}?v={{ git_hash }}{% endif %}">
+    <link rel="stylesheet" href="{{ asset_url }}{{ asset_hash }}">
     {% endstylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="icon" href="{{ asset('favicon.svg') }}">
@@ -47,12 +48,12 @@
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     {% javascripts '@production' output='assets/js/application.js' filter='uglifyjs2' %}
-        <script src="{{ asset_url }}{% if app.environment == 'dev' %}?v={{ 'now'|date('U') }}{% else %}?v={{ git_hash }}{% endif %}"></script>
+        <script src="{{ asset_url }}{{ asset_hash }}"></script>
     {% endjavascripts %}
     {# only include development js in dev environment #}
-    {% if app.environment == 'dev' %}
+    {% if app.environment == 'dev' or app.environment == 'staging' %}
         {% javascripts '@staging' output='assets/js/staging.js' filter='uglifyjs2' %}
-            <script src="{{ asset_url }}?v={{ 'now'|date('U') }}"></script>
+            <script src="{{ asset_url }}{{ asset_hash }}"></script>
         {% endjavascripts %}
     {% endif %}
     {% if analytics_enabled %}
