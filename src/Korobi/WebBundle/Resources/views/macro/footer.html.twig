@@ -1,14 +1,14 @@
-{% macro git_info(info) %}
+{% macro env_info(info) %}
     {# Why is this a macro? #}
     {# We have a bit of logic in here relating to whether the user's an admin or not (admins get shiny links!) #}
     {% if app.user and is_granted('ROLE_ADMIN') %}
         <div class="footer--revision">
             <i class="fa fa-code-fork"></i> <a href="https://github.com/korobi">Korobi</a>/<a href="https://github.com/korobi/Web">Web</a>
-            (<a href="https://github.com/korobi/Web/commit/{{ info.getHash() }}">{{ info.getShortHash() }}</a>) on <a href="https://github.com/korobi/Web/tree/{{ info.getBranch() }}">{{ info.getBranch() }}</a>
+            (<a href="https://github.com/korobi/Web/tree/{{ info.getBranch() }}">{{ info.getBranch() }}</a> @ <a href="https://github.com/korobi/Web/commit/{{ info.getHash() }}">{{ info.getShortHash() }}</a>) on {{ app.environment }}
         </div>
     {% else %}
         <div class="footer--revision">
-            <i class="fa fa-code-fork"></i> Korobi/Web ({{ info.getShortHash() }}) on {{ info.getBranch() }}
+            <i class="fa fa-code-fork"></i> Korobi/Web ({{ info.getBranch() }} @ {{ info.getShortHash() }})
         </div>
     {% endif %}
 {% endmacro %}
