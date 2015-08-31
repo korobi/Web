@@ -21,7 +21,7 @@
                 {% else %}
                     <td>{{ revision.sha|slice(0, 7) }}</td>
                 {% endif %}
-                <td><a href="https://github.com/{{ revision.commit.author.name }}">{{ revision.commit.author.name }}</a></td>
+                <td><a href="{{ revision.author.html_url }}">{{ revision.commit.author.name }}</a></td>
                 <td>{{ revision.commit.message }}</td>
                 <td>{{ revision.commit.author.date|date('d/m/Y H:m:s') }}</td>
             </tr>
