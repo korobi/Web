@@ -13,3 +13,17 @@
     }
   }
 }
+
+i.private-channel-icon {
+  color: #D0CE53;
+
+  &.inline {
+    margin-left: .2em;
+  }
+
+  &.super {
+    font-size: 60%;
+    margin-left: -.3em;
+    vertical-align: super;
+  }
+}

@@ -1,0 +1,8 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = "Channel feature unavailable" %}
+
+{% block body %}
+    <h1>Channel feature unavailable</h1>
+    <p>The requested feature <strong>{{ exception.feature }}</strong> for channel <strong>{{ exception.channel }}</strong> on network <strong>{{ exception.network }}</strong> is unavailable.</p>
+{% endblock %}

@@ -46,7 +46,7 @@ class UserProvider extends FOSUBUserProvider {
 
         /** @var \Korobi\WebBundle\Document\User $user */
         $user = parent::loadUserByOAuthUserResponse($response);
-        if ($user != null) {
+        if ($user !== null) {
             // update data
             $user->setUsername($response->getNickname());
             $this->userManager->updateUser($user);

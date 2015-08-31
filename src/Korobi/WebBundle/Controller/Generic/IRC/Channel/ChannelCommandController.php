@@ -22,14 +22,6 @@ class ChannelCommandController extends BaseController {
         /** @var Channel $dbChannel */
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
-        // check if this channel requires a key
-        if ($dbChannel->getKey() !== null) {
-            $key = $request->query->get('key');
-            if ($key === null || $key !== $dbChannel->getKey()) {
-                throw new \Exception('Unauthorized'); // TODO
-            }
-        }
-
         // fetch all commands
         $dbCommands = $this->get('doctrine_mongodb')
             ->getManager()
@@ -73,6 +65,7 @@ class ChannelCommandController extends BaseController {
         return $this->render('KorobiWebBundle:controller/generic/irc/channel:commands.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'channel_name' => $dbChannel->getChannel(),
+            'channel_private' => $dbChannel->isPrivate(),
             'commands' => $commands,
         ]);
     }

@@ -4,7 +4,9 @@ namespace Korobi\WebBundle\Controller;
 
 use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Network;
-use Korobi\WebBundle\IrcLogs\RenderManager;
+use Korobi\WebBundle\Exception\ChannelAccessException;
+use Korobi\WebBundle\IRC\Log\Render\RenderManager;
+use Korobi\WebBundle\Service\IAuthenticationService;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,10 +73,10 @@ abstract class BaseController extends Controller {
      * @param $network
      * @param $channel
      * @return array
+     * @throws ChannelAccessException If the user doesn't have access to the channel.
      */
     protected function createNetworkChannelPair($network, $channel) {
         // validate network
-        /** @var Network $dbNetwork */
         $dbNetwork = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Network')
@@ -87,10 +89,10 @@ abstract class BaseController extends Controller {
         }
 
         // grab first slice
+        /** @var Network $dbNetwork */
         $dbNetwork = $dbNetwork[0];
 
         // fetch channel
-        /** @var Channel $dbChannel */
         $dbChannel = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Channel')
@@ -103,7 +105,24 @@ abstract class BaseController extends Controller {
         }
 
         // grab first slice
+        /** @var Channel $dbChannel */
         $dbChannel = $dbChannel[0];
+
+        // FIXME: Will break for Symfony 3!
+
+        /** @var Request $request */
+        $request = $this->container->get('request');
+
+        // ensure the user is appropriately authenticated
+        $accessResponse = $this->getAuthenticationService()->hasAccessToChannel($dbChannel, $request);
+        if ($accessResponse !== IAuthenticationService::ALLOW) {
+            $failureType = ChannelAccessException::NO_KEY_SUPPLIED;
+            if ($accessResponse === IAuthenticationService::INVALID_KEY) {
+                $failureType = ChannelAccessException::INVALID_KEY_SUPPLIED;
+                $this->addFlash('error', 'Invalid key was supplied.');
+            }
+            throw new ChannelAccessException($dbNetwork->getName(), $dbChannel->getChannel(), $failureType);
+        }
 
         return [$dbNetwork, $dbChannel];
     }
@@ -113,6 +132,13 @@ abstract class BaseController extends Controller {
      */
     protected function getLogger() {
         return $this->get('logger');
+    }
+
+    /**
+     * @return IAuthenticationService
+     */
+    protected function getAuthenticationService() {
+        return $this->get("korobi.authentication_service");
     }
 
     /**

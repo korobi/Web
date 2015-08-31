@@ -50,7 +50,10 @@ class SecurityController extends BaseController {
         if ($payload === null) {
             $payload = [];
         }
-        $uri = $payload['csp-report']['document-uri'];
+        $uri = isset($payload['csp-report']['document-uri']) && $payload['csp-report']['document-uri'] != ''
+            ? $this->stripChannelKey($payload['csp-report']['document-uri'])
+            : '[uri]';
+            
         $resource = isset($payload['csp-report']['blocked-uri']) && $payload['csp-report']['blocked-uri'] != '' 
             ? $payload['csp-report']['blocked-uri'] 
             : '[resource]';
@@ -92,6 +95,21 @@ class SecurityController extends BaseController {
         return $resp;
     }
 
+    /**
+     * @param String $uri
+     * @return String
+     */
+    protected function stripChannelKey($uri) {
+        if (strpos($uri, '?key=') === false) 
+            return $uri;
+
+        $repl = preg_replace('/\?key=.*$/', '',  $uri);
+        
+        if ($repl === null)
+            return '[uri snipped]';
+        return $repl;    
+    }
+    
     /**
      * @param String $hash
      * @return bool Report message or not

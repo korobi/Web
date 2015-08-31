@@ -7,7 +7,7 @@
     {% if not showing_today or is_tail %}
         <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
     {% else %}
-        <meta name="description" content="Current logs for channel {{ channel_name }} on IRC network {{ network_name }}."
+        <meta name="description" content="Current logs for channel {{ channel_name }} on IRC network {{ network_name }}.">
     {% endif %}
 {% endblock %}
 
@@ -31,24 +31,33 @@
         </ul>
         <div class="right">
             {% if not is_tail and showing_today %}
-                <a class="button button-rounded button-flat-primary" href="{{ path('channel_log_tail', {'channel': channel_slug, 'network': network_slug}) }}" rel="nofollow">
+                <a class="button button-rounded button-flat-primary" href="{{ path('channel_log_tail', {
+                    'network': network_slug,
+                    'channel': channel_slug,
+                    'key': channel_key,
+                }) }}" rel="nofollow">
                     Tail
                     <i class="fa fa-ellipsis-h"></i>
                 </a>
             {% endif %}
             {% if not showing_today %}
-                <a class="button button-rounded button-flat-primary" href="{{ path('channel_log', {'channel': channel_slug, 'network': network_slug}) }}">
+                <a class="button button-rounded button-flat-primary" href="{{ path('channel_log', {
+                    'network': network_slug,
+                    'channel': channel_slug,
+                    'key': channel_key,
+                }) }}">
                     Today's logs
                     <i class="fa fa-clock-o"></i>
                 </a>
             {% endif %}
             <span class="button-group">
                 <a href="{{ path('channel_log_date', {
-                    'channel': channel_slug,
                     'network': network_slug,
+                    'channel': channel_slug,
                     'year': yesterday.format('Y'),
                     'month': yesterday.format('m'),
                     'day': yesterday.format('d'),
+                    'key': channel_key,
                 }) }}" class="button button-rounded button-flat-primary" aria-label="logs for day before"{% if showing_first_day %} disabled{% endif %}>
                     <i class="fa fa-{% if showing_first_day %}times{% else %}chevron-left{% endif %}"></i>
                 </a>
@@ -61,11 +70,12 @@
                 </label>
 
                 <a href="{{ showing_today ? '' : path('channel_log_date', {
-                    'channel': channel_slug,
                     'network': network_slug,
+                    'channel': channel_slug,
                     'year': tomorrow.format('Y'),
                     'month': tomorrow.format('m'),
                     'day': tomorrow.format('d'),
+                    'key': channel_key,
                 }) }}" class="button button-rounded button-flat-primary" aria-label="logs for day after"{% if showing_today %} disabled{% endif %}>
                     <i class="fa fa-{% if showing_today %}times{% else %}chevron-right{% endif %}"></i>
                 </a>
@@ -73,8 +83,13 @@
         </div>
     </div>
     {% set reusableLinks %}
-        <a href="{{ path('channel', {'channel': channel_slug, 'network': network_slug}) }}">
-            {{ channel_name }}</a> on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a>
+        <a href="{{ path('channel', {
+            'network': network_slug,
+            'channel': channel_slug,
+            'key': channel_key,
+        }) }}">{{ channel_name }}</a>
+        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'is_private': channel_private, 'super': true} %}
+        on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a>
     {% endset %}
     {% if is_tail %}
         <h1>Tail log for {{ reusableLinks }}</h1>

@@ -38,25 +38,19 @@ class ChannelHomeController extends BaseController {
             ];
         }
 
-
-        $key = '';
-        if($dbChannel->getKey() !== null && $this->authChecker->isGranted('ROLE_ADMIN')) {
-            $key = '?key=' . $dbChannel->getKey();
-        }
-
-
         // time to render!
         return $this->render('KorobiWebBundle:controller/generic/irc/channel:home.html.twig', [
             'network_name' => $dbNetwork->getName(),
             'network_slug' => $dbNetwork->getSlug(),
             'channel_name' => $dbChannel->getChannel(),
+            'channel_private' => $dbChannel->isPrivate(),
             'channel' => $dbChannel,
             'topic' => $topic,
             'now' => time(),
             'sample_logs' => $this->getRenderManager()->renderLogs($messages),
             'slug' => self::transformChannelName($dbChannel->getChannel()),
             'command_prefix' => $dbChannel->getCommandPrefix(),
-            'key' => $key,
+            'key' => $dbChannel->getKey(),
         ]);
     }
 }

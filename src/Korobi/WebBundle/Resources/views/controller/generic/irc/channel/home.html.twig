@@ -4,7 +4,10 @@
 {% set page_title = channel_name ~ ' on ' ~ network_name %}
 
 {% block body %}
-    <h1>{{ channel_name }} on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a></h1>
+    <h1>
+        {{ channel_name }}
+        {% include 'KorobiWebBundle::partial/channel-icon.html.twig' with {'is_private': channel_private, 'super': true} %}
+        on <a href="{{ path('network', {'network': network_slug}) }}">{{ network_name }}</a></h1>
     {% if topic is empty %}
         <h3>No topic is available.</h3>
     {% else %}
@@ -25,16 +28,32 @@
         {{  log_render.log_render(sample_logs, false, false, topic) }}
     {% endif %}
     {% if channel.LogsEnabled %}
-        <p><a href="{{ path('channel_log', {'network': network_slug, 'channel': channel_name|transformChannelName}) ~ key }}">View today's full log</a>
-            &mdash; <a href="{{ path('channel_log_tail', {'network': network_slug, 'channel': channel_name|transformChannelName}) ~ key }}">View tail</a>
-            &mdash; <a href="{{ path('channel_stat', {'network': network_slug, 'channel': channel_name|transformChannelName}) ~ key }}">View statistics</a>
+        <p><a href="{{ path('channel_log', {
+                'network': network_slug,
+                'channel': channel_name|transformChannelName,
+                'key': key,
+            }) }}">View today's full log</a>
+            &mdash; <a href="{{ path('channel_log_tail', {
+                'network': network_slug,
+                'channel': channel_name|transformChannelName,
+                'key': key,
+            }) }}">View tail</a>
+            &mdash; <a href="{{ path('channel_stat', {
+                'network': network_slug,
+                'channel': channel_name|transformChannelName,
+                'key': key,
+            }) }}">View statistics</a>
         </p>
     {% endif %}
 
     {% if channel.CommandsEnabled %}
         <p>
             <strong>Command Prefix: </strong> {{ command_prefix }}<br>
-            <a href="{{ path('channel_command', {'network': network_slug, 'channel': channel_name|transformChannelName}) }}">Commands</a>
+            <a href="{{ path('channel_command', {
+                'network': network_slug,
+                'channel': channel_name|transformChannelName,
+                'key': key,
+            }) }}">Commands</a>
         </p>
     {% endif %}
 {% endblock %}

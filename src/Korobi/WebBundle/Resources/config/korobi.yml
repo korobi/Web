@@ -16,7 +16,6 @@ korobi_web:
                   - channel_log_date
                   - channel_log_tail
                   - channel_stat
-                  - channel_game
 
             - title: docs
               route: 'https://docs.korobi.io/'

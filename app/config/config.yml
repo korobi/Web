@@ -35,6 +35,8 @@ twig:
     globals:
         gitInfo: "@korobi.git_info"
         navigation: "@korobi.navigation_collection"
+        analytics_enabled: "%analytics.enabled%"
+        analytics_siteid: "%analytics.site_id%"
 
 
 # Assetic Configuration
@@ -119,7 +121,7 @@ hwi_oauth:
 # NelmioSecurityBundle Configuration
 nelmio_security:
     forced_ssl:
-        # NOTE: In production/staging these values are controleld by CloudFlare.
+        # NOTE: In production/staging these values are controlled by CloudFlare.
         hsts_max_age: 31557600 # A long time
         hsts_subdomains: true
     csp:
@@ -153,6 +155,7 @@ nelmio_security:
             connect-src:
                 - 'self'
                 - 'wss://ws.korobi.io'
+                - 'https://analytics.korobi.io'
     external_redirects:
         override: /unexpected-redirect/
         forward_as: redirUrl

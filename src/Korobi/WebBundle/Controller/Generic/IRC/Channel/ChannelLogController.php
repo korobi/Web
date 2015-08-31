@@ -7,6 +7,7 @@ use Korobi\WebBundle\Document\Channel;
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Document\ChatIndex;
 use Korobi\WebBundle\Document\Network;
+use Korobi\WebBundle\Exception\FeatureNotEnabledException;
 use Korobi\WebBundle\Repository\ChatRepository;
 use Korobi\WebBundle\Util\FileCache;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,14 +31,8 @@ class ChannelLogController extends BaseController {
         /** @var Channel $dbChannel */
         list($dbNetwork, $dbChannel) = $this->createNetworkChannelPair($network, $channel);
 
-        // check if this channel requires a key
-        if ($dbChannel->getKey() !== null) {
-            $key = $request->query->get('key');
-            if ($key === null || $key !== $dbChannel->getKey()) {
-                throw new \Exception('Unauthorized'); // TODO
-            }
-        } else if(!$dbChannel->getLogsEnabled() && !$this->authChecker->isGranted('ROLE_SUPER_ADMIN')) {
-            throw $this->createNotFoundException();
+        if(!$dbChannel->getLogsEnabled() && !$this->authChecker->isGranted('ROLE_PRIVATE_ACCESS')) {
+            throw new FeatureNotEnabledException($dbNetwork->getName(), $dbChannel->getChannel(), "logs");
         }
 
         // populate variables with request information if available, or defaults
@@ -123,6 +118,10 @@ class ChannelLogController extends BaseController {
             ];
         }
         $logData['topic'] = $topic;
+
+        // key should not be cached
+        $logData['channel_key'] = $dbChannel->getKey();
+        $logData['channel_private'] = $dbChannel->isPrivate();
 
         $logData['available_log_days'] = $this->grabAvailableLogDays($dbNetwork->getSlug(), $dbChannel->getChannel());
 

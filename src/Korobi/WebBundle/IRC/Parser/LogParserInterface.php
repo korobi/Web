@@ -1,6 +1,6 @@
 <?php
 
-namespace Korobi\WebBundle\Parser;
+namespace Korobi\WebBundle\IRC\Parser;
 
 use Korobi\WebBundle\Document\Chat;
 

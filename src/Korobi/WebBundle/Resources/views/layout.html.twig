@@ -9,11 +9,12 @@
         <title>{% if page_title is defined %}{{ page_title }} | {% endif %}{{ app_name }}</title>
     {% endif %}
     <meta name='viewport' content='initial-scale=1'>
-    <link type="text/plain" rel="author" href="/humans.txt" />
+    <link type="text/plain" rel="author" href="{{ asset('humans.txt') }}" />
     {% stylesheets filter='scss' '@KorobiWebBundle/Resources/assets/sass/application.scss' output='assets/css/application.css' %}
     <link rel="stylesheet" href="{{ asset_url }}{% if app.environment == 'dev' %}?v={{ 'now'|date('U') }}{% else %}?v={{ git_hash }}{% endif %}">
     {% endstylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="icon" href="{{ asset('favicon.svg') }}">
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -53,6 +54,10 @@
         {% javascripts '@staging' output='assets/js/staging.js' filter='uglifyjs2' %}
             <script src="{{ asset_url }}?v={{ 'now'|date('U') }}"></script>
         {% endjavascripts %}
+    {% endif %}
+    {% if analytics_enabled %}
+    <script type="text/javascript" src="/dynamic/analytics/"></script>
+    <noscript><p><img src="https://analytics.korobi.io/piwik.php?idsite={{ analytics_siteid }}" style="border:0;" alt="" /></p></noscript>
     {% endif %}
 {% endblock %}
 </body>

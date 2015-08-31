@@ -48,18 +48,24 @@ class NetworkHomeController extends BaseController {
             }
 
             // only add channels with keys if we're an admin
-            if($dbChannel->getKey() !== null && !$this->authChecker->isGranted('ROLE_ADMIN')) {
+            if($dbChannel->getKey() !== null && !$this->authChecker->isGranted('ROLE_PRIVATE_ACCESS')) {
                 continue;
             }
-            $key = "";
-            if ($dbChannel->getKey() !== null && $this->authChecker->isGranted('ROLE_ADMIN')) {
-                $key = "?key=" . $dbChannel->getKey();
+
+            $key = null;
+            if ($dbChannel->getKey() !== null && $this->authChecker->isGranted('ROLE_PRIVATE_ACCESS')) {
+                $key = $dbChannel->getKey();
             }
 
-            $channels[$channel] = ["url" => $this->generateUrl('channel', [
-                'network' => $network,
-                'channel' => self::transformChannelName($channel),
-            ]), "db" => $dbChannel, 'key' => $key];
+            $channels[$channel] = [
+                'url' => $this->generateUrl('channel', [
+                    'network' => $network,
+                    'channel' => self::transformChannelName($channel),
+                    'key' => $key,
+                ]),
+                'db' => $dbChannel,
+                'key' => $key
+            ];
         }
 
         ksort($channels, SORT_NATURAL | SORT_FLAG_CASE);

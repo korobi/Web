@@ -1,9 +1,11 @@
 imports:
+    - { resource: services/events.yml }
     - { resource: services/twig.yml }
     - { resource: services/helpers.yml }
     - { resource: services/controllers.yml }
     - { resource: services/console.yml }
     - { resource: services/irc_logs.yml }
+    - { resource: services/services.yml }
 
 services:
     korobi.user_provider:

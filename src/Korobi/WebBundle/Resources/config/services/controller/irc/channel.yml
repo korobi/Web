@@ -14,6 +14,3 @@ services:
     korobi.controller.irc.channel.ai:
         class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelAIController
         parent: korobi.base_controller
-    korobi.controller.irc.channel.game:
-        class: Korobi\WebBundle\Controller\Generic\IRC\Channel\ChannelGameController
-        parent: korobi.base_controller

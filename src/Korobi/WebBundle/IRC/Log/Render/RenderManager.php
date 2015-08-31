@@ -1,10 +1,10 @@
 <?php
 
-namespace Korobi\WebBundle\IrcLogs;
+namespace Korobi\WebBundle\IRC\Log\Render;
 
 use Korobi\WebBundle\Document\Chat;
 use Korobi\WebBundle\Exception\UnsupportedOperationException;
-use Korobi\WebBundle\Parser\LogParserInterface;
+use Korobi\WebBundle\IRC\Parser\LogParserInterface;
 
 /**
  * Class RenderManager
@@ -12,7 +12,7 @@ use Korobi\WebBundle\Parser\LogParserInterface;
  * Try to provide a common class for controllers which
  * want to render logs on a page.
  *
- * @package Korobi\WebBundle\IrcLogs
+ * @package Korobi\WebBundle\IRC\Log\Render
  */
 class RenderManager {
 
