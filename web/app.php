@@ -3,7 +3,7 @@
 use Symfony\Component\HttpFoundation\Request;
 
 if (!inMaintenance()) {
-    $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+    $loader = require_once __DIR__.'/../var/bootstrap.php.cache';
 
     // NOTE: ApcClassLoader should not be used; apc is dead
 

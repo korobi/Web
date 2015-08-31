@@ -6,27 +6,27 @@
 .php_cs.cache
 
 # symfony
-/app/bootstrap.php.cache
-/app/cache/*
-!app/cache/.gitkeep
 /app/config/parameters.yml
-/app/logs/*
-!app/logs/.gitkeep
-/app/sessions/*
-!/app/sessions/.gitkeep
-/app/phpunit.xml
-/bin/
+/bin/*
+!bin/console
+!bin/symfony_requirements
 /build/
+/var/bootstrap.php.cache
+/var/SymfonyRequirements.php
+/var/cache/*
+!var/cache/.gitkeep
+/var/logs/*
+!var/logs/.gitkeep
+/web/bundles/
+
+# application
 /src/Korobi/WebBundle/Document/*.php~
+/src/Korobi/WebBundle/maintenance
 /web/assetic/*
 /web/assets/css/
 !/web/assets/css/.gitkeep
 /web/assets/js/
 !/web/assets/js/.gitkeep
-/web/bundles/
-
-# Maintenance file
-src/Korobi/WebBundle/maintenance
 
 # intellij
 /.idea/
