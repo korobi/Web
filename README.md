@@ -1,8 +1,5 @@
 ## Web
-Copyright &copy; 2014 - 2015 korobi.io
-
-## Staging
-A development instance is available at https://dev.korobi.io/. Authentication is required via the X-Korobi-Auth header (see app_dev.php in the web directory for more information).
+Copyright &copy; 2015 korobi.io
 
 ## Core branches
  - `master` - Automatically deployed to staging **after every push**.
