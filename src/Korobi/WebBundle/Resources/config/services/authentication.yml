@@ -9,5 +9,4 @@ services:
         class: Korobi\WebBundle\Handler\AuthenticationSuccessHandler
         arguments:
             - @security.http_utils
-            - []
             - @router

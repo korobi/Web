@@ -19,11 +19,10 @@ class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler {
 
     /**
      * @param HttpUtils $httpUtils
-     * @param array $options
      * @param RouterInterface $router
      */
-    public function __construct(HttpUtils $httpUtils, array $options = array(), RouterInterface $router) {
-        parent::__construct($httpUtils, $options);
+    public function __construct(HttpUtils $httpUtils, RouterInterface $router) {
+        parent::__construct($httpUtils, []);
         $this->router = $router;
     }
 
