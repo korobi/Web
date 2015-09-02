@@ -33,10 +33,13 @@ security:
                     github: '/auth/connect/check-github'
                 oauth_user_provider:
                     service: korobi.user_provider
+                success_handler: korobi.authentication.login.handler
+            login:
+                success_handler: korobi.authentication.login.handler
             logout:
                 path: /auth/logout
                 target: /
-                success_handler: korobi.logout_handler
+                success_handler: korobi.authentication.logout.handler
             anonymous: true
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:

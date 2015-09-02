@@ -1,0 +1,12 @@
+services:
+    korobi.authentication_service:
+        class: Korobi\WebBundle\Service\AuthenticationService
+        arguments: ["@security.authorization_checker"]
+    korobi.authentication.logout.handler:
+        class: Korobi\WebBundle\Handler\LogoutSuccessHandler
+        arguments: [@router]
+    korobi.authentication.login.handler:
+        class: Korobi\WebBundle\Handler\AuthenticationSuccessHandler
+        arguments:
+            - @security.http_utils
+            - @router
