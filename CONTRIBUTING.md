@@ -6,6 +6,11 @@
 - Reference issues where possible in commit messages
 - Do **not** squash your changes, it makes it extremely hard to see what you’ve changed compared to the previous version of your pull request.
 - Mark your PR as a work-in-progress by prefixing the title with `[WIP]`
+- Give your branch a name that makes sense. Some examples of valid names:
+ - `feature/log-caching` - a feature is functionality that wasn't available before
+ - `fix/caching-too-much` - a fix fixes a problem
+ - `patch/hide-channel-key` - a patch changes something, but is not a fix or new feature. Example: refactoring
+
 
 
 #### For external contributors (users without push access to the repository):
