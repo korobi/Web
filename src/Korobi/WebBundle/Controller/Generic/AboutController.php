@@ -12,4 +12,11 @@ class AboutController extends BaseController {
     public function homeAction() {
         return $this->render('KorobiWebBundle:controller/generic:about.html.twig');
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function securityAction() {
+        return $this->render('KorobiWebBundle:controller/generic:security.html.twig');
+    }
 }

@@ -100,6 +100,11 @@
                 <target>Logout</target>
                 <note>Used in navigation (header/footer). Appears for logged in users, allowing them to logout.</note>
             </trans-unit>
+            <trans-unit id="19">
+                <source>nav.security</source>
+                <target>Security</target>
+                <note>Used in navigation (header/footer). Used for security page.</note>
+            </trans-unit>
         </body>
     </file>
 </xliff>
