@@ -21,7 +21,7 @@ if (!inMaintenance()) {
     if (!array_key_exists('REMOTE_ADDR', $_SERVER) || array_key_exists('REMOTE_ADDR', $_SERVER) && !isInternalIpAddress($_SERVER['REMOTE_ADDR'])) {
         if (!isset($_SERVER['HTTP_X_GITHUB_DELIVERY']) && !isset($_SERVER['HTTP_X_HUB_SIGNATURE']) && strpos($_SERVER['HTTP_USER_AGENT'], 'GitHub-Hookshot/') === false) {
             // It looks like a user
-            if (!isset($_SERVER['HTTP_X_KOROBI_AUTH']) || $_SERVER['HTTP_X_KOROBI_AUTH'] != 'nkYPUztAKf3gv82FnuMd9BB') {
+            if (!isset($_SERVER['HTTP_X_KOROBI_AUTH']) || !hash_equals($_SERVER['HTTP_X_KOROBI_AUTH'], $_SERVER['KOROBI_AUTH_KEY'])) {
                 http_response_code(403);
                 exit();
             }
