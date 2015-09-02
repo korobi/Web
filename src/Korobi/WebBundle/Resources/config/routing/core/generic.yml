@@ -9,6 +9,10 @@ about:
     path: /about/
     defaults:
         _controller: korobi.controller.generic.about:homeAction
+security:
+    path: /about/security/
+    defaults:
+        _controller: korobi.controller.generic.about:securityAction
 csp_report:
     path: /csp/report/
     defaults:
