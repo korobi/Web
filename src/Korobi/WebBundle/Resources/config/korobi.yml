@@ -28,6 +28,10 @@ korobi_web:
               route: 'admin_home'
               requires_admin: true
 
+            - title: security
+              route: 'security'
+              type: 'footer'
+
             - title: issues
               route: 'https://github.com/korobi/Korobi/issues'
               type: 'footer'
