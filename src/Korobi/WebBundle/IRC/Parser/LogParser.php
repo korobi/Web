@@ -165,7 +165,7 @@ class LogParser implements LogParserInterface {
             $result = $this->t->trans('irc.topic_is', ['%topic%' => $topic]);
         } else {
             $actor = $this->transformActor($chat->getActorName(), $chat->getActorPrefix());
-            $result = ' ' . $this->t->trans('irc.has_changed_topic_to', ['%topic%' => $topic, '%actor%' => $actor]);
+            $result = $this->t->trans('irc.has_changed_topic_to', ['%topic%' => $topic, '%actor%' => $actor]);
         }
 
         return $result;
@@ -260,6 +260,7 @@ class LogParser implements LogParserInterface {
         return '<span class="' . strtolower($prefix) . '">' . $actor . '</span>';
     }
 
+    // TODO
     /**
      * @param $mode
      * @return string
