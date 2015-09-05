@@ -78,6 +78,9 @@ class SearchController extends BaseController {
                             'lt' => (new \DateTime($tmp ?: 'now'))->getTimestamp() * 1000
                         ]]];
                         break;
+                    case 'type':
+                        $query[] = ['term' => [$name => strtolower($tmp)]];
+                        break;
                     default:
                         $query[] = ['match' => [$name => $tmp]];
                 }
@@ -108,7 +111,7 @@ class SearchController extends BaseController {
                     'date' => 'desc'
                 ]
             ],
-            'size' => 3,
+            'size' => 20,
         ];
         var_dump($params);
         return $this->client->search($params);
