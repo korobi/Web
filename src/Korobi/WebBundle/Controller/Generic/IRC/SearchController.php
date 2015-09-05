@@ -4,7 +4,7 @@ namespace Korobi\WebBundle\Controller\Generic\IRC;
 
 use Elasticsearch\Client;
 use Korobi\WebBundle\Controller\BaseController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Korobi\WebBundle\Service\ISearchService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -14,17 +14,19 @@ class SearchController extends BaseController {
 
     private $client;
 
-    public function __construct() {
+    /**
+     * @var ISearchService
+     */
+    private $searchService;
+
+    public function __construct(ISearchService $searchService) {
         $this->client = new Client(); // FIXME: this shouldn't be instantiated here!
+        $this->searchService = $searchService;
     }
 
     public function autocompleteAction(Request $request) {
-        $suggestions = $this->suggestChannel($request->get("q"));
-
-        $suggestions = array_map(function($suggestion) {
-            return $suggestion['payload'];
-        }, $suggestions['suggest'][0]['options']);
-        return new JsonResponse($suggestions);
+        $query = $request->get("q");
+        return new JsonResponse($this->searchService->getSuggestionsForChannelName($query));
     }
 
     public function searchAction(Request $request) {
@@ -51,22 +53,6 @@ class SearchController extends BaseController {
         return $this->render('KorobiWebBundle:controller/generic:search.html.twig', [
             'plz' => $plz,
         ]);
-    }
-
-    private function suggestChannel($term) {
-        $params = [
-            'index' => 'channels',
-            'body' => [
-                'suggest' => [
-                    'text' => $term,
-                    'completion' => [
-                        'field' => '_name_suggest'
-                    ],
-                ],
-            ],
-        ];
-
-        return $this->client->suggest($params);
     }
 
     private function search(Request $request) {

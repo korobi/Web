@@ -1,0 +1,12 @@
+services:
+    elasticsearch.client:
+        class: Elasticsearch\Client
+    korobi.network_repository: # not search but this is much nicer than depending on doctrine_mongodb
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine_mongodb
+        factory_method: getRepository
+        arguments:
+            - KorobiWebBundle:Network
+    korobi.search_service:
+        class: Korobi\WebBundle\Service\SearchService
+        arguments: [@elasticsearch.client, @korobi.network_repository]
