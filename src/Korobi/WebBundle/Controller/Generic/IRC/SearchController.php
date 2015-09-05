@@ -5,6 +5,7 @@ namespace Korobi\WebBundle\Controller\Generic\IRC;
 use Elasticsearch\Client;
 use Korobi\WebBundle\Controller\BaseController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class SearchController extends BaseController {
@@ -14,7 +15,16 @@ class SearchController extends BaseController {
     private $client;
 
     public function __construct() {
-        $this->client = new Client();
+        $this->client = new Client(); // FIXME: this shouldn't be instantiated here!
+    }
+
+    public function autocompleteAction(Request $request) {
+        $suggestions = $this->suggestChannel($request->get("q"));
+
+        $suggestions = array_map(function($suggestion) {
+            return $suggestion['payload'];
+        }, $suggestions['suggest'][0]['options']);
+        return new JsonResponse($suggestions);
     }
 
     public function searchAction(Request $request) {
