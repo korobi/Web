@@ -70,16 +70,16 @@ class SearchController extends BaseController {
                     // TODO That doesn't work at all
                     case 'start':
                         $query[] = ['range' => ['date' => [
-                            'gt' => (new \DateTime($tmp ?: '@0'))->getTimestamp()
+                            'gt' => (new \DateTime($tmp ?: '@0'))->getTimestamp() * 1000
                         ]]];
                         break;
                     case 'end':
                         $query[] = ['range' => ['date' => [
-                            'lt' => (new \DateTime($tmp ?: 'now'))->getTimestamp()
+                            'lt' => (new \DateTime($tmp ?: 'now'))->getTimestamp() * 1000
                         ]]];
                         break;
                     default:
-                        $query[] = ['term' => [$name => $tmp]];
+                        $query[] = ['match' => [$name => $tmp]];
                 }
             }
         }
@@ -93,11 +93,14 @@ class SearchController extends BaseController {
             'body' => [
                 'query' => [
                     'filtered' => [
-                        'filter' => [
+                        'query' => [
                             'bool' => [
                                 'must' => $query,
                             ]
                         ],
+                        'filter' => [
+                            // TODO: filters after query
+                        ]
                     ],
                 ],
                 // TODO That doesn't work yet
