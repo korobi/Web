@@ -5,19 +5,23 @@
 {% block body %}
     <h1>Search</h1>
 
-    <form action="">
+    <form action="" method="post">
         <label for="message">Message</label>
         <input type="text" name="message" id="message">
         <label for="channel">Channel</label>
         <input type="text" name="channel" id="channel">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name">
+        <label for="actor_name">Name</label>
+        <input type="text" name="actor_name" id="actor_name">
         <label for="type">Type</label>
         <select name="type" id="type" multiple>
             {% for n in ['join', 'quit', 'part', 'message', 'mode', 'topic', 'kick', 'action'] %}
-                <option value="{{ n | upper }}">{{ n }}</option>
+                <option value="{{ n | upper }}">{{ n | capitalize }}</option>
             {% endfor %}
         </select>
+        <label for="start">Start</label>
+        <input type="date" name="start" id="start">
+        <label for="end">End</label>
+        <input type="date" name="end" id="end">
         <input type="submit">
     </form>
 

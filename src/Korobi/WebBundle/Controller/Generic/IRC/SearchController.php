@@ -60,25 +60,31 @@ class SearchController extends BaseController {
     }
 
     private function search(Request $request) {
-        $term = [];
+        $query = [];
 
-        if($message = $request->get('message', false)) {
-            $term['message'] = $message;
+        // TODO there can be multiple types!
+        foreach(['message', 'channel', 'type', 'actor_name', 'start', 'end'] as $name) {
+            if($tmp = $request->get($name)) {
+                switch($name) {
+                    // TODO Timezone stuff
+                    // TODO That doesn't work at all
+                    case 'start':
+                        $query[] = ['range' => ['date' => [
+                            'gt' => (new \DateTime($tmp ?: '@0'))->getTimestamp()
+                        ]]];
+                        break;
+                    case 'end':
+                        $query[] = ['range' => ['date' => [
+                            'lt' => (new \DateTime($tmp ?: 'now'))->getTimestamp()
+                        ]]];
+                        break;
+                    default:
+                        $query[] = ['term' => [$name => $tmp]];
+                }
+            }
         }
 
-        if($channel = $request->get('channel', false)) {
-            $term['channel'] = $channel;
-        }
-
-        if($type = $request->get('type', false)) {
-            $term['type'] = $type;
-        }
-
-        if($name = $request->get('name', false)) {
-            $term['actor_name'] = $name;
-        }
-
-        if(empty($term)) {
+        if(empty($query)) {
             return ['hits' => ['hits' => []]]; // kek
         }
 
@@ -87,17 +93,21 @@ class SearchController extends BaseController {
             'body' => [
                 'query' => [
                     'filtered' => [
-                        'query' => [
-                            'match_all' => [],
-                        ],
                         'filter' => [
-                            'term' =>  $term,
+                            'bool' => [
+                                'must' => $query,
+                            ]
                         ],
                     ],
                 ],
+                // TODO That doesn't work yet
+                'sort' => [
+                    'date' => 'desc'
+                ]
             ],
             'size' => 3,
         ];
+        var_dump($params);
         return $this->client->search($params);
     }
 
