@@ -16,7 +16,6 @@ class SearchController extends BaseController {
         $this->client = new Client();
     }
 
-
     public function searchAction(Request $request) {
         $term = $request->get("term");
         $page = (int) $request->get("page", 1) - 1;
@@ -24,19 +23,23 @@ class SearchController extends BaseController {
 
         ini_set('xdebug.var_display_max_depth', 10);
 
-        var_dump('count', $this->client->count([
+        $plz = [];
+
+        $plz['count'] = $this->client->count([
             'index' => 'chats',
             'type' => 'chat',
-        ]));
+        ])['count'];
 
         try {
-            var_dump('suggestChannel', $this->suggestChannel($term));
-            var_dump('searchChat', $this->searchChat($term));
+            $plz['suggestChannel'] = $this->suggestChannel($term)['suggest'];
+            $plz['searchChat'] = $this->searchChat($term)['hits']['hits'];
         } catch(\Exception $e) {
             print_r(json_decode($e->getMessage()));
         }
 
-        die();
+        return $this->render('KorobiWebBundle:controller/generic:search.html.twig', [
+            'plz' => $plz,
+        ]);
     }
 
     private function suggestChannel($term) {

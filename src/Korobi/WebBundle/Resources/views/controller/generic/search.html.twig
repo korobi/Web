@@ -1,0 +1,27 @@
+{% extends 'KorobiWebBundle::layout.html.twig' %}
+
+{% set page_title = 'Search' %}
+
+{% block body %}
+    <h1>Search</h1>
+
+    <form action="">
+        <label for="message">Message</label>
+        <input type="text" name="message" id="message">
+        <label for="channel">Channel</label>
+        <input type="text" name="channel" id="channel">
+        <label for="type">Type</label>
+        <select name="type" id="type" multiple>
+            {% for n in ['join', 'quit', 'part', 'message', 'mode', 'topic', 'kick', 'action'] %}
+                <option value="{{ n | upper }}">{{ n }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
+
+    <div style="margin-top: 1em;">
+        {% for i, v in plz %}
+            {{ dump(i, v) }}
+        {% endfor %}
+    </div>
+{% endblock %}
