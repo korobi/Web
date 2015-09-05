@@ -94,7 +94,7 @@ class ChannelRepository extends DocumentRepository {
     public function findPublicChannels() {
         return $this->createQueryBuilder()
             ->field('key')
-            ->notEqual(null)
+            ->equals(null)
             ->getQuery()
             ->execute();
     }
