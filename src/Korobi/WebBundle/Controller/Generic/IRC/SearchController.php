@@ -4,6 +4,7 @@ namespace Korobi\WebBundle\Controller\Generic\IRC;
 
 use Elasticsearch\Client;
 use Korobi\WebBundle\Controller\BaseController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 class SearchController extends BaseController {
@@ -31,8 +32,8 @@ class SearchController extends BaseController {
         ])['count'];
 
         try {
-            $plz['suggestChannel'] = $this->suggestChannel($term)['suggest'];
-            $plz['searchChat'] = $this->searchChat($term)['hits']['hits'];
+            //$plz['suggestChannel'] = $this->suggestChannel($term)['suggest'];
+            $plz['search'] = $this->search($request)['hits']['hits'];
         } catch(\Exception $e) {
             print_r(json_decode($e->getMessage()));
         }
@@ -58,7 +59,29 @@ class SearchController extends BaseController {
         return $this->client->suggest($params);
     }
 
-    private function searchChat($term) {
+    private function search(Request $request) {
+        $term = [];
+
+        if($message = $request->get('message', false)) {
+            $term['message'] = $message;
+        }
+
+        if($channel = $request->get('channel', false)) {
+            $term['channel'] = $channel;
+        }
+
+        if($type = $request->get('type', false)) {
+            $term['type'] = $type;
+        }
+
+        if($name = $request->get('name', false)) {
+            $term['actor_name'] = $name;
+        }
+
+        if(empty($term)) {
+            return ['hits' => ['hits' => []]]; // kek
+        }
+
         $params = [
             'index' => 'chats',
             'body' => [
@@ -68,9 +91,7 @@ class SearchController extends BaseController {
                             'match_all' => [],
                         ],
                         'filter' => [
-                            'term' => [
-                                'message' => $term,
-                            ],
+                            'term' =>  $term,
                         ],
                     ],
                 ],

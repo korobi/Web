@@ -10,6 +10,8 @@
         <input type="text" name="message" id="message">
         <label for="channel">Channel</label>
         <input type="text" name="channel" id="channel">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name">
         <label for="type">Type</label>
         <select name="type" id="type" multiple>
             {% for n in ['join', 'quit', 'part', 'message', 'mode', 'topic', 'kick', 'action'] %}
