@@ -2,44 +2,79 @@
 
 namespace Korobi\WebBundle\Controller\Generic\IRC;
 
+use Elasticsearch\Client;
 use Korobi\WebBundle\Controller\BaseController;
-use Korobi\WebBundle\Document\Channel;
-use Korobi\WebBundle\Repository\ChannelRepository;
-use Korobi\WebBundle\Repository\ChatRepository;
-use Korobi\WebBundle\Repository\NetworkRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class SearchController extends BaseController {
 
     const RESULT_PER_PAGE = 20;
 
+    private $client;
+
+    public function __construct() {
+        $this->client = new Client();
+    }
+
+
     public function searchAction(Request $request) {
         $term = $request->get("term");
-        $page = (int) $request->get("page", 0) - 1;
+        $page = (int) $request->get("page", 1) - 1;
         if ($page < 0) $page = 0;
 
-        /** @var ChannelRepository $channelRepo */
-        $channelRepo = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Channel');
+        ini_set('xdebug.var_display_max_depth', 10);
 
-        $dbChannels = $channelRepo->findPublicChannels()->toArray(false);
-        $channels = array_map(function(Channel $channel) {
-            return $channel->getNetwork() . $channel->getChannel();
-        }, $dbChannels);
+        var_dump('count', $this->client->count([
+            'index' => 'chats',
+            'type' => 'chat',
+        ]));
 
-        $result = $this->getChatRepository()->findAllBySearchTerm($term, $channels, $page);
-        var_dump($result);
+        try {
+            var_dump('suggestChannel', $this->suggestChannel($term));
+            var_dump('searchChat', $this->searchChat($term));
+        } catch(\Exception $e) {
+            print_r(json_decode($e->getMessage()));
+        }
+
         die();
     }
 
-    /**
-     * @return ChatRepository
-     */
-    private function getChatRepository() {
-        return $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('KorobiWebBundle:Chat');
+    private function suggestChannel($term) {
+        $params = [
+            'index' => 'channels',
+            'body' => [
+                'suggest' => [
+                    'text' => $term,
+                    'completion' => [
+                        'field' => '_name_suggest'
+                    ],
+                ],
+            ],
+        ];
+
+        return $this->client->suggest($params);
     }
+
+    private function searchChat($term) {
+        $params = [
+            'index' => 'chats',
+            'body' => [
+                'query' => [
+                    'filtered' => [
+                        'query' => [
+                            'match_all' => [],
+                        ],
+                        'filter' => [
+                            'term' => [
+                                'message' => $term,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'size' => 3,
+        ];
+        return $this->client->search($params);
+    }
+
 }
