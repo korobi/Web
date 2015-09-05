@@ -79,7 +79,7 @@ class SearchController extends BaseController {
                         ]]];
                         break;
                     case 'type':
-                        $query[] = ['term' => [$name => strtolower($tmp)]];
+                        $query[] = ['term' => [$name => $tmp]];
                         break;
                     default:
                         $query[] = ['match' => [$name => $tmp]];
