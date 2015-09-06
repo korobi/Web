@@ -1,0 +1,28 @@
+language: php
+
+php:
+  - 5.6
+
+sudo: false
+
+before_script:
+  - composer self-update
+  - cp templates/symfony_params.yml app/config/parameters.yml
+  - composer install --prefer-source --no-interaction --ignore-platform-reqs
+  - curl http://cs.sensiolabs.org/get/php-cs-fixer.phar -o php-cs-fixer.phar
+  - chmod +x php-cs-fixer.phar
+  - printf "\n" | pecl install mongo
+  - phpenv rehash
+
+script:
+  - ./php-cs-fixer.phar fix --config-file .php_cs -vvv
+  - cd app; phpunit
+
+notifications:
+  irc:
+    channels:
+      - 'irc.esper.net#korobi'
+    template:
+      - '%{repository}#%{build_number} (%{branch} - %{commit}) %{author}: %{message} - %{build_url}'
+    on_failure: always
+    on_success: change
