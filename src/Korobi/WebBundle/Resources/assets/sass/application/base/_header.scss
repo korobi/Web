@@ -95,7 +95,7 @@ nav.navigation:after {
   clear: both;
 }
 
-.navigation--search {
+nav .navigation--search {
   display: inline-block;
   height: 3rem;
   float: right;
@@ -117,13 +117,13 @@ nav.navigation:after {
     }
 
     &--input {
-      display: inline-block !important;
-      color: #aaa !important;
-      padding: 0.2rem 0.8rem 0.1rem 1.7rem !important;
-      border-radius: 1rem !important;
-      vertical-align: middle !important;
-      border: none !important;
-      margin: 0 !important;
+      display: inline-block;
+      color: #aaa;
+      padding: 0.2rem 0.8rem 0.1rem 1.7rem;
+      border-radius: 1rem;
+      vertical-align: middle;
+      border: none;
+      margin: 0;
     }
   }
 }
