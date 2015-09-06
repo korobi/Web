@@ -24,3 +24,9 @@
     }
   }
 }
+
+.vertical-form {
+  label, input {
+    display: block;
+  }
+}
