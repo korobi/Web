@@ -97,42 +97,33 @@ nav.navigation:after {
 
 .navigation--search {
   display: inline-block;
-  border: 1px solid #555;
+  height: 3rem;
   float: right;
-  position: relative;
-  top: 2px;
-  background-color: #101010;
 
-  label {
-    display: inline-block;
-    margin-left: 0.75em;
-  }
-  input {
-    display: inline-block;
-    background: #101010;
-    margin: 0 0 0 0.75em;
-    color: #aaa;
-    width: auto;
-    box-shadow: none;
-    border: 1px solid transparent;
-  }
-  input:hover {
-    border: 1px solid transparent;
-  }
+  &--container {
+    line-height: 3rem;
+    position: relative;
 
-  input:focus, input:active {
-    color: #fff;
-    box-shadow: none;
-    border-right: 1px solid transparent;
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid #555;
-  }
+    &--label {
+      position: absolute;
+      top: 1px;
+      bottom: 0;
+      left: 0.5rem;
+      &::before {
+        content: "\f002";
+        font-family: 'FontAwesome';
+      }
+    }
 
-
-  label:before {
-    content: "\f002";
-    font-family: 'FontAwesome';
+    &--input {
+      display: inline-block;
+      background: #101010;
+      color: #aaa;
+      padding: 0.2rem 0.8rem 0.1rem 1.7rem;
+      border-radius: 1rem;
+      vertical-align: middle;
+      border: none;
+    }
   }
 }
 

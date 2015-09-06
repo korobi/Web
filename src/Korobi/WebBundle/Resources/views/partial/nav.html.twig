@@ -16,7 +16,10 @@
         </ul>
 
         <div class="navigation--search">
-            <form action="{{ path('search') }}" method="POST"><label for="search-box" title="Search"></label><input type="text" class="navigation--search-box" name="term" id="search-box"></form>
+            <form action="{{ path('search') }}" method="POST" class="navigation--search--container">
+                <label for="search-box" title="Search" class="navigation--search--container--label"></label>
+                <input type="text" class="navigation--search--container--input" name="term" id="search-box">
+            </form>
         </div>
 
     </div>
