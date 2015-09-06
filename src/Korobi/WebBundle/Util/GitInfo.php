@@ -27,7 +27,14 @@ class GitInfo {
     public function updateData($environment = 'dev') {
         $root = __DIR__ . '/../../../../'; // just a bit of a hack
         $ref = (new \SplFileObject($root . '.git/HEAD'))->getCurrentLine();
-        $ref = trim(explode(' ', $ref)[1]);
+        $items = explode(' ', $ref);
+        if (count($items) < 2) {
+            $this->hash = (new \SplFileObject($root . 'REVISION'))->getCurrentLine();
+            $this->branch = $this->hash;
+            return;
+        }
+
+        $ref = trim($items[1]);
 
         if($environment === 'prod' && file_exists($root . 'REVISION') && str_replace('refs/heads/', '', $ref) === 'deploy') {
             $this->branch = 'www1-stable';

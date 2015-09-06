@@ -33,6 +33,7 @@ return Symfony\CS\Config\Config::create()
             ->exclude([
                 'app',
                 'web',
+                'vendor',
             ])
             ->notPath('src/Korobi/WebBundle/Resources/views/controller/generic/style_guide.html.twig')
     );
