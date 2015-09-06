@@ -1,43 +1,26 @@
-// ---- taken from bootstrap ----
-// I'm sure this looks great on a dark page.
-$form-gray-base: #000 !default;
-$form-gray-dark: lighten($form-gray-base, 20%) !default; // #333
-$form-text-color: $form-gray-dark !default;
-
-// Help text
-//
-// Apply to any element you wish to create light text for placement immediately
-// below a form control. Use for general help, formatting, or instructional text.
-
-.help-block {
-  display: block; // account for any element using help-block
-  margin-top: 5px;
-  margin-bottom: 10px;
-  color: lighten($form-text-color, 25%); // lighten the text some for contrast
-}
-
-.has-error {
-  color: #a94442;
-}
-// ---- thank you, bootstrap ----
-
-
-// key entry styles
 // form styles right now are pretty bad, this just makes things usable.
 
 .channel-key-entry {
-  input[type=text] {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #999;
-    width: 50%;
-    vertical-align: baseline;
-    margin-right: 0.5em;
-    display: inline-block;
-  }
-  input[type=submit] {
-    background-color: $primaryColour;
-    vertical-align: baseline;
-    display: inline-block;
+  input {
+    height: 2rem;
+
+    &[type=text] {
+      padding: 0.5rem;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      width: 50%;
+      margin-right: 0.5rem;
+      display: inline-block;
+      border-radius: 4px;
+
+      &:invalid {
+        box-shadow: none;
+
+        &:focus {
+          border: 1px solid #aa3333;
+        }
+      }
+    }
   }
 }
