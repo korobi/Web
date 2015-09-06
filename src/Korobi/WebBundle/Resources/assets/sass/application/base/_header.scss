@@ -109,6 +109,7 @@ nav.navigation:after {
       top: 1px;
       bottom: 0;
       left: 0.5rem;
+      margin: 0;
       &::before {
         content: "\f002";
         font-family: 'FontAwesome';
@@ -116,13 +117,13 @@ nav.navigation:after {
     }
 
     &--input {
-      display: inline-block;
-      background: #101010;
-      color: #aaa;
-      padding: 0.2rem 0.8rem 0.1rem 1.7rem;
-      border-radius: 1rem;
-      vertical-align: middle;
-      border: none;
+      display: inline-block !important;
+      color: #aaa !important;
+      padding: 0.2rem 0.8rem 0.1rem 1.7rem !important;
+      border-radius: 1rem !important;
+      vertical-align: middle !important;
+      border: none !important;
+      margin: 0 !important;
     }
   }
 }
