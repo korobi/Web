@@ -107,7 +107,8 @@ class SearchController extends BaseController {
                     'date' => 'desc'
                 ],
                 'highlight' => [
-                    "tags_schema" => "styled",
+                    "pre_tags" => ["<mark class=\"hl\">"],
+                    "post_tags" => ["</mark>"],
                     'fields' => [
                         // if you don't cast this, you won't have a fun time.
                         'message' => (object) []
