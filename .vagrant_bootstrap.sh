@@ -65,6 +65,9 @@ echo "Done. apt logs are in $HOME"
 echo "Activating ElasticSearch.."
 update-rc.d elasticsearch defaults 95 10
 
+echo "Configuring MongoDB daemon.."
+sed -i -e 's/bind_ip = 127\.0\.0\.1/bind_ip = 0\.0\.0\.0/g' /etc/mongod.conf
+
 echo "Installing composer.."
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/bin/composer
