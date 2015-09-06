@@ -84,7 +84,7 @@ class SearchController extends BaseController {
         }
 
         if(empty($query)) {
-            return ['hits' => ['hits' => []]]; // kek
+            return ['hits' => ['hits' => []]]; // topkek
         }
 
         $params = [
@@ -105,7 +105,14 @@ class SearchController extends BaseController {
                 // TODO That doesn't work yet
                 'sort' => [
                     'date' => 'desc'
-                ]
+                ],
+                'highlight' => [
+                    "tags_schema" => "styled",
+                    'fields' => [
+                        // if you don't cast this, you won't have a fun time.
+                        'message' => (object) []
+                    ]
+                ],
             ],
             'size' => 20,
         ];
