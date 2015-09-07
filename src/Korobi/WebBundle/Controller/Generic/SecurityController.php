@@ -157,7 +157,7 @@ class SecurityController extends BaseController {
 
         $contents = serialize([
             'hash' => $this->lastHashReported,
-            'hash_count' => $this->lastHashIdenticalReportCount
+            'hash_count' => $this->lastHashIdenticalReportCount,
         ]);
 
         $success = file_put_contents($cachePath, $contents);
