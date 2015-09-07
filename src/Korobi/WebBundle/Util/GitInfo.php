@@ -26,19 +26,21 @@ class GitInfo {
      * @param string $environment
      */
     public function updateData($rootDir, $environment = 'dev') {
-        $branch = trim(`git rev-parse --abbrev-ref HEAD 2>&1`);
-        if (StringUtil::startsWith($branch, "fatal: Not a git repository")) {
-            $this->branch = $environment === 'prod' ? 'www1-stable' : 'unknown';
-            $this->hash = 'unknown';
-        } else {
-            if ($environment === 'prod' && file_exists($rootDir . '/../REVISION') && $branch === 'deploy') {
-                $this->branch = 'www1-stable';
-            } else {
-                $this->branch = $branch;
-            }
-
-            $this->hash = trim(`git rev-parse HEAD 2>&1`);
+        if($environment === 'prod' || $environment === 'staging') {
+            $this->branch = $environment == 'prod' ? 'www1-stable' : 'master';
+            $this->hash = trim(file_get_contents($rootDir . '/../REVISION'));
+            return;
         }
+
+        $branch = trim(`git rev-parse --abbrev-ref HEAD 2>&1`);
+        if (StringUtil::startsWith($branch, 'fatal: Not a git repository')) {
+            $this->branch = 'unknown';
+            $this->hash = 'unknown';
+            return;
+        }
+
+        $this->branch = $branch;
+        $this->hash = trim(`git rev-parse HEAD 2>&1`);
     }
 
     /**

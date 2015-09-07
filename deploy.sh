@@ -3,6 +3,9 @@
 echo "** Pulling changes..."
 git pull
 
+echo "** Storing current hash..."
+git rev-parse HEAD > REVISION
+
 echo "** Assigning directory permissions..."
 chmod -R 777 app/cache/dev
 
