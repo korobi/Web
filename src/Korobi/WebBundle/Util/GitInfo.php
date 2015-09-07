@@ -14,9 +14,10 @@ class GitInfo {
 
     /**
      * @param $environment
+     * @param $rootDir
      */
-    public function __construct($environment) {
-        $this->updateData($environment);
+    public function __construct($environment, $rootDir) {
+        $this->updateData($rootDir, $environment);
     }
 
     /**
@@ -24,13 +25,18 @@ class GitInfo {
      *
      * @param string $environment
      */
-    public function updateData($environment = 'dev') {
+    public function updateData($rootDir, $environment = 'dev') {
         $branch = trim(`git rev-parse --abbrev-ref HEAD 2>&1`);
         if (StringUtil::startsWith($branch, "fatal: Not a git repository")) {
-            $this->branch = $environment === 'prod' ? 'www1-stable' : '';
-            $this->hash = "";
+            $this->branch = $environment === 'prod' ? 'www1-stable' : 'unknown';
+            $this->hash = 'unknown';
         } else {
-            $this->branch = $branch;
+            if ($environment === 'prod' && file_exists($rootDir . '/../REVISION') && $branch === 'deploy') {
+                $this->branch = 'www1-stable';
+            } else {
+                $this->branch = $branch;
+            }
+
             $this->hash = trim(`git rev-parse HEAD 2>&1`);
         }
     }
