@@ -25,23 +25,13 @@ class GitInfo {
      * @param string $environment
      */
     public function updateData($environment = 'dev') {
-        $root = __DIR__ . '/../../../../'; // just a bit of a hack
-        $ref = (new \SplFileObject($root . '.git/HEAD'))->getCurrentLine();
-        $items = explode(' ', $ref);
-        if (count($items) < 2) {
-            $this->hash = (new \SplFileObject($root . 'REVISION'))->getCurrentLine();
-            $this->branch = $this->hash;
-            return;
-        }
-
-        $ref = trim($items[1]);
-
-        if($environment === 'prod' && file_exists($root . 'REVISION') && str_replace('refs/heads/', '', $ref) === 'deploy') {
-            $this->branch = 'www1-stable';
-            $this->hash = (new \SplFileObject($root . 'REVISION'))->getCurrentLine();
+        $branch = trim(`git rev-parse --abbrev-ref HEAD 2>&1`);
+        if (StringUtil::startsWith($branch, "fatal: Not a git repository")) {
+            $this->branch = $environment === 'prod' ? 'www1-stable' : '';
+            $this->hash = "";
         } else {
-            $this->branch = str_replace('refs/heads/', '', $ref);
-            $this->hash = (new \SplFileObject($root . '.git/' . $ref))->getCurrentLine();
+            $this->branch = $branch;
+            $this->hash = trim(`git rev-parse HEAD 2>&1`);
         }
     }
 
