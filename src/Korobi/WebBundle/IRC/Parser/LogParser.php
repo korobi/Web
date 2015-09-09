@@ -96,7 +96,7 @@ class LogParser implements LogParserInterface {
             $mode .= $this->transformUserModeToLetter($chat->getRecipientPrefix());
             $mode .= ' ';
             $mode .= $this->transformActor($chat->getRecipientName());
-        } else if ($chat->getChannelMode() !== null) {
+        } elseif ($chat->getChannelMode() !== null) {
             $modeLetter = $chat->getChannelMode();
             $mode .= $modeLetter;
             $mode .= ' ';

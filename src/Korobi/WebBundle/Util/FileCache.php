@@ -56,7 +56,7 @@ class FileCache {
             return unserialize(file_get_contents($this->getPath($key)));
         }
 
-        return null;
+        return;
     }
 
     public function set($key, $value) {
@@ -82,7 +82,7 @@ class FileCache {
 
         if(is_dir($path)) {
             return FileUtil::removeRecursively($path);
-        } else if(is_file($path . $this->extension)) {
+        } elseif(is_file($path . $this->extension)) {
             unlink($path . $this->extension);
             return 1;
         }

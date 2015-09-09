@@ -53,12 +53,12 @@ class SecurityController extends BaseController {
         $uri = isset($payload['csp-report']['document-uri']) && $payload['csp-report']['document-uri'] != ''
             ? $this->stripChannelKey($payload['csp-report']['document-uri'])
             : '[uri]';
-            
-        $resource = isset($payload['csp-report']['blocked-uri']) && $payload['csp-report']['blocked-uri'] != '' 
-            ? $payload['csp-report']['blocked-uri'] 
+
+        $resource = isset($payload['csp-report']['blocked-uri']) && $payload['csp-report']['blocked-uri'] != ''
+            ? $payload['csp-report']['blocked-uri']
             : '[resource]';
         $directive = $payload['csp-report']['violated-directive'];
-        
+
         $this->logger->warning('CSP Warning', $payload);
         $ip = $request->getClientIp();
         $hash = hash_hmac('sha1', $ip .  $resource . $directive, 'bc604aedc9027a1f1880');
@@ -100,16 +100,16 @@ class SecurityController extends BaseController {
      * @return String
      */
     protected function stripChannelKey($uri) {
-        if (strpos($uri, '?key=') === false) 
+        if (strpos($uri, '?key=') === false)
             return $uri;
 
         $repl = preg_replace('/\?key=.*$/', '',  $uri);
-        
+
         if ($repl === null)
             return '[uri snipped]';
-        return $repl;    
+        return $repl;
     }
-    
+
     /**
      * @param String $hash
      * @return bool Report message or not

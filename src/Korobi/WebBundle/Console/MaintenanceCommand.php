@@ -34,7 +34,7 @@ class MaintenanceCommand extends ContainerAwareCommand {
                 $mt = $this->maintenance(false);
                 $out->writeln('Maintenance mode: ' . ($mt ? 'Disabled' : 'Could not unlink file.'));
             }
-        } else if ($option === 'on' || $option === 'true') {
+        } elseif ($option === 'on' || $option === 'true') {
             if ($this->inMaintenance()) {
                 $out->writeln('Already in maintenance mode.');
             } else {

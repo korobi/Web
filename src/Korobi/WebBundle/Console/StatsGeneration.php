@@ -46,7 +46,7 @@ class StatsGeneration extends Command {
             $runningTotal += $item->total - $lastItem;
             $lastItem = $item->total;
         }
-        $mean = $runningTotal / ($data->count()-1);
+        $mean = $runningTotal / ($data->count() - 1);
 
         // p(X = x) = mean^x * e^(-mean) all over x factorial
 
