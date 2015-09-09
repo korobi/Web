@@ -13,8 +13,8 @@ class LogParserTest extends WebTestCase {
     public function testTransformActorEscaping() {
         $sut = new LogParser(new DummyTranslator());
         $result = $sut->transformActor("<strong>HTML</strong><marquee>yay</marquee>");
-        $this->assertFalse(strpos($result, "<") !== false, "Left angle bracket must not be in result.");
-        $this->assertFalse(strpos($result, ">") !== false, "Right angle bracket must not be in result.");
+        $this->assertNotContains("<", $result, "Left angle bracket must not be in result.");
+        $this->assertNotContains(">", $result, "Right angle bracket must not be in result.");
     }
 }
 
