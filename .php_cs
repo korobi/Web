@@ -6,7 +6,6 @@ return Symfony\CS\Config\Config::create()
     ->fixers([
         'concat_with_spaces',
         'duplicate_semicolon',
-        'elseif',
         'empty_return',
         'encoding',
         'eof_ending',
