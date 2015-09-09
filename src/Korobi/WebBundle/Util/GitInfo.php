@@ -9,14 +9,17 @@ namespace Korobi\WebBundle\Util;
  */
 class GitInfo {
 
+    const ONLINE_ENVS = ['staging', 'prod'];
+
     protected $branch;
     protected $hash;
 
     /**
      * @param $environment
+     * @param $rootDir
      */
-    public function __construct($environment) {
-        $this->updateData($environment);
+    public function __construct($environment, $rootDir) {
+        $this->updateData($rootDir, $environment);
     }
 
     /**
@@ -24,18 +27,29 @@ class GitInfo {
      *
      * @param string $environment
      */
-    public function updateData($environment = 'dev') {
-        $root = __DIR__ . '/../../../../'; // just a bit of a hack
-        $ref = (new \SplFileObject($root . '.git/HEAD'))->getCurrentLine();
-        $ref = trim(explode(' ', $ref)[1]);
-
-        if($environment === 'prod' && file_exists($root . 'REVISION') && str_replace('refs/heads/', '', $ref) === 'deploy') {
-            $this->branch = 'www1-stable';
-            $this->hash = (new \SplFileObject($root . 'REVISION'))->getCurrentLine();
-        } else {
-            $this->branch = str_replace('refs/heads/', '', $ref);
-            $this->hash = (new \SplFileObject($root . '.git/' . $ref))->getCurrentLine();
+    public function updateData($rootDir, $environment = 'dev') {
+        // Fast information retrieval for online environments
+        if (in_array($environment, self::ONLINE_ENVS)) {
+            if ($environment == 'prod') {
+                $this->branch = 'www1-stable';
+            } else {
+                $ref = trim(file_get_contents($rootDir . '/../.git/HEAD'));
+                $this->branch = str_replace('refs/heads/', '', explode(' ', $ref)[1]);
+            }
+            $this->hash = trim(file_get_contents($rootDir . '/../REVISION'));
+            return;
         }
+
+        // Accurate information retrieval for local environments
+        $branch = trim(`git rev-parse --abbrev-ref HEAD 2>&1`);
+        if (StringUtil::startsWith($branch, 'fatal: Not a git repository')) {
+            $this->branch = 'unknown';
+            $this->hash = 'unknown';
+            return;
+        }
+
+        $this->branch = $branch;
+        $this->hash = trim(`git rev-parse HEAD 2>&1`);
     }
 
     /**

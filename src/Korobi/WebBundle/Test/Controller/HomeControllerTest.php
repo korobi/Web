@@ -6,6 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HomeControllerTest extends WebTestCase {
 
+    protected function setUp() {
+        if(getenv('CI') !== false) {
+            $this->markTestSkipped('Skipping scrapping on CI');
+        }
+    }
+
     public function testIndexLoadsSuccessfully() {
         $client = static::createClient();
         $client->request('GET', '/');

@@ -13,6 +13,7 @@ class FileCacheTest extends KernelTestCase {
     private $cacheFolder;
 
     public function setup() {
+        static::bootKernel();
         $this->cacheFolder = static::$kernel->getCacheDir() . DIRECTORY_SEPARATOR . 'file-cache-test';
         $this->cache = new FileCache($this->cacheFolder, '.cache');
     }
