@@ -1,9 +1,9 @@
 #!/bin/bash
 
 echo "** Starting deploy"
-if [ "$(hostname)" == "chaos.ellune.net" ]; then
-    echo "** Detected chaos.ellune.net, adding deploy key"
-    ssh-agent bash -c 'ssh-add /data/a/web/keys/korobi_web; /data/a/capifony/dev.korobi.io/current/deploy.sh'
+if [ "$(hostname)" == "aura.ellune.net" ]; then
+    echo "** Detected aura.ellune.net, adding deploy key"
+    ssh-agent bash -c 'ssh-add /data/web/_resources/korobi/deploy_web; /data/web/dev.korobi.io/current/deploy.sh'
 else
     ./deploy.sh
 fi
