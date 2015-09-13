@@ -20,15 +20,16 @@ class GitInfo {
      * @param string $appDir Absolute path to app directory.
      */
     public function __construct($environment, $appDir) {
-        $this->updateData(dirname($appDir));
+        $this->updateData(dirname($appDir), $environment);
     }
 
     /**
      * Force update data.
      *
      * @param string $rootDir Absolute path to root directory.
+     * @param string $environment Current environment's name.
      */
-    public function updateData($rootDir) {
+    public function updateData($rootDir, $environment) {
         // This process is not simple! Please be careful when maintaining this code.
         // Please refer to the flowchart in the PR for further information on how this works.
         // https://github.com/korobi/Web/pull/211
@@ -50,6 +51,9 @@ class GitInfo {
         $firstItem = array_shift($process);
         /** @var $firstItem Callable */
         $this->$firstItem($gitDir, $process);
+
+        // Handle capifony
+        $this->postCheckForCapifonyFiles($gitDir, $environment);
     }
 
     /*
@@ -81,7 +85,7 @@ class GitInfo {
             $this->setBranchAndHash($headContents, $headContents);
         } else {
             $referencedFile = trim(substr($headContents, 5));
-            $this->branch = str_replace("/refs/heads/", "", $referencedFile);
+            $this->branch = str_replace("refs/heads/", "", $referencedFile);
             $this->tempRef = $referencedFile;
             if (!file_exists($gitDir . $referencedFile)) {
                 /** @var Callable $next */
@@ -122,6 +126,16 @@ class GitInfo {
      * --------------------------------------------------
      * End chain-of-responsibility function definitions
      */
+
+    private function postCheckForCapifonyFiles($gitDir, $environment) {
+        $revisionFilePath = $gitDir . ".." . DIRECTORY_SEPARATOR . "REVISION";
+        if (file_exists($revisionFilePath)) {
+            $this->hash = file_get_contents($revisionFilePath);
+            if ($environment === "prod" && $this->branch === "deploy") {
+                $this->branch = "www1-stable";
+            }
+        }
+    }
 
     /**
      * @return string The name of the current git branch.
