@@ -105,7 +105,6 @@ class GitInfo {
                     $loc--;
                 }
                 $this->hash = strrev($commitHash);
-                die($this->hash);
                 return;
             }
         }
