@@ -16,7 +16,6 @@ return Symfony\CS\Config\Config::create()
         'parenthesis',
         'php_closing_tag',
         'visibility',
-        'multiline_array_trailing_comma',
         'namespace_no_leading_whitespace',
         'remove_lines_between_uses',
         'single_array_no_trailing_comma',
@@ -33,7 +32,7 @@ return Symfony\CS\Config\Config::create()
             ->exclude([
                 'app',
                 'web',
-                'vendor',
+                'vendor'
             ])
             ->notPath('src/Korobi/WebBundle/Resources/views/controller/generic/style_guide.html.twig')
     );
