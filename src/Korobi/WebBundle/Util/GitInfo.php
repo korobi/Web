@@ -31,6 +31,7 @@ class GitInfo {
     public function updateData($rootDir) {
         // This process is not simple! Please be careful when maintaining this code.
         // Please refer to the flowchart in the PR for further information on how this works.
+        // https://github.com/korobi/Web/pull/211
 
         $process = [
             "checkIsGitRepo",
