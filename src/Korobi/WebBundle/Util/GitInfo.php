@@ -33,12 +33,19 @@ class GitInfo {
         // Please refer to the flowchart in the PR for further information on how this works.
         // https://github.com/korobi/Web/pull/211
 
-        $process = [
-            "checkIsGitRepo",
-            "checkForGitHeadFile",
-            "checkForPackedRefs",
-            "useFallbackCommand"
-        ];
+        // Initialize the stack of functions to use
+        $process = [];
+        // The first step is to ensure we have a valid .git folder
+        $process[] = "checkIsGitRepo";
+        // Next, we'll make sure there's a .git/HEAD file and process it
+        $process[] = "checkForGitHeadFile";
+        // These are now fallbacks, for if the .git/HEAD approach failed
+        // Here, we look for the packed-refs file and parse it
+        $process[] = "checkForPackedRefs";
+        // Finally, if all else fails we use bendem's shell command approach
+        // this is a bit slower but hopefully is more reliable.
+        $process[] = "useFallbackCommand";
+
         $gitDir = $rootDir . DIRECTORY_SEPARATOR . ".git" . DIRECTORY_SEPARATOR;
         $firstItem = array_shift($process);
         /** @var $firstItem Callable */
@@ -90,14 +97,15 @@ class GitInfo {
         $refToLocate = $this->tempRef;
         if (file_exists($gitDir . "packed-refs")) {
             $packedRefData = file_get_contents($gitDir . "packed-refs");
-            $loc = strpos($packedRefData, $refToLocate);
+            $loc = strpos($packedRefData, $refToLocate) - 1;
             $commitHash = "";
             if ($loc !== false) {
                 while ($packedRefData[$loc] !== "\n" && $loc > 0) {
-                    $loc--;
                     $commitHash .= $packedRefData[$loc];
+                    $loc--;
                 }
                 $this->hash = strrev($commitHash);
+                die($this->hash);
                 return;
             }
         }
