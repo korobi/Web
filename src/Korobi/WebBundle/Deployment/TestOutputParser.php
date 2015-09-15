@@ -24,7 +24,7 @@ class TestOutputParser {
         foreach ($data as $key => $arr) {
             if (is_int($key)) {
                 unset($data[$key]);
-            } elseif ($arr === '') {
+            } else if ($arr === '') {
                 $data[$key] = 0;
             }
         }

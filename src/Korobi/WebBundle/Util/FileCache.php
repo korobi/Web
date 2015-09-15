@@ -82,7 +82,7 @@ class FileCache {
 
         if(is_dir($path)) {
             return FileUtil::removeRecursively($path);
-        } elseif(is_file($path . $this->extension)) {
+        } else if(is_file($path . $this->extension)) {
             unlink($path . $this->extension);
             return 1;
         }

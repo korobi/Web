@@ -49,7 +49,7 @@ class RewriteController extends BaseController {
                 'channel' => $channel,
                 'tail' => $tail,
             ], 301);
-        } elseif ($year && $month && $day) {
+        } else if ($year && $month && $day) {
             return $this->redirectToRoute('channel_log_date', [
                 'network' => $network,
                 'channel' => $channel,
