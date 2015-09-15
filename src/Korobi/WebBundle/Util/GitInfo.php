@@ -17,10 +17,10 @@ class GitInfo {
 
     /**
      * @param string $environment Current environment's name.
-     * @param string $appDir Absolute path to app directory.
+     * @param string $rootDir Absolute path to root directory.
      */
-    public function __construct($environment, $appDir) {
-        $this->updateData(dirname($appDir), $environment);
+    public function __construct($environment, $rootDir) {
+        $this->updateData($rootDir, $environment);
     }
 
     /**
@@ -111,18 +111,16 @@ class GitInfo {
 
     private function checkForPackedRefs($gitDir) {
         $refToLocate = $this->tempRef;
-        if (file_exists($gitDir . 'packed-refs')) {
-            $packedRefData = file_get_contents($gitDir . 'packed-refs');
-            $loc = strpos($packedRefData, $refToLocate) - 1;
-            $commitHash = '';
-            if ($loc !== false) {
-                while ($packedRefData[$loc] !== '\n' && $loc > 0) {
-                    $commitHash .= $packedRefData[$loc];
-                    $loc--;
+        $packedRefFileLocation = $gitDir . 'packed-refs';
+        if (file_exists($packedRefFileLocation)) {
+            $packedRefData = file($packedRefFileLocation);
+            foreach ($packedRefData as $line) {
+                if (strpos($line, $refToLocate) !== false) {
+                    $this->hash = explode(' ', $line)[0];
+                    return true;
                 }
-                $this->hash = strrev($commitHash);
-                return true;;
             }
+
         }
         return false;
     }
