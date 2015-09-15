@@ -91,7 +91,7 @@ class GitInfo {
     }
 
     private function handleGitHeadFile($gitDir, $headContents) {
-        if (strpos($headContents, 'ref: ') === -1) {
+        if (strpos($headContents, 'ref: ') === false) {
             $this->setBranchAndHash($headContents, $headContents);
             return true;
         } else {
