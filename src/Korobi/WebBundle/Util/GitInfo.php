@@ -37,17 +37,17 @@ class GitInfo {
         // Initialize the stack of functions to use
         $process = [];
         // The first step is to ensure we have a valid .git folder
-        $process[] = "checkIsGitRepo";
+        $process[] = 'checkIsGitRepo';
         // Next, we'll make sure there's a .git/HEAD file and process it
-        $process[] = "checkForGitHeadFile";
+        $process[] = 'checkForGitHeadFile';
         // These are now fallbacks, for if the .git/HEAD approach failed
         // Here, we look for the packed-refs file and parse it
-        $process[] = "checkForPackedRefs";
+        $process[] = 'checkForPackedRefs';
         // Finally, if all else fails we use bendem's shell command approach
         // this is a bit slower but hopefully is more reliable.
-        $process[] = "useFallbackCommand";
+        $process[] = 'useFallbackCommand';
 
-        $gitDir = $rootDir . DIRECTORY_SEPARATOR . ".git" . DIRECTORY_SEPARATOR;
+        $gitDir = $rootDir . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR;
         $firstItem = array_shift($process);
         /** @var $firstItem Callable */
         $this->$firstItem($gitDir, $process);
@@ -67,25 +67,25 @@ class GitInfo {
             $next = array_shift($stack);
             $this->$next($gitDir, $stack);
         } else {
-            $this->setBranchAndHash("unknown", "unknown");
+            $this->setBranchAndHash('unknown', 'unknown');
         }
     }
 
     private function checkForGitHeadFile($gitDir, $stack) {
-        if (file_exists($gitDir . "HEAD")) {
-            $headContents = fgets(fopen($gitDir . "HEAD", 'r')); // resource acquisition is initialization
+        if (file_exists($gitDir . 'HEAD')) {
+            $headContents = fgets(fopen($gitDir . 'HEAD', 'r')); // resource acquisition is initialization
             $this->handleGitHeadFile($gitDir, $headContents, $stack);
         } else {
-            $this->setBranchAndHash("unknown", "unknown");
+            $this->setBranchAndHash('unknown', 'unknown');
         }
     }
 
     private function handleGitHeadFile($gitDir, $headContents, $stack) {
-        if (strpos($headContents, "ref: ") === -1) {
+        if (strpos($headContents, 'ref: ') === -1) {
             $this->setBranchAndHash($headContents, $headContents);
         } else {
             $referencedFile = trim(substr($headContents, 5));
-            $this->branch = str_replace("refs/heads/", "", $referencedFile);
+            $this->branch = str_replace('refs/heads/', '', $referencedFile);
             $this->tempRef = $referencedFile;
             if (!file_exists($gitDir . $referencedFile)) {
                 /** @var Callable $next */
@@ -99,12 +99,12 @@ class GitInfo {
 
     private function checkForPackedRefs($gitDir, $stack) {
         $refToLocate = $this->tempRef;
-        if (file_exists($gitDir . "packed-refs")) {
-            $packedRefData = file_get_contents($gitDir . "packed-refs");
+        if (file_exists($gitDir . 'packed-refs')) {
+            $packedRefData = file_get_contents($gitDir . 'packed-refs');
             $loc = strpos($packedRefData, $refToLocate) - 1;
-            $commitHash = "";
+            $commitHash = '';
             if ($loc !== false) {
-                while ($packedRefData[$loc] !== "\n" && $loc > 0) {
+                while ($packedRefData[$loc] !== '\n' && $loc > 0) {
                     $commitHash .= $packedRefData[$loc];
                     $loc--;
                 }
@@ -128,11 +128,11 @@ class GitInfo {
      */
 
     private function postCheckForCapifonyFiles($gitDir, $environment) {
-        $revisionFilePath = $gitDir . ".." . DIRECTORY_SEPARATOR . "REVISION";
+        $revisionFilePath = $gitDir . '..' . DIRECTORY_SEPARATOR . 'REVISION';
         if (file_exists($revisionFilePath)) {
             $this->hash = file_get_contents($revisionFilePath);
-            if ($environment === "prod" && $this->branch === "deploy") {
-                $this->branch = "www1-stable";
+            if ($environment === 'prod' && $this->branch === 'deploy') {
+                $this->branch = 'www1-stable';
             }
         }
     }
