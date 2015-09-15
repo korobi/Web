@@ -35,22 +35,24 @@ class GitInfo {
         // https://github.com/korobi/Web/pull/211
 
         // Initialize the stack of functions to use
-        $process = [];
+        $processStack = [];
         // The first step is to ensure we have a valid .git folder
-        $process[] = 'checkIsGitRepo';
+        $processStack[] = 'checkIsGitRepo';
         // Next, we'll make sure there's a .git/HEAD file and process it
-        $process[] = 'checkForGitHeadFile';
+        $processStack[] = 'checkForGitHeadFile';
         // These are now fallbacks, for if the .git/HEAD approach failed
         // Here, we look for the packed-refs file and parse it
-        $process[] = 'checkForPackedRefs';
+        $processStack[] = 'checkForPackedRefs';
         // Finally, if all else fails we use bendem's shell command approach
         // this is a bit slower but hopefully is more reliable.
-        $process[] = 'useFallbackCommand';
+        $processStack[] = 'useFallbackCommand';
 
         $gitDir = $rootDir . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR;
-        $firstItem = array_shift($process);
-        /** @var $firstItem Callable */
-        $this->$firstItem($gitDir, $process);
+        foreach ($processStack as $item) {
+            if ($this->$item($gitDir)) {
+                break;
+            }
+        }
 
         // Handle capifony
         $this->postCheckForCapifonyFiles($gitDir, $environment);
@@ -59,45 +61,55 @@ class GitInfo {
     /*
      * Begin chain-of-responsibility function definitions
      * --------------------------------------------------
+     * These return true if the data has been set or false
+     * to suggest using the next method to find the
+     * requested information.
+     *
+     * Basically, see the return value as an "I'm done" or
+     * "I'm not done yet".
      */
 
-    private function checkIsGitRepo($gitDir, $stack) {
+    private function checkIsGitRepo($gitDir) {
         if (file_exists($gitDir)) {
-            /** @var Callable $next */
-            $next = array_shift($stack);
-            $this->$next($gitDir, $stack);
+            return false;
         } else {
             $this->setBranchAndHash('unknown', 'unknown');
+            return true;
         }
     }
 
-    private function checkForGitHeadFile($gitDir, $stack) {
+    /** ------------------------------------------------------------ */
+
+    private function checkForGitHeadFile($gitDir) {
         if (file_exists($gitDir . 'HEAD')) {
             $headContents = fgets(fopen($gitDir . 'HEAD', 'r')); // resource acquisition is initialization
-            $this->handleGitHeadFile($gitDir, $headContents, $stack);
+            return $this->handleGitHeadFile($gitDir, $headContents);
         } else {
             $this->setBranchAndHash('unknown', 'unknown');
+            return true;
         }
     }
 
-    private function handleGitHeadFile($gitDir, $headContents, $stack) {
+    private function handleGitHeadFile($gitDir, $headContents) {
         if (strpos($headContents, 'ref: ') === -1) {
             $this->setBranchAndHash($headContents, $headContents);
+            return true;
         } else {
             $referencedFile = trim(substr($headContents, 5));
             $this->branch = str_replace('refs/heads/', '', $referencedFile);
             $this->tempRef = $referencedFile;
             if (!file_exists($gitDir . $referencedFile)) {
-                /** @var Callable $next */
-                $next = array_shift($stack);
-                $this->$next($gitDir, $stack);
+                return false;
             } else {
                 $this->hash = file_get_contents($gitDir . $referencedFile);
+                return true;
             }
         }
     }
 
-    private function checkForPackedRefs($gitDir, $stack) {
+    /** ------------------------------------------------------------ */
+
+    private function checkForPackedRefs($gitDir) {
         $refToLocate = $this->tempRef;
         if (file_exists($gitDir . 'packed-refs')) {
             $packedRefData = file_get_contents($gitDir . 'packed-refs');
@@ -109,17 +121,19 @@ class GitInfo {
                     $loc--;
                 }
                 $this->hash = strrev($commitHash);
-                return;
+                return true;;
             }
         }
-        /** @var Callable $next */
-        $next = array_shift($stack);
-        $this->$next($gitDir, $stack);
+        return false;
     }
 
-    private function useFallbackCommand($gitDir, $stack) {
+    /** ------------------------------------------------------------ */
+
+    private function useFallbackCommand($gitDir) {
+        chdir($gitDir);
         $this->branch = trim(`git rev-parse --abbrev-ref HEAD 2>&1`);
         $this->hash = trim(`git rev-parse HEAD 2>&1`);
+        return true;
     }
 
     /*
