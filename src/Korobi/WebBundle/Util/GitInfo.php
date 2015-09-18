@@ -55,7 +55,7 @@ class GitInfo {
         }
 
         // Handle capifony
-        $this->postCheckForCapifonyFiles($gitDir, $environment);
+        $this->postCheckForCapifonyFiles($rootDir, $environment);
     }
 
     /*
@@ -139,8 +139,8 @@ class GitInfo {
      * End chain-of-responsibility function definitions
      */
 
-    private function postCheckForCapifonyFiles($gitDir, $environment) {
-        $revisionFilePath = $gitDir . '..' . DIRECTORY_SEPARATOR . 'REVISION';
+    private function postCheckForCapifonyFiles($rootDir, $environment) {
+        $revisionFilePath = $rootDir . 'REVISION';
         if (file_exists($revisionFilePath)) {
             $this->hash = file_get_contents($revisionFilePath);
             if ($environment === 'prod' && $this->branch === 'deploy') {
