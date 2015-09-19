@@ -3,7 +3,7 @@ services:
         class: Korobi\WebBundle\Util\GitInfo
         arguments:
             - %kernel.environment%
-            - %kernel.root_dir%
+            - %korobi.real_root_dir%
     korobi.navigation_collection:
         class: Korobi\WebBundle\Util\NavigationCollection
         arguments:
