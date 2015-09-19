@@ -56,7 +56,7 @@ class FileCache {
             return unserialize(file_get_contents($this->getPath($key)));
         }
 
-        return null;
+        return;
     }
 
     public function set($key, $value) {

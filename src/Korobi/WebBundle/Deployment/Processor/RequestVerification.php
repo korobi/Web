@@ -50,7 +50,7 @@ class RequestVerification extends BaseProcessor implements DeploymentProcessorIn
     private function getSignatureFromRequest(Request $request) {
         $signature = $request->headers->get('X-Hub-Signature');
         if ($signature === null) {
-            return null;
+            return;
         }
 
         parse_str($signature, $output);
