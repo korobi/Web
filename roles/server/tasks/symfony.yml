@@ -1,0 +1,30 @@
+---
+- name: copy parameters.yml for symfony project
+  template:
+    src=symfony_parameters.yml
+    dest='{{ home }}/site/app/config/parameters.yml'
+
+- name: check vendor/ for symfony project
+  stat: path='{{ home }}/site/vendor/'
+  register: vendor
+
+- name: composer install for symfony project
+  composer:
+    working_dir='{{ home }}/site'
+    prefer_dist=yes
+    no_dev=no
+  ignore_errors: yes # warnings about an outdated composer.lock file might be sent to stderr, which makes Ansible think the task failed... it didn't, so we'll ignore errors
+  when: not vendor.stat.exists or not vendor.stat.isdir
+
+- name: check for korobi database
+  command: echo "show dbs" | mongo
+  register: db_result
+
+- name: provision mongodb for symfony project
+  command: php {{ home }}/site/app/console korobi:db:provision
+  when: db_result.stdout.find('korobi') == -1
+
+- name: reload mongodb
+  service:
+    name=mongod
+    state=reloaded

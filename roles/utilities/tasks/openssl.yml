@@ -1,0 +1,3 @@
+---
+- name: install openssl
+  apt: name=openssl

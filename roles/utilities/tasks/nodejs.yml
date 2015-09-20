@@ -1,0 +1,14 @@
+---
+- name: install nodejs
+  apt: name={{ item }}
+  with_items:
+    - nodejs
+    - nodejs-legacy
+
+- name: install npm
+  apt: name=npm
+
+- name: install npm uglify-js
+  npm:
+    name=uglify-js
+    global=yes

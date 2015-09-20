@@ -1,0 +1,46 @@
+---
+- name: install nginx
+  apt: name=nginx
+
+- name: create nginx ssl directory
+  file:
+    path=/etc/nginx/ssl
+    state=directory
+
+- name: generate openssl key and crt
+  command: openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=CA/ST=British Columbia/L=Vancouver/O=Korobi/OU=Web Development/CN={{ host }}" -keyout /etc/nginx/ssl/{{ site_name }}.key -out /etc/nginx/ssl/{{ site_name }}.crt
+  args:
+    creates: '/etc/nginx/ssl/{{ site_name }}.crt'
+
+- name: copy nginx site template
+  template:
+    src=nginx_site.j2
+    dest='/etc/nginx/sites-available/{{ site_name }}'
+  notify:
+    - reload nginx
+    - reload php5-fpm
+
+- name: remove default enabled site
+  file:
+    path=/etc/nginx/sites-enabled/default
+    state=absent
+  notify:
+    - reload nginx
+    - reload php5-fpm
+
+- name: remove default available site
+  file:
+    path=/etc/nginx/sites-available/default
+    state=absent
+  notify:
+    - reload nginx
+    - reload php5-fpm
+
+- name: link korobi sites-enabled and sites-available
+  file:
+    src='/etc/nginx/sites-available/{{ site_name }}'
+    dest='/etc/nginx/sites-enabled/{{ site_name }}'
+    state=link
+  notify:
+    - reload nginx
+    - reload php5-fpm

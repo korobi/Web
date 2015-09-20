@@ -1,0 +1,17 @@
+---
+- name: check for swap
+  stat: path=/var/swap.1
+  register: swap
+
+- name: allocate swap
+  command: /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+  args:
+    creates: /var/swap.1
+
+- name: make swap
+  command: /sbin/mkswap /var/swap.1
+  when: not swap.stat.exists
+
+- name: enable swap
+  command: /sbin/swapon /var/swap.1
+  when: not swap.stat.exists

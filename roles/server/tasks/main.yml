@@ -1,0 +1,6 @@
+---
+- include: hosts.yml
+- include: php.yml
+- include: composer.yml
+- include: nginx.yml
+- include: symfony.yml
