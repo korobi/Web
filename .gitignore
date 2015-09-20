@@ -46,6 +46,5 @@ src/Korobi/WebBundle/maintenance
 ruby
 
 # Vagrant
-Vagrantfile
 .vagrant
 
