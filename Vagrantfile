@@ -15,5 +15,7 @@ Vagrant.configure(2) do |config|
       group: "www-data",
       mount_options: ["dmode=775,fmode=664"]
 
-    config.vm.provision :shell, path: '.vagrant_bootstrap.sh'
+    config.vm.provision "ansible" do |ansible|
+        ansible.playbook = "playbook.yml"
+    end
 end
