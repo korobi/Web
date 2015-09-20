@@ -7,7 +7,7 @@ sudo: false
 
 before_script:
   - composer self-update
-  - cp templates/symfony_params.yml app/config/parameters.yml
+  - cp roles/server/symfony_parameters.yml app/config/parameters.yml
   - composer install --prefer-source --no-interaction --ignore-platform-reqs
   - curl http://get.sensiolabs.org/php-cs-fixer.phar -o php-cs-fixer
   - chmod +x php-cs-fixer
