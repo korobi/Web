@@ -1,0 +1,3 @@
+---
+- name: install language pack
+  apt: name=language-pack-en

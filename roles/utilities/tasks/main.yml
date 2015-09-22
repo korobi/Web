@@ -7,3 +7,4 @@
 - include: nodejs.yml
 - include: openssl.yml
 - include: elasticsearch.yml
+- include: language.yml
