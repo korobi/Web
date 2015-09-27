@@ -27,9 +27,13 @@
 
 - name: install NPM packages for Symfony project
   npm:
+    name={{ item.name }}
+    version={{ item.version }}
     path="{{ home }}/site"
     state=present
     global=yes
+  with_items:
+    - { name: uglify-js, version: ^2.4.24 }
 
 - name: check for Korobi database
   command: echo "show dbs" | mongo
