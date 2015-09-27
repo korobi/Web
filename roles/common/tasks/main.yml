@@ -1,0 +1,17 @@
+---
+- include: swap.yml
+
+- include: ruby.yml
+
+# vcs
+- include: git.yml
+
+- include: bashrc.yml
+
+- include: java.yml
+
+- include: nodejs.yml
+
+- include: elasticsearch.yml
+
+- include: language.yml

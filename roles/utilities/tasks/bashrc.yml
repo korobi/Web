@@ -1,0 +1,5 @@
+---
+- name: append to bashrc cd to site
+  lineinfile:
+    dest='{{ home }}/.bashrc'
+    line='cd {{ home }}/site'

@@ -1,0 +1,13 @@
+---
+- name: add java ppa
+  apt_repository: repo='ppa:webupd8team/java'
+
+- name: accept java license
+  debconf:
+    name=oracle-java8-installer
+    question=shared/accepted-oracle-license-v1-1
+    value=true
+    vtype=select
+
+- name: install java
+  apt: name=oracle-java8-installer

@@ -1,0 +1,32 @@
+---
+- name: install nginx
+  apt: name=nginx state=present
+
+- name: create nginx SSL directory
+  file: path=/etc/nginx/ssl state=directory
+
+- name: generate OpenSSL key and crt
+  command: openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=CA/ST=British Columbia/L=Vancouver/O=Korobi/OU=Web Development/CN={{ host }}" -keyout /etc/nginx/ssl/app.key -out /etc/nginx/ssl/app.crt
+  args:
+    creates: /etc/nginx/ssl/app.crt
+
+- name: copy nginx site template
+  template:
+    src=nginx.j2
+    dest=/etc/nginx/sites-available/app
+
+- name: remove default nginx enabled site
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  notify:
+    - reload nginx
+
+- name: remove default nginx available site
+  file: path=/etc/nginx/sites-available/default state=absent
+
+- name: link app sites-enabled and sites-available
+  file:
+    src=/etc/nginx/sites-available/app
+    dest=/etc/nginx/sites-enabled/app
+    state=link
+  notify:
+    - reload nginx

@@ -1,0 +1,31 @@
+---
+- name: add PHP PPA
+  apt_repository: repo="ppa:ondrej/php5-5.6" state=present
+
+- name: install PHP and extensions
+  apt: name={{ item }} state=present
+  with_items:
+    - php5-cli
+    - php5-curl
+    - php5-fpm
+    - php5-mcrypt
+    - php5-mongo
+
+- name: install PHPUnit
+  get_url:
+    url=https://phar.phpunit.de/phpunit.phar
+    dest=/usr/bin/phpunit
+    mode=u+x
+
+- name: set date.timezone for PHP
+  ini_file:
+    dest=/etc/php5/{{ item }}/php.ini
+    section=Date
+    option=date.timezone
+    value=UTC
+    backup=yes
+  with_items:
+    - fpm
+    - cli
+  notify:
+    - reload php5-fpm
