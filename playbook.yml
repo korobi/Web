@@ -3,12 +3,11 @@
   sudo: true
   vars:
     home: /home/vagrant
-    site_name: korobi
     host: korobi.dev
   pre_tasks:
-    - name: apt update
+    - name: update apt cache
       apt: update_cache=yes
   roles:
-    - utilities
+    - common
     - database
     - server

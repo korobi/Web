@@ -1,0 +1,31 @@
+server {
+    listen      80;
+    server_name {{ host }};
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen      443;
+    server_name {{ host }};
+
+    access_log /var/log/nginx/app_access.log;
+    error_log  /var/log/nginx/app_error.log;
+
+    root {{ home }}/site/web;
+
+    ssl                 on;
+    ssl_certificate     /etc/nginx/ssl/app.crt;
+    ssl_certificate_key /etc/nginx/ssl/app.key;
+
+    location / {
+        try_files $uri /app_dev.php$is_args$args;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass  unix:/var/run/php5-fpm.sock;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include       fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}

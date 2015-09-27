@@ -1,9 +1,9 @@
 ---
-- name: add php ppa
-  apt_repository: repo='ppa:ondrej/php5-5.6'
+- name: add PHP PPA
+  apt_repository: repo="ppa:ondrej/php5-5.6" state=present
 
-- name: install php and extensions
-  apt: name={{ item }}
+- name: install PHP and extensions
+  apt: name={{ item }} state=present
   with_items:
     - php5-cli
     - php5-curl
@@ -11,20 +11,13 @@
     - php5-mcrypt
     - php5-mongo
 
-- name: install phpunit
-  command: wget -O /usr/bin/phpunit https://phar.phpunit.de/phpunit.phar
-  args:
-    creates: /usr/bin/phpunit
+- name: install PHPUnit
+  get_url:
+    url=https://phar.phpunit.de/phpunit.phar
+    dest=/usr/bin/phpunit
+    mode=u+x
 
-- name: check phpunit is executable
-  stat: path=/usr/bin/phpunit
-  register: phpunit
-
-- name: make phpunit executable
-  command: chmod +x /usr/bin/phpunit
-  when: not phpunit.stat.xusr
-
-- name: set date.timezone for php
+- name: set date.timezone for PHP
   ini_file:
     dest=/etc/php5/{{ item }}/php.ini
     section=Date

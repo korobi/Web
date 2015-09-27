@@ -1,30 +1,41 @@
 ---
-- name: copy parameters.yml for symfony project
+- name: copy parameters.yml template for Symfony project
   template:
     src=symfony_parameters.yml
-    dest='{{ home }}/site/app/config/parameters.yml'
+    dest="{{ home }}/site/app/config/parameters.yml"
 
-- name: check vendor/ for symfony project
-  stat: path='{{ home }}/site/vendor/'
+- name: check vendor/ for Symfony project
+  stat: path="{{ home }}/site/vendor/"
+  changed_when: false
   register: vendor
 
-- name: composer install for symfony project
+- name: Composer install for Symfony project
   composer:
-    working_dir='{{ home }}/site'
+    command=install
+    working_dir="{{ home }}/site"
     prefer_dist=yes
     no_dev=no
-  ignore_errors: yes # warnings about an outdated composer.lock file might be sent to stderr, which makes Ansible think the task failed... it didn't, so we'll ignore errors
+  # warnings about an outdated composer.lock file might be sent to stderr, which makes Ansible think the task failed... it didn't, so we'll ignore errors
+  ignore_errors: yes
   when: not vendor.stat.exists or not vendor.stat.isdir
 
-- name: check for korobi database
+- name: install sass gem for Symfony project
+  gem:
+    name=sass
+    user_install=no
+    state=present
+
+- name: install NPM packages for Symfony project
+  npm:
+    path="{{ home }}/site"
+    state=present
+    global=yes
+
+- name: check for Korobi database
   command: echo "show dbs" | mongo
+  changed_when: false
   register: db_result
 
-- name: provision mongodb for symfony project
+- name: provision MongoDB for Symfony project
   command: php {{ home }}/site/app/console korobi:db:provision
   when: db_result.stdout.find('korobi') == -1
-
-- name: reload mongodb
-  service:
-    name=mongod
-    state=reloaded
