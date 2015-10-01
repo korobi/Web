@@ -6,7 +6,7 @@ provisioning = {
   # happen; this is useful it you find yourself using `vagrant destroy -f;
   # vagrant up` very often, or if you're on Windows, which doesn't support
   # Ansible
-  enabled: true,
+  enabled: ENV.fetch('KOROBI_PROVISIONING', 'true') == 'true',
 
   # if true, Ansible's verbose mode (level 'vv') will be used; does nothing if
   # provisioning is disabled
