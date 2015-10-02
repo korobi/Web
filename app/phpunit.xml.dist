@@ -8,10 +8,13 @@
          bootstrap="bootstrap.php.cache"
 >
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>../src/*/*Bundle/Test</directory>
-            <directory>../src/*/Bundle/*Bundle/Test</directory>
-            <directory>../src/*Bundle/Test</directory>
+        <testsuite name="Project UnitTest Suite">
+            <directory>../src/Korobi/WebBundle/Test/Unit</directory>
+        </testsuite>
+        <testsuite name="All other tests">
+            <directory>../src/Korobi/WebBundle/Test/Command</directory>
+            <directory>../src/Korobi/WebBundle/Test/Controller</directory>
+            <directory>../src/Korobi/WebBundle/Test/Integration</directory>
         </testsuite>
     </testsuites>
 
