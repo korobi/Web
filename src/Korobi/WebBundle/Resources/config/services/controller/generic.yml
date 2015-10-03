@@ -1,6 +1,7 @@
 services:
     korobi.controller.generic.home:
         class: Korobi\WebBundle\Controller\Generic\HomeController
+        autowire: true
         parent: korobi.base_controller
     korobi.controller.generic.about:
         class: Korobi\WebBundle\Controller\Generic\AboutController

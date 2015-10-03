@@ -5,8 +5,18 @@ namespace Korobi\WebBundle\Controller\Generic;
 use Korobi\WebBundle\Controller\BaseController;
 use Korobi\WebBundle\Document\Network;
 use Korobi\WebBundle\Util\ExcludedHomepageChannels;
+use Korobi\WebBundle\Util\IExcludedHomepageChannels;
 
 class HomeController extends BaseController {
+
+    /**
+     * @var IExcludedHomepageChannels The list of excluded/blacklisted channels.
+     */
+    private $excludedChannels;
+
+    public function __construct(IExcludedHomepageChannels $excludedChannels) {
+        $this->excludedChannels = $excludedChannels;
+    }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
@@ -26,9 +36,8 @@ class HomeController extends BaseController {
 
         $targetChannel = $dbChannels[0]->getChannel();
         $targetNetwork = $dbChannels[0]->getNetwork();
-        $blacklist = $this->getHomepageBlacklist();
 
-        if ($blacklist->isBlacklisted($targetNetwork, $targetChannel)) {
+        if ($this->excludedChannels->isBlacklisted($targetNetwork, $targetChannel)) {
             // This is to ensure we have a more interesting log section on the homepage
             // E.g. The Esper-facing Spigot channel only has one user speaking and isn't colourful
 
@@ -56,15 +65,4 @@ class HomeController extends BaseController {
             'messages' => $this->getRenderManager()->renderLogs($messages, ["message"]),
         ]);
     }
-
-    /**
-     * @return ExcludedHomepageChannels
-     */
-    protected function getHomepageBlacklist() {
-        /** @var ExcludedHomepageChannels $blacklist */
-        $blacklist = $this->get('korobi.homepage_excluded_channels');
-        return $blacklist;
-    }
-
-
 }

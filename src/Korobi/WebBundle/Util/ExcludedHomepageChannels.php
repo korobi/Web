@@ -2,7 +2,7 @@
 
 namespace Korobi\WebBundle\Util;
 
-class ExcludedHomepageChannels {
+class ExcludedHomepageChannels implements IExcludedHomepageChannels {
 
     /**
      * @var array Fast storage of the blacklisted items.

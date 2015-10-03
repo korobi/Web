@@ -11,6 +11,7 @@ services:
             - @translator
     korobi.homepage_excluded_channels:
         class: Korobi\WebBundle\Util\ExcludedHomepageChannels
+        autowiring_types: '\Korobi\WebBundle\Util\IExcludedHomepageChannels'
         arguments:
             - %korobi.config%
     korobi.akio:
