@@ -66,7 +66,7 @@ class DeploymentController extends BaseController {
     public function deployAction(Request $request) {
         /** @var \Korobi\WebBundle\Document\User $user */
         $user = $this->getUser();
-        $env = $this->getParameter("kernel.environment");
+        $env = $this->getParameter('kernel.environment');
         $info = new DeploymentInfo($request, new Revision(), $user, $this->authChecker, $this->hmacKey, $this->rootPath, $env);
         $processor = new DeploymentProcessor($info, $this->logger, $this->container->get('kernel'), $this->akio,
             $this->get('doctrine_mongodb')->getManager(), $this->get("korobi.git_info"));
