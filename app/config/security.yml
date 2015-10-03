@@ -34,7 +34,7 @@ security:
                 oauth_user_provider:
                     service: korobi.user_provider
                 success_handler: korobi.authentication.login.handler
-            login:
+            form_login:
                 success_handler: korobi.authentication.login.handler
             logout:
                 path: /auth/logout
