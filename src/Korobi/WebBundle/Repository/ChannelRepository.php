@@ -87,4 +87,16 @@ class ChannelRepository extends DocumentRepository {
             ->getQuery()
             ->execute();
     }
+
+    /**
+     * @return \Doctrine\MongoDB\Cursor
+     */
+    public function findPublicChannels() {
+        return $this->createQueryBuilder()
+            ->field('key')
+            ->equals(null)
+            ->getQuery()
+            ->execute();
+    }
+
 }

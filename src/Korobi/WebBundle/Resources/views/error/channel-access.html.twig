@@ -5,6 +5,9 @@
 {% block body %}
     <h1>You don't have permission to view that channel</h1>
     <p>The channel <strong>{{ exception.channel }}</strong> on network <strong>{{ exception.network }}</strong> is protected by a key. If you know the key, you can enter it below:</p>
-    <form method="get" class="channel-key-entry"><input type="text" name="key" required><input type="submit" value="Submit"></form>
+    <form method="get" class="channel-key-entry">
+        <input type="text" name="key" required>
+        <input type="submit" value="Submit" class="button button-flat-primary button-rounded">
+    </form>
 
 {% endblock %}

@@ -37,10 +37,6 @@ class NavigationCollection {
         return $this->items['primary'];
     }
 
-    public function getSecondary() {
-        return $this->items['secondary'];
-    }
-
     public function getFooter() {
         return $this->items['footer'];
     }

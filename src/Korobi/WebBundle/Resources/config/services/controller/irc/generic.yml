@@ -1,0 +1,5 @@
+services:
+    korobi.controller.irc.search:
+        class: Korobi\WebBundle\Controller\Generic\IRC\SearchController
+        parent: korobi.base_controller
+        arguments: [@korobi.search_service]
