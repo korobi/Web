@@ -13,33 +13,37 @@
         on {{ network_name }}
     </h1>
     <div class="commands">
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Content</th>
-                    <th>Aliases</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for command in commands %}
+        {% if commands is empty %}
+            <p>There are no commands available.</p>
+        {% else %}
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ loop.index }}</td>
-                        <td>{{ command.name }}</td>
-                        <td>
-                            {% for value in command.value %}
-                                {{ value|ircformat|raw }}{% if not loop.last %}<br>{% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>{{ command.aliases ? command.aliases }}</td>
-                        <td>
-                            <i class="fa fa-{{ command.is_action ? 'check' : 'close' }}"></i>
-                        </td>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Content</th>
+                        <th>Aliases</th>
+                        <th>Action</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for command in commands %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ command.name }}</td>
+                            <td>
+                                {% for value in command.value %}
+                                    {{ value|ircformat|raw }}{% if not loop.last %}<br>{% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>{{ command.aliases ? command.aliases }}</td>
+                            <td>
+                                <i class="fa fa-{{ command.is_action ? 'check' : 'close' }}"></i>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 {% endblock %}
