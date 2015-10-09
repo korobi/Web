@@ -14,8 +14,10 @@
     </h1>
     <div class="commands">
         {% if commands is empty %}
-            <p>There are no commands available.</p>
-            <p>Refer to <a href="https://docs.korobi.io/channel/commands/index.html">our documentation <i class="fa fa-external-link"></i></a> to learn more about commands.</p>
+            <div class="logs">
+                <p>There are no commands available.</p>
+                <p>Refer to <a href="https://docs.korobi.io/channel/commands/index.html">our documentation <i class="fa fa-external-link"></i></a> to learn more about commands.</p>
+            </div>
         {% else %}
             <table>
                 <thead>
