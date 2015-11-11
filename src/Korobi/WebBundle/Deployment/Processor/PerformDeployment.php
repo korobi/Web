@@ -36,7 +36,7 @@ class PerformDeployment extends BaseProcessor implements DeploymentProcessorInte
         $info->getRevision()->setDeployOutput(implode("\n", $execOutput));
 
         // get latest git info
-        $gitInfo->updateData($info->getRootPath());
+        $gitInfo->updateData($info->getRootPath(), $info->getEnvironment());
         $info->getRevision()->setNewCommit($gitInfo->getHash());
         $info->getRevision()->setBranch($gitInfo->getBranch());
         return parent::handle($info);
