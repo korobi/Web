@@ -12,7 +12,7 @@
         <h3>No topic is available.</h3>
     {% else %}
         <h3>Topic: <em>{{ topic.value|ircformat|raw }}</em></h3>
-        <h4>Topic set by: <em>{{ topic.setter_nick }}</em> on {{ topic.time.format('F j, Y h:i:s a') }}</h4>
+        <h4>Topic set by: <em>{{ topic.setter_nick|raw }}</em> on {{ topic.time.format('F j, Y h:i:s a') }}</h4>
     {% endif %}
 
     {% if channel.LastActivityValid != null %}

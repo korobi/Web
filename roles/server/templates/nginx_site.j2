@@ -1,26 +1,24 @@
 server {
     listen 80;
-    listen [::]:80;
 
-    server_name korobi.dev;
+    server_name {{ host }};
 
-    return 301 https://korobi.dev$request_uri;
+    return 301 https://$host$request_uri;
 }
 
 server {
     listen 443;
-    listen [::]:443;
 
-    server_name korobi.dev;
+    server_name {{ host }};
 
-    access_log /var/log/nginx/access.log;
-    error_log /var/log/nginx/error.log;
+    access_log /var/log/nginx/{{ site_name }}_access.log;
+    error_log /var/log/nginx/{{ site_name }}_error.log;
 
-    root /vagrant/web;
+    root {{ home }}/site/web;
 
     ssl on;
-    ssl_certificate %ssl_dir%/korobi.crt;
-    ssl_certificate_key %ssl_dir%/korobi.key;
+    ssl_certificate /etc/nginx/ssl/{{ site_name }}.crt;
+    ssl_certificate_key /etc/nginx/ssl/{{ site_name }}.key;
 
     location / {
         try_files $uri /app_dev.php$is_args$args;

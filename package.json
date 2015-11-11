@@ -1,6 +1,6 @@
 {
   "name": "KorobiWeb",
-  "license": "proprietary",
+  "license": "MIT",
   "private": true,
   "version": "1.0.0",
   "description": "The Korobi web component",

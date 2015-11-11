@@ -1,0 +1,14 @@
+---
+- name: add elasticsearch apt-key
+  apt_key: url='https://packages.elastic.co/GPG-KEY-elasticsearch'
+
+- name: add elasticsearch ppa
+  apt_repository: repo='deb http://packages.elastic.co/elasticsearch/1.7/debian stable main'
+
+- name: install elasticsearch
+  apt: name=elasticsearch
+
+- name: activate elasticsearch
+  command: update-rc.d elasticsearch defaults 95 10
+  args:
+    creates: /etc/init.d/elasticsearch

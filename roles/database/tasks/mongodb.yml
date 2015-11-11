@@ -1,0 +1,22 @@
+---
+- name: add MongoDB apt-key
+  apt_key:
+    keyserver=keyserver.ubuntu.com
+    id=7F0CEB10
+    state=present
+
+- name: add MongoDB PPA
+  apt_repository:
+    repo="deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse"
+    state=present
+
+- name: install MongoDB
+  apt: name=mongodb-org state=present
+
+- name: set MongoDB bind_ip
+  replace:
+    dest=/etc/mongod.conf
+    regexp="^bind_ip = 127\.0\.0\.1"
+    replace="bind_ip = 0.0.0.0"
+  notify:
+    - restart mongodb

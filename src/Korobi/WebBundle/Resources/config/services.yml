@@ -5,11 +5,9 @@ imports:
     - { resource: services/controllers.yml }
     - { resource: services/console.yml }
     - { resource: services/irc_logs.yml }
-    - { resource: services/services.yml }
+    - { resource: services/authentication.yml }
 
 services:
     korobi.user_provider:
         class: Korobi\WebBundle\Security\Provider\UserProvider
         arguments: [@fos_user.user_manager, {github: githubUserId}, %secret%]
-    korobi.logout_handler:
-        class: Korobi\WebBundle\Handler\LogoutHandler

@@ -64,7 +64,7 @@ class NetworkHomeController extends BaseController {
                     'key' => $key,
                 ]),
                 'db' => $dbChannel,
-                'key' => $key
+                'key' => $key,
             ];
         }
 

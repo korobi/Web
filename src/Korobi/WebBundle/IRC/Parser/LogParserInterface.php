@@ -5,7 +5,7 @@ namespace Korobi\WebBundle\IRC\Parser;
 use Korobi\WebBundle\Document\Chat;
 
 interface LogParserInterface {
-    
+
     /**
      * @param Chat $chat
      * @return string

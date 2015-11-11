@@ -1,0 +1,17 @@
+---
+- name: add ruby ppa
+  apt_repository: repo='ppa:brightbox/ruby-ng'
+
+- name: install ruby
+  apt: name=ruby2.1
+
+- name: install ruby bundler
+  gem: name=bundler
+
+- name: install ruby sass
+  gem: name=sass
+
+- name: install ruby project dependencies
+  command: bundle install --path={{ home }}/site --gemfile={{ home }}/site/Gemfile
+  args:
+    creates: '{{ home }}/site/Gemfile.lock'

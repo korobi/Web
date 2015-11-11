@@ -55,6 +55,11 @@ class DeploymentInfo {
     protected $messageQueue = [];
 
     /**
+     * @var string Environment name
+     */
+    protected $env;
+
+    /**
      * @param $request Request
      * @param $revision Revision
      * @param $user User
@@ -62,7 +67,7 @@ class DeploymentInfo {
      * @param $hmacKey string The HMAC key
      * @param $rootPath
      */
-    public function __construct(Request $request, Revision $revision, $user, AuthorizationChecker $authorisationChecker, $hmacKey, $rootPath) {
+    public function __construct(Request $request, Revision $revision, $user, AuthorizationChecker $authorisationChecker, $hmacKey, $rootPath, $env) {
         $this->request = $request;
         $this->revision = $revision;
         $this->user = $user;
@@ -70,6 +75,7 @@ class DeploymentInfo {
         $this->hmacKey = $hmacKey;
         $this->rootPath = $rootPath;
         $this->status = [];
+        $this->env = $env;
     }
 
     /**
@@ -135,5 +141,12 @@ class DeploymentInfo {
      */
     public function getAllMessagesInQueue() {
         return $this->messageQueue;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnvironment() {
+        return $this->env;
     }
 }

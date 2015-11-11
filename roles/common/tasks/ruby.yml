@@ -1,0 +1,12 @@
+---
+- name: add Ruby PPA
+  apt_repository: repo="ppa:brightbox/ruby-ng"
+
+- name: install Ruby
+  apt: name=ruby2.1 state=present
+
+- name: install Ruby Bundler
+  gem:
+    name=bundler
+    user_install=no
+    state=present

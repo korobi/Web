@@ -1,0 +1,10 @@
+---
+- include: swap.yml
+- include: ruby.yml
+- include: git.yml
+- include: bashrc.yml
+- include: java.yml
+- include: nodejs.yml
+- include: openssl.yml
+- include: elasticsearch.yml
+- include: language.yml
