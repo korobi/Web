@@ -30,6 +30,10 @@
         Twitter: @_kashike
         GitHub: https://github.com/kashike/
 
+    kenzierocks - developer, debugger
+        Twitter: @ktogami
+        GitHub: https://github.com/kenzierocks/
+
     lol768 - backend developer
         Twitter: @lol768
         GitHub: https://github.com/lol768/
