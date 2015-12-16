@@ -123,6 +123,11 @@ class LogParser implements LogParserInterface {
         return $result;
     }
 
+    // TODO
+    public function parseNotice(Chat $chat) {
+        return '';
+    }
+
     /**
      * @param Chat $chat
      * @return string
