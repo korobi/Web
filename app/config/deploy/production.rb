@@ -1,4 +1,4 @@
-server 'aura.ellune.net', :app, :web, :db, :primary => true
+server 'aura.miserable.ninja', :app, :web, :db, :primary => true
 
 set :domain, "korobi.io"
 set :deploy_to, "/data/web/korobi.io"
