@@ -18,7 +18,6 @@
 
     Zarthus - front, back, side and up-end developer
         GitHub: https://github.com/Zarthus/
-        Website: https://luradi.com
 
 /* Felix */
 
