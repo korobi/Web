@@ -134,7 +134,7 @@ class ChatRepository extends DocumentRepository {
 
         if ($messagesOnly) {
             $builder->field('type')
-                ->equals('MESSAGE')
+                ->equals('MESSAGE');
         }
 
         return $builder->getQuery()
