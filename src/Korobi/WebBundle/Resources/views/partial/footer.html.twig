@@ -1,7 +1,7 @@
 {% import 'KorobiWebBundle::macro/footer.html.twig' as footer %}
 <footer class="footer">
     <div class="footer--inner">
-        <div class="footer--copyright">&copy; {{ 'now'|date('Y') }}, korobi.io team &ndash; {{ footer.git_info(gitInfo) }}</div>
+        <div class="footer--copyright">&copy; 2015-{{ 'now'|date('Y') }}, korobi.io team &ndash; {{ footer.git_info(gitInfo) }}</div>
         <ul class="footer--links" role="menubar">
             {% spaceless %}
                 {% for item in navigation.getFooter() %}
