@@ -39,7 +39,7 @@ class HomeController extends BaseController {
         $messages = $this->get('doctrine_mongodb')
             ->getManager()
             ->getRepository('KorobiWebBundle:Chat')
-            ->findLastChatsByChannel($targetNetwork, $targetChannel, 50, true)
+            ->findLastChatsByChannel($targetNetwork, $targetChannel, 50)
             ->toArray(false);
         $messages = array_reverse($messages);
 
