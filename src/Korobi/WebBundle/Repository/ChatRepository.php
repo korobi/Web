@@ -120,19 +120,24 @@ class ChatRepository extends DocumentRepository {
      * @param string $network
      * @param string $channel
      * @param int $count
+     * @param bool $messagesOnly
      * @return \Doctrine\MongoDB\Cursor
      */
-    public function findLastChatsByChannel($network, $channel, $count) {
-        return $this->createQueryBuilder()
+    public function findLastChatsByChannel($network, $channel, $count, $messagesOnly) {
+        $builder = $this->createQueryBuilder()
             ->sort('date', 'DESC')
             ->field('network')
                 ->equals($network)
             ->field('channel')
                 ->equals($channel)
-            ->field('type')
+            ->limit($count);
+
+        if ($messagesOnly) {
+            $builder->field('type')
                 ->equals('MESSAGE')
-            ->limit($count)
-            ->getQuery()
+        }
+
+        return $builder->getQuery()
             ->execute();
     }
 
