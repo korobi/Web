@@ -46,7 +46,7 @@ assetic:
     bundles:        [ 'KorobiWebBundle' ]
     #java: /usr/bin/java
     ruby: %bin_path.ruby%
-    sass: "%sass_path%"
+    sass: "%bin_path.sass%"
     filters:
         cssrewrite: ~
         sass:
@@ -55,7 +55,7 @@ assetic:
         scss:
             style: compressed
         uglifyjs2:
-            bin: "%uglifyjs_path%"
+            bin: "%bin_path.uglify-js%"
         #closure:
         #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
         #yui_css:
