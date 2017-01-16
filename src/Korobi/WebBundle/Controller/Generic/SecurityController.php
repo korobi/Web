@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends BaseController {
     const CACHE_FILE = 'csp_cache.json';
+    
+    // List of resources that occur too often and are often not legitimate reports.
+    const DO_NOT_ANNOUNCE_RESOURCES = ['[resource]', 'self'];
 
     /**
      * @var Akio
@@ -63,7 +66,7 @@ class SecurityController extends BaseController {
         $ip = $request->getClientIp();
         $hash = hash_hmac('sha1', $ip .  $resource . $directive, 'bc604aedc9027a1f1880');
 
-        if ($this->shouldReportCspAction($hash)) {
+        if (!in_array($resource, self::DO_NOT_ANNOUNCE_RESOURCES) && $this->shouldReportCspAction($hash)) {
             $amount = (int) $this->lastHashIdenticalReportCount + 1;
             $text = ' ' . $amount . ($amount == 1 ? ' request' : ' requests') . ' to ' . $resource ' on page ' . $uri ' blocked via ' . $ip . '.';
 
@@ -73,6 +76,8 @@ class SecurityController extends BaseController {
                 ->aquaLight()
                 ->text($text)
                 ->send('csp', 'private');
+        } else {
+            $this->logger->debug('Did not announce CSP Warning to Akio.');
         }
 
         return new JsonResponse('Thanks, browser.');
