@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 5.6
+  - 7.1
 
 sudo: false
 
@@ -16,10 +16,11 @@ before_script:
   - phpenv rehash
 
 script:
-  # - ./php-cs-fixer fix --config-file .php_cs -vv -n --dry-run  # it broke --config-file is not an option
+  - ./php-cs-fixer fix --config-file .php_cs -vv -n --dry-run
   - cd app; phpunit
 
-#notifications:
+notifications:
+  email: false
 #  irc:
 #    channels:
 #      - 'irc.esper.net#korobi'
