@@ -111,7 +111,7 @@ abstract class BaseController extends Controller {
         // FIXME: Will break for Symfony 3!
 
         /** @var Request $request */
-        $request = $this->container->get('request');
+        $request = $this->get('request_stack')->getCurrentRequest();
 
         // ensure the user is appropriately authenticated
         $accessResponse = $this->getAuthenticationService()->hasAccessToChannel($dbChannel, $request);
