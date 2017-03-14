@@ -9,14 +9,10 @@ before_script:
   - composer self-update
   - cp roles/server/templates/symfony_parameters.yml app/config/parameters.yml
   - composer install --prefer-source --no-interaction --ignore-platform-reqs
-  - curl http://get.sensiolabs.org/php-cs-fixer.phar -o php-cs-fixer
-  - chmod +x php-cs-fixer
-  - ./php-cs-fixer self-update
-  - printf "\n" | pecl install mongo
+  - printf "\n" | pecl install mongodb
   - phpenv rehash
 
 script:
-  - ./php-cs-fixer fix --config-file .php_cs -vv -n --dry-run
   - cd app; phpunit
 
 notifications:
