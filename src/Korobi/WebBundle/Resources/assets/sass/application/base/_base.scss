@@ -2,6 +2,11 @@ body {
   background: rgb(34, 34, 34) $bodyBackgroundImage repeat;
 }
 
+body.light {
+  filter: invert(100%);
+  background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+}
+
 html {
   // stop the page jumping about :)
   overflow-y: scroll;
