@@ -19,11 +19,11 @@ script:
   # - ./php-cs-fixer fix --config-file .php_cs -vv -n --dry-run  # it broke --config-file is not an option
   - cd app; phpunit
 
-notifications:
-  irc:
-    channels:
-      - 'irc.esper.net#korobi'
-    template:
-      - '%{repository}#%{build_number} (%{branch} - %{commit}) %{author}: %{message} - %{build_url}'
-    on_failure: always
-    on_success: change
+#notifications:
+#  irc:
+#    channels:
+#      - 'irc.esper.net#korobi'
+#    template:
+#      - '%{repository}#%{build_number} (%{branch} - %{commit}) %{author}: %{message} - %{build_url}'
+#    on_failure: always
+#    on_success: change
