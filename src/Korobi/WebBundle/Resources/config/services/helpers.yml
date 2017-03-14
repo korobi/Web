@@ -8,7 +8,7 @@ services:
         class: Korobi\WebBundle\Util\NavigationCollection
         arguments:
             - %korobi.config%
-            - @translator
+            - '@translator'
     korobi.homepage_excluded_channels:
         class: Korobi\WebBundle\Util\ExcludedHomepageChannels
         arguments:
@@ -19,11 +19,3 @@ services:
             - %akio.enabled%
             - %akio.path%
             - %akio.key%
-    korobi.influx:
-        class: Korobi\WebBundle\Util\InfluxService
-        arguments:
-            - %influx.host%
-            - %influx.port%
-            - %influx.user%
-            - %influx.pass%
-            - %influx.db%

@@ -35,13 +35,6 @@ parameters:
     # channel stats base path
     channel_stats_root: ~
 
-    # influx details
-    influx.host: 127.0.0.1
-    influx.port: 8086
-    influx.user: user
-    influx.pass: pass
-    influx.db: database
-
     # analytics
     analytics.enabled: false
     # 1 prod

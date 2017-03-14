@@ -99,13 +99,16 @@ fos_user:
     db_driver: mongodb
     firewall_name: app
     user_class: Korobi\WebBundle\Document\User
+    from_email:
+        address: korobi@korobi.io
+        sender_name: Korobi
     registration:
         confirmation:
             enabled: false
 
 # HWIOAuthBundle Configuration
 hwi_oauth:
-    firewall_name: app
+    firewall_names: [app]
     target_path_parameter: _destination
     resource_owners:
         github:

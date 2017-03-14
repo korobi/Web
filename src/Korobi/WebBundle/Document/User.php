@@ -16,7 +16,7 @@ class User extends BaseUser {
     protected $id;
 
     /**
-     * @MongoDB\Int
+     * @MongoDB\Field(type="int")
      */
     protected $githubUserId;
 

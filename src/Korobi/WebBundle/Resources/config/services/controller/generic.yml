@@ -18,8 +18,8 @@ services:
         class: Korobi\WebBundle\Controller\Generic\SecurityController
         parent: korobi.base_controller
         arguments:
-            - @korobi.akio
-            - @logger
+            - '@korobi.akio'
+            - '@logger'
     korobi.controller.generic.dynamic:
         class: Korobi\WebBundle\Controller\Generic\DynamicController
         parent: korobi.base_controller

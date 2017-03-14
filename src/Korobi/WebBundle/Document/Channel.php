@@ -15,17 +15,17 @@ class Channel {
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $network;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $channel;
 
     /**
-     * @MongoDB\String(nullable=true)
+     * @MongoDB\Field(type="string")(nullable=true)
      */
     private $key;
 
@@ -35,27 +35,27 @@ class Channel {
     private $managers;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $logs_enabled;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $commands_enabled;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $command_prefix;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $commands_link;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $punishments_enabled;
 
@@ -86,12 +86,12 @@ class Channel {
     private $topic;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $kitty_image;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $meow_module_enabled;
 

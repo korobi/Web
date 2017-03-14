@@ -4,7 +4,7 @@ services:
         tags:
             - { name: twig.extension }
         arguments:
-            - @korobi.git_info
+            - '@korobi.git_info'
     korobi.extension.twig.filters:
         class: Korobi\WebBundle\Twig\Extension\ExtensionTwigFilters
         tags:
@@ -15,6 +15,6 @@ services:
             - { name: twig.extension }
     salavert.twig.time_ago:
         class: Salavert\Twig\Extension\TimeAgoExtension
-        arguments: [@translator]
+        arguments: ['@translator']
         tags:
           - { name: twig.extension }

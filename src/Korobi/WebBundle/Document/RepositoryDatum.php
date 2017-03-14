@@ -15,22 +15,22 @@ class RepositoryDatum {
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $key;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $organisation;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $repository;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $display_tag;
 

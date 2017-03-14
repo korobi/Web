@@ -15,22 +15,22 @@ class ChannelAI {
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $network;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $channel;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $join_message;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $join_message_enabled;
 
@@ -40,7 +40,7 @@ class ChannelAI {
     private $patterns;
 
     /**
-     * @MongoDB\Int
+     * @MongoDB\Field(type="int")
      */
     private $pattern_index;
 

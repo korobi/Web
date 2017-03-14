@@ -15,12 +15,12 @@ class Revision {
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $old_commit;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $new_commit;
 
@@ -30,22 +30,22 @@ class Revision {
     private $date;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $deploy_successful;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $deploy_output;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $tests_passed;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $tests_output;
 
@@ -55,12 +55,12 @@ class Revision {
     private $tests_info;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $manual;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $branch;
 

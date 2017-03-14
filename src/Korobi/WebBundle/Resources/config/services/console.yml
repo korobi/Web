@@ -1,11 +1,4 @@
 services:
-    korobi.command.stats_gen:
-        class: Korobi\WebBundle\Console\StatsGeneration
-        arguments:
-            - @korobi.influx
-        tags:
-            -  { name: console.command }
-
     korobi.command.log_cache_clear:
         class: Korobi\WebBundle\Console\LogCacheClearCommand
         tags:
