@@ -15,22 +15,22 @@ class Punishment {
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $bot_id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $network;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $channel;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $type;
 
@@ -40,47 +40,47 @@ class Punishment {
     private $date;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $expire_date;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $expired;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $reason;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $victim_name;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $victim_hostname;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $actor_name;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $actor_hostname;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $actor_anonymous;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $sticky;
 

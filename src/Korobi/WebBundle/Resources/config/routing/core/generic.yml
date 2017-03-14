@@ -32,10 +32,6 @@ docs_file:
     defaults:
         _controller: korobi.controller.generic.docs:renderAction
         file: index
-kitty_images:
-    path: /kitty/
-    defaults:
-        _controller: korobi.controller.generic.kitty:homeAction
 revisions:
     path: /revisions/{repository}/
     defaults:

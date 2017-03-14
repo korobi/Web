@@ -15,12 +15,12 @@ class KittyImage {
     protected $id;
 
     /**
-     * @MongoDB\Int
+     * @MongoDB\Field(type="int")
      */
     private $image_id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $url;
 

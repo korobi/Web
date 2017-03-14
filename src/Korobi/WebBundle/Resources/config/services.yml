@@ -10,4 +10,4 @@ imports:
 services:
     korobi.user_provider:
         class: Korobi\WebBundle\Security\Provider\UserProvider
-        arguments: [@fos_user.user_manager, {github: githubUserId}, %secret%]
+        arguments: ['@fos_user.user_manager', {github: githubUserId}, %secret%]

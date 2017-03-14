@@ -15,27 +15,27 @@ class ChatIndex {
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $network;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $channel;
 
     /**
-     * @MongoDB\Int
+     * @MongoDB\Field(type="int")
      */
     private $year;
 
     /**
-     * @MongoDB\Int
+     * @MongoDB\Field(type="int")
      */
     private $day_of_year;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $has_valid_content;
 

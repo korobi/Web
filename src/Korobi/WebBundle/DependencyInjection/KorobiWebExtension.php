@@ -33,9 +33,6 @@ class KorobiWebExtension extends Extension implements PrependExtensionInterface 
      */
     public function prepend(ContainerBuilder $container) {
         $container->prependExtensionConfig('twig', [
-            'form' => [
-                'resources' => ['KorobiWebBundle:macros:form.html.twig'],
-            ],
         ]);
     }
 }

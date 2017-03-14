@@ -15,12 +15,12 @@ class Network {
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $slug;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $name;
 

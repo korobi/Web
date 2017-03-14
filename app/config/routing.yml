@@ -22,7 +22,7 @@ hwi_oauth_login:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix: /auth/connect
 app_login_github:
-    pattern: /auth/connect/check-github
+    path: /auth/connect/check-github
 
 app:
     resource: '@KorobiWebBundle/Resources/config/routing.yml'

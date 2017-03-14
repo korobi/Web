@@ -24,10 +24,6 @@ korobi_web:
             - title: about
               route: 'about'
 
-            - title: admin
-              route: 'admin_home'
-              requires_admin: true
-
             - title: security
               route: 'security'
               type: 'footer'

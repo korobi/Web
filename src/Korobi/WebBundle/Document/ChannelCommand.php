@@ -15,17 +15,17 @@ class ChannelCommand {
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $network;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $channel;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $name;
 
@@ -35,12 +35,12 @@ class ChannelCommand {
     private $value;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $is_action;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $is_alias;
 

@@ -17,17 +17,17 @@ class Chat {
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $network;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $channel;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $type;
 
@@ -37,57 +37,57 @@ class Chat {
     private $date;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $actor_name;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $actor_hostname;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $actor_prefix;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $recipient_name;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $recipient_hostname;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $recipient_prefix;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $channel_mode;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $imported;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $message;
 
     /**
-     * @MongoDB\Boolean
+     * @MongoDB\Field(type="boolean")
      */
     private $notice;
 
     /**
-     * @MongoDB\String
+     * @MongoDB\Field(type="string")
      */
     private $notice_target;
 
