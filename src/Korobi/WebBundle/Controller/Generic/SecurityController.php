@@ -65,7 +65,7 @@ class SecurityController extends BaseController {
 
         if ($this->shouldReportCspAction($hash)) {
             $amount = (int) $this->lastHashIdenticalReportCount + 1;
-            $text = ' ' . $amount . ($amount == 1 ? ' request' : ' requests') . ' to ' . $resource . ' on page ' . $uri ' blocked via ' . $ip . '.';
+            $text = ' ' . $amount . ($amount == 1 ? ' request' : ' requests') . ' to ' . $resource . ' on page ' . $uri . ' blocked via ' . $ip . '.';
 
             $this->akio->message()
                 ->red()
