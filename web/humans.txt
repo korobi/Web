@@ -44,7 +44,7 @@
         GitHub: https://github.com/drtshock/
 
     jamierocks - work on documentation
-        Twitter: @LexteamJamie
+        Twitter: @jamiethecoder
         GitHub: https://github.com/jamierocks/
 
     jkcclemens - feedback, suggestions, kitten cuddler
