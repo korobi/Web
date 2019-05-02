@@ -18,7 +18,7 @@ korobi_web:
                   - channel_stat
 
             - title: docs
-              route: 'https://docs.korobi.io/'
+              route: 'https://docs.korobi.vq.lc/'
               external: true
 
             - title: about

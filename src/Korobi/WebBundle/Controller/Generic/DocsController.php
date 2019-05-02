@@ -12,9 +12,9 @@ class DocsController extends BaseController {
      */
     public function renderAction($file) {
         if ($file === 'commands') {
-            return $this->redirect('https://docs.korobi.io/channel/commands/index.html', 301);
+            return $this->redirect('https://docs.korobi.vq.lc/channel/commands/index.html', 301);
         }
 
-        return $this->redirect('https://docs.korobi.io/', 301);
+        return $this->redirect('https://docs.korobi.vq.lc/', 301);
     }
 }
